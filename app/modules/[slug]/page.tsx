@@ -22,25 +22,107 @@ import {
   ChevronUp,
 } from "lucide-react";
 
-// Merkblatt Content Component
+// Merkblatt Content Component with full Markdown support
 function MerkblattContent({ content }: { content: string }) {
-  const parts = content.split(/(\$[^$]+\$)/g);
-  return (
-    <div className="prose prose-invert prose-sm max-w-none">
-      {parts.map((part, i) => {
-        if (part.startsWith("$") && part.endsWith("$")) {
-          return <MathBlock key={i} math={part.slice(1, -1)} display={false} />;
-        }
-        // Handle line breaks
-        return part.split("\\n").map((line, j) => (
-          <span key={`${i}-${j}`}>
-            {j > 0 && <br />}
-            {line}
-          </span>
-        ));
-      })}
-    </div>
-  );
+  const elements: JSX.Element[] = [];
+  const lines = content.split("\n");
+  let tableRows: JSX.Element[] = [];
+  let tableKey = 0;
+  let elementKey = 0;
+
+  const renderInline = (text: string) => {
+    const parts: JSX.Element[] = [];
+    let remaining = text;
+    let key = 0;
+
+    while (remaining.length > 0) {
+      // Find next math, bold, or code
+      const mathMatch = remaining.match(/\$([^$]+)\$/);
+      const boldMatch = remaining.match(/\*\*([^*]+)\*\*/);
+      const codeMatch = remaining.match(/`([^`]+)`/);
+
+      const mathIdx = mathMatch ? remaining.indexOf(mathMatch[0]) : Infinity;
+      const boldIdx = boldMatch ? remaining.indexOf(boldMatch[0]) : Infinity;
+      const codeIdx = codeMatch ? remaining.indexOf(codeMatch[0]) : Infinity;
+
+      const minIdx = Math.min(mathIdx, boldIdx, codeIdx);
+
+      if (minIdx === Infinity) {
+        parts.push(<span key={key++}>{remaining}</span>);
+        break;
+      }
+
+      if (minIdx > 0) {
+        parts.push(<span key={key++}>{remaining.slice(0, minIdx)}</span>);
+      }
+
+      if (minIdx === mathIdx && mathMatch) {
+        parts.push(<MathBlock key={key++} math={mathMatch[1]} display={false} />);
+        remaining = remaining.slice(mathIdx + mathMatch[0].length);
+      } else if (minIdx === boldIdx && boldMatch) {
+        parts.push(<strong key={key++} className="text-white font-semibold">{boldMatch[1]}</strong>);
+        remaining = remaining.slice(boldIdx + boldMatch[0].length);
+      } else if (minIdx === codeIdx && codeMatch) {
+        parts.push(<code key={key++} className="bg-slate-700 px-1.5 py-0.5 rounded text-blue-300 text-xs">{codeMatch[1]}</code>);
+        remaining = remaining.slice(codeIdx + codeMatch[0].length);
+      }
+    }
+
+    return <>{parts}</>;
+  };
+
+  const flushTable = () => {
+    if (tableRows.length > 0) {
+      elements.push(
+        <div key={`table-${tableKey++}`} className="overflow-x-auto my-3">
+          <table className="w-full border-collapse text-xs">
+            <tbody>{tableRows}</tbody>
+          </table>
+        </div>
+      );
+      tableRows = [];
+    }
+  };
+
+  lines.forEach((line) => {
+    // Table row
+    if (line.includes("|") && line.trim().startsWith("|") && line.trim().endsWith("|")) {
+      const cells = line.split("|").filter((_, i, arr) => i > 0 && i < arr.length - 1).map(c => c.trim());
+      // Skip separator rows
+      if (!cells.every(c => /^[\s:-]+$/.test(c))) {
+        tableRows.push(
+          <tr key={`tr-${elementKey++}`} className="border-b border-slate-700/50">
+            {cells.map((cell, ci) => (
+              <td key={ci} className="px-3 py-1.5 text-slate-300 bg-slate-800/30">
+                {renderInline(cell)}
+              </td>
+            ))}
+          </tr>
+        );
+      }
+      return;
+    }
+
+    // Flush table if not a table row
+    flushTable();
+
+    // Headings
+    if (line.startsWith("### ")) {
+      elements.push(<h4 key={elementKey++} className="text-sm font-semibold text-slate-200 mt-3 mb-1">{line.slice(4)}</h4>);
+    } else if (line.startsWith("## ")) {
+      elements.push(<h3 key={elementKey++} className="text-base font-semibold text-yellow-400 mt-4 mb-2">{line.slice(3)}</h3>);
+    } else if (line.startsWith("# ")) {
+      elements.push(<h2 key={elementKey++} className="text-lg font-bold text-white mt-4 mb-2">{line.slice(2)}</h2>);
+    } else if (line.startsWith("- ")) {
+      elements.push(<li key={elementKey++} className="text-slate-300 ml-4 mb-0.5 list-disc list-inside text-xs">{renderInline(line.slice(2))}</li>);
+    } else if (line.trim()) {
+      elements.push(<p key={elementKey++} className="text-slate-300 mb-1 text-xs">{renderInline(line)}</p>);
+    }
+  });
+
+  flushTable(); // Flush any remaining table
+
+  return <div className="space-y-1">{elements}</div>;
 }
 
 export default function ModulePage() {
