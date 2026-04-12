@@ -1,7 +1,7 @@
 "use client";
 
 import { Lesson } from "@/lib/data";
-import { CheckCircle2, ChevronRight, BookOpen } from "lucide-react";
+import { CheckCircle2, ChevronRight } from "lucide-react";
 import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
 
@@ -14,9 +14,6 @@ interface LessonViewerProps {
 }
 
 export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext }: LessonViewerProps) {
-  // Check if lesson has a summary/merkblatt section
-  const hasMerkblatt = lesson.content.includes("## Merkblatt") || lesson.content.includes("## Zusammenfassung");
-
   const renderContent = (content: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
@@ -177,19 +174,6 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         <div className="mt-8">
           <h3 className="text-lg font-semibold text-blue-400 mb-3">💻 Code-Übung</h3>
           <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
-        </div>
-      )}
-
-      {/* Merkblatt Button if not already in content */}
-      {!hasMerkblatt && (
-        <div className="mt-8 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-xl">
-          <div className="flex items-center gap-2 text-yellow-400 mb-2">
-            <BookOpen className="w-5 h-5" />
-            <span className="font-semibold">Merkblatt</span>
-          </div>
-          <p className="text-sm text-slate-300">
-            Merke dir die wichtigsten Punkte dieser Lektion für die Prüfung!
-          </p>
         </div>
       )}
 
