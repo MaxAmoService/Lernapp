@@ -9,7 +9,7 @@ on:
 jobs:
   # Schneller Build & Lint Check
   test:
-    name: 🔍 Test & Lint
+    name: test
     runs-on: ubuntu-latest
     
     steps:
