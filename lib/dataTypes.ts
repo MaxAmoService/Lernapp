@@ -1,0 +1,27 @@
+export interface Lesson {
+  id: string;
+  title: string;
+  duration: string;
+  type: "video" | "text" | "interactive" | "quiz";
+  content: string;
+  codeExample?: string;
+}
+
+export interface Module {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  progress: number;
+  category: string;
+  lessons: Lesson[];
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+}
