@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ["localhost"],
   },
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
 };
 
 module.exports = nextConfig;
