@@ -57,18 +57,6 @@ export const mathModules: Module[] = [
         type: "interactive",
         content: `# Mengen & Mengenoperationen
 
-## Merkblatt: Mengen
-
-### Symbole
-- $\in$: Element der Menge
-- $\notin$: Kein Element
-- $\subset$: Teilmenge
-- $\cup$: Vereinigung
-- $\cap$: Schnittmenge
-
-### Formeln
-- $|A \cup B| = |A| + |B| - |A \cap B|$ (Satz von Bernoulli)
-
 ---
 
 
@@ -133,16 +121,6 @@ $P \\rightarrow Q$ ist nur falsch, wenn P wahr und Q falsch.
         type: "interactive",
         content: `# Quantoren
 
-## Merkblatt: Logik & Mengen
-
-### Wichtigste Zeichen
-- $\land$ (UND), $\lor$ (ODER), $\neg$ (NICHT)
-- $\rightarrow$ (Implikation): $P \rightarrow Q$ nur falsch bei T→F
-
-### Merksatz
-Implikation umdrehen heißt **nicht** wahr!
-- Richtig: $(P \rightarrow Q) \equiv (\neg Q \rightarrow \neg P)$
-
 ---
 
 ## Allquantor ($\forall$)
@@ -188,6 +166,7 @@ $\\exists! x \\in \\mathbb{R}: x + 2 = 5$
     color: "#8b5cf6",
     category: "mathe-grundlagen",
     progress: 0,
+    merkblatt: `## 📋 Merkblatt: Funktionen & Graphen\n\n### 🎯 Wichtige Funktionen\n\n| Typ | Formel | Beispiel |\n|-----|--------|----------|\n| **Linear** | $f(x) = mx + b$ | $2x + 3$ |\n| **Quadratisch** | $f(x) = ax^2 + bx + c$ | $x^2 - 4$ |\n| **Potenz** | $f(x) = x^n$ | $x^3$ |\n| **Wurzel** | $f(x) = \\sqrt{x}$ | $\\sqrt{x+1}$ |\n| **Exponential** | $f(x) = a^x$ | $2^x$ |\n| **Logarithmus** | $f(x) = \\log_a x$ | $\\ln x$ |\n\n### 📐 Eigenschaften\n\n| Eigenschaft | Definition |\n|-------------|------------|\n| **Gerade** | $f(-x) = f(x)$ (achsensymmetrisch) |\n| **Ungerade** | $f(-x) = -f(x)$ (punktsymmetrisch) |\n| **Monoton** | $x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)$ |\n| **Beschränkt** | $|f(x)| \\leq M$ |\n\n### 💡 Umkehrfunktion\n- $f^{-1}(f(x)) = x$\n- Grafisch: Spiegelung an $y = x$\n- Existiert nur, wenn $f$ bijektiv ist` ,
     lessons: [
       {
         id: "mf1",
@@ -264,7 +243,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$`,
     id: "m1-grenzwerte",
     slug: "mathe1-grenzwerte",
     title: "Grenzwerte",
-    merkblatt: "## 📋 Merkblatt: Grenzwerte\n\n### Wichtige Grenzwerte\n- lim (x→0) sin(x)/x = 1\n- lim (x→∞) (1+1/x)^x = e\n- lim (x→0) (e^x-1)/x = 1\n\n### L'Hôpital\nBei 0/0 oder ∞/∞: lim f/g = lim f'/g'",
+    merkblatt: `## 📋 Merkblatt: Grenzwerte\n\n### 🎯 Wichtige Grenzwerte\n\n| Grenzwert | Wert |\n|-----------|------|\n| $\\lim_{x \\to 0} \\frac{\\sin x}{x}$ | $1$ |\n| $\\lim_{x \\to 0} \\frac{1 - \\cos x}{x}$ | $0$ |\n| $\\lim_{x \\to \\infty} (1 + \\frac{1}{x})^x$ | $e$ |\n| $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$ | $1$ |\n| $\\lim_{x \\to 0} \\frac{\\ln(1+x)}{x}$ | $1$ |\n\n### 📐 L'Hôpital'sche Regel\n\nBei $\\frac{0}{0}$ oder $\\frac{\\infty}{\\infty}$:\n\n$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$$\n\n### 💡 Merke\n- Immer **L'Hôpital** versuchen bei $\\frac{0}{0}$\n- Grenzwerte können $\\pm\\infty$ sein\n- **Squeeze Theorem:** $f(x) \\leq g(x) \\leq h(x)$ und $\\lim f = \\lim h \\Rightarrow \\lim g = \\lim f`,
     description: "Grenzwerte und stetige Fortsetzung",
     icon: "🎯",
     color: "#10b981",
@@ -336,7 +315,7 @@ $\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$`
     id: "m1-ableitungen",
     slug: "mathe1-ableitungen",
     title: "Differentialrechnung",
-    merkblatt: "## 📋 Merkblatt: Differentialrechnung\n\n### Grundregeln\n- (x^n)' = n·x^(n-1)\n- (e^x)' = e^x\n- (sin x)' = cos x\n- (cos x)' = -sin x\n- (ln x)' = 1/x\n\n### Regeln\n- Kettenregel: (f(g(x)))' = f'(g(x))·g'(x)\n- Produktregel: (f·g)' = f'g + fg'\n- Quotient: (f/g)' = (f'g - fg')/g²",
+    merkblatt: `## 📋 Merkblatt: Differentialrechnung\n\n### 🎯 Grundableitungen\n\n| $f(x)$ | $f'(x)$ |\n|--------|----------|\n| $x^n$ | $n \\cdot x^{n-1}$ |\n| $e^x$ | $e^x$ |\n| $a^x$ | $a^x \\cdot \\ln(a)$ |\n| $\\sin x$ | $\\cos x$ |\n| $\\cos x$ | $-\\sin x$ |\n| $\\ln x$ | $\\frac{1}{x}$ |\n\n### 📐 Ableitungsregeln\n\n| Regel | Formel |\n|-------|--------|\n| **Kettenregel** | $(f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)$ |\n| **Produktregel** | $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ |\n| **Quotient** | $(\\frac{f}{g})' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$ |\n\n### 💡 Anwendungen\n- **Tangentengleichung:** $y = f(a) + f'(a)(x - a)$\n- **Extremstellen:** $f'(x_0) = 0$\n- **Hinreichend:** $f''(x_0) > 0$ Min, $f''(x_0) < 0$ Max`,
     description: "Ableitungen, Regeln und Anwendungen",
     icon: "📐",
     color: "#8b5cf6",
@@ -412,7 +391,7 @@ $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$`,
     id: "m1-integration",
     slug: "mathe1-integration",
     title: "Integralrechnung",
-    merkblatt: "## 📋 Merkblatt: Integralrechnung\n\n### Stammfunktionen\n- ∫x^n dx = x^(n+1)/(n+1)\n- ∫1/x dx = ln|x|\n- ∫e^x dx = e^x\n- ∫sin x dx = -cos x\n- ∫cos x dx = sin x\n\n### Hauptsatz\n∫_a^b f(x)dx = F(b) - F(a)",
+    merkblatt: `## 📋 Merkblatt: Integralrechnung\n\n### 🎯 Stammfunktionen\n\n| $f(x)$ | $\\int f(x) \\,dx$ |\n|--------|------------------|\n| $x^n$ | $\\frac{x^{n+1}}{n+1}$ |\n| $\\frac{1}{x}$ | $\\ln|x|$ |\n| $e^x$ | $e^x$ |\n| $\\sin x$ | $-\\cos x$ |\n| $\\cos x$ | $\\sin x$ |\n| $\\frac{1}{x^2+1}$ | $\\arctan x$ |\n\n### 📐 Hauptsatz der Differential- und Integralrechnung\n\n$$\\int_a^b f(x) \\,dx = F(b) - F(a)$$\n\n### 💡 Techniken\n- **Substitution:** $u = g(x) \Rightarrow du = g'(x)dx$\n- **Partielle Integration:** $\\int u \\,dv = uv - \\int v \\,du$\n- **Partialbruch:** Für rationale Funktionen`,
     description: "Stammfunktionen und bestimmte Integrale",
     icon: "∫",
     color: "#f59e0b",
@@ -486,7 +465,7 @@ $\\int u \\, dv = uv - \\int v \\, du$`,
     id: "m1-reihen",
     slug: "mathe1-reihen",
     title: "Reihen & Potenzreihen",
-    merkblatt: "## 📋 Merkblatt: Reihen\n\n### Konvergenz (Quotientenkriterium)\nlim |a(n+1)/a(n)| = q\n- q < 1: konvergent\n- q > 1: divergent\n\n### Wichtige Reihen\n- e^x = Σ x^n/n!\n- sin x = Σ (-1)^n x^(2n+1)/(2n+1)!\n- cos x = Σ (-1)^n x^(2n)/(2n)!",
+    merkblatt: `## 📋 Merkblatt: Reihen & Potenzreihen\n\n### 🎯 Konvergenzkriterien\n\n| Kriterium | Bedingung |\n|-----------|-----------|\n| **Quotienten** | $q = \\lim_{n \\to \\infty} \\left|\\frac{a_{n+1}}{a_n}\\right| < 1$ |\n| **Wurzel** | $\\sqrt[n]{|a_n|} < 1$ |\n| **Vergleich** | $0 \\leq a_n \\leq b_n$ und $\\sum b_n$ konv. |\n\n### 📐 Wichtige Reihen\n\n| Reihe | Summe |\n|-------|-------|\n| $\\sum_{n=0}^{\\infty} x^n = \\frac{1}{1-x}$ | $|x| < 1$ |\n| $e^x = \\sum \\frac{x^n}{n!}$ | $\\forall x$ |\n| $\\sin x = \\sum \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$ | $\\forall x$ |\n| $\\cos x = \\sum \\frac{(-1)^n x^{2n}}{(2n)!}$ | $\\forall x$ |\n\n### 💡 Taylor-Entwicklung\n$$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$$`,
     description: "Unendliche Reihen und Konvergenz",
     icon: "∞",
     color: "#ec4899",
@@ -557,7 +536,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
     id: "m2-vektoren",
     slug: "mathe2-vektoren",
     title: "Vektoren & Lineare Algebra",
-    merkblatt: "## 📋 Merkblatt: Vektoren\n\n### Skalarprodukt\n- a·b = |a||b|cos(α) = a1b1 + a2b2 + a3b3\n- Orthogonal: a·b = 0\n- Parallel: a = λb\n\n### Kreuzprodukt\n|a × b| = |a||b|sin(α)\nRichtung: rechtwinklig zu a und b",
+    merkblatt: `## 📋 Merkblatt: Vektoren & Lineare Algebra\n\n### 🎯 Skalarprodukt\n\n$$\\vec{a} \\cdot \\vec{b} = a_1b_1 + a_2b_2 + a_3b_3 = |\\vec{a}||\\vec{b}|\\cos\\alpha$$\n\n| Eigenschaft | Bedingung |\n|-------------|-----------|\n| **Orthogonal** | $\\vec{a} \\cdot \\vec{b} = 0$ |\n| **Parallel** | $\\vec{a} = \\lambda \\vec{b}$ |\n| **Betrag** | $|\\vec{a}| = \\sqrt{a_1^2 + a_2^2 + a_3^2}$ |\n\n### 📐 Kreuzprodukt\n\n$$\\vec{a} \\times \\vec{b} = \\begin{pmatrix} a_2b_3 - a_3b_2 \\\\ a_3b_1 - a_1b_3 \\\\ a_1b_2 - a_2b_1 \\end{pmatrix}$$\n\n- **Betrag:** $|\\vec{a} \\times \\vec{b}| = |\\vec{a}||\\vec{b}|\\sin\\alpha$\n- **Richtung:** Rechtwinklig zu $\\vec{a}$ und $\\vec{b}$\n\n### 💡 Ebene & Gerade\n- **Ebenengleichung:** $\\vec{n} \\cdot (\\vec{x} - \\vec{p}) = 0$\n- **Gerade:** $\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$`,
     description: "Vektoren, Matrizen und Lineare Gleichungssysteme",
     icon: "↔",
     color: "#06b6d4",
@@ -631,7 +610,7 @@ $A \\cdot A^{-1} = I$`,
     id: "m2-dgl",
     slug: "mathe2-dgl",
     title: "Differentialgleichungen",
-    merkblatt: "## 📋 Merkblatt: Differentialgleichungen\n\n### Homogene DGL 2. Ordnung\nay'' + by' + cy = 0\nCharakteristisch: ar² + br + c = 0\n\n### Lösungen\n- 2 reelle: y = C1·e^(r1·x) + C2·e^(r2·x)\n- Doppelte: y = (C1 + C2·x)·e^(rx)\n- Komplexe: y = e^(αx)(C1·cos(βx) + C2·sin(βx))",
+    merkblatt: `## 📋 Merkblatt: Differentialgleichungen\n\n### 🎯 Homogene DGL 2. Ordnung\n\n$$ay'' + by' + cy = 0$$\n\n**Charakteristische Gleichung:** $ar^2 + br + c = 0$\n\n### 📐 Lösungen\n\n| Fall | Lösung |\n|------|--------|\n| **2 reelle** $r_1 \\neq r_2$ | $y = C_1e^{r_1x} + C_2e^{r_2x}$ |\n| **Doppelte** $r_1 = r_2 = r$ | $y = (C_1 + C_2x)e^{rx}$ |\n| **Komplexe** $r = \\alpha \\pm \\beta i$ | $y = e^{\\alpha x}(C_1\\cos\\beta x + C_2\\sin\\beta x)$ |\n\n### 💡 Nicht-homogen\n$$ay'' + by' + cy = f(x)$$\n\n**Lösung:** $y = y_h + y_p$ (homogen + partikulär)\n\n- **Bestimmung:** Partikuläre Lösung raten oder Variation der Konstanten`,
     description: "Gewöhnliche Differentialgleichungen 1. und 2. Ordnung",
     icon: "dy/dx",
     color: "#ef4444",
