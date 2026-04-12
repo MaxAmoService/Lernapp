@@ -31,6 +31,24 @@ export const mathModules: Module[] = [
     color: "#8b5cf6",
     category: "mathe-grundlagen",
     progress: 0,
+    merkblatt: `## 📋 Merkblatt: Mengenlehre & Logik
+
+### Mengen-Operationen
+| Operation | Symbol | Beschreibung |
+|-----------|--------|---------------|
+| Vereinigung | $A \\cup B$ | Alle Elemente in A oder B |
+| Schnitt | $A \\cap B$ | Nur Elemente in A und B |
+| Differenz | $A \\setminus B$ | In A, aber nicht in B |
+| Komplement | $\\bar{A}$ | Alles außerhalb A |
+
+### Wichtige Formeln
+- **Satz von Bernoulli:** $|A \\cup B| = |A| + |B| - |A \\cap B|$
+- **De Morgan:** $\\overline{A \\cup B} = \\bar{A} \\cap \\bar{B}$
+
+### Logik
+- **Implikation:** $P \\rightarrow Q$ nur falsch bei Wahr → Falsch
+- **Kontraposition:** $(P \\rightarrow Q) \\equiv (\\neg Q \\rightarrow \\neg P)$
+- **Quantoren:** $\\forall$ (alle), $\\exists$ (existiert)` ,
     lessons: [
       {
         id: "mg1",
@@ -246,6 +264,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$`,
     id: "m1-grenzwerte",
     slug: "mathe1-grenzwerte",
     title: "Grenzwerte",
+    merkblatt: "## 📋 Merkblatt: Grenzwerte\n\n### Wichtige Grenzwerte\n- lim (x→0) sin(x)/x = 1\n- lim (x→∞) (1+1/x)^x = e\n- lim (x→0) (e^x-1)/x = 1\n\n### L'Hôpital\nBei 0/0 oder ∞/∞: lim f/g = lim f'/g'",
     description: "Grenzwerte und stetige Fortsetzung",
     icon: "🎯",
     color: "#10b981",
@@ -317,6 +336,7 @@ $\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$`
     id: "m1-ableitungen",
     slug: "mathe1-ableitungen",
     title: "Differentialrechnung",
+    merkblatt: "## 📋 Merkblatt: Differentialrechnung\n\n### Grundregeln\n- (x^n)' = n·x^(n-1)\n- (e^x)' = e^x\n- (sin x)' = cos x\n- (cos x)' = -sin x\n- (ln x)' = 1/x\n\n### Regeln\n- Kettenregel: (f(g(x)))' = f'(g(x))·g'(x)\n- Produktregel: (f·g)' = f'g + fg'\n- Quotient: (f/g)' = (f'g - fg')/g²",
     description: "Ableitungen, Regeln und Anwendungen",
     icon: "📐",
     color: "#8b5cf6",
@@ -392,6 +412,7 @@ $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$`,
     id: "m1-integration",
     slug: "mathe1-integration",
     title: "Integralrechnung",
+    merkblatt: "## 📋 Merkblatt: Integralrechnung\n\n### Stammfunktionen\n- ∫x^n dx = x^(n+1)/(n+1)\n- ∫1/x dx = ln|x|\n- ∫e^x dx = e^x\n- ∫sin x dx = -cos x\n- ∫cos x dx = sin x\n\n### Hauptsatz\n∫_a^b f(x)dx = F(b) - F(a)",
     description: "Stammfunktionen und bestimmte Integrale",
     icon: "∫",
     color: "#f59e0b",
@@ -465,6 +486,7 @@ $\\int u \\, dv = uv - \\int v \\, du$`,
     id: "m1-reihen",
     slug: "mathe1-reihen",
     title: "Reihen & Potenzreihen",
+    merkblatt: "## 📋 Merkblatt: Reihen\n\n### Konvergenz (Quotientenkriterium)\nlim |a(n+1)/a(n)| = q\n- q < 1: konvergent\n- q > 1: divergent\n\n### Wichtige Reihen\n- e^x = Σ x^n/n!\n- sin x = Σ (-1)^n x^(2n+1)/(2n+1)!\n- cos x = Σ (-1)^n x^(2n)/(2n)!",
     description: "Unendliche Reihen und Konvergenz",
     icon: "∞",
     color: "#ec4899",
@@ -535,6 +557,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
     id: "m2-vektoren",
     slug: "mathe2-vektoren",
     title: "Vektoren & Lineare Algebra",
+    merkblatt: "## 📋 Merkblatt: Vektoren\n\n### Skalarprodukt\n- a·b = |a||b|cos(α) = a1b1 + a2b2 + a3b3\n- Orthogonal: a·b = 0\n- Parallel: a = λb\n\n### Kreuzprodukt\n|a × b| = |a||b|sin(α)\nRichtung: rechtwinklig zu a und b",
     description: "Vektoren, Matrizen und Lineare Gleichungssysteme",
     icon: "↔",
     color: "#06b6d4",
@@ -608,6 +631,7 @@ $A \\cdot A^{-1} = I$`,
     id: "m2-dgl",
     slug: "mathe2-dgl",
     title: "Differentialgleichungen",
+    merkblatt: "## 📋 Merkblatt: Differentialgleichungen\n\n### Homogene DGL 2. Ordnung\nay'' + by' + cy = 0\nCharakteristisch: ar² + br + c = 0\n\n### Lösungen\n- 2 reelle: y = C1·e^(r1·x) + C2·e^(r2·x)\n- Doppelte: y = (C1 + C2·x)·e^(rx)\n- Komplexe: y = e^(αx)(C1·cos(βx) + C2·sin(βx))",
     description: "Gewöhnliche Differentialgleichungen 1. und 2. Ordnung",
     icon: "dy/dx",
     color: "#ef4444",

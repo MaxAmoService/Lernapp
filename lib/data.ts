@@ -19,6 +19,7 @@ export interface Module {
   progress: number;
   category: string;
   lessons: Lesson[];
+  merkblatt?: string;
 }
 
 export interface Category {
@@ -48,6 +49,7 @@ export const modules: Module[] = [
     color: "#61dafb",
     category: "programmieren",
     progress: 35,
+    merkblatt: "## 📋 Merkblatt: React\n\n### Grundlagen\n- Komponenten = Funktionen die JSX zurückgeben\n- JSX = HTML-ähnliche Syntax in JavaScript\n- Props = Daten von Eltern → Kinder (read-only)\n- State = interner Zustand mit useState()\n\n### Hooks\n- useState(): State verwalten\n- useEffect(): Nebeneffekte (API, Timer)\n- useContext(): Context nutzen\n\n### Regeln\n- Komponenten immer mit Großbuchstaben\n- Hooks nur auf oberster Ebene\n- state nie direkt manipulieren, sondern setState() nutzen",
     lessons: [
       {
         id: "r1",
@@ -220,6 +222,7 @@ Viel Erfolg! 🍀`,
     color: "#3178c6",
     category: "programmieren",
     progress: 0,
+    merkblatt: "## 📋 Merkblatt: TypeScript\n\n### Primitive Types\n- string, number, boolean, null, undefined\n- any (vermeiden!), unknown, never\n\n### Complex Types\n- type User = { name: string; age: number }\n- interface Product { id: number; name: string }\n- Union: string | number\n- Array: number[] oder Array<number>\n\n### Functions\n- (a: number, b: number) => number\n- Optional: (name?: string) => void\n\n### Generics\n- Array<T>\n- function identity<T>(arg: T): T",
     lessons: [
       {
         id: "t1",
@@ -359,6 +362,7 @@ const response: ApiResponse<User> = {
     icon: "▲",
     color: "#000000",
     category: "programmieren",
+    merkblatt: "## 📋 Merkblatt: Next.js\n\n### Routing (App Router)\n- app/page.tsx = Startseite (/)\n- app/about/page.tsx = /about\n- app/[slug]/page.tsx = dynamische Routes\n\n### Server vs Client\n- Server Components (default)\n- 'use client' für Browser-Code\n\n### Wichtige Features\n- File-based Routing\n- API Routes: app/api/\n- Image Optimization: <Image />\n- ISR: revalidate = 60",
     progress: 0,
     lessons: [
       {
@@ -418,6 +422,7 @@ export default function About() {
     description: "Differentiationsregeln, Kettenregel, Produktregel",
     icon: "📐",
     color: "#8b5cf6",
+    merkblatt: "## 📋 Merkblatt: Ableitungen\n\n### Grundregeln\n- (x^n)' = n·x^(n-1)\n- (e^x)' = e^x\n- (sin x)' = cos x\n- (cos x)' = -sin x\n- (ln x)' = 1/x\n\n### Regeln\n- Kettenregel: (f(g(x)))' = f'(g(x))·g'(x)\n- Produktregel: (f·g)' = f'·g + f·g'\n- Quotient: (f/g)' = (f'·g - f·g')/g²\n\n### Anwendung\n- Steigung der Tangente: f'(a)\n- Extremstellen: f'(x) = 0",
     category: "mathe",
     progress: 0,
     lessons: [

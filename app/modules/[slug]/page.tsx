@@ -8,6 +8,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { LessonViewer } from "@/components/LessonViewer";
 import { Quiz } from "@/components/Quiz";
 import { LoginModal } from "@/components/LoginModal";
+import { MathBlock } from "@/components/MathBlock";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -16,7 +17,31 @@ import {
   FileText,
   Code,
   HelpCircle,
+  BookOpen,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
+
+// Merkblatt Content Component
+function MerkblattContent({ content }: { content: string }) {
+  const parts = content.split(/(\$[^$]+\$)/g);
+  return (
+    <div className="prose prose-invert prose-sm max-w-none">
+      {parts.map((part, i) => {
+        if (part.startsWith("$") && part.endsWith("$")) {
+          return <MathBlock key={i} math={part.slice(1, -1)} display={false} />;
+        }
+        // Handle line breaks
+        return part.split("\\n").map((line, j) => (
+          <span key={`${i}-${j}`}>
+            {j > 0 && <br />}
+            {line}
+          </span>
+        ));
+      })}
+    </div>
+  );
+}
 
 export default function ModulePage() {
   const params = useParams();
@@ -24,6 +49,7 @@ export default function ModulePage() {
   const module = getModule(params.slug as string);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [showLogin, setShowLogin] = useState(false);
+  const [showMerkblatt, setShowMerkblatt] = useState(false);
 
   // Get completed lessons for this module (from user or localStorage fallback)
   const completedLessons = new Set(
@@ -114,6 +140,26 @@ export default function ModulePage() {
         {/* Lesson List */}
         <aside className="lg:col-span-1">
           <div className="glass rounded-xl p-4 sticky top-24">
+            {/* Merkblatt */}
+            {module.merkblatt && (
+              <div className="mb-6">
+                <button
+                  onClick={() => setShowMerkblatt(!showMerkblatt)}
+                  className="w-full flex items-center justify-between p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg hover:bg-yellow-500/20 transition-colors"
+                >
+                  <span className="flex items-center gap-2 text-yellow-400 font-medium">
+                    <BookOpen className="w-5 h-5" />
+                    Merkblatt
+                  </span>
+                  {showMerkblatt ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </button>
+                {showMerkblatt && (
+                  <div className="mt-2 p-4 bg-slate-800/50 rounded-lg border border-slate-700 text-sm">
+                    <MerkblattContent content={module.merkblatt} />
+                  </div>
+                )}
+              </div>
+            )}
             <h2 className="text-lg font-semibold mb-4">Lektionen</h2>
             <nav className="space-y-2">
               {module.lessons.map((lesson, index) => {

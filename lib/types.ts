@@ -17,6 +17,7 @@ export interface Module {
   progress: number;
   category: string;
   lessons: Lesson[];
+  merkblatt?: string;
 }
 
 export interface Category {
