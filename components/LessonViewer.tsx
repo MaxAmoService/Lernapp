@@ -4,6 +4,8 @@ import { Lesson } from "@/lib/data";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
+import { InteractiveExercise } from "./InteractiveExercise";
+import { getExercisesForLesson } from "@/lib/mathExercises";
 
 interface LessonViewerProps {
   lesson: Lesson;
@@ -175,6 +177,14 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           <h3 className="text-lg font-semibold text-blue-400 mb-3">💻 Code-Übung</h3>
           <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
         </div>
+      )}
+
+      {/* Interactive Exercises */}
+      {getExercisesForLesson(lesson.id).length > 0 && (
+        <InteractiveExercise
+          exercises={getExercisesForLesson(lesson.id)}
+          lessonTitle={lesson.title}
+        />
       )}
 
       {/* Actions */}
