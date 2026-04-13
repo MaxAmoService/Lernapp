@@ -199,8 +199,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
 
         {/* Frage */}
         <div className="p-6">
-          <div className="text-white text-xl md:text-2xl mb-6 leading-relaxed">
-            <MathBlock math={current.question} display />
+          <div className="text-white text-lg md:text-xl mb-6 leading-relaxed">
+            <MathBlock math={current.question} />
           </div>
 
           {/* Hinweis */}
@@ -218,8 +218,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
                   <div className="flex items-start gap-2">
                     <Lightbulb className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
-                    <div className="text-yellow-200 text-lg">
-                      <MathBlock math={current.hint} display />
+                    <div className="text-yellow-200 text-base">
+                      <MathBlock math={current.hint} />
                     </div>
                   </div>
                 </div>
@@ -266,8 +266,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                         <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
                       )}
                     </div>
-                    <span className="text-white text-lg">
-                      <MathBlock math={option.label} display />
+                    <span className="text-white text-base">
+                      <MathBlock math={option.label} />
                     </span>
                   </div>
                 </button>
@@ -324,8 +324,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                 <HelpCircle className="w-5 h-5" />
                 Lösung
               </h4>
-              <div className="text-slate-300 text-lg">
-                <MathBlock math={current.solution} display />
+              <div className="text-slate-300 text-base">
+                <MathBlock math={current.solution} />
               </div>
             </div>
           )}

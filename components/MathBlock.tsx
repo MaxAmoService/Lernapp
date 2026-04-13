@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface MathBlockProps {
   math: string;
@@ -9,30 +9,57 @@ interface MathBlockProps {
 
 export function MathBlock({ math, display = false }: MathBlockProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [html, setHtml] = useState<string>("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (containerRef.current) {
-      // Dynamically import KaTeX
-      import("katex").then((katex) => {
-        if (containerRef.current) {
-          try {
-            katex.default.render(math, containerRef.current, {
-              displayMode: display,
-              throwOnError: false,
-              trust: true,
-            });
-          } catch (e) {
-            containerRef.current.textContent = math;
-          }
+    let cancelled = false;
+    
+    import("katex").then((katexModule) => {
+      if (cancelled || !containerRef.current) return;
+      
+      try {
+        const result = katexModule.default.renderToString(math, {
+          displayMode: display,
+          throwOnError: false,
+          trust: true,
+          strict: false,
+          macros: {
+            "\\R": "\\mathbb{R}",
+            "\\N": "\\mathbb{N}",
+            "\\Z": "\\mathbb{Z}",
+            "\\Q": "\\mathbb{Q}",
+          },
+        });
+        
+        if (!cancelled) {
+          setHtml(result);
+          setError(null);
         }
-      });
-    }
+      } catch (e: any) {
+        if (!cancelled) {
+          setError(e.message);
+          setHtml("");
+        }
+      }
+    });
+
+    return () => { cancelled = true; };
   }, [math, display]);
 
+  if (error) {
+    return <span className="text-red-400 font-mono">{math}</span>;
+  }
+
+  if (!html) {
+    return <span className="text-slate-400 animate-pulse">...</span>;
+  }
+
   return (
-    <div
+    <span
       ref={containerRef}
-      className={`my-4 ${display ? "text-center overflow-x-auto" : "inline"}`}
+      className={display ? "block my-4 overflow-x-auto text-center" : "inline"}
+      dangerouslySetInnerHTML={{ __html: html }}
     />
   );
 }
