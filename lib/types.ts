@@ -2,7 +2,7 @@ export interface Lesson {
   id: string;
   title: string;
   duration: string;
-  type: "video" | "text" | "interactive" | "quiz";
+  type: "video" | "text" | "interactive" | "quiz" | "exercises";
   content: string;
   codeExample?: string;
 }

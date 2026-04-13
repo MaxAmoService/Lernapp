@@ -9,6 +9,8 @@ import { LessonViewer } from "@/components/LessonViewer";
 import { Quiz } from "@/components/Quiz";
 import { LoginModal } from "@/components/LoginModal";
 import { MathBlock } from "@/components/MathBlock";
+import { InteractiveExercise } from "@/components/InteractiveExercise";
+import { getExercisesForLesson } from "@/lib/mathExercises";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -20,6 +22,7 @@ import {
   BookOpen,
   ChevronDown,
   ChevronUp,
+  Target,
 } from "lucide-react";
 
 // Merkblatt Content Component with full Markdown support
@@ -156,6 +159,7 @@ export default function ModulePage() {
       case "text": return <FileText className="w-4 h-4" />;
       case "interactive": return <Code className="w-4 h-4" />;
       case "quiz": return <HelpCircle className="w-4 h-4" />;
+      case "exercises": return <Target className="w-4 h-4" />;
     }
   };
 
@@ -286,6 +290,11 @@ export default function ModulePage() {
               <Quiz
                 moduleSlug={module.slug}
                 onComplete={() => markComplete(selectedLesson.id)}
+              />
+            ) : selectedLesson.type === "exercises" ? (
+              <InteractiveExercise
+                exercises={getExercisesForLesson(module.id)}
+                moduleTitle={module.title}
               />
             ) : (
               <LessonViewer
