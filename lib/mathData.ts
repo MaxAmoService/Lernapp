@@ -942,9 +942,9 @@ $$z = a + bi$$
 | Betrag | $|z| = \\sqrt{a^2 + b^2}$ |
 
 ### 💡 Polardarstellung
-$$z = r \\cdot e^{i\varphi} = r(\cos\varphi + i\sin\varphi)$$
+$$z = r \\cdot e^{i\\varphi} = r(\\cos\\varphi + i\\sin\\varphi)$$
 
-**Euler-Formel:** $e^{i\varphi} = \cos\varphi + i\sin\varphi$`,
+**Euler-Formel:** $e^{i\\varphi} = \\cos\\varphi + i\\sin\\varphi$`,
     lessons: [
       {
         id: "m-kz-1",
