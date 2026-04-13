@@ -1,76 +1,73 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Exercise } from "@/lib/mathExercises";
 import { MathBlock } from "./MathBlock";
-import { CheckCircle2, XCircle, Lightbulb, RotateCcw, ChevronDown, ChevronUp, Star, Plus } from "lucide-react";
+import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, Star, HelpCircle } from "lucide-react";
 
 interface Props {
   exercises: Exercise[];
-  lessonTitle: string;
+  moduleTitle: string;
 }
 
-export function InteractiveExercise({ exercises, lessonTitle }: Props) {
+export function InteractiveExercise({ exercises, moduleTitle }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [showResult, setShowResult] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [showSolution, setShowSolution] = useState(false);
-  const [completedCount, setCompletedCount] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [stats, setStats] = useState({ correct: 0, wrong: 0 });
+  const [completed, setCompleted] = useState(false);
   const [showAllExercises, setShowAllExercises] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  const sortedExercises = [...exercises].sort((a, b) => a.difficulty - b.difficulty);
-  const current = sortedExercises[currentIndex];
-  const hasMoreExercises = sortedExercises.length > 3;
+  const current = exercises[currentIndex];
+  const total = exercises.length;
+  const progress = ((currentIndex + 1) / total) * 100;
 
+  // Reset bei Aufgabenwechsel
   useEffect(() => {
     setUserAnswer("");
     setSelectedOption(null);
     setShowResult(false);
-    setIsCorrect(false);
     setShowHint(false);
     setShowSolution(false);
   }, [currentIndex]);
 
   const checkAnswer = () => {
-    if (!current) return;
-
     let correct = false;
 
-    if (current.type === "multiple") {
+    if (current.type === "multiple" && current.correctOption) {
       correct = selectedOption === current.correctOption;
     } else if (current.type === "input" && current.expectedAnswer) {
-      const normalized = userAnswer.trim().toLowerCase().replace(/\s+/g, "");
-      const expected = current.expectedAnswer.toLowerCase().replace(/\s+/g, "");
-
+      const normalizedUser = userAnswer.trim().toLowerCase().replace(/\s+/g, "");
+      const normalizedExpected = current.expectedAnswer.toLowerCase().replace(/\s+/g, "");
+      
       if (current.tolerance) {
-        const userNum = parseFloat(normalized);
-        const expectedNum = parseFloat(expected);
+        const userNum = parseFloat(normalizedUser);
+        const expectedNum = parseFloat(normalizedExpected);
         if (!isNaN(userNum) && !isNaN(expectedNum)) {
           correct = Math.abs(userNum - expectedNum) <= current.tolerance;
         }
       } else {
-        correct = normalized === expected;
+        correct = normalizedUser === normalizedExpected;
       }
     }
 
     setIsCorrect(correct);
     setShowResult(true);
-    if (correct) setCompletedCount((c) => c + 1);
+    setStats(prev => ({
+      correct: prev.correct + (correct ? 1 : 0),
+      wrong: prev.wrong + (correct ? 0 : 1),
+    }));
   };
 
   const nextExercise = () => {
-    if (currentIndex < sortedExercises.length - 1) {
-      setCurrentIndex((i) => i + 1);
-    }
-  };
-
-  const prevExercise = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex((i) => i - 1);
+    if (currentIndex < total - 1) {
+      setCurrentIndex(prev => prev + 1);
+    } else {
+      setCompleted(true);
     }
   };
 
@@ -78,235 +75,292 @@ export function InteractiveExercise({ exercises, lessonTitle }: Props) {
     setUserAnswer("");
     setSelectedOption(null);
     setShowResult(false);
-    setIsCorrect(false);
     setShowHint(false);
     setShowSolution(false);
-    inputRef.current?.focus();
   };
 
-  const getDifficultyStars = (level: number) => {
-    return Array.from({ length: 3 }, (_, i) => (
-      <Star
-        key={i}
-        className={`w-3 h-3 ${i < level ? "text-yellow-400 fill-yellow-400" : "text-slate-600"}`}
-      />
-    ));
+  const restartAll = () => {
+    setCurrentIndex(0);
+    setStats({ correct: 0, wrong: 0 });
+    setCompleted(false);
+    resetExercise();
   };
 
-  if (exercises.length === 0) return null;
+  const getScorePercentage = () => Math.round((stats.correct / total) * 100);
+  const getScoreEmoji = () => {
+    const pct = getScorePercentage();
+    if (pct >= 90) return "🏆";
+    if (pct >= 70) return "🎉";
+    if (pct >= 50) return "👍";
+    return "💪";
+  };
+
+  const diffLabel = {
+    1: { text: "Leicht", bg: "bg-green-500/20", color: "text-green-400" },
+    2: { text: "Mittel", bg: "bg-yellow-500/20", color: "text-yellow-400" },
+    3: { text: "Schwer", bg: "bg-red-500/20", color: "text-red-400" },
+  }[current?.difficulty || 1];
+
+  if (exercises.length === 0) {
+    return (
+      <div className="glass rounded-xl p-8 text-center">
+        <Target className="w-12 h-12 text-slate-500 mx-auto mb-4" />
+        <h3 className="text-xl font-bold text-white mb-2">Keine Aufgaben verfügbar</h3>
+        <p className="text-slate-400">Für dieses Modul gibt es noch keine interaktiven Aufgaben.</p>
+      </div>
+    );
+  }
+
+  // Abschluss-Bildschirm
+  if (completed) {
+    return (
+      <div className="glass rounded-2xl p-8 text-center max-w-lg mx-auto">
+        <div className="text-6xl mb-4">{getScoreEmoji()}</div>
+        <h2 className="text-2xl font-bold text-white mb-2">Aufgaben abgeschlossen!</h2>
+        <p className="text-slate-400 mb-6">{moduleTitle}</p>
+        
+        <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
+          <div className="text-5xl font-bold text-white mb-2">{getScorePercentage()}%</div>
+          <div className="flex justify-center gap-6 text-sm">
+            <div className="flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5 text-green-400" />
+              <span className="text-green-400">{stats.correct} Richtig</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <XCircle className="w-5 h-5 text-red-400" />
+              <span className="text-red-400">{stats.wrong} Falsch</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex gap-3 justify-center">
+          <button
+            onClick={restartAll}
+            className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
+          >
+            <RotateCcw className="w-5 h-5" />
+            Nochmal versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="mt-8 border-t border-slate-700/50 pt-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold text-white flex items-center gap-2">
-          🎯 Aufgaben
-          <span className="text-sm font-normal text-slate-400">
-            ({completedCount}/{sortedExercises.length} gelöst)
-          </span>
-        </h3>
-        {hasMoreExercises && (
-          <button
-            onClick={() => setShowAllExercises(!showAllExercises)}
-            className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"
-          >
-            {showAllExercises ? "Weniger" : "Alle anzeigen"}
-            {showAllExercises ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-          </button>
-        )}
+    <div className="space-y-6">
+      {/* Header */}
+      <div className="glass rounded-2xl p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-bold text-white flex items-center gap-2">
+            <Target className="w-6 h-6 text-blue-400" />
+            Aufgaben
+          </h2>
+          <div className="text-sm text-slate-400">
+            {currentIndex + 1} / {total}
+          </div>
+        </div>
+
+        {/* Fortschrittsbalken */}
+        <div className="h-2 bg-slate-700 rounded-full overflow-hidden mb-4">
+          <div
+            className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+
+        {/* Statistiken */}
+        <div className="flex gap-4 text-sm">
+          <div className="flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-green-400" />
+            <span className="text-green-400">{stats.correct}</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <XCircle className="w-4 h-4 text-red-400" />
+            <span className="text-red-400">{stats.wrong}</span>
+          </div>
+        </div>
       </div>
 
-      {/* Exercise Card */}
-      <div className="bg-slate-800/50 rounded-xl p-5 border border-slate-700/50">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span className="text-slate-400 text-sm">
-              Aufgabe {currentIndex + 1} von {sortedExercises.length}
-            </span>
-            <div className="flex">{getDifficultyStars(current.difficulty)}</div>
+      {/* Aufgaben-Karte */}
+      <div className="glass rounded-2xl overflow-hidden">
+        {/* Karten-Header */}
+        <div className="px-6 py-4 border-b border-slate-700/50 flex items-center justify-between">
+          <div className={`px-3 py-1 rounded-full text-xs font-medium ${diffLabel.bg} ${diffLabel.color}`}>
+            {"★".repeat(current.difficulty)} {diffLabel.text}
           </div>
           <button
             onClick={resetExercise}
-            className="text-slate-400 hover:text-white p-1"
+            className="p-2 text-slate-400 hover:text-white transition-colors"
             title="Zurücksetzen"
           >
             <RotateCcw className="w-4 h-4" />
           </button>
         </div>
 
-        {/* Progress Bar */}
-        <div className="w-full bg-slate-700 rounded-full h-1.5 mb-4">
-          <div
-            className="bg-blue-500 h-1.5 rounded-full transition-all duration-300"
-            style={{ width: `${((currentIndex + 1) / sortedExercises.length) * 100}%` }}
-          />
-        </div>
-
-        {/* Question */}
-        <div className="mb-5">
-          <div className="text-slate-200 leading-relaxed">
-            <MathBlock math={current.question} display={true} />
+        {/* Frage */}
+        <div className="p-6">
+          <div className="text-white text-lg mb-6">
+            <MathBlock math={current.question} />
           </div>
-          {current.format && (
-            <p className="text-sm text-blue-400 mt-2 flex items-center gap-1">
-              📝 <span>{current.format}</span>
-            </p>
+
+          {/* Hinweis */}
+          {current.hint && (
+            <div className="mb-6">
+              {!showHint ? (
+                <button
+                  onClick={() => setShowHint(true)}
+                  className="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors text-sm"
+                >
+                  <Lightbulb className="w-4 h-4" />
+                  Hinweis anzeigen
+                </button>
+              ) : (
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+                  <div className="flex items-start gap-2">
+                    <Lightbulb className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                    <div className="text-yellow-200">
+                      <MathBlock math={current.hint} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Eingabefeld */}
+          {current.type === "input" && !showResult && (
+            <div className="space-y-3">
+              <input
+                type="text"
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
+                placeholder={current.format || "Deine Antwort..."}
+                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
+                autoFocus
+              />
+              {current.format && (
+                <p className="text-xs text-slate-500">Format: {current.format}</p>
+              )}
+            </div>
+          )}
+
+          {/* Multiple Choice */}
+          {current.type === "multiple" && !showResult && (
+            <div className="space-y-3">
+              {current.options?.map((option, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setSelectedOption(option.value)}
+                  className={`w-full text-left p-4 rounded-lg border transition-all ${
+                    selectedOption === option.value
+                      ? "border-blue-500 bg-blue-500/20"
+                      : "border-slate-600 hover:border-slate-500 bg-slate-800/30"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      selectedOption === option.value ? "border-blue-500" : "border-slate-500"
+                    }`}>
+                      {selectedOption === option.value && (
+                        <div className="w-2.5 h-2.5 bg-blue-500 rounded-full" />
+                      )}
+                    </div>
+                    <span className="text-white">
+                      <MathBlock math={option.label} />
+                    </span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Ergebnis */}
+          {showResult && (
+            <div className={`rounded-xl p-5 mb-4 ${
+              isCorrect ? "bg-green-500/10 border border-green-500/30" : "bg-red-500/10 border border-red-500/30"
+            }`}>
+              <div className="flex items-start gap-3">
+                {isCorrect ? (
+                  <CheckCircle2 className="w-6 h-6 text-green-400 flex-shrink-0" />
+                ) : (
+                  <XCircle className="w-6 h-6 text-red-400 flex-shrink-0" />
+                )}
+                <div>
+                  <p className={`font-semibold mb-2 ${isCorrect ? "text-green-400" : "text-red-400"}`}>
+                    {isCorrect ? "Richtig! ✨" : "Leider falsch"}
+                  </p>
+                  {!isCorrect && (
+                    <div className="text-slate-300 text-sm">
+                      <p className="mb-1">
+                        <span className="text-slate-500">Richtige Antwort:</span>{" "}
+                        <span className="text-white font-medium">
+                          {current.type === "multiple" 
+                            ? current.options?.find(o => o.value === current.correctOption)?.label
+                            : current.expectedAnswer}
+                        </span>
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Lösung & Erklärung */}
+          {showResult && !showSolution && (
+            <button
+              onClick={() => setShowSolution(true)}
+              className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm"
+            >
+              <HelpCircle className="w-4 h-4" />
+              Lösung & Erklärung anzeigen
+            </button>
+          )}
+
+          {showSolution && (
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mt-4">
+              <h4 className="text-blue-400 font-semibold mb-2 flex items-center gap-2">
+                <HelpCircle className="w-5 h-5" />
+                Lösung
+              </h4>
+              <div className="text-slate-300">
+                <MathBlock math={current.solution} />
+              </div>
+            </div>
           )}
         </div>
 
-        {/* Answer Input */}
-        {!showResult && (
-          <div className="mb-4">
-            {current.type === "input" ? (
-              <div className="flex gap-2">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  value={userAnswer}
-                  onChange={(e) => setUserAnswer(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
-                  placeholder="Deine Antwort..."
-                  className="flex-1 bg-slate-900 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-                  autoFocus
-                />
-                <button
-                  onClick={checkAnswer}
-                  disabled={!userAnswer.trim()}
-                  className="bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 text-white px-6 py-3 rounded-lg font-medium transition-colors"
-                >
-                  Prüfen
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {current.options?.map((option) => (
-                  <button
-                    key={option.value}
-                    onClick={() => setSelectedOption(option.value)}
-                    className={`w-full text-left px-4 py-3 rounded-lg border transition-all ${
-                      selectedOption === option.value
-                        ? "border-blue-500 bg-blue-500/20 text-white"
-                        : "border-slate-600 bg-slate-900/50 text-slate-300 hover:border-slate-500"
-                    }`}
-                  >
-                    <span className="font-medium mr-2">{option.label}</span>
-                  </button>
-                ))}
-                <button
-                  onClick={checkAnswer}
-                  disabled={!selectedOption}
-                  className="w-full bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 text-white px-6 py-3 rounded-lg font-medium transition-colors mt-3"
-                >
-                  Prüfen
-                </button>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Result */}
-        {showResult && (
-          <div className={`rounded-lg p-4 mb-4 ${isCorrect ? "bg-green-500/20 border border-green-500/30" : "bg-red-500/20 border border-red-500/30"}`}>
-            <div className="flex items-center gap-2 mb-2">
-              {isCorrect ? (
+        {/* Footer */}
+        <div className="px-6 py-4 border-t border-slate-700/50 bg-slate-800/30">
+          {!showResult ? (
+            <button
+              onClick={checkAnswer}
+              disabled={current.type === "input" ? !userAnswer : !selectedOption}
+              className="w-full py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg font-medium transition-colors"
+            >
+              Antwort prüfen
+            </button>
+          ) : (
+            <button
+              onClick={nextExercise}
+              className="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
+            >
+              {currentIndex < total - 1 ? (
                 <>
-                  <CheckCircle2 className="w-5 h-5 text-green-400" />
-                  <span className="text-green-400 font-medium">Richtig! 🎉</span>
+                  Nächste Aufgabe
+                  <ChevronRight className="w-5 h-5" />
                 </>
               ) : (
                 <>
-                  <XCircle className="w-5 h-5 text-red-400" />
-                  <span className="text-red-400 font-medium">Leider falsch</span>
+                  Ergebnis anzeigen
+                  <Trophy className="w-5 h-5" />
                 </>
               )}
-            </div>
-            {!isCorrect && current.expectedAnswer && (
-              <p className="text-slate-300 text-sm">
-                Richtige Antwort: <strong className="text-white">{current.expectedAnswer}</strong>
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Hint & Solution */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {current.hint && !showResult && (
-            <button
-              onClick={() => setShowHint(!showHint)}
-              className="flex items-center gap-1 text-yellow-400 hover:text-yellow-300 text-sm"
-            >
-              <Lightbulb className="w-4 h-4" />
-              {showHint ? "Tipp ausblenden" : "Tipp"}
-            </button>
-          )}
-          {(showResult || currentIndex === sortedExercises.length - 1) && (
-            <button
-              onClick={() => setShowSolution(!showSolution)}
-              className="flex items-center gap-1 text-blue-400 hover:text-blue-300 text-sm"
-            >
-              {showSolution ? "Lösung ausblenden" : "Lösung anzeigen"}
-            </button>
-          )}
-        </div>
-
-        {showHint && current.hint && (
-          <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3 mb-4">
-            <p className="text-yellow-200 text-sm">💡 {current.hint}</p>
-          </div>
-        )}
-
-        {showSolution && (
-          <div className="bg-slate-900/50 border border-slate-600/50 rounded-lg p-4 mb-4">
-            <p className="text-sm text-slate-400 mb-2">Lösung:</p>
-            <div className="text-slate-200">
-              <MathBlock math={current.solution} display={true} />
-            </div>
-          </div>
-        )}
-
-        {/* Navigation */}
-        <div className="flex justify-between items-center pt-2">
-          <button
-            onClick={prevExercise}
-            disabled={currentIndex === 0}
-            className="text-slate-400 hover:text-white disabled:opacity-30 disabled:cursor-not-allowed text-sm"
-          >
-            ← Zurück
-          </button>
-          {currentIndex < sortedExercises.length - 1 && (
-            <button
-              onClick={nextExercise}
-              className="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
-            >
-              Nächste Aufgabe →
             </button>
           )}
         </div>
       </div>
-
-      {/* All Exercises List (collapsible) */}
-      {showAllExercises && hasMoreExercises && (
-        <div className="mt-4 space-y-2">
-          <p className="text-sm text-slate-400 mb-2">Weitere Aufgaben:</p>
-          {sortedExercises.slice(3).map((ex, i) => (
-            <button
-              key={ex.id}
-              onClick={() => {
-                setCurrentIndex(3 + i);
-                setShowAllExercises(false);
-              }}
-              className="w-full text-left bg-slate-800/30 hover:bg-slate-800/50 rounded-lg p-3 border border-slate-700/30 transition-colors"
-            >
-              <div className="flex items-center gap-2">
-                <div className="flex">{getDifficultyStars(ex.difficulty)}</div>
-                <span className="text-slate-300 text-sm truncate">
-                  <MathBlock math={ex.question.replace(/\$[^$]+\$/g, "[Formel]").slice(0, 60)} display={false} />
-                </span>
-              </div>
-            </button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

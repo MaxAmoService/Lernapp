@@ -1,0 +1,373 @@
+import { Module, QuizQuestion } from "./types";
+
+export const mathCategories = [
+  {
+    id: "mathe-grundlagen",
+    name: "Mathe Grundlagen",
+    icon: "📐",
+    description: "Grundlagen für das Mathe-Studium",
+  },
+  {
+    id: "mathe1",
+    name: "Mathe 1",
+    icon: "📊",
+    description: "Analysis & Lineare Algebra für Erstsemester",
+  },
+  {
+    id: "mathe2",
+    name: "Mathe 2",
+    icon: "📈",
+    description: "Fortgeschrittene Themen für das zweite Semester",
+  },
+];
+
+export const mathModules: Module[] = [
+  {
+    id: "m-grundlagen-mengen",
+    slug: "mathe-mengenlehre",
+    title: "Mengenlehre & Logik",
+    description: "Grundlagen der Mengen und mathematischen Logik",
+    icon: "🔢",
+    color: "#8b5cf6",
+    category: "mathe-grundlagen",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Mengenlehre & Logik
+
+### Mengen-Operationen
+| Operation | Symbol | Beschreibung |
+|-----------|--------|---------------|
+| Vereinigung | $A \\cup B$ | Alle Elemente in A oder B |
+| Schnitt | $A \\cap B$ | Nur Elemente in A und B |
+| Differenz | $A \\setminus B$ | In A, aber nicht in B |
+| Komplement | $\\bar{A}$ | Alles außerhalb A |
+
+### Wichtige Formeln
+- **Satz von Bernoulli:** $|A \\cup B| = |A| + |B| - |A \\cap B|$
+- **De Morgan:** $\\overline{A \\cup B} = \\bar{A} \\cap \\bar{B}$
+
+### Logik
+- **Implikation:** $P \\rightarrow Q$ nur falsch bei Wahr → Falsch
+- **Kontraposition:** $(P \\rightarrow Q) \\equiv (\\neg Q \\rightarrow \\neg P)$
+- **Quantoren:** $\\forall$ (alle), $\\exists$ (existiert)` ,
+    lessons: [
+    
+          {
+        id: "m-grundlagen-mengen-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+  },
+  {
+    id: "m-grundlagen-funktionen",
+    slug: "mathe-funktionen",
+    title: "Funktionen & Graphen",
+    description: "Funktionen, Graphen und Eigenschaften",
+    icon: "📉",
+    color: "#8b5cf6",
+    category: "mathe-grundlagen",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Funktionen & Graphen\n\n### 🎯 Wichtige Funktionen\n\n| Typ | Formel | Beispiel |\n|-----|--------|----------|\n| **Linear** | $f(x) = mx + b$ | $2x + 3$ |\n| **Quadratisch** | $f(x) = ax^2 + bx + c$ | $x^2 - 4$ |\n| **Potenz** | $f(x) = x^n$ | $x^3$ |\n| **Wurzel** | $f(x) = \\sqrt{x}$ | $\\sqrt{x+1}$ |\n| **Exponential** | $f(x) = a^x$ | $2^x$ |\n| **Logarithmus** | $f(x) = \\log_a x$ | $\\ln x$ |\n\n### 📐 Eigenschaften\n\n| Eigenschaft | Definition |\n|-------------|------------|\n| **Gerade** | $f(-x) = f(x)$ (achsensymmetrisch) |\n| **Ungerade** | $f(-x) = -f(x)$ (punktsymmetrisch) |\n| **Monoton** | $x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)$ |\n| **Beschränkt** | $|f(x)| \\leq M$ |\n\n### 💡 Umkehrfunktion\n- $f^{-1}(f(x)) = x$\n- Grafisch: Spiegelung an $y = x$\n- Existiert nur, wenn $f$ bijektiv ist` ,
+    lessons: [
+    ],
+  },
+  {
+    id: "m1-grenzwerte",
+    slug: "mathe1-grenzwerte",
+    title: "Grenzwerte",
+    merkblatt: `## 📋 Merkblatt: Grenzwerte\n\n### 🎯 Wichtige Grenzwerte\n\n| Grenzwert | Wert |\n|-----------|------|\n| $\\lim_{x \\to 0} \\frac{\\sin x}{x}$ | $1$ |\n| $\\lim_{x \\to 0} \\frac{1 - \\cos x}{x}$ | $0$ |\n| $\\lim_{x \\to \\infty} (1 + \\frac{1}{x})^x$ | $e$ |\n| $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$ | $1$ |\n| $\\lim_{x \\to 0} \\frac{\\ln(1+x)}{x}$ | $1$ |\n\n### 📐 L'Hôpital'sche Regel\n\nBei $\\frac{0}{0}$ oder $\\frac{\\infty}{\\infty}$:\n\n$$\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$$\n\n### 💡 Merke\n- Immer **L'Hôpital** versuchen bei $\\frac{0}{0}$\n- Grenzwerte können $\\pm\\infty$ sein\n- **Squeeze Theorem:** $f(x) \\leq g(x) \\leq h(x)$ und $\\lim f = \\lim h \\Rightarrow \\lim g = \\lim f`,
+    description: "Grenzwerte und stetige Fortsetzung",
+    icon: "🎯",
+    color: "#10b981",
+    category: "mathe1",
+    progress: 0,
+    lessons: [
+    ],
+  },
+  {
+    id: "m1-ableitungen",
+    slug: "mathe1-ableitungen",
+    title: "Differentialrechnung",
+    merkblatt: `## 📋 Merkblatt: Differentialrechnung\n\n### 🎯 Grundableitungen\n\n| $f(x)$ | $f'(x)$ |\n|--------|----------|\n| $x^n$ | $n \\cdot x^{n-1}$ |\n| $e^x$ | $e^x$ |\n| $a^x$ | $a^x \\cdot \\ln(a)$ |\n| $\\sin x$ | $\\cos x$ |\n| $\\cos x$ | $-\\sin x$ |\n| $\\ln x$ | $\\frac{1}{x}$ |\n\n### 📐 Ableitungsregeln\n\n| Regel | Formel |\n|-------|--------|\n| **Kettenregel** | $(f \\circ g)'(x) = f'(g(x)) \\cdot g'(x)$ |\n| **Produktregel** | $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$ |\n| **Quotient** | $(\\frac{f}{g})' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$ |\n\n### 💡 Anwendungen\n- **Tangentengleichung:** $y = f(a) + f'(a)(x - a)$\n- **Extremstellen:** $f'(x_0) = 0$\n- **Hinreichend:** $f''(x_0) > 0$ Min, $f''(x_0) < 0$ Max`,
+    description: "Ableitungen, Regeln und Anwendungen",
+    icon: "📐",
+    color: "#8b5cf6",
+    category: "mathe1",
+    progress: 0,
+    lessons: [
+    ],
+  },
+  {
+    id: "m1-integration",
+    slug: "mathe1-integration",
+    title: "Integralrechnung",
+    merkblatt: `## 📋 Merkblatt: Integralrechnung\n\n### 🎯 Stammfunktionen\n\n| $f(x)$ | $\\int f(x) \\,dx$ |\n|--------|------------------|\n| $x^n$ | $\\frac{x^{n+1}}{n+1}$ |\n| $\\frac{1}{x}$ | $\\ln|x|$ |\n| $e^x$ | $e^x$ |\n| $\\sin x$ | $-\\cos x$ |\n| $\\cos x$ | $\\sin x$ |\n| $\\frac{1}{x^2+1}$ | $\\arctan x$ |\n\n### 📐 Hauptsatz der Differential- und Integralrechnung\n\n$$\\int_a^b f(x) \\,dx = F(b) - F(a)$$\n\n### 💡 Techniken\n- **Substitution:** $u = g(x) \Rightarrow du = g'(x)dx$\n- **Partielle Integration:** $\\int u \\,dv = uv - \\int v \\,du$\n- **Partialbruch:** Für rationale Funktionen`,
+    description: "Stammfunktionen und bestimmte Integrale",
+    icon: "∫",
+    color: "#f59e0b",
+    category: "mathe1",
+    progress: 0,
+    lessons: [
+    ],
+  },
+  {
+    id: "m1-reihen",
+    slug: "mathe1-reihen",
+    title: "Reihen & Potenzreihen",
+    merkblatt: `## 📋 Merkblatt: Reihen & Potenzreihen\n\n### 🎯 Konvergenzkriterien\n\n| Kriterium | Bedingung |\n|-----------|-----------|\n| **Quotienten** | $q = \\lim_{n \\to \\infty} \\left|\\frac{a_{n+1}}{a_n}\\right| < 1$ |\n| **Wurzel** | $\\sqrt[n]{|a_n|} < 1$ |\n| **Vergleich** | $0 \\leq a_n \\leq b_n$ und $\\sum b_n$ konv. |\n\n### 📐 Wichtige Reihen\n\n| Reihe | Summe |\n|-------|-------|\n| $\\sum_{n=0}^{\\infty} x^n = \\frac{1}{1-x}$ | $|x| < 1$ |\n| $e^x = \\sum \\frac{x^n}{n!}$ | $\\forall x$ |\n| $\\sin x = \\sum \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$ | $\\forall x$ |\n| $\\cos x = \\sum \\frac{(-1)^n x^{2n}}{(2n)!}$ | $\\forall x$ |\n\n### 💡 Taylor-Entwicklung\n$$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$$`,
+    description: "Unendliche Reihen und Konvergenz",
+    icon: "∞",
+    color: "#ec4899",
+    category: "mathe1",
+    progress: 0,
+    lessons: [
+    ],
+  },
+  {
+    id: "m2-vektoren",
+    slug: "mathe2-vektoren",
+    title: "Vektoren & Lineare Algebra",
+    merkblatt: `## 📋 Merkblatt: Vektoren & Lineare Algebra\n\n### 🎯 Skalarprodukt\n\n$$\\vec{a} \\cdot \\vec{b} = a_1b_1 + a_2b_2 + a_3b_3 = |\\vec{a}||\\vec{b}|\\cos\\alpha$$\n\n| Eigenschaft | Bedingung |\n|-------------|-----------|\n| **Orthogonal** | $\\vec{a} \\cdot \\vec{b} = 0$ |\n| **Parallel** | $\\vec{a} = \\lambda \\vec{b}$ |\n| **Betrag** | $|\\vec{a}| = \\sqrt{a_1^2 + a_2^2 + a_3^2}$ |\n\n### 📐 Kreuzprodukt\n\n$$\\vec{a} \\times \\vec{b} = \\begin{pmatrix} a_2b_3 - a_3b_2 \\\\ a_3b_1 - a_1b_3 \\\\ a_1b_2 - a_2b_1 \\end{pmatrix}$$\n\n- **Betrag:** $|\\vec{a} \\times \\vec{b}| = |\\vec{a}||\\vec{b}|\\sin\\alpha$\n- **Richtung:** Rechtwinklig zu $\\vec{a}$ und $\\vec{b}$\n\n### 💡 Ebene & Gerade\n- **Ebenengleichung:** $\\vec{n} \\cdot (\\vec{x} - \\vec{p}) = 0$\n- **Gerade:** $\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$`,
+    description: "Vektoren, Matrizen und Lineare Gleichungssysteme",
+    icon: "↔",
+    color: "#06b6d4",
+    category: "mathe2",
+    progress: 0,
+    lessons: [
+    ],
+  },
+  {
+    id: "m2-dgl",
+    slug: "mathe2-dgl",
+    title: "Differentialgleichungen",
+    merkblatt: `## 📋 Merkblatt: Differentialgleichungen\n\n### 🎯 Homogene DGL 2. Ordnung\n\n$$ay'' + by' + cy = 0$$\n\n**Charakteristische Gleichung:** $ar^2 + br + c = 0$\n\n### 📐 Lösungen\n\n| Fall | Lösung |\n|------|--------|\n| **2 reelle** $r_1 \\neq r_2$ | $y = C_1e^{r_1x} + C_2e^{r_2x}$ |\n| **Doppelte** $r_1 = r_2 = r$ | $y = (C_1 + C_2x)e^{rx}$ |\n| **Komplexe** $r = \\alpha \\pm \\beta i$ | $y = e^{\\alpha x}(C_1\\cos\\beta x + C_2\\sin\\beta x)$ |\n\n### 💡 Nicht-homogen\n$$ay'' + by' + cy = f(x)$$\n\n**Lösung:** $y = y_h + y_p$ (homogen + partikulär)\n\n- **Bestimmung:** Partikuläre Lösung raten oder Variation der Konstanten`,
+    description: "Gewöhnliche Differentialgleichungen 1. und 2. Ordnung",
+    icon: "dy/dx",
+    color: "#ef4444",
+    category: "mathe2",
+    progress: 0,
+    lessons: [
+    ],
+  },
+];
+
+export const mathQuizzes: Record<string, QuizQuestion[]> = {
+  "mathe-mengenlehre": [
+    {
+      question: "Was ist $A \\cap B$ wenn $A = \\{1, 2, 3\\}$ und $B = \\{2, 3, 4\\}$?",
+      type: "input",
+      correct: "{2, 3}",
+      explanation: "Die Schnittmenge enthält alle Elemente, die in beiden Mengen sind.",
+      hint: "Welche Zahlen kommen in beiden Mengen vor?",
+    },
+    {
+      question: "Welche Menge enthält alle reellen Zahlen?",
+      type: "multiple",
+      options: ["$\\mathbb{N}$", "$\\mathbb{Z}$", "$\\mathbb{Q}$", "$\\mathbb{R}$"],
+      correct: 3,
+      explanation: "$\\mathbb{R}$ ist die Menge aller reellen Zahlen.",
+    },
+    {
+      question: "Was bedeutet $\\forall x \\in \\mathbb{R}$?",
+      type: "multiple",
+      options: [
+        "Es existiert ein x",
+        "Für alle x",
+        "Für kein x",
+        "Es gibt genau ein x",
+      ],
+      correct: 1,
+      explanation: "$\\forall$ ist der Allquantor und bedeutet 'für alle'.",
+    },
+  ],
+  "mathe-funktionen": [
+    {
+      question: "Was ist der Definitionsbereich von $f(x) = \\sqrt{x}$?",
+      type: "multiple",
+      options: [
+        "$x > 0$",
+        "$x \\geq 0$",
+        "$x \\in \\mathbb{R}$",
+        "$x < 0$",
+      ],
+      correct: 1,
+      explanation: "Die Quadratwurzel ist nur für nicht-negative Zahlen definiert.",
+    },
+    {
+      question: "Welche Funktion ist gerade?",
+      type: "multiple",
+      options: ["$f(x) = x^3$", "$f(x) = x^2$", "$f(x) = x + 1$", "$f(x) = \\sin x$"],
+      correct: 1,
+      explanation: "Eine gerade Funktion erfüllt $f(-x) = f(x)$. Für $f(x) = x^2$ gilt: $(-x)^2 = x^2$.",
+    },
+  ],
+  "mathe1-grenzwerte": [
+    {
+      question: "Was ist $\\lim_{x \\to 0} \\frac{\\sin x}{x}$?",
+      type: "input",
+      correct: "1",
+      explanation: "Dies ist einer der wichtigsten Grenzwerte in der Analysis.",
+      hint: "Denk an L'Hôpital oder die geometrische Interpretation.",
+    },
+    {
+      question: "Welche Regel wendet man bei $\\frac{0}{0}$ an?",
+      type: "multiple",
+      options: [
+        "Produktregel",
+        "Kettenregel",
+        "L'Hôpital",
+        "Substitution",
+      ],
+      correct: 2,
+      explanation: "L'Hôpital's Regel gilt für die Formen $\\frac{0}{0}$ oder $\\frac{\\infty}{\\infty}$.",
+    },
+  ],
+  "mathe1-ableitungen": [
+    {
+      question: "Was ist die Ableitung von $f(x) = x^3$?",
+      type: "input",
+      correct: "3x^2",
+      explanation: "Potenzregel: $(x^n)' = n \\cdot x^{n-1}$",
+      hint: "Verwende die Potenzregel.",
+    },
+    {
+      question: "Was ist $(\\sin x)'$?",
+      type: "multiple",
+      options: ["$\\cos x$", "$-\\cos x$", "$\\sin x$", "$-\\sin x$"],
+      correct: 0,
+      explanation: "Die Ableitung von $\\sin x$ ist $\\cos x$.",
+    },
+    {
+      question: "Was ist die Kettenregel für $(f(g(x)))'$?",
+      type: "multiple",
+      options: [
+        "$f'(x) \\cdot g'(x)$",
+        "$f'(g(x)) \\cdot g'(x)$",
+        "$f(g'(x)) \\cdot g'(x)$",
+        "$f'(g(x)) \\cdot g(x)$",
+      ],
+      correct: 1,
+      explanation: "Kettenregel: $(f(g(x)))' = f'(g(x)) \\cdot g'(x)$",
+    },
+  ],
+  "mathe1-integration": [
+    {
+      question: "Was ist $\\int x^2 \\, dx$?",
+      type: "input",
+      correct: "x^3/3",
+      explanation: "Stammfunktion von $x^n$ ist $\\frac{x^{n+1}}{n+1}$",
+      hint: "Erhöhe den Exponenten um 1 und teile durch die neue Potenz.",
+    },
+    {
+      question: "Was besagt der Hauptsatz der Analysis?",
+      type: "multiple",
+      options: [
+        "$\\int_a^b f(x) dx = f(b) - f(a)$",
+        "$\\int_a^b f(x) dx = F(b) - F(a)$ mit $F' = f$",
+        "$\\int f'(x) dx = f(x)$",
+        "Alle Antworten sind richtig",
+      ],
+      correct: 1,
+      explanation: "Der Hauptsatz verknüpft Integration und Differentiation.",
+    },
+  ],
+  "mathe1-reihen": [
+    {
+      question: "Was ist $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$?",
+      type: "multiple",
+      options: ["$\\sin x$", "$\\cos x$", "$e^x$", "$\\ln(1+x)$"],
+      correct: 2,
+      explanation: "Die Taylor-Reihe von $e^x$ ist $\\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$.",
+    },
+  ],
+  "mathe2-vektoren": [
+    {
+      question: "Was ist $\\vec{u} \\cdot \\vec{v}$ für orthogonale Vektoren?",
+      type: "input",
+      correct: "0",
+      explanation: "Bei orthogonalen Vektoren ist das Skalarprodukt 0.",
+      hint: "Was bedeutet $\\cos(90°)$?",
+    },
+    {
+      question: "Wie viele Komponenten hat ein Vektor in $\\mathbb{R}^3$?",
+      type: "multiple",
+      options: ["1", "2", "3", "4"],
+      correct: 2,
+      explanation: "Ein Vektor in $\\mathbb{R}^3$ hat 3 Komponenten.",
+    },
+  ],
+  "mathe2-dgl": [
+    {
+      question: "Was ist die allgemeine Lösung von $y' = 2y$?",
+      type: "input",
+      correct: "Ce^{2x}",
+      explanation: "Dies ist eine exponentielle Wachstumsgleichung.",
+      hint: "Löse durch Trennung der Variablen.",
+    },
+    {
+      question: "Wie lautet die charakteristische Gleichung für $y'' - 3y' + 2y = 0$?",
+      type: "multiple",
+      options: [
+        "$r^2 - 3r + 2 = 0$",
+        "$r^2 + 3r + 2 = 0$",
+        "$r^2 - 3r - 2 = 0$",
+        "$r^2 + 3r - 2 = 0$",
+      
+          {
+        id: "m1-grenzwerte-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+          {
+        id: "m1-ableitungen-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+          {
+        id: "m1-integration-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+          {
+        id: "m1-reihen-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+          {
+        id: "m2-vektoren-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+          {
+        id: "m2-dgl-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+      correct: 0,
+      explanation: "Die Koeffizienten der DGl werden direkt übernommen.",
+    },
+  
+          {
+        id: "m-grundlagen-funktionen-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+};

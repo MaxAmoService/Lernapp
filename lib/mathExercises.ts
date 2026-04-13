@@ -1,7 +1,7 @@
 // Interaktive Mathe-Aufgaben für alle Module
 export interface Exercise {
   id: string;
-  lessonId: string;
+  lessonId: string; // Module ID für Filterung
   difficulty: 1 | 2 | 3;
   type: 'input' | 'multiple';
   question: string;
@@ -17,10 +17,10 @@ export interface Exercise {
 // ==================== MATHE GRUNDLAGEN ====================
 
 export const grundlagenExercises: Exercise[] = [
-  // mg1: Mengen & Mengenoperationen
+  // m-grundlagen-mengen
   {
     id: "gr-mengen-1",
-    lessonId: "mg1",
+    lessonId: "m-grundlagen-mengen",
     difficulty: 1,
     type: "multiple",
     question: "Welche Menge ist eine Teilmenge von $A = \\{1, 2, 3\\}$?",
@@ -35,7 +35,7 @@ export const grundlagenExercises: Exercise[] = [
   },
   {
     id: "gr-mengen-2",
-    lessonId: "mg1",
+    lessonId: "m-grundlagen-mengen",
     difficulty: 2,
     type: "input",
     question: "Gegeben $A = \\{1, 2, 3, 4\\}$ und $B = \\{3, 4, 5, 6\\}$. Berechne $|A \\cup B|$.",
@@ -45,19 +45,17 @@ export const grundlagenExercises: Exercise[] = [
   },
   {
     id: "gr-mengen-3",
-    lessonId: "mg1",
+    lessonId: "m-grundlagen-mengen",
     difficulty: 3,
     type: "input",
     question: "Gegeben $A = \\{1, 2, 3\\}$, $B = \\{2, 3, 4\\}$, $C = \\{3, 4, 5\\}$. Berechne $|(A \\cup B) \\cap C|$.",
     expectedAnswer: "2",
     format: "Ganze Zahl",
-    solution: "$A \\cup B = \\{1, 2, 3, 4\\}$. Dann $(A \\cup B) \\cap C = \\{3, 4\\}$, also $|(A \\cup B) \\cap C| = 2$.",
+    solution: "$A \\cup B = \\{1, 2, 3, 4\\}$. Dann $(A \\cup B) \\cap C = \\{3, 4\\}$, also 2.",
   },
-
-  // mg2: Schnittmengen & Vereinigungen
   {
     id: "gr-op-1",
-    lessonId: "mg2",
+    lessonId: "m-grundlagen-mengen",
     difficulty: 1,
     type: "multiple",
     question: "Was ist $A \\cap B$ wenn $A = \\{1, 2, 3\\}$ und $B = \\{2, 3, 4\\}$?",
@@ -70,31 +68,11 @@ export const grundlagenExercises: Exercise[] = [
     correctOption: "b",
     solution: "Die Schnittmenge enthält Elemente in BEIDEN Mengen: $\\{2, 3\\}$.",
   },
-  {
-    id: "gr-op-2",
-    lessonId: "mg2",
-    difficulty: 2,
-    type: "input",
-    question: "Gegeben $U = \\{1, 2, 3, 4, 5\\}$ und $A = \\{1, 3\\}$. Berechne $|A^C|$.",
-    expectedAnswer: "3",
-    format: "Ganze Zahl",
-    solution: "$A^C = U \\setminus A = \\{2, 4, 5\\}$, also $|A^C| = 3$.",
-  },
-  {
-    id: "gr-op-3",
-    lessonId: "mg2",
-    difficulty: 3,
-    type: "input",
-    question: "Gegeben $A = \\{1, 2, 3\\}$, $B = \\{2, 3, 4\\}$, $C = \\{3, 4, 5\\}$. Berechne $|(A \\setminus B) \\cup (B \\setminus C)|$.",
-    expectedAnswer: "2",
-    format: "Ganze Zahl",
-    solution: "$A \\setminus B = \\{1\\}$, $B \\setminus C = \\{2\\}$. Union: $\\{1, 2\\}$, also 2.",
-  },
 
-  // mf1: Funktionen & Zuordnungen
+  // m-grundlagen-funktionen
   {
     id: "gr-func-1",
-    lessonId: "mf1",
+    lessonId: "m-grundlagen-funktionen",
     difficulty: 1,
     type: "input",
     question: "Gegeben $f(x) = 2x + 3$. Berechne $f(4)$.",
@@ -104,7 +82,7 @@ export const grundlagenExercises: Exercise[] = [
   },
   {
     id: "gr-func-2",
-    lessonId: "mf1",
+    lessonId: "m-grundlagen-funktionen",
     difficulty: 2,
     type: "multiple",
     question: "Was ist der Definitionsbereich von $f(x) = \\frac{1}{x-2}$?",
@@ -119,7 +97,7 @@ export const grundlagenExercises: Exercise[] = [
   },
   {
     id: "gr-func-3",
-    lessonId: "mf1",
+    lessonId: "m-grundlagen-funktionen",
     difficulty: 3,
     type: "input",
     question: "Gegeben $f(x) = x^2 - 4x + 3$. Berechne $f(a+1)$ als Term in $a$ (ohne Leerzeichen).",
@@ -127,10 +105,14 @@ export const grundlagenExercises: Exercise[] = [
     format: "Term wie a^2-2a",
     solution: "$f(a+1) = (a+1)^2 - 4(a+1) + 3 = a^2 + 2a + 1 - 4a - 4 + 3 = a^2 - 2a$.",
   },
+];
 
-  // m1-grenzwerte: Grenzwerte
+// ==================== MATHE 1 ====================
+
+export const mathe1Exercises: Exercise[] = [
+  // m1-grenzwerte
   {
-    id: "gr-gw-1",
+    id: "m1-gw-1",
     lessonId: "m1-grenzwerte",
     difficulty: 1,
     type: "input",
@@ -140,7 +122,7 @@ export const grundlagenExercises: Exercise[] = [
     solution: "Einsetzen: $2 \\cdot 3 + 1 = 7$.",
   },
   {
-    id: "gr-gw-2",
+    id: "m1-gw-2",
     lessonId: "m1-grenzwerte",
     difficulty: 2,
     type: "input",
@@ -150,7 +132,7 @@ export const grundlagenExercises: Exercise[] = [
     solution: "$\\frac{(x-2)(x+2)}{x-2} = x+2$ für $x \\neq 2$. Also $2+2 = 4$.",
   },
   {
-    id: "gr-gw-3",
+    id: "m1-gw-3",
     lessonId: "m1-grenzwerte",
     difficulty: 3,
     type: "input",
@@ -160,12 +142,8 @@ export const grundlagenExercises: Exercise[] = [
     format: "Dezimalzahl, z.B. 1.50",
     solution: "Koeffizienten der höchsten Potenz: $\\frac{3}{2} = 1.5$.",
   },
-];
 
-// ==================== MATHE 1 ====================
-
-export const mathe1Exercises: Exercise[] = [
-  // m1-ableitungen: Ableitungen
+  // m1-ableitungen
   {
     id: "m1-diff-1",
     lessonId: "m1-ableitungen",
@@ -197,7 +175,7 @@ export const mathe1Exercises: Exercise[] = [
     solution: "Produktregel: $f'(x) = 2x \\cdot e^x + x^2 \\cdot e^x = xe^x(x+2)$.",
   },
 
-  // m1-integration: Integration
+  // m1-integration
   {
     id: "m1-int-1",
     lessonId: "m1-integration",
@@ -230,7 +208,7 @@ export const mathe1Exercises: Exercise[] = [
     solution: "$\\left[x^3 + x^2\\right]_0^1 = (1 + 1) - 0 = 2$.",
   },
 
-  // m1-reihen: Reihen & Folgen
+  // m1-reihen
   {
     id: "m1-reihe-1",
     lessonId: "m1-reihen",
@@ -272,7 +250,7 @@ export const mathe1Exercises: Exercise[] = [
 // ==================== MATHE 2 ====================
 
 export const mathe2Exercises: Exercise[] = [
-  // m2-vektoren: Vektoren
+  // m2-vektoren
   {
     id: "m2-vec-1",
     lessonId: "m2-vektoren",
@@ -305,7 +283,7 @@ export const mathe2Exercises: Exercise[] = [
     solution: "$\\cos \\alpha = \\frac{32}{\\sqrt{14} \\cdot \\sqrt{77}} \\approx 0.974$. $\\alpha \\approx 13°$.",
   },
 
-  // m2-dgl: Differentialgleichungen
+  // m2-dgl
   {
     id: "m2-dgl-1",
     lessonId: "m2-dgl",
@@ -352,6 +330,6 @@ export const allExercises: Exercise[] = [
   ...mathe2Exercises,
 ];
 
-export function getExercisesForLesson(lessonId: string): Exercise[] {
-  return allExercises.filter((e) => e.lessonId === lessonId);
+export function getExercisesForLesson(moduleId: string): Exercise[] {
+  return allExercises.filter((e) => e.lessonId === moduleId);
 }
