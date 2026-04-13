@@ -296,9 +296,9 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                       <p className="mb-1">
                         <span className="text-slate-500">Richtige Antwort:</span>{" "}
                         <span className="text-white font-medium">
-                          {current.type === "multiple" 
-                            ? current.options?.find(o => o.value === current.correctOption)?.label
-                            : current.expectedAnswer}
+                          <InlineText text={current.type === "multiple" 
+                            ? current.options?.find(o => o.value === current.correctOption)?.label || ""
+                            : current.expectedAnswer || ""} />
                         </span>
                       </p>
                     </div>
