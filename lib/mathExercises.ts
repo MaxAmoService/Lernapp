@@ -1,7 +1,7 @@
 // Interaktive Mathe-Aufgaben für alle Module
 export interface Exercise {
   id: string;
-  lessonId: string; // Module ID für Filterung
+  lessonId: string;
   difficulty: 1 | 2 | 3;
   type: 'input' | 'multiple';
   question: string;
@@ -17,7 +17,8 @@ export interface Exercise {
 // ==================== MATHE GRUNDLAGEN ====================
 
 export const grundlagenExercises: Exercise[] = [
-  // m-grundlagen-mengen
+  // ===== m-grundlagen-mengen (mg1, mg2, mg3, mg4) =====
+  // mg1: Mengen
   {
     id: "gr-mengen-1",
     lessonId: "m-grundlagen-mengen",
@@ -36,6 +37,16 @@ export const grundlagenExercises: Exercise[] = [
   {
     id: "gr-mengen-2",
     lessonId: "m-grundlagen-mengen",
+    difficulty: 1,
+    type: "input",
+    question: "Wie viele Elemente hat $A = \\{2, 4, 6, 8\\}$?",
+    expectedAnswer: "4",
+    format: "Ganze Zahl",
+    solution: "$|A| = 4$ (4 Elemente in der Menge).",
+  },
+  {
+    id: "gr-mengen-3",
+    lessonId: "m-grundlagen-mengen",
     difficulty: 2,
     type: "input",
     question: "Gegeben $A = \\{1, 2, 3, 4\\}$ und $B = \\{3, 4, 5, 6\\}$. Berechne $|A \\cup B|$.",
@@ -44,7 +55,17 @@ export const grundlagenExercises: Exercise[] = [
     solution: "$A \\cup B = \\{1, 2, 3, 4, 5, 6\\}$, also $|A \\cup B| = 6$.",
   },
   {
-    id: "gr-mengen-3",
+    id: "gr-mengen-4",
+    lessonId: "m-grundlagen-mengen",
+    difficulty: 2,
+    type: "input",
+    question: "Gegeben $A = \\{1, 2, 3, 4\\}$ und $B = \\{3, 4, 5, 6\\}$. Berechne $|A \\cap B|$.",
+    expectedAnswer: "2",
+    format: "Ganze Zahl",
+    solution: "$A \\cap B = \\{3, 4\\}$, also $|A \\cap B| = 2$.",
+  },
+  {
+    id: "gr-mengen-5",
     lessonId: "m-grundlagen-mengen",
     difficulty: 3,
     type: "input",
@@ -54,22 +75,69 @@ export const grundlagenExercises: Exercise[] = [
     solution: "$A \\cup B = \\{1, 2, 3, 4\\}$. Dann $(A \\cup B) \\cap C = \\{3, 4\\}$, also 2.",
   },
   {
-    id: "gr-op-1",
+    id: "gr-mengen-6",
+    lessonId: "m-grundlagen-mengen",
+    difficulty: 3,
+    type: "multiple",
+    question: "Was ist $A \\setminus B$ wenn $A = \\{1, 2, 3, 4\\}$ und $B = \\{3, 4, 5\\}$?",
+    options: [
+      { label: "$\\{1, 2\\}$", value: "a" },
+      { label: "$\\{5\\}$", value: "b" },
+      { label: "$\\{1, 2, 5\\}$", value: "c" },
+      { label: "$\\{3, 4\\}$", value: "d" },
+    ],
+    correctOption: "a",
+    solution: "$A \\setminus B$ enthält Elemente in $A$ aber nicht in $B$: $\\{1, 2\\}$.",
+  },
+
+  // mg2: Logische Aussagen
+  {
+    id: "gr-logik-1",
     lessonId: "m-grundlagen-mengen",
     difficulty: 1,
     type: "multiple",
-    question: "Was ist $A \\cap B$ wenn $A = \\{1, 2, 3\\}$ und $B = \\{2, 3, 4\\}$?",
+    question: "Was bedeutet $P \\land Q$?",
     options: [
-      { label: "$\\{1, 2, 3, 4\\}$", value: "a" },
-      { label: "$\\{2, 3\\}$", value: "b" },
-      { label: "$\\{1, 4\\}$", value: "c" },
-      { label: "$\\emptyset$", value: "d" },
+      { label: "P oder Q", value: "a" },
+      { label: "P und Q", value: "b" },
+      { label: "Nicht P", value: "c" },
+      { label: "P impliziert Q", value: "d" },
     ],
     correctOption: "b",
-    solution: "Die Schnittmenge enthält Elemente in BEIDEN Mengen: $\\{2, 3\\}$.",
+    solution: "$P \\land Q$ bedeutet \"P und Q\" - beide Aussagen müssen wahr sein.",
+  },
+  {
+    id: "gr-logik-2",
+    lessonId: "m-grundlagen-mengen",
+    difficulty: 2,
+    type: "multiple",
+    question: "Wann ist $P \\rightarrow Q$ falsch?",
+    options: [
+      { label: "P wahr, Q wahr", value: "a" },
+      { label: "P wahr, Q falsch", value: "b" },
+      { label: "P falsch, Q wahr", value: "c" },
+      { label: "P falsch, Q falsch", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "$P \\rightarrow Q$ ist nur falsch wenn P wahr und Q falsch ist.",
+  },
+  {
+    id: "gr-logik-3",
+    lessonId: "m-grundlagen-mengen",
+    difficulty: 3,
+    type: "multiple",
+    question: "Was ist die Negation von $\\forall x: P(x)$?",
+    options: [
+      { label: "$\\forall x: \\neg P(x)$", value: "a" },
+      { label: "$\\exists x: \\neg P(x)$", value: "b" },
+      { label: "$\\exists x: P(x)$", value: "c" },
+      { label: "$\\neg P(x)$", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "$\\neg(\\forall x: P(x)) \\equiv \\exists x: \\neg P(x)$ - De Morgan für Quantoren.",
   },
 
-  // m-grundlagen-funktionen
+  // ===== m-grundlagen-funktionen (mf1, mf2, mf3) =====
   {
     id: "gr-func-1",
     lessonId: "m-grundlagen-funktionen",
@@ -82,6 +150,16 @@ export const grundlagenExercises: Exercise[] = [
   },
   {
     id: "gr-func-2",
+    lessonId: "m-grundlagen-funktionen",
+    difficulty: 1,
+    type: "input",
+    question: "Gegeben $f(x) = x^2$. Berechne $f(3)$.",
+    expectedAnswer: "9",
+    format: "Ganze Zahl",
+    solution: "$f(3) = 3^2 = 9$.",
+  },
+  {
+    id: "gr-func-3",
     lessonId: "m-grundlagen-funktionen",
     difficulty: 2,
     type: "multiple",
@@ -96,7 +174,22 @@ export const grundlagenExercises: Exercise[] = [
     solution: "Nenner $\\neq 0$: $x - 2 \\neq 0 \\Rightarrow x \\neq 2$.",
   },
   {
-    id: "gr-func-3",
+    id: "gr-func-4",
+    lessonId: "m-grundlagen-funktionen",
+    difficulty: 2,
+    type: "multiple",
+    question: "Welche Funktion ist gerade (achsensymmetrisch)?",
+    options: [
+      { label: "$f(x) = x + 1$", value: "a" },
+      { label: "$f(x) = x^2$", value: "b" },
+      { label: "$f(x) = x^3$", value: "c" },
+      { label: "$f(x) = x + x^2$", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "Gerade: $f(-x) = f(x)$. Für $x^2$: $(-x)^2 = x^2$ ✅",
+  },
+  {
+    id: "gr-func-5",
     lessonId: "m-grundlagen-funktionen",
     difficulty: 3,
     type: "input",
@@ -105,12 +198,22 @@ export const grundlagenExercises: Exercise[] = [
     format: "Term wie a^2-2a",
     solution: "$f(a+1) = (a+1)^2 - 4(a+1) + 3 = a^2 + 2a + 1 - 4a - 4 + 3 = a^2 - 2a$.",
   },
+  {
+    id: "gr-func-6",
+    lessonId: "m-grundlagen-funktionen",
+    difficulty: 3,
+    type: "input",
+    question: "Gegeben $f(x) = 3x - 1$. Finde $f^{-1}(5)$.",
+    expectedAnswer: "2",
+    format: "Ganze Zahl",
+    solution: "$y = 3x - 1 \\Rightarrow 5 = 3x - 1 \\Rightarrow x = 2$.",
+  },
 ];
 
 // ==================== MATHE 1 ====================
 
 export const mathe1Exercises: Exercise[] = [
-  // m1-grenzwerte
+  // ===== m1-grenzwerte =====
   {
     id: "m1-gw-1",
     lessonId: "m1-grenzwerte",
@@ -124,6 +227,16 @@ export const mathe1Exercises: Exercise[] = [
   {
     id: "m1-gw-2",
     lessonId: "m1-grenzwerte",
+    difficulty: 1,
+    type: "input",
+    question: "Berechne $\\lim_{x \\to 2} (x^2 + 1)$.",
+    expectedAnswer: "5",
+    format: "Ganze Zahl",
+    solution: "Einsetzen: $2^2 + 1 = 5$.",
+  },
+  {
+    id: "m1-gw-3",
+    lessonId: "m1-grenzwerte",
     difficulty: 2,
     type: "input",
     question: "Berechne $\\lim_{x \\to 2} \\frac{x^2 - 4}{x - 2}$.",
@@ -132,7 +245,17 @@ export const mathe1Exercises: Exercise[] = [
     solution: "$\\frac{(x-2)(x+2)}{x-2} = x+2$ für $x \\neq 2$. Also $2+2 = 4$.",
   },
   {
-    id: "m1-gw-3",
+    id: "m1-gw-4",
+    lessonId: "m1-grenzwerte",
+    difficulty: 2,
+    type: "input",
+    question: "Berechne $\\lim_{x \\to 0} \\frac{\\sin x}{x}$.",
+    expectedAnswer: "1",
+    format: "Ganze Zahl",
+    solution: "Standardgrenzwert: $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$.",
+  },
+  {
+    id: "m1-gw-5",
     lessonId: "m1-grenzwerte",
     difficulty: 3,
     type: "input",
@@ -142,8 +265,19 @@ export const mathe1Exercises: Exercise[] = [
     format: "Dezimalzahl, z.B. 1.50",
     solution: "Koeffizienten der höchsten Potenz: $\\frac{3}{2} = 1.5$.",
   },
+  {
+    id: "m1-gw-6",
+    lessonId: "m1-grenzwerte",
+    difficulty: 3,
+    type: "input",
+    question: "Berechne $\\lim_{x \\to 0} \\frac{e^x - 1}{x}$. Dezimalzahl auf 2 Stellen.",
+    expectedAnswer: "1.00",
+    tolerance: 0.01,
+    format: "Dezimalzahl, z.B. 1.00",
+    solution: "Standardgrenzwert: $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$.",
+  },
 
-  // m1-ableitungen
+  // ===== m1-ableitungen =====
   {
     id: "m1-diff-1",
     lessonId: "m1-ableitungen",
@@ -157,6 +291,16 @@ export const mathe1Exercises: Exercise[] = [
   {
     id: "m1-diff-2",
     lessonId: "m1-ableitungen",
+    difficulty: 1,
+    type: "input",
+    question: "Berechne $f'(x)$ für $f(x) = x^4$.",
+    expectedAnswer: "4x^3",
+    format: "Term wie 4x^3",
+    solution: "$f'(x) = 4x^3$ (Potenzregel).",
+  },
+  {
+    id: "m1-diff-3",
+    lessonId: "m1-ableitungen",
     difficulty: 2,
     type: "input",
     question: "Berechne $f'(x)$ für $f(x) = (2x + 1)^3$. Gib den vereinfachten Term an.",
@@ -165,7 +309,22 @@ export const mathe1Exercises: Exercise[] = [
     solution: "Kettenregel: $f'(x) = 3(2x+1)^2 \\cdot 2 = 6(2x+1)^2$.",
   },
   {
-    id: "m1-diff-3",
+    id: "m1-diff-4",
+    lessonId: "m1-ableitungen",
+    difficulty: 2,
+    type: "multiple",
+    question: "Was ist die Ableitung von $f(x) = \\sin(x)$?",
+    options: [
+      { label: "$\\cos(x)$", value: "a" },
+      { label: "$-\\sin(x)$", value: "b" },
+      { label: "$-\\cos(x)$", value: "c" },
+      { label: "$\\tan(x)$", value: "d" },
+    ],
+    correctOption: "a",
+    solution: "$f'(x) = \\cos(x)$ - Grundableitung.",
+  },
+  {
+    id: "m1-diff-5",
     lessonId: "m1-ableitungen",
     difficulty: 3,
     type: "input",
@@ -174,8 +333,18 @@ export const mathe1Exercises: Exercise[] = [
     format: "Faktorisierte Form",
     solution: "Produktregel: $f'(x) = 2x \\cdot e^x + x^2 \\cdot e^x = xe^x(x+2)$.",
   },
+  {
+    id: "m1-diff-6",
+    lessonId: "m1-ableitungen",
+    difficulty: 3,
+    type: "input",
+    question: "Berechne die 2. Ableitung von $f(x) = x^3 - 2x^2 + x$.",
+    expectedAnswer: "6x-4",
+    format: "Term wie 6x-4",
+    solution: "$f'(x) = 3x^2 - 4x + 1$, $f''(x) = 6x - 4$.",
+  },
 
-  // m1-integration
+  // ===== m1-integration =====
   {
     id: "m1-int-1",
     lessonId: "m1-integration",
@@ -189,6 +358,16 @@ export const mathe1Exercises: Exercise[] = [
   {
     id: "m1-int-2",
     lessonId: "m1-integration",
+    difficulty: 1,
+    type: "input",
+    question: "Berechne $\\int x^2 \\, dx$. Gib den Term an.",
+    expectedAnswer: "x^3/3",
+    format: "Term wie x^3/3",
+    solution: "$\\int x^2 \\, dx = \\frac{x^3}{3} + C$.",
+  },
+  {
+    id: "m1-int-3",
+    lessonId: "m1-integration",
     difficulty: 2,
     type: "input",
     question: "Berechne $\\int_0^2 x^2 \\, dx$. Gib eine Dezimalzahl auf 2 Stellen.",
@@ -198,7 +377,17 @@ export const mathe1Exercises: Exercise[] = [
     solution: "$\\left[\\frac{x^3}{3}\\right]_0^2 = \\frac{8}{3} \\approx 2.67$.",
   },
   {
-    id: "m1-int-3",
+    id: "m1-int-4",
+    lessonId: "m1-integration",
+    difficulty: 2,
+    type: "input",
+    question: "Berechne $\\int_1^3 2x \\, dx$.",
+    expectedAnswer: "8",
+    format: "Ganze Zahl",
+    solution: "$\\left[x^2\\right]_1^3 = 9 - 1 = 8$.",
+  },
+  {
+    id: "m1-int-5",
     lessonId: "m1-integration",
     difficulty: 3,
     type: "input",
@@ -207,8 +396,18 @@ export const mathe1Exercises: Exercise[] = [
     format: "Ganze Zahl oder Dezimal",
     solution: "$\\left[x^3 + x^2\\right]_0^1 = (1 + 1) - 0 = 2$.",
   },
+  {
+    id: "m1-int-6",
+    lessonId: "m1-integration",
+    difficulty: 3,
+    type: "input",
+    question: "Berechne $\\int e^{2x} \\, dx$. Gib den Term an.",
+    expectedAnswer: "e^{2x}/2",
+    format: "Term wie e^{2x}/2",
+    solution: "$\\int e^{2x} \\, dx = \\frac{e^{2x}}{2} + C$ (Substitution $u = 2x$).",
+  },
 
-  // m1-reihen
+  // ===== m1-reihen =====
   {
     id: "m1-reihe-1",
     lessonId: "m1-reihen",
@@ -221,6 +420,16 @@ export const mathe1Exercises: Exercise[] = [
   },
   {
     id: "m1-reihe-2",
+    lessonId: "m1-reihen",
+    difficulty: 1,
+    type: "input",
+    question: "Summe: $\\sum_{n=1}^{4} n^2$.",
+    expectedAnswer: "30",
+    format: "Ganze Zahl",
+    solution: "$1 + 4 + 9 + 16 = 30$.",
+  },
+  {
+    id: "m1-reihe-3",
     lessonId: "m1-reihen",
     difficulty: 2,
     type: "multiple",
@@ -235,7 +444,17 @@ export const mathe1Exercises: Exercise[] = [
     solution: "$\\sum \\frac{1}{n^2}$ konvergiert (p-Reihe mit $p = 2 > 1$).",
   },
   {
-    id: "m1-reihe-3",
+    id: "m1-reihe-4",
+    lessonId: "m1-reihen",
+    difficulty: 2,
+    type: "input",
+    question: "Summe der geometrischen Reihe: $a_1 = 2$, $q = 0.5$. Gib die Grenze an.",
+    expectedAnswer: "4",
+    format: "Ganze oder Dezimalzahl",
+    solution: "$S = \\frac{a_1}{1-q} = \\frac{2}{0.5} = 4$.",
+  },
+  {
+    id: "m1-reihe-5",
     lessonId: "m1-reihen",
     difficulty: 3,
     type: "input",
@@ -245,25 +464,49 @@ export const mathe1Exercises: Exercise[] = [
     format: "Dezimalzahl, z.B. 1.50",
     solution: "$S = \\frac{a}{1-q} = \\frac{1}{1 - 1/3} = \\frac{3}{2} = 1.5$.",
   },
+  {
+    id: "m1-reihe-6",
+    lessonId: "m1-reihen",
+    difficulty: 3,
+    type: "multiple",
+    question: "Welches Konvergenzkriterium ist korrekt für $\\sum \\frac{1}{n^2}$?",
+    options: [
+      { label: "Quotientenkriterium: $q = 1$", value: "a" },
+      { label: "p-Reihe mit $p = 2 > 1$", value: "b" },
+      { label: "Leibniz-Kriterium", value: "c" },
+      { label: "Divergenz durch $a_n \\to 0$", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "$\\sum \\frac{1}{n^p}$ konvergiert für $p > 1$. Hier $p = 2$.",
+  },
 ];
 
 // ==================== MATHE 2 ====================
 
 export const mathe2Exercises: Exercise[] = [
-  // m2-vektoren
+  // ===== m2-vektoren =====
   {
     id: "m2-vec-1",
     lessonId: "m2-vektoren",
     difficulty: 1,
     type: "input",
-    question: "$\\vec{a} = \\binom{2}{3}$, $\\vec{b} = \\binom{1}{4}$. Berechne $|\\vec{a} + \\vec{b}|$ auf 2 Stellen.",
-    expectedAnswer: "7.62",
-    tolerance: 0.01,
-    format: "Dezimalzahl, z.B. 7.62",
-    solution: "$\\vec{a} + \\vec{b} = \\binom{3}{7}$. Betrag: $\\sqrt{9 + 49} = \\sqrt{58} \\approx 7.62$.",
+    question: "$\\vec{a} = \\binom{2}{3}$, $\\vec{b} = \\binom{1}{4}$. Berechne $\\vec{a} + \\vec{b}$ (erster Eintrag).",
+    expectedAnswer: "3",
+    format: "Ganze Zahl",
+    solution: "$\\vec{a} + \\vec{b} = \\binom{2+1}{3+4} = \\binom{3}{7}$. Erster Eintrag: 3.",
   },
   {
     id: "m2-vec-2",
+    lessonId: "m2-vektoren",
+    difficulty: 1,
+    type: "input",
+    question: "$\\vec{a} = \\binom{3}{4}$. Berechne $|\\vec{a}|$.",
+    expectedAnswer: "5",
+    format: "Ganze Zahl",
+    solution: "$|\\vec{a}| = \\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$.",
+  },
+  {
+    id: "m2-vec-3",
     lessonId: "m2-vektoren",
     difficulty: 2,
     type: "input",
@@ -273,17 +516,43 @@ export const mathe2Exercises: Exercise[] = [
     solution: "$\\vec{a} \\cdot \\vec{b} = 3 \\cdot 2 + 1 \\cdot (-5) = 6 - 5 = 1$.",
   },
   {
-    id: "m2-vec-3",
+    id: "m2-vec-4",
+    lessonId: "m2-vektoren",
+    difficulty: 2,
+    type: "multiple",
+    question: "Wann sind zwei Vektoren orthogonal?",
+    options: [
+      { label: "Wenn sie parallel sind", value: "a" },
+      { label: "Wenn ihr Skalarprodukt = 0 ist", value: "b" },
+      { label: "Wenn sie gleich lang sind", value: "c" },
+      { label: "Wenn ihre Summe = 0 ist", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "Orthogonal: $\\vec{a} \\cdot \\vec{b} = 0$ (Winkel = 90°).",
+  },
+  {
+    id: "m2-vec-5",
     lessonId: "m2-vektoren",
     difficulty: 3,
     type: "input",
-    question: "$\\vec{a} = \\binom{1}{2}{3}$, $\\vec{b} = \\binom{4}{5}{6}$. Winkel in Grad (ganze Zahl).",
-    expectedAnswer: "13",
+    question: "$\\vec{a} = \\binom{1}{2}{3}$, $\\vec{b} = \\binom{4}{5}{6}$. Berechne $\\vec{a} \\cdot \\vec{b}$.",
+    expectedAnswer: "32",
     format: "Ganze Zahl",
-    solution: "$\\cos \\alpha = \\frac{32}{\\sqrt{14} \\cdot \\sqrt{77}} \\approx 0.974$. $\\alpha \\approx 13°$.",
+    solution: "$\\vec{a} \\cdot \\vec{b} = 1 \\cdot 4 + 2 \\cdot 5 + 3 \\cdot 6 = 4 + 10 + 18 = 32$.",
+  },
+  {
+    id: "m2-vec-6",
+    lessonId: "m2-vektoren",
+    difficulty: 3,
+    type: "input",
+    question: "Betrag von $\\vec{a} = \\binom{1}{2}{3}$. Dezimal auf 2 Stellen.",
+    expectedAnswer: "3.74",
+    tolerance: 0.01,
+    format: "Dezimal, z.B. 3.74",
+    solution: "$|\\vec{a}| = \\sqrt{1 + 4 + 9} = \\sqrt{14} \\approx 3.74$.",
   },
 
-  // m2-dgl
+  // ===== m2-dgl =====
   {
     id: "m2-dgl-1",
     lessonId: "m2-dgl",
@@ -302,6 +571,21 @@ export const mathe2Exercises: Exercise[] = [
   {
     id: "m2-dgl-2",
     lessonId: "m2-dgl",
+    difficulty: 1,
+    type: "multiple",
+    question: "Was ist eine homogene lineare DGL 1. Ordnung?",
+    options: [
+      { label: "$y' + y = x$", value: "a" },
+      { label: "$y' + y = 0$", value: "b" },
+      { label: "$y' = y^2$", value: "c" },
+      { label: "$y'' + y = 0$", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "Homogen: Rechte Seite = 0. $y' + y = 0$ ist homogen linear 1. Ordnung.",
+  },
+  {
+    id: "m2-dgl-3",
+    lessonId: "m2-dgl",
     difficulty: 2,
     type: "input",
     question: "Löse $y' = 3y$, $y(0) = 2$. Berechne $y(1)$ auf 2 Stellen.",
@@ -311,7 +595,22 @@ export const mathe2Exercises: Exercise[] = [
     solution: "$y = 2e^{3x}$. $y(1) = 2e^3 \\approx 40.17$.",
   },
   {
-    id: "m2-dgl-3",
+    id: "m2-dgl-4",
+    lessonId: "m2-dgl",
+    difficulty: 2,
+    type: "multiple",
+    question: "Was ist die allgemeine Lösung von $y' = ky$?",
+    options: [
+      { label: "$y = kx + C$", value: "a" },
+      { label: "$y = Ce^{kx}$", value: "b" },
+      { label: "$y = Ck^x$", value: "c" },
+      { label: "$y = e^{kx} + C$", value: "d" },
+    ],
+    correctOption: "b",
+    solution: "Lösung: $y = Ce^{kx}$ (Exponentialfunktion).",
+  },
+  {
+    id: "m2-dgl-5",
     lessonId: "m2-dgl",
     difficulty: 3,
     type: "input",
@@ -320,6 +619,16 @@ export const mathe2Exercises: Exercise[] = [
     tolerance: 0.01,
     format: "Dezimalzahl, z.B. 7.39",
     solution: "$y = e^{x^2/2}$. $y(2) = e^2 \\approx 7.39$.",
+  },
+  {
+    id: "m2-dgl-6",
+    lessonId: "m2-dgl",
+    difficulty: 3,
+    type: "input",
+    question: "Löse $y'' - 3y' + 2y = 0$. Gib die charakteristische Gleichung als Term an (z.B. r^2-3r+2=0).",
+    expectedAnswer: "r^2-3r+2=0",
+    format: "Gleichung wie r^2-3r+2=0",
+    solution: "Charakteristisch: $r^2 - 3r + 2 = 0$ → $(r-1)(r-2) = 0$ → $r_1 = 1, r_2 = 2$.",
   },
 ];
 
