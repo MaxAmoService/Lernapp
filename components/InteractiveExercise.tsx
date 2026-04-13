@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Exercise } from "@/lib/mathExercises";
 import { MathBlock } from "./MathBlock";
+import { InlineText } from "./InlineMath";
 import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, Star, HelpCircle } from "lucide-react";
 
 interface Props {
@@ -200,7 +201,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
         {/* Frage */}
         <div className="p-6">
           <div className="text-white text-lg md:text-xl mb-6 leading-relaxed">
-            <MathBlock math={current.question} />
+            <InlineText text={current.question} />
           </div>
 
           {/* Hinweis */}
@@ -219,7 +220,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                   <div className="flex items-start gap-2">
                     <Lightbulb className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                     <div className="text-yellow-200 text-base">
-                      <MathBlock math={current.hint} />
+                      <InlineText text={current.hint} />
                     </div>
                   </div>
                 </div>
@@ -267,7 +268,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                       )}
                     </div>
                     <span className="text-white text-base">
-                      <MathBlock math={option.label} />
+                      <InlineText text={option.label} />
                     </span>
                   </div>
                 </button>
@@ -325,7 +326,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                 Lösung
               </h4>
               <div className="text-slate-300 text-base">
-                <MathBlock math={current.solution} />
+                <InlineText text={current.solution} />
               </div>
             </div>
           )}
