@@ -2,22 +2,52 @@ import { Module, QuizQuestion } from "./types";
 
 export const mathCategories = [
   {
-    id: "mathe-grundlagen",
-    name: "Mathe Grundlagen",
-    icon: "📐",
-    description: "Grundlagen für das Mathe-Studium",
+    id: "arithmetik-algebra",
+    name: "Arithmetik & Algebra",
+    icon: "🔢",
+    description: "Grundrechenarten, Gleichungen und algebraische Strukturen",
   },
   {
-    id: "mathe1",
-    name: "Mathe 1",
+    id: "analysis",
+    name: "Analysis",
     icon: "📊",
-    description: "Analysis & Lineare Algebra für Erstsemester",
+    description: "Grenzwerte, Differentiation, Integration und Reihen",
   },
   {
-    id: "mathe2",
-    name: "Mathe 2",
+    id: "lineare-algebra",
+    name: "Lineare Algebra",
+    icon: "↔️",
+    description: "Vektoren, Matrizen und lineare Gleichungssysteme",
+  },
+  {
+    id: "geometrie",
+    name: "Geometrie",
+    icon: "📐",
+    description: "Formen, Flächen, Körper und räumliches Denken",
+  },
+  {
+    id: "differentialgleichungen",
+    name: "Differentialgleichungen",
     icon: "📈",
-    description: "Fortgeschrittene Themen für das zweite Semester",
+    description: "ODEs, PDEs und Lösungsmethoden",
+  },
+  {
+    id: "komplexe-zahlen",
+    name: "Komplexe Zahlen",
+    icon: "🌀",
+    description: "Komplexe Ebene, Polardarstellung und Anwendungen",
+  },
+  {
+    id: "stochastik",
+    name: "Stochastik",
+    icon: "🎲",
+    description: "Wahrscheinlichkeitsrechnung und Statistik",
+  },
+  {
+    id: "numerik",
+    name: "Numerik & Algorithmen",
+    icon: "💻",
+    description: "Numerische Verfahren und Algorithmik",
   },
 ];
 
@@ -29,7 +59,7 @@ export const mathModules: Module[] = [
     description: "Grundlagen der Mengen und mathematischen Logik",
     icon: "🔢",
     color: "#8b5cf6",
-    category: "mathe-grundlagen",
+    category: "arithmetik-algebra",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Mengenlehre & Logik
 
@@ -171,7 +201,7 @@ $\\exists! x \\in \\mathbb{R}: x + 2 = 5$
     description: "Funktionen, Graphen und Eigenschaften",
     icon: "📉",
     color: "#8b5cf6",
-    category: "mathe-grundlagen",
+    category: "arithmetik-algebra",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Funktionen & Graphen\n\n### 🎯 Wichtige Funktionen\n\n| Typ | Formel | Beispiel |\n|-----|--------|----------|\n| **Linear** | $f(x) = mx + b$ | $2x + 3$ |\n| **Quadratisch** | $f(x) = ax^2 + bx + c$ | $x^2 - 4$ |\n| **Potenz** | $f(x) = x^n$ | $x^3$ |\n| **Wurzel** | $f(x) = \\sqrt{x}$ | $\\sqrt{x+1}$ |\n| **Exponential** | $f(x) = a^x$ | $2^x$ |\n| **Logarithmus** | $f(x) = \\log_a x$ | $\\ln x$ |\n\n### 📐 Eigenschaften\n\n| Eigenschaft | Definition |\n|-------------|------------|\n| **Gerade** | $f(-x) = f(x)$ (achsensymmetrisch) |\n| **Ungerade** | $f(-x) = -f(x)$ (punktsymmetrisch) |\n| **Monoton** | $x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)$ |\n| **Beschränkt** | $|f(x)| \\leq M$ |\n\n### 💡 Umkehrfunktion\n- $f^{-1}(f(x)) = x$\n- Grafisch: Spiegelung an $y = x$\n- Existiert nur, wenn $f$ bijektiv ist` ,
     lessons: [
@@ -261,7 +291,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$`,
     description: "Grenzwerte und stetige Fortsetzung",
     icon: "🎯",
     color: "#10b981",
-    category: "mathe1",
+    category: "analysis",
     progress: 0,
     lessons: [
       {
@@ -340,7 +370,7 @@ $\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$`
     description: "Ableitungen, Regeln und Anwendungen",
     icon: "📐",
     color: "#8b5cf6",
-    category: "mathe1",
+    category: "analysis",
     progress: 0,
     lessons: [
       {
@@ -423,7 +453,7 @@ $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$`,
     description: "Stammfunktionen und bestimmte Integrale",
     icon: "∫",
     color: "#f59e0b",
-    category: "mathe1",
+    category: "analysis",
     progress: 0,
     lessons: [
       {
@@ -504,7 +534,7 @@ $\\int u \\, dv = uv - \\int v \\, du$`,
     description: "Unendliche Reihen und Konvergenz",
     icon: "∞",
     color: "#ec4899",
-    category: "mathe1",
+    category: "analysis",
     progress: 0,
     lessons: [
       {
@@ -582,7 +612,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
     description: "Vektoren, Matrizen und Lineare Gleichungssysteme",
     icon: "↔",
     color: "#06b6d4",
-    category: "mathe2",
+    category: "lineare-algebra",
     progress: 0,
     lessons: [
       {
@@ -663,7 +693,7 @@ $A \\cdot A^{-1} = I$`,
     description: "Gewöhnliche Differentialgleichungen 1. und 2. Ordnung",
     icon: "dy/dx",
     color: "#ef4444",
-    category: "mathe2",
+    category: "differentialgleichungen",
     progress: 0,
     lessons: [
       {
@@ -724,6 +754,441 @@ Lösung: $y = y_h + y_p$ (homogene + partikuläre Lösung)`,
       },
       {
         id: "m2-dgl-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+  },
+
+  // =============== STOCHASTIK ===============
+  {
+    id: "m-stochastik-grundlagen",
+    slug: "mathe-stochastik",
+    title: "Wahrscheinlichkeitsrechnung",
+    description: "Grundlagen der Stochastik und Wahrscheinlichkeit",
+    icon: "🎲",
+    color: "#f59e0b",
+    category: "stochastik",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Wahrscheinlichkeitsrechnung
+
+### 🎯 Grundbegriffe
+- **Zufallsexperiment:** Experiment mit zufälligem Ausgang
+- **Ergebnisraum Ω:** Menge aller möglichen Ergebnisse
+- **Ereignis:** Teilmenge von Ω
+
+### 📐 Wahrscheinlichkeit
+$$P(A) = \frac{|A|}{|\Omega|}$$
+
+**Eigenschaften:**
+- $0 \leq P(A) \leq 1$
+- $P(\Omega) = 1$
+- $P(\emptyset) = 0$
+
+### 💡 Formeln
+| Regel | Formel |
+|-------|--------|
+| Addition | $P(A \cup B) = P(A) + P(B) - P(A \cap B)$ |
+| Komplement | $P(\bar{A}) = 1 - P(A)$ |
+| Bedingt | $P(A|B) = \frac{P(A \cap B)}{P(B)}$ |`,
+    lessons: [
+      {
+        id: "m-sto-1",
+        title: "Grundbegriffe der Wahrscheinlichkeit",
+        duration: "20 min",
+        type: "text",
+        content: `## Zufallsexperimente
+
+Ein **Zufallsexperiment** ist ein Experiment, dessen Ausgang nicht vorhersehbar ist.
+
+**Beispiele:**
+- Münzwurf: $\Omega = \{K, Z\}$
+- Würfelwurf: $\Omega = \{1, 2, 3, 4, 5, 6\}$
+- Kartenziehen: $\Omega = \{\text{Herz}, \text{Karo}, \text{Kreuz}, \text{Pik}\}$
+
+## Wahrscheinlichkeit
+
+$$P(A) = \frac{\text{günstige Ergebnisse}}{\text{alle Ergebnisse}}$$
+
+**Beispiel:** Beim Würfelwurf ist die Wahrscheinlichkeit für eine gerade Zahl:
+$$P(\text{gerade}) = \frac{3}{6} = \frac{1}{2}$$
+
+## Additionssatz
+
+$$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+
+Bei **disjunkten** Ereignissen ($A \cap B = \emptyset$):
+$$P(A \cup B) = P(A) + P(B)$$
+
+## Komplementregel
+
+$$P(\bar{A}) = 1 - P(A)$$
+
+**Beispiel:** Die Wahrscheinlichkeit, keine 6 zu würfeln:
+$$P(\text{keine 6}) = 1 - P(6) = 1 - \frac{1}{6} = \frac{5}{6}$$
+
+## Übung
+
+Gegeben: $P(A) = 0.4$, $P(B) = 0.3$, $P(A \cap B) = 0.1$
+
+Berechne $P(A \cup B)$!`,
+      },
+      {
+        id: "m-sto-2",
+        title: "Kombinatorik",
+        duration: "25 min",
+        type: "text",
+        content: `## Permutationen
+
+Anordnung von n verschiedenen Objekten:
+$$P_n = n! = n \cdot (n-1) \cdot ... \cdot 1$$
+
+**Beispiel:** 5 Bücher können auf $5! = 120$ Arten angeordnet werden.
+
+## Variationen
+
+Auswahl von k aus n Objekten **mit Zurücklegen**:
+$$V_k^n = n^k$$
+
+Ohne Zurücklegen:
+$$V_k^n = \frac{n!}{(n-k)!}$$
+
+## Kombinationen
+
+Auswahl von k aus n Objekten **ohne Reihenfolge**:
+$$C_k^n = \binom{n}{k} = \frac{n!}{k!(n-k)!}$$
+
+**Beispiel:** Aus 10 Personen werden 3 gewählt:
+$$\binom{10}{3} = \frac{10!}{3! \cdot 7!} = 120$$
+
+## Binomialformel
+
+$$(a + b)^n = \sum_{k=0}^{n} \binom{n}{k} a^k b^{n-k}$$
+
+## Übung
+
+Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wiederholung)?`,
+      },
+      {
+        id: "m-sto-3",
+        title: "Bedingte Wahrscheinlichkeit",
+        duration: "20 min",
+        type: "text",
+        content: `## Bedingte Wahrscheinlichkeit
+
+$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
+
+Die Wahrscheinlichkeit von A, **unter der Bedingung** dass B eingetreten ist.
+
+## Bayes-Formel
+
+$$P(B|A) = \frac{P(A|B) \cdot P(B)}{P(A)}$$
+
+## Unabhängigkeit
+
+A und B sind **unabhängig**, wenn:
+$$P(A \cap B) = P(A) \cdot P(B)$$
+
+**Beispiel:** Münzwürfe sind unabhängig.
+
+## Übung
+
+In einer Klasse sind 60% Mädchen und 40% Jungen. 70% der Mädchen haben Haare lang, 30% der Jungen haben Haare lang.
+
+Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig gewählter Schüler ein Mädchen mit langen Haaren ist?`,
+      },
+      {
+        id: "m-sto-quiz",
+        title: "Quiz: Stochastik",
+        duration: "10 min",
+        type: "quiz",
+        content: "Teste dein Wissen über Wahrscheinlichkeitsrechnung!",
+      },
+      {
+        id: "m-stochastik-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+  },
+
+  // =============== KOMPLEXE ZAHLEN ===============
+  {
+    id: "m-komplexe-zahlen",
+    slug: "mathe-komplexe-zahlen",
+    title: "Komplexe Zahlen",
+    description: "Imaginäre Zahlen und komplexe Ebene",
+    icon: "🌀",
+    color: "#8b5cf6",
+    category: "komplexe-zahlen",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Komplexe Zahlen
+
+### 🎯 Definition
+$$z = a + bi$$
+- $a$: Realteil, $b$: Imaginärteil
+- $i^2 = -1$
+
+### 📐 Rechenregeln
+| Operation | Formel |
+|-----------|--------|
+| Addition | $(a+bi) + (c+di) = (a+c) + (b+d)i$ |
+| Multiplikation | $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$ |
+| Konjugiertes | $\overline{a+bi} = a-bi$ |
+| Betrag | $|z| = \sqrt{a^2 + b^2}$ |
+
+### 💡 Polardarstellung
+$$z = r \cdot e^{i\varphi} = r(\cos\varphi + i\sin\varphi)$$
+
+**Euler-Formel:** $e^{i\varphi} = \cos\varphi + i\sin\varphi$`,
+    lessons: [
+      {
+        id: "m-kz-1",
+        title: "Grundlagen komplexer Zahlen",
+        duration: "20 min",
+        type: "text",
+        content: `## Die imaginäre Einheit
+
+$$i^2 = -1$$
+
+Die **imaginäre Einheit** $i$ ist definiert als:
+$$i = \sqrt{-1}$$
+
+## Komplexe Zahlen
+
+Eine komplexe Zahl hat die Form:
+$$z = a + bi$$
+
+- $a$ = **Realteil** = $\text{Re}(z)$
+- $b$ = **Imaginärteil** = $\text{Im}(z)$
+
+**Beispiele:**
+- $z = 3 + 2i$ → Re = 3, Im = 2
+- $z = -1 + i$ → Re = -1, Im = 1
+- $z = 5$ → Re = 5, Im = 0 (reelle Zahl)
+- $z = -2i$ → Re = 0, Im = -2 (reine Imaginärzahl)
+
+## Rechenregeln
+
+**Addition:**
+$$(a + bi) + (c + di) = (a + c) + (b + d)i$$
+
+**Beispiel:** $(2 + 3i) + (1 - i) = 3 + 2i$
+
+**Subtraktion:**
+$$(a + bi) - (c + di) = (a - c) + (b - d)i$$
+
+## Übung
+
+Berechne $(4 + 2i) + (3 - 5i)$!`,
+      },
+      {
+        id: "m-kz-2",
+        title: "Multiplikation und Division",
+        duration: "25 min",
+        type: "text",
+        content: `## Multiplikation
+
+$$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
+
+**Beispiel:**
+$$(2 + 3i)(1 + 4i) = 2 + 8i + 3i + 12i^2 = 2 + 11i - 12 = -10 + 11i$$
+
+## Konjugierte
+
+$$\overline{a + bi} = a - bi$$
+
+**Eigenschaft:** $z \cdot \bar{z} = |z|^2 = a^2 + b^2$
+
+## Division
+
+$$\frac{a + bi}{c + di} = \frac{(a + bi)(c - di)}{(c + di)(c - di)} = \frac{(a + bi)(c - di)}{c^2 + d^2}$$
+
+**Beispiel:**
+$$\frac{3 + 2i}{1 + i} = \frac{(3 + 2i)(1 - i)}{1 + 1} = \frac{3 - 3i + 2i - 2i^2}{2} = \frac{5 - i}{2} = 2.5 - 0.5i$$
+
+## Übung
+
+Berechne $\frac{2 + 3i}{1 - i}$!`,
+      },
+      {
+        id: "m-kz-3",
+        title: "Polardarstellung & Euler",
+        duration: "20 min",
+        type: "text",
+        content: `## Polardarstellung
+
+$$z = r \cdot e^{i\varphi}$$
+
+Mit:
+- $r = |z| = \sqrt{a^2 + b^2}$ (Betrag)
+- $\varphi = \arg(z)$ (Argument/Winkel)
+
+## Euler-Formel
+
+$$e^{i\varphi} = \cos\varphi + i\sin\varphi$$
+
+**Spezielle Werte:**
+- $e^{i\pi/2} = i$
+- $e^{i\pi} = -1$
+- $e^{i2\pi} = 1$
+
+## De Moivre'scher Satz
+
+$$(e^{i\varphi})^n = e^{in\varphi} = \cos(n\varphi) + i\sin(n\varphi)$$
+
+**Anwendung:** Potenzen und Wurzeln komplexer Zahlen
+
+## Einheitskreis
+
+Alle Zahlen mit $|z| = 1$ liegen auf dem Einheitskreis.
+
+## Übung
+
+Gib $z = 1 + i$ in Polardarstellung an!`,
+      },
+      {
+        id: "m-kz-quiz",
+        title: "Quiz: Komplexe Zahlen",
+        duration: "10 min",
+        type: "quiz",
+        content: "Teste dein Wissen über komplexe Zahlen!",
+      },
+      {
+        id: "m-komplexe-zahlen-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+      },
+    ],
+  },
+
+  // =============== NUMERIK ===============
+  {
+    id: "m-numerik-grundlagen",
+    slug: "mathe-numerik",
+    title: "Numerische Verfahren",
+    description: "Algorithmen für numerische Berechnungen",
+    icon: "💻",
+    color: "#10b981",
+    category: "numerik",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Numerik
+
+### 🎯 Grundlagen
+- **Fehler:** $|x_{exakt} - x_{approx}|$
+- **Rel. Fehler:** $\frac{|x_{exakt} - x_{approx}|}{|x_{exakt}|}$
+
+### 📐 Wichtige Verfahren
+| Verfahren | Anwendung |
+|-----------|----------|
+| Bisektion | Nullstellen finden |
+| Newton | Nullstellen (schneller) |
+| Gauß | Lineare Gleichungssysteme |
+| Euler | DGLs lösen |
+
+### 💡 Konvergenz
+- **Ordnung p:** $|e_{n+1}| \leq C \cdot |e_n|^p$
+- Linear: $p=1$, Quadratisch: $p=2$`,
+    lessons: [
+      {
+        id: "m-num-1",
+        title: "Fehler und Näherungen",
+        duration: "15 min",
+        type: "text",
+        content: `## Rundungsfehler
+
+Computer können nicht alle Zahlen exakt darstellen.
+
+**Beispiel:** $\frac{1}{3} = 0.3333...$ wird gerundet.
+
+## Absolute und relative Fehler
+
+$$\text{abs. Fehler} = |x_{exakt} - x_{approx}|$$
+
+$$\text{rel. Fehler} = \frac{|x_{exakt} - x_{approx}|}{|x_{exakt}|}$$
+
+## Maschinengenauigkeit
+
+$$\varepsilon_{mach} \approx 2.2 \times 10^{-16}$$ (für Double Precision)
+
+## Übung
+
+Berechne den relativen Fehler für $x_{exakt} = 2.5$, $x_{approx} = 2.48$!`,
+      },
+      {
+        id: "m-num-2",
+        title: "Bisektionsverfahren",
+        duration: "20 min",
+        type: "text",
+        content: `## Bisektionsverfahren
+
+Einfache Methode zum Finden von Nullstellen.
+
+### Algorithmus
+1. Wähle $[a,b]$ mit $f(a) \cdot f(b) < 0$
+2. Berechne $m = \frac{a+b}{2}$
+3. Wenn $f(m) = 0$: fertig!
+4. Wenn $f(a) \cdot f(m) < 0$: $b = m$, sonst $a = m$
+5. Wiederhole ab Schritt 2
+
+### Konvergenz
+Nach n Schritten:
+$$|x_n - x^*| \leq \frac{b-a}{2^n}$$
+
+**Beispiel:** Nullstelle von $f(x) = x^2 - 2$ im Intervall [1, 2]
+
+## Übung
+
+Finde die Nullstelle von $f(x) = x - \cos(x)$ mit Bisektion!`,
+      },
+      {
+        id: "m-num-3",
+        title: "Newton-Verfahren",
+        duration: "25 min",
+        type: "text",
+        content: `## Newton-Verfahren
+
+Schnellere Methode mit Ableitung.
+
+### Formel
+$$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
+
+### Geometrische Deutung
+Tangente an $f$ in $x_n$ wird gezogen. Der Schnitt mit der x-Achse ist $x_{n+1}$.
+
+### Konvergenz
+- Quadratische Konvergenz (sehr schnell!)
+- Voraussetzung: $f'(x^*) \neq 0$
+
+### Beispiel
+$f(x) = x^2 - 2$, $f'(x) = 2x$
+
+$$x_{n+1} = x_n - \frac{x_n^2 - 2}{2x_n} = \frac{x_n}{2} + \frac{1}{x_n}$$
+
+Mit $x_0 = 1$:
+- $x_1 = 1.5$
+- $x_2 = 1.4166...$
+- $x_3 = 1.4142...$ (schon sehr nah!)
+
+## Übung
+
+Verwende Newton für $f(x) = x^3 - 5$ mit $x_0 = 2$!`,
+      },
+      {
+        id: "m-num-quiz",
+        title: "Quiz: Numerik",
+        duration: "10 min",
+        type: "quiz",
+        content: "Teste dein Wissen über numerische Verfahren!",
+      },
+      {
+        id: "m-numerik-aufgaben",
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
