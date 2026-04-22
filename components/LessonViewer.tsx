@@ -13,6 +13,9 @@ import {
 import { CoordinateSystem2D, CoordinateSystem3D } from "./visuals/CoordinateSystem";
 import { FunctionGraph } from "./visuals/FunctionGraph";
 import { UnitCircle } from "./visuals/UnitCircle";
+import { FunctionExplorer } from "./interactive/FunctionExplorer";
+import { TangentExplorer } from "./interactive/TangentExplorer";
+import { IntegralExplorer } from "./interactive/IntegralExplorer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -38,6 +41,20 @@ function renderVisual(visual: LessonVisual, index: number) {
   return (
     <div key={`visual-${index}`} className="my-6 p-4 bg-slate-800/30 rounded-xl border border-slate-700/50">
       {components[visual.type] || <p className="text-red-400">Unbekannter Visual-Typ: {visual.type}</p>}
+    </div>
+  );
+}
+
+function renderInteractive(type: string) {
+  const components: Record<string, JSX.Element> = {
+    functionExplorer: <FunctionExplorer />,
+    tangentExplorer: <TangentExplorer />,
+    integralExplorer: <IntegralExplorer />,
+  };
+
+  return (
+    <div className="my-6">
+      {components[type] || <p className="text-red-400">Unbekannter Interaktiv-Typ: {type}</p>}
     </div>
   );
 }
@@ -205,6 +222,9 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
 
       {/* Visuals (top position) */}
       {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
+
+      {/* Interactive Component */}
+      {lesson.interactive && renderInteractive(lesson.interactive)}
 
       {/* Content */}
       <div className="markdown-content">{renderContent(lesson.content)}</div>
