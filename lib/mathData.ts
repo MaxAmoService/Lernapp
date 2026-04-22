@@ -249,6 +249,7 @@ $\\exists! x \\in \\mathbb{R}: x + 2 = 5$
         title: "Funktionen & Definitionsbereiche",
         duration: "15 min",
         type: "interactive",
+        interactive: "functionExplorer" as const,
         visuals: [
           { type: "functionGraph" as const, props: { fn: (x: number) => x * x - 2, xRange: [-3, 3], yRange: [-3, 7], label: "f(x) = x² - 2", points: [{ x: 0, y: -2, label: "(0, -2)" }] } },
         ],
@@ -423,6 +424,7 @@ $\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$`
         title: "Definition der Ableitung",
         duration: "15 min",
         type: "interactive",
+        interactive: "tangentExplorer" as const,
         visuals: [
           { type: "functionGraph" as const, props: { fn: (x: number) => x * x, xRange: [-3, 4], yRange: [-1, 10], label: "f(x) = x²", tangent: { x: 2, slope: 4, label: "f'(2) = 4" }, points: [{ x: 2, y: 4, label: "(2, 4)" }] } },
         ],
@@ -509,6 +511,7 @@ $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$`,
         title: "Stammfunktionen",
         duration: "18 min",
         type: "interactive",
+        interactive: "integralExplorer" as const,
         visuals: [
           { type: "functionGraph" as const, props: { fn: (x: number) => x * x, xRange: [-1, 3], yRange: [-1, 10], label: "f(x) = x²", fillArea: { from: 0, to: 2, color: "rgba(129,140,248,0.3)", label: "∫₀² x² dx" } } },
         ],

@@ -4,6 +4,8 @@ export interface LessonVisual {
   position?: "top" | "bottom";
 }
 
+export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer";
+
 export interface Lesson {
   id: string;
   title: string;
@@ -12,6 +14,7 @@ export interface Lesson {
   content: string;
   codeExample?: string;
   visuals?: LessonVisual[];
+  interactive?: InteractiveType;
 }
 
 export interface Module {
