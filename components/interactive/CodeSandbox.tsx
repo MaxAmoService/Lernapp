@@ -37,6 +37,7 @@ export function CodeSandbox({
   const [output, setOutput] = useState<OutputLine[]>([]);
   const [isRunning, setIsRunning] = useState(false);
   const [hasRun, setHasRun] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const highlightRef = useRef<HTMLElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
@@ -141,7 +142,7 @@ export function CodeSandbox({
   }, [code, runCode]);
 
   return (
-    <div className={`rounded-xl overflow-hidden border border-slate-700/50 shadow-lg ${className}`}>
+    <div className={`rounded-xl overflow-hidden border border-slate-700/50 shadow-lg transition-all ${isExpanded ? "fixed inset-4 z-50 flex flex-col" : ""} ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-slate-800/90 border-b border-slate-700/50">
         <div className="flex items-center gap-3">
@@ -154,6 +155,9 @@ export function CodeSandbox({
           <span className="text-xs px-2 py-0.5 bg-slate-700/80 rounded text-slate-400 font-mono">{language}</span>
         </div>
         <div className="flex items-center gap-1.5">
+          <button onClick={() => setIsExpanded(!isExpanded)} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title={isExpanded ? "Verkleinern" : "Vergrößern"}>
+            {isExpanded ? "⊟ Kompakt" : "⊞ Vollbild"}
+          </button>
           <button onClick={resetCode} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title="Zurücksetzen">↺ Reset</button>
           <button onClick={clearOutput} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title="Output löschen">🗑 Clear</button>
           <button
@@ -167,7 +171,7 @@ export function CodeSandbox({
       </div>
 
       {/* Editor with Prism overlay */}
-      <div className="relative bg-[#1e1e2e] min-h-[200px] max-h-[400px]">
+      <div className={`relative bg-[#1e1e2e] ${isExpanded ? "flex-1 min-h-0" : "min-h-[280px] max-h-[500px]"}`}>
         {/* Line numbers */}
         <div className="absolute left-0 top-0 w-12 h-full bg-slate-900/60 border-r border-slate-800/50 z-10 pointer-events-none overflow-hidden">
           {code.split("\n").map((_, i) => (
@@ -178,7 +182,7 @@ export function CodeSandbox({
         </div>
 
         {/* Highlighted code (background) */}
-        <pre className="!m-0 !p-4 !pl-14 !bg-transparent overflow-hidden pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+        <pre className={`!m-0 !p-4 !pl-14 !bg-transparent overflow-hidden pointer-events-none absolute inset-0 z-0 ${isExpanded ? "overflow-y-auto" : ""}`} aria-hidden="true">
           <code ref={highlightRef} className={`language-${language} !bg-transparent`}>{code}</code>
         </pre>
 
@@ -189,7 +193,7 @@ export function CodeSandbox({
           onChange={(e) => setCode(e.target.value)}
           onKeyDown={handleKeyDown}
           onScroll={syncScroll}
-          className="w-full min-h-[200px] max-h-[400px] p-4 pl-14 bg-transparent text-transparent caret-white resize-y focus:outline-none leading-[1.65] font-mono text-[0.9em] relative z-10 selection:bg-blue-500/30"
+          className={`w-full p-4 pl-14 bg-transparent text-transparent caret-white resize-none focus:outline-none leading-[1.65] font-mono text-[0.9em] relative z-10 selection:bg-blue-500/30 ${isExpanded ? "h-full" : "min-h-[280px] max-h-[500px] resize-y"}`}
           spellCheck={false}
           autoCapitalize="off"
           autoComplete="off"
@@ -201,7 +205,7 @@ export function CodeSandbox({
 
       {/* Output */}
       {hasRun && (
-        <div className="border-t border-slate-700/50">
+        <div className={`border-t border-slate-700/50 ${isExpanded ? "max-h-[300px]" : ""}`}>
           <div className="flex items-center justify-between px-4 py-2 bg-slate-800/60">
             <div className="flex items-center gap-2 text-xs text-slate-400">
               <span className="font-mono">📟</span>
@@ -211,7 +215,7 @@ export function CodeSandbox({
             </div>
             <button onClick={clearOutput} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">✕</button>
           </div>
-          <div ref={outputRef} className="p-4 bg-[#0d1117] font-mono text-sm max-h-[250px] overflow-y-auto space-y-0.5">
+          <div ref={outputRef} className={`p-4 bg-[#0d1117] font-mono text-sm overflow-y-auto space-y-0.5 ${isExpanded ? "max-h-[300px]" : "max-h-[250px]"}`}>
             {output.length === 0 ? (
               <div className="text-slate-600 italic text-xs">Kein Output</div>
             ) : (
