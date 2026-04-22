@@ -4,7 +4,7 @@ export interface LessonVisual {
   position?: "top" | "bottom";
 }
 
-export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer";
+export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer";
 
 export interface Lesson {
   id: string;

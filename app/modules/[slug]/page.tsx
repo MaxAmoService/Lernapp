@@ -255,7 +255,7 @@ export default function ModulePage() {
                 return (
                   <button
                     key={lesson.id}
-                    onClick={() => setSelectedLesson(lesson)}
+                    onClick={() => { setSelectedLesson(lesson); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                     className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors ${
                       isSelected
                         ? "bg-blue-500/20 border border-blue-500/50"
@@ -313,7 +313,7 @@ export default function ModulePage() {
                 Wähle eine Lektion aus der Liste, um zu beginnen.
               </p>
               <button
-                onClick={() => setSelectedLesson(module.lessons[0])}
+                onClick={() => { setSelectedLesson(module.lessons[0]); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className="px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
               >
                 Erste Lektion starten
