@@ -1,53 +1,94 @@
 import { Module, QuizQuestion, LessonVisual } from "./types";
 
-export const mathCategories = [
+export interface MathSubCategory {
+  id: string;
+  name: string;
+  description: string;
+}
+
+export interface MathCategory {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  subCategories: MathSubCategory[];
+}
+
+export const mathCategories: MathCategory[] = [
   {
-    id: "arithmetik-algebra",
-    name: "Arithmetik & Algebra",
+    id: "grundlagen",
+    name: "Grundlagen",
     icon: "🔢",
-    description: "Grundrechenarten, Gleichungen und algebraische Strukturen",
+    description: "Mengenlehre, Logik, Funktionen, Potenzen & Wurzeln",
+    subCategories: [
+      { id: "mengen-logik", name: "Mengenlehre & Logik", description: "Mengenoperationen, logische Aussagen, Quantoren" },
+      { id: "funktionen", name: "Funktionen & Graphen", description: "Definitionsbereiche, Eigenschaften, Umkehrfunktionen" },
+      { id: "potenzen-logarithmen", name: "Potenzen & Logarithmen", description: "Potenzregeln, Wurzeln, Exponentialfunktionen" },
+    ],
   },
   {
     id: "analysis",
     name: "Analysis",
     icon: "📊",
-    description: "Grenzwerte, Differentiation, Integration und Reihen",
+    description: "Grenzwerte, Ableitungen, Integration, Reihen & Potenzreihen",
+    subCategories: [
+      { id: "grenzwerte", name: "Grenzwerte", description: "Limes, L'Hôpital, Konvergenz" },
+      { id: "differentialrechnung", name: "Differentialrechnung", description: "Ableitungen, Regeln, Anwendungen" },
+      { id: "integralrechnung", name: "Integralrechnung", description: "Stammfunktionen, bestimmte Integrale" },
+      { id: "reihen", name: "Reihen & Potenzreihen", description: "Konvergenz, Taylor, Maclaurin" },
+    ],
   },
   {
     id: "lineare-algebra",
     name: "Lineare Algebra",
     icon: "↔️",
-    description: "Vektoren, Matrizen und lineare Gleichungssysteme",
+    description: "Vektoren, Matrizen, Lineare Gleichungssysteme",
+    subCategories: [
+      { id: "vektoren", name: "Vektoren", description: "Vektorrechnung, Skalar- und Kreuzprodukt" },
+      { id: "matrizen", name: "Matrizen", description: "Matrixrechnung, Determinanten, inverse Matrizen" },
+    ],
   },
   {
-    id: "geometrie",
-    name: "Geometrie",
+    id: "geometrie-trigonometrie",
+    name: "Geometrie & Trigonometrie",
     icon: "📐",
-    description: "Formen, Flächen, Körper und räumliches Denken",
-  },
-  {
-    id: "differentialgleichungen",
-    name: "Differentialgleichungen",
-    icon: "📈",
-    description: "ODEs, PDEs und Lösungsmethoden",
-  },
-  {
-    id: "komplexe-zahlen",
-    name: "Komplexe Zahlen",
-    icon: "🌀",
-    description: "Komplexe Ebene, Polardarstellung und Anwendungen",
+    description: "Flächen, Körper, Trigonometrie, Analytische Geometrie",
+    subCategories: [
+      { id: "flaechen", name: "Flächeninhalte", description: "Rechteck, Dreieck, Kreis, Trapez" },
+      { id: "koerper", name: "Körper & Volumen", description: "Quader, Kugel, Zylinder, Kegel" },
+      { id: "trigonometrie", name: "Trigonometrie", description: "Sinus, Kosinus, Tangens, Einheitskreis" },
+    ],
   },
   {
     id: "stochastik",
     name: "Stochastik",
     icon: "🎲",
-    description: "Wahrscheinlichkeitsrechnung und Statistik",
+    description: "Wahrscheinlichkeitsrechnung, Kombinatorik, Statistik",
+    subCategories: [
+      { id: "wahrscheinlichkeit", name: "Wahrscheinlichkeitsrechnung", description: "Grundbegriffe, bedingte Wahrscheinlichkeit, Bayes" },
+      { id: "kombinatorik", name: "Kombinatorik", description: "Permutationen, Variationen, Kombinationen" },
+      { id: "statistik", name: "Statistik", description: "Mittelwert, Varianz, Standardabweichung, Quartile" },
+    ],
   },
   {
-    id: "numerik",
-    name: "Numerik & Algorithmen",
-    icon: "💻",
-    description: "Numerische Verfahren und Algorithmik",
+    id: "komplexe-numerik",
+    name: "Komplexe Zahlen & Numerik",
+    icon: "🌀",
+    description: "Komplexe Zahlen, Numerische Verfahren",
+    subCategories: [
+      { id: "komplexe-zahlen", name: "Komplexe Zahlen", description: "Rechenregeln, Betrag, Polardarstellung" },
+      { id: "numerik", name: "Numerische Verfahren", description: "Fehler, Bisektion, Newton-Verfahren" },
+    ],
+  },
+  {
+    id: "differentialgleichungen",
+    name: "Differentialgleichungen",
+    icon: "📈",
+    description: "DGln 1. und 2. Ordnung",
+    subCategories: [
+      { id: "dgl-1", name: "DGln 1. Ordnung", description: "Trennbare Variablen, Integrationsfaktor" },
+      { id: "dgl-2", name: "DGln 2. Ordnung", description: "Charakteristik, homogen, inhomogen" },
+    ],
   },
 ];
 
@@ -59,7 +100,7 @@ export const mathModules: Module[] = [
     description: "Grundlagen der Mengen und mathematischen Logik",
     icon: "🔢",
     color: "#8b5cf6",
-    category: "arithmetik-algebra",
+    category: "grundlagen",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Mengenlehre & Logik
 
@@ -199,7 +240,7 @@ $\\exists! x \\in \\mathbb{R}: x + 2 = 5$
     description: "Funktionen, Graphen und Eigenschaften",
     icon: "📉",
     color: "#8b5cf6",
-    category: "arithmetik-algebra",
+    category: "grundlagen",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Funktionen & Graphen\n\n### 🎯 Wichtige Funktionen\n\n| Typ | Formel | Beispiel |\n|-----|--------|----------|\n| **Linear** | $f(x) = mx + b$ | $2x + 3$ |\n| **Quadratisch** | $f(x) = ax^2 + bx + c$ | $x^2 - 4$ |\n| **Potenz** | $f(x) = x^n$ | $x^3$ |\n| **Wurzel** | $f(x) = \\sqrt{x}$ | $\\sqrt{x+1}$ |\n| **Exponential** | $f(x) = a^x$ | $2^x$ |\n| **Logarithmus** | $f(x) = \\log_a x$ | $\\ln x$ |\n\n### 📐 Eigenschaften\n\n| Eigenschaft | Definition |\n|-------------|------------|\n| **Gerade** | $f(-x) = f(x)$ (achsensymmetrisch) |\n| **Ungerade** | $f(-x) = -f(x)$ (punktsymmetrisch) |\n| **Monoton** | $x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)$ |\n| **Beschränkt** | $|f(x)| \\leq M$ |\n\n### 💡 Umkehrfunktion\n- $f^{-1}(f(x)) = x$\n- Grafisch: Spiegelung an $y = x$\n- Existiert nur, wenn $f$ bijektiv ist` ,
     lessons: [
@@ -938,7 +979,7 @@ Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig gewählter Schüler ein 
     description: "Imaginäre Zahlen und komplexe Ebene",
     icon: "🌀",
     color: "#8b5cf6",
-    category: "komplexe-zahlen",
+    category: "komplexe-numerik",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Komplexe Zahlen
 
@@ -1090,7 +1131,7 @@ Gib $z = 1 + i$ in Polardarstellung an!`,
     description: "Algorithmen für numerische Berechnungen",
     icon: "💻",
     color: "#10b981",
-    category: "numerik",
+    category: "komplexe-numerik",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Numerik
 
@@ -1219,7 +1260,7 @@ Verwende Newton für $f(x) = x^3 - 5$ mit $x_0 = 2$!`,
     description: "Flächen, Körper und räumliches Denken",
     icon: "📐",
     color: "#06b6d4",
-    category: "geometrie",
+    category: "geometrie-trigonometrie",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Geometrie
 
@@ -1361,7 +1402,7 @@ Ein rechtwinkliges Dreieck hat Katheten $a = 3$ und $b = 4$. Wie lang ist die Hy
     description: "Sinus, Kosinus, Tangens und Anwendungen",
     icon: "📏",
     color: "#ec4899",
-    category: "geometrie",
+    category: "geometrie-trigonometrie",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Trigonometrie
 
@@ -1482,7 +1523,7 @@ Gegeben: $a = 5$, $b = 7$, $\\gamma = 60°$. Berechne $c$!`,
     description: "Rechnen mit Potenzen und Logarithmen",
     icon: "🔢",
     color: "#84cc16",
-    category: "arithmetik-algebra",
+    category: "grundlagen",
     progress: 0,
     merkblatt: `## 📋 Merkblatt: Potenzen & Logarithmen
 
@@ -1911,6 +1952,282 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       ],
       correct: 0,
       explanation: "Die Koeffizienten der DGl werden direkt übernommen.",
+    },
+  ],
+
+  // ==================== STOCHASTIK ====================
+  "mathe-stochastik": [
+    {
+      question: "Ein fairer Würfel wird geworfen. Wie groß ist $P(\text{ungerade Zahl})$?",
+      type: "multiple",
+      options: ["$\\frac{1}{6}$", "$\\frac{1}{3}$", "$\\frac{1}{2}$", "$\\frac{2}{3}$"],
+      correct: 2,
+      explanation: "Ungerade Zahlen: {1, 3, 5} = 3 von 6. Also $P = \\frac{3}{6} = \\frac{1}{2}$.",
+    },
+    {
+      question: "Was ist $P(A \\cup B)$ wenn $P(A) = 0.4$, $P(B) = 0.3$ und A, B sind disjunkt?",
+      type: "input",
+      correct: "0.7",
+      explanation: "Bei disjunkten Ereignissen: $P(A \\cup B) = P(A) + P(B) = 0.4 + 0.3 = 0.7$.",
+      hint: "Disjunkt bedeutet $A \\cap B = \\emptyset$.",
+    },
+    {
+      question: "Wie viele Möglichkeiten gibt es, 3 Bücher auf einem Regal anzuordnen?",
+      type: "input",
+      correct: "6",
+      explanation: "Permutation: $3! = 3 \\cdot 2 \\cdot 1 = 6$.",
+    },
+    {
+      question: "Was ist $\\binom{5}{2}$?",
+      type: "input",
+      correct: "10",
+      explanation: "$\\binom{5}{2} = \\frac{5!}{2! \\cdot 3!} = \\frac{120}{2 \\cdot 6} = 10$.",
+    },
+    {
+      question: "Wenn $P(A) = 0.6$ und $P(B|A) = 0.5$, was ist $P(A \\cap B)$?",
+      type: "input",
+      correct: "0.3",
+      explanation: "Bedingte Wahrscheinlichkeit: $P(A \\cap B) = P(B|A) \\cdot P(A) = 0.5 \\cdot 0.6 = 0.3$.",
+    },
+  ],
+
+  // ==================== KOMPLEXE ZAHLEN ====================
+  "mathe-komplexe-zahlen": [
+    {
+      question: "Was ist $i^2$?",
+      type: "input",
+      correct: "-1",
+      explanation: "Die imaginäre Einheit ist definiert als $i^2 = -1$.",
+    },
+    {
+      question: "Berechne $(2 + 3i) + (1 - i)$.",
+      type: "multiple",
+      options: ["$3 + 2i$", "$3 + 4i$", "$1 + 2i$", "$3 - 2i$"],
+      correct: 0,
+      explanation: "Addition: $(2+1) + (3-1)i = 3 + 2i$.",
+    },
+    {
+      question: "Was ist der Betrag von $z = 3 + 4i$?",
+      type: "input",
+      correct: "5",
+      explanation: "$|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$.",
+    },
+    {
+      question: "Was ist das konjugierte von $z = 2 - 5i$?",
+      type: "multiple",
+      options: ["$-2 + 5i$", "$2 + 5i$", "$-2 - 5i$", "$5 - 2i$"],
+      correct: 1,
+      explanation: "Das konjugierte $\\bar{z} = a - bi$ wird durch Vorzeichenwechsel des Imaginärteils gebildet: $2 + 5i$.",
+    },
+    {
+      question: "In der Polardarstellung $z = r \\cdot e^{i\\varphi}$, was ist $r$?",
+      type: "multiple",
+      options: ["Der Realteil", "Der Imaginärteil", "Der Betrag $|z|$", "Das Argument"],
+      correct: 2,
+      explanation: "$r = |z|$ ist der Betrag der komplexen Zahl.",
+    },
+  ],
+
+  // ==================== NUMERIK ====================
+  "mathe-numerik": [
+    {
+      question: "Was ist der absolute Fehler für $x_{exakt} = 10$, $x_{approx} = 9.8$?",
+      type: "input",
+      correct: "0.2",
+      explanation: "$|x_{exakt} - x_{approx}| = |10 - 9.8| = 0.2$.",
+    },
+    {
+      question: "Beim Bisektionsverfahren halbiert sich das Intervall in jedem Schritt. Nach wie vielen Schritten ist das Intervall kleiner als $\\frac{1}{8}$ des ursprünglichen?",
+      type: "input",
+      correct: "3",
+      explanation: "$\\frac{1}{2^3} = \\frac{1}{8}$, also nach 3 Schritten.",
+    },
+    {
+      question: "Wie lautet die Newton-Iterationsformel?",
+      type: "multiple",
+      options: [
+        "$x_{n+1} = x_n - f(x_n) \\cdot f'(x_n)$",
+        "$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$",
+        "$x_{n+1} = x_n + \\frac{f(x_n)}{f'(x_n)}$",
+        "$x_{n+1} = \\frac{x_n + f(x_n)}{2}$",
+      ],
+      correct: 1,
+      explanation: "Newton-Verfahren: $x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$.",
+    },
+    {
+      question: "Welche Konvergenzordnung hat das Newton-Verfahren (bei einfachen Nullstellen)?",
+      type: "multiple",
+      options: ["Linear", "Quadratisch", "Kubisch", "Logarithmisch"],
+      correct: 1,
+      explanation: "Das Newton-Verfahren hat quadratische Konvergenz (Ordnung 2).",
+    },
+    {
+      question: "Newton: $f(x) = x^2 - 4$, $x_0 = 3$. Berechne $x_1$.",
+      type: "input",
+      correct: "2.1667",
+      explanation: "$x_1 = 3 - \\frac{9-4}{6} = 3 - \\frac{5}{6} \\approx 2.1667$.",
+    },
+  ],
+
+  // ==================== GEOMETRIE ====================
+  "mathe-geometrie": [
+    {
+      question: "Was ist die Fläche eines Rechtecks mit $a = 6$ und $b = 4$?",
+      type: "input",
+      correct: "24",
+      explanation: "$A = a \\cdot b = 6 \\cdot 4 = 24$.",
+    },
+    {
+      question: "Was ist das Volumen einer Kugel mit Radius $r = 3$? Gib $\\pi$ als Faktor an (z.B. 36\\pi).",
+      type: "input",
+      correct: "36pi",
+      explanation: "$V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3}\\pi \\cdot 27 = 36\\pi$.",
+    },
+    {
+      question: "Im rechtwinkligen Dreieck: $a = 5$, $b = 12$. Was ist $c$?",
+      type: "input",
+      correct: "13",
+      explanation: "Pythagoras: $c = \\sqrt{a^2 + b^2} = \\sqrt{25 + 144} = \\sqrt{169} = 13$.",
+    },
+    {
+      question: "Was ist die Fläche eines Kreises mit Radius $r = 5$? Gib $\\pi$ als Faktor an.",
+      type: "input",
+      correct: "25pi",
+      explanation: "$A = \\pi r^2 = 25\\pi$.",
+    },
+    {
+      question: "Welche Formel beschreibt das Volumen eines Zylinders?",
+      type: "multiple",
+      options: [
+        "$V = \\pi r^2$",
+        "$V = \\pi r^2 h$",
+        "$V = \\frac{1}{3}\\pi r^2 h$",
+        "$V = \\frac{4}{3}\\pi r^3$",
+      ],
+      correct: 1,
+      explanation: "Zylindervolumen: $V = \\pi r^2 h$.",
+    },
+  ],
+
+  // ==================== TRIGONOMETRIE ====================
+  "mathe-trigonometrie": [
+    {
+      question: "Was ist $\\sin(30°)$?",
+      type: "multiple",
+      options: ["$0$", "$\\frac{1}{2}$", "$\\frac{\\sqrt{2}}{2}$", "$1$"],
+      correct: 1,
+      explanation: "$\\sin(30°) = \\frac{1}{2}$.",
+    },
+    {
+      question: "Was ist $\\cos(0°)$?",
+      type: "input",
+      correct: "1",
+      explanation: "$\\cos(0°) = 1$.",
+    },
+    {
+      question: "Im rechtwinkligen Dreieck: Gegenkathete $= 4$, Hypotenuse $= 5$. Was ist $\\sin(\\alpha)$?",
+      type: "multiple",
+      options: ["$\\frac{3}{5}$", "$\\frac{4}{5}$", "$\\frac{4}{3}$", "$\\frac{5}{4}$"],
+      correct: 1,
+      explanation: "$\\sin(\\alpha) = \\frac{\\text{Gegenkathete}}{\\text{Hypotenuse}} = \\frac{4}{5}$.",
+    },
+    {
+      question: "Welche Identität gilt immer?",
+      type: "multiple",
+      options: [
+        "$\\sin^2\\alpha + \\cos^2\\alpha = 2$",
+        "$\\sin^2\\alpha + \\cos^2\\alpha = 1$",
+        "$\\sin\\alpha + \\cos\\alpha = 1$",
+        "$\\sin\\alpha \\cdot \\cos\\alpha = 1$",
+      ],
+      correct: 1,
+      explanation: "Grundidentität: $\\sin^2\\alpha + \\cos^2\\alpha = 1$.",
+    },
+    {
+      question: "Was ist $\\tan(45°)$?",
+      type: "input",
+      correct: "1",
+      explanation: "$\\tan(45°) = \\frac{\\sin(45°)}{\\cos(45°)} = \\frac{\\sqrt{2}/2}{\\sqrt{2}/2} = 1$.",
+    },
+  ],
+
+  // ==================== POTENZEN ====================
+  "mathe-potenzen": [
+    {
+      question: "Was ist $2^3 \\cdot 2^4$?",
+      type: "input",
+      correct: "128",
+      explanation: "$2^3 \\cdot 2^4 = 2^{3+4} = 2^7 = 128$.",
+    },
+    {
+      question: "Was ist $\\log_2(16)$?",
+      type: "input",
+      correct: "4",
+      explanation: "$2^4 = 16$, also $\\log_2(16) = 4$.",
+    },
+    {
+      question: "Was ist $\\sqrt[3]{27}$?",
+      type: "input",
+      correct: "3",
+      explanation: "$3^3 = 27$, also $\\sqrt[3]{27} = 3$.",
+    },
+    {
+      question: "Welche Regel gilt: $\\log(a \\cdot b) = $ ...?",
+      type: "multiple",
+      options: [
+        "$\\log(a) \\cdot \\log(b)$",
+        "$\\log(a) + \\log(b)$",
+        "$\\frac{\\log(a)}{\\log(b)}$",
+        "$\\log(a) - \\log(b)$",
+      ],
+      correct: 1,
+      explanation: "Produktregel des Logarithmus: $\\log(a \\cdot b) = \\log(a) + \\log(b)$.",
+    },
+    {
+      question: "Was ist $5^0$?",
+      type: "input",
+      correct: "1",
+      explanation: "Jede Zahl (außer 0) hoch 0 ist 1: $a^0 = 1$.",
+    },
+  ],
+
+  // ==================== STATISTIK ====================
+  "mathe-statistik": [
+    {
+      question: "Was ist der Mittelwert von $2, 4, 6, 8, 10$?",
+      type: "input",
+      correct: "6",
+      explanation: "$\\bar{x} = \\frac{2+4+6+8+10}{5} = \\frac{30}{5} = 6$.",
+    },
+    {
+      question: "Was ist der Median von $3, 7, 9, 12, 15$?",
+      type: "input",
+      correct: "9",
+      explanation: "Sortiert: Der mittlere Wert (3. von 5) ist 9.",
+    },
+    {
+      question: "Daten: $1, 3, 5, 7, 9$. Was ist die Varianz $s^2$?",
+      type: "input",
+      correct: "8",
+      explanation: "$\\bar{x} = 5$. $s^2 = \\frac{(1-5)^2+(3-5)^2+(5-5)^2+(7-5)^2+(9-5)^2}{5} = \\frac{16+4+0+4+16}{5} = 8$.",
+    },
+    {
+      question: "Was ist die Standardabweichung wenn die Varianz $s^2 = 9$ ist?",
+      type: "input",
+      correct: "3",
+      explanation: "$s = \\sqrt{s^2} = \\sqrt{9} = 3$.",
+    },
+    {
+      question: "Was gibt der Interquartilsabstand $IQR$ an?",
+      type: "multiple",
+      options: [
+        "Den Mittelwert",
+        "Die Spannweite",
+        "Die Streubreite des mittleren 50%",
+        "Den häufigsten Wert",
+      ],
+      correct: 2,
+      explanation: "$IQR = Q_3 - Q_1$ beschreibt die Streubreite des mittleren 50% der Daten.",
     },
   ],
 };
