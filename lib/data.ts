@@ -93,6 +93,7 @@ function Greeting({ name }) {
         title: "Komponenten & Props",
         duration: "10 min",
         type: "interactive",
+        interactive: "codeSandbox" as const,
         content: `# Komponenten & Props
 
 Komponenten sind das Herzstück von React. Sie sind wiederverwendbare UI-Bausteine.
@@ -106,33 +107,31 @@ Props (Properties) sind Daten, die von **Eltern- zu Kind-Komponenten** übergebe
 Eine Komponente darf ihre Props **nie** verändern. Das sorgt für vorhersehbares Verhalten.
 
 ## Beispiel: Benutzer-Karte`,
-        codeExample: `// Kind-Komponente
-function UserCard({ name, email, avatar }) {
-  return (
-    <div className="user-card">
-      <img src={avatar} alt={name} />
-      <h2>{name}</h2>
-      <p>{email}</p>
-    </div>
-  );
+        codeExample: `// Props wie Argumente einer Funktion
+function UserCard(name, email) {
+  return { name, email, type: "UserCard" };
 }
 
-// Eltern-Komponente
-function App() {
-  return (
-    <UserCard 
-      name="Moritz"
-      email="moritz@example.com"
-      avatar="/avatar.jpg"
-    />
-  );
-}`,
+// Komponente erstellen
+const user = UserCard("Moritz", "moritz@example.com");
+console.log(user);
+console.log("Name:", user.name);
+
+// Arrays von Komponenten
+const users = [
+  UserCard("Anna", "anna@test.de"),
+  UserCard("Max", "max@test.de"),
+  UserCard("Lisa", "lisa@test.de"),
+];
+
+users.forEach(u => console.log(u.name + " - " + u.email));`,
       },
       {
         id: "r3",
         title: "useState Hook",
         duration: "12 min",
         type: "interactive",
+        interactive: "codeSandbox" as const,
         content: `# useState Hook
 
 Der **useState**-Hook ermöglicht es Funktionskomponenten State zu haben.
@@ -146,20 +145,30 @@ Der **useState**-Hook ermöglicht es Funktionskomponenten State zu haben.
 - \`initialValue\`: Startwert
 
 ## Beispiel: Counter`,
-        codeExample: `import { useState } from "react";
+        codeExample: `// State wie eine Variable
+let count = 0;
 
-function Counter() {
-  const [count, setCount] = useState(0);
+function increment() {
+  count = count + 1;
+  console.log("Count:", count);
+}
 
-  return (
-    <div>
-      <p>Du hast {count} mal geklickt</p>
-      <button onClick={() => setCount(count + 1)}>
-        Klick mich!
-      </button>
-    </div>
-  );
-}`,
+// Simuliere Klicks
+increment(); // Count: 1
+increment(); // Count: 2
+increment(); // Count: 3
+
+// State als Objekt
+let state = { name: "Moritz", xp: 0 };
+
+function addXP(amount) {
+  state = { ...state, xp: state.xp + amount };
+  console.log(state.name + " hat jetzt " + state.xp + " XP!");
+}
+
+addXP(10);
+addXP(25);
+addXP(50);`,
       },
       {
         id: "r4",
@@ -270,6 +279,7 @@ add("5", 3); // ❌ Compile Error!`,
         title: "Interfaces & Types",
         duration: "12 min",
         type: "interactive",
+        interactive: "codeSandbox" as const,
         content: `# Interfaces & Types
 
 Beide definieren Strukturen, aber mit Unterschieden.
