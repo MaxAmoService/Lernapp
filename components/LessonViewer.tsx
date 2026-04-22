@@ -229,19 +229,31 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Visuals (top position) */}
       {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
 
-      {/* Interactive Component */}
-      {lesson.interactive && renderInteractive(lesson.interactive, lesson.codeExample)}
+      {/* Math-Interaktive OBEN — man lernt durch Ausprobieren */}
+      {lesson.interactive && lesson.interactive !== "codeSandbox" && (
+        <div className="my-6">
+          {renderInteractive(lesson.interactive)}
+        </div>
+      )}
 
-      {/* Content */}
+      {/* Content — Erklärung */}
       <div className="markdown-content">{renderContent(lesson.content)}</div>
 
       {/* Visuals (bottom position) */}
       {lesson.visuals?.filter(v => v.position === "bottom").map((v, i) => renderVisual(v, i + 100))}
 
-      {/* Code Example */}
-      {lesson.codeExample && (
+      {/* CodeSandbox UNTEN — erst lernen, dann anwenden */}
+      {lesson.interactive === "codeSandbox" && (
         <div className="mt-8">
-          <h3 className="text-lg font-semibold text-blue-400 mb-3">💻 Code-Übung</h3>
+          <h3 className="text-lg font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
+          {renderInteractive("codeSandbox", lesson.codeExample)}
+        </div>
+      )}
+
+      {/* Code Example — nur wenn KEIN CodeSandbox */}
+      {lesson.codeExample && lesson.interactive !== "codeSandbox" && (
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
           <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
         </div>
       )}
