@@ -1,4 +1,4 @@
-import { mathModules, mathCategories, mathQuizzes } from "./mathData";
+import { mathModules, mathCategories, mathQuizzes, MathCategory } from "./mathData";
 import { LessonVisual } from "./types";
 
 export interface Lesson {
@@ -29,6 +29,7 @@ export interface Category {
   name: string;
   icon: string;
   description: string;
+  subCategories?: { id: string; name: string; description: string }[];
 }
 
 export const categories: Category[] = [
