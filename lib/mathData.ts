@@ -674,6 +674,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
         title: "Vektoren im Raum",
         duration: "18 min",
         type: "interactive",
+        interactive: "vectorExplorer" as const,
         visuals: [
           { type: "coordinate2d" as const, props: { vectors: [{ x: 3, y: 2, label: "a⃗", color: "#818cf8" }, { x: 1, y: 4, label: "b⃗", color: "#f472b6" }] } },
           { type: "coordinate3d" as const, props: { vectors: [{ x: 2, y: 1, z: 3, label: "v⃗", color: "#f59e0b" }] } },
@@ -1432,6 +1433,7 @@ Ein rechtwinkliges Dreieck hat Katheten $a = 3$ und $b = 4$. Wie lang ist die Hy
         title: "Grundlagen der Trigonometrie",
         duration: "25 min",
         type: "text",
+        interactive: "unitCircleInteractive" as const,
         visuals: [
           { type: "triangle" as const },
           { type: "unitCircle" as const, props: { angle: Math.PI / 3 } },

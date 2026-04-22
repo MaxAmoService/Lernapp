@@ -16,6 +16,8 @@ import { UnitCircle } from "./visuals/UnitCircle";
 import { FunctionExplorer } from "./interactive/FunctionExplorer";
 import { TangentExplorer } from "./interactive/TangentExplorer";
 import { IntegralExplorer } from "./interactive/IntegralExplorer";
+import { UnitCircleInteractive } from "./interactive/UnitCircleInteractive";
+import { VectorExplorer } from "./interactive/VectorExplorer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -50,6 +52,8 @@ function renderInteractive(type: string) {
     functionExplorer: <FunctionExplorer />,
     tangentExplorer: <TangentExplorer />,
     integralExplorer: <IntegralExplorer />,
+    unitCircleInteractive: <UnitCircleInteractive />,
+    vectorExplorer: <VectorExplorer />,
   };
 
   return (
@@ -259,7 +263,10 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
 
         {hasNext && (
           <button
-            onClick={onNext}
+            onClick={() => {
+              onNext?.();
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
             className="flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
           >
             Nächste Lektion
