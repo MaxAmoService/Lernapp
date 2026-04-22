@@ -18,6 +18,7 @@ import { TangentExplorer } from "./interactive/TangentExplorer";
 import { IntegralExplorer } from "./interactive/IntegralExplorer";
 import { UnitCircleInteractive } from "./interactive/UnitCircleInteractive";
 import { VectorExplorer } from "./interactive/VectorExplorer";
+import { CodeSandbox } from "./interactive/CodeSandbox";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -47,13 +48,14 @@ function renderVisual(visual: LessonVisual, index: number) {
   );
 }
 
-function renderInteractive(type: string) {
+function renderInteractive(type: string, codeExample?: string) {
   const components: Record<string, JSX.Element> = {
     functionExplorer: <FunctionExplorer />,
     tangentExplorer: <TangentExplorer />,
     integralExplorer: <IntegralExplorer />,
     unitCircleInteractive: <UnitCircleInteractive />,
     vectorExplorer: <VectorExplorer />,
+    codeSandbox: <CodeSandbox initialCode={codeExample || '// Schreibe deinen Code hier\nconsole.log("Hallo!");'} />,
   };
 
   return (
@@ -228,7 +230,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
 
       {/* Interactive Component */}
-      {lesson.interactive && renderInteractive(lesson.interactive)}
+      {lesson.interactive && renderInteractive(lesson.interactive, lesson.codeExample)}
 
       {/* Content */}
       <div className="markdown-content">{renderContent(lesson.content)}</div>

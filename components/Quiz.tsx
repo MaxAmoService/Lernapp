@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "./AuthProvider";
 import { mathQuizzes } from "@/lib/mathData";
 import { MathBlock } from "./MathBlock";
+import { InlineText } from "./InlineText";
 import { CheckCircle2, XCircle, RotateCcw, Trophy, Send } from "lucide-react";
 
 interface QuizQuestion {
@@ -438,10 +439,10 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
           <p className={`font-medium mb-1 ${isCorrect ? "text-green-400" : "text-red-400"}`}>
             {isCorrect ? "✅ Richtig!" : "❌ Falsch!"}
           </p>
-          <p className="text-slate-300">{question.explanation}</p>
+          <div className="text-slate-300"><InlineText text={question.explanation} /></div>
           {!isCorrect && question.type === "input" && (
             <p className="text-slate-400 mt-2">
-              Richtige Antwort: <span className="text-green-400 font-mono">{question.correct}</span>
+              Richtige Antwort: <span className="text-green-400 font-mono">{typeof question.correct === "string" && question.correct.includes("$") ? <InlineText text={question.correct} /> : String(question.correct)}</span>
             </p>
           )}
         </div>
