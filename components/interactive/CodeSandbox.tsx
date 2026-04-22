@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
+
+// @ts-ignore
+import Prism from "prismjs";
+import "prismjs/components/prism-jsx";
+import "prismjs/components/prism-typescript";
+import "prismjs/components/prism-tsx";
+import "prismjs/components/prism-python";
+import "prismjs/components/prism-css";
+import "prismjs/components/prism-javascript";
 
 interface CodeSandboxProps {
   initialCode?: string;
@@ -9,8 +18,14 @@ interface CodeSandboxProps {
   className?: string;
 }
 
+interface OutputLine {
+  type: "log" | "warn" | "error" | "result" | "info";
+  text: string;
+  time?: string;
+}
+
 /**
- * Interaktive Code-Sandbox — Code schreiben, ausführen, Output sehen
+ * Interaktive Code-Sandbox mit Syntax-Highlighting
  */
 export function CodeSandbox({
   initialCode = '// Schreibe deinen Code hier\nconsole.log("Hallo Welt!");',
@@ -19,58 +34,96 @@ export function CodeSandbox({
   className = "",
 }: CodeSandboxProps) {
   const [code, setCode] = useState(initialCode);
-  const [output, setOutput] = useState<string[]>([]);
+  const [output, setOutput] = useState<OutputLine[]>([]);
   const [isRunning, setIsRunning] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [hasRun, setHasRun] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const highlightRef = useRef<HTMLElement>(null);
+  const outputRef = useRef<HTMLDivElement>(null);
+
+  // Prism theme inject
+  useEffect(() => {
+    if (!document.getElementById("prism-sandbox-theme")) {
+      const style = document.createElement("style");
+      style.id = "prism-sandbox-theme";
+      style.textContent = prismTheme;
+      document.head.appendChild(style);
+    }
+  }, []);
+
+  // Highlight code
+  useEffect(() => {
+    if (highlightRef.current) {
+      highlightRef.current.textContent = code;
+      Prism.highlightElement(highlightRef.current);
+    }
+  }, [code]);
 
   const runCode = useCallback(() => {
     setIsRunning(true);
-    setOutput([]);
-    setError(null);
+    setHasRun(true);
+    const logs: OutputLine[] = [];
+    const now = () => new Date().toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
 
-    const logs: string[] = [];
     const originalConsole = {
       log: console.log,
       warn: console.warn,
       error: console.error,
+      info: console.info,
     };
 
-    // Capture console output
     console.log = (...args: unknown[]) => {
-      logs.push(args.map(a => typeof a === "object" ? JSON.stringify(a, null, 2) : String(a)).join(" "));
+      logs.push({ type: "log", text: args.map(a => formatValue(a)).join(" "), time: now() });
     };
     console.warn = (...args: unknown[]) => {
-      logs.push("⚠️ " + args.map(a => String(a)).join(" "));
+      logs.push({ type: "warn", text: args.map(a => formatValue(a)).join(" "), time: now() });
     };
     console.error = (...args: unknown[]) => {
-      logs.push("❌ " + args.map(a => String(a)).join(" "));
+      logs.push({ type: "error", text: args.map(a => formatValue(a)).join(" "), time: now() });
+    };
+    console.info = (...args: unknown[]) => {
+      logs.push({ type: "info", text: args.map(a => formatValue(a)).join(" "), time: now() });
     };
 
     try {
       // eslint-disable-next-line no-eval
       const result = eval(code);
       if (result !== undefined) {
-        logs.push("→ " + (typeof result === "object" ? JSON.stringify(result, null, 2) : String(result)));
+        logs.push({ type: "result", text: "→ " + formatValue(result), time: now() });
       }
     } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
+      logs.push({ type: "error", text: "❌ " + (e instanceof Error ? e.message : String(e)), time: now() });
     } finally {
       console.log = originalConsole.log;
       console.warn = originalConsole.warn;
       console.error = originalConsole.error;
+      console.info = originalConsole.info;
       setOutput(logs);
       setIsRunning(false);
+      // Auto-scroll output
+      setTimeout(() => outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight, behavior: "smooth" }), 50);
     }
   }, [code]);
 
   const resetCode = useCallback(() => {
     setCode(initialCode);
     setOutput([]);
-    setError(null);
+    setHasRun(false);
   }, [initialCode]);
 
-  // Handle Tab key in textarea
+  const clearOutput = useCallback(() => {
+    setOutput([]);
+    setHasRun(false);
+  }, []);
+
+  // Sync scroll between textarea and highlight
+  const syncScroll = useCallback(() => {
+    if (textareaRef.current && highlightRef.current?.parentElement) {
+      highlightRef.current.parentElement.scrollTop = textareaRef.current.scrollTop;
+      highlightRef.current.parentElement.scrollLeft = textareaRef.current.scrollLeft;
+    }
+  }, []);
+
   const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
     if (e.key === "Tab") {
       e.preventDefault();
@@ -78,14 +131,9 @@ export function CodeSandbox({
       if (!ta) return;
       const start = ta.selectionStart;
       const end = ta.selectionEnd;
-      const newCode = code.substring(0, start) + "  " + code.substring(end);
-      setCode(newCode);
-      // Move cursor after the inserted tab
-      requestAnimationFrame(() => {
-        ta.selectionStart = ta.selectionEnd = start + 2;
-      });
+      setCode(code.substring(0, start) + "  " + code.substring(end));
+      requestAnimationFrame(() => { ta.selectionStart = ta.selectionEnd = start + 2; });
     }
-    // Ctrl/Cmd + Enter to run
     if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
       e.preventDefault();
       runCode();
@@ -93,92 +141,86 @@ export function CodeSandbox({
   }, [code, runCode]);
 
   return (
-    <div className={`rounded-xl overflow-hidden border border-slate-700/50 ${className}`}>
+    <div className={`rounded-xl overflow-hidden border border-slate-700/50 shadow-lg ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 bg-slate-800/80 border-b border-slate-700/50">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between px-4 py-2.5 bg-slate-800/90 border-b border-slate-700/50">
+        <div className="flex items-center gap-3">
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full bg-red-500/80" />
             <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-sm text-slate-400 ml-2">{title}</span>
+          <span className="text-sm text-slate-300 font-medium">{title}</span>
+          <span className="text-xs px-2 py-0.5 bg-slate-700/80 rounded text-slate-400 font-mono">{language}</span>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500 bg-slate-700/50 px-2 py-0.5 rounded">{language}</span>
-          <button
-            onClick={resetCode}
-            className="px-2 py-1 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors"
-            title="Zurücksetzen"
-          >
-            ↺ Reset
-          </button>
+        <div className="flex items-center gap-1.5">
+          <button onClick={resetCode} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title="Zurücksetzen">↺ Reset</button>
+          <button onClick={clearOutput} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title="Output löschen">🗑 Clear</button>
           <button
             onClick={runCode}
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-green-500/20 text-green-400 hover:bg-green-500/30 rounded text-sm font-medium transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-1.5 bg-green-500/20 text-green-400 hover:bg-green-500/30 rounded text-sm font-medium transition-colors disabled:opacity-50 ml-1"
           >
-            {isRunning ? (
-              <>
-                <span className="animate-spin">⏳</span>
-                Läuft...
-              </>
-            ) : (
-              <>
-                ▶ Run
-                <span className="text-xs text-green-500/60 ml-1">⌘↵</span>
-              </>
-            )}
+            {isRunning ? (<><span className="animate-spin">⏳</span> Läuft...</>) : (<>▶ Run <span className="text-xs text-green-500/60 ml-1">⌘↵</span></>)}
           </button>
         </div>
       </div>
 
-      {/* Editor */}
-      <div className="relative">
+      {/* Editor with Prism overlay */}
+      <div className="relative bg-[#1e1e2e] min-h-[200px] max-h-[400px]">
+        {/* Line numbers */}
+        <div className="absolute left-0 top-0 w-12 h-full bg-slate-900/60 border-r border-slate-800/50 z-10 pointer-events-none overflow-hidden">
+          {code.split("\n").map((_, i) => (
+            <div key={i} className="text-right pr-3 text-xs text-slate-600 font-mono leading-[1.65] h-[1.65rem]">
+              {i + 1}
+            </div>
+          ))}
+        </div>
+
+        {/* Highlighted code (background) */}
+        <pre className="!m-0 !p-4 !pl-14 !bg-transparent overflow-hidden pointer-events-none absolute inset-0 z-0" aria-hidden="true">
+          <code ref={highlightRef} className={`language-${language} !bg-transparent`}>{code}</code>
+        </pre>
+
+        {/* Textarea (foreground, transparent) */}
         <textarea
           ref={textareaRef}
           value={code}
           onChange={(e) => setCode(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full min-h-[200px] max-h-[400px] p-4 bg-slate-900/80 text-sm font-mono text-slate-200 resize-y focus:outline-none leading-relaxed"
+          onScroll={syncScroll}
+          className="w-full min-h-[200px] max-h-[400px] p-4 pl-14 bg-transparent text-transparent caret-white resize-y focus:outline-none leading-[1.65] font-mono text-[0.9em] relative z-10 selection:bg-blue-500/30"
           spellCheck={false}
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
           placeholder="// Code hier eingeben..."
-          style={{
-            tabSize: 2,
-          }}
+          style={{ tabSize: 2, caretColor: "#fff" }}
         />
-        {/* Line numbers */}
-        <div className="absolute left-0 top-0 w-10 h-full bg-slate-900/50 border-r border-slate-800 pointer-events-none">
-          {code.split("\n").map((_, i) => (
-            <div key={i} className="text-right pr-2 text-xs text-slate-600 leading-relaxed" style={{ height: "1.625rem", paddingTop: "1rem" }}>
-              {i + 1}
-            </div>
-          ))}
-        </div>
-        {/* Adjust padding for line numbers */}
-        <style>{`textarea { padding-left: 3.5rem !important; }`}</style>
       </div>
 
       {/* Output */}
-      {(output.length > 0 || error) && (
+      {hasRun && (
         <div className="border-t border-slate-700/50">
-          <div className="px-4 py-1.5 bg-slate-800/50 text-xs text-slate-500 flex items-center gap-2">
-            <span>📟</span> Output
+          <div className="flex items-center justify-between px-4 py-2 bg-slate-800/60">
+            <div className="flex items-center gap-2 text-xs text-slate-400">
+              <span className="font-mono">📟</span>
+              <span>Output</span>
+              <span className="text-slate-600">•</span>
+              <span>{output.length} {output.length === 1 ? "Zeile" : "Zeilen"}</span>
+            </div>
+            <button onClick={clearOutput} className="text-xs text-slate-500 hover:text-slate-300 transition-colors">✕</button>
           </div>
-          <div className="p-4 bg-slate-950/80 font-mono text-sm max-h-[200px] overflow-y-auto">
-            {error && (
-              <div className="text-red-400 mb-2">❌ {error}</div>
-            )}
-            {output.map((line, i) => (
-              <div key={i} className={`${line.startsWith("→ ") ? "text-blue-400" : line.startsWith("⚠️") ? "text-yellow-400" : line.startsWith("❌") ? "text-red-400" : "text-slate-300"}`}>
-                {line}
-              </div>
-            ))}
-            {output.length === 0 && !error && (
-              <div className="text-slate-500 italic">Kein Output</div>
+          <div ref={outputRef} className="p-4 bg-[#0d1117] font-mono text-sm max-h-[250px] overflow-y-auto space-y-0.5">
+            {output.length === 0 ? (
+              <div className="text-slate-600 italic text-xs">Kein Output</div>
+            ) : (
+              output.map((line, i) => (
+                <div key={i} className={`flex items-start gap-3 py-0.5 px-2 rounded ${getOutputBg(line.type)}`}>
+                  <span className="text-slate-600 text-xs min-w-[70px] shrink-0 font-mono opacity-60">{line.time}</span>
+                  <span className={`flex-1 ${getOutputColor(line.type)}`}>{line.text}</span>
+                </div>
+              ))
             )}
           </div>
         </div>
@@ -186,3 +228,60 @@ export function CodeSandbox({
     </div>
   );
 }
+
+function formatValue(val: unknown): string {
+  if (val === null) return "null";
+  if (val === undefined) return "undefined";
+  if (typeof val === "object") {
+    try { return JSON.stringify(val, null, 2); } catch { return String(val); }
+  }
+  return String(val);
+}
+
+function getOutputColor(type: OutputLine["type"]): string {
+  switch (type) {
+    case "warn": return "text-yellow-400";
+    case "error": return "text-red-400";
+    case "result": return "text-blue-400";
+    case "info": return "text-cyan-400";
+    default: return "text-slate-300";
+  }
+}
+
+function getOutputBg(type: OutputLine["type"]): string {
+  switch (type) {
+    case "warn": return "bg-yellow-500/5";
+    case "error": return "bg-red-500/5";
+    case "result": return "bg-blue-500/5";
+    default: return "";
+  }
+}
+
+// Prism Tomorrow Night theme for sandbox
+const prismTheme = `
+#prism-sandbox-theme, .prism-sandbox code[class*="language-"],
+pre[class*="language-"] .token.comment { color: #6a9955; }
+pre[class*="language-"] .token.punctuation { color: #d4d4d4; }
+pre[class*="language-"] .token.property,
+pre[class*="language-"] .token.tag,
+pre[class*="language-"] .token.boolean,
+pre[class*="language-"] .token.number,
+pre[class*="language-"] .token.constant,
+pre[class*="language-"] .token.symbol { color: #b5cea8; }
+pre[class*="language-"] .token.selector,
+pre[class*="language-"] .token.attr-name,
+pre[class*="language-"] .token.string,
+pre[class*="language-"] .token.char,
+pre[class*="language-"] .token.builtin { color: #ce9178; }
+pre[class*="language-"] .token.operator,
+pre[class*="language-"] .token.entity,
+pre[class*="language-"] .token.url { color: #d4d4d4; }
+pre[class*="language-"] .token.atrule,
+pre[class*="language-"] .token.attr-value,
+pre[class*="language-"] .token.keyword { color: #c586c0; }
+pre[class*="language-"] .token.function,
+pre[class*="language-"] .token.class-name { color: #dcdcaa; }
+pre[class*="language-"] .token.regex,
+pre[class*="language-"] .token.important,
+pre[class*="language-"] .token.variable { color: #d16969; }
+`;
