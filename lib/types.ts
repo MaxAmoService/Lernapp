@@ -1,3 +1,9 @@
+export interface LessonVisual {
+  type: "triangle" | "circle" | "rectangle" | "square" | "trapezoid" | "parallelogram" | "cube" | "cuboid" | "sphere" | "cylinder" | "cone" | "pyramid" | "coordinate2d" | "coordinate3d" | "functionGraph" | "unitCircle";
+  props?: Record<string, unknown>;
+  position?: "top" | "bottom";
+}
+
 export interface Lesson {
   id: string;
   title: string;
@@ -5,6 +11,7 @@ export interface Lesson {
   type: "video" | "text" | "interactive" | "quiz" | "exercises";
   content: string;
   codeExample?: string;
+  visuals?: LessonVisual[];
 }
 
 export interface Module {

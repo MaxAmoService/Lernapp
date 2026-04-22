@@ -1,4 +1,5 @@
 import { mathModules, mathCategories, mathQuizzes } from "./mathData";
+import { LessonVisual } from "./types";
 
 export interface Lesson {
   id: string;
@@ -7,6 +8,7 @@ export interface Lesson {
   type: "video" | "text" | "interactive" | "quiz" | "exercises";
   content: string;
   codeExample?: string;
+  visuals?: LessonVisual[];
 }
 
 export interface Module {

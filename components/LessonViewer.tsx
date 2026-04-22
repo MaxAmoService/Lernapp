@@ -1,9 +1,46 @@
 "use client";
 
 import { Lesson } from "@/lib/data";
+import { LessonVisual } from "@/lib/types";
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
+import { InlineText } from "./InlineText";
+import {
+  Triangle, Circle, Rectangle, Square, Trapezoid, Parallelogram,
+  Cube, Cuboid, Sphere, Cylinder, Cone, Pyramid
+} from "./visuals/GeometryShapes";
+import { CoordinateSystem2D, CoordinateSystem3D } from "./visuals/CoordinateSystem";
+import { FunctionGraph } from "./visuals/FunctionGraph";
+import { UnitCircle } from "./visuals/UnitCircle";
+
+function renderVisual(visual: LessonVisual, index: number) {
+  const w = 400, h = 300;
+  const components: Record<string, JSX.Element> = {
+    triangle: <Triangle width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    circle: <Circle width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    rectangle: <Rectangle width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    square: <Square width={w} height={h} className="w-full max-w-xs mx-auto" />,
+    trapezoid: <Trapezoid width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    parallelogram: <Parallelogram width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    cube: <Cube width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    cuboid: <Cuboid width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    sphere: <Sphere width={w} height={h} className="w-full max-w-xs mx-auto" />,
+    cylinder: <Cylinder width={w} height={h} className="w-full max-w-xs mx-auto" />,
+    cone: <Cone width={w} height={h} className="w-full max-w-xs mx-auto" />,
+    pyramid: <Pyramid width={w} height={h} className="w-full max-w-sm mx-auto" />,
+    coordinate2d: <CoordinateSystem2D width={w} height={w} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
+    coordinate3d: <CoordinateSystem3D width={w} height={h} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
+    functionGraph: <FunctionGraph width={500} height={350} className="w-full max-w-md mx-auto" {...(visual.props || {})} />,
+    unitCircle: <UnitCircle width={w} height={w} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
+  };
+
+  return (
+    <div key={`visual-${index}`} className="my-6 p-4 bg-slate-800/30 rounded-xl border border-slate-700/50">
+      {components[visual.type] || <p className="text-red-400">Unbekannter Visual-Typ: {visual.type}</p>}
+    </div>
+  );
+}
 
 interface LessonViewerProps {
   lesson: Lesson;
@@ -166,8 +203,14 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         )}
       </div>
 
+      {/* Visuals (top position) */}
+      {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
+
       {/* Content */}
       <div className="markdown-content">{renderContent(lesson.content)}</div>
+
+      {/* Visuals (bottom position) */}
+      {lesson.visuals?.filter(v => v.position === "bottom").map((v, i) => renderVisual(v, i + 100))}
 
       {/* Code Example */}
       {lesson.codeExample && (
@@ -208,41 +251,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   );
 }
 
-// Inline text with bold, code, math
-function InlineText({ text }: { text: string }) {
-  const parts: (string | JSX.Element)[] = [];
-  let remaining = text;
-  let key = 0;
 
-  while (remaining.length > 0) {
-    const mathMatch = remaining.match(/\$([^$]+)\$/);
-    const boldMatch = remaining.match(/\*\*(.*?)\*\*/);
-    const codeMatch = remaining.match(/`([^`]+)`/);
-
-    const mathIndex = mathMatch ? remaining.indexOf(mathMatch[0]) : Infinity;
-    const boldIndex = boldMatch ? remaining.indexOf(boldMatch[0]) : Infinity;
-    const codeIndex = codeMatch ? remaining.indexOf(codeMatch[0]) : Infinity;
-
-    if (mathIndex < boldIndex && mathIndex < codeIndex) {
-      if (mathIndex > 0) parts.push(remaining.slice(0, mathIndex));
-      parts.push(<MathBlock key={key++} math={mathMatch![1]} display={false} />);
-      remaining = remaining.slice(mathIndex + mathMatch![0].length);
-    } else if (boldIndex < codeIndex) {
-      if (boldIndex > 0) parts.push(remaining.slice(0, boldIndex));
-      parts.push(<strong key={key++} className="text-white font-semibold">{boldMatch![1]}</strong>);
-      remaining = remaining.slice(boldIndex + boldMatch![0].length);
-    } else if (codeIndex < Infinity) {
-      if (codeIndex > 0) parts.push(remaining.slice(0, codeIndex));
-      parts.push(<code key={key++} className="bg-slate-700 px-1.5 py-0.5 rounded text-blue-300 text-sm">{codeMatch![1]}</code>);
-      remaining = remaining.slice(codeIndex + codeMatch![0].length);
-    } else {
-      parts.push(remaining);
-      break;
-    }
-  }
-
-  return <>{parts}</>;
-}
 
 function getTypeLabel(type: Lesson["type"]) {
   switch (type) {
