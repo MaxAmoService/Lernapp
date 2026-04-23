@@ -1180,25 +1180,47 @@ Gib $z = 1 + i$ in Polardarstellung an!`,
         title: "Fehler und Näherungen",
         duration: "15 min",
         type: "text",
-        content: `## Rundungsfehler
+        content: `## Fehler und Näherungen
 
-Computer können nicht alle Zahlen exakt darstellen.
+In der Numerik sind **Fehler** unvermeidlich. Wir unterscheiden verschiedene Arten von Fehlern.
 
-**Beispiel:** $\\frac{1}{3} = 0.3333...$ wird gerundet.
+### Absoluter Fehler
 
-## Absolute und relative Fehler
+$e = |x_{\text{approx}} - x_{\text{exact}}|$
 
-$$\\text{abs. Fehler} = |x_{exakt} - x_{approx}|$$
+**Beispiel:** $\pi \approx 3{,}14$
 
-$$\\text{rel. Fehler} = \\frac{|x_{exakt} - x_{approx}|}{|x_{exakt}|}$$
+$e = |3{,}14 - 3{,}14159...| = 0{,}00159...$
 
-## Maschinengenauigkeit
+### Relativer Fehler
 
-$$\\varepsilon_{mach} \\approx 2.2 \\times 10^{-16}$$ (für Double Precision)
+$e_{\text{rel}} = \frac{|x_{\text{approx}} - x_{\text{exact}}|}{|x_{\text{exact}}|}$
 
-## Übung
+**Beispiel:** $\pi \approx 3{,}14$
 
-Berechne den relativen Fehler für $x_{exakt} = 2.5$, $x_{approx} = 2.48$!`,
+$e_{\text{rel}} = \frac{0{,}00159}{3{,}14159} \approx 0{,}0005 = 0{,}05\%$
+
+### Rundungsfehler
+
+Computer haben endliche Genauigkeit. $0{,}1 + 0{,}2 \neq 0{,}3$ in Gleitkomma!
+
+$0{,}1 + 0{,}2 = 0{,}30000000000000004$
+
+### Kondition
+
+Wie stark ändert sich das Ergebnis bei kleinen Änderungen der Eingabe?
+
+- **Gut konditioniert:** $f(x) = x + 1$ (kleine Änderung → kleiner Effekt)
+- **Schlecht konditioniert:** $f(x) = \frac{1}{x}$ bei $x \approx 0$ (kleine Änderung → großer Effekt)
+
+### Konvergenzordnung
+
+Wenn $|e_{n+1}| \leq C \cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
+
+- **Linear (p=1):** Jeder Schritt halbiert den Fehler
+- **Quadratisch (p=2):** Jeder Schritt quadriert den Fehler (viel schneller!)
+
+> **Merke:** Relativer Fehler ist oft wichtiger als absoluter — 1 cm Fehler bei 1 m ist anders als bei 1 km!`,
       },
       {
         id: "m-num-2",
@@ -3298,24 +3320,57 @@ Kontraposition: $p \\Rightarrow q = \\lnot q \\Rightarrow \\lnot p$`,
         title: "Beweistechniken",
         duration: "20 min",
         type: "text",
-        content: `## Direkter Beweis
+        content: `## Beweistechniken
 
-Von Voraussetzung zum Ziel.
+Beweise sind das Herzstück der Mathematik. Hier die wichtigsten Techniken.
 
-## Indirekter Beweis (Widerspruch)
+### Direkter Beweis
 
-Annahme des Gegenteils, dann Widerspruch zeigen.
+Von der Voraussetzung Schritt für Schritt zum Ziel zeigen.
 
-## Vollstaendige Induktion
+**Beispiel:** Sei n eine gerade Zahl. Dann ist $n^2$ auch gerade.
 
-1. Anfang: Zeige fuer n = 0 (oder 1)
-2. Schritt: Annahme fuer n, zeigen fuer n+1
+$n = 2k$ (Definition von gerade) → $n^2 = 4k^2 = 2(2k^2)$ → gerade ✓
 
-### Beispiel
-$\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}$
+### Indirekter Beweis (Widerspruch)
 
-Anfang n=1: $1 = \\frac{1 \\cdot 2}{2}$ stimmt
-Schritt: $\\sum_{k=1}^{n+1} = \\frac{n(n+1)}{2} + (n+1) = \\frac{(n+1)(n+2)}{2}$`,
+Annahme des **Gegenteils**, dann einen Widerspruch herleiten.
+
+**Beispiel:** $\sqrt{2}$ ist irrational.
+
+Annahme: $\sqrt{2} = \frac{p}{q}$ (ggT(p,q)=1)
+
+$2q^2 = p^2$ → $p^2$ gerade → $p$ gerade → $p = 2k$
+
+$2q^2 = 4k^2$ → $q^2 = 2k^2$ → $q$ auch gerade
+
+Widerspruch: ggT(p,q) ≥ 2! ✓
+
+### Vollständige Induktion (VI)
+
+Für Aussagen über **alle natürlichen Zahlen**.
+
+**Schritt 1 — Anfang:** Zeige für $n = 0$ (oder $n = 1$)
+
+**Schritt 2 — Induktionsschritt:** Annahme für $n$, zeige für $n + 1$
+
+**Beispiel:** $\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$
+
+**Anfang ($n=1$):** $1 = \frac{1 \cdot 2}{2} = 1$ ✓
+
+**Schritt:** Angenommen für $n$. Dann:
+
+$\sum_{k=1}^{n+1} k = \frac{n(n+1)}{2} + (n+1) = \frac{n(n+1) + 2(n+1)}{2} = \frac{(n+1)(n+2)}{2}$ ✓
+
+### Kontraposition
+
+Statt $p \Rightarrow q$ beweisen wir $\lnot q \Rightarrow \lnot p$.
+
+**Beispiel:** Wenn $n^2$ ungerade, dann $n$ ungerade.
+
+Kontraposition: Wenn $n$ gerade, dann $n^2$ gerade. (Einfacher zu beweisen!)
+
+> **Merke:** VI funktioniert wie eine Kartenreihe — wenn jede Karte die nächste umstößt, fallen alle um!`,
       },
       {
         id: "m-lg-3",
