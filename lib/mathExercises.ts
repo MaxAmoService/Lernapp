@@ -1556,6 +1556,64 @@ export const analytischeGeometrieExercises: Exercise[] = [
   },
 ];
 
+
+// ==================== NEUE MODULE Exercises ====================
+
+export const prozentExercises: Exercise[] = [
+  { id: "pz-1", lessonId: "m-prozent", difficulty: 1, type: "input", question: "30% von 250?", expectedAnswer: "75", format: "Ganze Zahl", solution: "$250 \cdot 0.3 = 75$" },
+  { id: "pz-2", lessonId: "m-prozent", difficulty: 1, type: "input", question: "15% von 400?", expectedAnswer: "60", format: "Ganze Zahl", solution: "$400 \cdot 0.15 = 60$" },
+  { id: "pz-3", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Preis 80->100. Steigerung?", expectedAnswer: "25", format: "Prozent", solution: "$20/80 = 25\%$" },
+  { id: "pz-4", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinsen: 5000, 4%, 1J?", expectedAnswer: "200", format: "Ganze Zahl", solution: "$5000 \cdot 0.04 = 200$" },
+  { id: "pz-5", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinseszins: 1000, 3%, 2J?", expectedAnswer: "1060.9", format: "Dezimalzahl", solution: "$1000 \cdot 1.03^2 = 1060.90$" },
+  { id: "pz-6", lessonId: "m-prozent", difficulty: 3, type: "multiple", question: "Verdopplung bei 6%?", options: [{label: "6J", value: "a"}, {label: "12J", value: "b"}, {label: "18J", value: "c"}, {label: "24J", value: "d"}], correctOption: "b", solution: "72/6 = 12J" },
+];
+
+export const koerperExercises: Exercise[] = [
+  { id: "ko-1", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Quader 2x3x4?", expectedAnswer: "24", format: "Ganze Zahl", solution: "$2 \cdot 3 \cdot 4 = 24$" },
+  { id: "ko-2", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Oberflaeche Wuerfel a=3?", expectedAnswer: "54", format: "Ganze Zahl", solution: "$6 \cdot 9 = 54$" },
+  { id: "ko-3", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Zylinder r=2, h=5?", expectedAnswer: "20pi", format: "Ausdruck", solution: "$V = \pi \cdot 4 \cdot 5 = 20\pi$" },
+  { id: "ko-4", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Kugel r=3?", expectedAnswer: "36pi", format: "Ausdruck", solution: "$V = \frac{4}{3}\pi \cdot 27 = 36\pi$" },
+  { id: "ko-5", lessonId: "m-koerper", difficulty: 2, type: "multiple", question: "Kegel = ? des Zylinders", options: [{label: "1/2", value: "a"}, {label: "1/3", value: "b"}, {label: "1/4", value: "c"}], correctOption: "b", solution: "$V = \frac{1}{3}V_{Zyl}$" },
+  { id: "ko-6", lessonId: "m-koerper", difficulty: 3, type: "input", question: "Kugel-Oberflaeche r=5?", expectedAnswer: "100pi", format: "Ausdruck", solution: "$O = 4\pi \cdot 25 = 100\pi$" },
+];
+
+export const kombinatorikExercises: Exercise[] = [
+  { id: "kb-1", lessonId: "m-kombinatorik", difficulty: 1, type: "input", question: "$5! = ?$", expectedAnswer: "120", format: "Ganze Zahl", solution: "$5! = 120$" },
+  { id: "kb-2", lessonId: "m-kombinatorik", difficulty: 1, type: "input", question: "C(6,2) = ?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$\binom{6}{2} = 15$" },
+  { id: "kb-3", lessonId: "m-kombinatorik", difficulty: 2, type: "input", question: "V(6,3) = ?", expectedAnswer: "120", format: "Ganze Zahl", solution: "$6!/3! = 120$" },
+  { id: "kb-4", lessonId: "m-kombinatorik", difficulty: 2, type: "input", question: "C(8,3) = ?", expectedAnswer: "56", format: "Ganze Zahl", solution: "$\binom{8}{3} = 56$" },
+  { id: "kb-5", lessonId: "m-kombinatorik", difficulty: 2, type: "multiple", question: "Permutationen AABB?", options: [{label: "24", value: "a"}, {label: "12", value: "b"}, {label: "6", value: "c"}, {label: "4", value: "d"}], correctOption: "c", solution: "$4!/(2!2!) = 6$" },
+  { id: "kb-6", lessonId: "m-kombinatorik", difficulty: 3, type: "input", question: "Lotto 6 aus 49?", expectedAnswer: "13983816", format: "Ganze Zahl", solution: "$\binom{49}{6} = 13983816$" },
+];
+
+export const logikExercises: Exercise[] = [
+  { id: "lg-1", lessonId: "m-logik", difficulty: 1, type: "multiple", question: "w UND f = ?", options: [{label: "w", value: "a"}, {label: "f", value: "b"}], correctOption: "b", solution: "UND nur wahr wenn beide wahr" },
+  { id: "lg-2", lessonId: "m-logik", difficulty: 1, type: "multiple", question: "f ODER w = ?", options: [{label: "w", value: "a"}, {label: "f", value: "b"}], correctOption: "a", solution: "ODER wahr wenn mind. eine wahr" },
+  { id: "lg-3", lessonId: "m-logik", difficulty: 2, type: "multiple", question: "NICHT(w UND f) = ?", options: [{label: "w", value: "a"}, {label: "f", value: "b"}], correctOption: "a", solution: "NICHT(f) = w" },
+  { id: "lg-4", lessonId: "m-logik", difficulty: 2, type: "multiple", question: "Kontraposition?", options: [{label: "q=>p", value: "a"}, {label: "~q=>~p", value: "b"}, {label: "~p=>~q", value: "c"}], correctOption: "b", solution: "~q => ~p" },
+  { id: "lg-5", lessonId: "m-logik", difficulty: 2, type: "multiple", question: "De Morgan: ~(p oder q)?", options: [{label: "~p oder ~q", value: "a"}, {label: "~p und ~q", value: "b"}], correctOption: "b", solution: "~p und ~q" },
+  { id: "lg-6", lessonId: "m-logik", difficulty: 3, type: "multiple", question: "VI-Schritt?", options: [{label: "Anfang", value: "a"}, {label: "n->n+1", value: "b"}, {label: "Widerspruch", value: "c"}], correctOption: "b", solution: "Induktionsschritt" },
+];
+
+export const dreisatzExercises: Exercise[] = [
+  { id: "ds-1", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "3 Aepfel=2E. 9 Aepfel?", expectedAnswer: "6", format: "Ganze Zahl", solution: "$9 \cdot 2 / 3 = 6$" },
+  { id: "ds-2", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "5 Arb., 10T. 2 Arb.?", expectedAnswer: "25", format: "Ganze Zahl", solution: "$5 \cdot 10 / 2 = 25$" },
+  { id: "ds-3", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "4L=6E. 10L?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$10 \cdot 6 / 4 = 15$" },
+  { id: "ds-4", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "6 Masch., 12h. 4 Masch.?", expectedAnswer: "18", format: "Ganze Zahl", solution: "$6 \cdot 12 / 4 = 18$" },
+  { id: "ds-5", lessonId: "m-dreisatz", difficulty: 2, type: "multiple", question: "Direkt proportional?", options: [{label: "Verhaeltnis", value: "a"}, {label: "Produkt", value: "b"}, {label: "Summe", value: "c"}], correctOption: "a", solution: "a1/b1 = a2/b2" },
+  { id: "ds-6", lessonId: "m-dreisatz", difficulty: 3, type: "input", question: "8 Arb., 15T. 6 Arb.?", expectedAnswer: "20", format: "Ganze Zahl", solution: "$8 \cdot 15 / 6 = 20$" },
+];
+
+export const taylorExercises: Exercise[] = [
+  { id: "tw-1", lessonId: "m-taylor", difficulty: 1, type: "multiple", question: "Taylor bei a=0?", options: [{label: "Fourier", value: "a"}, {label: "Maclaurin", value: "b"}, {label: "Laurent", value: "c"}], correctOption: "b", solution: "Maclaurin-Reihe" },
+  { id: "tw-2", lessonId: "m-taylor", difficulty: 1, type: "input", question: "$e^x \approx ?$ (1. Ord.)", expectedAnswer: "1+x", format: "Term", solution: "$e^x \approx 1+x$" },
+  { id: "tw-3", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\sin(x) \approx ?$ (1. Ord.)", expectedAnswer: "x", format: "Term", solution: "$\sin(x) \approx x$" },
+  { id: "tw-4", lessonId: "m-taylor", difficulty: 2, type: "multiple", question: "Konvergenzradius 1/(1-x)?", options: [{label: "R=0", value: "a"}, {label: "R=1", value: "b"}, {label: "R=inf", value: "c"}], correctOption: "b", solution: "|x|<1, R=1" },
+  { id: "tw-5", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\cos(x) \approx ?$ (2. Ord.)", expectedAnswer: "1-x^2/2", format: "Term", solution: "$\cos(x) \approx 1 - x^2/2$" },
+  { id: "tw-6", lessonId: "m-taylor", difficulty: 3, type: "input", question: "Glieder fuer $e \approx 2.7$?", expectedAnswer: "8", format: "Ganze Zahl", solution: "Ca. 8 Glieder" },
+];
+
+
 export const allExercises: Exercise[] = [
   ...grundlagenExercises,
   ...mathe1Exercises,

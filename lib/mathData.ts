@@ -16,6 +16,26 @@ export interface MathCategory {
 
 export const mathCategories: MathCategory[] = [
   {
+    id: "arithmetik-algebra",
+    name: "Arithmetik & Algebra",
+    icon: "🔢",
+    description: "Brüche, Gleichungen, Termumformung, Ungleichungen",
+    subCategories: [
+      { id: "bruchrechnen", name: "Bruchrechnen", description: "Brüche, KGV, gemischte Zahlen" },
+      { id: "gleichungen", name: "Gleichungen", description: "Linear, quadratisch, pq-Formel" },
+      { id: "termumformung", name: "Termumformung", description: "Binomische Formeln, Distributivgesetz" },
+    ],
+  },
+  {
+    id: "geometrie",
+    name: "Geometrie",
+    icon: "📏",
+    description: "Analytische Geometrie, Körper, Abstände",
+    subCategories: [
+      { id: "analytisch", name: "Analytische Geometrie", description: "Geraden, Ebenen, Abstände" },
+    ],
+  },
+  {
     id: "grundlagen",
     name: "Grundlagen",
     icon: "🔢",
@@ -2764,6 +2784,452 @@ $d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}}$`,
     ],
   },
 
+  {
+    id: "m-prozent",
+    slug: "mathe-prozent-zinsen",
+    title: "Prozent- & Zinsrechnung",
+    description: "Prozente, Zinsen, Zinseszins, Prozentuale Änderungen",
+    icon: "💰",
+    color: "#10b981",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## Merkblatt: Prozent- & Zinsrechnung
+
+### Prozentwert
+$p = W \cdot \frac{p\%}{100}$
+
+### Zinsen
+$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$
+
+### Zinseszins
+$K_n = K_0 \cdot (1 + \frac{p}{100})^n$`,
+    lessons: [
+      {
+        id: "m-pz-1",
+        title: "Prozentrechnung",
+        duration: "15 min",
+        type: "text",
+        content: `## Grundbegriffe
+
+- **Grundwert (G):** Die Gesamtmenge
+- **Prozentsatz (p%):** Der Anteil in Prozent
+- **Prozentwert (W):** Der absolute Anteil
+
+### Formel
+$$W = G \cdot \frac{p\%}{100}$$
+
+### Beispiel
+20% von 150 Euro:
+$W = 150 \cdot 0.2 = 30$ Euro
+
+## Prozentuale Änderung
+
+$\text{Anderung} = \frac{\text{Neu} - \text{Alt}}{\text{Alt}} \cdot 100\%$
+
+Preis steigt von 80 auf 100:
+$\frac{20}{80} \cdot 100\% = 25\%$`,
+      },
+      {
+        id: "m-pz-2",
+        title: "Zinsen & Zinseszins",
+        duration: "18 min",
+        type: "text",
+        content: `## Zinsen
+
+$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$
+
+### Beispiel
+5000 Euro zu 4% fuer 6 Monate:
+$Z = 5000 \cdot 0.04 \cdot 0.5 = 100$ Euro
+
+## Zinseszins
+
+$K_n = K_0 \cdot (1 + \frac{p}{100})^n$
+
+### Beispiel
+1000 Euro zu 5% ueber 3 Jahre:
+$K_3 = 1000 \cdot 1.05^3 = 1157.63$ Euro
+
+## 72er-Regel
+
+$t \approx \frac{72}{p}$
+
+Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
+      },
+      {
+        id: "m-pz-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-pz-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-koerper",
+    slug: "mathe-koerper",
+    title: "Koerper & Volumen",
+    description: "Quader, Zylinder, Kegel, Kugel",
+    icon: "🧊",
+    color: "#06b6d4",
+    category: "geometrie-trigonometrie",
+    progress: 0,
+    merkblatt: `## Merkblatt: Koerper
+
+| Koerper | Volumen | Oberflaeche |
+|---------|---------|-------------|
+| Quader | $abc$ | $2(ab+bc+ac)$ |
+| Wuerfel | $a^3$ | $6a^2$ |
+| Zylinder | $\pi r^2 h$ | $2\pi r(r+h)$ |
+| Kegel | $\frac{1}{3}\pi r^2 h$ | $\pi r(r+s)$ |
+| Kugel | $\frac{4}{3}\pi r^3$ | $4\pi r^2$ |`,
+    lessons: [
+      {
+        id: "m-ko-1",
+        title: "Quader & Wuerfel",
+        duration: "15 min",
+        type: "text",
+        content: `## Quader
+
+$V = a \cdot b \cdot c$
+$O = 2(ab + bc + ac)$
+
+### Beispiel
+a=3, b=4, c=5:
+$V = 60$, $O = 2(12+20+15) = 94$
+
+## Wuerfel
+
+$V = a^3$, $O = 6a^2$, $d = a\sqrt{3}$
+
+### Beispiel
+a = 4: $V = 64$, $O = 96$`,
+      },
+      {
+        id: "m-ko-2",
+        title: "Zylinder, Kegel, Kugel",
+        duration: "18 min",
+        type: "text",
+        content: `## Zylinder
+
+$V = \pi r^2 h$, $O = 2\pi r(r + h)$
+
+## Kegel
+
+$V = \frac{1}{3}\pi r^2 h$
+$s = \sqrt{r^2 + h^2}$ (Mantellinie)
+
+## Kugel
+
+$V = \frac{4}{3}\pi r^3$, $O = 4\pi r^2$
+
+### Beispiel
+r = 5:
+$V = \frac{500}{3}\pi \approx 523.6$
+$O = 100\pi \approx 314.2$`,
+      },
+      {
+        id: "m-ko-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-ko-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-kombinatorik",
+    slug: "mathe-kombinatorik",
+    title: "Kombinatorik",
+    description: "Permutationen, Kombinationen, Variationen",
+    icon: "🔀",
+    color: "#f59e0b",
+    category: "stochastik",
+    progress: 0,
+    merkblatt: `## Merkblatt: Kombinatorik
+
+| Art | Formel |
+|-----|--------|
+| Permutation | $P(n) = n!$ |
+| Variation | $V(n,k) = \frac{n!}{(n-k)!}$ |
+| Kombination | $C(n,k) = \binom{n}{k}$ |`,
+    lessons: [
+      {
+        id: "m-kb-1",
+        title: "Permutationen & Variationen",
+        duration: "18 min",
+        type: "text",
+        content: `## Permutation
+
+Anordnung von n Elementen: $P(n) = n!$
+
+### Beispiel
+3 Buecher: $3! = 6$ Anordnungen
+
+## Variation
+
+k aus n, Reihenfolge wichtig:
+$V(n,k) = \frac{n!}{(n-k)!}$
+
+### Beispiel
+3 aus 5: $V(5,3) = 60$`,
+      },
+      {
+        id: "m-kb-2",
+        title: "Kombinationen",
+        duration: "15 min",
+        type: "text",
+        content: `## Kombination
+
+k aus n, Reihenfolge egal:
+$C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$
+
+### Beispiel
+3 aus 5: $\binom{5}{3} = 10$
+
+Lotto 6 aus 49: $\binom{49}{6} = 13.983.816$`,
+      },
+      {
+        id: "m-kb-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-kb-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-logik",
+    slug: "mathe-logik",
+    title: "Logik & Beweise",
+    description: "Aussagenlogik, Wahrheitstafeln, Beweistechniken",
+    icon: "🧠",
+    color: "#8b5cf6",
+    category: "grundlagen",
+    progress: 0,
+    merkblatt: `## Merkblatt: Logik
+
+### Verknuepfungen
+- UND: $\land$
+- ODER: $\lor$
+- NICHT: $\lnot$
+- Implikation: $\Rightarrow$
+
+### De Morgan
+$\lnot(p \land q) = \lnot p \lor \lnot q$
+$\lnot(p \lor q) = \lnot p \land \lnot q$`,
+    lessons: [
+      {
+        id: "m-lg-1",
+        title: "Aussagenlogik",
+        duration: "18 min",
+        type: "text",
+        content: `## Aussagen
+
+Eine Aussage ist wahr oder falsch.
+
+## Verknuepfungen
+
+- UND: $p \land q$ nur wahr wenn beide wahr
+- ODER: $p \lor q$ wahr wenn mindestens eine wahr
+- NICHT: $\lnot p$ kehrt um
+
+## Implikation
+
+$p \Rightarrow q$ ist nur falsch wenn p wahr und q falsch
+
+Kontraposition: $p \Rightarrow q = \lnot q \Rightarrow \lnot p$`,
+      },
+      {
+        id: "m-lg-2",
+        title: "Beweistechniken",
+        duration: "20 min",
+        type: "text",
+        content: `## Direkter Beweis
+
+Von Voraussetzung zum Ziel.
+
+## Indirekter Beweis (Widerspruch)
+
+Annahme des Gegenteils, dann Widerspruch zeigen.
+
+## Vollstaendige Induktion
+
+1. Anfang: Zeige fuer n = 0 (oder 1)
+2. Schritt: Annahme fuer n, zeigen fuer n+1
+
+### Beispiel
+$\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$
+
+Anfang n=1: $1 = \frac{1 \cdot 2}{2}$ stimmt
+Schritt: $\sum_{k=1}^{n+1} = \frac{n(n+1)}{2} + (n+1) = \frac{(n+1)(n+2)}{2}$`,
+      },
+      {
+        id: "m-lg-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-lg-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-dreisatz",
+    slug: "mathe-dreisatz",
+    title: "Dreisatz",
+    description: "Direkt & indirekt proportional, Dreisatz-Aufgaben",
+    icon: "⚖️",
+    color: "#ec4899",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## Merkblatt: Dreisatz
+
+### Direkt proportional
+$a_1 : a_2 = b_1 : b_2$
+
+### Indirekt proportional
+$a_1 : a_2 = b_2 : b_1$`,
+    lessons: [
+      {
+        id: "m-ds-1",
+        title: "Direkt proportional",
+        duration: "15 min",
+        type: "text",
+        content: `## Direkt proportional
+
+Wenn x steigt, steigt y. Verhaeltnis bleibt gleich.
+
+$b_2 = \frac{a_2 \cdot b_1}{a_1}$
+
+### Beispiel
+3 Aepfel kosten 2 Euro. 8 Aepfel?
+$\frac{8 \cdot 2}{3} = 5.33$ Euro`,
+      },
+      {
+        id: "m-ds-2",
+        title: "Indirekt proportional",
+        duration: "15 min",
+        type: "text",
+        content: `## Indirekt proportional
+
+Wenn x steigt, sinkt y.
+
+$b_2 = \frac{a_1 \cdot b_1}{a_2}$
+
+### Beispiel
+3 Arbeiter brauchen 10 Tage. 5 Arbeiter?
+$\frac{3 \cdot 10}{5} = 6$ Tage`,
+      },
+      {
+        id: "m-ds-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-ds-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-taylor",
+    slug: "mathe-taylorreihen",
+    title: "Taylorreihen",
+    description: "Taylor- und Maclaurin-Reihen, wichtige Reihenentwicklungen",
+    icon: "📐",
+    color: "#a855f7",
+    category: "analysis",
+    progress: 0,
+    merkblatt: `## Merkblatt: Taylorreihen
+
+### Taylor-Reihe
+$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
+
+### Wichtige Reihen
+- $e^x = \sum x^n/n!$
+- $\sin(x) = \sum (-1)^n x^{2n+1}/(2n+1)!$
+- $\cos(x) = \sum (-1)^n x^{2n}/(2n)!$`,
+    lessons: [
+      {
+        id: "m-tw-1",
+        title: "Taylor-Reihe",
+        duration: "20 min",
+        type: "text",
+        content: `## Taylor-Reihe
+
+Approximation durch Polynome:
+$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
+
+Fuer a = 0: Maclaurin-Reihe
+
+## Beispiel: $e^x$
+
+$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$`,
+      },
+      {
+        id: "m-tw-2",
+        title: "Wichtige Reihen",
+        duration: "18 min",
+        type: "text",
+        content: `## Reihenentwicklungen
+
+$e^x = 1 + x + \frac{x^2}{2!} + \cdots$
+$\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$
+$\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$
+$\frac{1}{1-x} = 1 + x + x^2 + \cdots$ fuer $|x| < 1$
+
+## Naeherung (kleines x)
+$\sin(x) \approx x$, $\cos(x) \approx 1 - x^2/2$, $e^x \approx 1 + x$`,
+      },
+      {
+        id: "m-tw-3",
+        title: "Quiz",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-tw-aufgaben",
+        title: "Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Uebe das Gelernte!`,
+      },
+    ],
+  },
 ];
 
 export const mathQuizzes: Record<string, QuizQuestion[]> = {
@@ -3578,5 +4044,48 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       correct: 0,
       explanation: "Parameterform in Koordinatenform einsetzen und nach t auflösen",
     },
+  ],
+
+  "mathe-prozent-zinsen": [
+    { question: "20% von 150?", type: "multiple", options: ["20", "25", "30", "35"], correct: 2, explanation: "$150 \cdot 0.2 = 30$" },
+    { question: "Zinseszins: 1000, 5%, 2J?", type: "multiple", options: ["1100", "1102.50", "1050", "1150"], correct: 1, explanation: "$1000 \cdot 1.05^2 = 1102.50$" },
+    { question: "72er-Regel bei 8%?", type: "multiple", options: ["6J", "9J", "12J", "18J"], correct: 1, explanation: "$72 / 8 = 9$ Jahre" },
+    { question: "Preis 200->250. Prozent?", type: "multiple", options: ["20%", "25%", "30%", "15%"], correct: 1, explanation: "$50/200 = 25\%$" },
+    { question: "15% Rabatt auf 80?", type: "multiple", options: ["12", "68", "65", "15"], correct: 1, explanation: "$80 - 12 = 68$" },
+  ],
+  "mathe-koerper": [
+    { question: "Volumen Quader 3x4x5?", type: "multiple", options: ["47", "60", "94", "12"], correct: 1, explanation: "$3 \cdot 4 \cdot 5 = 60$" },
+    { question: "Oberflaeche Wuerfel a=2?", type: "multiple", options: ["8", "12", "24", "16"], correct: 2, explanation: "$6 \cdot 4 = 24$" },
+    { question: "Kugel-Volumen r=3?", type: "multiple", options: ["$36\pi$", "$27\pi$", "$108\pi$", "$9\pi$"], correct: 0, explanation: "$\frac{4}{3}\pi \cdot 27 = 36\pi$" },
+    { question: "Zylinder r=2, h=5?", type: "multiple", options: ["$10\pi$", "$20\pi$", "$40\pi$", "$50\pi$"], correct: 1, explanation: "$\pi \cdot 4 \cdot 5 = 20\pi$" },
+    { question: "Kegel = ? des Zylinders", type: "multiple", options: ["1/2", "1/3", "1/4", "2/3"], correct: 1, explanation: "$V = \frac{1}{3}V_{Zyl}$" },
+  ],
+  "mathe-kombinatorik": [
+    { question: "$P(4) = ?$", type: "multiple", options: ["12", "16", "24", "8"], correct: 2, explanation: "$4! = 24$" },
+    { question: "$\binom{5}{2} = ?$", type: "multiple", options: ["5", "10", "20", "15"], correct: 1, explanation: "$\frac{5!}{2! \cdot 3!} = 10$" },
+    { question: "Lotto 6 aus 49?", type: "multiple", options: ["13983816", "1000000", "49!", "$6^{49}$"], correct: 0, explanation: "$\binom{49}{6} = 13.983.816$" },
+    { question: "$V(5,2) = ?$", type: "multiple", options: ["10", "20", "25", "15"], correct: 1, explanation: "$\frac{5!}{3!} = 20$" },
+    { question: "Permutationen AABB?", type: "multiple", options: ["24", "12", "6", "4"], correct: 2, explanation: "$\frac{4!}{2!2!} = 6$" },
+  ],
+  "mathe-logik": [
+    { question: "$p \Rightarrow q$ falsch wenn...", type: "multiple", options: ["p w, q f", "p f, q w", "beide f", "beide w"], correct: 0, explanation: "Implikation nur falsch bei (w,f)" },
+    { question: "$\lnot(p \land q) = ?$", type: "multiple", options: ["$\lnot p \land \lnot q$", "$\lnot p \lor \lnot q$", "$p \lor q$", "$p \land q$"], correct: 1, explanation: "De Morgan" },
+    { question: "Kontraposition von $p \Rightarrow q$?", type: "multiple", options: ["$q \Rightarrow p$", "$\lnot p \Rightarrow \lnot q$", "$\lnot q \Rightarrow \lnot p$", "$\lnot p \lor q$"], correct: 2, explanation: "Kontraposition: $\lnot q \Rightarrow \lnot p$" },
+    { question: "VI-Schritt?", type: "multiple", options: ["Anfang", "n -> n+1", "Widerspruch", "Gegenbeispiel"], correct: 1, explanation: "Induktionsschritt" },
+    { question: "$p \lor \lnot p$ ist immer...", type: "multiple", options: ["Falsch", "Wahr", "Unbestimmt", "Kontingenz"], correct: 1, explanation: "Tautologie" },
+  ],
+  "mathe-dreisatz": [
+    { question: "5 Arb., 8 Tage. 2 Arb.?", type: "multiple", options: ["3", "20", "10", "16"], correct: 1, explanation: "$\frac{5 \cdot 8}{2} = 20$" },
+    { question: "4L = 6 Euro. 10L?", type: "multiple", options: ["12", "15", "16", "24"], correct: 1, explanation: "$\frac{10 \cdot 6}{4} = 15$" },
+    { question: "Direkt proportional?", type: "multiple", options: ["Verhaeltnis", "Produkt", "Summe", "Differenz"], correct: 0, explanation: "a1/b1 = a2/b2" },
+    { question: "6 Masch., 12h. 4 Masch.?", type: "multiple", options: ["8", "16", "18", "24"], correct: 2, explanation: "$\frac{6 \cdot 12}{4} = 18$" },
+    { question: "30% von 200?", type: "multiple", options: ["40", "50", "60", "70"], correct: 2, explanation: "$200 \cdot 0.3 = 60$" },
+  ],
+  "mathe-taylorreihen": [
+    { question: "Taylor bei a=0?", type: "multiple", options: ["Taylor", "Maclaurin", "Fourier", "Laurent"], correct: 1, explanation: "Maclaurin-Reihe" },
+    { question: "$e^x \approx ?$ (1. Ord.)", type: "multiple", options: ["$1+x$", "$x$", "$1+x^2$", "$1-x$"], correct: 0, explanation: "$e^x \approx 1+x$" },
+    { question: "$\sin(x) \approx ?$ (1. Ord.)", type: "multiple", options: ["$x$", "$1$", "$x^2$", "$1-x$"], correct: 0, explanation: "$\sin(x) \approx x$" },
+    { question: "Konvergenzradius 1/(1-x)?", type: "multiple", options: ["R=0", "R=1", "R=inf", "R=2"], correct: 1, explanation: "|x| < 1, R=1" },
+    { question: "$\cos(0) = ?$", type: "multiple", options: ["0", "1", "-1", "pi"], correct: 1, explanation: "$\cos(0) = 1$" },
   ],
 };
