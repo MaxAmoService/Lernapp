@@ -1578,89 +1578,139 @@ $$\\log_a(x) = y \\Leftrightarrow a^y = x$$
         title: "Potenzen & Potenzregeln",
         duration: "20 min",
         type: "text",
-        content: `## Potenzen
+        content: `## Potenzregeln
 
-$$a^n = \\underbrace{a \\cdot a \\cdot ... \\cdot a}_{n \\text{ mal}}$$
+Potenzen sind die Grundlage für viele mathematische Konzepte. Hier die wichtigsten Regeln:
 
-## Potenzregeln
+### Grundbegriffe
+$a^n = a \cdot a \cdot a \cdots$ (n-mal)
 
-**Multiplikation:**
-$$a^m \\cdot a^n = a^{m+n}$$
+- $a$: Basis
+- $n$: Exponent
+- $a^2$: Quadrat
+- $a^3$: Kubik
 
-**Division:**
-$$\\frac{a^m}{a^n} = a^{m-n}$$
+### Regeln
 
-**Potenz von Potenz:**
-$$(a^m)^n = a^{m \\cdot n}$$
+**Multiplikation:** $a^m \cdot a^n = a^{m+n}$
 
-**Nullter Potenz:**
-$$a^0 = 1 \\quad (a \\neq 0)$$
+$2^3 \cdot 2^4 = 2^7 = 128$
 
-**Negativer Exponent:**
-$$a^{-n} = \\frac{1}{a^n}$$
+**Division:** $\frac{a^m}{a^n} = a^{m-n}$
 
-## Übung
+$\frac{2^5}{2^3} = 2^2 = 4$
 
-Berechne $2^3 \\cdot 2^4$!`,
+**Potenz von Potenz:** $(a^m)^n = a^{m \cdot n}$
+
+$(2^3)^2 = 2^6 = 64$
+
+**Produkt:** $(ab)^n = a^n \cdot b^n$
+
+$(2 \cdot 3)^2 = 4 \cdot 9 = 36$
+
+**Quotient:** $(\frac{a}{b})^n = \frac{a^n}{b^n}$
+
+$(\frac{2}{3})^2 = \frac{4}{9}$
+
+### Besondere Werte
+$a^0 = 1$ (für $a \neq 0$)
+
+$a^1 = a$
+
+$a^{-n} = \frac{1}{a^n}$
+
+$2^{-3} = \frac{1}{8} = 0{,}125$
+
+> **Merke:** Bei Multiplikation gleicher Basen werden die Exponenten addiert, bei Division subtrahiert!`,
       },
       {
         id: "m-pot-2",
         title: "Logarithmen",
         duration: "25 min",
         type: "text",
-        content: `## Definition
+        content: `## Logarithmen
 
-$$\\log_a(x) = y \\Leftrightarrow a^y = x$$
+Der Logarithmus ist die **Umkehrung** der Potenzierung. Wenn $a^x = b$, dann ist $\log_a(b) = x$.
 
-Der Logarithmus gibt die Potenz zurück, auf die man $a$ erheben muss, um $x$ zu erhalten.
+### Definition
+$\log_a(b) = x \Leftrightarrow a^x = b$
 
-## Logarithmusregeln
+### Beispiel 1
+$\log_2(8) = 3$, denn $2^3 = 8$
 
-**Produktregel:**
-$$\\log_a(xy) = \\log_a(x) + \\log_a(y)$$
+$\log_{10}(100) = 2$, denn $10^2 = 100$
 
-**Quotientenregel:**
-$$\\log_a\\left(\\frac{x}{y}\\right) = \\log_a(x) - \\log_a(y)$$
+$\log_5(25) = 2$, denn $5^2 = 25$
 
-**Potenzregel:**
-$$\\log_a(x^n) = n \\cdot \\log_a(x)$$
+### Logarithmusgesetze
 
-## Natürlicher Logarithmus
+**Produkt:** $\log(a \cdot b) = \log(a) + \log(b)$
 
-$$\\ln(x) = \\log_e(x)$$
-mit $e \\approx 2.71828$
+$\log(6) = \log(2) + \log(3)$
 
-## Übung
+**Quotient:** $\log(\frac{a}{b}) = \log(a) - \log(b)$
 
-Berechne $\\log_2(8)$!`,
+$\log(\frac{100}{10}) = \log(100) - \log(10) = 2 - 1 = 1$
+
+**Potenz:** $\log(a^n) = n \cdot \log(a)$
+
+$\log(8) = \log(2^3) = 3 \cdot \log(2)$
+
+### Wichtige Logarithmen
+
+- **Natürlicher Logarithmus:** $\ln(x) = \log_e(x)$ mit $e \approx 2{,}718$
+- **Dezimallogarithmus:** $\lg(x) = \log_{10}(x)$
+- **Binärlogarithmus:** $\log_2(x)$ (in der Informatik)
+
+### Beispiel 2: Gleichung lösen
+$2^x = 16$
+
+$x = \log_2(16) = \log_2(2^4) = 4$
+
+> **Merke:** Logarithmen wandeln Potenzen in Produkte um — das macht Rechnungen einfacher!`,
       },
       {
         id: "m-pot-3",
         title: "Exponentialfunktion",
         duration: "20 min",
         type: "text",
-        content: `## Exponentialfunktion
+        content: `## Exponentialfunktionen
 
-$$f(x) = a^x \\quad (a > 0, a \\neq 1)$$
+Eine Exponentialfunktion hat die Form $f(x) = a^x$, wobei die Variable im **Exponenten** steht.
 
-**Eigenschaften:**
-- Immer positiv: $f(x) > 0$
-- $f(0) = 1$
-- Wachstum für $a > 1$, Zerfall für $0 < a < 1$
+### Die wichtigste: $e^x$
 
-## Natürliche Exponentialfunktion
+$e \approx 2{,}71828$ ist die **Euler-Zahl**.
 
-$$f(x) = e^x$$
+$e^x$ hat eine besondere Eigenschaft: $\frac{d}{dx}e^x = e^x$ — die Ableitung ist die Funktion selbst!
 
-## Umkehrfunktion
+### Wachstum & Zerfall
 
-Die Umkehrfunktion von $e^x$ ist $\\ln(x)$:
-$$e^{\\ln(x)} = x$$
-$$\\ln(e^x) = x$$
+**Exponentielles Wachstum:** $f(t) = N_0 \cdot e^{kt}$ (k > 0)
 
-## Übung
+- Bakterienwachstum
+- Bevölkerungsentwicklung
+- Zinseszins
 
-Löse $2^x = 16$!`,
+**Exponentieller Zerfall:** $f(t) = N_0 \cdot e^{-kt}$ (k > 0)
+
+- Radioaktiver Zerfall
+- Abkühlung
+- Medikamentenabbau
+
+### Halbwertszeit
+
+Die Zeit, bis die Hälfte zerfallen ist:
+
+$T_{1/2} = \frac{\ln(2)}{k}$
+
+### Beispiel: Radioaktiver Zerfall
+
+1000 Atome, Halbwertszeit 5 Jahre. Nach 15 Jahren?
+
+$N(15) = 1000 \cdot (\frac{1}{2})^{15/5} = 1000 \cdot \frac{1}{8} = 125$
+
+> **Merke:** $e^x$ ist DIE Exponentialfunktion — sie beschreibt natürliches Wachstum überall in der Natur!`,
       },
       {
         id: "m-pot-quiz",
@@ -1716,84 +1766,137 @@ Löse $2^x = 16$!`,
         title: "Mittelwert, Median, Modus",
         duration: "20 min",
         type: "text",
-        content: `## Mittelwert
+        content: `## Mittelwert, Median, Modus
 
-$$\\bar{x} = \\frac{1}{n} \\sum_{i=1}^{n} x_i = \\frac{x_1 + x_2 + ... + x_n}{n}$$
+Diese drei Maße beschreiben die **Lage** einer Datenverteilung.
 
-## Median
+### Mittelwert (Durchschnitt)
 
-Sortiere die Werte. Der Median ist der mittlere Wert.
-- Bei ungerader Anzahl: mittlerer Wert
-- Bei gerader Anzahl: Durchschnitt der beiden mittleren
+$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}$
 
-## Modus
+### Beispiel 1
+Noten: 2, 3, 2, 1, 2, 4, 3
 
-Der Modus ist der häufigste Wert.
+$\bar{x} = \frac{2+3+2+1+2+4+3}{7} = \frac{17}{7} \approx 2{,}43$
 
-## Beispiel
+### Median (Zentralwert)
 
-Daten: $3, 7, 7, 9, 12$
-- Mittelwert: $\\frac{3+7+7+9+12}{5} = 7.6$
-- Median: 7
-- Modus: 7
+Der **mittlere Wert**, wenn die Daten sortiert sind. Robust gegen Ausreißer!
 
-## Übung
+Sortiert: 1, 2, 2, **2**, 3, 3, 4 → Median = 2
 
-Berechne Mittelwert und Median für $2, 5, 8, 11, 14$!`,
+### Beispiel 2: Ausreißer
+Gehälter: 3000, 3200, 3500, 3800, **50000**
+
+Mittelwert: $\frac{63500}{5} = 12700$ (verzerrt!)
+
+Median: 3500 (realistischer)
+
+### Modus (Häufigster Wert)
+
+Der Wert, der **am häufigsten** vorkommt.
+
+Daten: 2, 3, 2, 1, 2, 4, 3 → Modus = 2 (kommt 3-mal vor)
+
+> **Merke:** Mittelwert rechnet, Median sortiert, Modus zählt. Bei schiefen Verteiligungen ist der Median oft aussagekräftiger!`,
       },
       {
         id: "m-stat-2",
         title: "Varianz & Standardabweichung",
         duration: "25 min",
         type: "text",
-        content: `## Varianz
+        content: `## Varianz & Standardabweichung
 
-$$s^2 = \\frac{1}{n} \\sum_{i=1}^{n} (x_i - \\bar{x})^2$$
+Diese Maße beschreiben die **Streuung** einer Datenverteilung.
 
-Misst die Streuung um den Mittelwert.
+### Varianz
 
-## Standardabweichung
+$\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$
 
-$$s = \\sqrt{s^2}$$
+### Beispiel 1
+Daten: 2, 4, 4, 4, 5, 5, 7, 9
 
-Hat die gleiche Einheit wie die Daten.
+Mittelwert: $\bar{x} = \frac{40}{8} = 5$
 
-## Beispiel
+Abweichungen: $-3, -1, -1, -1, 0, 0, 2, 4$
 
-Daten: $2, 4, 6, 8, 10$ ($\\bar{x} = 6$)
+Quadrate: $9, 1, 1, 1, 0, 0, 4, 16$
 
-$$s^2 = \\frac{(2-6)^2 + (4-6)^2 + ... + (10-6)^2}{5} = \\frac{40}{5} = 8$$
+$\sigma^2 = \frac{32}{8} = 4$
 
-$$s = \\sqrt{8} \\approx 2.83$$
+### Standardabweichung
 
-## Übung
+$\sigma = \sqrt{\sigma^2}$
 
-Berechne die Standardabweichung für $1, 3, 5, 7, 9$!`,
+$\sigma = \sqrt{4} = 2$
+
+Die Standardabweichung hat die **gleiche Einheit** wie die Daten!
+
+### Beispiel 2: Noten
+Klasse A: Noten 3, 3, 3, 3, 3 → $\sigma = 0$ (alle gleich)
+
+Klasse B: Noten 1, 2, 3, 4, 5 → $\sigma \approx 1{,}41$ (große Streuung)
+
+### Empirische Regel (Normalverteilung)
+
+- 68% der Daten liegen in $\bar{x} \pm \sigma$
+- 95% in $\bar{x} \pm 2\sigma$
+- 99,7% in $\bar{x} \pm 3\sigma$
+
+> **Merke:** Varianz in Quadrat-Einheiten, Standardabweichung in Original-Einheiten. $\sigma$ zeigt, wie stark die Daten um den Mittelwert streuen!`,
       },
       {
         id: "m-stat-3",
         title: "Quartile & Boxplot",
         duration: "20 min",
         type: "text",
-        content: `## Quartile
+        content: `## Quartile & Boxplot
 
-**Erstes Quartil $Q_1$:** 25% der Werte sind kleiner
-**Zweites Quartil $Q_2$:** Median (50%)
-**Drittes Quartil $Q_3$:** 75% der Werte sind kleiner
+Quartile teilen eine sortierte Datenreihe in **vier gleiche Teile**.
 
-## Interquartilsabstand
+### Definitionen
 
-$$IQR = Q_3 - Q_1$$
+- **Q1** (unteres Quartil): 25% der Daten liegen darunter
+- **Q2** (Median): 50% der Daten liegen darunter
+- **Q3** (oberes Quartil): 75% der Daten liegen darunter
 
-## Boxplot
+### Berechnung
 
-Min ---- Q1 ---- Q2 ---- Q3 ---- Max
+Sortierte Daten: $x_1, x_2, \cdots, x_n$
 
-## Übung
+$Q_1$ = Median der unteren Hälfte
 
-Daten: $2, 5, 7, 8, 10, 12, 15$
+$Q_3$ = Median der oberen Hälfte
 
-Bestimme $Q_1$, $Q_2$, $Q_3$!`,
+### Beispiel
+Daten: 2, 3, 5, 7, 8, 10, 12, 15, 18
+
+$Q_1 = 4$ (Median von 2,3,5,7)
+
+$Q_2 = 8$ (Median)
+
+$Q_3 = 13{,}5$ (Median von 10,12,15,18)
+
+### Interquartilsabstand (IQR)
+
+$IQR = Q_3 - Q_1 = 13{,}5 - 4 = 9{,}5$
+
+Der IQR beschreibt die Streubreite des **mittleren 50%** der Daten.
+
+### Boxplot
+
+Ein Boxplot zeigt:
+- Box von Q1 bis Q3
+- Linie bei Q2 (Median)
+- Whisker bis zu den Extremwerten (innerhalb 1,5 × IQR)
+- Punkte für Ausreißer
+
+### Ausreißer erkennen
+
+- Unterhalb: $Q_1 - 1{,}5 \cdot IQR$
+- Oberhalb: $Q_3 + 1{,}5 \cdot IQR$
+
+> **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!`,
       },
       {
         id: "m-stat-quiz",
@@ -2450,55 +2553,95 @@ $A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
         title: "Matrix-Operationen",
         duration: "18 min",
         type: "text",
-        content: `## Was ist eine Matrix?
+        content: `## Matrix-Operationen
 
-Eine Matrix ist ein rechteckiges Zahlenfeld:
+Eine Matrix ist ein rechteckiges Zahlenfeld in Zeilen und Spalten.
 
-$A = \\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\end{pmatrix}$ — eine $2 \\times 3$-Matrix
+### Notation
+$A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$
 
-## Addition
+Die Matrix hat 2 Zeilen und 2 Spalten → $2 \times 2$-Matrix.
+
+### Addition
 
 Matrizen gleicher Dimension werden elementweise addiert:
 
-$\\begin{pmatrix}1&2\\3&4\\end{pmatrix} + \\begin{pmatrix}5&6\\7&8\\end{pmatrix} = \\begin{pmatrix}6&8\\10&12\\end{pmatrix}$
+$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} + \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 6 & 8 \\ 10 & 12 \end{pmatrix}$
 
-## Multiplikation
+### Skalarmultiplikation
 
-$(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} \\cdot b_{kj}$
+$2 \cdot \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \begin{pmatrix} 2 & 4 \\ 6 & 8 \end{pmatrix}$
 
-**Achtung:** $AB \\neq BA$ im Allgemeinen!
+### Matrixmultiplikation
 
-### Beispiel
-$\\begin{pmatrix}1&2\\3&4\\end{pmatrix} \\cdot \\begin{pmatrix}5&6\\7&8\\end{pmatrix} = \\begin{pmatrix}19&22\\43&50\\end{pmatrix}$`,
+$(AB)_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}$
+
+**Beispiel:**
+
+$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \cdot \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$
+
+$(AB)_{11} = 1 \cdot 5 + 2 \cdot 7 = 19$
+
+$(AB)_{12} = 1 \cdot 6 + 2 \cdot 8 = 22$
+
+$(AB)_{21} = 3 \cdot 5 + 4 \cdot 7 = 43$
+
+$(AB)_{22} = 3 \cdot 6 + 4 \cdot 8 = 50$
+
+**Ergebnis:** $\begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}$
+
+### Transposition
+
+$A^T$: Zeilen werden zu Spalten
+
+$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}^T = \begin{pmatrix} 1 & 3 \\ 2 & 4 \end{pmatrix}$
+
+> **Merke:** Matrixmultiplikation ist NICHT kommutativ: $AB \neq BA$ im Allgemeinen!`,
       },
       {
         id: "m-ma-2",
         title: "Determinanten & Inverse",
         duration: "20 min",
         type: "text",
-        content: `## Determinante
+        content: `## Determinanten & Inverse
 
-Für eine $2 \\times 2$-Matrix:
+Die Determinante ist eine Zahl, die aus einer quadratischen Matrix berechnet wird. Sie sagt aus, ob die Matrix invertierbar ist.
 
-$\det\\begin{pmatrix}a&b\\c&d\\end{pmatrix} = ad - bc$
+### Determinante (2×2)
 
-### Beispiel
-$\det\\begin{pmatrix}3&1\\2&4\\end{pmatrix} = 12 - 2 = 10$
+$\det(A) = \det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$
 
-## Inverse Matrix
+### Beispiel 1
 
-$A \\cdot A^{-1} = I$ (Einheitsmatrix)
+$\det\begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix} = 3 \cdot 4 - 1 \cdot 2 = 12 - 2 = 10$
 
-Für $2 \\times 2$:
-$A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$
+### Determinante (3×3)
+
+Für eine $3 \times 3$-Matrix wird nach der **Sarrus-Regel** oder **Laplace-Entwicklung** berechnet.
+
+### Inverse Matrix
+
+$A \cdot A^{-1} = I$ (Einheitsmatrix)
+
+Für $2 \times 2$:
+
+$A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$
+
+### Beispiel 2
+
+$A = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}$, $\det(A) = 10$
+
+$A^{-1} = \frac{1}{10} \begin{pmatrix} 4 & -1 \\ -2 & 3 \end{pmatrix} = \begin{pmatrix} 0{,}4 & -0{,}1 \\ -0{,}2 & 0{,}3 \end{pmatrix}$
 
 ### Wann existiert die Inverse?
-Nur wenn $\det A \\neq 0$!
 
-### Beispiel
-$A = \\begin{pmatrix}3&1\\2&4\\end{pmatrix}$, $\det A = 10$
+Nur wenn $\det(A) \neq 0$! Ist $\det(A) = 0$, heißt die Matrix **singulär**.
 
-$A^{-1} = \\frac{1}{10}\\begin{pmatrix}4&-1\\-2&3\\end{pmatrix} = \\begin{pmatrix}0{,}4&-0{,}1\\-0{,}2&0{,}3\\end{pmatrix}$`,
+### Anwendung: LGS lösen
+
+$A \vec{x} = \vec{b} \Rightarrow \vec{x} = A^{-1} \vec{b}$
+
+> **Merke:** det = 0 → keine Inverse → LGS hat keine oder unendlich viele Lösungen!`,
       },
       {
         id: "m-ma-3",
@@ -2898,19 +3041,39 @@ Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
         type: "text",
         content: `## Quader
 
-$V = a \\cdot b \\cdot c$
+Ein Quader hat 3 verschiedene Kantenlängen: a, b, c.
+
+### Volumen
+$V = a \cdot b \cdot c$
+
+### Oberfläche
 $O = 2(ab + bc + ac)$
 
+### Raumdiagonale
+$d = \sqrt{a^2 + b^2 + c^2}$
+
+### Beispiel 1
+$a=3$, $b=4$, $c=5$:
+
+$V = 3 \cdot 4 \cdot 5 = 60$
+
+$O = 2(12 + 20 + 15) = 2 \cdot 47 = 94$
+
+$d = \sqrt{9 + 16 + 25} = \sqrt{50} \approx 7{,}07$
+
+### Beispiel 2: Karton
+Ein Karton ist 40cm × 30cm × 20cm. Wie viele Liter fasst er?
+
+$V = 40 \cdot 30 \cdot 20 = 24.000$ cm³ $= 24$ Liter
+
+## Würfel
+
+Sonderfall des Quaders: alle Kanten gleich lang ($a = b = c$).
+
+$V = a^3$, $O = 6a^2$, $d = a\sqrt{3}$
+
 ### Beispiel
-a=3, b=4, c=5:
-$V = 60$, $O = 2(12+20+15) = 94$
-
-## Wuerfel
-
-$V = a^3$, $O = 6a^2$, $d = a\\sqrt{3}$
-
-### Beispiel
-a = 4: $V = 64$, $O = 96$`,
+$a = 4$: $V = 64$, $O = 96$, $d = 4\sqrt{3} \approx 6{,}93$`,
       },
       {
         id: "m-ko-2",
@@ -2919,21 +3082,57 @@ a = 4: $V = 64$, $O = 96$`,
         type: "text",
         content: `## Zylinder
 
-$V = \\pi r^2 h$, $O = 2\\pi r(r + h)$
+Ein Zylinder hat einen kreisförmigen Querschnitt mit Radius r und Höhe h.
+
+### Volumen
+$V = \pi r^2 h$
+
+### Oberfläche
+$O = 2\pi r^2 + 2\pi r h = 2\pi r(r + h)$
+
+### Beispiel
+$r = 3$, $h = 10$:
+
+$V = \pi \cdot 9 \cdot 10 = 90\pi \approx 282{,}7$
+
+$O = 2\pi \cdot 3(3 + 10) = 78\pi \approx 245$
 
 ## Kegel
 
-$V = \\frac{1}{3}\\pi r^2 h$
-$s = \\sqrt{r^2 + h^2}$ (Mantellinie)
+Ein Kegel hat eine Spitze. Radius r, Höhe h, Mantellinie s.
+
+### Volumen
+$V = \frac{1}{3}\pi r^2 h$
+
+### Mantellinie
+$s = \sqrt{r^2 + h^2}$
+
+### Oberfläche
+$O = \pi r^2 + \pi r s = \pi r(r + s)$
+
+### Beispiel
+$r = 4$, $h = 6$:
+
+$V = \frac{1}{3}\pi \cdot 16 \cdot 6 = 32\pi \approx 100{,}5$
+
+$s = \sqrt{16 + 36} = \sqrt{52} \approx 7{,}21$
+
+> **Merke:** Kegel = $\frac{1}{3}$ des Zylinders mit gleicher Grundfläche und Höhe!
 
 ## Kugel
 
-$V = \\frac{4}{3}\\pi r^3$, $O = 4\\pi r^2$
+### Volumen
+$V = \frac{4}{3}\pi r^3$
+
+### Oberfläche
+$O = 4\pi r^2$
 
 ### Beispiel
-r = 5:
-$V = \\frac{500}{3}\\pi \approx 523.6$
-$O = 100\\pi \approx 314.2$`,
+$r = 5$:
+
+$V = \frac{4}{3}\pi \cdot 125 = \frac{500}{3}\pi \approx 523{,}6$
+
+$O = 4\pi \cdot 25 = 100\pi \approx 314{,}2$`,
       },
       {
         id: "m-ko-3",
@@ -2975,18 +3174,38 @@ $O = 100\\pi \approx 314.2$`,
         type: "text",
         content: `## Permutation
 
-Anordnung von n Elementen: $P(n) = n!$
+Eine Permutation ist eine **Anordnung** von n Elementen. Die Reihenfolge ist wichtig!
 
-### Beispiel
-3 Buecher: $3! = 6$ Anordnungen
+### Formel
+$P(n) = n!$ (n-Fakultät)
+
+$5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120$
+
+### Beispiel 1: Bücherregal
+3 Bücher (A, B, C) auf einem Regal anordnen:
+$P(3) = 3! = 6$
+
+Möglichkeiten: ABC, ACB, BAC, BCA, CAB, CBA
+
+### Beispiel 2: PIN
+Eine 4-stellige PIN mit den Ziffern 0-9:
+Hier handelt es sich um eine **Variation mit Wiederholung**: $10^4 = 10.000$ Möglichkeiten
 
 ## Variation
 
-k aus n, Reihenfolge wichtig:
-$V(n,k) = \\frac{n!}{(n-k)!}$
+**k** aus **n** Elementen auswählen, **Reihenfolge wichtig**:
 
-### Beispiel
-3 aus 5: $V(5,3) = 60$`,
+$V(n,k) = \frac{n!}{(n-k)!}$
+
+### Beispiel 1: Top 3
+Die besten 3 aus 5 Schülern auswählen:
+$V(5,3) = \frac{5!}{(5-3)!} = \frac{120}{2} = 60$ Möglichkeiten
+
+### Beispiel 2: Medaillen
+Gold, Silber, Bronze unter 8 Athleten:
+$V(8,3) = \frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336$
+
+> **Merke:** Permutation = alle Elemente, Variation = Auswahl. Bei beiden ist die Reihenfolge wichtig!`,
       },
       {
         id: "m-kb-2",
@@ -2995,13 +3214,26 @@ $V(n,k) = \\frac{n!}{(n-k)!}$
         type: "text",
         content: `## Kombination
 
-k aus n, Reihenfolge egal:
-$C(n,k) = \\binom{n}{k} = \\frac{n!}{k!(n-k)!}$
+Eine Kombination ist eine **Auswahl** von k aus n Elementen, bei der die **Reihenfolge egal** ist.
 
-### Beispiel
-3 aus 5: $\\binom{5}{3} = 10$
+### Formel
+$C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$
 
-Lotto 6 aus 49: $\\binom{49}{6} = 13.983.816$`,
+### Beispiel 1: Lotto
+6 aus 49 Zahlen — Reihenfolge egal:
+$\binom{49}{6} = \frac{49!}{6! \cdot 43!} = 13.983.816$
+
+Die Chance auf den Jackpot ist also etwa 1 zu 14 Millionen!
+
+### Beispiel 2: Eiscreme
+3 Eissorten aus 8 wählen:
+$\binom{8}{3} = \frac{8!}{3! \cdot 5!} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56$
+
+### Beispiel 3: Hände schütteln
+In einer Runde mit 10 Personen schütteln alle einander die Hände. Wie viele Handshakes?
+$\binom{10}{2} = \frac{10!}{2! \cdot 8!} = 45$
+
+> **Merke:** Kombination = Auswahl ohne Reihenfolge. Variation = Auswahl mit Reihenfolge.`,
       },
       {
         id: "m-kb-3",
@@ -3125,13 +3357,31 @@ $a_1 : a_2 = b_2 : b_1$`,
         type: "text",
         content: `## Direkt proportional
 
-Wenn x steigt, steigt y. Verhaeltnis bleibt gleich.
+Wenn eine Größe steigt, steigt die andere **im gleichen Verhältnis**. Das Verhältnis bleibt konstant.
 
-$b_2 = \\frac{a_2 \\cdot b_1}{a_1}$
+### Schema
+$a_1 \rightarrow b_1$
+$a_2 \rightarrow b_2$
 
-### Beispiel
-3 Aepfel kosten 2 Euro. 8 Aepfel?
-$\\frac{8 \\cdot 2}{3} = 5.33$ Euro`,
+$b_2 = \frac{a_2 \cdot b_1}{a_1}$
+
+### Beispiel 1: Äpfel
+3 Äpfel kosten 2€. Was kosten 8 Äpfel?
+
+$b_2 = \frac{8 \cdot 2}{3} = \frac{16}{3} = 5{,}33€$
+
+### Beispiel 2: Benzin
+5 Liter Benzin kosten 8,50€. Was kosten 12 Liter?
+
+$b_2 = \frac{12 \cdot 8{,}50}{5} = \frac{102}{5} = 20{,}40€$
+
+### Beispiel 3: Geschwindigkeit
+Ein Auto fährt 60 km in 45 Minuten. Wie weit in 2 Stunden?
+
+Erst umrechnen: 2 Stunden = 120 Minuten
+$b_2 = \frac{120 \cdot 60}{45} = 160$ km
+
+> **Merke:** Direkt proportional = $\frac{a_1}{b_1} = \frac{a_2}{b_2}$ (Verhältnis gleich)`,
       },
       {
         id: "m-ds-2",
@@ -3140,13 +3390,34 @@ $\\frac{8 \\cdot 2}{3} = 5.33$ Euro`,
         type: "text",
         content: `## Indirekt proportional
 
-Wenn x steigt, sinkt y.
+Wenn eine Größe steigt, sinkt die andere. Das **Produkt** bleibt konstant.
 
-$b_2 = \\frac{a_1 \\cdot b_1}{a_2}$
+### Schema
+$a_1 \rightarrow b_1$
+$a_2 \rightarrow b_2$
 
-### Beispiel
-3 Arbeiter brauchen 10 Tage. 5 Arbeiter?
-$\\frac{3 \\cdot 10}{5} = 6$ Tage`,
+$b_2 = \frac{a_1 \cdot b_1}{a_2}$
+
+### Beispiel 1: Arbeiter
+3 Arbeiter brauchen 10 Tage für eine Aufgabe. Wie lange brauchen 5 Arbeiter?
+
+$b_2 = \frac{3 \cdot 10}{5} = 6$ Tage
+
+Mehr Arbeiter = weniger Tage. Logisch!
+
+### Beispiel 2: Geschwindigkeit
+Wenn man 120 km mit 60 km/h in 2 Stunden schafft — wie lange braucht man mit 40 km/h?
+
+$b_2 = \frac{60 \cdot 2}{40} = 3$ Stunden
+
+Langsamer = mehr Zeit.
+
+### Beispiel 3: Rohrleitung
+Eine Rohrleitung füllt einen Tank in 8 Stunden. Eine zweite (doppelt so schnell) braucht...
+
+$b_2 = \frac{8 \cdot 1}{2} = 4$ Stunden
+
+> **Merke:** Indirekt proportional = $a_1 \cdot b_1 = a_2 \cdot b_2$ (Produkt gleich)`,
       },
       {
         id: "m-ds-3",
@@ -3190,29 +3461,72 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
         type: "text",
         content: `## Taylor-Reihe
 
-Approximation durch Polynome:
-$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
+Die Taylor-Reihe ermöglicht es, eine Funktion durch ein **Polynom** (unendliche Summe) anzunähern. Das ist extrem nützlich für Berechnungen!
 
-Fuer a = 0: Maclaurin-Reihe
+### Formel
+$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
 
-## Beispiel: $e^x$
+Für $a = 0$ heißt sie **Maclaurin-Reihe**.
 
-$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots$`,
+### Beispiel: $e^x$
+
+Alle Ableitungen von $e^x$ sind $e^x$. Also: $f^{(n)}(0) = 1$ für alle n.
+
+$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots$
+
+### Näherung von $e$
+
+$e = e^1 \approx 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \frac{1}{120} = 2{,}7167...$
+
+Das wahre $e \approx 2{,}71828$ — schon nach 5 Gliedern ziemlich genau!
+
+### Warum ist das nützlich?
+
+Computer können nicht $e^x$ direkt berechnen. Sie verwenden stattdessen die Taylor-Reihe und berechnen eine endliche Anzahl von Gliedern.
+
+> **Merke:** Taylor-Reihe = Funktion als unendliches Polynom. Je mehr Glieder, desto genauer.`,
       },
       {
         id: "m-tw-2",
         title: "Wichtige Reihen",
         duration: "18 min",
         type: "text",
-        content: `## Reihenentwicklungen
+        content: `## Wichtige Reihenentwicklungen
 
-$e^x = 1 + x + \\frac{x^2}{2!} + \\cdots$
-$\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots$
-$\\cos(x) = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\cdots$
-$\\frac{1}{1-x} = 1 + x + x^2 + \\cdots$ fuer $|x| < 1$
+Diese Reihen kommen überall in der Mathematik und Physik vor. Sie lohnt es sich, sie zu kennen!
 
-## Naeherung (kleines x)
-$\\sin(x) \approx x$, $\\cos(x) \approx 1 - x^2/2$, $e^x \approx 1 + x$`,
+### Exponentialfunktion
+$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \frac{x^n}{n!}$
+
+Konvergenzradius: $R = \infty$ (konvergiert für alle x)
+
+### Sinus
+$\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots$
+
+Nur ungerade Potenzen, Vorzeichen wechseln.
+
+### Kosinus
+$\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots$
+
+Nur gerade Potenzen, Vorzeichen wechseln.
+
+### Geometrische Reihe
+$\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots$ für $|x| < 1$
+
+### Natürlicher Logarithmus
+$\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots$ für $|x| < 1$
+
+## Näherungen (kleines x)
+
+Für kleine x-Werte reichen die ersten Glieder:
+
+$\sin(x) \approx x - \frac{x^3}{6}$
+
+$\cos(x) \approx 1 - \frac{x^2}{2}$
+
+$e^x \approx 1 + x + \frac{x^2}{2}$
+
+> **Merke:** Taylor-Reihen sind das Werkzeug, mit dem Computer trigonometrische Funktionen berechnen!`,
       },
       {
         id: "m-tw-3",
