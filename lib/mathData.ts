@@ -937,14 +937,14 @@ $$V_k^n = \\frac{n!}{(n-k)!}$$
 ## Kombinationen
 
 Auswahl von k aus n Objekten **ohne Reihenfolge**:
-$$C_k^n = \binom{n}{k} = \\frac{n!}{k!(n-k)!}$$
+$$C_k^n = \\binom{n}{k} = \\frac{n!}{k!(n-k)!}$$
 
 **Beispiel:** Aus 10 Personen werden 3 gewählt:
-$$\binom{10}{3} = \\frac{10!}{3! \\cdot 7!} = 120$$
+$$\\binom{10}{3} = \\frac{10!}{3! \\cdot 7!} = 120$$
 
 ## Binomialformel
 
-$$(a + b)^n = \\sum_{k=0}^{n} \binom{n}{k} a^k b^{n-k}$$
+$$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^k b^{n-k}$$
 
 ## Übung
 
@@ -1831,13 +1831,13 @@ Bestimme $Q_1$, $Q_2$, $Q_3$!`,
 ### Rechenregeln
 | Operation | Regel |
 |-----------|-------|
-| Addieren | $\frac{a}{c} + \frac{b}{c} = \frac{a+b}{c}$ |
-| KGV nötig | $\frac{a}{b} + \frac{c}{d} = \frac{a \cdot d + c \cdot b}{b \cdot d}$ |
-| Multiplizieren | $\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$ |
-| Dividieren | $\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$ |
+| Addieren | $\\frac{a}{c} + \\frac{b}{c} = \\frac{a+b}{c}$ |
+| KGV nötig | $\\frac{a}{b} + \\frac{c}{d} = \\frac{a \\cdot d + c \\cdot b}{b \\cdot d}$ |
+| Multiplizieren | $\\frac{a}{b} \\cdot \\frac{c}{d} = \\frac{a \\cdot c}{b \\cdot d}$ |
+| Dividieren | $\\frac{a}{b} : \\frac{c}{d} = \\frac{a}{b} \\cdot \\frac{d}{c}$ |
 
 ### Kürzen
-$\frac{a \cdot k}{b \cdot k} = \frac{a}{b}$ — Immer den größten gemeinsamen Teiler suchen!`,
+$\\frac{a \\cdot k}{b \\cdot k} = \\frac{a}{b}$ — Immer den größten gemeinsamen Teiler suchen!`,
     lessons: [
       {
         id: "m-br-1",
@@ -1846,24 +1846,24 @@ $\frac{a \cdot k}{b \cdot k} = \frac{a}{b}$ — Immer den größten gemeinsamen 
         type: "text",
         content: `## Was ist ein Bruch?
 
-Ein Bruch $\frac{a}{b}$ stellt einen Anteil dar. $a$ ist der **Zähler**, $b$ der **Nenner**.
+Ein Bruch $\\frac{a}{b}$ stellt einen Anteil dar. $a$ ist der **Zähler**, $b$ der **Nenner**.
 
 ## Echte vs. unechte Brüche
 
-- **Echter Bruch:** $\frac{3}{4}$ — Zähler < Nenner (weniger als 1 Ganzes)
-- **Unechter Bruch:** $\frac{5}{3}$ — Zähler ≥ Nenner (mehr als 1 Ganzes)
-- **Gemischte Zahl:** $1\frac{2}{3}$ = $\frac{5}{3}$
+- **Echter Bruch:** $\\frac{3}{4}$ — Zähler < Nenner (weniger als 1 Ganzes)
+- **Unechter Bruch:** $\\frac{5}{3}$ — Zähler ≥ Nenner (mehr als 1 Ganzes)
+- **Gemischte Zahl:** $1\\frac{2}{3}$ = $\\frac{5}{3}$
 
 ## Brüche als Dezimalzahlen
 
-$\frac{1}{4} = 0{,}25$, $\frac{1}{3} = 0{,}333...$, $\frac{1}{2} = 0{,}5$
+$\\frac{1}{4} = 0{,}25$, $\\frac{1}{3} = 0{,}333...$, $\\frac{1}{2} = 0{,}5$
 
 ## Am Zahlenstrahl
 
-Brüche lassen sich auf dem Zahlenstrahl darstellen. $\frac{3}{4}$ liegt bei 0,75.
+Brüche lassen sich auf dem Zahlenstrahl darstellen. $\\frac{3}{4}$ liegt bei 0,75.
 
 ### Beispiel
-Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\frac{3}{8}$ gegessen. Es bleiben $\frac{5}{8}$.`,
+Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\\frac{3}{8}$ gegessen. Es bleiben $\\frac{5}{8}$.`,
       },
       {
         id: "m-br-2",
@@ -1874,15 +1874,15 @@ Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\frac{3}{8}$ gegessen.
 
 Wenn der Nenner gleich ist, einfach die Zähler addieren/subtrahieren:
 
-$$\frac{3}{7} + \frac{2}{7} = \frac{5}{7}$$
+$$\\frac{3}{7} + \\frac{2}{7} = \\frac{5}{7}$$
 
-$$\frac{5}{8} - \frac{3}{8} = \frac{2}{8} = \frac{1}{4}$$
+$$\\frac{5}{8} - \\frac{3}{8} = \\frac{2}{8} = \\frac{1}{4}$$
 
 ## Verschiedene Nenner
 
 KGV (kleinstes gemeinsames Vielfaches) des Nenners suchen:
 
-$$\frac{1}{3} + \frac{1}{4} = \frac{4}{12} + \frac{3}{12} = \frac{7}{12}$$
+$$\\frac{1}{3} + \\frac{1}{4} = \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$$
 
 ## Schritt für Schritt
 
@@ -1892,9 +1892,9 @@ $$\frac{1}{3} + \frac{1}{4} = \frac{4}{12} + \frac{3}{12} = \frac{7}{12}$$
 4. Ergebnis kürzen
 
 ### Beispiel
-$\frac{2}{5} + \frac{1}{3}$:
+$\\frac{2}{5} + \\frac{1}{3}$:
 - KGV von 5 und 3 = 15
-- $\frac{2 \cdot 3}{5 \cdot 3} + \frac{1 \cdot 5}{3 \cdot 5} = \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$`,
+- $\\frac{2 \\cdot 3}{5 \\cdot 3} + \\frac{1 \\cdot 5}{3 \\cdot 5} = \\frac{6}{15} + \\frac{5}{15} = \\frac{11}{15}$`,
       },
       {
         id: "m-br-3",
@@ -1905,17 +1905,17 @@ $\frac{2}{5} + \frac{1}{3}$:
 
 Einfach Zähler mal Zähler, Nenner mal Nenner:
 
-$$\frac{2}{3} \cdot \frac{4}{5} = \frac{8}{15}$$
+$$\\frac{2}{3} \\cdot \\frac{4}{5} = \\frac{8}{15}$$
 
 **Vor dem Multiplizieren kürzen** macht das Ergebnis einfacher:
 
-$$\frac{3}{4} \cdot \frac{8}{9} = \frac{\cancel{3}}{4} \cdot \frac{8}{\cancel{9}_3} = \frac{1}{1} \cdot \frac{2}{3} = \frac{2}{3}$$
+$$\\frac{3}{4} \\cdot \\frac{8}{9} = \\frac{\\cancel{3}}{4} \\cdot \\frac{8}{\\cancel{9}_3} = \\frac{1}{1} \\cdot \\frac{2}{3} = \\frac{2}{3}$$
 
 ## Division
 
-Kehrtausch! Dividiere durch $\frac{a}{b}$ → multipliziere mit $\frac{b}{a}$:
+Kehrtausch! Dividiere durch $\\frac{a}{b}$ → multipliziere mit $\\frac{b}{a}$:
 
-$$\frac{2}{3} : \frac{4}{5} = \frac{2}{3} \cdot \frac{5}{4} = \frac{10}{12} = \frac{5}{6}$$
+$$\\frac{2}{3} : \\frac{4}{5} = \\frac{2}{3} \\cdot \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$$
 
 ### Merksatz
 "Dividieren? Kehren und multiplizieren!"`,
@@ -1948,14 +1948,14 @@ $$\frac{2}{3} : \frac{4}{5} = \frac{2}{3} \cdot \frac{5}{4} = \frac{10}{12} = \f
     merkblatt: `## 📋 Merkblatt: Gleichungen lösen
 
 ### Lineare Gleichungen
-$ax + b = 0 \Rightarrow x = -\frac{b}{a}$
+$ax + b = 0 \\Rightarrow x = -\\frac{b}{a}$
 
 ### Quadratische Gleichungen
 $ax^2 + bx + c = 0$
 
-**pq-Formel:** $x^2 + px + q = 0 \Rightarrow x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}$
+**pq-Formel:** $x^2 + px + q = 0 \\Rightarrow x = -\\frac{p}{2} \\pm \\sqrt{\\left(\\frac{p}{2}\\right)^2 - q}$
 
-**abc-Formel:** $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+**abc-Formel:** $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$
 
 ### Diskriminante
 $D = b^2 - 4ac$
@@ -1991,7 +1991,7 @@ $x = 4$
 $5(x - 3) = 2x + 1$
 $5x - 15 = 2x + 1$
 $3x = 16$
-$x = \frac{16}{3} = 5\frac{1}{3}$`,
+$x = \\frac{16}{3} = 5\\frac{1}{3}$`,
       },
       {
         id: "m-gl-2",
@@ -2006,12 +2006,12 @@ $ax^2 + bx + c = 0$ — Die Variable kommt in der **2. Potenz** vor.
 
 Für $x^2 + px + q = 0$:
 
-$$x_{1,2} = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}$$
+$$x_{1,2} = -\\frac{p}{2} \\pm \\sqrt{\\left(\\frac{p}{2}\\right)^2 - q}$$
 
 ### Beispiel
 $x^2 - 5x + 6 = 0$ → $p = -5$, $q = 6$
 
-$x_{1,2} = \frac{5}{2} \pm \sqrt{\frac{25}{4} - 6} = \frac{5}{2} \pm \sqrt{\frac{1}{4}} = \frac{5}{2} \pm \frac{1}{2}$
+$x_{1,2} = \\frac{5}{2} \\pm \\sqrt{\\frac{25}{4} - 6} = \\frac{5}{2} \\pm \\sqrt{\\frac{1}{4}} = \\frac{5}{2} \\pm \\frac{1}{2}$
 
 $x_1 = 3$, $x_2 = 2$
 
@@ -2019,7 +2019,7 @@ $x_1 = 3$, $x_2 = 2$
 
 Für $ax^2 + bx + c = 0$:
 
-$$x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+$$x_{1,2} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 
 ## Diskriminante
 
@@ -2064,9 +2064,9 @@ $(a+b)(a-b) = a^2 - b^2$
 $a(b+c) = ab + ac$
 
 ### Potenzregeln
-$a^m \cdot a^n = a^{m+n}$
-$(a^m)^n = a^{m \cdot n}$
-$a^0 = 1$ (für $a \neq 0$)`,
+$a^m \\cdot a^n = a^{m+n}$
+$(a^m)^n = a^{m \\cdot n}$
+$a^0 = 1$ (für $a \\neq 0$)`,
     lessons: [
       {
         id: "m-tu-1",
@@ -2075,7 +2075,7 @@ $a^0 = 1$ (für $a \neq 0$)`,
         type: "text",
         content: `## Distributivgesetz
 
-$a \cdot (b + c) = a \cdot b + a \cdot c$
+$a \\cdot (b + c) = a \\cdot b + a \\cdot c$
 
 ### Beispiel
 $3(x + 4) = 3x + 12$
@@ -2145,14 +2145,14 @@ $x^2 - 49 = (x+7)(x-7)$
     merkblatt: `## 📋 Merkblatt: Ungleichungen
 
 ### Regeln
-- $a < b \Rightarrow a + c < b + c$ (Addition)
-- $a < b$ und $c > 0 \Rightarrow a \cdot c < b \cdot c$
-- $a < b$ und $c < 0 \Rightarrow a \cdot c > b \cdot c$ (**Vorzeichenwechsel!**)
+- $a < b \\Rightarrow a + c < b + c$ (Addition)
+- $a < b$ und $c > 0 \\Rightarrow a \\cdot c < b \\cdot c$
+- $a < b$ und $c < 0 \\Rightarrow a \\cdot c > b \\cdot c$ (**Vorzeichenwechsel!**)
 
 ### Intervallschreibweise
 - $(a, b)$ = offenes Intervall: $a < x < b$
-- $[a, b]$ = abgeschlossenes Intervall: $a \leq x \leq b$
-- $[a, b)$ = halboffen: $a \leq x < b$`,
+- $[a, b]$ = abgeschlossenes Intervall: $a \\leq x \\leq b$
+- $[a, b)$ = halboffen: $a \\leq x < b$`,
     lessons: [
       {
         id: "m-ug-1",
@@ -2161,14 +2161,14 @@ $x^2 - 49 = (x+7)(x-7)$
         type: "text",
         content: `## Lineare Ungleichungen
 
-Wie Gleichungen lösen — aber mit $<$, $>$, $\leq$, $\geq$ statt $=$.
+Wie Gleichungen lösen — aber mit $<$, $>$, $\\leq$, $\\geq$ statt $=$.
 
 ### Beispiel
 $3x - 7 > 5$
 $3x > 12$
 $x > 4$
 
-**Lösungsmenge:** $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
+**Lösungsmenge:** $L = \{x \\in \\mathbb{R} \mid x > 4\} = (4, \\infty)$
 
 ## Wichtig: Vorzeichenwechsel!
 
@@ -2200,11 +2200,11 @@ $x^2 - 5x + 6 > 0$
 
 Nullstellen: $x_1 = 2$, $x_2 = 3$
 
-| Intervall | $(−\infty, 2)$ | $(2, 3)$ | $(3, \infty)$ |
+| Intervall | $(−\\infty, 2)$ | $(2, 3)$ | $(3, \\infty)$ |
 |-----------|---------|---------|---------|
 | Vorzeichen | $+$ | $-$ | $+$ |
 
-Lösung: $x < 2$ oder $x > 3$, also $L = (-\infty, 2) \cup (3, \infty)$`,
+Lösung: $x < 2$ oder $x > 3$, also $L = (-\\infty, 2) \\cup (3, \\infty)$`,
       },
       {
         id: "m-ug-3",
@@ -2238,7 +2238,7 @@ Lösung: $x < 2$ oder $x > 3$, also $L = (-\infty, 2) \cup (3, \infty)$`,
 2. Nullstellen: $f(x) = 0$
 3. Ableitungen: $f'(x)$, $f''(x)$
 4. Extrema: $f'(x) = 0$, dann $f''(x)$ prüfen
-5. Wendepunkt: $f''(x) = 0$, dann $f'''(x) \neq 0$
+5. Wendepunkt: $f''(x) = 0$, dann $f'''(x) \\neq 0$
 6. Monotonie: Vorzeichen von $f'(x)$
 7. Krümmung: Vorzeichen von $f''(x)$
 
@@ -2256,8 +2256,8 @@ Lösung: $x < 2$ oder $x > 3$, also $L = (-\infty, 2) \cup (3, \infty)$`,
 Für welche $x$-Werte ist $f(x)$ definiert?
 
 ### Einschränkungen
-- **Nenner:** $\neq 0$
-- **Wurzel:** Argument $\geq 0$
+- **Nenner:** $\\neq 0$
+- **Wurzel:** Argument $\\geq 0$
 - **Logarithmus:** Argument $> 0$
 
 ## Nullstellen
@@ -2290,7 +2290,7 @@ $f'(x_0) = 0$ → Kandidat für Extremum
 ### Beispiel
 $f(x) = x^3 - 3x + 2$
 
-$f'(x) = 3x^2 - 3 = 0 \Rightarrow x = \pm 1$
+$f'(x) = 3x^2 - 3 = 0 \\Rightarrow x = \\pm 1$
 
 $f''(x) = 6x$
 - $f''(-1) = -6 < 0$ → **Maximum** bei $(-1, 4)$
@@ -2303,12 +2303,12 @@ $f''(x) = 6x$
         type: "text",
         content: `## Wendepunkt
 
-Die **Krümmung** ändert sich. Bedingung: $f''(x_0) = 0$ und $f'''(x_0) \neq 0$.
+Die **Krümmung** ändert sich. Bedingung: $f''(x_0) = 0$ und $f'''(x_0) \\neq 0$.
 
 ### Beispiel
 $f(x) = x^3 - 3x + 2$
-$f''(x) = 6x = 0 \Rightarrow x = 0$
-$f'''(x) = 6 \neq 0$ → Wendepunkt bei $(0, 2)$
+$f''(x) = 6x = 0 \\Rightarrow x = 0$
+$f'''(x) = 6 \\neq 0$ → Wendepunkt bei $(0, 2)$
 
 ## Monotonie
 
@@ -2354,7 +2354,7 @@ $f'''(x) = 6 \neq 0$ → Wendepunkt bei $(0, 2)$
 3. **Gauß:** Stufenform durch Zeilenumformung
 
 ### Cramersche Regel (2×2)
-$x = \frac{D_x}{D}$, $y = \frac{D_y}{D}$
+$x = \\frac{D_x}{D}$, $y = \\frac{D_y}{D}$
 
 ### Anzahl Lösungen
 - **1 Lösung:** Gleichungen schneiden sich
@@ -2372,18 +2372,18 @@ $x = \frac{D_x}{D}$, $y = \frac{D_y}{D}$
 2. In die andere Gleichung einsetzen
 
 ### Beispiel
-$\begin{cases} 2x + y = 7 \\ x - y = 1 \end{cases}$
+$\\begin{cases} 2x + y = 7 \\ x - y = 1 \\end{cases}$
 
 Aus Gleichung 2: $x = y + 1$
 
 Einsetzen in Gleichung 1: $2(y+1) + y = 7$
 $2y + 2 + y = 7$
 $3y = 5$
-$y = \frac{5}{3}$
+$y = \\frac{5}{3}$
 
-Rückeinsetzen: $x = \frac{5}{3} + 1 = \frac{8}{3}$
+Rückeinsetzen: $x = \\frac{5}{3} + 1 = \\frac{8}{3}$
 
-Probe: $2 \cdot \frac{8}{3} + \frac{5}{3} = \frac{21}{3} = 7$ ✓`,
+Probe: $2 \\cdot \\frac{8}{3} + \\frac{5}{3} = \\frac{21}{3} = 7$ ✓`,
       },
       {
         id: "m-lgs-2",
@@ -2395,15 +2395,15 @@ Probe: $2 \cdot \frac{8}{3} + \frac{5}{3} = \frac{21}{3} = 7$ ✓`,
 Systematische Methode durch Zeilenumformung.
 
 ### Beispiel
-$\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$
+$\\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \\end{cases}$
 
 **Schritt 1:** Zeile 2 - 2·Zeile 1, Zeile 3 - Zeile 1
 
-$\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ y - 2z = -4 \end{cases}$
+$\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ y - 2z = -4 \\end{cases}$
 
-**Schritt 2:** Zeile 3 + $\frac{1}{3}$·Zeile 2
+**Schritt 2:** Zeile 3 + $\\frac{1}{3}$·Zeile 2
 
-$\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\frac{7}{3}z = -7 \end{cases}$
+$\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\\frac{7}{3}z = -7 \\end{cases}$
 
 **Rückwärts:** $z = 3$, $y = 2$, $x = 1$`,
       },
@@ -2436,14 +2436,14 @@ $\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\frac{7}{3}z = -7 \end{cases}$
 
 ### Operationen
 - **Addition:** $(A+B)_{ij} = a_{ij} + b_{ij}$
-- **Multiplikation:** $(AB)_{ij} = \sum_k a_{ik} b_{kj}$
+- **Multiplikation:** $(AB)_{ij} = \\sum_k a_{ik} b_{kj}$
 - **Transponiert:** $(A^T)_{ij} = a_{ji}$
 
 ### Determinante (2×2)
-$\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad - bc$
+$\det\\begin{pmatrix}a&b\\c&d\\end{pmatrix} = ad - bc$
 
 ### Inverse (2×2)
-$A^{-1} = \frac{1}{\det A} \begin{pmatrix}d&-b\\-c&a\end{pmatrix}$`,
+$A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
     lessons: [
       {
         id: "m-ma-1",
@@ -2454,22 +2454,22 @@ $A^{-1} = \frac{1}{\det A} \begin{pmatrix}d&-b\\-c&a\end{pmatrix}$`,
 
 Eine Matrix ist ein rechteckiges Zahlenfeld:
 
-$A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$ — eine $2 \times 3$-Matrix
+$A = \\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \\end{pmatrix}$ — eine $2 \\times 3$-Matrix
 
 ## Addition
 
 Matrizen gleicher Dimension werden elementweise addiert:
 
-$\begin{pmatrix}1&2\\3&4\end{pmatrix} + \begin{pmatrix}5&6\\7&8\end{pmatrix} = \begin{pmatrix}6&8\\10&12\end{pmatrix}$
+$\\begin{pmatrix}1&2\\3&4\\end{pmatrix} + \\begin{pmatrix}5&6\\7&8\\end{pmatrix} = \\begin{pmatrix}6&8\\10&12\\end{pmatrix}$
 
 ## Multiplikation
 
-$(AB)_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}$
+$(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} \\cdot b_{kj}$
 
-**Achtung:** $AB \neq BA$ im Allgemeinen!
+**Achtung:** $AB \\neq BA$ im Allgemeinen!
 
 ### Beispiel
-$\begin{pmatrix}1&2\\3&4\end{pmatrix} \cdot \begin{pmatrix}5&6\\7&8\end{pmatrix} = \begin{pmatrix}19&22\\43&50\end{pmatrix}$`,
+$\\begin{pmatrix}1&2\\3&4\\end{pmatrix} \\cdot \\begin{pmatrix}5&6\\7&8\\end{pmatrix} = \\begin{pmatrix}19&22\\43&50\\end{pmatrix}$`,
       },
       {
         id: "m-ma-2",
@@ -2478,27 +2478,27 @@ $\begin{pmatrix}1&2\\3&4\end{pmatrix} \cdot \begin{pmatrix}5&6\\7&8\end{pmatrix}
         type: "text",
         content: `## Determinante
 
-Für eine $2 \times 2$-Matrix:
+Für eine $2 \\times 2$-Matrix:
 
-$\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad - bc$
+$\det\\begin{pmatrix}a&b\\c&d\\end{pmatrix} = ad - bc$
 
 ### Beispiel
-$\det\begin{pmatrix}3&1\\2&4\end{pmatrix} = 12 - 2 = 10$
+$\det\\begin{pmatrix}3&1\\2&4\\end{pmatrix} = 12 - 2 = 10$
 
 ## Inverse Matrix
 
-$A \cdot A^{-1} = I$ (Einheitsmatrix)
+$A \\cdot A^{-1} = I$ (Einheitsmatrix)
 
-Für $2 \times 2$:
-$A^{-1} = \frac{1}{\det A} \begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
+Für $2 \\times 2$:
+$A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$
 
 ### Wann existiert die Inverse?
-Nur wenn $\det A \neq 0$!
+Nur wenn $\det A \\neq 0$!
 
 ### Beispiel
-$A = \begin{pmatrix}3&1\\2&4\end{pmatrix}$, $\det A = 10$
+$A = \\begin{pmatrix}3&1\\2&4\\end{pmatrix}$, $\det A = 10$
 
-$A^{-1} = \frac{1}{10}\begin{pmatrix}4&-1\\-2&3\end{pmatrix} = \begin{pmatrix}0{,}4&-0{,}1\\-0{,}2&0{,}3\end{pmatrix}$`,
+$A^{-1} = \\frac{1}{10}\\begin{pmatrix}4&-1\\-2&3\\end{pmatrix} = \\begin{pmatrix}0{,}4&-0{,}1\\-0{,}2&0{,}3\\end{pmatrix}$`,
       },
       {
         id: "m-ma-3",
@@ -2528,15 +2528,15 @@ $A^{-1} = \frac{1}{10}\begin{pmatrix}4&-1\\-2&3\end{pmatrix} = \begin{pmatrix}0{
     merkblatt: `## 📋 Merkblatt: Verteilungen
 
 ### Binomialverteilung
-$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+$P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}$
 $E(X) = np$, $Var(X) = np(1-p)$
 
 ### Normalverteilung
-$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
+$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$
 
 ### Poisson-Verteilung
-$P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}$
-$E(X) = \lambda$`,
+$P(X=k) = \\frac{\\lambda^k}{k!} e^{-\\lambda}$
+$E(X) = \\lambda$`,
     lessons: [
       {
         id: "m-vt-1",
@@ -2553,15 +2553,15 @@ Modelliert die Anzahl **erfolgreicher** Versuche bei $n$ Bernoulli-Versuchen.
 - Versuche unabhängig
 
 ### Formel
-$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+$P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}$
 
 ### Beispiel
 Münzwurf 10-mal: Wie wahrscheinlich sind genau 3 Mal Kopf?
 
-$P(X=3) = \binom{10}{3} (0{,}5)^3 (0{,}5)^7 = 120 \cdot 0{,}000977 = 0{,}117$
+$P(X=3) = \\binom{10}{3} (0{,}5)^3 (0{,}5)^7 = 120 \\cdot 0{,}000977 = 0{,}117$
 
 ### Erwartungswert & Varianz
-$E(X) = np = 10 \cdot 0{,}5 = 5$
+$E(X) = np = 10 \\cdot 0{,}5 = 5$
 $Var(X) = np(1-p) = 2{,}5$`,
       },
       {
@@ -2574,19 +2574,19 @@ $Var(X) = np(1-p) = 2{,}5$`,
 Die wichtigste **stetige** Verteilung. Glockenförmige Kurve.
 
 ### Parameter
-- $\mu$: Mittelwert (Lage)
-- $\sigma$: Standardabweichung (Streue)
+- $\\mu$: Mittelwert (Lage)
+- $\\sigma$: Standardabweichung (Streue)
 
 ### 68-95-99,7-Regel
-- 68% der Werte liegen in $\mu \pm \sigma$
-- 95% in $\mu \pm 2\sigma$
-- 99,7% in $\mu \pm 3\sigma$
+- 68% der Werte liegen in $\\mu \\pm \\sigma$
+- 95% in $\\mu \\pm 2\\sigma$
+- 99,7% in $\\mu \\pm 3\\sigma$
 
 ### Standardnormalverteilung
-$Z = \frac{X - \mu}{\sigma}$ → $\mu = 0$, $\sigma = 1$
+$Z = \\frac{X - \\mu}{\\sigma}$ → $\\mu = 0$, $\\sigma = 1$
 
 ### Beispiel
-Größe: $\mu = 175$ cm, $\sigma = 7$ cm
+Größe: $\\mu = 175$ cm, $\\sigma = 7$ cm
 68% sind zwischen 168 und 182 cm groß.`,
       },
       {
@@ -2617,15 +2617,15 @@ Größe: $\mu = 175$ cm, $\sigma = 7$ cm
     merkblatt: `## 📋 Merkblatt: Folgen & Reihen
 
 ### Arithmetische Folge
-$a_n = a_1 + (n-1) \cdot d$
-$S_n = \frac{n}{2}(a_1 + a_n)$
+$a_n = a_1 + (n-1) \\cdot d$
+$S_n = \\frac{n}{2}(a_1 + a_n)$
 
 ### Geometrische Folge
-$a_n = a_1 \cdot q^{n-1}$
-$S_n = a_1 \cdot \frac{1-q^n}{1-q}$ (für $q \neq 1$)
+$a_n = a_1 \\cdot q^{n-1}$
+$S_n = a_1 \\cdot \\frac{1-q^n}{1-q}$ (für $q \\neq 1$)
 
 ### Geometrische Reihe (unendlich)
-$S = \frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
+$S = \\frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
     lessons: [
       {
         id: "m-fr-1",
@@ -2637,17 +2637,17 @@ $S = \frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
 Konstanter **Abstand** $d$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
-$a_n = a_1 + (n-1) \cdot d$
+$a_n = a_1 + (n-1) \\cdot d$
 
 ### Beispiel
 $3, 7, 11, 15, 19, ...$ → $a_1 = 3$, $d = 4$
 
-$a_{10} = 3 + 9 \cdot 4 = 39$
+$a_{10} = 3 + 9 \\cdot 4 = 39$
 
 ### Partialsumme
-$S_n = \frac{n}{2}(a_1 + a_n) = \frac{n}{2}(2a_1 + (n-1)d)$
+$S_n = \\frac{n}{2}(a_1 + a_n) = \\frac{n}{2}(2a_1 + (n-1)d)$
 
-$S_{10} = \frac{10}{2}(3 + 39) = 5 \cdot 42 = 210$`,
+$S_{10} = \\frac{10}{2}(3 + 39) = 5 \\cdot 42 = 210$`,
       },
       {
         id: "m-fr-2",
@@ -2659,22 +2659,22 @@ $S_{10} = \frac{10}{2}(3 + 39) = 5 \cdot 42 = 210$`,
 Konstanter **Faktor** $q$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
-$a_n = a_1 \cdot q^{n-1}$
+$a_n = a_1 \\cdot q^{n-1}$
 
 ### Beispiel
 $2, 6, 18, 54, ...$ → $a_1 = 2$, $q = 3$
-$a_5 = 2 \cdot 3^4 = 162$
+$a_5 = 2 \\cdot 3^4 = 162$
 
 ## Geometrische Reihe (endlich)
-$S_n = a_1 \cdot \frac{1-q^n}{1-q}$ für $q \neq 1$
+$S_n = a_1 \\cdot \\frac{1-q^n}{1-q}$ für $q \\neq 1$
 
 ## Unendliche geometrische Reihe
 
 Wenn $|q| < 1$:
-$S_\infty = \frac{a_1}{1-q}$
+$S_\\infty = \\frac{a_1}{1-q}$
 
 ### Beispiel
-$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... = \frac{1}{1-\frac{1}{2}} = 2$`,
+$1 + \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + ... = \\frac{1}{1-\\frac{1}{2}} = 2$`,
       },
       {
         id: "m-fr-3",
@@ -2704,16 +2704,16 @@ $1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... = \frac{1}{1-\frac{1}{2}} = 2
     merkblatt: `## 📋 Merkblatt: Analytische Geometrie
 
 ### Gerade im Raum
-$\vec{x} = \vec{p} + t \cdot \vec{v}$
+$\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$
 
 ### Ebene
-$\vec{n} \cdot (\vec{x} - \vec{p}) = 0$ oder $ax + by + cz = d$
+$\\vec{n} \\cdot (\\vec{x} - \\vec{p}) = 0$ oder $ax + by + cz = d$
 
 ### Abstand Punkt-Ebene
-$d = \frac{|\vec{n} \cdot (\vec{a} - \vec{p})|}{|\vec{n}|}$
+$d = \\frac{|\\vec{n} \\cdot (\\vec{a} - \\vec{p})|}{|\\vec{n}|}$
 
 ### Abstand Punkt-Gerade
-$d = \frac{|\vec{v} \times (\vec{a} - \vec{p})|}{|\vec{v}|}$`,
+$d = \\frac{|\\vec{v} \\times (\\vec{a} - \\vec{p})|}{|\\vec{v}|}$`,
     lessons: [
       {
         id: "m-ag-1",
@@ -2722,14 +2722,14 @@ $d = \frac{|\vec{v} \times (\vec{a} - \vec{p})|}{|\vec{v}|}$`,
         type: "text",
         content: `## Gerade im Raum
 
-Parameterform: $\vec{x} = \vec{p} + t \cdot \vec{v}$
+Parameterform: $\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$
 
-- $\vec{p}$: Stützvektor (Punkt auf der Geraden)
-- $\vec{v}$: Richtungsvektor
+- $\\vec{p}$: Stützvektor (Punkt auf der Geraden)
+- $\\vec{v}$: Richtungsvektor
 - $t$: Parameter
 
 ### Beispiel
-$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + t \cdot \begin{pmatrix}2\\-1\\1\end{pmatrix}$
+$\\vec{x} = \\begin{pmatrix}1\\2\\3\\end{pmatrix} + t \\cdot \\begin{pmatrix}2\\-1\\1\\end{pmatrix}$
 
 Für $t = 0$: Punkt $(1, 2, 3)$
 Für $t = 1$: Punkt $(3, 1, 4)$
@@ -2746,26 +2746,26 @@ Gleichsetzen und $t_1$, $t_2$ lösen. Wenn keine Lösung → parallel oder winds
         content: `## Ebene im Raum
 
 ### Parameterform
-$\vec{x} = \vec{p} + r \cdot \vec{u} + s \cdot \vec{v}$
+$\\vec{x} = \\vec{p} + r \\cdot \\vec{u} + s \\cdot \\vec{v}$
 
 ### Koordinatenform
 $ax + by + cz = d$
 
-$\vec{n} = \begin{pmatrix}a\\b\\c\end{pmatrix}$ ist der **Normalenvektor**.
+$\\vec{n} = \\begin{pmatrix}a\\b\\c\\end{pmatrix}$ ist der **Normalenvektor**.
 
 ### Beispiel
 $2x - y + 3z = 6$
 
-Normalenvektor: $\vec{n} = (2, -1, 3)$
+Normalenvektor: $\\vec{n} = (2, -1, 3)$
 
 ## Abstand Punkt-Ebene
 
-$d = \frac{|ax_0 + by_0 + cz_0 - d|}{\sqrt{a^2 + b^2 + c^2}}$
+$d = \\frac{|ax_0 + by_0 + cz_0 - d|}{\\sqrt{a^2 + b^2 + c^2}}$
 
 ### Beispiel
 Punkt $(1, 2, 3)$, Ebene $2x - y + 3z = 6$
 
-$d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}}$`,
+$d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}}$`,
       },
       {
         id: "m-ag-3",
@@ -2796,13 +2796,13 @@ $d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}}$`,
     merkblatt: `## Merkblatt: Prozent- & Zinsrechnung
 
 ### Prozentwert
-$p = W \cdot \frac{p\%}{100}$
+$p = W \\cdot \\frac{p\%}{100}$
 
 ### Zinsen
-$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$
+$Z = K \\cdot \\frac{p}{100} \\cdot \\frac{n}{12}$
 
 ### Zinseszins
-$K_n = K_0 \cdot (1 + \frac{p}{100})^n$`,
+$K_n = K_0 \\cdot (1 + \\frac{p}{100})^n$`,
     lessons: [
       {
         id: "m-pz-1",
@@ -2816,18 +2816,18 @@ $K_n = K_0 \cdot (1 + \frac{p}{100})^n$`,
 - **Prozentwert (W):** Der absolute Anteil
 
 ### Formel
-$$W = G \cdot \frac{p\%}{100}$$
+$$W = G \\cdot \\frac{p\%}{100}$$
 
 ### Beispiel
 20% von 150 Euro:
-$W = 150 \cdot 0.2 = 30$ Euro
+$W = 150 \\cdot 0.2 = 30$ Euro
 
 ## Prozentuale Änderung
 
-$\text{Anderung} = \frac{\text{Neu} - \text{Alt}}{\text{Alt}} \cdot 100\%$
+$\\text{Anderung} = \\frac{\\text{Neu} - \\text{Alt}}{\\text{Alt}} \\cdot 100\%$
 
 Preis steigt von 80 auf 100:
-$\frac{20}{80} \cdot 100\% = 25\%$`,
+$\\frac{20}{80} \\cdot 100\% = 25\%$`,
       },
       {
         id: "m-pz-2",
@@ -2836,23 +2836,23 @@ $\frac{20}{80} \cdot 100\% = 25\%$`,
         type: "text",
         content: `## Zinsen
 
-$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$
+$Z = K \\cdot \\frac{p}{100} \\cdot \\frac{n}{12}$
 
 ### Beispiel
 5000 Euro zu 4% fuer 6 Monate:
-$Z = 5000 \cdot 0.04 \cdot 0.5 = 100$ Euro
+$Z = 5000 \\cdot 0.04 \\cdot 0.5 = 100$ Euro
 
 ## Zinseszins
 
-$K_n = K_0 \cdot (1 + \frac{p}{100})^n$
+$K_n = K_0 \\cdot (1 + \\frac{p}{100})^n$
 
 ### Beispiel
 1000 Euro zu 5% ueber 3 Jahre:
-$K_3 = 1000 \cdot 1.05^3 = 1157.63$ Euro
+$K_3 = 1000 \\cdot 1.05^3 = 1157.63$ Euro
 
 ## 72er-Regel
 
-$t \approx \frac{72}{p}$
+$t \approx \\frac{72}{p}$
 
 Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
       },
@@ -2887,9 +2887,9 @@ Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
 |---------|---------|-------------|
 | Quader | $abc$ | $2(ab+bc+ac)$ |
 | Wuerfel | $a^3$ | $6a^2$ |
-| Zylinder | $\pi r^2 h$ | $2\pi r(r+h)$ |
-| Kegel | $\frac{1}{3}\pi r^2 h$ | $\pi r(r+s)$ |
-| Kugel | $\frac{4}{3}\pi r^3$ | $4\pi r^2$ |`,
+| Zylinder | $\\pi r^2 h$ | $2\\pi r(r+h)$ |
+| Kegel | $\\frac{1}{3}\\pi r^2 h$ | $\\pi r(r+s)$ |
+| Kugel | $\\frac{4}{3}\\pi r^3$ | $4\\pi r^2$ |`,
     lessons: [
       {
         id: "m-ko-1",
@@ -2898,7 +2898,7 @@ Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
         type: "text",
         content: `## Quader
 
-$V = a \cdot b \cdot c$
+$V = a \\cdot b \\cdot c$
 $O = 2(ab + bc + ac)$
 
 ### Beispiel
@@ -2907,7 +2907,7 @@ $V = 60$, $O = 2(12+20+15) = 94$
 
 ## Wuerfel
 
-$V = a^3$, $O = 6a^2$, $d = a\sqrt{3}$
+$V = a^3$, $O = 6a^2$, $d = a\\sqrt{3}$
 
 ### Beispiel
 a = 4: $V = 64$, $O = 96$`,
@@ -2919,21 +2919,21 @@ a = 4: $V = 64$, $O = 96$`,
         type: "text",
         content: `## Zylinder
 
-$V = \pi r^2 h$, $O = 2\pi r(r + h)$
+$V = \\pi r^2 h$, $O = 2\\pi r(r + h)$
 
 ## Kegel
 
-$V = \frac{1}{3}\pi r^2 h$
-$s = \sqrt{r^2 + h^2}$ (Mantellinie)
+$V = \\frac{1}{3}\\pi r^2 h$
+$s = \\sqrt{r^2 + h^2}$ (Mantellinie)
 
 ## Kugel
 
-$V = \frac{4}{3}\pi r^3$, $O = 4\pi r^2$
+$V = \\frac{4}{3}\\pi r^3$, $O = 4\\pi r^2$
 
 ### Beispiel
 r = 5:
-$V = \frac{500}{3}\pi \approx 523.6$
-$O = 100\pi \approx 314.2$`,
+$V = \\frac{500}{3}\\pi \approx 523.6$
+$O = 100\\pi \approx 314.2$`,
       },
       {
         id: "m-ko-3",
@@ -2965,8 +2965,8 @@ $O = 100\pi \approx 314.2$`,
 | Art | Formel |
 |-----|--------|
 | Permutation | $P(n) = n!$ |
-| Variation | $V(n,k) = \frac{n!}{(n-k)!}$ |
-| Kombination | $C(n,k) = \binom{n}{k}$ |`,
+| Variation | $V(n,k) = \\frac{n!}{(n-k)!}$ |
+| Kombination | $C(n,k) = \\binom{n}{k}$ |`,
     lessons: [
       {
         id: "m-kb-1",
@@ -2983,7 +2983,7 @@ Anordnung von n Elementen: $P(n) = n!$
 ## Variation
 
 k aus n, Reihenfolge wichtig:
-$V(n,k) = \frac{n!}{(n-k)!}$
+$V(n,k) = \\frac{n!}{(n-k)!}$
 
 ### Beispiel
 3 aus 5: $V(5,3) = 60$`,
@@ -2996,12 +2996,12 @@ $V(n,k) = \frac{n!}{(n-k)!}$
         content: `## Kombination
 
 k aus n, Reihenfolge egal:
-$C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$
+$C(n,k) = \\binom{n}{k} = \\frac{n!}{k!(n-k)!}$
 
 ### Beispiel
-3 aus 5: $\binom{5}{3} = 10$
+3 aus 5: $\\binom{5}{3} = 10$
 
-Lotto 6 aus 49: $\binom{49}{6} = 13.983.816$`,
+Lotto 6 aus 49: $\\binom{49}{6} = 13.983.816$`,
       },
       {
         id: "m-kb-3",
@@ -3031,14 +3031,14 @@ Lotto 6 aus 49: $\binom{49}{6} = 13.983.816$`,
     merkblatt: `## Merkblatt: Logik
 
 ### Verknuepfungen
-- UND: $\land$
-- ODER: $\lor$
-- NICHT: $\lnot$
-- Implikation: $\Rightarrow$
+- UND: $\\land$
+- ODER: $\\lor$
+- NICHT: $\\lnot$
+- Implikation: $\\Rightarrow$
 
 ### De Morgan
-$\lnot(p \land q) = \lnot p \lor \lnot q$
-$\lnot(p \lor q) = \lnot p \land \lnot q$`,
+$\\lnot(p \\land q) = \\lnot p \\lor \\lnot q$
+$\\lnot(p \\lor q) = \\lnot p \\land \\lnot q$`,
     lessons: [
       {
         id: "m-lg-1",
@@ -3051,15 +3051,15 @@ Eine Aussage ist wahr oder falsch.
 
 ## Verknuepfungen
 
-- UND: $p \land q$ nur wahr wenn beide wahr
-- ODER: $p \lor q$ wahr wenn mindestens eine wahr
-- NICHT: $\lnot p$ kehrt um
+- UND: $p \\land q$ nur wahr wenn beide wahr
+- ODER: $p \\lor q$ wahr wenn mindestens eine wahr
+- NICHT: $\\lnot p$ kehrt um
 
 ## Implikation
 
-$p \Rightarrow q$ ist nur falsch wenn p wahr und q falsch
+$p \\Rightarrow q$ ist nur falsch wenn p wahr und q falsch
 
-Kontraposition: $p \Rightarrow q = \lnot q \Rightarrow \lnot p$`,
+Kontraposition: $p \\Rightarrow q = \\lnot q \\Rightarrow \\lnot p$`,
       },
       {
         id: "m-lg-2",
@@ -3080,10 +3080,10 @@ Annahme des Gegenteils, dann Widerspruch zeigen.
 2. Schritt: Annahme fuer n, zeigen fuer n+1
 
 ### Beispiel
-$\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$
+$\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}$
 
-Anfang n=1: $1 = \frac{1 \cdot 2}{2}$ stimmt
-Schritt: $\sum_{k=1}^{n+1} = \frac{n(n+1)}{2} + (n+1) = \frac{(n+1)(n+2)}{2}$`,
+Anfang n=1: $1 = \\frac{1 \\cdot 2}{2}$ stimmt
+Schritt: $\\sum_{k=1}^{n+1} = \\frac{n(n+1)}{2} + (n+1) = \\frac{(n+1)(n+2)}{2}$`,
       },
       {
         id: "m-lg-3",
@@ -3127,11 +3127,11 @@ $a_1 : a_2 = b_2 : b_1$`,
 
 Wenn x steigt, steigt y. Verhaeltnis bleibt gleich.
 
-$b_2 = \frac{a_2 \cdot b_1}{a_1}$
+$b_2 = \\frac{a_2 \\cdot b_1}{a_1}$
 
 ### Beispiel
 3 Aepfel kosten 2 Euro. 8 Aepfel?
-$\frac{8 \cdot 2}{3} = 5.33$ Euro`,
+$\\frac{8 \\cdot 2}{3} = 5.33$ Euro`,
       },
       {
         id: "m-ds-2",
@@ -3142,11 +3142,11 @@ $\frac{8 \cdot 2}{3} = 5.33$ Euro`,
 
 Wenn x steigt, sinkt y.
 
-$b_2 = \frac{a_1 \cdot b_1}{a_2}$
+$b_2 = \\frac{a_1 \\cdot b_1}{a_2}$
 
 ### Beispiel
 3 Arbeiter brauchen 10 Tage. 5 Arbeiter?
-$\frac{3 \cdot 10}{5} = 6$ Tage`,
+$\\frac{3 \\cdot 10}{5} = 6$ Tage`,
       },
       {
         id: "m-ds-3",
@@ -3176,12 +3176,12 @@ $\frac{3 \cdot 10}{5} = 6$ Tage`,
     merkblatt: `## Merkblatt: Taylorreihen
 
 ### Taylor-Reihe
-$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
+$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
 
 ### Wichtige Reihen
-- $e^x = \sum x^n/n!$
-- $\sin(x) = \sum (-1)^n x^{2n+1}/(2n+1)!$
-- $\cos(x) = \sum (-1)^n x^{2n}/(2n)!$`,
+- $e^x = \\sum x^n/n!$
+- $\\sin(x) = \\sum (-1)^n x^{2n+1}/(2n+1)!$
+- $\\cos(x) = \\sum (-1)^n x^{2n}/(2n)!$`,
     lessons: [
       {
         id: "m-tw-1",
@@ -3191,13 +3191,13 @@ $f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
         content: `## Taylor-Reihe
 
 Approximation durch Polynome:
-$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
+$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
 
 Fuer a = 0: Maclaurin-Reihe
 
 ## Beispiel: $e^x$
 
-$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$`,
+$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots$`,
       },
       {
         id: "m-tw-2",
@@ -3206,13 +3206,13 @@ $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$`,
         type: "text",
         content: `## Reihenentwicklungen
 
-$e^x = 1 + x + \frac{x^2}{2!} + \cdots$
-$\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$
-$\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$
-$\frac{1}{1-x} = 1 + x + x^2 + \cdots$ fuer $|x| < 1$
+$e^x = 1 + x + \\frac{x^2}{2!} + \\cdots$
+$\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\cdots$
+$\\cos(x) = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\cdots$
+$\\frac{1}{1-x} = 1 + x + x^2 + \\cdots$ fuer $|x| < 1$
 
 ## Naeherung (kleines x)
-$\sin(x) \approx x$, $\cos(x) \approx 1 - x^2/2$, $e^x \approx 1 + x$`,
+$\\sin(x) \approx x$, $\\cos(x) \approx 1 - x^2/2$, $e^x \approx 1 + x$`,
       },
       {
         id: "m-tw-3",
@@ -3402,7 +3402,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
   // ==================== STOCHASTIK ====================
   "mathe-stochastik": [
     {
-      question: "Ein fairer Würfel wird geworfen. Wie groß ist $P(\text{ungerade Zahl})$?",
+      question: "Ein fairer Würfel wird geworfen. Wie groß ist $P(\\text{ungerade Zahl})$?",
       type: "multiple",
       options: ["$\\frac{1}{6}$", "$\\frac{1}{3}$", "$\\frac{1}{2}$", "$\\frac{2}{3}$"],
       correct: 2,
@@ -3677,39 +3677,39 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
 
   "mathe-bruchrechnen": [
     {
-      question: "Was ist $\frac{1}{2} + \frac{1}{3}$?",
+      question: "Was ist $\\frac{1}{2} + \\frac{1}{3}$?",
       type: "multiple",
-      options: ["$\frac{2}{5}$", "$\frac{5}{6}$", "$\frac{1}{5}$", "$\frac{3}{5}$"],
+      options: ["$\\frac{2}{5}$", "$\\frac{5}{6}$", "$\\frac{1}{5}$", "$\\frac{3}{5}$"],
       correct: 1,
-      explanation: "$\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$",
+      explanation: "$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$",
     },
     {
-      question: "Was ist $\frac{2}{3} \cdot \frac{3}{4}$?",
+      question: "Was ist $\\frac{2}{3} \\cdot \\frac{3}{4}$?",
       type: "multiple",
-      options: ["$\frac{6}{12}$", "$\frac{1}{2}$", "$\frac{5}{7}$", "$\frac{8}{9}$"],
+      options: ["$\\frac{6}{12}$", "$\\frac{1}{2}$", "$\\frac{5}{7}$", "$\\frac{8}{9}$"],
       correct: 1,
-      explanation: "$\frac{2}{3} \cdot \frac{3}{4} = \frac{6}{12} = \frac{1}{2}$",
+      explanation: "$\\frac{2}{3} \\cdot \\frac{3}{4} = \\frac{6}{12} = \\frac{1}{2}$",
     },
     {
       question: "Welcher Bruch ist gleich $0{,}75$?",
       type: "multiple",
-      options: ["$\frac{1}{4}$", "$\frac{1}{2}$", "$\frac{3}{4}$", "$\frac{2}{3}$"],
+      options: ["$\\frac{1}{4}$", "$\\frac{1}{2}$", "$\\frac{3}{4}$", "$\\frac{2}{3}$"],
       correct: 2,
-      explanation: "$\frac{3}{4} = 0{,}75$",
+      explanation: "$\\frac{3}{4} = 0{,}75$",
     },
     {
-      question: "$\frac{5}{8} : \frac{5}{4} = ?$",
+      question: "$\\frac{5}{8} : \\frac{5}{4} = ?$",
       type: "multiple",
-      options: ["$\frac{1}{2}$", "$\frac{25}{32}$", "$\frac{1}{4}$", "$\frac{5}{2}$"],
+      options: ["$\\frac{1}{2}$", "$\\frac{25}{32}$", "$\\frac{1}{4}$", "$\\frac{5}{2}$"],
       correct: 0,
-      explanation: "$\frac{5}{8} \cdot \frac{4}{5} = \frac{20}{40} = \frac{1}{2}$",
+      explanation: "$\\frac{5}{8} \\cdot \\frac{4}{5} = \\frac{20}{40} = \\frac{1}{2}$",
     },
     {
-      question: "Was ist $\frac{7}{12} - \frac{1}{4}$?",
+      question: "Was ist $\\frac{7}{12} - \\frac{1}{4}$?",
       type: "multiple",
-      options: ["$\frac{1}{3}$", "$\frac{6}{8}$", "$\frac{1}{2}$", "$\frac{4}{12}$"],
+      options: ["$\\frac{1}{3}$", "$\\frac{6}{8}$", "$\\frac{1}{2}$", "$\\frac{4}{12}$"],
       correct: 0,
-      explanation: "$\frac{7}{12} - \frac{3}{12} = \frac{4}{12} = \frac{1}{3}$",
+      explanation: "$\\frac{7}{12} - \\frac{3}{12} = \\frac{4}{12} = \\frac{1}{3}$",
     },
   ],
   "mathe-gleichungen": [
@@ -3718,7 +3718,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["$x = 3$", "$x = -3$", "$x = 9$", "$x = -9$"],
       correct: 1,
-      explanation: "$3x = -9 \Rightarrow x = -3$",
+      explanation: "$3x = -9 \\Rightarrow x = -3$",
     },
     {
       question: "Welche Formel löst $x^2 + px + q = 0$?",
@@ -3737,9 +3737,9 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
     {
       question: "Nullstellen von $x^2 - 9 = 0$?",
       type: "multiple",
-      options: ["$x = 3$", "$x = \pm 3$", "$x = 9$", "$x = \pm 9$"],
+      options: ["$x = 3$", "$x = \\pm 3$", "$x = 9$", "$x = \\pm 9$"],
       correct: 1,
-      explanation: "$x^2 = 9 \Rightarrow x = \pm 3$",
+      explanation: "$x^2 = 9 \\Rightarrow x = \\pm 3$",
     },
     {
       question: "Wie viele Lösungen hat $x^2 + 2x + 5 = 0$?",
@@ -3769,7 +3769,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["$2x + 3$", "$2x + 6$", "$x + 6$", "$2x + 5$"],
       correct: 1,
-      explanation: "Distributivgesetz: $2 \cdot x + 2 \cdot 3 = 2x + 6$",
+      explanation: "Distributivgesetz: $2 \\cdot x + 2 \\cdot 3 = 2x + 6$",
     },
     {
       question: "$x^2 - 25 = ?$ (faktorisiert)",
@@ -3797,30 +3797,30 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
     {
       question: "Was bedeutet $[2, 5)$?",
       type: "multiple",
-      options: ["$2 < x < 5$", "$2 \leq x < 5$", "$2 < x \leq 5$", "$2 \leq x \leq 5$"],
+      options: ["$2 < x < 5$", "$2 \\leq x < 5$", "$2 < x \\leq 5$", "$2 \\leq x \\leq 5$"],
       correct: 1,
-      explanation: "$[2, 5)$ = $2 \leq x < 5$ (geschlossen bei 2, offen bei 5)",
+      explanation: "$[2, 5)$ = $2 \\leq x < 5$ (geschlossen bei 2, offen bei 5)",
     },
     {
-      question: "Löse $x^2 - 1 \leq 0$",
+      question: "Löse $x^2 - 1 \\leq 0$",
       type: "multiple",
-      options: ["$-1 \leq x \leq 1$", "$x \leq -1$ oder $x \geq 1$", "$x < 1$", "$x > -1$"],
+      options: ["$-1 \\leq x \\leq 1$", "$x \\leq -1$ oder $x \\geq 1$", "$x < 1$", "$x > -1$"],
       correct: 0,
-      explanation: "$(x-1)(x+1) \leq 0 \Rightarrow -1 \leq x \leq 1$",
+      explanation: "$(x-1)(x+1) \\leq 0 \\Rightarrow -1 \\leq x \\leq 1$",
     },
     {
-      question: "Löse $3x - 1 \geq 5$",
+      question: "Löse $3x - 1 \\geq 5$",
       type: "multiple",
-      options: ["$x \geq 2$", "$x > 2$", "$x \geq \frac{4}{3}$", "$x \geq 6$"],
+      options: ["$x \\geq 2$", "$x > 2$", "$x \\geq \\frac{4}{3}$", "$x \\geq 6$"],
       correct: 0,
-      explanation: "$3x \geq 6 \Rightarrow x \geq 2$",
+      explanation: "$3x \\geq 6 \\Rightarrow x \\geq 2$",
     },
     {
       question: "$|x| < 3$ bedeutet:",
       type: "multiple",
       options: ["$x < 3$", "$x > -3$", "$-3 < x < 3$", "$x < -3$ oder $x > 3$"],
       correct: 2,
-      explanation: "$|x| < a \Leftrightarrow -a < x < a$",
+      explanation: "$|x| < a \\Leftrightarrow -a < x < a$",
     },
   ],
   "mathe-kurvendiskussion": [
@@ -3829,7 +3829,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["Bei $x = 0$", "Bei $x = 1$", "Kein Wendepunkt", "Bei $x = -1$"],
       correct: 0,
-      explanation: "$f''(x) = 6x = 0 \Rightarrow x = 0$, $f'''(0) = 6 \neq 0$",
+      explanation: "$f''(x) = 6x = 0 \\Rightarrow x = 0$, $f'''(0) = 6 \\neq 0$",
     },
     {
       question: "Was gilt bei einem lokalen Maximum?",
@@ -3880,7 +3880,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["$(2, 1)$", "$(1, 2)$", "$(3, 0)$", "$(0, 3)$"],
       correct: 0,
-      explanation: "Addition: $2x = 4 \Rightarrow x = 2$, $y = 1$",
+      explanation: "Addition: $2x = 4 \\Rightarrow x = 2$, $y = 1$",
     },
     {
       question: "Cramersche Regel nutzt...",
@@ -3894,16 +3894,16 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["Keine Lösung", "Genau eine Lösung", "Mindestens die Nulllösung", "Unendlich viele"],
       correct: 2,
-      explanation: "Homogen: $A\vec{x} = \vec{0}$ hat immer die Triviallösung $\vec{x} = \vec{0}$",
+      explanation: "Homogen: $A\\vec{x} = \\vec{0}$ hat immer die Triviallösung $\\vec{x} = \\vec{0}$",
     },
   ],
   "mathe-matrizen": [
     {
-      question: "Produkt einer $(2 \times 3)$ und $(3 \times 2)$ Matrix hat Dimension...",
+      question: "Produkt einer $(2 \\times 3)$ und $(3 \\times 2)$ Matrix hat Dimension...",
       type: "multiple",
-      options: ["$(2 \times 2)$", "$(3 \times 3)$", "$(2 \times 3)$", "$(3 \times 2)$"],
+      options: ["$(2 \\times 2)$", "$(3 \\times 3)$", "$(2 \\times 3)$", "$(3 \\times 2)$"],
       correct: 0,
-      explanation: "$(m \times n) \cdot (n \times p) = (m \times p)$ → $(2 \times 2)$",
+      explanation: "$(m \\times n) \\cdot (n \\times p) = (m \\times p)$ → $(2 \\times 2)$",
     },
     {
       question: "Einheitsmatrix: Alle Diagonalelemente sind...",
@@ -3931,7 +3931,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["Determinante", "Summe der Diagonalelemente", "Anzahl Zeilen", "Rang"],
       correct: 1,
-      explanation: "$\text{tr}(A) = \sum a_{ii}$ — Summe der Hauptdiagonale",
+      explanation: "$\\text{tr}(A) = \\sum a_{ii}$ — Summe der Hauptdiagonale",
     },
   ],
   "mathe-wahrscheinlichkeitsverteilungen": [
@@ -3945,16 +3945,16 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
     {
       question: "Normalverteilung: 95% der Werte in...",
       type: "multiple",
-      options: ["$\mu \pm \sigma$", "$\mu \pm 2\sigma$", "$\mu \pm 3\sigma$", "$\mu \pm 4\sigma$"],
+      options: ["$\\mu \\pm \\sigma$", "$\\mu \\pm 2\\sigma$", "$\\mu \\pm 3\\sigma$", "$\\mu \\pm 4\\sigma$"],
       correct: 1,
-      explanation: "68-95-99,7-Regel: 95% in $\mu \pm 2\sigma$",
+      explanation: "68-95-99,7-Regel: 95% in $\\mu \\pm 2\\sigma$",
     },
     {
       question: "$Bin(20, 0{,}5)$. Erwartungswert?",
       type: "multiple",
       options: ["5", "10", "15", "20"],
       correct: 1,
-      explanation: "$E(X) = np = 20 \cdot 0{,}5 = 10$",
+      explanation: "$E(X) = np = 20 \\cdot 0{,}5 = 10$",
     },
     {
       question: "Poisson-Verteilung nutzt man für...",
@@ -3968,7 +3968,7 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["Varianz²", "√Varianz", "Erwartungswert²", "Mittelwert"],
       correct: 1,
-      explanation: "$\sigma = \sqrt{Var(X)}$",
+      explanation: "$\\sigma = \\sqrt{Var(X)}$",
     },
   ],
   "mathe-folgen-reihen": [
@@ -3977,65 +3977,65 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       type: "multiple",
       options: ["11", "14", "17", "8"],
       correct: 1,
-      explanation: "$a_5 = 2 + 4 \cdot 3 = 14$",
+      explanation: "$a_5 = 2 + 4 \\cdot 3 = 14$",
     },
     {
       question: "Geometrische Reihe konvergiert wenn...",
       type: "multiple",
       options: ["$|q| > 1$", "$|q| < 1$", "$q = 1$", "$q = 0$"],
       correct: 1,
-      explanation: "Geometrische Reihe: $S = \frac{a_1}{1-q}$ nur für $|q| < 1$",
+      explanation: "Geometrische Reihe: $S = \\frac{a_1}{1-q}$ nur für $|q| < 1$",
     },
     {
-      question: "$\sum_{n=1}^{100} n = ?$",
+      question: "$\\sum_{n=1}^{100} n = ?$",
       type: "multiple",
       options: ["5000", "5050", "5100", "4950"],
       correct: 1,
-      explanation: "$\frac{100 \cdot 101}{2} = 5050$",
+      explanation: "$\\frac{100 \\cdot 101}{2} = 5050$",
     },
     {
       question: "Harmonische Reihe...",
       type: "multiple",
       options: ["Konvergiert", "Divergiert", "Ist endlich", "Ist alternierend"],
       correct: 1,
-      explanation: "$\sum \frac{1}{n}$ divergiert (bekanntes Ergebnis)",
+      explanation: "$\\sum \\frac{1}{n}$ divergiert (bekanntes Ergebnis)",
     },
     {
-      question: "Grenzwert von $\frac{1}{n}$ für $n \to \infty$?",
+      question: "Grenzwert von $\\frac{1}{n}$ für $n \to \\infty$?",
       type: "multiple",
-      options: ["1", "0", "$\infty$", "-1"],
+      options: ["1", "0", "$\\infty$", "-1"],
       correct: 1,
-      explanation: "$\lim_{n \to \infty} \frac{1}{n} = 0$",
+      explanation: "$\\lim_{n \to \\infty} \\frac{1}{n} = 0$",
     },
   ],
   "mathe-analytische-geometrie": [
     {
-      question: "Gerade: $\vec{x} = \vec{p} + t \cdot \vec{v}$. $\vec{p}$ ist der...",
+      question: "Gerade: $\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$. $\\vec{p}$ ist der...",
       type: "multiple",
       options: ["Richtungsvektor", "Stützvektor", "Normalenvektor", "Ortsvektor"],
       correct: 1,
-      explanation: "$\vec{p}$ = Stützvektor (Punkt auf der Geraden)",
+      explanation: "$\\vec{p}$ = Stützvektor (Punkt auf der Geraden)",
     },
     {
       question: "Ebene $ax + by + cz = d$. Normalenvektor?",
       type: "multiple",
       options: ["$(a, b, c)$", "$(d, b, c)$", "$(-a, -b, -c)$", "$(1, 1, 1)$"],
       correct: 0,
-      explanation: "$\vec{n} = (a, b, c)$ ist der Normalenvektor der Ebene",
+      explanation: "$\\vec{n} = (a, b, c)$ ist der Normalenvektor der Ebene",
     },
     {
       question: "Zwei Ebenen sind parallel wenn...",
       type: "multiple",
       options: ["Gleicher Normalenvektor (bis auf Skalar)", "Gleicher Abstand", "Verschiedene d", "Orthogonal"],
       correct: 0,
-      explanation: "Parallel: $\vec{n}_1 = k \cdot \vec{n}_2$",
+      explanation: "Parallel: $\\vec{n}_1 = k \\cdot \\vec{n}_2$",
     },
     {
       question: "Abstand Ursprung zur Ebene $2x + y - 2z = 6$?",
       type: "multiple",
-      options: ["2", "3", "6", "$\sqrt{9}$"],
+      options: ["2", "3", "6", "$\\sqrt{9}$"],
       correct: 0,
-      explanation: "$d = \frac{|0+0+0-6|}{\sqrt{4+1+4}} = \frac{6}{3} = 2$",
+      explanation: "$d = \\frac{|0+0+0-6|}{\\sqrt{4+1+4}} = \\frac{6}{3} = 2$",
     },
     {
       question: "Schnitt von Gerade und Ebene: Wie löst man?",
@@ -4047,45 +4047,45 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
   ],
 
   "mathe-prozent-zinsen": [
-    { question: "20% von 150?", type: "multiple", options: ["20", "25", "30", "35"], correct: 2, explanation: "$150 \cdot 0.2 = 30$" },
-    { question: "Zinseszins: 1000, 5%, 2J?", type: "multiple", options: ["1100", "1102.50", "1050", "1150"], correct: 1, explanation: "$1000 \cdot 1.05^2 = 1102.50$" },
+    { question: "20% von 150?", type: "multiple", options: ["20", "25", "30", "35"], correct: 2, explanation: "$150 \\cdot 0.2 = 30$" },
+    { question: "Zinseszins: 1000, 5%, 2J?", type: "multiple", options: ["1100", "1102.50", "1050", "1150"], correct: 1, explanation: "$1000 \\cdot 1.05^2 = 1102.50$" },
     { question: "72er-Regel bei 8%?", type: "multiple", options: ["6J", "9J", "12J", "18J"], correct: 1, explanation: "$72 / 8 = 9$ Jahre" },
     { question: "Preis 200->250. Prozent?", type: "multiple", options: ["20%", "25%", "30%", "15%"], correct: 1, explanation: "$50/200 = 25\%$" },
     { question: "15% Rabatt auf 80?", type: "multiple", options: ["12", "68", "65", "15"], correct: 1, explanation: "$80 - 12 = 68$" },
   ],
   "mathe-koerper": [
-    { question: "Volumen Quader 3x4x5?", type: "multiple", options: ["47", "60", "94", "12"], correct: 1, explanation: "$3 \cdot 4 \cdot 5 = 60$" },
-    { question: "Oberflaeche Wuerfel a=2?", type: "multiple", options: ["8", "12", "24", "16"], correct: 2, explanation: "$6 \cdot 4 = 24$" },
-    { question: "Kugel-Volumen r=3?", type: "multiple", options: ["$36\pi$", "$27\pi$", "$108\pi$", "$9\pi$"], correct: 0, explanation: "$\frac{4}{3}\pi \cdot 27 = 36\pi$" },
-    { question: "Zylinder r=2, h=5?", type: "multiple", options: ["$10\pi$", "$20\pi$", "$40\pi$", "$50\pi$"], correct: 1, explanation: "$\pi \cdot 4 \cdot 5 = 20\pi$" },
-    { question: "Kegel = ? des Zylinders", type: "multiple", options: ["1/2", "1/3", "1/4", "2/3"], correct: 1, explanation: "$V = \frac{1}{3}V_{Zyl}$" },
+    { question: "Volumen Quader 3x4x5?", type: "multiple", options: ["47", "60", "94", "12"], correct: 1, explanation: "$3 \\cdot 4 \\cdot 5 = 60$" },
+    { question: "Oberflaeche Wuerfel a=2?", type: "multiple", options: ["8", "12", "24", "16"], correct: 2, explanation: "$6 \\cdot 4 = 24$" },
+    { question: "Kugel-Volumen r=3?", type: "multiple", options: ["$36\\pi$", "$27\\pi$", "$108\\pi$", "$9\\pi$"], correct: 0, explanation: "$\\frac{4}{3}\\pi \\cdot 27 = 36\\pi$" },
+    { question: "Zylinder r=2, h=5?", type: "multiple", options: ["$10\\pi$", "$20\\pi$", "$40\\pi$", "$50\\pi$"], correct: 1, explanation: "$\\pi \\cdot 4 \\cdot 5 = 20\\pi$" },
+    { question: "Kegel = ? des Zylinders", type: "multiple", options: ["1/2", "1/3", "1/4", "2/3"], correct: 1, explanation: "$V = \\frac{1}{3}V_{Zyl}$" },
   ],
   "mathe-kombinatorik": [
     { question: "$P(4) = ?$", type: "multiple", options: ["12", "16", "24", "8"], correct: 2, explanation: "$4! = 24$" },
-    { question: "$\binom{5}{2} = ?$", type: "multiple", options: ["5", "10", "20", "15"], correct: 1, explanation: "$\frac{5!}{2! \cdot 3!} = 10$" },
-    { question: "Lotto 6 aus 49?", type: "multiple", options: ["13983816", "1000000", "49!", "$6^{49}$"], correct: 0, explanation: "$\binom{49}{6} = 13.983.816$" },
-    { question: "$V(5,2) = ?$", type: "multiple", options: ["10", "20", "25", "15"], correct: 1, explanation: "$\frac{5!}{3!} = 20$" },
-    { question: "Permutationen AABB?", type: "multiple", options: ["24", "12", "6", "4"], correct: 2, explanation: "$\frac{4!}{2!2!} = 6$" },
+    { question: "$\\binom{5}{2} = ?$", type: "multiple", options: ["5", "10", "20", "15"], correct: 1, explanation: "$\\frac{5!}{2! \\cdot 3!} = 10$" },
+    { question: "Lotto 6 aus 49?", type: "multiple", options: ["13983816", "1000000", "49!", "$6^{49}$"], correct: 0, explanation: "$\\binom{49}{6} = 13.983.816$" },
+    { question: "$V(5,2) = ?$", type: "multiple", options: ["10", "20", "25", "15"], correct: 1, explanation: "$\\frac{5!}{3!} = 20$" },
+    { question: "Permutationen AABB?", type: "multiple", options: ["24", "12", "6", "4"], correct: 2, explanation: "$\\frac{4!}{2!2!} = 6$" },
   ],
   "mathe-logik": [
-    { question: "$p \Rightarrow q$ falsch wenn...", type: "multiple", options: ["p w, q f", "p f, q w", "beide f", "beide w"], correct: 0, explanation: "Implikation nur falsch bei (w,f)" },
-    { question: "$\lnot(p \land q) = ?$", type: "multiple", options: ["$\lnot p \land \lnot q$", "$\lnot p \lor \lnot q$", "$p \lor q$", "$p \land q$"], correct: 1, explanation: "De Morgan" },
-    { question: "Kontraposition von $p \Rightarrow q$?", type: "multiple", options: ["$q \Rightarrow p$", "$\lnot p \Rightarrow \lnot q$", "$\lnot q \Rightarrow \lnot p$", "$\lnot p \lor q$"], correct: 2, explanation: "Kontraposition: $\lnot q \Rightarrow \lnot p$" },
+    { question: "$p \\Rightarrow q$ falsch wenn...", type: "multiple", options: ["p w, q f", "p f, q w", "beide f", "beide w"], correct: 0, explanation: "Implikation nur falsch bei (w,f)" },
+    { question: "$\\lnot(p \\land q) = ?$", type: "multiple", options: ["$\\lnot p \\land \\lnot q$", "$\\lnot p \\lor \\lnot q$", "$p \\lor q$", "$p \\land q$"], correct: 1, explanation: "De Morgan" },
+    { question: "Kontraposition von $p \\Rightarrow q$?", type: "multiple", options: ["$q \\Rightarrow p$", "$\\lnot p \\Rightarrow \\lnot q$", "$\\lnot q \\Rightarrow \\lnot p$", "$\\lnot p \\lor q$"], correct: 2, explanation: "Kontraposition: $\\lnot q \\Rightarrow \\lnot p$" },
     { question: "VI-Schritt?", type: "multiple", options: ["Anfang", "n -> n+1", "Widerspruch", "Gegenbeispiel"], correct: 1, explanation: "Induktionsschritt" },
-    { question: "$p \lor \lnot p$ ist immer...", type: "multiple", options: ["Falsch", "Wahr", "Unbestimmt", "Kontingenz"], correct: 1, explanation: "Tautologie" },
+    { question: "$p \\lor \\lnot p$ ist immer...", type: "multiple", options: ["Falsch", "Wahr", "Unbestimmt", "Kontingenz"], correct: 1, explanation: "Tautologie" },
   ],
   "mathe-dreisatz": [
-    { question: "5 Arb., 8 Tage. 2 Arb.?", type: "multiple", options: ["3", "20", "10", "16"], correct: 1, explanation: "$\frac{5 \cdot 8}{2} = 20$" },
-    { question: "4L = 6 Euro. 10L?", type: "multiple", options: ["12", "15", "16", "24"], correct: 1, explanation: "$\frac{10 \cdot 6}{4} = 15$" },
+    { question: "5 Arb., 8 Tage. 2 Arb.?", type: "multiple", options: ["3", "20", "10", "16"], correct: 1, explanation: "$\\frac{5 \\cdot 8}{2} = 20$" },
+    { question: "4L = 6 Euro. 10L?", type: "multiple", options: ["12", "15", "16", "24"], correct: 1, explanation: "$\\frac{10 \\cdot 6}{4} = 15$" },
     { question: "Direkt proportional?", type: "multiple", options: ["Verhaeltnis", "Produkt", "Summe", "Differenz"], correct: 0, explanation: "a1/b1 = a2/b2" },
-    { question: "6 Masch., 12h. 4 Masch.?", type: "multiple", options: ["8", "16", "18", "24"], correct: 2, explanation: "$\frac{6 \cdot 12}{4} = 18$" },
-    { question: "30% von 200?", type: "multiple", options: ["40", "50", "60", "70"], correct: 2, explanation: "$200 \cdot 0.3 = 60$" },
+    { question: "6 Masch., 12h. 4 Masch.?", type: "multiple", options: ["8", "16", "18", "24"], correct: 2, explanation: "$\\frac{6 \\cdot 12}{4} = 18$" },
+    { question: "30% von 200?", type: "multiple", options: ["40", "50", "60", "70"], correct: 2, explanation: "$200 \\cdot 0.3 = 60$" },
   ],
   "mathe-taylorreihen": [
     { question: "Taylor bei a=0?", type: "multiple", options: ["Taylor", "Maclaurin", "Fourier", "Laurent"], correct: 1, explanation: "Maclaurin-Reihe" },
     { question: "$e^x \approx ?$ (1. Ord.)", type: "multiple", options: ["$1+x$", "$x$", "$1+x^2$", "$1-x$"], correct: 0, explanation: "$e^x \approx 1+x$" },
-    { question: "$\sin(x) \approx ?$ (1. Ord.)", type: "multiple", options: ["$x$", "$1$", "$x^2$", "$1-x$"], correct: 0, explanation: "$\sin(x) \approx x$" },
+    { question: "$\\sin(x) \approx ?$ (1. Ord.)", type: "multiple", options: ["$x$", "$1$", "$x^2$", "$1-x$"], correct: 0, explanation: "$\\sin(x) \approx x$" },
     { question: "Konvergenzradius 1/(1-x)?", type: "multiple", options: ["R=0", "R=1", "R=inf", "R=2"], correct: 1, explanation: "|x| < 1, R=1" },
-    { question: "$\cos(0) = ?$", type: "multiple", options: ["0", "1", "-1", "pi"], correct: 1, explanation: "$\cos(0) = 1$" },
+    { question: "$\\cos(0) = ?$", type: "multiple", options: ["0", "1", "-1", "pi"], correct: 1, explanation: "$\\cos(0) = 1$" },
   ],
 };
