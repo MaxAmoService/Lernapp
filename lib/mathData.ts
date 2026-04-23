@@ -1791,6 +1791,979 @@ Bestimme $Q_1$, $Q_2$, $Q_3$!`,
       },
     ],
   },
+  {
+    id: "m-bruchrechnen",
+    slug: "mathe-bruchrechnen",
+    title: "Bruchrechnen",
+    description: "Grundlagen der Bruchrechnung - addieren, subtrahieren, multiplizieren, dividieren",
+    icon: "🔢",
+    color: "#8b5cf6",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Bruchrechnen
+
+### Grundbegriffe
+- **Zähler** (oben): Anzahl der Teile
+- **Nenner** (unten): Gesamtanzahl der Teile
+- **Echter Bruch:** Zähler < Nenner
+- **Unechter Bruch:** Zähler ≥ Nenner
+
+### Rechenregeln
+| Operation | Regel |
+|-----------|-------|
+| Addieren | $\frac{a}{c} + \frac{b}{c} = \frac{a+b}{c}$ |
+| KGV nötig | $\frac{a}{b} + \frac{c}{d} = \frac{a \cdot d + c \cdot b}{b \cdot d}$ |
+| Multiplizieren | $\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$ |
+| Dividieren | $\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$ |
+
+### Kürzen
+$\frac{a \cdot k}{b \cdot k} = \frac{a}{b}$ — Immer den größten gemeinsamen Teiler suchen!`,
+    lessons: [
+      {
+        id: "m-br-1",
+        title: "Brüche verstehen",
+        duration: "15 min",
+        type: "text",
+        content: `## Was ist ein Bruch?
+
+Ein Bruch $\frac{a}{b}$ stellt einen Anteil dar. $a$ ist der **Zähler**, $b$ der **Nenner**.
+
+## Echte vs. unechte Brüche
+
+- **Echter Bruch:** $\frac{3}{4}$ — Zähler < Nenner (weniger als 1 Ganzes)
+- **Unechter Bruch:** $\frac{5}{3}$ — Zähler ≥ Nenner (mehr als 1 Ganzes)
+- **Gemischte Zahl:** $1\frac{2}{3}$ = $\frac{5}{3}$
+
+## Brüche als Dezimalzahlen
+
+$\frac{1}{4} = 0{,}25$, $\frac{1}{3} = 0{,}333...$, $\frac{1}{2} = 0{,}5$
+
+## Am Zahlenstrahl
+
+Brüche lassen sich auf dem Zahlenstrahl darstellen. $\frac{3}{4}$ liegt bei 0,75.
+
+### Beispiel
+Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\frac{3}{8}$ gegessen. Es bleiben $\frac{5}{8}$.`,
+      },
+      {
+        id: "m-br-2",
+        title: "Addieren & Subtrahieren",
+        duration: "18 min",
+        type: "text",
+        content: `## Gleicher Nenner
+
+Wenn der Nenner gleich ist, einfach die Zähler addieren/subtrahieren:
+
+$$\frac{3}{7} + \frac{2}{7} = \frac{5}{7}$$
+
+$$\frac{5}{8} - \frac{3}{8} = \frac{2}{8} = \frac{1}{4}$$
+
+## Verschiedene Nenner
+
+KGV (kleinstes gemeinsames Vielfaches) des Nenners suchen:
+
+$$\frac{1}{3} + \frac{1}{4} = \frac{4}{12} + \frac{3}{12} = \frac{7}{12}$$
+
+## Schritt für Schritt
+
+1. Nenner gleich machen (KGV suchen)
+2. Zähler entsprechend erweitern
+3. Zähler addieren/subtrahieren
+4. Ergebnis kürzen
+
+### Beispiel
+$\frac{2}{5} + \frac{1}{3}$:
+- KGV von 5 und 3 = 15
+- $\frac{2 \cdot 3}{5 \cdot 3} + \frac{1 \cdot 5}{3 \cdot 5} = \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$`,
+      },
+      {
+        id: "m-br-3",
+        title: "Multiplizieren & Dividieren",
+        duration: "15 min",
+        type: "text",
+        content: `## Multiplikation
+
+Einfach Zähler mal Zähler, Nenner mal Nenner:
+
+$$\frac{2}{3} \cdot \frac{4}{5} = \frac{8}{15}$$
+
+**Vor dem Multiplizieren kürzen** macht das Ergebnis einfacher:
+
+$$\frac{3}{4} \cdot \frac{8}{9} = \frac{\cancel{3}}{4} \cdot \frac{8}{\cancel{9}_3} = \frac{1}{1} \cdot \frac{2}{3} = \frac{2}{3}$$
+
+## Division
+
+Kehrtausch! Dividiere durch $\frac{a}{b}$ → multipliziere mit $\frac{b}{a}$:
+
+$$\frac{2}{3} : \frac{4}{5} = \frac{2}{3} \cdot \frac{5}{4} = \frac{10}{12} = \frac{5}{6}$$
+
+### Merksatz
+"Dividieren? Kehren und multiplizieren!"`,
+      },
+      {
+        id: "m-br-4",
+        title: "Quiz: Bruchrechnen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen über Bruchrechnen!`,
+      },
+      {
+        id: "m-br-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-gleichungen",
+    slug: "mathe-gleichungen",
+    title: "Gleichungen lösen",
+    description: "Lineare und quadratische Gleichungen, pq-Formel, Mitternachtsformel",
+    icon: "⚖️",
+    color: "#10b981",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Gleichungen lösen
+
+### Lineare Gleichungen
+$ax + b = 0 \Rightarrow x = -\frac{b}{a}$
+
+### Quadratische Gleichungen
+$ax^2 + bx + c = 0$
+
+**pq-Formel:** $x^2 + px + q = 0 \Rightarrow x = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}$
+
+**abc-Formel:** $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+### Diskriminante
+$D = b^2 - 4ac$
+- $D > 0$: 2 Lösungen
+- $D = 0$: 1 Lösung (doppelt)
+- $D < 0$: keine reelle Lösung`,
+    lessons: [
+      {
+        id: "m-gl-1",
+        title: "Lineare Gleichungen",
+        duration: "15 min",
+        type: "text",
+        content: `## Was ist eine lineare Gleichung?
+
+Eine Gleichung mit einer Variablen in **höchstens 1. Potenz**:
+
+$$3x + 5 = 14$$
+
+## Lösungsprinzip
+
+Was auf einer Seite gemacht wird, muss auch auf die andere:
+
+1. **Umformen:** Terme zusammenfassen
+2. **Isolieren:** Variable auf eine Seite bringen
+3. **Lösen:** Durch Koeffizienten teilen
+
+### Beispiel 1
+$2x + 7 = 15$
+$2x = 15 - 7 = 8$
+$x = 4$
+
+### Beispiel 2
+$5(x - 3) = 2x + 1$
+$5x - 15 = 2x + 1$
+$3x = 16$
+$x = \frac{16}{3} = 5\frac{1}{3}$`,
+      },
+      {
+        id: "m-gl-2",
+        title: "Quadratische Gleichungen",
+        duration: "20 min",
+        type: "text",
+        content: `## Quadratische Gleichungen
+
+$ax^2 + bx + c = 0$ — Die Variable kommt in der **2. Potenz** vor.
+
+## pq-Formel
+
+Für $x^2 + px + q = 0$:
+
+$$x_{1,2} = -\frac{p}{2} \pm \sqrt{\left(\frac{p}{2}\right)^2 - q}$$
+
+### Beispiel
+$x^2 - 5x + 6 = 0$ → $p = -5$, $q = 6$
+
+$x_{1,2} = \frac{5}{2} \pm \sqrt{\frac{25}{4} - 6} = \frac{5}{2} \pm \sqrt{\frac{1}{4}} = \frac{5}{2} \pm \frac{1}{2}$
+
+$x_1 = 3$, $x_2 = 2$
+
+## abc-Formel
+
+Für $ax^2 + bx + c = 0$:
+
+$$x_{1,2} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+## Diskriminante
+
+$D = b^2 - 4ac$ bestimmt die Anzahl der Lösungen:
+- $D > 0$: Zwei Lösungen
+- $D = 0$: Eine Lösung (doppelt)
+- $D < 0$: Keine reelle Lösung`,
+      },
+      {
+        id: "m-gl-3",
+        title: "Quiz: Gleichungen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-gl-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-termumformung",
+    slug: "mathe-termumformung",
+    title: "Termumformung",
+    description: "Klammern, Binomische Formeln, Kürzen, Vereinfachen",
+    icon: "✏️",
+    color: "#f59e0b",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Termumformung
+
+### Binomische Formeln
+$(a+b)^2 = a^2 + 2ab + b^2$
+$(a-b)^2 = a^2 - 2ab + b^2$
+$(a+b)(a-b) = a^2 - b^2$
+
+### Distributivgesetz
+$a(b+c) = ab + ac$
+
+### Potenzregeln
+$a^m \cdot a^n = a^{m+n}$
+$(a^m)^n = a^{m \cdot n}$
+$a^0 = 1$ (für $a \neq 0$)`,
+    lessons: [
+      {
+        id: "m-tu-1",
+        title: "Klammern ausmultiplizieren",
+        duration: "15 min",
+        type: "text",
+        content: `## Distributivgesetz
+
+$a \cdot (b + c) = a \cdot b + a \cdot c$
+
+### Beispiel
+$3(x + 4) = 3x + 12$
+
+$-2(5 - x) = -10 + 2x$
+
+## Klammern verschachtelt
+
+$2(3x - (4 - x)) = 2(3x - 4 + x) = 2(4x - 4) = 8x - 8$
+
+## Mehrere Klammern
+
+$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$`,
+      },
+      {
+        id: "m-tu-2",
+        title: "Binomische Formeln",
+        duration: "18 min",
+        type: "text",
+        content: `## Die drei binomischen Formeln
+
+### 1. Formel: $(a+b)^2 = a^2 + 2ab + b^2$
+$(x+3)^2 = x^2 + 6x + 9$
+
+### 2. Formel: $(a-b)^2 = a^2 - 2ab + b^2$
+$(x-4)^2 = x^2 - 8x + 16$
+
+### 3. Formel: $(a+b)(a-b) = a^2 - b^2$
+$(x+5)(x-5) = x^2 - 25$
+
+## Anwendung: Ausklammern rückwärts
+
+$x^2 + 10x + 25 = (x+5)^2$
+
+$x^2 - 49 = (x+7)(x-7)$
+
+### Merkhilfe
+- **Erste:** Quadrieren, doppelt, quadrieren
+- **Zweite:** Wie erste, aber Minus
+- **Dritte:** Plus mal Minus = Differenz der Quadrate`,
+      },
+      {
+        id: "m-tu-3",
+        title: "Quiz: Termumformung",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-tu-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-ungleichungen",
+    slug: "mathe-ungleichungen",
+    title: "Ungleichungen",
+    description: "Lineare und quadratische Ungleichungen, Betragsungleichungen",
+    icon: "⚖️",
+    color: "#ec4899",
+    category: "arithmetik-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Ungleichungen
+
+### Regeln
+- $a < b \Rightarrow a + c < b + c$ (Addition)
+- $a < b$ und $c > 0 \Rightarrow a \cdot c < b \cdot c$
+- $a < b$ und $c < 0 \Rightarrow a \cdot c > b \cdot c$ (**Vorzeichenwechsel!**)
+
+### Intervallschreibweise
+- $(a, b)$ = offenes Intervall: $a < x < b$
+- $[a, b]$ = abgeschlossenes Intervall: $a \leq x \leq b$
+- $[a, b)$ = halboffen: $a \leq x < b$`,
+    lessons: [
+      {
+        id: "m-ug-1",
+        title: "Lineare Ungleichungen",
+        duration: "15 min",
+        type: "text",
+        content: `## Lineare Ungleichungen
+
+Wie Gleichungen lösen — aber mit $<$, $>$, $\leq$, $\geq$ statt $=$.
+
+### Beispiel
+$3x - 7 > 5$
+$3x > 12$
+$x > 4$
+
+**Lösungsmenge:** $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
+
+## Wichtig: Vorzeichenwechsel!
+
+Bei Multiplikation/Division mit einer **negativen Zahl** dreht sich das Zeichen um:
+
+$-2x < 6$ → $x > -3$ (nicht $x < -3$!)
+
+## Darstellung auf dem Zahlenstrahl
+
+$x > 4$: Offener Kreis bei 4, Pfeil nach rechts.`,
+      },
+      {
+        id: "m-ug-2",
+        title: "Quadratische Ungleichungen",
+        duration: "18 min",
+        type: "text",
+        content: `## Quadratische Ungleichungen
+
+$ax^2 + bx + c > 0$ oder $ax^2 + bx + c < 0$
+
+## Lösungsweg
+
+1. Zugehörige Gleichung $ax^2 + bx + c = 0$ lösen
+2. Nullstellen auf dem Zahlenstrahl eintragen
+3. Vorzeichen in den Intervallen bestimmen (Tafel-Test)
+
+### Beispiel
+$x^2 - 5x + 6 > 0$
+
+Nullstellen: $x_1 = 2$, $x_2 = 3$
+
+| Intervall | $(−\infty, 2)$ | $(2, 3)$ | $(3, \infty)$ |
+|-----------|---------|---------|---------|
+| Vorzeichen | $+$ | $-$ | $+$ |
+
+Lösung: $x < 2$ oder $x > 3$, also $L = (-\infty, 2) \cup (3, \infty)$`,
+      },
+      {
+        id: "m-ug-3",
+        title: "Quiz: Ungleichungen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-ug-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-kurvendiskussion",
+    slug: "mathe-kurvendiskussion",
+    title: "Kurvendiskussion",
+    description: "Vollständige Analyse einer Funktion: Nullstellen, Extrema, Wendepunkte",
+    icon: "📈",
+    color: "#8b5cf6",
+    category: "analysis",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Kurvendiskussion
+
+### Schema
+1. Definitionsbereich bestimmen
+2. Nullstellen: $f(x) = 0$
+3. Ableitungen: $f'(x)$, $f''(x)$
+4. Extrema: $f'(x) = 0$, dann $f''(x)$ prüfen
+5. Wendepunkt: $f''(x) = 0$, dann $f'''(x) \neq 0$
+6. Monotonie: Vorzeichen von $f'(x)$
+7. Krümmung: Vorzeichen von $f''(x)$
+
+### Extrema
+- **Minimum:** $f'(x_0) = 0$ und $f''(x_0) > 0$
+- **Maximum:** $f'(x_0) = 0$ und $f''(x_0) < 0$`,
+    lessons: [
+      {
+        id: "m-kd-1",
+        title: "Definitionsbereich & Nullstellen",
+        duration: "18 min",
+        type: "text",
+        content: `## Definitionsbereich (Wertebereich)
+
+Für welche $x$-Werte ist $f(x)$ definiert?
+
+### Einschränkungen
+- **Nenner:** $\neq 0$
+- **Wurzel:** Argument $\geq 0$
+- **Logarithmus:** Argument $> 0$
+
+## Nullstellen
+
+Löse $f(x) = 0$.
+
+### Polynomfunktionen
+$f(x) = x^3 - 4x = x(x^2 - 4) = x(x+2)(x-2)$
+
+Nullstellen: $x_1 = -2$, $x_2 = 0$, $x_3 = 2$
+
+### Numerisch
+Wenn keine algebraische Lösung möglich: Newton-Verfahren oder Bisektion.`,
+      },
+      {
+        id: "m-kd-2",
+        title: "Extrema",
+        duration: "20 min",
+        type: "text",
+        content: `## Extrema finden
+
+### Notwendige Bedingung (1. Ableitung)
+$f'(x_0) = 0$ → Kandidat für Extremum
+
+### Hinreichende Bedingung (2. Ableitung)
+- $f''(x_0) > 0$ → **lokales Minimum**
+- $f''(x_0) < 0$ → **lokales Maximum**
+- $f''(x_0) = 0$ → unklar, höhere Ableitungen prüfen
+
+### Beispiel
+$f(x) = x^3 - 3x + 2$
+
+$f'(x) = 3x^2 - 3 = 0 \Rightarrow x = \pm 1$
+
+$f''(x) = 6x$
+- $f''(-1) = -6 < 0$ → **Maximum** bei $(-1, 4)$
+- $f''(1) = 6 > 0$ → **Minimum** bei $(1, 0)$`,
+      },
+      {
+        id: "m-kd-3",
+        title: "Wendepunkte & Monotonie",
+        duration: "18 min",
+        type: "text",
+        content: `## Wendepunkt
+
+Die **Krümmung** ändert sich. Bedingung: $f''(x_0) = 0$ und $f'''(x_0) \neq 0$.
+
+### Beispiel
+$f(x) = x^3 - 3x + 2$
+$f''(x) = 6x = 0 \Rightarrow x = 0$
+$f'''(x) = 6 \neq 0$ → Wendepunkt bei $(0, 2)$
+
+## Monotonie
+
+- $f'(x) > 0$: Funktion steigt
+- $f'(x) < 0$: Funktion fällt
+- $f'(x) = 0$: Extremstelle
+
+## Krümmung
+
+- $f''(x) > 0$: Linksgekrümmt (U-Form)
+- $f''(x) < 0$: Rechtsgekrümmt (n-U-Form)`,
+      },
+      {
+        id: "m-kd-4",
+        title: "Quiz: Kurvendiskussion",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-kd-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-lgs",
+    slug: "mathe-gleichungssysteme",
+    title: "Lineare Gleichungssysteme",
+    description: "Gauß-Verfahren, Einsetzen, Addieren, Cramersche Regel",
+    icon: "↔️",
+    color: "#06b6d4",
+    category: "lineare-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: LGS
+
+### Verfahren
+1. **Einsetzen:** Eine Gleichung nach einer Variable auflösen
+2. **Addition:** Gleichungen addieren, um Variable zu eliminieren
+3. **Gauß:** Stufenform durch Zeilenumformung
+
+### Cramersche Regel (2×2)
+$x = \frac{D_x}{D}$, $y = \frac{D_y}{D}$
+
+### Anzahl Lösungen
+- **1 Lösung:** Gleichungen schneiden sich
+- **∞ Lösungen:** Gleichungen sind identisch
+- **0 Lösungen:** Gleichungen sind parallel`,
+    lessons: [
+      {
+        id: "m-lgs-1",
+        title: "Einsetzungsverfahren",
+        duration: "15 min",
+        type: "text",
+        content: `## Einsetzungsverfahren
+
+1. Aus einer Gleichung eine Variable isolieren
+2. In die andere Gleichung einsetzen
+
+### Beispiel
+$\begin{cases} 2x + y = 7 \\ x - y = 1 \end{cases}$
+
+Aus Gleichung 2: $x = y + 1$
+
+Einsetzen in Gleichung 1: $2(y+1) + y = 7$
+$2y + 2 + y = 7$
+$3y = 5$
+$y = \frac{5}{3}$
+
+Rückeinsetzen: $x = \frac{5}{3} + 1 = \frac{8}{3}$
+
+Probe: $2 \cdot \frac{8}{3} + \frac{5}{3} = \frac{21}{3} = 7$ ✓`,
+      },
+      {
+        id: "m-lgs-2",
+        title: "Gauß-Verfahren",
+        duration: "20 min",
+        type: "text",
+        content: `## Gauß-Verfahren
+
+Systematische Methode durch Zeilenumformung.
+
+### Beispiel
+$\begin{cases} x + y + z = 6 \\ 2x - y + z = 3 \\ x + 2y - z = 2 \end{cases}$
+
+**Schritt 1:** Zeile 2 - 2·Zeile 1, Zeile 3 - Zeile 1
+
+$\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ y - 2z = -4 \end{cases}$
+
+**Schritt 2:** Zeile 3 + $\frac{1}{3}$·Zeile 2
+
+$\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\frac{7}{3}z = -7 \end{cases}$
+
+**Rückwärts:** $z = 3$, $y = 2$, $x = 1$`,
+      },
+      {
+        id: "m-lgs-3",
+        title: "Quiz: Gleichungssysteme",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-lgs-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-matrizen",
+    slug: "mathe-matrizen",
+    title: "Matrizen & Determinanten",
+    description: "Matrix-Operationen, Determinanten, Inverse Matrix",
+    icon: "🔢",
+    color: "#a855f7",
+    category: "lineare-algebra",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Matrizen
+
+### Operationen
+- **Addition:** $(A+B)_{ij} = a_{ij} + b_{ij}$
+- **Multiplikation:** $(AB)_{ij} = \sum_k a_{ik} b_{kj}$
+- **Transponiert:** $(A^T)_{ij} = a_{ji}$
+
+### Determinante (2×2)
+$\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad - bc$
+
+### Inverse (2×2)
+$A^{-1} = \frac{1}{\det A} \begin{pmatrix}d&-b\\-c&a\end{pmatrix}$`,
+    lessons: [
+      {
+        id: "m-ma-1",
+        title: "Matrix-Operationen",
+        duration: "18 min",
+        type: "text",
+        content: `## Was ist eine Matrix?
+
+Eine Matrix ist ein rechteckiges Zahlenfeld:
+
+$A = \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$ — eine $2 \times 3$-Matrix
+
+## Addition
+
+Matrizen gleicher Dimension werden elementweise addiert:
+
+$\begin{pmatrix}1&2\\3&4\end{pmatrix} + \begin{pmatrix}5&6\\7&8\end{pmatrix} = \begin{pmatrix}6&8\\10&12\end{pmatrix}$
+
+## Multiplikation
+
+$(AB)_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}$
+
+**Achtung:** $AB \neq BA$ im Allgemeinen!
+
+### Beispiel
+$\begin{pmatrix}1&2\\3&4\end{pmatrix} \cdot \begin{pmatrix}5&6\\7&8\end{pmatrix} = \begin{pmatrix}19&22\\43&50\end{pmatrix}$`,
+      },
+      {
+        id: "m-ma-2",
+        title: "Determinanten & Inverse",
+        duration: "20 min",
+        type: "text",
+        content: `## Determinante
+
+Für eine $2 \times 2$-Matrix:
+
+$\det\begin{pmatrix}a&b\\c&d\end{pmatrix} = ad - bc$
+
+### Beispiel
+$\det\begin{pmatrix}3&1\\2&4\end{pmatrix} = 12 - 2 = 10$
+
+## Inverse Matrix
+
+$A \cdot A^{-1} = I$ (Einheitsmatrix)
+
+Für $2 \times 2$:
+$A^{-1} = \frac{1}{\det A} \begin{pmatrix}d&-b\\-c&a\end{pmatrix}$
+
+### Wann existiert die Inverse?
+Nur wenn $\det A \neq 0$!
+
+### Beispiel
+$A = \begin{pmatrix}3&1\\2&4\end{pmatrix}$, $\det A = 10$
+
+$A^{-1} = \frac{1}{10}\begin{pmatrix}4&-1\\-2&3\end{pmatrix} = \begin{pmatrix}0{,}4&-0{,}1\\-0{,}2&0{,}3\end{pmatrix}$`,
+      },
+      {
+        id: "m-ma-3",
+        title: "Quiz: Matrizen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-ma-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-verteilungen",
+    slug: "mathe-wahrscheinlichkeitsverteilungen",
+    title: "Wahrscheinlichkeitsverteilungen",
+    description: "Binomialverteilung, Normalverteilung, Poisson-Verteilung",
+    icon: "📊",
+    color: "#f59e0b",
+    category: "stochastik",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Verteilungen
+
+### Binomialverteilung
+$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+$E(X) = np$, $Var(X) = np(1-p)$
+
+### Normalverteilung
+$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
+
+### Poisson-Verteilung
+$P(X=k) = \frac{\lambda^k}{k!} e^{-\lambda}$
+$E(X) = \lambda$`,
+    lessons: [
+      {
+        id: "m-vt-1",
+        title: "Binomialverteilung",
+        duration: "20 min",
+        type: "text",
+        content: `## Binomialverteilung
+
+Modelliert die Anzahl **erfolgreicher** Versuche bei $n$ Bernoulli-Versuchen.
+
+### Voraussetzungen
+- $n$ feste Versuche
+- Jeder Versuch: Erfolg (p) oder Misserfolg (1-p)
+- Versuche unabhängig
+
+### Formel
+$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$
+
+### Beispiel
+Münzwurf 10-mal: Wie wahrscheinlich sind genau 3 Mal Kopf?
+
+$P(X=3) = \binom{10}{3} (0{,}5)^3 (0{,}5)^7 = 120 \cdot 0{,}000977 = 0{,}117$
+
+### Erwartungswert & Varianz
+$E(X) = np = 10 \cdot 0{,}5 = 5$
+$Var(X) = np(1-p) = 2{,}5$`,
+      },
+      {
+        id: "m-vt-2",
+        title: "Normalverteilung",
+        duration: "20 min",
+        type: "text",
+        content: `## Normalverteilung
+
+Die wichtigste **stetige** Verteilung. Glockenförmige Kurve.
+
+### Parameter
+- $\mu$: Mittelwert (Lage)
+- $\sigma$: Standardabweichung (Streue)
+
+### 68-95-99,7-Regel
+- 68% der Werte liegen in $\mu \pm \sigma$
+- 95% in $\mu \pm 2\sigma$
+- 99,7% in $\mu \pm 3\sigma$
+
+### Standardnormalverteilung
+$Z = \frac{X - \mu}{\sigma}$ → $\mu = 0$, $\sigma = 1$
+
+### Beispiel
+Größe: $\mu = 175$ cm, $\sigma = 7$ cm
+68% sind zwischen 168 und 182 cm groß.`,
+      },
+      {
+        id: "m-vt-3",
+        title: "Quiz: Verteilungen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-vt-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-folgen",
+    slug: "mathe-folgen-reihen",
+    title: "Folgen & Reihen",
+    description: "Arithmetische/geometrische Folgen und Reihen, Konvergenz",
+    icon: "♾️",
+    color: "#ec4899",
+    category: "analysis",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Folgen & Reihen
+
+### Arithmetische Folge
+$a_n = a_1 + (n-1) \cdot d$
+$S_n = \frac{n}{2}(a_1 + a_n)$
+
+### Geometrische Folge
+$a_n = a_1 \cdot q^{n-1}$
+$S_n = a_1 \cdot \frac{1-q^n}{1-q}$ (für $q \neq 1$)
+
+### Geometrische Reihe (unendlich)
+$S = \frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
+    lessons: [
+      {
+        id: "m-fr-1",
+        title: "Arithmetische Folgen",
+        duration: "15 min",
+        type: "text",
+        content: `## Arithmetische Folge
+
+Konstanter **Abstand** $d$ zwischen aufeinanderfolgenden Gliedern.
+
+### Formel
+$a_n = a_1 + (n-1) \cdot d$
+
+### Beispiel
+$3, 7, 11, 15, 19, ...$ → $a_1 = 3$, $d = 4$
+
+$a_{10} = 3 + 9 \cdot 4 = 39$
+
+### Partialsumme
+$S_n = \frac{n}{2}(a_1 + a_n) = \frac{n}{2}(2a_1 + (n-1)d)$
+
+$S_{10} = \frac{10}{2}(3 + 39) = 5 \cdot 42 = 210$`,
+      },
+      {
+        id: "m-fr-2",
+        title: "Geometrische Folgen & Reihen",
+        duration: "18 min",
+        type: "text",
+        content: `## Geometrische Folge
+
+Konstanter **Faktor** $q$ zwischen aufeinanderfolgenden Gliedern.
+
+### Formel
+$a_n = a_1 \cdot q^{n-1}$
+
+### Beispiel
+$2, 6, 18, 54, ...$ → $a_1 = 2$, $q = 3$
+$a_5 = 2 \cdot 3^4 = 162$
+
+## Geometrische Reihe (endlich)
+$S_n = a_1 \cdot \frac{1-q^n}{1-q}$ für $q \neq 1$
+
+## Unendliche geometrische Reihe
+
+Wenn $|q| < 1$:
+$S_\infty = \frac{a_1}{1-q}$
+
+### Beispiel
+$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... = \frac{1}{1-\frac{1}{2}} = 2$`,
+      },
+      {
+        id: "m-fr-3",
+        title: "Quiz: Folgen & Reihen",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-fr-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+  {
+    id: "m-anageo",
+    slug: "mathe-analytische-geometrie",
+    title: "Analytische Geometrie",
+    description: "Geraden, Ebenen, Abstände im Raum",
+    icon: "📏",
+    color: "#06b6d4",
+    category: "geometrie",
+    progress: 0,
+    merkblatt: `## 📋 Merkblatt: Analytische Geometrie
+
+### Gerade im Raum
+$\vec{x} = \vec{p} + t \cdot \vec{v}$
+
+### Ebene
+$\vec{n} \cdot (\vec{x} - \vec{p}) = 0$ oder $ax + by + cz = d$
+
+### Abstand Punkt-Ebene
+$d = \frac{|\vec{n} \cdot (\vec{a} - \vec{p})|}{|\vec{n}|}$
+
+### Abstand Punkt-Gerade
+$d = \frac{|\vec{v} \times (\vec{a} - \vec{p})|}{|\vec{v}|}$`,
+    lessons: [
+      {
+        id: "m-ag-1",
+        title: "Geraden im Raum",
+        duration: "20 min",
+        type: "text",
+        content: `## Gerade im Raum
+
+Parameterform: $\vec{x} = \vec{p} + t \cdot \vec{v}$
+
+- $\vec{p}$: Stützvektor (Punkt auf der Geraden)
+- $\vec{v}$: Richtungsvektor
+- $t$: Parameter
+
+### Beispiel
+$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + t \cdot \begin{pmatrix}2\\-1\\1\end{pmatrix}$
+
+Für $t = 0$: Punkt $(1, 2, 3)$
+Für $t = 1$: Punkt $(3, 1, 4)$
+
+## Schnitt zweier Geraden
+
+Gleichsetzen und $t_1$, $t_2$ lösen. Wenn keine Lösung → parallel oder windschief.`,
+      },
+      {
+        id: "m-ag-2",
+        title: "Ebenen im Raum",
+        duration: "20 min",
+        type: "text",
+        content: `## Ebene im Raum
+
+### Parameterform
+$\vec{x} = \vec{p} + r \cdot \vec{u} + s \cdot \vec{v}$
+
+### Koordinatenform
+$ax + by + cz = d$
+
+$\vec{n} = \begin{pmatrix}a\\b\\c\end{pmatrix}$ ist der **Normalenvektor**.
+
+### Beispiel
+$2x - y + 3z = 6$
+
+Normalenvektor: $\vec{n} = (2, -1, 3)$
+
+## Abstand Punkt-Ebene
+
+$d = \frac{|ax_0 + by_0 + cz_0 - d|}{\sqrt{a^2 + b^2 + c^2}}$
+
+### Beispiel
+Punkt $(1, 2, 3)$, Ebene $2x - y + 3z = 6$
+
+$d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}}$`,
+      },
+      {
+        id: "m-ag-3",
+        title: "Quiz: Analytische Geometrie",
+        duration: "8 min",
+        type: "quiz",
+        content: `Teste dein Wissen!`,
+      },
+      {
+        id: "m-ag-aufgaben",
+        title: "📝 Aufgaben",
+        duration: "15 min",
+        type: "exercises",
+        content: `Übe das Gelernte!`,
+      },
+    ],
+  },
+
 ];
 
 export const mathQuizzes: Record<string, QuizQuestion[]> = {
@@ -2233,6 +3206,377 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       ],
       correct: 2,
       explanation: "$IQR = Q_3 - Q_1$ beschreibt die Streubreite des mittleren 50% der Daten.",
+    },
+  ],
+
+  "mathe-bruchrechnen": [
+    {
+      question: "Was ist $\frac{1}{2} + \frac{1}{3}$?",
+      type: "multiple",
+      options: ["$\frac{2}{5}$", "$\frac{5}{6}$", "$\frac{1}{5}$", "$\frac{3}{5}$"],
+      correct: 1,
+      explanation: "$\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$",
+    },
+    {
+      question: "Was ist $\frac{2}{3} \cdot \frac{3}{4}$?",
+      type: "multiple",
+      options: ["$\frac{6}{12}$", "$\frac{1}{2}$", "$\frac{5}{7}$", "$\frac{8}{9}$"],
+      correct: 1,
+      explanation: "$\frac{2}{3} \cdot \frac{3}{4} = \frac{6}{12} = \frac{1}{2}$",
+    },
+    {
+      question: "Welcher Bruch ist gleich $0{,}75$?",
+      type: "multiple",
+      options: ["$\frac{1}{4}$", "$\frac{1}{2}$", "$\frac{3}{4}$", "$\frac{2}{3}$"],
+      correct: 2,
+      explanation: "$\frac{3}{4} = 0{,}75$",
+    },
+    {
+      question: "$\frac{5}{8} : \frac{5}{4} = ?$",
+      type: "multiple",
+      options: ["$\frac{1}{2}$", "$\frac{25}{32}$", "$\frac{1}{4}$", "$\frac{5}{2}$"],
+      correct: 0,
+      explanation: "$\frac{5}{8} \cdot \frac{4}{5} = \frac{20}{40} = \frac{1}{2}$",
+    },
+    {
+      question: "Was ist $\frac{7}{12} - \frac{1}{4}$?",
+      type: "multiple",
+      options: ["$\frac{1}{3}$", "$\frac{6}{8}$", "$\frac{1}{2}$", "$\frac{4}{12}$"],
+      correct: 0,
+      explanation: "$\frac{7}{12} - \frac{3}{12} = \frac{4}{12} = \frac{1}{3}$",
+    },
+  ],
+  "mathe-gleichungen": [
+    {
+      question: "Löse $3x + 9 = 0$",
+      type: "multiple",
+      options: ["$x = 3$", "$x = -3$", "$x = 9$", "$x = -9$"],
+      correct: 1,
+      explanation: "$3x = -9 \Rightarrow x = -3$",
+    },
+    {
+      question: "Welche Formel löst $x^2 + px + q = 0$?",
+      type: "multiple",
+      options: ["Mitternachtsformel", "pq-Formel", "Euler-Formel", "abc-Formel"],
+      correct: 1,
+      explanation: "Die pq-Formel löst quadratische Gleichungen in Normalform.",
+    },
+    {
+      question: "Diskriminante von $x^2 - 4x + 4 = 0$?",
+      type: "multiple",
+      options: ["$D = 0$", "$D = 4$", "$D = -4$", "$D = 8$"],
+      correct: 0,
+      explanation: "$D = 16 - 16 = 0$ → doppelte Lösung",
+    },
+    {
+      question: "Nullstellen von $x^2 - 9 = 0$?",
+      type: "multiple",
+      options: ["$x = 3$", "$x = \pm 3$", "$x = 9$", "$x = \pm 9$"],
+      correct: 1,
+      explanation: "$x^2 = 9 \Rightarrow x = \pm 3$",
+    },
+    {
+      question: "Wie viele Lösungen hat $x^2 + 2x + 5 = 0$?",
+      type: "multiple",
+      options: ["0", "1", "2", "3"],
+      correct: 0,
+      explanation: "$D = 4 - 20 = -16 < 0$ → keine reelle Lösung",
+    },
+  ],
+  "mathe-termumformung": [
+    {
+      question: "$(a-b)^2 = ?$",
+      type: "multiple",
+      options: ["$a^2 - b^2$", "$a^2 - 2ab + b^2$", "$a^2 + 2ab + b^2$", "$a^2 + b^2$"],
+      correct: 1,
+      explanation: "2. binomische Formel: $(a-b)^2 = a^2 - 2ab + b^2$",
+    },
+    {
+      question: "$(x+4)(x-4) = ?$",
+      type: "multiple",
+      options: ["$x^2 - 16$", "$x^2 + 16$", "$x^2 - 8x + 16$", "$x^2 + 8x - 16$"],
+      correct: 0,
+      explanation: "3. binomische Formel: $(a+b)(a-b) = a^2 - b^2$",
+    },
+    {
+      question: "$2(x+3) = ?$",
+      type: "multiple",
+      options: ["$2x + 3$", "$2x + 6$", "$x + 6$", "$2x + 5$"],
+      correct: 1,
+      explanation: "Distributivgesetz: $2 \cdot x + 2 \cdot 3 = 2x + 6$",
+    },
+    {
+      question: "$x^2 - 25 = ?$ (faktorisiert)",
+      type: "multiple",
+      options: ["$(x-5)^2$", "$(x+5)(x-5)$", "$(x+5)^2$", "$(x-25)(x+1)$"],
+      correct: 1,
+      explanation: "$x^2 - 25 = (x+5)(x-5)$ — Differenz der Quadrate",
+    },
+    {
+      question: "$(2x+3)^2 = ?$",
+      type: "multiple",
+      options: ["$4x^2 + 9$", "$4x^2 + 12x + 9$", "$4x^2 + 6x + 9$", "$2x^2 + 12x + 9$"],
+      correct: 1,
+      explanation: "$(2x+3)^2 = 4x^2 + 12x + 9$",
+    },
+  ],
+  "mathe-ungleichungen": [
+    {
+      question: "Löse $-2x > 6$",
+      type: "multiple",
+      options: ["$x > -3$", "$x < -3$", "$x > 3$", "$x < 3$"],
+      correct: 1,
+      explanation: "Division durch -2: Vorzeichen wechseln! $x < -3$",
+    },
+    {
+      question: "Was bedeutet $[2, 5)$?",
+      type: "multiple",
+      options: ["$2 < x < 5$", "$2 \leq x < 5$", "$2 < x \leq 5$", "$2 \leq x \leq 5$"],
+      correct: 1,
+      explanation: "$[2, 5)$ = $2 \leq x < 5$ (geschlossen bei 2, offen bei 5)",
+    },
+    {
+      question: "Löse $x^2 - 1 \leq 0$",
+      type: "multiple",
+      options: ["$-1 \leq x \leq 1$", "$x \leq -1$ oder $x \geq 1$", "$x < 1$", "$x > -1$"],
+      correct: 0,
+      explanation: "$(x-1)(x+1) \leq 0 \Rightarrow -1 \leq x \leq 1$",
+    },
+    {
+      question: "Löse $3x - 1 \geq 5$",
+      type: "multiple",
+      options: ["$x \geq 2$", "$x > 2$", "$x \geq \frac{4}{3}$", "$x \geq 6$"],
+      correct: 0,
+      explanation: "$3x \geq 6 \Rightarrow x \geq 2$",
+    },
+    {
+      question: "$|x| < 3$ bedeutet:",
+      type: "multiple",
+      options: ["$x < 3$", "$x > -3$", "$-3 < x < 3$", "$x < -3$ oder $x > 3$"],
+      correct: 2,
+      explanation: "$|x| < a \Leftrightarrow -a < x < a$",
+    },
+  ],
+  "mathe-kurvendiskussion": [
+    {
+      question: "$f(x) = x^3$. Wo ist der Wendepunkt?",
+      type: "multiple",
+      options: ["Bei $x = 0$", "Bei $x = 1$", "Kein Wendepunkt", "Bei $x = -1$"],
+      correct: 0,
+      explanation: "$f''(x) = 6x = 0 \Rightarrow x = 0$, $f'''(0) = 6 \neq 0$",
+    },
+    {
+      question: "Was gilt bei einem lokalen Maximum?",
+      type: "multiple",
+      options: ["$f'(x) = 0$, $f''(x) > 0$", "$f'(x) = 0$, $f''(x) < 0$", "$f''(x) = 0$", "$f(x) = 0$"],
+      correct: 1,
+      explanation: "Maximum: $f'(x_0) = 0$ und $f''(x_0) < 0$",
+    },
+    {
+      question: "Monotonie: Wann fällt $f$?",
+      type: "multiple",
+      options: ["$f'(x) > 0$", "$f'(x) < 0$", "$f''(x) < 0$", "$f(x) < 0$"],
+      correct: 1,
+      explanation: "$f'(x) < 0$ → $f$ ist fallend",
+    },
+    {
+      question: "$f(x) = x^2 - 2x + 1$. Minimum bei x = ?",
+      type: "multiple",
+      options: ["$x = 0$", "$x = 1$", "$x = -1$", "$x = 2$"],
+      correct: 1,
+      explanation: "$f(x) = (x-1)^2$ → Minimum bei $x = 1$ mit $f(1) = 0$",
+    },
+    {
+      question: "Krümmung bei $f''(x) > 0$:",
+      type: "multiple",
+      options: ["Rechtsgekrümmt", "Linksgekrümmt", "Linear", "Keine Krümmung"],
+      correct: 1,
+      explanation: "$f''(x) > 0$ → linksgekrümmt (U-Form)",
+    },
+  ],
+  "mathe-gleichungssysteme": [
+    {
+      question: "Wie viele Lösungen hat ein LGS mit 2 Gleichungen und 2 Unbekannten normalerweise?",
+      type: "multiple",
+      options: ["0, 1 oder unendlich", "Immer 1", "Immer 2", "Immer unendlich"],
+      correct: 0,
+      explanation: "Je nach Schnitt: 0 (parallel), 1 (Schnittpunkt), oder unendlich (identisch)",
+    },
+    {
+      question: "Gauß-Verfahren arbeitet mit...",
+      type: "multiple",
+      options: ["Determinanten", "Zeilenumformungen", "Graphen", "Ableitungen"],
+      correct: 1,
+      explanation: "Gauß: Zeilenumformungen zum Lösen des Systems",
+    },
+    {
+      question: "$x + y = 3$, $x - y = 1$. Lösung?",
+      type: "multiple",
+      options: ["$(2, 1)$", "$(1, 2)$", "$(3, 0)$", "$(0, 3)$"],
+      correct: 0,
+      explanation: "Addition: $2x = 4 \Rightarrow x = 2$, $y = 1$",
+    },
+    {
+      question: "Cramersche Regel nutzt...",
+      type: "multiple",
+      options: ["Summen", "Determinanten", "Ableitungen", "Integrale"],
+      correct: 1,
+      explanation: "Cramer: $x = D_x / D$ mit Determinanten",
+    },
+    {
+      question: "Homogenes LGS hat immer...",
+      type: "multiple",
+      options: ["Keine Lösung", "Genau eine Lösung", "Mindestens die Nulllösung", "Unendlich viele"],
+      correct: 2,
+      explanation: "Homogen: $A\vec{x} = \vec{0}$ hat immer die Triviallösung $\vec{x} = \vec{0}$",
+    },
+  ],
+  "mathe-matrizen": [
+    {
+      question: "Produkt einer $(2 \times 3)$ und $(3 \times 2)$ Matrix hat Dimension...",
+      type: "multiple",
+      options: ["$(2 \times 2)$", "$(3 \times 3)$", "$(2 \times 3)$", "$(3 \times 2)$"],
+      correct: 0,
+      explanation: "$(m \times n) \cdot (n \times p) = (m \times p)$ → $(2 \times 2)$",
+    },
+    {
+      question: "Einheitsmatrix: Alle Diagonalelemente sind...",
+      type: "multiple",
+      options: ["0", "1", "-1", "beliebig"],
+      correct: 1,
+      explanation: "Einheitsmatrix $I$: Diagonale = 1, Rest = 0",
+    },
+    {
+      question: "$\det(A) = 0$ bedeutet...",
+      type: "multiple",
+      options: ["A ist invertierbar", "A ist nicht invertierbar", "A = 0", "A ist symmetrisch"],
+      correct: 1,
+      explanation: "$\det(A) = 0$ → singulär → keine Inverse",
+    },
+    {
+      question: "$(AB)^T = ?$",
+      type: "multiple",
+      options: ["$A^T B^T$", "$B^T A^T$", "$AB$", "$(BA)^T$"],
+      correct: 1,
+      explanation: "Transponiert: $(AB)^T = B^T A^T$ (Reihenfolge dreht sich um!)",
+    },
+    {
+      question: "Spur einer Matrix = ?",
+      type: "multiple",
+      options: ["Determinante", "Summe der Diagonalelemente", "Anzahl Zeilen", "Rang"],
+      correct: 1,
+      explanation: "$\text{tr}(A) = \sum a_{ii}$ — Summe der Hauptdiagonale",
+    },
+  ],
+  "mathe-wahrscheinlichkeitsverteilungen": [
+    {
+      question: "Binomialverteilung: Voraussetzung?",
+      type: "multiple",
+      options: ["Stetige Werte", "Feste Anzahl Versuche, Erfolg/Misserfolg", "Normalverteilte Daten", "Unendliche Versuche"],
+      correct: 1,
+      explanation: "Binomial: n feste Bernoulli-Versuche mit konstantem p",
+    },
+    {
+      question: "Normalverteilung: 95% der Werte in...",
+      type: "multiple",
+      options: ["$\mu \pm \sigma$", "$\mu \pm 2\sigma$", "$\mu \pm 3\sigma$", "$\mu \pm 4\sigma$"],
+      correct: 1,
+      explanation: "68-95-99,7-Regel: 95% in $\mu \pm 2\sigma$",
+    },
+    {
+      question: "$Bin(20, 0{,}5)$. Erwartungswert?",
+      type: "multiple",
+      options: ["5", "10", "15", "20"],
+      correct: 1,
+      explanation: "$E(X) = np = 20 \cdot 0{,}5 = 10$",
+    },
+    {
+      question: "Poisson-Verteilung nutzt man für...",
+      type: "multiple",
+      options: ["Stetige Daten", "Seltene Ereignisse", "Normalverteilte Daten", "Ordinaldaten"],
+      correct: 1,
+      explanation: "Poisson modelliert seltene Ereignisse in festen Intervallen",
+    },
+    {
+      question: "Standardabweichung = ?",
+      type: "multiple",
+      options: ["Varianz²", "√Varianz", "Erwartungswert²", "Mittelwert"],
+      correct: 1,
+      explanation: "$\sigma = \sqrt{Var(X)}$",
+    },
+  ],
+  "mathe-folgen-reihen": [
+    {
+      question: "Arithmetische Folge: $a_1 = 2$, $d = 3$. $a_5 = ?$",
+      type: "multiple",
+      options: ["11", "14", "17", "8"],
+      correct: 1,
+      explanation: "$a_5 = 2 + 4 \cdot 3 = 14$",
+    },
+    {
+      question: "Geometrische Reihe konvergiert wenn...",
+      type: "multiple",
+      options: ["$|q| > 1$", "$|q| < 1$", "$q = 1$", "$q = 0$"],
+      correct: 1,
+      explanation: "Geometrische Reihe: $S = \frac{a_1}{1-q}$ nur für $|q| < 1$",
+    },
+    {
+      question: "$\sum_{n=1}^{100} n = ?$",
+      type: "multiple",
+      options: ["5000", "5050", "5100", "4950"],
+      correct: 1,
+      explanation: "$\frac{100 \cdot 101}{2} = 5050$",
+    },
+    {
+      question: "Harmonische Reihe...",
+      type: "multiple",
+      options: ["Konvergiert", "Divergiert", "Ist endlich", "Ist alternierend"],
+      correct: 1,
+      explanation: "$\sum \frac{1}{n}$ divergiert (bekanntes Ergebnis)",
+    },
+    {
+      question: "Grenzwert von $\frac{1}{n}$ für $n \to \infty$?",
+      type: "multiple",
+      options: ["1", "0", "$\infty$", "-1"],
+      correct: 1,
+      explanation: "$\lim_{n \to \infty} \frac{1}{n} = 0$",
+    },
+  ],
+  "mathe-analytische-geometrie": [
+    {
+      question: "Gerade: $\vec{x} = \vec{p} + t \cdot \vec{v}$. $\vec{p}$ ist der...",
+      type: "multiple",
+      options: ["Richtungsvektor", "Stützvektor", "Normalenvektor", "Ortsvektor"],
+      correct: 1,
+      explanation: "$\vec{p}$ = Stützvektor (Punkt auf der Geraden)",
+    },
+    {
+      question: "Ebene $ax + by + cz = d$. Normalenvektor?",
+      type: "multiple",
+      options: ["$(a, b, c)$", "$(d, b, c)$", "$(-a, -b, -c)$", "$(1, 1, 1)$"],
+      correct: 0,
+      explanation: "$\vec{n} = (a, b, c)$ ist der Normalenvektor der Ebene",
+    },
+    {
+      question: "Zwei Ebenen sind parallel wenn...",
+      type: "multiple",
+      options: ["Gleicher Normalenvektor (bis auf Skalar)", "Gleicher Abstand", "Verschiedene d", "Orthogonal"],
+      correct: 0,
+      explanation: "Parallel: $\vec{n}_1 = k \cdot \vec{n}_2$",
+    },
+    {
+      question: "Abstand Ursprung zur Ebene $2x + y - 2z = 6$?",
+      type: "multiple",
+      options: ["2", "3", "6", "$\sqrt{9}$"],
+      correct: 0,
+      explanation: "$d = \frac{|0+0+0-6|}{\sqrt{4+1+4}} = \frac{6}{3} = 2$",
+    },
+    {
+      question: "Schnitt von Gerade und Ebene: Wie löst man?",
+      type: "multiple",
+      options: ["Gleichsetzen und t berechnen", "Abstand berechnen", "Kreuzprodukt", "Determinante"],
+      correct: 0,
+      explanation: "Parameterform in Koordinatenform einsetzen und nach t auflösen",
     },
   ],
 };
