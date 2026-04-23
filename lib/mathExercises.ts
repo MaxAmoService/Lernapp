@@ -1099,45 +1099,45 @@ export const numerikExercises: Exercise[] = [
 export const bruchrechnenExercises: Exercise[] = [
   {
     id: "br-1", lessonId: "m-bruchrechnen", difficulty: 1, type: "input",
-    question: "$\frac{1}{2} + \frac{1}{3} = ?$",
-    expectedAnswer: "$\frac{5}{6}$", format: "Bruch",
-    solution: "$\frac{1}{2} + \frac{1}{3} = \frac{3}{6} + \frac{2}{6} = \frac{5}{6}$",
+    question: "$\\frac{1}{2} + \\frac{1}{3} = ?$",
+    expectedAnswer: "$\\frac{5}{6}$", format: "Bruch",
+    solution: "$\\frac{1}{2} + \\frac{1}{3} = \\frac{3}{6} + \\frac{2}{6} = \\frac{5}{6}$",
   },
   {
     id: "br-2", lessonId: "m-bruchrechnen", difficulty: 1, type: "input",
-    question: "$\frac{3}{4} - \frac{1}{4} = ?$",
-    expectedAnswer: "$\frac{1}{2}$", format: "Bruch",
-    solution: "$\frac{3}{4} - \frac{1}{4} = \frac{2}{4} = \frac{1}{2}$",
+    question: "$\\frac{3}{4} - \\frac{1}{4} = ?$",
+    expectedAnswer: "$\\frac{1}{2}$", format: "Bruch",
+    solution: "$\\frac{3}{4} - \\frac{1}{4} = \\frac{2}{4} = \\frac{1}{2}$",
   },
   {
     id: "br-3", lessonId: "m-bruchrechnen", difficulty: 1, type: "input",
-    question: "$\frac{2}{5} \cdot \frac{3}{7} = ?$",
-    expectedAnswer: "$\frac{6}{35}$", format: "Bruch",
-    solution: "$\frac{2}{5} \cdot \frac{3}{7} = \frac{6}{35}$",
+    question: "$\\frac{2}{5} \\cdot \\frac{3}{7} = ?$",
+    expectedAnswer: "$\\frac{6}{35}$", format: "Bruch",
+    solution: "$\\frac{2}{5} \\cdot \\frac{3}{7} = \\frac{6}{35}$",
   },
   {
     id: "br-4", lessonId: "m-bruchrechnen", difficulty: 2, type: "input",
-    question: "$\frac{3}{8} : \frac{2}{3} = ?$",
-    expectedAnswer: "$\frac{9}{16}$", format: "Bruch",
-    solution: "$\frac{3}{8} : \frac{2}{3} = \frac{3}{8} \cdot \frac{3}{2} = \frac{9}{16}$",
+    question: "$\\frac{3}{8} : \\frac{2}{3} = ?$",
+    expectedAnswer: "$\\frac{9}{16}$", format: "Bruch",
+    solution: "$\\frac{3}{8} : \\frac{2}{3} = \\frac{3}{8} \\cdot \\frac{3}{2} = \\frac{9}{16}$",
   },
   {
     id: "br-5", lessonId: "m-bruchrechnen", difficulty: 2, type: "multiple",
     question: "Welcher Bruch ist am größten?",
     options: [
-      { label: "$\frac{2}{3}$", value: "a" },
-      { label: "$\frac{3}{5}$", value: "b" },
-      { label: "$\frac{7}{12}$", value: "c" },
-      { label: "$\frac{1}{2}$", value: "d" },
+      { label: "$\\frac{2}{3}$", value: "a" },
+      { label: "$\\frac{3}{5}$", value: "b" },
+      { label: "$\\frac{7}{12}$", value: "c" },
+      { label: "$\\frac{1}{2}$", value: "d" },
     ],
     correctOption: "a",
-    solution: "$\frac{2}{3} = 0{,}667$ ist am größten.",
+    solution: "$\\frac{2}{3} = 0{,}667$ ist am größten.",
   },
   {
     id: "br-6", lessonId: "m-bruchrechnen", difficulty: 2, type: "input",
-    question: "$\frac{1}{4} + \frac{2}{3} + \frac{1}{6} = ?$",
-    expectedAnswer: "$\frac{13}{12}$", format: "Bruch",
-    solution: "$\frac{3}{12} + \frac{8}{12} + \frac{2}{12} = \frac{13}{12}$",
+    question: "$\\frac{1}{4} + \\frac{2}{3} + \\frac{1}{6} = ?$",
+    expectedAnswer: "$\\frac{13}{12}$", format: "Bruch",
+    solution: "$\\frac{3}{12} + \\frac{8}{12} + \\frac{2}{12} = \\frac{13}{12}$",
   },
 ];
 
@@ -1146,25 +1146,25 @@ export const gleichungenExercises: Exercise[] = [
     id: "gl-1", lessonId: "m-gleichungen", difficulty: 1, type: "input",
     question: "Löse $2x + 6 = 14$",
     expectedAnswer: "4", format: "Ganze Zahl",
-    solution: "$2x = 8 \Rightarrow x = 4$",
+    solution: "$2x = 8 \\Rightarrow x = 4$",
   },
   {
     id: "gl-2", lessonId: "m-gleichungen", difficulty: 1, type: "input",
     question: "Löse $3x - 7 = 2$",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "$3x = 9 \Rightarrow x = 3$",
+    solution: "$3x = 9 \\Rightarrow x = 3$",
   },
   {
     id: "gl-3", lessonId: "m-gleichungen", difficulty: 2, type: "input",
     question: "Löse $x^2 - 5x + 6 = 0$. Kleinere Lösung?",
     expectedAnswer: "2", format: "Ganze Zahl",
-    solution: "$x^2 - 5x + 6 = (x-2)(x-3) = 0 \Rightarrow x_1 = 2$",
+    solution: "$x^2 - 5x + 6 = (x-2)(x-3) = 0 \\Rightarrow x_1 = 2$",
   },
   {
     id: "gl-4", lessonId: "m-gleichungen", difficulty: 2, type: "input",
     question: "Löse $x^2 + 4x + 4 = 0$",
     expectedAnswer: "-2", format: "Ganze Zahl",
-    solution: "$(x+2)^2 = 0 \Rightarrow x = -2$",
+    solution: "$(x+2)^2 = 0 \\Rightarrow x = -2$",
   },
   {
     id: "gl-5", lessonId: "m-gleichungen", difficulty: 3, type: "multiple",
@@ -1182,7 +1182,7 @@ export const gleichungenExercises: Exercise[] = [
     id: "gl-6", lessonId: "m-gleichungen", difficulty: 2, type: "input",
     question: "Löse $5x - 3 = 2x + 9$",
     expectedAnswer: "4", format: "Ganze Zahl",
-    solution: "$3x = 12 \Rightarrow x = 4$",
+    solution: "$3x = 12 \\Rightarrow x = 4$",
   },
 ];
 
@@ -1236,13 +1236,13 @@ export const ungleichungenExercises: Exercise[] = [
     id: "ug-1", lessonId: "m-ungleichungen", difficulty: 1, type: "input",
     question: "Löse $2x + 3 > 7$",
     expectedAnswer: "x > 2", format: "Ungleichung",
-    solution: "$2x > 4 \Rightarrow x > 2$",
+    solution: "$2x > 4 \\Rightarrow x > 2$",
   },
   {
     id: "ug-2", lessonId: "m-ungleichungen", difficulty: 1, type: "input",
-    question: "Löse $-3x \leq 12$",
-    expectedAnswer: "x \geq -4", format: "Ungleichung",
-    solution: "$-3x \leq 12 \Rightarrow x \geq -4$ (Vorzeichenwechsel!)",
+    question: "Löse $-3x \\leq 12$",
+    expectedAnswer: "x \\geq -4", format: "Ungleichung",
+    solution: "$-3x \\leq 12 \\Rightarrow x \\geq -4$ (Vorzeichenwechsel!)",
   },
   {
     id: "ug-3", lessonId: "m-ungleichungen", difficulty: 2, type: "multiple",
@@ -1254,31 +1254,31 @@ export const ungleichungenExercises: Exercise[] = [
       { label: "$x > 0$", value: "d" },
     ],
     correctOption: "b",
-    solution: "$(x-2)(x+2) > 0 \Rightarrow x < -2$ oder $x > 2$",
+    solution: "$(x-2)(x+2) > 0 \\Rightarrow x < -2$ oder $x > 2$",
   },
   {
     id: "ug-4", lessonId: "m-ungleichungen", difficulty: 2, type: "input",
     question: "Löse $5 - 2x < 1$",
     expectedAnswer: "x > 2", format: "Ungleichung",
-    solution: "$-2x < -4 \Rightarrow x > 2$",
+    solution: "$-2x < -4 \\Rightarrow x > 2$",
   },
   {
     id: "ug-5", lessonId: "m-ungleichungen", difficulty: 3, type: "input",
     question: "Löse $|x - 3| < 5$",
     expectedAnswer: "-2 < x < 8", format: "Intervall",
-    solution: "$-5 < x - 3 < 5 \Rightarrow -2 < x < 8$",
+    solution: "$-5 < x - 3 < 5 \\Rightarrow -2 < x < 8$",
   },
   {
     id: "ug-6", lessonId: "m-ungleichungen", difficulty: 2, type: "multiple",
     question: "Was bedeutet $(3, 7]$?",
     options: [
-      { label: "$3 \leq x < 7$", value: "a" },
-      { label: "$3 < x \leq 7$", value: "b" },
-      { label: "$3 \leq x \leq 7$", value: "c" },
+      { label: "$3 \\leq x < 7$", value: "a" },
+      { label: "$3 < x \\leq 7$", value: "b" },
+      { label: "$3 \\leq x \\leq 7$", value: "c" },
       { label: "$3 < x < 7$", value: "d" },
     ],
     correctOption: "b",
-    solution: "$(3, 7]$ = $3 < x \leq 7$ (offen links, geschlossen rechts)",
+    solution: "$(3, 7]$ = $3 < x \\leq 7$ (offen links, geschlossen rechts)",
   },
 ];
 
@@ -1293,13 +1293,13 @@ export const kurvendiskussionExercises: Exercise[] = [
     id: "kd-2", lessonId: "m-kurvendiskussion", difficulty: 2, type: "input",
     question: "$f(x) = x^2 - 4x + 3$. Kleinere Nullstelle?",
     expectedAnswer: "1", format: "Ganze Zahl",
-    solution: "$(x-1)(x-3) = 0 \Rightarrow x_1 = 1$",
+    solution: "$(x-1)(x-3) = 0 \\Rightarrow x_1 = 1$",
   },
   {
     id: "kd-3", lessonId: "m-kurvendiskussion", difficulty: 2, type: "input",
     question: "$f(x) = x^2 - 6x + 5$. Extremstelle bei x = ?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "$f'(x) = 2x - 6 = 0 \Rightarrow x = 3$ (Minimum)",
+    solution: "$f'(x) = 2x - 6 = 0 \\Rightarrow x = 3$ (Minimum)",
   },
   {
     id: "kd-4", lessonId: "m-kurvendiskussion", difficulty: 3, type: "multiple",
@@ -1311,19 +1311,19 @@ export const kurvendiskussionExercises: Exercise[] = [
       { label: "Ja, bei x=-1", value: "d" },
     ],
     correctOption: "a",
-    solution: "$f''(x) = 6x = 0 \Rightarrow x = 0$ → Wendepunkt bei $(0,0)$",
+    solution: "$f''(x) = 6x = 0 \\Rightarrow x = 0$ → Wendepunkt bei $(0,0)$",
   },
   {
     id: "kd-5", lessonId: "m-kurvendiskussion", difficulty: 2, type: "input",
     question: "Wann steigt $f(x) = x^2 - 2x$?",
     expectedAnswer: "x > 1", format: "Ungleichung",
-    solution: "$f'(x) = 2x - 2 > 0 \Rightarrow x > 1$",
+    solution: "$f'(x) = 2x - 2 > 0 \\Rightarrow x > 1$",
   },
   {
     id: "kd-6", lessonId: "m-kurvendiskussion", difficulty: 3, type: "input",
     question: "Wendepunkt von $f(x) = x^3 - 3x^2 + 2$?",
     expectedAnswer: "(1, 0)", format: "Punkt",
-    solution: "$f''(x) = 6x - 6 = 0 \Rightarrow x = 1$, $f(1) = 0$",
+    solution: "$f''(x) = 6x - 6 = 0 \\Rightarrow x = 1$, $f(1) = 0$",
   },
 ];
 
@@ -1332,19 +1332,19 @@ export const gleichungssystemeExercises: Exercise[] = [
     id: "lgs-1", lessonId: "m-lgs", difficulty: 1, type: "input",
     question: "$x + y = 5$, $x - y = 1$. x?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "Addition: $2x = 6 \Rightarrow x = 3$",
+    solution: "Addition: $2x = 6 \\Rightarrow x = 3$",
   },
   {
     id: "lgs-2", lessonId: "m-lgs", difficulty: 1, type: "input",
     question: "$x + y = 5$, $x - y = 1$. y?",
     expectedAnswer: "2", format: "Ganze Zahl",
-    solution: "Subtraktion: $2y = 4 \Rightarrow y = 2$",
+    solution: "Subtraktion: $2y = 4 \\Rightarrow y = 2$",
   },
   {
     id: "lgs-3", lessonId: "m-lgs", difficulty: 2, type: "input",
     question: "$2x + y = 7$, $x - y = 2$. x?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "Addition: $3x = 9 \Rightarrow x = 3$",
+    solution: "Addition: $3x = 9 \\Rightarrow x = 3$",
   },
   {
     id: "lgs-4", lessonId: "m-lgs", difficulty: 2, type: "multiple",
@@ -1362,13 +1362,13 @@ export const gleichungssystemeExercises: Exercise[] = [
     id: "lgs-5", lessonId: "m-lgs", difficulty: 3, type: "input",
     question: "$x + 2y = 5$, $3x - y = 1$. x?",
     expectedAnswer: "1", format: "Ganze Zahl",
-    solution: "$y = 3x - 1 \Rightarrow x + 6x - 2 = 5 \Rightarrow x = 1$",
+    solution: "$y = 3x - 1 \\Rightarrow x + 6x - 2 = 5 \\Rightarrow x = 1$",
   },
   {
     id: "lgs-6", lessonId: "m-lgs", difficulty: 2, type: "input",
     question: "$3x + 2y = 12$, $x - y = 1$. y?",
-    expectedAnswer: "$\frac{9}{5}$", format: "Bruch",
-    solution: "$5y = 9 \Rightarrow y = \frac{9}{5}$",
+    expectedAnswer: "$\\frac{9}{5}$", format: "Bruch",
+    solution: "$5y = 9 \\Rightarrow y = \\frac{9}{5}$",
   },
 ];
 
@@ -1377,13 +1377,13 @@ export const matrizenExercises: Exercise[] = [
     id: "ma-1", lessonId: "m-matrizen", difficulty: 1, type: "input",
     question: "$\det\begin{pmatrix}2&3\\1&4\end{pmatrix} = ?$",
     expectedAnswer: "5", format: "Ganze Zahl",
-    solution: "$2 \cdot 4 - 3 \cdot 1 = 5$",
+    solution: "$2 \\cdot 4 - 3 \\cdot 1 = 5$",
   },
   {
     id: "ma-2", lessonId: "m-matrizen", difficulty: 1, type: "input",
     question: "$\det\begin{pmatrix}1&2\\3&6\end{pmatrix} = ?$",
     expectedAnswer: "0", format: "Ganze Zahl",
-    solution: "$1 \cdot 6 - 2 \cdot 3 = 0$",
+    solution: "$1 \\cdot 6 - 2 \\cdot 3 = 0$",
   },
   {
     id: "ma-3", lessonId: "m-matrizen", difficulty: 2, type: "multiple",
@@ -1395,7 +1395,7 @@ export const matrizenExercises: Exercise[] = [
       { label: "Wenn sie symmetrisch ist", value: "d" },
     ],
     correctOption: "a",
-    solution: "Nur invertierbar wenn $\det A \neq 0$",
+    solution: "Nur invertierbar wenn $\det A \\neq 0$",
   },
   {
     id: "ma-4", lessonId: "m-matrizen", difficulty: 2, type: "input",
@@ -1405,15 +1405,15 @@ export const matrizenExercises: Exercise[] = [
   },
   {
     id: "ma-5", lessonId: "m-matrizen", difficulty: 3, type: "input",
-    question: "$\begin{pmatrix}2&0\\0&3\end{pmatrix} \cdot \begin{pmatrix}1&1\\1&1\end{pmatrix}$. Element (2,1)?",
+    question: "$\begin{pmatrix}2&0\\0&3\end{pmatrix} \\cdot \begin{pmatrix}1&1\\1&1\end{pmatrix}$. Element (2,1)?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "$0 \cdot 1 + 3 \cdot 1 = 3$",
+    solution: "$0 \\cdot 1 + 3 \\cdot 1 = 3$",
   },
   {
     id: "ma-6", lessonId: "m-matrizen", difficulty: 2, type: "input",
     question: "$A = \begin{pmatrix}3&1\\2&4\end{pmatrix}$. det(A)?",
     expectedAnswer: "10", format: "Ganze Zahl",
-    solution: "$3 \cdot 4 - 1 \cdot 2 = 10$",
+    solution: "$3 \\cdot 4 - 1 \\cdot 2 = 10$",
   },
 ];
 
@@ -1422,23 +1422,23 @@ export const verteilungenExercises: Exercise[] = [
     id: "vt-1", lessonId: "m-verteilungen", difficulty: 1, type: "input",
     question: "Münze 5×: $P(X=0$ Kopf$) = ?$",
     expectedAnswer: "0.03125", format: "Dezimalzahl",
-    solution: "$\binom{5}{0}(0{,}5)^5 = 0{,}03125$",
+    solution: "$\\binom{5}{0}(0{,}5)^5 = 0{,}03125$",
   },
   {
     id: "vt-2", lessonId: "m-verteilungen", difficulty: 2, type: "input",
     question: "Erwartungswert von $Bin(10, 0{,}3)$?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "$E(X) = np = 10 \cdot 0{,}3 = 3$",
+    solution: "$E(X) = np = 10 \\cdot 0{,}3 = 3$",
   },
   {
     id: "vt-3", lessonId: "m-verteilungen", difficulty: 2, type: "input",
     question: "Varianz von $Bin(10, 0{,}3)$?",
     expectedAnswer: "2.1", format: "Dezimalzahl",
-    solution: "$Var(X) = np(1-p) = 10 \cdot 0{,}3 \cdot 0{,}7 = 2{,}1$",
+    solution: "$Var(X) = np(1-p) = 10 \\cdot 0{,}3 \\cdot 0{,}7 = 2{,}1$",
   },
   {
     id: "vt-4", lessonId: "m-verteilungen", difficulty: 2, type: "multiple",
-    question: "Wie viel liegt in $\mu \pm 2\sigma$?",
+    question: "Wie viel liegt in $\\mu \\pm 2\\sigma$?",
     options: [
       { label: "68%", value: "a" },
       { label: "95%", value: "b" },
@@ -1446,11 +1446,11 @@ export const verteilungenExercises: Exercise[] = [
       { label: "50%", value: "d" },
     ],
     correctOption: "b",
-    solution: "95% der Werte liegen in $\mu \pm 2\sigma$",
+    solution: "95% der Werte liegen in $\\mu \\pm 2\\sigma$",
   },
   {
     id: "vt-5", lessonId: "m-verteilungen", difficulty: 1, type: "input",
-    question: "Poisson: $\lambda = 4$. $P(X=0) = ?$",
+    question: "Poisson: $\\lambda = 4$. $P(X=0) = ?$",
     expectedAnswer: "0.0183", format: "Dezimalzahl",
     solution: "$e^{-4} \approx 0{,}0183$",
   },
@@ -1458,7 +1458,7 @@ export const verteilungenExercises: Exercise[] = [
     id: "vt-6", lessonId: "m-verteilungen", difficulty: 3, type: "input",
     question: "Standardabweichung bei Varianz 9?",
     expectedAnswer: "3", format: "Ganze Zahl",
-    solution: "$\sigma = \sqrt{9} = 3$",
+    solution: "$\\sigma = \\sqrt{9} = 3$",
   },
 ];
 
@@ -1467,29 +1467,29 @@ export const folgenExercises: Exercise[] = [
     id: "fr-1", lessonId: "m-folgen", difficulty: 1, type: "input",
     question: "Arithmetisch: $a_1 = 3$, $d = 5$. $a_4 = ?$",
     expectedAnswer: "18", format: "Ganze Zahl",
-    solution: "$a_4 = 3 + 3 \cdot 5 = 18$",
+    solution: "$a_4 = 3 + 3 \\cdot 5 = 18$",
   },
   {
     id: "fr-2", lessonId: "m-folgen", difficulty: 1, type: "input",
     question: "Geometrisch: $a_1 = 2$, $q = 3$. $a_3 = ?$",
     expectedAnswer: "18", format: "Ganze Zahl",
-    solution: "$a_3 = 2 \cdot 3^2 = 18$",
+    solution: "$a_3 = 2 \\cdot 3^2 = 18$",
   },
   {
     id: "fr-3", lessonId: "m-folgen", difficulty: 2, type: "input",
     question: "$1 + 2 + 3 + ... + 100 = ?$",
     expectedAnswer: "5050", format: "Ganze Zahl",
-    solution: "$S_{100} = \frac{100}{2}(1+100) = 5050$",
+    solution: "$S_{100} = \\frac{100}{2}(1+100) = 5050$",
   },
   {
     id: "fr-4", lessonId: "m-folgen", difficulty: 2, type: "input",
-    question: "$1 + \frac{1}{2} + \frac{1}{4} + ... = ?$",
+    question: "$1 + \\frac{1}{2} + \\frac{1}{4} + ... = ?$",
     expectedAnswer: "2", format: "Ganze Zahl",
-    solution: "$S = \frac{1}{1-\frac{1}{2}} = 2$",
+    solution: "$S = \\frac{1}{1-\\frac{1}{2}} = 2$",
   },
   {
     id: "fr-5", lessonId: "m-folgen", difficulty: 2, type: "multiple",
-    question: "Konvergiert $\sum \frac{1}{n}$?",
+    question: "Konvergiert $\\sum \\frac{1}{n}$?",
     options: [
       { label: "Ja", value: "a" },
       { label: "Nein", value: "b" },
@@ -1501,7 +1501,7 @@ export const folgenExercises: Exercise[] = [
     id: "fr-6", lessonId: "m-folgen", difficulty: 3, type: "input",
     question: "Arithmetisches Mittel von $2, 5, 8, 11$?",
     expectedAnswer: "6.5", format: "Dezimalzahl",
-    solution: "$\frac{26}{4} = 6{,}5$",
+    solution: "$\\frac{26}{4} = 6{,}5$",
   },
 ];
 
@@ -1510,13 +1510,13 @@ export const analytischeGeometrieExercises: Exercise[] = [
     id: "ag-1", lessonId: "m-anageo", difficulty: 1, type: "input",
     question: "Normalenvektor von $3x - 2y + z = 5$?",
     expectedAnswer: "(3, -2, 1)", format: "Vektor",
-    solution: "$\vec{n} = (3, -2, 1)$",
+    solution: "$\\vec{n} = (3, -2, 1)$",
   },
   {
     id: "ag-2", lessonId: "m-anageo", difficulty: 2, type: "input",
     question: "Abstand $(0,0,0)$ zur Ebene $x+y+z=3$? (gerundet)",
-    expectedAnswer: "$\sqrt{3}$", format: "Wurzel",
-    solution: "$d = \frac{3}{\sqrt{3}} = \sqrt{3}$",
+    expectedAnswer: "$\\sqrt{3}$", format: "Wurzel",
+    solution: "$d = \\frac{3}{\\sqrt{3}} = \\sqrt{3}$",
   },
   {
     id: "ag-3", lessonId: "m-anageo", difficulty: 2, type: "multiple",
@@ -1534,13 +1534,13 @@ export const analytischeGeometrieExercises: Exercise[] = [
     id: "ag-4", lessonId: "m-anageo", difficulty: 3, type: "input",
     question: "Abstand $(1,2,3)$ zur Ebene $2x+y-2z=4$?",
     expectedAnswer: "2", format: "Ganze Zahl",
-    solution: "$d = \frac{|2+2-6-4|}{3} = \frac{|-6|}{3} = 2$",
+    solution: "$d = \\frac{|2+2-6-4|}{3} = \\frac{|-6|}{3} = 2$",
   },
   {
     id: "ag-5", lessonId: "m-anageo", difficulty: 2, type: "input",
-    question: "Stützvektor: $\vec{x} = (1,2,3) + t(4,5,6)$?",
+    question: "Stützvektor: $\\vec{x} = (1,2,3) + t(4,5,6)$?",
     expectedAnswer: "(1, 2, 3)", format: "Vektor",
-    solution: "$\vec{p} = (1, 2, 3)$",
+    solution: "$\\vec{p} = (1, 2, 3)$",
   },
   {
     id: "ag-6", lessonId: "m-anageo", difficulty: 3, type: "multiple",
@@ -1552,7 +1552,7 @@ export const analytischeGeometrieExercises: Exercise[] = [
       { label: "verschieden", value: "d" },
     ],
     correctOption: "a",
-    solution: "Parallel: $\vec{v}_1 = k \cdot \vec{v}_2$",
+    solution: "Parallel: $\\vec{v}_1 = k \\cdot \\vec{v}_2$",
   },
 ];
 
@@ -1560,30 +1560,30 @@ export const analytischeGeometrieExercises: Exercise[] = [
 // ==================== NEUE MODULE Exercises ====================
 
 export const prozentExercises: Exercise[] = [
-  { id: "pz-1", lessonId: "m-prozent", difficulty: 1, type: "input", question: "30% von 250?", expectedAnswer: "75", format: "Ganze Zahl", solution: "$250 \cdot 0.3 = 75$" },
-  { id: "pz-2", lessonId: "m-prozent", difficulty: 1, type: "input", question: "15% von 400?", expectedAnswer: "60", format: "Ganze Zahl", solution: "$400 \cdot 0.15 = 60$" },
+  { id: "pz-1", lessonId: "m-prozent", difficulty: 1, type: "input", question: "30% von 250?", expectedAnswer: "75", format: "Ganze Zahl", solution: "$250 \\cdot 0.3 = 75$" },
+  { id: "pz-2", lessonId: "m-prozent", difficulty: 1, type: "input", question: "15% von 400?", expectedAnswer: "60", format: "Ganze Zahl", solution: "$400 \\cdot 0.15 = 60$" },
   { id: "pz-3", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Preis 80->100. Steigerung?", expectedAnswer: "25", format: "Prozent", solution: "$20/80 = 25\%$" },
-  { id: "pz-4", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinsen: 5000, 4%, 1J?", expectedAnswer: "200", format: "Ganze Zahl", solution: "$5000 \cdot 0.04 = 200$" },
-  { id: "pz-5", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinseszins: 1000, 3%, 2J?", expectedAnswer: "1060.9", format: "Dezimalzahl", solution: "$1000 \cdot 1.03^2 = 1060.90$" },
+  { id: "pz-4", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinsen: 5000, 4%, 1J?", expectedAnswer: "200", format: "Ganze Zahl", solution: "$5000 \\cdot 0.04 = 200$" },
+  { id: "pz-5", lessonId: "m-prozent", difficulty: 2, type: "input", question: "Zinseszins: 1000, 3%, 2J?", expectedAnswer: "1060.9", format: "Dezimalzahl", solution: "$1000 \\cdot 1.03^2 = 1060.90$" },
   { id: "pz-6", lessonId: "m-prozent", difficulty: 3, type: "multiple", question: "Verdopplung bei 6%?", options: [{label: "6J", value: "a"}, {label: "12J", value: "b"}, {label: "18J", value: "c"}, {label: "24J", value: "d"}], correctOption: "b", solution: "72/6 = 12J" },
 ];
 
 export const koerperExercises: Exercise[] = [
-  { id: "ko-1", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Quader 2x3x4?", expectedAnswer: "24", format: "Ganze Zahl", solution: "$2 \cdot 3 \cdot 4 = 24$" },
-  { id: "ko-2", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Oberflaeche Wuerfel a=3?", expectedAnswer: "54", format: "Ganze Zahl", solution: "$6 \cdot 9 = 54$" },
-  { id: "ko-3", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Zylinder r=2, h=5?", expectedAnswer: "20pi", format: "Ausdruck", solution: "$V = \pi \cdot 4 \cdot 5 = 20\pi$" },
-  { id: "ko-4", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Kugel r=3?", expectedAnswer: "36pi", format: "Ausdruck", solution: "$V = \frac{4}{3}\pi \cdot 27 = 36\pi$" },
-  { id: "ko-5", lessonId: "m-koerper", difficulty: 2, type: "multiple", question: "Kegel = ? des Zylinders", options: [{label: "1/2", value: "a"}, {label: "1/3", value: "b"}, {label: "1/4", value: "c"}], correctOption: "b", solution: "$V = \frac{1}{3}V_{Zyl}$" },
-  { id: "ko-6", lessonId: "m-koerper", difficulty: 3, type: "input", question: "Kugel-Oberflaeche r=5?", expectedAnswer: "100pi", format: "Ausdruck", solution: "$O = 4\pi \cdot 25 = 100\pi$" },
+  { id: "ko-1", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Quader 2x3x4?", expectedAnswer: "24", format: "Ganze Zahl", solution: "$2 \\cdot 3 \\cdot 4 = 24$" },
+  { id: "ko-2", lessonId: "m-koerper", difficulty: 1, type: "input", question: "Oberflaeche Wuerfel a=3?", expectedAnswer: "54", format: "Ganze Zahl", solution: "$6 \\cdot 9 = 54$" },
+  { id: "ko-3", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Zylinder r=2, h=5?", expectedAnswer: "20pi", format: "Ausdruck", solution: "$V = \\pi \\cdot 4 \\cdot 5 = 20\\pi$" },
+  { id: "ko-4", lessonId: "m-koerper", difficulty: 2, type: "input", question: "Kugel r=3?", expectedAnswer: "36pi", format: "Ausdruck", solution: "$V = \\frac{4}{3}\\pi \\cdot 27 = 36\\pi$" },
+  { id: "ko-5", lessonId: "m-koerper", difficulty: 2, type: "multiple", question: "Kegel = ? des Zylinders", options: [{label: "1/2", value: "a"}, {label: "1/3", value: "b"}, {label: "1/4", value: "c"}], correctOption: "b", solution: "$V = \\frac{1}{3}V_{Zyl}$" },
+  { id: "ko-6", lessonId: "m-koerper", difficulty: 3, type: "input", question: "Kugel-Oberflaeche r=5?", expectedAnswer: "100pi", format: "Ausdruck", solution: "$O = 4\\pi \\cdot 25 = 100\\pi$" },
 ];
 
 export const kombinatorikExercises: Exercise[] = [
   { id: "kb-1", lessonId: "m-kombinatorik", difficulty: 1, type: "input", question: "$5! = ?$", expectedAnswer: "120", format: "Ganze Zahl", solution: "$5! = 120$" },
-  { id: "kb-2", lessonId: "m-kombinatorik", difficulty: 1, type: "input", question: "C(6,2) = ?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$\binom{6}{2} = 15$" },
+  { id: "kb-2", lessonId: "m-kombinatorik", difficulty: 1, type: "input", question: "C(6,2) = ?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$\\binom{6}{2} = 15$" },
   { id: "kb-3", lessonId: "m-kombinatorik", difficulty: 2, type: "input", question: "V(6,3) = ?", expectedAnswer: "120", format: "Ganze Zahl", solution: "$6!/3! = 120$" },
-  { id: "kb-4", lessonId: "m-kombinatorik", difficulty: 2, type: "input", question: "C(8,3) = ?", expectedAnswer: "56", format: "Ganze Zahl", solution: "$\binom{8}{3} = 56$" },
+  { id: "kb-4", lessonId: "m-kombinatorik", difficulty: 2, type: "input", question: "C(8,3) = ?", expectedAnswer: "56", format: "Ganze Zahl", solution: "$\\binom{8}{3} = 56$" },
   { id: "kb-5", lessonId: "m-kombinatorik", difficulty: 2, type: "multiple", question: "Permutationen AABB?", options: [{label: "24", value: "a"}, {label: "12", value: "b"}, {label: "6", value: "c"}, {label: "4", value: "d"}], correctOption: "c", solution: "$4!/(2!2!) = 6$" },
-  { id: "kb-6", lessonId: "m-kombinatorik", difficulty: 3, type: "input", question: "Lotto 6 aus 49?", expectedAnswer: "13983816", format: "Ganze Zahl", solution: "$\binom{49}{6} = 13983816$" },
+  { id: "kb-6", lessonId: "m-kombinatorik", difficulty: 3, type: "input", question: "Lotto 6 aus 49?", expectedAnswer: "13983816", format: "Ganze Zahl", solution: "$\\binom{49}{6} = 13983816$" },
 ];
 
 export const logikExercises: Exercise[] = [
@@ -1596,20 +1596,20 @@ export const logikExercises: Exercise[] = [
 ];
 
 export const dreisatzExercises: Exercise[] = [
-  { id: "ds-1", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "3 Aepfel=2E. 9 Aepfel?", expectedAnswer: "6", format: "Ganze Zahl", solution: "$9 \cdot 2 / 3 = 6$" },
-  { id: "ds-2", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "5 Arb., 10T. 2 Arb.?", expectedAnswer: "25", format: "Ganze Zahl", solution: "$5 \cdot 10 / 2 = 25$" },
-  { id: "ds-3", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "4L=6E. 10L?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$10 \cdot 6 / 4 = 15$" },
-  { id: "ds-4", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "6 Masch., 12h. 4 Masch.?", expectedAnswer: "18", format: "Ganze Zahl", solution: "$6 \cdot 12 / 4 = 18$" },
+  { id: "ds-1", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "3 Aepfel=2E. 9 Aepfel?", expectedAnswer: "6", format: "Ganze Zahl", solution: "$9 \\cdot 2 / 3 = 6$" },
+  { id: "ds-2", lessonId: "m-dreisatz", difficulty: 1, type: "input", question: "5 Arb., 10T. 2 Arb.?", expectedAnswer: "25", format: "Ganze Zahl", solution: "$5 \\cdot 10 / 2 = 25$" },
+  { id: "ds-3", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "4L=6E. 10L?", expectedAnswer: "15", format: "Ganze Zahl", solution: "$10 \\cdot 6 / 4 = 15$" },
+  { id: "ds-4", lessonId: "m-dreisatz", difficulty: 2, type: "input", question: "6 Masch., 12h. 4 Masch.?", expectedAnswer: "18", format: "Ganze Zahl", solution: "$6 \\cdot 12 / 4 = 18$" },
   { id: "ds-5", lessonId: "m-dreisatz", difficulty: 2, type: "multiple", question: "Direkt proportional?", options: [{label: "Verhaeltnis", value: "a"}, {label: "Produkt", value: "b"}, {label: "Summe", value: "c"}], correctOption: "a", solution: "a1/b1 = a2/b2" },
-  { id: "ds-6", lessonId: "m-dreisatz", difficulty: 3, type: "input", question: "8 Arb., 15T. 6 Arb.?", expectedAnswer: "20", format: "Ganze Zahl", solution: "$8 \cdot 15 / 6 = 20$" },
+  { id: "ds-6", lessonId: "m-dreisatz", difficulty: 3, type: "input", question: "8 Arb., 15T. 6 Arb.?", expectedAnswer: "20", format: "Ganze Zahl", solution: "$8 \\cdot 15 / 6 = 20$" },
 ];
 
 export const taylorExercises: Exercise[] = [
   { id: "tw-1", lessonId: "m-taylor", difficulty: 1, type: "multiple", question: "Taylor bei a=0?", options: [{label: "Fourier", value: "a"}, {label: "Maclaurin", value: "b"}, {label: "Laurent", value: "c"}], correctOption: "b", solution: "Maclaurin-Reihe" },
   { id: "tw-2", lessonId: "m-taylor", difficulty: 1, type: "input", question: "$e^x \approx ?$ (1. Ord.)", expectedAnswer: "1+x", format: "Term", solution: "$e^x \approx 1+x$" },
-  { id: "tw-3", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\sin(x) \approx ?$ (1. Ord.)", expectedAnswer: "x", format: "Term", solution: "$\sin(x) \approx x$" },
+  { id: "tw-3", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\sin(x) \approx ?$ (1. Ord.)", expectedAnswer: "x", format: "Term", solution: "$\\sin(x) \approx x$" },
   { id: "tw-4", lessonId: "m-taylor", difficulty: 2, type: "multiple", question: "Konvergenzradius 1/(1-x)?", options: [{label: "R=0", value: "a"}, {label: "R=1", value: "b"}, {label: "R=inf", value: "c"}], correctOption: "b", solution: "|x|<1, R=1" },
-  { id: "tw-5", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\cos(x) \approx ?$ (2. Ord.)", expectedAnswer: "1-x^2/2", format: "Term", solution: "$\cos(x) \approx 1 - x^2/2$" },
+  { id: "tw-5", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\cos(x) \approx ?$ (2. Ord.)", expectedAnswer: "1-x^2/2", format: "Term", solution: "$\\cos(x) \approx 1 - x^2/2$" },
   { id: "tw-6", lessonId: "m-taylor", difficulty: 3, type: "input", question: "Glieder fuer $e \approx 2.7$?", expectedAnswer: "8", format: "Ganze Zahl", solution: "Ca. 8 Glieder" },
 ];
 
