@@ -2187,31 +2187,66 @@ Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\\frac{3}{8}$ gegessen
         title: "Addieren & Subtrahieren",
         duration: "18 min",
         type: "text",
-        content: `## Gleicher Nenner
+        content: `## Addieren & Subtrahieren von Brüchen
+
+Um Brüche zu addieren oder subtrahieren, braucht man einen **gemeinsamen Nenner**.
+
+## Gleicher Nenner
 
 Wenn der Nenner gleich ist, einfach die Zähler addieren/subtrahieren:
 
-$$\\frac{3}{7} + \\frac{2}{7} = \\frac{5}{7}$$
+$$\frac{a}{c} + \frac{b}{c} = \frac{a+b}{c}$$
 
-$$\\frac{5}{8} - \\frac{3}{8} = \\frac{2}{8} = \\frac{1}{4}$$
+### Beispiel 1
+
+$\frac{3}{7} + \frac{2}{7} = \frac{5}{7}$
+
+$\frac{5}{8} - \frac{3}{8} = \frac{2}{8} = \frac{1}{4}$ (kürzen!)
 
 ## Verschiedene Nenner
 
-KGV (kleinstes gemeinsames Vielfaches) des Nenners suchen:
+Man braucht das **kleinste gemeinsame Vielfache (kgV)** der Nenner.
 
-$$\\frac{1}{3} + \\frac{1}{4} = \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$$
+### Beispiel 2
+
+$\frac{1}{3} + \frac{1}{4}$
+
+kgV(3, 4) = 12
+
+$= \frac{4}{12} + \frac{3}{12} = \frac{7}{12}$
+
+### Beispiel 3
+
+$\frac{2}{5} + \frac{1}{3}$
+
+kgV(5, 3) = 15
+
+$= \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$
 
 ## Schritt für Schritt
 
-1. Nenner gleich machen (KGV suchen)
-2. Zähler entsprechend erweitern
-3. Zähler addieren/subtrahieren
-4. Ergebnis kürzen
+1. **kgV** der Nenner suchen
+2. **Erweitern:** Brüche auf den gleichen Nenner bringen
+3. **Zähler** addieren/subtrahieren
+4. **Kürzen:** Ergebnis vereinfachen
 
-### Beispiel
-$\\frac{2}{5} + \\frac{1}{3}$:
-- KGV von 5 und 3 = 15
-- $\\frac{2 \\cdot 3}{5 \\cdot 3} + \\frac{1 \\cdot 5}{3 \\cdot 5} = \\frac{6}{15} + \\frac{5}{15} = \\frac{11}{15}$`,
+### Beispiel 4
+
+$\frac{3}{4} - \frac{1}{6}$
+
+kgV(4, 6) = 12
+
+$= \frac{9}{12} - \frac{2}{12} = \frac{7}{12}$
+
+### Beispiel 5: Drei Brüche
+
+$\frac{1}{2} + \frac{1}{3} + \frac{1}{4}$
+
+kgV(2, 3, 4) = 12
+
+$= \frac{6}{12} + \frac{4}{12} + \frac{3}{12} = \frac{13}{12} = 1\frac{1}{12}$
+
+> **Merke:** Gleicher Nenner = direkt addieren. Verschiedene Nenner = erst kgV suchen und erweitern!`,
       },
       {
         id: "m-br-3",
@@ -2502,27 +2537,57 @@ $(a + b)(c + d) = ac + ad + bc + bd"
         title: "Binomische Formeln",
         duration: "18 min",
         type: "text",
-        content: `## Die drei binomischen Formeln
+        content: `## Binomische Formeln
+
+Die drei binomischen Formeln gehören zu den wichtigsten Werkzeugen der Algebra.
 
 ### 1. Formel: $(a+b)^2 = a^2 + 2ab + b^2$
+
+**Wortlich:** "Summe quadriert = Quadrate plus doppeltes Produkt"
+
 $(x+3)^2 = x^2 + 6x + 9$
 
+$(2x+1)^2 = 4x^2 + 4x + 1$
+
 ### 2. Formel: $(a-b)^2 = a^2 - 2ab + b^2$
+
+**Wortlich:** "Differenz quadriert = Quadrate minus doppeltes Produkt"
+
 $(x-4)^2 = x^2 - 8x + 16$
 
+$(3x-2)^2 = 9x^2 - 12x + 4$
+
 ### 3. Formel: $(a+b)(a-b) = a^2 - b^2$
+
+**Wortlich:** "Summe mal Differenz = Differenz der Quadrate"
+
 $(x+5)(x-5) = x^2 - 25$
 
-## Anwendung: Ausklammern rückwärts
+$(2x+3)(2x-3) = 4x^2 - 9$
+
+### Anwendung: Ausklammern rückwärts
 
 $x^2 + 10x + 25 = (x+5)^2$
 
 $x^2 - 49 = (x+7)(x-7)$
 
+$4x^2 - 12x + 9 = (2x-3)^2$
+
 ### Merkhilfe
-- **Erste:** Quadrieren, doppelt, quadrieren
-- **Zweite:** Wie erste, aber Minus
-- **Dritte:** Plus mal Minus = Differenz der Quadrate`,
+
+| Formel | Schema | Beispiel |
+|--------|--------|----------|
+| $(a+b)^2$ | $a^2 + 2ab + b^2$ | $(x+1)^2 = x^2 + 2x + 1$ |
+| $(a-b)^2$ | $a^2 - 2ab + b^2$ | $(x-1)^2 = x^2 - 2x + 1$ |
+| $(a+b)(a-b)$ | $a^2 - b^2$ | $(x+1)(x-1) = x^2 - 1$ |
+
+### Warum wichtig?
+
+- Quadratische Gleichungen lösen
+- Terme vereinfachen
+- Kurvendiskussion (Scheitelpunktform)
+
+> **Merke:** Erste = Quadrieren, doppelt, quadrieren. Zweite = wie erste mit Minus. Dritte = Plus mal Minus = Differenz der Quadrate!`,
       },
       {
         id: "m-tu-3",
@@ -2633,24 +2698,57 @@ $x \geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
         type: "text",
         content: `## Quadratische Ungleichungen
 
-$ax^2 + bx + c > 0$ oder $ax^2 + bx + c < 0$
+Quadratische Ungleichungen haben die Form $ax^2 + bx + c > 0$ (oder $< 0$, $\leq$, $\geq$).
 
 ## Lösungsweg
 
-1. Zugehörige Gleichung $ax^2 + bx + c = 0$ lösen
+1. Zugehörige Gleichung $ax^2 + bx + c = 0$ lösen (Nullstellen)
 2. Nullstellen auf dem Zahlenstrahl eintragen
 3. Vorzeichen in den Intervallen bestimmen (Tafel-Test)
+4. Lösungsmenge ablesen
 
-### Beispiel
+### Beispiel 1
+
 $x^2 - 5x + 6 > 0$
+
+**Schritt 1:** $x^2 - 5x + 6 = (x-2)(x-3) = 0$
 
 Nullstellen: $x_1 = 2$, $x_2 = 3$
 
-| Intervall | $(−\\infty, 2)$ | $(2, 3)$ | $(3, \\infty)$ |
-|-----------|---------|---------|---------|
-| Vorzeichen | $+$ | $-$ | $+$ |
+**Schritt 2:** Intervalle testen:
 
-Lösung: $x < 2$ oder $x > 3$, also $L = (-\\infty, 2) \\cup (3, \\infty)$`,
+| Intervall | $(x-2)$ | $(x-3)$ | Produkt |
+|-----------|---------|---------|---------|
+| $x < 2$ | $-$ | $-$ | $+$ ✓ |
+| $2 < x < 3$ | $+$ | $-$ | $-$ |
+| $x > 3$ | $+$ | $+$ | $+$ ✓ |
+
+**Schritt 3:** Lösung: $x < 2$ oder $x > 3$
+
+$L = (-\infty, 2) \cup (3, \infty)$
+
+### Beispiel 2
+
+$x^2 - 4 \leq 0$
+
+$(x-2)(x+2) \leq 0$
+
+| Intervall | $(x+2)$ | $(x-2)$ | Produkt |
+|-----------|---------|---------|---------|
+| $x < -2$ | $-$ | $-$ | $+$ |
+| $-2 < x < 2$ | $+$ | $-$ | $-$ ✓ |
+| $x > 2$ | $+$ | $+$ | $+$ |
+
+Lösung: $-2 \leq x \leq 2$ → $L = [-2, 2]$
+
+### Tafel-Test (Vorzeichen)
+
+Der Tafel-Test funktioniert immer:
+1. Faktorisieren
+2. Für jeden Faktor: Vorzeichen in jedem Intervall bestimmen
+3. Produkt-Vorzeichen ablesen
+
+> **Merke:** Nullstellen finden → Intervalle testen → Lösung ablesen!`,
       },
       {
         id: "m-ug-3",
@@ -2697,75 +2795,183 @@ Lösung: $x < 2$ oder $x > 3$, also $L = (-\\infty, 2) \\cup (3, \\infty)$`,
         title: "Definitionsbereich & Nullstellen",
         duration: "18 min",
         type: "text",
-        content: `## Definitionsbereich (Wertebereich)
+        content: `## Definitionsbereich & Nullstellen
 
-Für welche $x$-Werte ist $f(x)$ definiert?
+Bevor man eine Funktion analysiert, muss man wissen, wo sie **definiert** ist und wo sie die x-Achse schneidet.
+
+### Definitionsbereich (Domain)
+
+Der Definitionsbereich ist die Menge aller x-Werte, für die $f(x)$ definiert ist.
 
 ### Einschränkungen
-- **Nenner:** $\\neq 0$
-- **Wurzel:** Argument $\\geq 0$
-- **Logarithmus:** Argument $> 0$
+
+- **Nenner:** Darf nicht 0 sein → $q(x) \neq 0$
+- **Wurzel:** Argument muss $\geq 0$ sein → $\sqrt{g(x)}$ mit $g(x) \geq 0$
+- **Logarithmus:** Argument muss $> 0$ sein → $\ln(g(x))$ mit $g(x) > 0$
+
+### Beispiel 1
+
+$f(x) = \frac{1}{x-2}$
+
+Nenner $\neq 0$: $x - 2 \neq 0 \Rightarrow x \neq 2$
+
+$D_f = \mathbb{R} \setminus \{2\} = (-\infty, 2) \cup (2, \infty)$
+
+### Beispiel 2
+
+$f(x) = \sqrt{x-3}$
+
+$x - 3 \geq 0 \Rightarrow x \geq 3$
+
+$D_f = [3, \infty)$
 
 ## Nullstellen
 
-Löse $f(x) = 0$.
+Nullstellen sind die x-Werte, für die $f(x) = 0$.
 
-### Polynomfunktionen
-$f(x) = x^3 - 4x = x(x^2 - 4) = x(x+2)(x-2)$
+### Beispiel 3
 
-Nullstellen: $x_1 = -2$, $x_2 = 0$, $x_3 = 2$
+$f(x) = x^2 - 4$
 
-### Numerisch
-Wenn keine algebraische Lösung möglich: Newton-Verfahren oder Bisektion.`,
+$x^2 - 4 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \pm 2$
+
+Nullstellen: $x_1 = -2$, $x_2 = 2$
+
+### Beispiel 4: Faktorisieren
+
+$f(x) = x^3 - x = x(x^2 - 1) = x(x+1)(x-1)$
+
+Nullstellen: $x_1 = -1$, $x_2 = 0$, $x_3 = 1$
+
+> **Merke:** Erst Definitionsbereich prüfen, dann Nullstellen berechnen!`,
       },
       {
         id: "m-kd-2",
         title: "Extrema",
         duration: "20 min",
         type: "text",
-        content: `## Extrema finden
+        content: `## Extrema
+
+Extrema sind die **Hoch- und Tiefpunkte** einer Funktion. Man findet sie mit der Ableitung.
 
 ### Notwendige Bedingung (1. Ableitung)
-$f'(x_0) = 0$ → Kandidat für Extremum
+
+An Extremstellen gilt: $f'(x_0) = 0$
+
+Das heißt: Die Tangente ist **horizontal**.
 
 ### Hinreichende Bedingung (2. Ableitung)
-- $f''(x_0) > 0$ → **lokales Minimum**
-- $f''(x_0) < 0$ → **lokales Maximum**
-- $f''(x_0) = 0$ → unklar, höhere Ableitungen prüfen
+
+- $f''(x_0) > 0$ → **lokales Minimum** (U-Form)
+- $f''(x_0) < 0$ → **lokales Maximum** (n-Form)
+- $f''(x_0) = 0$ → unklar (höhere Ableitungen prüfen)
 
 ### Beispiel
+
 $f(x) = x^3 - 3x + 2$
 
-$f'(x) = 3x^2 - 3 = 0 \\Rightarrow x = \\pm 1$
+**Schritt 1:** $f'(x) = 3x^2 - 3 = 0$
 
-$f''(x) = 6x$
-- $f''(-1) = -6 < 0$ → **Maximum** bei $(-1, 4)$
-- $f''(1) = 6 > 0$ → **Minimum** bei $(1, 0)$`,
+$x^2 = 1 \Rightarrow x = \pm 1$
+
+**Schritt 2:** $f''(x) = 6x$
+
+$f''(-1) = -6 < 0$ → **Maximum** bei $(-1, 4)$
+
+$f''(1) = 6 > 0$ → **Minimum** bei $(1, 0)$
+
+**Schritt 3:** Werte berechnen
+
+$f(-1) = -1 + 3 + 2 = 4$
+
+$f(1) = 1 - 3 + 2 = 0$
+
+### Absolute Extrema
+
+Auf einem abgeschlossenen Intervall $[a, b]$:
+
+1. Extrema im Inneren berechnen
+2. Funktionswerte an den Rändern $f(a)$, $f(b)$ berechnen
+3. Größter Wert = absolutes Maximum, kleinster = absolutes Minimum
+
+### Beispiel 2
+
+$f(x) = x^2$ auf $[-2, 3]$
+
+$f'(x) = 2x = 0 \Rightarrow x = 0$
+
+$f(0) = 0$, $f(-2) = 4$, $f(3) = 9$
+
+Absolutes Maximum: $f(3) = 9$
+
+Absolutes Minimum: $f(0) = 0$
+
+> **Merke:** $f'(x_0) = 0$ ist nur die **notwendige** Bedingung. Immer mit $f''$ prüfen!`,
       },
       {
         id: "m-kd-3",
         title: "Wendepunkte & Monotonie",
         duration: "18 min",
         type: "text",
-        content: `## Wendepunkt
+        content: `## Wendepunkte & Monotonie
 
-Die **Krümmung** ändert sich. Bedingung: $f''(x_0) = 0$ und $f'''(x_0) \\neq 0$.
+Nach den Extrema kommen die Wendepunkte — wo sich die **Krümmung** ändert.
+
+### Wendepunkt
+
+Ein Wendepunkt ist ein Punkt, an dem die Funktion von **linksgekrümmt** nach **rechtsgekrümmt** (oder umgekehrt) wechselt.
+
+### Bedingung
+
+$f''(x_0) = 0$ und $f'''(x_0) \neq 0$
 
 ### Beispiel
+
 $f(x) = x^3 - 3x + 2$
-$f''(x) = 6x = 0 \\Rightarrow x = 0$
-$f'''(x) = 6 \\neq 0$ → Wendepunkt bei $(0, 2)$
+
+$f'(x) = 3x^2 - 3$
+
+$f''(x) = 6x = 0 \Rightarrow x = 0$
+
+$f'''(0) = 6 \neq 0$ → Wendepunkt!
+
+$f(0) = 2$ → Wendepunkt bei $(0, 2)$
 
 ## Monotonie
 
-- $f'(x) > 0$: Funktion steigt
-- $f'(x) < 0$: Funktion fällt
-- $f'(x) = 0$: Extremstelle
+Anhand von $f'(x)$ kann man sehen, ob die Funktion steigt oder fällt:
+
+- $f'(x) > 0$: $f$ ist **steigend** ↗
+- $f'(x) < 0$: $f$ ist **fallend** ↘
+- $f'(x) = 0$: **Extremstelle** (oder Sattelpunkt)
+
+### Beispiel 2
+
+$f(x) = x^2 - 4x + 3$
+
+$f'(x) = 2x - 4$
+
+$f'(x) > 0 \Rightarrow x > 2$ → $f$ steigt für $x > 2$
+
+$f'(x) < 0 \Rightarrow x < 2$ → $f$ fällt für $x < 2$
 
 ## Krümmung
 
-- $f''(x) > 0$: Linksgekrümmt (U-Form)
-- $f''(x) < 0$: Rechtsgekrümmt (n-U-Form)`,
+Anhand von $f''(x)$:
+
+- $f''(x) > 0$: **Linksgekrümmt** (U-Form, wie $x^2$)
+- $f''(x) < 0$: **Rechtsgekrümmt** (n-Form, wie $-x^2$)
+
+### Schema für Kurvendiskussion
+
+1. Definitionsbereich
+2. Nullstellen ($f(x) = 0$)
+3. Extrema ($f'(x) = 0$, $f''(x)$ prüfen)
+4. Wendepunkte ($f''(x) = 0$)
+5. Monotonie (Vorzeichen von $f'(x)$)
+6. Krümmung (Vorzeichen von $f''(x)$)
+
+> **Merke:** Wendepunkt = Krümmungswechsel. Monotonie zeigt $f'$, Krümmung zeigt $f''$!`,
       },
       {
         id: "m-kd-4",
@@ -2814,22 +3020,57 @@ $x = \\frac{D_x}{D}$, $y = \\frac{D_y}{D}$
         type: "text",
         content: `## Einsetzungsverfahren
 
+Das Einsetzungsverfahren ist eine Methode, um lineare Gleichungssysteme (LGS) zu lösen.
+
+### Prinzip
+
 1. Aus einer Gleichung eine Variable isolieren
 2. In die andere Gleichung einsetzen
+3. Ergebnis zurücksetzen
 
-### Beispiel
-$\\begin{cases} 2x + y = 7 \\ x - y = 1 \\end{cases}$
+### Beispiel 1
+
+$\begin{cases} 2x + y = 7 \\ x - y = 1 \end{cases}$
+
+**Schritt 1:** Aus Gleichung 2: $x = y + 1$
+
+**Schritt 2:** Einsetzen in Gleichung 1:
+
+$2(y+1) + y = 7$
+
+$2y + 2 + y = 7$
+
+$3y = 5$
+
+$y = \frac{5}{3}$
+
+**Schritt 3:** Rückeinsetzen:
+
+$x = \frac{5}{3} + 1 = \frac{8}{3}$
+
+**Probe:** $2 \cdot \frac{8}{3} + \frac{5}{3} = \frac{21}{3} = 7$ ✓
+
+### Beispiel 2
+
+$\begin{cases} 3x + 2y = 12 \\ x - y = 1 \end{cases}$
 
 Aus Gleichung 2: $x = y + 1$
 
-Einsetzen in Gleichung 1: $2(y+1) + y = 7$
-$2y + 2 + y = 7$
-$3y = 5$
-$y = \\frac{5}{3}$
+Einsetzen: $3(y+1) + 2y = 12$
 
-Rückeinsetzen: $x = \\frac{5}{3} + 1 = \\frac{8}{3}$
+$3y + 3 + 2y = 12$
 
-Probe: $2 \\cdot \\frac{8}{3} + \\frac{5}{3} = \\frac{21}{3} = 7$ ✓`,
+$5y = 9$
+
+$y = \frac{9}{5} = 1{,}8$
+
+$x = 1{,}8 + 1 = 2{,}8$
+
+### Wann verwenden?
+
+Das Einsetzungsverfahren ist gut, wenn eine Variable leicht isolierbar ist (Koeffizient 1 oder -1).
+
+> **Merke:** Isolieren → Einsetzen → Zurücksetzen → Probe!`,
       },
       {
         id: "m-lgs-2",
@@ -3087,23 +3328,48 @@ $\binom{5}{3} = \frac{5!}{3! \cdot 2!} = \frac{120}{6 \cdot 2} = 10$
         type: "text",
         content: `## Normalverteilung
 
-Die wichtigste **stetige** Verteilung. Glockenförmige Kurve.
+Die Normalverteilung ist die wichtigste **stetige** Verteilung. Sie beschreibt viele natürliche Phänomene: Körpergröße, Messfehler, IQ.
+
+### Glockenkurve
+
+Die Dichtefunktion ist eine symmetrische Glocke:
+
+$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
 
 ### Parameter
-- $\\mu$: Mittelwert (Lage)
-- $\\sigma$: Standardabweichung (Streue)
+
+- $\mu$: Mittelwert (Verschiebung)
+- $\sigma$: Standardabweichung (Breite)
 
 ### 68-95-99,7-Regel
-- 68% der Werte liegen in $\\mu \\pm \\sigma$
-- 95% in $\\mu \\pm 2\\sigma$
-- 99,7% in $\\mu \\pm 3\\sigma$
 
-### Standardnormalverteilung
-$Z = \\frac{X - \\mu}{\\sigma}$ → $\\mu = 0$, $\\sigma = 1$
+- **68%** der Werte liegen in $\mu \pm \sigma$
+- **95%** in $\mu \pm 2\sigma$
+- **99,7%** in $\mu \pm 3\sigma$
 
 ### Beispiel
-Größe: $\\mu = 175$ cm, $\\sigma = 7$ cm
-68% sind zwischen 168 und 182 cm groß.`,
+
+Körpergröße: $\mu = 175$ cm, $\sigma = 7$ cm
+
+- 68% sind zwischen 168 und 182 cm groß
+- 95% sind zwischen 161 und 189 cm
+- 99,7% sind zwischen 154 und 196 cm
+
+### Standardnormalverteilung
+
+$Z = \frac{X - \mu}{\sigma}$ → $\mu = 0$, $\sigma = 1$
+
+### Beispiel 2
+
+IQ: $\mu = 100$, $\sigma = 15$
+
+$P(X > 130) = P\left(Z > \frac{130-100}{15}\right) = P(Z > 2) \approx 2{,}5\%$
+
+### Warum so wichtig?
+
+Nach dem **Zentralen Grenzwertsatz** nähert sich die Summe vieler unabhängiger Zufallsvariablen der Normalverteilung an — egal, welche Verteilung die einzelnen haben!
+
+> **Merke:** Normalverteilung = Glockenkurve. 68-95-99,7 ist die wichtigste Faustregel!`,
       },
       {
         id: "m-vt-3",
@@ -3350,29 +3616,55 @@ Schnittpunkt: $(1, 1, 0)$
         title: "Ebenen im Raum",
         duration: "20 min",
         type: "text",
-        content: `## Ebene im Raum
+        content: `## Ebenen im Raum
+
+Eine Ebene im dreidimensionalen Raum wird durch einen Punkt und zwei Richtungsvektoren (oder einen Normalenvektor) beschrieben.
 
 ### Parameterform
-$\\vec{x} = \\vec{p} + r \\cdot \\vec{u} + s \\cdot \\vec{v}$
+
+$$\vec{x} = \vec{p} + r \cdot \vec{u} + s \cdot \vec{v}$$
+
+- $\vec{p}$: Stützvektor (Punkt auf der Ebene)
+- $\vec{u}$, $\vec{v}$: Richtungsvektoren (linear unabhängig)
+- $r$, $s$: Parameter
+
+### Beispiel 1
+
+$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + r \begin{pmatrix}1\\0\\0\end{pmatrix} + s \begin{pmatrix}0\\1\\0\end{pmatrix}$
+
+Das ist die Ebene $z = 3$ (parallel zur xy-Ebene).
 
 ### Koordinatenform
-$ax + by + cz = d$
 
-$\\vec{n} = \\begin{pmatrix}a\\b\\c\\end{pmatrix}$ ist der **Normalenvektor**.
+$$ax + by + cz = d$$
 
-### Beispiel
+$\vec{n} = \begin{pmatrix}a\\b\\c\end{pmatrix}$ ist der **Normalenvektor** (senkrecht zur Ebene).
+
+### Beispiel 2
+
 $2x - y + 3z = 6$
 
-Normalenvektor: $\\vec{n} = (2, -1, 3)$
+Normalenvektor: $\vec{n} = (2, -1, 3)$
 
-## Abstand Punkt-Ebene
+Punkt auf der Ebene: $x=3, y=0, z=0$ → $6 = 6$ ✓
 
-$d = \\frac{|ax_0 + by_0 + cz_0 - d|}{\\sqrt{a^2 + b^2 + c^2}}$
+### Umrechnung
 
-### Beispiel
-Punkt $(1, 2, 3)$, Ebene $2x - y + 3z = 6$
+**Parameter → Koordinaten:** Normalenvektor = Kreuzprodukt $\vec{u} \times \vec{v}$
 
-$d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}}$`,
+**Koordinaten → Parameter:** Zwei linear unabhängige Vektoren senkrecht zu $\vec{n}$ finden.
+
+### Abstand Punkt-Ebene
+
+$$d = \frac{|ax_0 + by_0 + cz_0 - d|}{\sqrt{a^2 + b^2 + c^2}}$$
+
+### Beispiel 3
+
+Abstand $(1, 2, 3)$ zur Ebene $2x - y + 3z = 6$:
+
+$d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}} \approx 0{,}80$
+
+> **Merke:** Ebene = Punkt + 2 Richtungen. Normalenvektor steht senkrecht drauf!`,
       },
       {
         id: "m-ag-3",
