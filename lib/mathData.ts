@@ -957,26 +957,45 @@ Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wied
         type: "text",
         content: `## Bedingte Wahrscheinlichkeit
 
-$$P(A|B) = \\frac{P(A \\cap B)}{P(B)}$$
+Die bedingte Wahrscheinlichkeit gibt an, wie wahrscheinlich ein Ereignis ist, **wenn ein anderes bereits eingetreten ist**.
 
-Die Wahrscheinlichkeit von A, **unter der Bedingung** dass B eingetreten ist.
+### Notation
 
-## Bayes-Formel
+$P(A|B)$ = "Wahrscheinlichkeit von A, gegeben B"
 
-$$P(B|A) = \\frac{P(A|B) \\cdot P(B)}{P(A)}$$
+### Formel
 
-## Unabhängigkeit
+$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
 
-A und B sind **unabhängig**, wenn:
-$$P(A \\cap B) = P(A) \\cdot P(B)$$
+### Beispiel 1: Ziehen ohne Zurücklegen
 
-**Beispiel:** Münzwürfe sind unabhängig.
+Eine Urne mit 3 roten und 2 blauen Kugeln. Ziehe 2 Kugeln ohne Zurücklegen.
 
-## Übung
+$P(\text{2. rot} | \text{1. rot}) = \frac{2}{4} = 0{,}5$
 
-In einer Klasse sind 60% Mädchen und 40% Jungen. 70% der Mädchen haben Haare lang, 30% der Jungen haben Haare lang.
+Nachdem die erste rote Kugel gezogen wurde, sind nur noch 2 von 4 übrig.
 
-Wie hoch ist die Wahrscheinlichkeit, dass ein zufällig gewählter Schüler ein Mädchen mit langen Haaren ist?`,
+### Beispiel 2: Würfeln
+
+$P(\text{6} | \text{ungerade}) = ?$
+
+Ungerade Zahlen: {1, 3, 5}. Keine davon ist 6. Also $P = 0$.
+
+### Beispiel 3: Medizinischer Test
+
+- Krankheit: 1% der Bevölkerung
+- Test: 95% Sensitivität (richtig positiv)
+- Test: 5% Falsch-Positiv-Rate
+
+$P(\text{krank} | \text{positiv}) = \frac{0{,}95 \cdot 0{,}01}{0{,}95 \cdot 0{,}01 + 0{,}05 \cdot 0{,}99} \approx 16{,}1\%$
+
+Überraschend niedrig! Das liegt an der niedrigen Grundrate.
+
+### Unabhängigkeit
+
+A und B sind unabhängig, wenn $P(A|B) = P(A)$.
+
+> **Merke:** Bedingte Wahrscheinlichkeit = "Wissen ändert die Wahrscheinlichkeit"!`,
       },
       {
         id: "m-sto-quiz",
@@ -1099,36 +1118,60 @@ Berechne $\\frac{2 + 3i}{1 - i}$!`,
         title: "Polardarstellung & Euler",
         duration: "20 min",
         type: "text",
-        content: `## Polardarstellung
+        content: `## Polardarstellung & Euler
 
-$$z = r \\cdot e^{i\\varphi}$$
+Komplexe Zahlen können nicht nur als $a + bi$, sondern auch als **Polarkoordinaten** dargestellt werden.
 
-Mit:
-- $r = |z| = \\sqrt{a^2 + b^2}$ (Betrag)
-- $\\varphi = \arg(z)$ (Argument/Winkel)
+### Betrag
 
-## Euler-Formel
+$|z| = \sqrt{a^2 + b^2}$
 
-$$e^{i\\varphi} = \\cos\\varphi + i\\sin\\varphi$$
+### Beispiel 1
 
-**Spezielle Werte:**
-- $e^{i\\pi/2} = i$
-- $e^{i\\pi} = -1$
-- $e^{i2\\pi} = 1$
+$z = 3 + 4i$
 
-## De Moivre'scher Satz
+$|z| = \sqrt{9 + 16} = \sqrt{25} = 5$
 
-$$(e^{i\\varphi})^n = e^{in\\varphi} = \\cos(n\\varphi) + i\\sin(n\\varphi)$$
+### Polarform
 
-**Anwendung:** Potenzen und Wurzeln komplexer Zahlen
+$z = r \cdot (\cos \varphi + i \sin \varphi) = r \cdot e^{i\varphi}$
 
-## Einheitskreis
+- $r = |z|$ (Betrag)
+- $\varphi = \arctan\frac{b}{a}$ (Winkel)
 
-Alle Zahlen mit $|z| = 1$ liegen auf dem Einheitskreis.
+### Beispiel 2
 
-## Übung
+$z = 1 + i$
 
-Gib $z = 1 + i$ in Polardarstellung an!`,
+$r = \sqrt{2}$, $\varphi = \frac{\pi}{4}$ (45°)
+
+$z = \sqrt{2} \cdot e^{i\pi/4}$
+
+### Euler-Formel
+
+$$e^{ix} = \cos x + i \sin x$$
+
+Das ist eine der berühmtesten Formeln der Mathematik! Sie verbindet $e$, $i$, $\pi$, $1$ und $0$.
+
+### Multiplikation in Polarform
+
+$z_1 \cdot z_2 = r_1 \cdot r_2 \cdot e^{i(\varphi_1 + \varphi_2)}$
+
+**Betrag multiplizieren, Winkel addieren!**
+
+### Beispiel 3
+
+$z_1 = 2e^{i\pi/6}$, $z_2 = 3e^{i\pi/3}$
+
+$z_1 \cdot z_2 = 6e^{i\pi/2} = 6i$
+
+### De Moivre's Formel
+
+$z^n = r^n \cdot e^{in\varphi}$
+
+$|z^n| = r^n$, $\arg(z^n) = n \cdot \varphi$
+
+> **Merke:** Polarform = Betrag × Euler. Multiplikation = Beträge multiplizieren, Winkel addieren!`,
       },
       {
         id: "m-kz-quiz",
@@ -1229,24 +1272,50 @@ Wenn $|e_{n+1}| \leq C \cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
         type: "text",
         content: `## Bisektionsverfahren
 
-Einfache Methode zum Finden von Nullstellen.
+Das Bisektionsverfahren findet **Nullstellen** einer Funktion durch halbierende Intervallschritte.
+
+### Idee
+
+Wenn $f(a)$ und $f(b)$ verschiedene Vorzeichen haben, liegt dazwischen eine Nullstelle.
 
 ### Algorithmus
-1. Wähle $[a,b]$ mit $f(a) \\cdot f(b) < 0$
-2. Berechne $m = \\frac{a+b}{2}$
-3. Wenn $f(m) = 0$: fertig!
-4. Wenn $f(a) \\cdot f(m) < 0$: $b = m$, sonst $a = m$
-5. Wiederhole ab Schritt 2
+
+1. Startintervall $[a, b]$ mit $f(a) \cdot f(b) < 0$
+2. Mitte: $c = \frac{a+b}{2}$
+3. Wenn $f(c) = 0$: fertig!
+4. Sonst: Welches Teilintervall hat Vorzeichenwechsel? → neues Intervall
+5. Wiederhole bis gewünschte Genauigkeit
+
+### Beispiel
+
+$f(x) = x^2 - 2$ (Nullstelle bei $\sqrt{2} \approx 1{,}414$)
+
+| Schritt | $a$ | $b$ | $c$ | $f(c)$ |
+|---------|-----|-----|-----|--------|
+| 1 | 1 | 2 | 1,5 | 0,25 |
+| 2 | 1 | 1,5 | 1,25 | -0,4375 |
+| 3 | 1,25 | 1,5 | 1,375 | -0,1094 |
+| 4 | 1,375 | 1,5 | 1,4375 | 0,0664 |
+
+Nach 4 Schritten: $\sqrt{2} \approx 1{,}4375$
 
 ### Konvergenz
-Nach n Schritten:
-$$|x_n - x^*| \\leq \\frac{b-a}{2^n}$$
 
-**Beispiel:** Nullstelle von $f(x) = x^2 - 2$ im Intervall [1, 2]
+- **Linear** (Ordnung 1): Jeder Schritt halbiert das Intervall
+- Nach $n$ Schritten: Intervallbreite $\frac{b-a}{2^n}$
+- Für 10 Dezimalstellen: ca. 34 Schritte ($2^{34} > 10^{10}$)
 
-## Übung
+### Vor- und Nachteile
 
-Finde die Nullstelle von $f(x) = x - \\cos(x)$ mit Bisektion!`,
+✅ Garantiert Konvergenz (wenn Vorzeichenwechsel vorhanden)
+
+✅ Einfach zu implementieren
+
+❌ Langsam (linear)
+
+❌ Braucht Vorzeichenwechsel
+
+> **Merke:** Bisektion = Intervall halbieren. Garantiert, aber langsam!`,
       },
       {
         id: "m-num-3",
@@ -1255,31 +1324,57 @@ Finde die Nullstelle von $f(x) = x - \\cos(x)$ mit Bisektion!`,
         type: "text",
         content: `## Newton-Verfahren
 
-Schnellere Methode mit Ableitung.
+Das Newton-Verfahren (auch Newton-Raphson) ist ein schnelles Verfahren zur Nullstellenbestimmung.
+
+### Idee
+
+Starte mit einem Schätzwert $x_0$ und verbessere ihn iterativ mit der **Tangente**.
 
 ### Formel
-$$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$$
 
-### Geometrische Deutung
-Tangente an $f$ in $x_n$ wird gezogen. Der Schnitt mit der x-Achse ist $x_{n+1}$.
-
-### Konvergenz
-- Quadratische Konvergenz (sehr schnell!)
-- Voraussetzung: $f'(x^*) \\neq 0$
+$$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
 
 ### Beispiel
-$f(x) = x^2 - 2$, $f'(x) = 2x$
 
-$$x_{n+1} = x_n - \\frac{x_n^2 - 2}{2x_n} = \\frac{x_n}{2} + \\frac{1}{x_n}$$
+$f(x) = x^2 - 2$ (Nullstelle bei $\sqrt{2}$)
 
-Mit $x_0 = 1$:
-- $x_1 = 1.5$
-- $x_2 = 1.4166...$
-- $x_3 = 1.4142...$ (schon sehr nah!)
+$f'(x) = 2x$, Start: $x_0 = 2$
 
-## Übung
+| Schritt | $x_n$ | $f(x_n)$ | $f'(x_n)$ | $x_{n+1}$ |
+|---------|--------|----------|-----------|-----------|
+| 0 | 2 | 2 | 4 | 1,5 |
+| 1 | 1,5 | 0,25 | 3 | 1,4167 |
+| 2 | 1,4167 | 0,0069 | 2,833 | 1,4142 |
 
-Verwende Newton für $f(x) = x^3 - 5$ mit $x_0 = 2$!`,
+Nach nur 3 Schritten: $\sqrt{2} \approx 1{,}4142$ (4 Dezimalstellen!)
+
+### Konvergenz
+
+- **Quadratisch** (Ordnung 2): Anzahl korrekter Stellen verdoppelt sich pro Schritt
+- Viel schneller als Bisektion!
+
+### Vor- und Nachteile
+
+✅ Sehr schnell (quadratisch)
+
+✅ Gut für viele Funktionen
+
+❌ Braucht Ableitung $f'(x)$
+
+❌ Konvergiert nicht immer (z.B. bei Wendepunkten)
+
+❌ Kann "überspringen" (divergieren)
+
+### Vergleich
+
+| | Bisektion | Newton |
+|--|-----------|--------|
+| Konvergenz | Linear | Quadratisch |
+| Braucht Ableitung? | Nein | Ja |
+| Garantiert? | Ja | Nein |
+| Schritte für 10 Stellen | ~34 | ~5 |
+
+> **Merke:** Newton = schnell aber heikel, Bisektion = langsam aber sicher!`,
       },
       {
         id: "m-num-quiz",
@@ -2026,24 +2121,49 @@ $\\frac{2}{5} + \\frac{1}{3}$:
         title: "Multiplizieren & Dividieren",
         duration: "15 min",
         type: "text",
-        content: `## Multiplikation
+        content: `## Multiplizieren & Dividieren
 
-Einfach Zähler mal Zähler, Nenner mal Nenner:
+Brüche zu multiplizieren ist einfacher als zu addieren — man braucht keinen gemeinsamen Nenner!
 
-$$\\frac{2}{3} \\cdot \\frac{4}{5} = \\frac{8}{15}$$
+## Multiplikation
 
-**Vor dem Multiplizieren kürzen** macht das Ergebnis einfacher:
+**Regel:** Zähler mal Zähler, Nenner mal Nenner.
 
-$$\\frac{3}{4} \\cdot \\frac{8}{9} = \\frac{\\cancel{3}}{4} \\cdot \\frac{8}{\\cancel{9}_3} = \\frac{1}{1} \\cdot \\frac{2}{3} = \\frac{2}{3}$$
+$$\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$$
+
+### Beispiel 1
+
+$\frac{2}{3} \cdot \frac{4}{5} = \frac{8}{15}$
+
+### Beispiel 2: Vereinfachen vor dem Multiplizieren
+
+$\frac{3}{4} \cdot \frac{8}{9}$
+
+Kreußlich kürzen: 3 und 9 teilen sich durch 3, 4 und 8 teilen sich durch 4:
+
+$= \frac{1}{1} \cdot \frac{2}{3} = \frac{2}{3}$
+
+**Tipp:** Immer vor dem Multiplizieren kürzen — das macht das Ergebnis einfacher!
 
 ## Division
 
-Kehrtausch! Dividiere durch $\\frac{a}{b}$ → multipliziere mit $\\frac{b}{a}$:
+**Regel:** Kehrtausch! Dividieren durch $\frac{a}{b}$ = Multiplizieren mit $\frac{b}{a}$.
 
-$$\\frac{2}{3} : \\frac{4}{5} = \\frac{2}{3} \\cdot \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$$
+$$\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$$
 
-### Merksatz
-"Dividieren? Kehren und multiplizieren!"`,
+### Beispiel 3
+
+$\frac{2}{3} : \frac{4}{5} = \frac{2}{3} \cdot \frac{5}{4} = \frac{10}{12} = \frac{5}{6}$
+
+### Beispiel 4: Gemischte Zahlen
+
+$2\frac{1}{2} : 1\frac{1}{4}$
+
+Erst in unechte Brüche umwandeln:
+
+$\frac{5}{2} : \frac{5}{4} = \frac{5}{2} \cdot \frac{4}{5} = \frac{20}{10} = 2$
+
+> **Merke:** Multiplizieren = Zähler×Zähler, Nenner×Nenner. Dividieren = Kehren und multiplizieren!`,
       },
       {
         id: "m-br-4",
@@ -2093,30 +2213,66 @@ $D = b^2 - 4ac$
         title: "Lineare Gleichungen",
         duration: "15 min",
         type: "text",
-        content: `## Was ist eine lineare Gleichung?
+        content: `## Lineare Gleichungen
 
-Eine Gleichung mit einer Variablen in **höchstens 1. Potenz**:
+Lineare Gleichungen sind die einfachste Art von Gleichungen — die Variable kommt nur in der **1. Potenz** vor.
 
-$$3x + 5 = 14$$
+### Grundprinzip
 
-## Lösungsprinzip
+Was du auf einer Seite machst, musst du auch auf der anderen machen.
 
-Was auf einer Seite gemacht wird, muss auch auf die andere:
+### Beispiel 1: Einfach
 
-1. **Umformen:** Terme zusammenfassen
-2. **Isolieren:** Variable auf eine Seite bringen
-3. **Lösen:** Durch Koeffizienten teilen
+$2x + 6 = 14$
 
-### Beispiel 1
-$2x + 7 = 15$
-$2x = 15 - 7 = 8$
+$2x = 14 - 6 = 8$
+
 $x = 4$
 
-### Beispiel 2
-$5(x - 3) = 2x + 1$
-$5x - 15 = 2x + 1$
-$3x = 16$
-$x = \\frac{16}{3} = 5\\frac{1}{3}$`,
+**Probe:** $2 \cdot 4 + 6 = 14$ ✓
+
+### Beispiel 2: Variable auf beiden Seiten
+
+$5x - 3 = 2x + 9$
+
+$5x - 2x = 9 + 3$
+
+$3x = 12$
+
+$x = 4$
+
+### Beispiel 3: Klammern
+
+$3(x - 2) = 2(x + 1)$
+
+$3x - 6 = 2x + 2$
+
+$3x - 2x = 2 + 6$
+
+$x = 8$
+
+### Beispiel 4: Brüche
+
+$\frac{x}{3} + \frac{x}{4} = 7$
+
+Mit 12 erweitern (kgV von 3 und 4):
+
+$4x + 3x = 84$
+
+$7x = 84$
+
+$x = 12$
+
+### Schema
+
+1. **Klammern** auflösen
+2. **Brüche** wegschaffen (erweitern)
+3. **Variablen** auf eine Seite
+4. **Zahlen** auf die andere Seite
+5. **Dividieren** durch den Koeffizienten
+6. **Probe** machen!
+
+> **Merke:** Das Ziel ist immer, $x = ...$ zu bekommen. Schritt für Schritt umformen!`,
       },
       {
         id: "m-gl-2",
@@ -2198,22 +2354,51 @@ $a^0 = 1$ (für $a \\neq 0$)`,
         title: "Klammern ausmultiplizieren",
         duration: "15 min",
         type: "text",
-        content: `## Distributivgesetz
+        content: `## Klammern ausmultiplizieren
 
-$a \\cdot (b + c) = a \\cdot b + a \\cdot c$
+Das Distributivgesetz ist das wichtigste Werkzeug beim Vereinfachen von Termen.
 
-### Beispiel
-$3(x + 4) = 3x + 12$
+### Distributivgesetz
 
-$-2(5 - x) = -10 + 2x$
+$a \cdot (b + c) = a \cdot b + a \cdot c$
 
-## Klammern verschachtelt
+### Beispiel 1: Einfach
 
-$2(3x - (4 - x)) = 2(3x - 4 + x) = 2(4x - 4) = 8x - 8$
+$3(x + 4) = 3 \cdot x + 3 \cdot 4 = 3x + 12$
 
-## Mehrere Klammern
+### Beispiel 2: Negatives Vorzeichen
 
-$(x + 2)(x - 3) = x^2 - 3x + 2x - 6 = x^2 - x - 6$`,
+$-2(5 - x) = -2 \cdot 5 + (-2) \cdot (-x) = -10 + 2x$
+
+**Vorsicht:** Minus mal Minus gibt Plus!
+
+### Beispiel 3: Variable außen
+
+$x(x + 3) = x^2 + 3x$
+
+### Beispiel 4: Verschachtelte Klammern
+
+$2(3x - (4 - x))$
+
+Erst innere Klammer auflösen:
+
+$= 2(3x - 4 + x) = 2(4x - 4) = 8x - 8$
+
+### Beispiel 5: Zwei Klammern
+
+$(x + 2)(x - 3)$
+
+Jedes Element der ersten Klammer mit jedem der zweiten multiplizieren:
+
+$= x \cdot x + x \cdot (-3) + 2 \cdot x + 2 \cdot (-3)$
+
+$= x^2 - 3x + 2x - 6 = x^2 - x - 6$
+
+### Schema für zwei Klammern
+
+$(a + b)(c + d) = ac + ad + bc + bd"
+
+> **Merke:** "Außen mal Außen, Innen mal Innen" — das FOIL-Prinzip (First, Outer, Inner, Last)!`,
       },
       {
         id: "m-tu-2",
@@ -2710,24 +2895,54 @@ $E(X) = \\lambda$`,
         type: "text",
         content: `## Binomialverteilung
 
-Modelliert die Anzahl **erfolgreicher** Versuche bei $n$ Bernoulli-Versuchen.
+Die Binomialverteilung modelliert die Anzahl **erfolgreicher** Versuche bei $n$ unabhängigen Experimenten.
 
 ### Voraussetzungen
-- $n$ feste Versuche
-- Jeder Versuch: Erfolg (p) oder Misserfolg (1-p)
-- Versuche unabhängig
+
+- **n** feste Versuche
+- Jeder Versuch: **Erfolg** (Wahrscheinlichkeit $p$) oder **Misserfolg** ($1-p$)
+- Versuche sind **unabhängig**
+- **p** ist konstant
 
 ### Formel
-$P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}$
 
-### Beispiel
-Münzwurf 10-mal: Wie wahrscheinlich sind genau 3 Mal Kopf?
+$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
 
-$P(X=3) = \\binom{10}{3} (0{,}5)^3 (0{,}5)^7 = 120 \\cdot 0{,}000977 = 0{,}117$
+### Beispiel 1: Münzwurf
+
+Münze 5-mal werfen. Wie wahrscheinlich sind genau 3 Köpfe?
+
+$P(X=3) = \binom{5}{3} (0{,}5)^3 (0{,}5)^2 = 10 \cdot 0{,}125 \cdot 0{,}25 = 0{,}3125$
+
+Also ca. 31%.
+
+### Beispiel 2: Würfel
+
+Würfel 10-mal. Wie wahrscheinlich sind genau 2 Sechsen?
+
+$P(X=2) = \binom{10}{2} \left(\frac{1}{6}\right)^2 \left(\frac{5}{6}\right)^8$
+
+$= 45 \cdot 0{,}0278 \cdot 0{,}2326 \approx 0{,}2907$
 
 ### Erwartungswert & Varianz
-$E(X) = np = 10 \\cdot 0{,}5 = 5$
-$Var(X) = np(1-p) = 2{,}5$`,
+
+$E(X) = np$
+
+$Var(X) = np(1-p)$
+
+### Beispiel 3
+
+Münze 100-mal: $E(X) = 100 \cdot 0{,}5 = 50$ Köpfe
+
+$Var(X) = 100 \cdot 0{,}5 \cdot 0{,}5 = 25$, $\sigma = 5$
+
+### Binomialkoeffizient
+
+$\binom{n}{k} = \frac{n!}{k!(n-k)!}$
+
+$\binom{5}{3} = \frac{5!}{3! \cdot 2!} = \frac{120}{6 \cdot 2} = 10$
+
+> **Merke:** Binomialverteilung zählt Erfolge bei n Versuchen. $E(X) = np$ ist der erwartete Mittelwert!`,
       },
       {
         id: "m-vt-2",
@@ -2797,49 +3012,106 @@ $S = \\frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
         title: "Arithmetische Folgen",
         duration: "15 min",
         type: "text",
-        content: `## Arithmetische Folge
+        content: `## Arithmetische Folgen
 
-Konstanter **Abstand** $d$ zwischen aufeinanderfolgenden Gliedern.
+Eine arithmetische Folge hat einen **konstanten Abstand** $d$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
-$a_n = a_1 + (n-1) \\cdot d$
 
-### Beispiel
+$$a_n = a_1 + (n-1) \cdot d$$
+
+### Beispiel 1
+
 $3, 7, 11, 15, 19, ...$ → $a_1 = 3$, $d = 4$
 
-$a_{10} = 3 + 9 \\cdot 4 = 39$
+$a_5 = 3 + (5-1) \cdot 4 = 3 + 16 = 19$
 
-### Partialsumme
-$S_n = \\frac{n}{2}(a_1 + a_n) = \\frac{n}{2}(2a_1 + (n-1)d)$
+### Beispiel 2
 
-$S_{10} = \\frac{10}{2}(3 + 39) = 5 \\cdot 42 = 210$`,
+Gerade Zahlen: $2, 4, 6, 8, ...$ → $a_1 = 2$, $d = 2$
+
+$a_{10} = 2 + 9 \cdot 2 = 20$
+
+## Partialsumme
+
+Die Summe der ersten $n$ Glieder:
+
+$$S_n = \frac{n}{2}(a_1 + a_n) = \frac{n}{2}(2a_1 + (n-1)d)$$
+
+### Beispiel 3: Gauß'sche Summenformel
+
+$1 + 2 + 3 + ... + 100 = ?$
+
+$S_{100} = \frac{100}{2}(1 + 100) = 50 \cdot 101 = 5050$
+
+### Beispiel 4
+
+$5 + 8 + 11 + 14 + 17 = ?$
+
+$S_5 = \frac{5}{2}(5 + 17) = \frac{5}{2} \cdot 22 = 55$
+
+## Wichtige Eigenschaften
+
+- **Differenz:** $a_{n+1} - a_n = d$ (konstant)
+- **Graphisch:** Punkte liegen auf einer Geraden
+- **Summe:** Wächst quadratisch mit $n$
+
+> **Merke:** Arithmetische Folge = gleicher Abstand, Partialsumme = Durchschnitt × Anzahl!`,
       },
       {
         id: "m-fr-2",
         title: "Geometrische Folgen & Reihen",
         duration: "18 min",
         type: "text",
-        content: `## Geometrische Folge
+        content: `## Geometrische Folgen & Reihen
 
-Konstanter **Faktor** $q$ zwischen aufeinanderfolgenden Gliedern.
+Eine geometrische Folge hat einen **konstanten Faktor** $q$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
-$a_n = a_1 \\cdot q^{n-1}$
 
-### Beispiel
+$$a_n = a_1 \cdot q^{n-1}$$
+
+### Beispiel 1
+
 $2, 6, 18, 54, ...$ → $a_1 = 2$, $q = 3$
-$a_5 = 2 \\cdot 3^4 = 162$
+
+$a_4 = 2 \cdot 3^3 = 2 \cdot 27 = 54$
+
+### Beispiel 2: Halbwertszeit
+
+1000g einer Substanz, Halbwertszeit = 5 Jahre:
+
+$a_n = 1000 \cdot \left(\frac{1}{2}\right)^{n/5}$
+
+Nach 15 Jahren: $a_3 = 1000 \cdot \frac{1}{8} = 125g$
 
 ## Geometrische Reihe (endlich)
-$S_n = a_1 \\cdot \\frac{1-q^n}{1-q}$ für $q \\neq 1$
+
+$$S_n = a_1 \cdot \frac{1-q^n}{1-q}$$ (für $q \neq 1$)
+
+### Beispiel 3
+
+$1 + 2 + 4 + 8 + 16 = ?$
+
+$S_5 = 1 \cdot \frac{1-2^5}{1-2} = \frac{1-32}{-1} = 31$
 
 ## Unendliche geometrische Reihe
 
-Wenn $|q| < 1$:
-$S_\\infty = \\frac{a_1}{1-q}$
+Wenn $|q| < 1$, dann konvergiert die Reihe:
 
-### Beispiel
-$1 + \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + ... = \\frac{1}{1-\\frac{1}{2}} = 2$`,
+$$S_\infty = \frac{a_1}{1-q}$$
+
+### Beispiel 4
+
+$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots$
+
+$S_\infty = \frac{1}{1-\frac{1}{2}} = 2$
+
+### Beispiel 5: Periodische Dezimalzahlen
+
+$0{,}333... = \frac{3}{10} + \frac{3}{100} + \frac{3}{1000} + \cdots = \frac{\frac{3}{10}}{1-\frac{1}{10}} = \frac{3}{9} = \frac{1}{3}$
+
+> **Merke:** Geometrische Folge = gleicher Faktor. Unendliche Reihe konvergiert nur wenn $|q| < 1$!`,
       },
       {
         id: "m-fr-3",
@@ -2885,23 +3157,57 @@ $d = \\frac{|\\vec{v} \\times (\\vec{a} - \\vec{p})|}{|\\vec{v}|}$`,
         title: "Geraden im Raum",
         duration: "20 min",
         type: "text",
-        content: `## Gerade im Raum
+        content: `## Geraden im Raum
 
-Parameterform: $\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$
+Im dreidimensionalen Raum werden Geraden durch einen **Stützvektor** und einen **Richtungsvektor** beschrieben.
 
-- $\\vec{p}$: Stützvektor (Punkt auf der Geraden)
-- $\\vec{v}$: Richtungsvektor
-- $t$: Parameter
+### Parameterform
 
-### Beispiel
-$\\vec{x} = \\begin{pmatrix}1\\2\\3\\end{pmatrix} + t \\cdot \\begin{pmatrix}2\\-1\\1\\end{pmatrix}$
+$$\vec{x} = \vec{p} + t \cdot \vec{v}$$
+
+- $\vec{p}$: Stützvektor (Punkt auf der Geraden)
+- $\vec{v}$: Richtungsvektor (Richtung der Geraden)
+- $t$: Parameter (reelle Zahl)
+
+### Beispiel 1
+
+$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + t \cdot \begin{pmatrix}2\\-1\\1\end{pmatrix}$
 
 Für $t = 0$: Punkt $(1, 2, 3)$
-Für $t = 1$: Punkt $(3, 1, 4)$
 
-## Schnitt zweier Geraden
+Für $t = 1$: Punkt $(1+2, 2-1, 3+1) = (3, 1, 4)$
 
-Gleichsetzen und $t_1$, $t_2$ lösen. Wenn keine Lösung → parallel oder windschief.`,
+Für $t = -1$: Punkt $(1-2, 2+1, 3-1) = (-1, 3, 2)$
+
+### Koordinatenform
+
+Aus der Parameterform erhält man die Koordinatengleichungen:
+
+$x = 1 + 2t$, $y = 2 - t$, $z = 3 + t$
+
+### Schnitt zweier Geraden
+
+Gleichsetzen und $t_1$, $t_2$ lösen:
+
+$\vec{p}_1 + t_1 \vec{v}_1 = \vec{p}_2 + t_2 \vec{v}_2$
+
+### Beispiel 2
+
+$g_1: \vec{x} = \begin{pmatrix}0\\0\\0\end{pmatrix} + t \begin{pmatrix}1\\1\\0\end{pmatrix}$
+
+$g_2: \vec{x} = \begin{pmatrix}1\\0\\0\end{pmatrix} + s \begin{pmatrix}0\\1\\0\end{pmatrix}$
+
+Gleichsetzen: $t = 1$, $t + 0 = 0 + s$ → $s = 1$
+
+Schnittpunkt: $(1, 1, 0)$
+
+### Lagebeziehungen
+
+- **Schnitt:** Genau ein Punkt (Gleichungssystem lösbar)
+- **Parallel:** $\vec{v}_1 = k \cdot \vec{v}_2$ (Richtungsvektoren proportional)
+- **Windschief:** Weder parallel noch sich schneidend
+
+> **Merke:** Gerade im Raum = Punkt + Richtung × Parameter. Schnitt = Gleichungssystem lösen!`,
       },
       {
         id: "m-ag-2",
@@ -2974,52 +3280,108 @@ $K_n = K_0 \\cdot (1 + \\frac{p}{100})^n$`,
         title: "Prozentrechnung",
         duration: "15 min",
         type: "text",
-        content: `## Grundbegriffe
+        content: `## Prozentrechnung
 
-- **Grundwert (G):** Die Gesamtmenge
+Prozente begegnen uns überall: Rabatte, Steuern, Zinsen. Die Grundformel ist einfach.
+
+### Grundbegriffe
+
+- **Grundwert (G):** Die Gesamtmenge (100%)
 - **Prozentsatz (p%):** Der Anteil in Prozent
 - **Prozentwert (W):** Der absolute Anteil
 
-### Formel
-$$W = G \\cdot \\frac{p\%}{100}$$
+### Grundformel
 
-### Beispiel
-20% von 150 Euro:
-$W = 150 \\cdot 0.2 = 30$ Euro
+$$W = G \cdot \frac{p}{100}$$
+
+### Beispiel 1: Prozentwert berechnen
+
+20% von 150€?
+
+$W = 150 \cdot \frac{20}{100} = 150 \cdot 0{,}2 = 30€$
+
+### Beispiel 2: Prozentualer Anteil
+
+30 von 200 — wie viel Prozent?
+
+$p = \frac{W}{G} \cdot 100 = \frac{30}{200} \cdot 100 = 15\%$
+
+### Beispiel 3: Grundwert berechnen
+
+40 sind 25% von was?
+
+$G = \frac{W \cdot 100}{p} = \frac{40 \cdot 100}{25} = 160$
 
 ## Prozentuale Änderung
 
-$\\text{Anderung} = \\frac{\\text{Neu} - \\text{Alt}}{\\text{Alt}} \\cdot 100\%$
+$\text{Änderung} = \frac{\text{Neu} - \text{Alt}}{\text{Alt}} \cdot 100\%$
 
-Preis steigt von 80 auf 100:
-$\\frac{20}{80} \\cdot 100\% = 25\%$`,
+### Beispiel 4: Preissteigerung
+
+Preis steigt von 80€ auf 100€:
+
+$\frac{100 - 80}{80} \cdot 100\% = \frac{20}{80} \cdot 100\% = 25\%$
+
+### Beispiel 5: Rabatt
+
+20% Rabatt auf 120€:
+
+$120 \cdot 0{,}2 = 24€$ Rabatt
+
+$120 - 24 = 96€$ Endpreis
+
+> **Merke:** Prozentwert = Grundwert × Prozentsatz / 100. Die drei Formeln kann man alle aus der Grundformel ableiten!`,
       },
       {
         id: "m-pz-2",
         title: "Zinsen & Zinseszins",
         duration: "18 min",
         type: "text",
-        content: `## Zinsen
+        content: `## Zinsen & Zinseszins
 
-$Z = K \\cdot \\frac{p}{100} \\cdot \\frac{n}{12}$
+Zinsen sind der "Preis" für geliehenes Geld. Bei Zinseszinsen wächst das Geld exponentiell.
 
-### Beispiel
-5000 Euro zu 4% fuer 6 Monate:
-$Z = 5000 \\cdot 0.04 \\cdot 0.5 = 100$ Euro
+## Einfache Zinsen
+
+$$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$$
+
+- $K$: Kapital
+- $p$: Zinssatz (pro Jahr)
+- $n$: Monate
+
+### Beispiel 1
+
+5000€ zu 4% für 6 Monate:
+
+$Z = 5000 \cdot \frac{4}{100} \cdot \frac{6}{12} = 5000 \cdot 0{,}04 \cdot 0{,}5 = 100€$
 
 ## Zinseszins
 
-$K_n = K_0 \\cdot (1 + \\frac{p}{100})^n$
+Bei Zinseszinsen werden die Zinsen **mitverzinst** — das Geld wächst exponentiell!
 
-### Beispiel
-1000 Euro zu 5% ueber 3 Jahre:
-$K_3 = 1000 \\cdot 1.05^3 = 1157.63$ Euro
+$$K_n = K_0 \cdot \left(1 + \frac{p}{100}\right)^n$$
 
-## 72er-Regel
+### Beispiel 2
 
-$t \approx \\frac{72}{p}$
+1000€ zu 5% über 3 Jahre:
 
-Bei 6%: Verdaupplungszeit ca. 12 Jahre`,
+$K_3 = 1000 \cdot 1{,}05^3 = 1000 \cdot 1{,}157625 = 1157{,}63€$
+
+Ohne Zinseszins wären es nur $1000 + 150 = 1150€$ — die 7,63€ Unterschied kommen von den Zinsen auf die Zinsen!
+
+## Verdopplungszeit (72er-Regel)
+
+$t \approx \frac{72}{p}$
+
+Bei 6% Zinsen: $t \approx \frac{72}{6} = 12$ Jahre bis zur Verdopplung.
+
+### Beispiel 3
+
+10.000€ zu 8% — wann verdoppelt?
+
+$t \approx \frac{72}{8} = 9$ Jahre → $K_9 \approx 10000 \cdot 1{,}08^9 \approx 19{,}990€$
+
+> **Merke:** Einfache Zinsen = linear, Zinseszins = exponentiell. Die 72er-Regel ist eine schnelle Faustregel!`,
       },
       {
         id: "m-pz-3",
@@ -3299,21 +3661,70 @@ $\\lnot(p \\lor q) = \\lnot p \\land \\lnot q$`,
         title: "Aussagenlogik",
         duration: "18 min",
         type: "text",
-        content: `## Aussagen
+        content: `## Aussagenlogik
 
-Eine Aussage ist wahr oder falsch.
+Die Aussagenlogik ist die Grundlage der Mathematik und Informatik. Sie untersucht, ob Aussagen **wahr** oder **falsch** sind.
 
-## Verknuepfungen
+### Was ist eine Aussage?
 
-- UND: $p \\land q$ nur wahr wenn beide wahr
-- ODER: $p \\lor q$ wahr wenn mindestens eine wahr
-- NICHT: $\\lnot p$ kehrt um
+Eine Aussage ist ein Satz, der entweder **wahr (w)** oder **falsch (f)** ist — aber nicht beides.
 
-## Implikation
+- "2 + 3 = 5" → wahr ✓
+- "Alle Primzahlen sind gerade" → falsch ✗ (3, 5, 7 sind ungerade)
+- "x > 5" → **keine Aussage** (hängt von x ab)
 
-$p \\Rightarrow q$ ist nur falsch wenn p wahr und q falsch
+### Logische Verknüpfungen
 
-Kontraposition: $p \\Rightarrow q = \\lnot q \\Rightarrow \\lnot p$`,
+**UND ($\land$):** $p \land q$ ist nur wahr, wenn **beide** wahr sind.
+
+| $p$ | $q$ | $p \land q$ |
+|-----|-----|-------------|
+| w | w | **w** |
+| w | f | f |
+| f | w | f |
+| f | f | f |
+
+**ODER ($\lor$):** $p \lor q$ ist wahr, wenn **mindestens eine** wahr ist.
+
+| $p$ | $q$ | $p \lor q$ |
+|-----|-----|------------|
+| w | w | w |
+| w | f | **w** |
+| f | w | **w** |
+| f | f | f |
+
+**NICHT ($\lnot$):** Kehrt den Wahrheitswert um.
+
+$\lnot w = f$, $\lnot f = w$
+
+### Implikation ($\Rightarrow$)
+
+$p \Rightarrow q$ bedeutet: "Wenn p, dann q."
+
+| $p$ | $q$ | $p \Rightarrow q$ |
+|-----|-----|-------------------|
+| w | w | **w** |
+| w | f | **f** |
+| f | w | **w** |
+| f | f | **w** |
+
+**Merke:** Die Implikation ist nur falsch, wenn die Voraussetzung wahr und die Folge falsch ist!
+
+### Beispiel
+
+"Wenn es regnet ($p$), dann wird die Straße nass ($q$)."
+
+- Es regnet und die Straße ist nass → wahr ✓
+- Es regnet, aber die Straße ist trocken → falsch ✗
+- Es regnet nicht, aber die Straße ist nass (Sprinkler) → trotzdem wahr!
+
+### De Morgan'sche Regeln
+
+$\lnot(p \land q) = \lnot p \lor \lnot q$
+
+$\lnot(p \lor q) = \lnot p \land \lnot q$
+
+"Nicht beide" = "Mindestens einer nicht" — das ist intuitiv!`,
       },
       {
         id: "m-lg-2",
