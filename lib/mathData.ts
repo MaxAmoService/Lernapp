@@ -1500,23 +1500,59 @@ Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!`,
         title: "Satz des Pythagoras",
         duration: "20 min",
         type: "text",
-        content: `## Der Satz des Pythagoras
+        content: `## Satz des Pythagoras
 
-Im rechtwinkligen Dreieck gilt:
+Der Satz des Pythagoras ist einer der wichtigsten Sätze der Geometrie. Er gilt für **rechtwinklige Dreiecke**.
+
+### Formel
+
 $$a^2 + b^2 = c^2$$
 
-$c$ ist die Hypotenuse (längste Seite).
+wobei $c$ die **Hypotenuse** (längste Seite, gegenüber dem rechten Winkel) ist.
 
-### Umformungen
-$$c = \\sqrt{a^2 + b^2}$$
-$$a = \\sqrt{c^2 - b^2}$$
+### Beispiel 1
 
-### Geometrische Deutung
-Die Quadrate über den Seiten ergeben:
-$$A_c = A_a + A_b$$
+$a = 3$, $b = 4$, $c = ?$
 
-### Übung
-Ein rechtwinkliges Dreieck hat Katheten $a = 3$ und $b = 4$. Wie lang ist die Hypotenuse?`,
+$c^2 = 9 + 16 = 25$
+
+$c = 5$
+
+### Beispiel 2
+
+$a = 5$, $c = 13$, $b = ?$
+
+$b^2 = c^2 - a^2 = 169 - 25 = 144$
+
+$b = 12$
+
+### Beispiel 3: Ist es ein rechtwinkliges Dreieck?
+
+Seiten: 6, 8, 10
+
+$6^2 + 8^2 = 36 + 64 = 100 = 10^2$ ✓ → Ja!
+
+### Pythagoräische Tripel
+
+Ganzzahlige Lösungen: $(3, 4, 5)$, $(5, 12, 13)$, $(8, 15, 17)$, $(7, 24, 25)$
+
+### Umgekehrter Satz
+
+Wenn $a^2 + b^2 = c^2$, dann ist das Dreieck rechtwinklig.
+
+### Anwendung: Distanz im Koordinatensystem
+
+Abstand zwischen $(x_1, y_1)$ und $(x_2, y_2)$:
+
+$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+
+### Beispiel 4
+
+Abstand $(1, 2)$ und $(4, 6)$:
+
+$d = \sqrt{9 + 16} = \sqrt{25} = 5$
+
+> **Merke:** Pythagoras gilt NUR bei rechten Winkeln!`,
       },
       {
         id: "m-geo-quiz",
@@ -1598,47 +1634,108 @@ Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\a
         title: "Wichtige Werte & Einheitskreis",
         duration: "20 min",
         type: "text",
-        content: `## Wichtige Werte
+        content: `## Wichtige Werte & Einheitskreis
 
-| α | 0° | 30° | 45° | 60° | 90° |
-|---|-----|-----|-----|-----|-----|
-| sin | 0 | ½ | $\\frac{\\sqrt{2}}{2}$ | $\\frac{\\sqrt{3}}{2}$ | 1 |
-| cos | 1 | $\\frac{\\sqrt{3}}{2}$ | $\\frac{\\sqrt{2}}{2}$ | ½ | 0 |
-| tan | 0 | $\\frac{\\sqrt{3}}{3}$ | 1 | $\\sqrt{3}$ | - |
+Der Einheitskreis (Radius 1) ist das zentrale Werkzeug der Trigonometrie.
 
-## Einheitskreis
+### Definition
 
-Auf dem Einheitskreis ($r=1$):
-- $x = \\cos \\alpha$
-- $y = \\sin \\alpha$
+Im Einheitskreis mit Radius $r = 1$:
 
-## Übung
+- $\cos \varphi = x$-Koordinate
+- $\sin \varphi = y$-Koordinate
+- $\tan \varphi = \frac{\sin \varphi}{\cos \varphi}$
 
-Berechne $\\sin(60°) + \\cos(30°)$!`,
+### Wichtige Werte
+
+| Winkel | $\sin$ | $\cos$ | $\tan$ |
+|--------|--------|--------|--------|
+| 0° | 0 | 1 | 0 |
+| 30° | $\frac{1}{2}$ | $\frac{\sqrt{3}}{2}$ | $\frac{1}{\sqrt{3}}$ |
+| 45° | $\frac{\sqrt{2}}{2}$ | $\frac{\sqrt{2}}{2}$ | 1 |
+| 60° | $\frac{\sqrt{3}}{2}$ | $\frac{1}{2}$ | $\sqrt{3}$ |
+| 90° | 1 | 0 | undefiniert |
+
+### Merkhilfe für 30° und 60°
+
+$\sin(30°) = \frac{1}{2}$, $\cos(30°) = \frac{\sqrt{3}}{2}$
+
+$\sin(60°) = \frac{\sqrt{3}}{2}$, $\cos(60°) = \frac{1}{2}$
+
+### Quadranten-Vorzeichen
+
+| Quadrant | sin | cos | tan |
+|----------|-----|-----|-----|
+| I (0-90°) | + | + | + |
+| II (90-180°) | + | - | - |
+| III (180-270°) | - | - | + |
+| IV (270-360°) | - | + | - |
+
+**ASTC-Regel:** All Students Take Calculus (alle positiv → sin → tan → cos)
+
+### Symmetrien
+
+$\sin(-x) = -\sin(x)$ (ungerade Funktion)
+
+$\cos(-x) = \cos(x)$ (gerade Funktion)
+
+> **Merke:** Einheitskreis = Radius 1. cos = x, sin = y. Die Werte bei 30°, 45°, 60° auswendig lernen!`,
       },
       {
         id: "m-trig-3",
         title: "Satz des Sinus & Kosinus",
         duration: "25 min",
         type: "text",
-        content: `## Satz des Sinus
+        content: `## Satz des Sinus & Kosinus
 
-$$\\frac{a}{\\sin \\alpha} = \\frac{b}{\\sin \\beta} = \\frac{c}{\\sin \\gamma} = 2R$$
+Diese beiden Sätze erweitern die Trigonometrie über rechtwinklige Dreiecke hinaus.
 
-$R$ = Radius des Umkreises.
+## Sinussatz
 
-## Satz des Kosinus
+Für beliebige Dreiecke:
 
-$$c^2 = a^2 + b^2 - 2ab \\cdot \\cos \\gamma$$
+$$\frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2R$$
 
-## Anwendung
+wobei $R$ der Umkreisradius ist.
 
-**Satz des Sinus:** Wenn Gegenwinkel bekannt
-**Satz des Kosinus:** Wenn SSW oder SWS gegeben
+### Beispiel 1
 
-## Übung
+$a = 5$, $\alpha = 30°$, $\beta = 45°$, $b = ?$
 
-Gegeben: $a = 5$, $b = 7$, $\\gamma = 60°$. Berechne $c$!`,
+$\frac{5}{\sin 30°} = \frac{b}{\sin 45°}$
+
+$b = \frac{5 \cdot \sin 45°}{\sin 30°} = \frac{5 \cdot 0{,}707}{0{,}5} = 7{,}07$
+
+## Kosinussatz
+
+Verallgemeinerung des Pythagoras:
+
+$$c^2 = a^2 + b^2 - 2ab \cos \gamma$$
+
+### Beispiel 2: Pythagoras als Spezialfall
+
+Wenn $\gamma = 90°$: $\cos 90° = 0$
+
+$c^2 = a^2 + b^2$ — das ist Pythagoras!
+
+### Beispiel 3
+
+$a = 3$, $b = 4$, $\gamma = 60°$
+
+$c^2 = 9 + 16 - 2 \cdot 3 \cdot 4 \cdot 0{,}5 = 25 - 12 = 13$
+
+$c = \sqrt{13} \approx 3{,}61$
+
+## Wann was verwenden?
+
+| Gegeben | Verwende |
+|---------|----------|
+| Rechter Winkel | Pythagoras + einfache Trigonometrie |
+| 2 Seiten + Winkel gegenüber | Sinussatz |
+| 2 Seiten + eingeschlossener Winkel | Kosinussatz |
+| 3 Seiten | Kosinussatz (nach Winkel auflösen) |
+
+> **Merke:** Sinussatz = Verhältnis, Kosinussatz = Verallgemeinerung von Pythagoras!`,
       },
       {
         id: "m-trig-quiz",
@@ -2471,24 +2568,63 @@ $x^2 - 49 = (x+7)(x-7)$
         type: "text",
         content: `## Lineare Ungleichungen
 
-Wie Gleichungen lösen — aber mit $<$, $>$, $\\leq$, $\\geq$ statt $=$.
+Ungleichungen funktionieren wie Gleichungen — mit einer wichtigen Ausnahme beim Multiplizieren mit negativen Zahlen.
 
-### Beispiel
-$3x - 7 > 5$
-$3x > 12$
-$x > 4$
+### Symbole
 
-**Lösungsmenge:** $L = \{x \\in \\mathbb{R} \mid x > 4\} = (4, \\infty)$
+- $<$ : kleiner als
+- $>$ : größer als
+- $\leq$ : kleiner oder gleich
+- $\geq$ : größer oder gleich
 
-## Wichtig: Vorzeichenwechsel!
+### Grundregeln
 
-Bei Multiplikation/Division mit einer **negativen Zahl** dreht sich das Zeichen um:
+- Addition/Subtraktion: wie bei Gleichungen ✓
+- Multiplikation/Division mit **positiver** Zahl: wie bei Gleichungen ✓
+- Multiplikation/Division mit **negativer** Zahl: **Vorzeichen umkehren!** ⚠️
 
-$-2x < 6$ → $x > -3$ (nicht $x < -3$!)
+### Beispiel 1: Einfach
 
-## Darstellung auf dem Zahlenstrahl
+$2x + 3 > 7$
 
-$x > 4$: Offener Kreis bei 4, Pfeil nach rechts.`,
+$2x > 4$
+
+$x > 2$
+
+Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 2\} = (2, \infty)$
+
+### Beispiel 2: Negativer Koeffizient
+
+$-3x + 6 \leq 12$
+
+$-3x \leq 6$
+
+$x \geq -2$ ← Vorzeichenwechsel!
+
+### Beispiel 3: Klammern
+
+$2(x - 1) > 3(x + 2)$
+
+$2x - 2 > 3x + 6$
+
+$-2 - 6 > 3x - 2x$
+
+$-8 > x$ → $x < -8$
+
+### Intervallschreibweise
+
+- $(a, b)$ = offenes Intervall: $a < x < b$
+- $[a, b]$ = abgeschlossenes Intervall: $a \leq x \leq b$
+- $(a, b]$ = halboffen: $a < x \leq b$
+- $(-\infty, a)$ = nach links offen
+
+### Darstellung auf dem Zahlenstrahl
+
+$x > 2$: Offener Kreis bei 2, Pfeil nach rechts.
+
+$x \geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
+
+> **Merke:** Bei Division durch negative Zahlen: Vorzeichen umkehren!`,
       },
       {
         id: "m-ug-2",
