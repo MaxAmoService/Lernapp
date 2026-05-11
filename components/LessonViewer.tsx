@@ -101,7 +101,7 @@ interface LessonViewerProps {
 }
 
 export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext }: LessonViewerProps) {
-  const renderContent = (content: string) => {
+  const renderContent = (content: string, interactiveType?: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
     let inCodeBlock = false;
@@ -268,6 +268,14 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       } else if (!line.trim()) {
         elements.push(<div key={`br-${keyIndex++}`} className="h-3" />);
       }
+      // Interactive marker
+      else if (line.trim() === "[INTERACTIVE]" && interactiveType && interactiveType !== "codeSandbox") {
+        elements.push(
+          <div key={`interactive-${keyIndex++}`} className="my-8">
+            {renderInteractive(interactiveType)}
+          </div>
+        );
+      }
       // Regular paragraph
       else {
         elements.push(<p key={`p-${keyIndex++}`} className="text-slate-200 mb-3 leading-relaxed"><InlineText text={line} /></p>);
@@ -299,15 +307,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Visuals (top position) */}
       {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
 
-      {/* Content — Erklärung */}
-      <div className="markdown-content">{renderContent(lesson.content)}</div>
-
-      {/* Interaktive Elemente NACH dem Content — erst lesen, dann ausprobieren */}
-      {lesson.interactive && lesson.interactive !== "codeSandbox" && (
-        <div className="my-6">
-          {renderInteractive(lesson.interactive)}
-        </div>
-      )}
+      {/* Content — Erklärung (enthält ggf. [INTERACTIVE] Marker) */}
+      <div className="markdown-content">{renderContent(lesson.content, lesson.interactive)}</div>
 
       {/* Visuals (bottom position) */}
       {lesson.visuals?.filter(v => v.position === "bottom").map((v, i) => renderVisual(v, i + 100))}

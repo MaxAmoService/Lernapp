@@ -283,6 +283,7 @@ match (eingabe):
 
 ---
 
+[INTERACTIVE]
 ## ☕ Beispiel: Bubblesort in Pseudocode
 
 \`\`\`
@@ -359,6 +360,7 @@ Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 ---
 
 ## ☕ Beispiel: PAP für eine Kaffeemaschine
+[INTERACTIVE]
 
 Schau dir den interaktiven PAP oben an! Hier die Schritte im Detail:
 
@@ -462,6 +464,7 @@ Ein Rechteck mit **schrägem Rand** (Parallelogramm) — für \`input()\` oder \
 ---
 
 ## ☕ Beispiel: Bubblesort
+[INTERACTIVE]
 
 Das vollständige Diagramm findest du **unten** und im **interaktiven Builder** oben!
 
@@ -583,6 +586,7 @@ for i = 0 to n-2:
 ---
 
 ## ⚔️ Vergleich der Sortieralgorithmen
+[INTERACTIVE]
 
 | | 🫧 Bubblesort | 🔍 Selectionsort | 📥 Insertionsort |
 |---|---|---|---|
@@ -696,6 +700,7 @@ function binarySearch(liste, ziel):
 ---
 
 ## ⚔️ Vergleich
+[INTERACTIVE]
 
 | | 🔎 Lineare Suche | 🎯 Binäre Suche |
 |---|---|---|
@@ -796,6 +801,7 @@ Ereignisse und Funktionen **wechseln sich immer ab**. Direkt hintereinander zwei
 
 ---
 
+[INTERACTIVE]
 ## ☕ Beispiel: Bestellprozess
 
 1. 🟢 **Ereignis:** Bestellung eingegangen
@@ -890,6 +896,7 @@ Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem D
 
 ---
 
+[INTERACTIVE]
 ## ☕ Beispiel: Bestellsystem
 
 \`\`\`
@@ -955,6 +962,7 @@ Ein Sequenzdiagramm zeigt die **zeitliche Abfolge** der Nachrichten (Methodenauf
 
 ---
 
+[INTERACTIVE]
 ### ☕ Beispiel: Online-Bestellung
 
 \`\`\`
@@ -1071,6 +1079,7 @@ Der **kritische Pfad** ist die Kette von Vorgängen, bei denen die **Pufferzeit 
 
 ---
 
+[INTERACTIVE]
 ## 🗃️ ER-Modell (Entity-Relationship)
 
 ### Was ist ein ER-Modell?
