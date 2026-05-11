@@ -193,6 +193,49 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         flushTable();
         elements.push(<h3 key={`h-${keyIndex++}`} className="text-xl font-semibold text-slate-200 mt-4 mb-2">{line.slice(4)}</h3>);
       }
+      // Callout boxes: > 💡 text or > [!TIP] text etc.
+      else if (line.startsWith("> ")) {
+        const raw = line.slice(2);
+        const calloutTypes: Record<string, { bg: string; border: string; icon: string; label: string; text: string }> = {
+          "💡": { bg: "bg-blue-500/10", border: "border-blue-500/40", icon: "💡", label: "Tipp", text: "text-blue-200" },
+          "[!TIP]": { bg: "bg-blue-500/10", border: "border-blue-500/40", icon: "💡", label: "Tipp", text: "text-blue-200" },
+          "⚠️": { bg: "bg-amber-500/10", border: "border-amber-500/40", icon: "⚠️", label: "Achtung", text: "text-amber-200" },
+          "[!WARNING]": { bg: "bg-amber-500/10", border: "border-amber-500/40", icon: "⚠️", label: "Achtung", text: "text-amber-200" },
+          "ℹ️": { bg: "bg-cyan-500/10", border: "border-cyan-500/40", icon: "ℹ️", label: "Info", text: "text-cyan-200" },
+          "[!INFO]": { bg: "bg-cyan-500/10", border: "border-cyan-500/40", icon: "ℹ️", label: "Info", text: "text-cyan-200" },
+          "❗": { bg: "bg-purple-500/10", border: "border-purple-500/40", icon: "❗", label: "Wichtig", text: "text-purple-200" },
+          "[!IMPORTANT]": { bg: "bg-purple-500/10", border: "border-purple-500/40", icon: "❗", label: "Wichtig", text: "text-purple-200" },
+          "✅": { bg: "bg-emerald-500/10", border: "border-emerald-500/40", icon: "✅", label: "Merke", text: "text-emerald-200" },
+          "[!SUCCESS]": { bg: "bg-emerald-500/10", border: "border-emerald-500/40", icon: "✅", label: "Merke", text: "text-emerald-200" },
+          "📝": { bg: "bg-slate-500/10", border: "border-slate-500/40", icon: "📝", label: "Notiz", text: "text-slate-300" },
+          "[!NOTE]": { bg: "bg-slate-500/10", border: "border-slate-500/40", icon: "📝", label: "Notiz", text: "text-slate-300" },
+        };
+        let matched = false;
+        for (const [key, style] of Object.entries(calloutTypes)) {
+          if (raw.startsWith(key)) {
+            const content = raw.slice(key.length).trim();
+            elements.push(
+              <div key={`callout-${keyIndex++}`} className={`my-4 p-4 rounded-xl border-l-4 ${style.bg} ${style.border} flex items-start gap-3`}>
+                <span className="text-lg mt-0.5 shrink-0">{style.icon}</span>
+                <div>
+                  <span className={`text-xs font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
+                  <p className={`${style.text} text-sm mt-1 leading-relaxed`}><InlineText text={content} /></p>
+                </div>
+              </div>
+            );
+            matched = true;
+            break;
+          }
+        }
+        if (!matched) {
+          // Regular blockquote
+          elements.push(
+            <blockquote key={`bq-${keyIndex++}`} className="my-3 pl-4 border-l-2 border-slate-600 text-slate-400 italic">
+              <InlineText text={raw} />
+            </blockquote>
+          );
+        }
+      }
       // List items
       else if (line.startsWith("- ")) {
         const text = line.slice(2);

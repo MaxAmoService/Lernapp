@@ -300,51 +300,81 @@ function bubbleSort(liste n):
         { type: "papExample", position: "bottom" },
       ],
       interactive: "papBuilder",
-      content: `# Programmablaufplan (PAP) — DIN 66001
+      content: `# Programmablaufplan (PAP) 📊
 
 ## Was ist ein PAP?
 
 Ein Programmablaufplan (PAP) ist eine **grafische Darstellung** eines Algorithmus nach der Norm **DIN 66001**. Er zeigt den Ablauf eines Programms mit standardisierten Symbolen — unabhängig von einer Programmiersprache.
 
+> 💡 Denk an den PAP wie einen **Bauplan für deinen Code** — du siehst den gesamten Ablauf, bevor du eine Zeile programmierst.
+
 ## Wofür braucht man ein PAP?
 
-- **Prozessdarstellung:** Code allgemein visualisieren, ohne eine Sprache zu nutzen
-- **Kommunikation:** Nicht-Techniker können den Ablauf verstehen
-- **IHK-Prüfung:** Typische Aufgabe — Algorithmus als PAP zeichnen
+- 🎯 **Prozessdarstellung:** Code allgemein visualisieren, ohne eine Sprache zu nutzen
+- 💬 **Kommunikation:** Nicht-Techniker können den Ablauf verstehen
+- 📝 **IHK-Prüfung:** Typische Aufgabe — Algorithmus als PAP zeichnen
 
-## Die Symbole nach DIN 66001
+> ⚠️ In der IHK-Prüfung musst du PAPs **auf Papier zeichnen** können — nicht nur am PC!
+
+---
+
+## 🟢🔵🔶📥 Die Symbole nach DIN 66001
+
+Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 
 | Symbol | Form | Bedeutung |
-|--------|------|-----------|
-| **Start/Ende** | Oval (abgerundetes Rechteck) | Beginn oder Ende des Programms |
-| **Operation** | Rechteck | Berechnung, Zuweisung, eine Aktion |
-| **Entscheidung** | Raute | Ja/Nein-Abfrage (if/else) |
-| **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
-| **Flusspfeil** | Pfeil | Richtung des Ablaufs |
+|--------|------|------------|
+| 🟢 **Start/Ende** | Oval (abgerundetes Rechteck) | Beginn oder Ende des Programms |
+| 🟦 **Operation** | Rechteck | Berechnung, Zuweisung, eine Aktion |
+| 🔶 **Entscheidung** | Raute | Ja/Nein-Abfrage (if/else) |
+| 📥 **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
+| ➡️ **Flusspfeil** | Pfeil | Richtung des Ablaufs |
 
-## Beispiel: PAP für eine Kaffeemaschine
+> ✅ **Merke:** Die Raute ist das EINZIGE Symbol mit zwei Ausgängen (Ja/Nein). Alle anderen haben genau einen Ausgang.
 
-1. **Start** (Oval)
-2. **Ausgabe:** "Bitte Geld einwerfen" (Parallelogramm)
-3. **Eingabe:** Betrag (Parallelogramm)
-4. **Entscheidung:** Betrag >= Preis? (Raute)
-   - **Ja →** Kaffee zubereiten (Rechteck) → Ausgabe "Ihr Kaffee" → **Ende**
-   - **Nein →** Ausgabe "Zu wenig Geld" → zurück zu Schritt 2
+---
 
-## PAP vs. Struktogramm
+## ☕ Beispiel: PAP für eine Kaffeemaschine
 
-| PAP | Struktogramm |
-|-----|-------------|
-| Kann unstrukturierte Abläufe darstellen (goto) | Nur strukturierte Abläufe |
-| Kann schnell unübersichtlich werden | Strukturiert und übersichtlich |
-| Schwer in Code übertragbar | Einfach in Code übertragbar |
+Schau dir den interaktiven PAP oben an! Hier die Schritte:
 
-## Tipps für die IHK
+1. 🟢 **Start** — Das Programm beginnt
+2. 📥 **Ausgabe:** "Bitte Geld einwerfen" — Der Nutzer wird informiert
+3. 📥 **Eingabe:** Betrag — Der Nutzer gibt Geld ein
+4. 🔶 **Entscheidung:** Betrag >= Preis?
+   - ✅ **Ja →** 🟦 Kaffee zubereiten → 📥 "Ihr Kaffee" → 🟢 Ende
+   - ❌ **Nein →** 📥 "Zu wenig Guthaben!" → zurück zu Schritt 2
 
-- Auf **Papier** üben — nicht nur am PC
-- Symbole **sauber und beschriftet** zeichnen
-- **Englische Beschriftungen** verwenden (Start, End, Input, Output)
-- Immer einen **Schreibtischtest** durchführen: Variablenwerte in Tabelle protokollieren`
+> 💡 Der **Rückpfeil** (Nein → Schritt 2) ist typisch für PAPs: Der Nutzer wird solange nach Geld gefragt, bis genug da ist.
+
+---
+
+## ⚔️ PAP vs. Struktogramm
+
+Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärken:
+
+| | PAP | Struktogramm |
+|---|---|---|
+| 🔄 Abläufe | Kann auch unstrukturierte Abläufe darstellen | Nur strukturierte Abläufe |
+| 📐 Struktur | Kann schnell unübersichtlich werden | Strukturiert und übersichtlich |
+| 💻 Code | Schwer in Code übertragbar | Direkt in Code übertragbar |
+| 🚫 Sprünge | Erlaubt (goto möglich) | Verhindert Sprünge |
+
+> ℹ️ **Für die IHK:** Beide sind wichtig! Der PAP zeigt Flexibilität, das Struktogramm zeigt saubere Struktur.
+
+---
+
+## 🎯 Tipps für die IHK-Prüfung
+
+> ❗ **Diese Tipps können Punkte bringen!**
+
+- ✏️ Auf **Papier** üben — nicht nur am PC
+- 📏 Symbole **sauber und beschriftet** zeichnen
+- 🇬🇧 **Englische Beschriftungen** verwenden (Start, End, Input, Output)
+- 🧪 Immer einen **Schreibtischtest** durchführen: Variablenwerte in einer Tabelle protokollieren
+- ➡️ **Flusspfeile** nicht vergessen — sie zeigen die Richtung!
+
+> 📝 **Schreibtischtest:** Erstelle eine Tabelle mit Spalten "Schritt", "Variable", "Wert" und gehe jeden PAP-Schritt durch. So erkennst du Fehler bevor du den Code schreibst.`
     },
 
     // --- Lektion 3: Struktogramm ---

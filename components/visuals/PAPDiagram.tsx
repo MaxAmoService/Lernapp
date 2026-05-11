@@ -8,226 +8,176 @@ interface PAPSymbolProps {
   className?: string;
 }
 
-// Einzelne PAP-Symbole als SVG
-export function PAPStartEnd({ width = 200, height = 80, className = "" }: PAPSymbolProps) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 200 80" className={className}>
-      <defs>
-        <linearGradient id="pap-start-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#22c55e" />
-          <stop offset="100%" stopColor="#16a34a" />
-        </linearGradient>
-      </defs>
-      <rect x="10" y="10" width="180" height="60" rx="30" ry="30"
-        fill="url(#pap-start-grad)" stroke="#15803d" strokeWidth="2" />
-      <text x="100" y="46" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">
-        Start / Ende
-      </text>
-    </svg>
-  );
-}
-
-export function PAPOperation({ width = 200, height = 80, className = "" }: PAPSymbolProps) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 200 80" className={className}>
-      <defs>
-        <linearGradient id="pap-op-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#3b82f6" />
-          <stop offset="100%" stopColor="#2563eb" />
-        </linearGradient>
-      </defs>
-      <rect x="10" y="10" width="180" height="60" rx="4" ry="4"
-        fill="url(#pap-op-grad)" stroke="#1d4ed8" strokeWidth="2" />
-      <text x="100" y="46" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">
-        Operation
-      </text>
-    </svg>
-  );
-}
-
-export function PAPDecision({ width = 200, height = 100, className = "" }: PAPSymbolProps) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 200 100" className={className}>
-      <defs>
-        <linearGradient id="pap-dec-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#f59e0b" />
-          <stop offset="100%" stopColor="#d97706" />
-        </linearGradient>
-      </defs>
-      <polygon points="100,5 190,50 100,95 10,50"
-        fill="url(#pap-dec-grad)" stroke="#b45309" strokeWidth="2" />
-      <text x="100" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
-        Entscheidung
-      </text>
-      <text x="100" y="64" textAnchor="middle" fill="white" fontSize="11">
-        (Ja / Nein)
-      </text>
-    </svg>
-  );
-}
-
-export function PAPIO({ width = 220, height = 80, className = "" }: PAPSymbolProps) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 220 80" className={className}>
-      <defs>
-        <linearGradient id="pap-io-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#a855f7" />
-          <stop offset="100%" stopColor="#7c3aed" />
-        </linearGradient>
-      </defs>
-      {/* Parallelogramm */}
-      <polygon points="40,10 210,10 180,70 10,70"
-        fill="url(#pap-io-grad)" stroke="#6d28d9" strokeWidth="2" />
-      <text x="110" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">
-        Ein- / Ausgabe
-      </text>
-    </svg>
-  );
-}
-
-export function PAPConnector({ width = 200, height = 80, className = "" }: PAPSymbolProps) {
-  return (
-    <svg width={width} height={height} viewBox="0 0 200 80" className={className}>
-      <circle cx="100" cy="40" r="28" fill="#06b6d4" stroke="#0891b2" strokeWidth="2" />
-      <text x="100" y="45" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">
-        Verbinder
-      </text>
-    </svg>
-  );
-}
-
-// Alle Symbole zusammen als Übersicht
 export function PAPSymbolOverview({ width = 400, height = 500, className = "" }: PAPSymbolProps) {
   return (
-    <div className={`flex flex-col items-center gap-6 ${className}`}>
-      <h3 className="text-lg font-bold text-white">PAP-Symbole nach DIN 66001</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl">
-        <div className="flex flex-col items-center p-3 bg-slate-800/50 rounded-lg border border-green-500/30">
-          <svg width="160" height="60" viewBox="0 0 200 80">
-            <rect x="10" y="10" width="180" height="60" rx="30" ry="30" fill="#22c55e" stroke="#15803d" strokeWidth="2" />
-            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Start / Ende</text>
-          </svg>
-          <p className="text-sm text-slate-400 mt-2 text-center">Beginn oder Ende des Programms</p>
-        </div>
-        <div className="flex flex-col items-center p-3 bg-slate-800/50 rounded-lg border border-blue-500/30">
-          <svg width="160" height="60" viewBox="0 0 200 80">
-            <rect x="10" y="10" width="180" height="60" rx="4" ry="4" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2" />
-            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Operation</text>
-          </svg>
-          <p className="text-sm text-slate-400 mt-2 text-center">Berechnung, Zuweisung, Aktion</p>
-        </div>
-        <div className="flex flex-col items-center p-3 bg-slate-800/50 rounded-lg border border-amber-500/30">
-          <svg width="160" height="80" viewBox="0 0 200 100">
-            <polygon points="100,5 190,50 100,95 10,50" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
-            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Entscheidung</text>
-            <text x="100" y="62" textAnchor="middle" fill="white" fontSize="10">(Ja / Nein)</text>
-          </svg>
-          <p className="text-sm text-slate-400 mt-2 text-center">Verzweigung: Ja oder Nein</p>
-        </div>
-        <div className="flex flex-col items-center p-3 bg-slate-800/50 rounded-lg border border-purple-500/30">
-          <svg width="180" height="60" viewBox="0 0 220 80">
-            <polygon points="40,10 210,10 180,70 10,70" fill="#a855f7" stroke="#6d28d9" strokeWidth="2" />
-            <text x="110" y="46" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Ein- / Ausgabe</text>
-          </svg>
-          <p className="text-sm text-slate-400 mt-2 text-center">Eingabe vom Nutzer oder Ausgabe</p>
-        </div>
-        <div className="flex flex-col items-center p-3 bg-slate-800/50 rounded-lg border border-cyan-500/30 col-span-1 sm:col-span-2">
-          <svg width="60" height="60" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="28" fill="#06b6d4" stroke="#0891b2" strokeWidth="2" />
-            <text x="40" y="44" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Verbinder</text>
-          </svg>
-          <p className="text-sm text-slate-400 mt-2 text-center">Verbindung zwischen entfernten Punkten im Flussdiagramm</p>
-        </div>
+    <div className={`flex flex-col items-center gap-5 ${className}`}>
+      <div className="text-center">
+        <h3 className="text-xl font-bold text-white mb-1">PAP-Symbole nach DIN 66001</h3>
+        <p className="text-sm text-slate-400">Die 5 Grundelemente des Programmablaufplans</p>
       </div>
-      {/* Flusspfeil */}
-      <div className="flex items-center gap-2 text-slate-400">
-        <svg width="30" height="20" viewBox="0 0 30 20">
-          <line x1="0" y1="10" x2="22" y2="10" stroke="#94a3b8" strokeWidth="2" />
-          <polygon points="22,5 30,10 22,15" fill="#94a3b8" />
-        </svg>
-        <span className="text-sm">Flusspfeil = Richtung des Ablaufs</span>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-xl">
+        {/* Start/Ende */}
+        <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-green-500/10 to-green-500/5 rounded-xl border border-green-500/20 hover:border-green-500/40 transition-colors">
+          <svg width="90" height="50" viewBox="0 0 200 80" className="shrink-0">
+            <rect x="10" y="10" width="180" height="60" rx="30" ry="30" fill="#22c55e" stroke="#15803d" strokeWidth="3" />
+            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="18" fontWeight="bold">Start</text>
+          </svg>
+          <div>
+            <p className="text-white font-semibold text-sm">Start / Ende</p>
+            <p className="text-slate-400 text-xs mt-0.5">Oval — Beginn oder Ende des Programms</p>
+          </div>
+        </div>
+
+        {/* Operation */}
+        <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-blue-500/10 to-blue-500/5 rounded-xl border border-blue-500/20 hover:border-blue-500/40 transition-colors">
+          <svg width="90" height="50" viewBox="0 0 200 80" className="shrink-0">
+            <rect x="10" y="10" width="180" height="60" rx="4" ry="4" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="3" />
+            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">x = x + 1</text>
+          </svg>
+          <div>
+            <p className="text-white font-semibold text-sm">Operation</p>
+            <p className="text-slate-400 text-xs mt-0.5">Rechteck — Berechnung, Zuweisung</p>
+          </div>
+        </div>
+
+        {/* Entscheidung */}
+        <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-amber-500/10 to-amber-500/5 rounded-xl border border-amber-500/20 hover:border-amber-500/40 transition-colors">
+          <svg width="90" height="60" viewBox="0 0 200 100" className="shrink-0">
+            <polygon points="100,5 190,50 100,95 10,50" fill="#f59e0b" stroke="#b45309" strokeWidth="3" />
+            <text x="100" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">x &gt; 5?</text>
+            <text x="100" y="64" textAnchor="middle" fill="white" fontSize="11">(Ja / Nein)</text>
+          </svg>
+          <div>
+            <p className="text-white font-semibold text-sm">Entscheidung</p>
+            <p className="text-slate-400 text-xs mt-0.5">Raute — Ja/Nein-Verzweigung</p>
+          </div>
+        </div>
+
+        {/* Ein-/Ausgabe */}
+        <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-purple-500/10 to-purple-500/5 rounded-xl border border-purple-500/20 hover:border-purple-500/40 transition-colors">
+          <svg width="100" height="50" viewBox="0 0 220 80" className="shrink-0">
+            <polygon points="40,10 210,10 180,70 10,70" fill="#a855f7" stroke="#6d28d9" strokeWidth="3" />
+            <text x="110" y="46" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">input(x)</text>
+          </svg>
+          <div>
+            <p className="text-white font-semibold text-sm">Ein- / Ausgabe</p>
+            <p className="text-slate-400 text-xs mt-0.5">Parallelogramm — Nutzereingabe oder Ausgabe</p>
+          </div>
+        </div>
+
+        {/* Verbinder + Flusspfeil */}
+        <div className="flex items-center gap-4 p-4 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 rounded-xl border border-cyan-500/20 hover:border-cyan-500/40 transition-colors sm:col-span-2">
+          <svg width="60" height="50" viewBox="0 0 80 80" className="shrink-0">
+            <circle cx="40" cy="40" r="28" fill="#06b6d4" stroke="#0891b2" strokeWidth="3" />
+            <text x="40" y="44" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">A</text>
+          </svg>
+          <div className="flex-1">
+            <p className="text-white font-semibold text-sm">Verbinder</p>
+            <p className="text-slate-400 text-xs mt-0.5">Verbindung zwischen entfernten Punkten</p>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 rounded-lg">
+            <svg width="30" height="14" viewBox="0 0 30 14">
+              <line x1="0" y1="7" x2="20" y2="7" stroke="#94a3b8" strokeWidth="2.5" />
+              <polygon points="20,2 30,7 20,12" fill="#94a3b8" />
+            </svg>
+            <span className="text-xs text-slate-400">Flusspfeil</span>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
 
-// Ein einfacher PAP als Beispiel (Kaffeemaschine)
 export function PAPExample({ width = 400, height = 600, className = "" }: PAPSymbolProps) {
   return (
-    <div className={`flex flex-col items-center gap-2 ${className}`}>
-      <h3 className="text-lg font-bold text-white mb-2">Beispiel: PAP Kaffeemaschine</h3>
-      <svg width={width} height={height} viewBox="0 0 400 650">
-        <defs>
-          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-            <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
-          </marker>
-        </defs>
+    <div className={`flex flex-col items-center gap-3 ${className}`}>
+      <div className="text-center">
+        <h3 className="text-xl font-bold text-white mb-1">☕ Beispiel: Kaffeemaschine</h3>
+        <p className="text-sm text-slate-400">Ein kompletter PAP mit Entscheidung und Rückkopplung</p>
+      </div>
+      <div className="bg-slate-900/40 rounded-xl p-4 border border-slate-700/30">
+        <svg width={width} height={height} viewBox="0 0 420 520" className="max-w-full">
+          <defs>
+            <marker id="ex-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+            </marker>
+            <marker id="ex-arrow-green" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
+            </marker>
+            <marker id="ex-arrow-red" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+              <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444" />
+            </marker>
+          </defs>
 
-        {/* START */}
-        <rect x="140" y="10" width="120" height="50" rx="25" ry="25" fill="#22c55e" stroke="#15803d" strokeWidth="2" />
-        <text x="200" y="40" textAnchor="middle" fill="white" fontSize="14" fontWeight="bold">Start</text>
-        {/* Pfeil */}
-        <line x1="200" y1="60" x2="200" y2="90" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          {/* START */}
+          <rect x="150" y="10" width="120" height="45" rx="22" ry="22" fill="#22c55e" stroke="#15803d" strokeWidth="2.5" />
+          <text x="210" y="38" textAnchor="middle" fill="white" fontSize="15" fontWeight="bold">Start</text>
+          <line x1="210" y1="55" x2="210" y2="80" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
-        {/* Ausgabe: Bitte Geld einwerfen */}
-        <polygon points="120,95 300,95 280,135 100,135" fill="#a855f7" stroke="#6d28d9" strokeWidth="2" />
-        <text x="200" y="120" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Geld einwerfen</text>
-        {/* Pfeil */}
-        <line x1="200" y1="135" x2="200" y2="165" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          {/* Eingabe: Geld */}
+          <polygon points="130,85 290,85 270,120 110,120" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="200" y="107" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Geld einwerfen</text>
+          <line x1="200" y1="120" x2="200" y2="148" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
-        {/* Eingabe: Betrag */}
-        <polygon points="120,170 300,170 280,210 100,210" fill="#a855f7" stroke="#6d28d9" strokeWidth="2" />
-        <text x="200" y="195" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Betrag eingeben</text>
-        {/* Pfeil */}
-        <line x1="200" y1="210" x2="200" y2="240" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          {/* Eingabe: Betrag */}
+          <polygon points="130,153 290,153 270,188 110,188" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="200" y="175" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Betrag eingeben</text>
+          <line x1="200" y1="188" x2="200" y2="218" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
-        {/* Entscheidung: Betrag >= Preis? */}
-        <polygon points="200,245 310,290 200,335 90,290" fill="#f59e0b" stroke="#b45309" strokeWidth="2" />
-        <text x="200" y="286" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Betrag</text>
-        <text x="200" y="300" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">≥ Preis?</text>
+          {/* Entscheidung */}
+          <polygon points="200,223 285,268 200,313 115,268" fill="#f59e0b" stroke="#b45309" strokeWidth="2.5" />
+          <text x="200" y="264" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Betrag</text>
+          <text x="200" y="280" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">≥ Preis?</text>
 
-        {/* JA-Pfeil nach rechts */}
-        <line x1="310" y1="290" x2="350" y2="290" stroke="#22c55e" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="330" y="283" textAnchor="middle" fill="#22c55e" fontSize="12" fontWeight="bold">Ja</text>
+          {/* JA-Pfeil */}
+          <line x1="285" y1="268" x2="330" y2="268" stroke="#22c55e" strokeWidth="2.5" markerEnd="url(#ex-arrow-green)" />
+          <rect x="318" y="244" width="28" height="18" rx="9" ry="9" fill="#22c55e" />
+          <text x="332" y="257" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Ja</text>
 
-        {/* Operation: Kaffee zubereiten (rechts) */}
-        <rect x="350" y="265" width="40" height="50" rx="3" ry="3" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2" />
-        <text x="370" y="294" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">Kaffee</text>
-        {/* Pfeil nach unten zu Ausgabe */}
-        <line x1="370" y1="315" x2="370" y2="370" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        {/* Ausgabe: Ihr Kaffee */}
-        <polygon points="300,375 440,375 420,415 280,415" fill="#a855f7" stroke="#6d28d9" strokeWidth="2" />
-        <text x="360" y="400" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Ihr Kaffee</text>
-        {/* Pfeil zu Ende */}
-        <line x1="360" y1="415" x2="360" y2="450" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        {/* ENDE */}
-        <rect x="300" y="455" width="120" height="45" rx="22" ry="22" fill="#ef4444" stroke="#dc2626" strokeWidth="2" />
-        <text x="360" y="482" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Ende</text>
+          {/* Operation: Kaffee */}
+          <rect x="335" y="248" width="75" height="40" rx="3" ry="3" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2.5" />
+          <text x="372" y="272" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Kaffee</text>
+          <text x="372" y="284" textAnchor="middle" fill="white" fontSize="9">zubereiten</text>
+          <line x1="372" y1="288" x2="372" y2="330" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
-        {/* NEIN-Pfeil nach unten */}
-        <line x1="200" y1="335" x2="200" y2="380" stroke="#ef4444" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        <text x="215" y="360" textAnchor="middle" fill="#ef4444" fontSize="12" fontWeight="bold">Nein</text>
+          {/* Ausgabe: Ihr Kaffee */}
+          <polygon points="305,335 440,335 420,370 285,370" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="362" y="357" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Ihr Kaffee ☕</text>
+          <line x1="362" y1="370" x2="362" y2="405" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
-        {/* Ausgabe: Zu wenig Geld */}
-        <polygon points="120,385 300,385 280,425 100,425" fill="#a855f7" stroke="#6d28d9" strokeWidth="2" />
-        <text x="200" y="410" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Zu wenig Guthaben!</text>
-        {/* Pfeil zurück */}
-        <line x1="200" y1="425" x2="200" y2="460" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
-        {/* Pfeil zurück nach oben (Geld einwerfen) */}
-        <line x1="200" y1="460" x2="60" y2="460" stroke="#94a3b8" strokeWidth="2" />
-        <line x1="60" y1="460" x2="60" y2="115" stroke="#94a3b8" strokeWidth="2" />
-        <line x1="60" y1="115" x2="100" y2="115" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#arrowhead)" />
+          {/* Ende */}
+          <rect x="302" y="410" width="120" height="45" rx="22" ry="22" fill="#ef4444" stroke="#dc2626" strokeWidth="2.5" />
+          <text x="362" y="438" textAnchor="middle" fill="white" fontSize="15" fontWeight="bold">Ende</text>
 
-        {/* Legende */}
-        <rect x="10" y="530" width="15" height="15" rx="8" ry="8" fill="#22c55e" />
-        <text x="32" y="543" fill="#94a3b8" fontSize="10">Start/Ende</text>
-        <rect x="120" y="530" width="15" height="15" rx="2" ry="2" fill="#3b82f6" />
-        <text x="142" y="543" fill="#94a3b8" fontSize="10">Operation</text>
-        <polygon points="250,530 265,538 250,546 235,538" fill="#f59e0b" />
-        <text x="272" y="543" fill="#94a3b8" fontSize="10">Entscheidung</text>
-        <polygon points="10,560 25,552 40,560 25,568" fill="#a855f7" />
-        <text x="48" y="564" fill="#94a3b8" fontSize="10">Ein-/Ausgabe</text>
-      </svg>
+          {/* NEIN-Pfeil */}
+          <line x1="200" y1="313" x2="200" y2="350" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#ex-arrow-red)" />
+          <rect x="186" y="326" width="28" height="18" rx="9" ry="9" fill="#ef4444" />
+          <text x="200" y="339" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Nein</text>
+
+          {/* Ausgabe: Zu wenig */}
+          <polygon points="130,355 290,355 270,390 110,390" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="200" y="377" textAnchor="middle" fill="white" fontSize="10" fontWeight="bold">Zu wenig Guthaben!</text>
+
+          {/* Rückpfeil */}
+          <line x1="200" y1="390" x2="200" y2="420" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="200" y1="420" x2="75" y2="420" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="75" y1="420" x2="75" y2="107" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="75" y1="107" x2="110" y2="107" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <text x="68" y="270" textAnchor="end" fill="#94a3b8" fontSize="10" transform="rotate(-90, 68, 270)">↩ Erneut versuchen</text>
+
+          {/* Legende */}
+          <g transform="translate(10, 470)">
+            <rect x="0" y="0" width="12" height="12" rx="6" fill="#22c55e" />
+            <text x="18" y="11" fill="#94a3b8" fontSize="10">Start/Ende</text>
+            <rect x="100" y="0" width="12" height="12" rx="2" fill="#3b82f6" />
+            <text x="118" y="11" fill="#94a3b8" fontSize="10">Operation</text>
+            <polygon points="220,0 232,6 220,12 208,6" fill="#f59e0b" />
+            <text x="240" y="11" fill="#94a3b8" fontSize="10">Entscheidung</text>
+            <polygon points="10,24 22,18 34,24 22,30" fill="#a855f7" />
+            <text x="42" y="25" fill="#94a3b8" fontSize="10">Ein-/Ausgabe</text>
+          </g>
+        </svg>
+      </div>
     </div>
   );
 }
