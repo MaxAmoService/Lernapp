@@ -257,7 +257,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   };
 
   return (
-    <div className="glass rounded-xl p-6 animate-slide-up">
+    <div className="glass rounded-xl p-4 animate-slide-up">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
         <div>
