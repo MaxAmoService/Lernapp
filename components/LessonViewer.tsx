@@ -180,18 +180,18 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       // Headers
       if (line.startsWith("# ")) {
         flushTable();
-        elements.push(<h1 key={`h-${keyIndex++}`} className="text-3xl font-bold text-white mt-8 mb-4">{line.slice(2)}</h1>);
+        elements.push(<h1 key={`h-${keyIndex++}`} className="text-3xl font-bold text-white mt-8 mb-4"><InlineText text={line.slice(2)} /></h1>);
       } else if (line.startsWith("## ")) {
         flushTable();
         const isMerkblatt = line.includes("Merkblatt") || line.includes("Zusammenfassung");
         elements.push(
           <h2 key={`h-${keyIndex++}`} className={`text-2xl font-semibold mt-6 mb-3 ${isMerkblatt ? "text-yellow-400" : "text-blue-400"}`}>
-            {isMerkblatt && "📋 "}{line.slice(3)}
+            {isMerkblatt && "📋 "}<InlineText text={line.slice(3)} />
           </h2>
         );
       } else if (line.startsWith("### ")) {
         flushTable();
-        elements.push(<h3 key={`h-${keyIndex++}`} className="text-xl font-semibold text-slate-200 mt-4 mb-2">{line.slice(4)}</h3>);
+        elements.push(<h3 key={`h-${keyIndex++}`} className="text-xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
       }
       // Callout boxes: > 💡 text or > [!TIP] text etc.
       else if (line.startsWith("> ")) {
