@@ -417,16 +417,12 @@ Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung v
 
 ---
 
-## 🟦🔶🔁🟪 Die drei Grundstrukturen
+## Die vier Grundelemente
+
+Schau dir den interaktiven Builder oben an — dort siehst du jedes Element als echtes Nassi-Shneiderman-Diagramm!
 
 ### 1. 🟦 Sequenz
-Aufeinanderfolgende Anweisungen — die einfachste Struktur.
-
-\`\`\`
-| Anweisung 1              |
-| Anweisung 2              |
-| Anweisung 3              |
-\`\`\`
+Ein einfaches Rechteck mit Text. Aufeinanderfolgende Anweisungen — die einfachste Struktur.
 
 **In Code:**
 \`\`\`
@@ -435,65 +431,56 @@ y = x + 2
 print(y)
 \`\`\`
 
-### 2. 🔶 Auswahl (If-Then-Else)
-Eine Bedingung führt zu zwei verschiedenen Pfaden — links JA, rechts NEIN.
+**Im Struktogramm:** Drei untereinander stehende Rechtecke mit Monospace-Text.
 
-\`\`\`
-          | Bedingung |
-|----------+-----------|
-| JA-Teil  | NEIN-Teil |
-\`\`\`
+### 2. 🔶 Auswahl (if/else)
+Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil**, rechts der **NEIN-Teil** — genau wie im Nassi-Shneiderman-Standard.
 
 **In Code:**
 \`\`\`
 if (alter >= 18) {
-    print("Volljährig")    // JA
+    print("Volljährig")    // JA (links)
 } else {
-    print("Minderjährig")  // NEIN
+    print("Minderjährig")  // NEIN (rechts)
 }
 \`\`\`
 
-### 3. 🔁 Wiederholung (Schleife)
-Ein Block wird wiederholt, solange eine Bedingung stimmt. Der Schleifenrumpf ist darunter eingerückt.
-
-\`\`\`
-| while (Bedingung)  |
-|--------------------|
-| Schleifenrumpf     |
-\`\`\`
+### 3. 🔁 Schleife (for / while)
+Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert.
 
 **In Code:**
 \`\`\`
-i = 0
-while (i < 10) {
+for i = 0 to 9:
     print(i)
-    i = i + 1
-}
 \`\`\`
 
-> ✅ **Merke:** Im Struktogramm werden Schleifen als Blöcke dargestellt — die Bedingung steht oben, der Rumpf darunter. Verschachtelung sieht man an der Einrückung!
+**Im Struktogramm:** Kopf mit \`for i = 0 bis 9\`, darunter eingerückt der Rumpf mit \`print(i)\`.
+
+### 4. 🟪 Ein-/Ausgabe
+Ein Rechteck mit schrägem Rand (Parallelogramm) — für \`input()\` oder \`print()\`.
 
 ---
 
 ## ☕ Beispiel: Bubblesort als Struktogramm
 
-Schau dir den interaktiven Builder oben an! Hier die Erklärung:
+Schau dir den interaktiven Builder oben an! Hier die Erklärung der Struktur:
 
-**Die Struktur:**
+**Der Algorithmus:**
 \`\`\`
 function bubbleSort(liste, n):
-    for i = 0 to n-2:           ← Äußere Schleife
-        for j = 0 to n-2-i:     ← Innere Schleife (verschachtelt!)
-            if liste[j] > liste[j+1]:  ← Auswahl
-                tausche(liste[j], liste[j+1])  ← Sequenz
+    for i = 0 to n-2:           ← Äußere Schleife (for)
+        for j = 0 to n-2-i:     ← Innere Schleife (for, verschachtelt)
+            if liste[j] > liste[j+1]:  ← Auswahl (if/else)
+                temp = liste[j]                ← Sequenz
+                liste[j] = liste[j+1]          ← Sequenz
+                liste[j+1] = temp              ← Sequenz
 \`\`\`
 
 **Im Struktogramm siehst du:**
-- 🟦 Die Funktion als großer äußerer Block
-- 🔁 Die äußere for-Schleife als eingerückter Block
-- 🔁 Die innere for-Schleife als noch tiefer eingerückter Block
-- 🔶 Die if-Abfrage als Raute mit JA/NEIN-Teil
-- 🟦 Die drei Tausch-Anweisungen als Sequenz-Blöcke
+- 🔁 Die äußere for-Schleife als großer Block mit Bogen links
+- 🔁 Die innere for-Schleife als eingerückter Block darunter
+- 🔶 Die if-Abfrage mit diagonaler Linie — JA-Seite (tauschen) und NEIN-Seite (leer)
+- 🟦 Die drei Tausch-Anweisungen als Sequenz-Rechtecke im JA-Teil
 
 > 💡 **Verschachtelung** ist die Stärke des Struktogramms — du siehst sofort, welcher Block in welchem steckt!
 
