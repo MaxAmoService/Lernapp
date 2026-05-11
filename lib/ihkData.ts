@@ -231,75 +231,21 @@ export const ihkModule: Module = {
 
 ## Die wichtigsten Strukturen
 
-### 📦 Variablen und Zuweisung
+| Struktur | Zweck | Beispiel |
+|----------|-------|----------|
+| 📦 **Variable** | Wert speichern | \`meineZahl = 42\` |
+| 🔶 **if/else** | Bedingte Verzweigung | \`if (bedingung) { ... } else { ... }\` |
+| 🔁 **while** | Kopfgesteuerte Schleife | Bedingung wird AM ANFANG geprüft |
+| 🔁 **do-while** | Fußgesteuerte Schleife | Wird mindestens 1× ausgeführt |
+| 🔀 **switch/case** | Mehrfachverzweigung | \`match (eingabe): case ...\` |
 
-\`\`\`
-meineZahl = 42
-name = "Moritz"
-\`\`\`
-
-### 🔶 Bedingungen (if/else)
-
-\`\`\`
-if (alter >= 18) {
-    print("Volljährig")
-} else {
-    print("Minderjährig")
-}
-\`\`\`
-
-### 🔁 Schleifen — kopfgesteuert (while)
-
-Die Bedingung wird **am Anfang** geprüft. Wenn sie nicht erfüllt ist, wird die Schleife gar nicht erst ausgeführt.
-
-\`\`\`
-i = 0
-while (i < 10) {
-    print(i)
-    i = i + 1
-}
-\`\`\`
-
-### 🔁 Schleifen — fußgesteuert (do-while)
-
-Die Bedingung wird **am Ende** geprüft. Die Schleife wird **mindestens einmal** ausgeführt.
-
-\`\`\`
-i = 0
-do {
-    print(i)
-    i = i + 1
-} while (i < 10)
-\`\`\`
-
-### 🔀 Switch/Case
-
-\`\`\`
-match (eingabe):
-    case "ja": print("Bestätigt")
-    case "nein": print("Abgebrochen")
-    default: print("Ungültig")
-\`\`\`
+> 💡 Alle Strukturen siehst du in Aktion im **PseudocodeRunner** oben!
 
 ---
+
+## 🧩 Interaktiv erkunden
 
 [INTERACTIVE]
-## ☕ Beispiel: Bubblesort in Pseudocode
-
-\`\`\`
-function bubbleSort(liste n):
-    for i = 0 to n-2:
-        for j = 0 to n-2-i:
-            if (liste[j] > liste[j+1]):
-                temp = liste[j]
-                liste[j] = liste[j+1]
-                liste[j+1] = temp
-\`\`\`
-
-> 💡 **Verschachtelte Schleifen** sind typisch für Sortieralgorithmen. Die äußere Schleife zählt die Durchläufe, die innere vergleicht benachbarte Elemente.
-
----
-
 ## 🎯 Regeln für die IHK-Prüfung
 
 > ❗ **Diese Regeln sichern dir Punkte!**
@@ -343,50 +289,25 @@ Ein Programmablaufplan (PAP) ist eine **grafische Darstellung** eines Algorithmu
 
 ---
 
-## 🟢🔵🔶🟪 Die Symbole nach DIN 66001
-
-Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
+## Die Symbole nach DIN 66001
 
 | Symbol | Form | Bedeutung |
 |--------|------|------------|
-| 🟢 **Start/Ende** | Oval (abgerundetes Rechteck) | Beginn oder Ende des Programms |
-| 🟦 **Operation** | Rechteck | Berechnung, Zuweisung, eine Aktion |
-| 🔶 **Entscheidung** | Raute | Ja/Nein-Abfrage (if/else) |
+| 🟢 **Start/Ende** | Oval | Beginn oder Ende des Programms |
+| 🟦 **Operation** | Rechteck | Berechnung, Zuweisung |
+| 🔶 **Entscheidung** | Raute | Ja/Nein-Abfrage (zwei Ausgänge!) |
 | 🟪 **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
 | ➡️ **Flusspfeil** | Pfeil | Richtung des Ablaufs |
 
-> ✅ **Merke:** Die Raute ist das EINZIGE Symbol mit zwei Ausgängen (Ja/Nein). Alle anderen haben genau einen Ausgang.
+> ✅ Die Raute ist das EINZIGE Symbol mit zwei Ausgängen. Alle anderen haben genau einen.
 
 ---
 
-## ☕ Beispiel: PAP für eine Kaffeemaschine
+## 🔨 Ausprobieren
+
 [INTERACTIVE]
 
-Schau dir den interaktiven PAP oben an! Hier die Schritte im Detail:
-
-**Schritt 1:** 🟢 **Start**
-- Das Programm beginnt
-
-**Schritt 2:** 🟪 **Ausgabe:** "Bitte Geld einwerfen"
-- Der Nutzer wird auf dem Bildschirm informiert
-
-**Schritt 3:** 🟪 **Eingabe:** Betrag eingeben
-- Der Nutzer wirft Geld ein und tippt den Betrag ein
-
-**Schritt 4:** 🔶 **Entscheidung:** Betrag >= Preis?
-- ✅ **Ja →** weiter zu Schritt 5
-- ❌ **Nein →** zurück zu Schritt 3 (erneut eingeben)
-
-**Schritt 5:** 🟦 **Operation:** Kaffee zubereiten
-- Die Maschine bereitet das Getränk zu
-
-**Schritt 6:** 🟪 **Ausgabe:** "Ihr Kaffee ist fertig!"
-- Der Nutzer wird informiert, dass der Kaffee fertig ist
-
-**Schritt 7:** 🟢 **Ende**
-- Das Programm endet
-
-> 💡 Der **Rückpfeil** (Nein → Schritt 3) ist typisch für PAPs: Der Nutzer wird solange nach Geld gefragt, bis genug da ist.
+> 💡 Der interaktive PAP-Builder oben zeigt dir ein komplettes Beispiel — teste es selbst!
 
 ---
 
@@ -447,35 +368,22 @@ Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung v
 
 ## Die vier Grundelemente
 
-Im Nassi-Shneiderman-Diagramm gibt es vier Elemente. Im Builder oben erkennst du sie an den Farben:
+Der Builder oben zeigt dir alle vier Elemente in Aktion:
 
-### 🟦 Sequenz
-Ein einfaches **Rechteck** mit Monospace-Text. Drei Anweisungen untereinander — die einfachste Struktur. Beispiel: \`x = 5\` → \`y = x + 2\` → \`print(y)\`.
-
-### 🔶 Auswahl (if/else)
-Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil** (grün), rechts der **NEIN-Teil** (rot). Beispiel: \`alter >= 18?\` → links \`Volljährig\`, rechts \`Minderjährig\`.
-
-### 🔁 Schleife (for / while)
-Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert. Beispiel: \`for i = 0 bis 9\` mit \`print(i)\` als Rumpf.
-
-### 🟪 Ein-/Ausgabe
-Ein Rechteck mit **schrägem Rand** (Parallelogramm) — für \`input()\` oder \`print()\`.
+| Element | Darstellung | Zweck |
+|---------|-------------|-------|
+| 🟦 **Sequenz** | Einfaches Rechteck | Anweisungen nacheinander |
+| 🔶 **Auswahl** | Block mit diagonaler Linie | if/else — JA links, NEIN rechts |
+| 🔁 **Schleife** | Block mit Bogen links | for/while — Bedingung im Kopf |
+| 🟪 **Ein-/Ausgabe** | Parallelogramm | input() oder print() |
 
 ---
 
-## ☕ Beispiel: Bubblesort
+## 🔨 Ausprobieren
+
 [INTERACTIVE]
 
-Das vollständige Diagramm findest du **unten** und im **interaktiven Builder** oben!
-
-Die Struktur von Bubblesort als Struktogramm:
-
-- 🔁 **Äußere for-Schleife** (\`i = 0 bis n-2\`) — umschließt alles als großer Block mit Bogen links
-- 🔁 **Innere for-Schleife** (\`j = 0 bis n-2-i\`) — eingerückter Block darunter
-- 🔶 **if-Abfrage** (\`liste[j] > liste[j+1]?\`) — diagonale Linie, JA-Seite mit Tausch, NEIN-Seite leer
-- 🟦 **Drei Sequenz-Blöcke** im JA-Teil: temp sichern, verschieben, einsetzen
-
-> 💡 **Verschachtelung** ist die Stärke des Struktogramms — du siehst sofort, welcher Block in welchem steckt!
+> 💡 Der interaktive Builder zeigt dir Bubblesort als Struktogramm — teste auch eigene Algorithmen!
 
 ---
 
@@ -521,71 +429,47 @@ Sortieren ist eine der **grundlegendsten Aufgaben** in der Informatik. Viele Alg
 
 ---
 
-## 🫧 Bubblesort (Durchlauf-Methode)
+## 🫧 Bubblesort
 
-**Prinzip:** Vergleiche benachbarte Elemente und tausche sie, wenn sie in falscher Reihenfolge sind. Wiederhole das Ganze, bis alles sortiert ist.
+**Prinzip:** Vergleiche benachbarte Elemente und tausche sie, wenn sie in falscher Reihenfolge sind — wiederhole bis alles sortiert ist.
 
-**Beispiel:** Liste A = [2, 4, 5, 3, 1, 8]
-
-**Durchlauf 1:**
-- Vergleiche 2↔4 → OK
-- Vergleiche 4↔5 → OK
-- Vergleiche 5↔3 → Tausche → [2, 4, 3, 5, 1, 8]
-- Vergleiche 5↔1 → Tausche → [2, 4, 3, 1, 5, 8]
-- Vergleiche 5↔8 → OK
-- Größtes Element (8) ist am Ende! ✅
-
-**Durchlauf 2:** Das größte Element ist schon hinten, also nur bis n-1 prüfen. Das 5 wandert nach hinten.
-
-**Zeitkomplexität:**
-- 🟢 Bester Fall: O(n) (bereits sortiert, eine Optimierung)
-- 🟡 Durchschnitt: O(n²)
-- 🔴 Schlechtester Fall: O(n²) (umgekehrt sortiert)
-
-**Pseudocode:**
-\`\`\`
-for i = 0 to n-2:
-    for j = 0 to n-2-i:
-        if A[j] > A[j+1]:
-            temp = A[j]
-            A[j] = A[j+1]
-            A[j+1] = temp
-\`\`\`
+| | Wert |
+|---|---|
+| 🟢 Bester Fall | O(n) — bereits sortiert |
+| 🟡 Durchschnitt | O(n²) |
+| 🔴 Schlechtester Fall | O(n²) |
+| ✅ Stabil? | Ja |
 
 ---
 
-## 🔍 Selectionsort (Auswahlverfahren)
+## 🔍 Selectionsort
 
-**Prinzip:** Finde das kleinste Element im unsortierten Teil und tausche es an die erste Position. Wiederhole mit dem Rest.
+**Prinzip:** Finde das kleinste Element im unsortierten Teil und tausche es an die erste Position.
 
-**Beispiel:** Liste A = [2, 4, 5, 3, 1, 8]
-
-- Kleinste: 1 (Position 4) → Tausche mit Position 0 → [1, 4, 5, 3, 2, 8]
-- Kleinste: 2 (Position 4) → Tausche mit Position 1 → [1, 2, 5, 3, 4, 8]
-- Und so weiter...
-
-**Zeitkomplexität:** 🟡 Immer O(n²) — wenige Tauschoperationen, aber viele Vergleiche.
+| | Wert |
+|---|---|
+| 🟡 Immer | O(n²) — wenige Tausche, viele Vergleiche |
+| ✅ Stabil? | Nein |
 
 ---
 
-## 📥 Insertionsort (Einfügemethode)
+## 📥 Insertionsort
 
-**Prinzip:** Baue die sortierte Liste elementweise auf. Nimm das nächste Element und schiebe es an die richtige Stelle.
+**Prinzip:** Baue die sortierte Liste elementweise auf — jedes neue Element wird an der richtigen Stelle eingefügt.
 
-**Beispiel:** Liste A = [2, 4, 5, 3, 1, 8]
-
-- 3 ist sortiert: [2, 4, 5] → 3 gehört zwischen 2 und 4 → [2, 3, 4, 5]
-- 1 gehört vor alles → [1, 2, 3, 4, 5]
-- 8 gehört hinten → [1, 2, 3, 4, 5, 8] ✅
-
-**Zeitkomplexität:**
-- 🟢 Bester Fall: O(n) (fast sortiert — sehr effizient!)
-- 🟡 Durchschnitt: O(n²)
-- 🔴 Schlechtester Fall: O(n²)
+| | Wert |
+|---|---|
+| 🟢 Bester Fall | O(n) — fast sortiert |
+| 🟡 Durchschnitt | O(n²) |
+| 🔴 Schlechtester Fall | O(n²) |
+| ✅ Stabil? | Ja |
 
 ---
 
 ## ⚔️ Vergleich der Sortieralgorithmen
+
+## 🔨 Ausprobieren
+
 [INTERACTIVE]
 
 | | 🫧 Bubblesort | 🔍 Selectionsort | 📥 Insertionsort |
@@ -642,24 +526,8 @@ Daten suchen ist eine der **häufigsten Operationen** in der Softwareentwicklung
 
 **Prinzip:** Gehe die Liste von Anfang bis Ende durch und prüfe jedes Element.
 
-**Voraussetzung:** Keine — die Liste muss NICHT sortiert sein.
-
-**Zeitkomplexität:** 🟡 O(n) — im schlimmsten Fall musst du alles durchsuchen.
-
-**Pseudocode:**
-\`\`\`
-function linearSearch(liste, ziel):
-    for i = 0 to length(liste)-1:
-        if liste[i] == ziel:
-            return i
-    return -1  // nicht gefunden
-\`\`\`
-
-**Beispiel:** Liste = [2, 4, 5, 3, 1, 8], Ziel = 3
-- Prüfe 2 → ❌ nein
-- Prüfe 4 → ❌ nein
-- Prüfe 5 → ❌ nein
-- Prüfe 3 → ✅ JA! Gefunden an Index 3
+- **Voraussetzung:** Keine — die Liste muss NICHT sortiert sein
+- **Zeitkomplexität:** 🟡 O(n)
 
 ---
 
@@ -667,39 +535,17 @@ function linearSearch(liste, ziel):
 
 **Prinzip:** Teile die sortierte Liste in der Mitte. Ist das mittlere Element das Ziel? Falls nicht: Suche nur in der linken oder rechten Hälfte weiter.
 
-**Voraussetzung:** Die Liste MUSS **sortiert** sein!
+- **Voraussetzung:** Die Liste MUSS **sortiert** sein!
+- **Zeitkomplexität:** 🟢 O(log n) — viel schneller als linear
 
-**Zeitkomplexität:** 🟢 O(log n) — viel schneller als linear!
-
-**Pseudocode:**
-\`\`\`
-function binarySearch(liste, ziel):
-    links = 0
-    rechts = length(liste) - 1
-
-    while links <= rechts:
-        mitte = (links + rechts) / 2
-        if liste[mitte] == ziel:
-            return mitte
-        else if liste[mitte] < ziel:
-            links = mitte + 1
-        else:
-            rechts = mitte - 1
-
-    return -1  // nicht gefunden
-\`\`\`
-
-**Beispiel 1:** Sortierte Liste = [1, 2, 3, 4, 5, 8], Ziel = 3
-1. Mitte = (0+5)/2 = 2 → liste[2] = 3 → ✅ Gefunden!
-
-**Beispiel 2:** Sortierte Liste = [1, 2, 3, 4, 5, 8], Ziel = 8
-1. Mitte = 2 → liste[2] = 3 < 8 → Suche rechts (links = 3)
-2. Mitte = (3+5)/2 = 4 → liste[4] = 5 < 8 → Suche rechts (links = 5)
-3. Mitte = (5+5)/2 = 5 → liste[5] = 8 → ✅ Gefunden!
+> ❗ Bei 1 Million Einträgen: Lineare Suche = bis zu 1.000.000 Schritte, Binäre Suche = max. ~20 Schritte!
 
 ---
 
 ## ⚔️ Vergleich
+
+## 🔨 Ausprobieren
+
 [INTERACTIVE]
 
 | | 🔎 Lineare Suche | 🎯 Binäre Suche |
@@ -768,26 +614,17 @@ Eine **EPK** (Ereignisgesteuerte Prozesskette) ist ein Diagramm zur Darstellung 
 
 | Element | Symbol | Beschreibung |
 |---------|--------|-------------|
-| 🟢 **Ereignis** | Sechseck | Beschreibt, WAS passiert (z.B. "Bestellung eingegangen") |
-| 🟦 **Funktion** | Abgerundetes Rechteck | Beschreibt eine TÄTIGKEIT (z.B. "Bestellung bearbeiten") |
+| 🟢 **Ereignis** | Sechseck | WAS passiert (z.B. "Bestellung eingegangen") |
+| 🟦 **Funktion** | Abger. Rechteck | Eine TÄTIGKEIT (z.B. "Bestellung bearbeiten") |
 | 🔀 **Operator** | AND / OR / XOR | Logische Verknüpfung mehrerer Pfade |
-| 👤 **Organisation** | Ellipse | Abteilung/Person für eine Funktion |
-| 📄 **Information** | Dokument-Symbol | Daten für eine Funktion |
 
 ---
 
 ## 🔀 Die Operatoren
 
-### AND (UND)
-Alle nachfolgenden Pfade werden **parallel** ausgeführt — **alle** müssen abgearbeitet werden.
-
-### OR (ODER)
-**Mehrere** Pfade können gewählt werden — **mindestens einer**.
-
-### XOR (Exklusives Oder)
-Genau **ein** Pfad wird gewählt — entweder der eine oder der andere.
-
-> ⚠️ **Merke:** XOR = genau einer, OR = mindestens einer, ALLE = alle gleichzeitig.
+- **AND:** Alle Pfade werden **parallel** ausgeführt
+- **OR:** **Mindestens ein** Pfad wird gewählt
+- **XOR:** Genau **ein** Pfad wird gewählt (exklusiv)
 
 ---
 
@@ -795,21 +632,17 @@ Genau **ein** Pfad wird gewählt — entweder der eine oder der andere.
 
 **Ereignis → Funktion → Ereignis → Funktion → ...**
 
-Ereignisse und Funktionen **wechseln sich immer ab**. Direkt hintereinander zwei Funktionen oder zwei Ereignisse ist NICHT erlaubt.
+Ereignisse und Funktionen **wechseln sich immer ab**. Zwei Funktionen oder zwei Ereignisse direkt hintereinander ist NICHT erlaubt.
 
 > ❗ **Diese Regel wird in der IHK-Prüfung oft geprüft!**
 
 ---
 
-[INTERACTIVE]
-## ☕ Beispiel: Bestellprozess
+## 🔨 Ausprobieren
 
-1. 🟢 **Ereignis:** Bestellung eingegangen
-2. → 🟦 **Funktion:** Bestellung prüfen
-3. → 🟢 **Ereignis:** Bestellung geprüft
-4. → 🔀 **XOR:**
-   - ✅ Ja → 🟦 **Funktion:** Ware ausliefern → 🟢 **Ereignis:** Ware geliefert
-   - ❌ Nein → 🟦 **Funktion:** Kunde kontaktieren → 🟢 **Ereignis:** Kunde informiert
+[INTERACTIVE]
+
+> 💡 Der EPK-Builder oben zeigt dir einen kompletten Bestellprozess — baue eigene EPKs!
 
 ---
 
@@ -843,42 +676,24 @@ Das Klassendiagramm ist das **wichtigste Strukturdiagramm** in UML. Es zeigt Kla
 
 ## 🧱 Aufbau einer Klasse
 
-\`\`\`
-| ClassName          |
-|-------------------|
-| - privateAttr: Type |
-| + publicAttr: Type  |
-|-------------------|
-| + method(): Type   |
-| + method2(arg: T): T |
-\`\`\`
-
-**Sichtbarkeiten:**
-- **-** (Minus) = 🔒 private
-- **+** (Plus) = 🌐 public
-- **#** (Raute) = 🛡️ protected
+| Bereich | Inhalt | Sichtbarkeit |
+|---------|--------|-------------|
+| **Name** | Klassenname | — |
+| **Attribute** | Eigenschaften | \`-\` privat, \`+\` öffentlich, \`#\` protected |
+| **Methoden** | Funktionen | \`-\` privat, \`+\` öffentlich, \`#\` protected |
 
 ---
 
 ## 🔗 Arten von Beziehungen
 
-### 1. ➡️ Assoziation
-Einfache Verbindung zwischen Klassen. Zwei Klassen wissen voneinander.
+| Beziehung | Symbol | Bedeutung |
+|-----------|--------|-----------|
+| ➡️ **Assoziation** | Einfache Linie | Klassen wissen voneinander |
+| 🔷 **Aggregation** | ◇ Leere Raute | Lose Kopplung — Objekte können unabhängig existieren |
+| 🔶 **Komposition** | ◆ Ausgefüllte Raute | Starke Kopplung — existenzabhängig (z.B. Räume ohne Gebäude) |
+| 🏗️ **Vererbung** | ▷ Pfeil mit Dreieck | "ist ein" — Kind erbt von Elternklasse |
 
-### 2. 🔷 Aggregation (lose Kopplung)
-Objekte können **unabhängig** existieren. Dargestellt durch eine **leere Raute** ◇.
-
-**Beispiel:** Student und Vorlesung — Ein Student kann eine Vorlesung besuchen, existiert aber unabhängig davon.
-
-### 3. 🔶 Komposition (starke Kopplung)
-Objekte sind **existenzabhängig**. Dargestellt durch eine **ausgefüllte Raute** ◆.
-
-**Beispiel:** Gebäude und Räume — Ohne das Gebäude können die Räume nicht existieren.
-
-### 4. 🏗️ Vererbung (Generalisierung)
-Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem Dreieck** ▷.
-
-**Beispiel:** "Auto" erbt von "Fahrzeug" — Auto ist ein Fahrzeug.
+> 💡 Der UML-Class-Diagram-Builder oben zeigt dir alle Beziehungen interaktiv!
 
 ---
 
@@ -890,24 +705,16 @@ Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem D
 | \`*\` | Beliebig viele (0 oder mehr) |
 | \`1..*\` | Mindestens eine |
 | \`0..1\` | Null oder eine |
-| \`5..10\` | Zwischen 5 und 10 |
 
-> ❗ **Merke:** Kardinalitäten werden in der IHK-Prüfung oft abgefragt! 1:n und n:m sind die häufigsten.
+> ❗ Kardinalitäten werden in der IHK oft abgefragt! 1:n und n:m sind die häufigsten.
 
 ---
 
+## 🔨 Ausprobieren
+
 [INTERACTIVE]
-## ☕ Beispiel: Bestellsystem
 
-\`\`\`
-Kunde (1) --- Bestellung (*)
-Bestellung (1) --- Artikel (*)
-Bestellung (1) --- Mitarbeiter (1)
-\`\`\`
-
-- 1 Kunde → * Bestellungen (1:n)
-- 1 Bestellung → * Artikel (n:m über Zwischentabelle)
-- 1 Bestellung → 1 Mitarbeiter (1:1)
+> 💡 Der Builder oben zeigt ein komplettes Bestellsystem — erstelle eigene Klassendiagramme!
 
 ---
 
@@ -932,89 +739,41 @@ Bestellung (1) --- Mitarbeiter (1)
 
 ## 📨 Sequenzdiagramm
 
-### Was ist ein Sequenzdiagramm?
-
-Ein Sequenzdiagramm zeigt die **zeitliche Abfolge** der Nachrichten (Methodenaufrufe, Events) zwischen Objekten. Du siehst genau, welche Objekte miteinander kommunizieren und in welcher Reihenfolge.
-
-> 💡 Das Sequenzdiagramm ist wie ein **Protokoll eines Gesprächs** — es zeigt, wer wann was sagt.
-
----
+Ein Sequenzdiagramm zeigt die **zeitliche Abfolge** von Nachrichten zwischen Objekten — wie ein Protokoll eines Gesprächs.
 
 ### 🧩 Elemente
 
 | Element | Beschreibung |
 |---------|-------------|
 | 📏 **Lebenslinien** | Gestrichelte Linie unter jedem Objekt — zeigt Existenzdauer |
-| ▓ **Aktivierungsbalken** | Zeigt, wann ein Objekt gerade arbeitet/aktiv ist |
-| ➡️ **Nachrichten** | Pfeile zwischen Lebenslinien (synchron = volle Spitze, asynchron = offene Spitze) |
+| ▓ **Aktivierungsbalken** | Zeigt, wann ein Objekt gerade arbeitet |
+| ➡️ **Nachrichten** | Pfeile zwischen Lebenslinien (synchron = volle Spitze) |
 | ➰ **Rücknachrichten** | Gestrichelte Pfeile zurück |
 
----
-
-### 📐 Regeln für Aktivierungsbalken
-
-> ❗ **Diese Regeln werden in der IHK geprüft!**
-
-- ▓ Balken erscheint am **Empfänger** einer synchronen Nachricht
-- ⏳ Bleibt so lange, bis die **Antwort gesendet** wird
-- 🚫 **Nur Balken setzen, wenn noch keiner vorhanden** — unnötige Balken weglassen
-- ▓ Der gesendende Balken bleibt bestehen, wenn noch weitere Aktionen folgen
-
----
-
-[INTERACTIVE]
-### ☕ Beispiel: Online-Bestellung
-
-\`\`\`
-Kunde -> Bestellsystem: "Produkt auswählen"
-Bestellsystem -> Warenkorb: "Produkt hinzufügen"
-Warenkorb -> Bestellsystem: "Bestätigung"
-Bestellsystem -> Kunde: "Im Warenkorb"
-Kunde -> Bestellsystem: "Bestellen"
-Bestellsystem -> Zahlung: "Zahlung anfordern"
-Zahlung -> Bestellsystem: "Zahlung OK"
-Bestellsystem -> Kunde: "Bestellung bestätigt"
-\`\`\`
+> ❗ **Regel:** Aktivierungsbalken nur setzen, wenn noch keiner vorhanden ist!
 
 ---
 
 ## 🔄 Zustandsdiagramm (State Machine)
 
-### Was ist ein Zustandsdiagramm?
-
-Ein Zustandsdiagramm beschreibt die verschiedenen **Zustände** eines Objekts und die **Übergänge** zwischen ihnen. Es ist wie ein **endlicher Automat** — für jeden Zustand ist definiert, was bei einem Ereignis passiert.
-
-> 💡 Das Zustandsdiagramm zeigt das **Verhalten eines Objekts** über seine Lebenszeit.
-
----
+Ein Zustandsdiagramm beschreibt die **Zustände** eines Objekts und die **Übergänge** zwischen ihnen — wie ein endlicher Automat.
 
 ### 🧩 Elemente
 
 | Element | Symbol | Beschreibung |
 |---------|--------|-------------|
-| 🔵 **Zustand** | Abgerundetes Rechteck | Beschreibt einen Zustand des Objekts |
-| ⬤ **Anfangszustand** | Gefüllter Kreis | Startpunkt des Diagramms |
-| ◎ **Endzustand** | Gefüllter Kreis mit Ring | Endpunkt des Diagramms |
-| ➡️ **Übergang** | Pfeil mit Beschriftung | Ereignis [Bedingung] / Aktion |
-| 📌 **History-State** | (H) | Merkt sich den letzten Zustand |
+| 🔵 **Zustand** | Abgerundetes Rechteck | Beschreibt einen Zustand |
+| ⬤ **Anfangszustand** | Gefüllter Kreis | Startpunkt |
+| ◎ **Endzustand** | Kreis mit Ring | Endpunkt |
+| ➡️ **Übergang** | Pfeil | Ereignis [Bedingung] / Aktion |
 
 ---
 
-### ☕ Beispiel: Bestellstatus
+## 🔨 Ausprobieren
 
-\`\`\`
-[Angelegt] --"Bestätigt"--> [In Bearbeitung]
-[In Bearbeitung] --"Versandt"--> [Unterwegs]
-[Unterwegs] --"Zugestellt"--> [Abgeschlossen]
-[In Bearbeitung] --"Storniert"--> [Storniert]
-[Unterwegs] --"Retoure"--> [Rücksendung]
-\`\`\`
+[INTERACTIVE]
 
----
-
-### 📌 History-State
-
-Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehrt, springt der History-State **nicht zum Anfang**, sondern an die **letzte Position** zurück.
+> 💡 Der Sequence-Diagram-Builder oben zeigt dir eine Online-Bestellung — erstelle eigene Sequenz- und Zustandsdiagramme!
 
 ---
 
@@ -1040,17 +799,9 @@ Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehr
 
 ## 🗓️ Netzplantechnik
 
-### Was ist Netzplantechnik?
+Netzplantechnik ist eine Methode aus dem **Projektmanagement** zur Darstellung von Arbeitsabläufen und deren Abhängigkeiten.
 
-Netzplantechnik ist eine Methode aus dem **Projektmanagement**, um Arbeitsabläufe und deren Abhängigkeiten darzustellen. Sie hilft bei der **Planung, Steuerung und Überwachung** von Projekten.
-
-> 💡 Netzplantechnik zeigt dir den **kritischen Pfad** — den längsten Weg durch das Projekt, der die Mindestdauer bestimmt.
-
----
-
-### 🧩 Aufbau eines Netzknotens
-
-Jeder Vorgang hat vier Zeitpunkte:
+### 🧩 Die vier Zeitpunkte pro Vorgang
 
 | Abkürzung | Bedeutung | Berechnung |
 |-----------|-----------|------------|
@@ -1059,27 +810,23 @@ Jeder Vorgang hat vier Zeitpunkte:
 | 🔴 **SAZ** | Spätester Anfangszeitpunkt | SEZ − Dauer |
 | 🔴 **SEZ** | Spätester Endzeitpunkt | Nachfolger-SAZ |
 
-> ❗ **Merke:** FAZ/FEZ werden **vorwärts** berechnet (von links nach rechts), SAZ/SEZ **rückwärts** (von rechts nach links).
+> ❗ FAZ/FEZ werden **vorwärts** berechnet (links → rechts), SAZ/SEZ **rückwärts** (rechts → links).
+
+### ⏱️ Pufferzeit & Kritischer Pfad
+
+- **Pufferzeit = SAZ − FAZ** — wie viel Spielraum hat ein Vorgang?
+- **Kritischer Pfad** = Kette mit Pufferzeit **0** — jede Verzögerung hier verzögert das Gesamtprojekt
+
+> 💡 Der NetzplanBuilder oben berechnet alles automatisch — probiere es aus!
 
 ---
 
-### ⏱️ Pufferzeit
-
-**Pufferzeit = SAZ − FAZ**
-
-Gibt an, wie viel Spielraum ein Vorgang hat, ohne das gesamte Projekt zu verzögern.
-
----
-
-### 🔴 Kritischer Pfad
-
-Der **kritische Pfad** ist die Kette von Vorgängen, bei denen die **Pufferzeit = 0** ist. Jede Verzögerung auf diesem Pfad verzögert das gesamte Projekt. Er ist der **längste Pfad** durch das Netzwerk.
-
-> ⚠️ **Merke:** Kritischer Pfad = Pufferzeit 0 = Kein Spielraum!
-
----
+## 🔨 Ausprobieren
 
 [INTERACTIVE]
+
+---
+
 ## 🗃️ ER-Modell (Entity-Relationship)
 
 ### Was ist ein ER-Modell?
