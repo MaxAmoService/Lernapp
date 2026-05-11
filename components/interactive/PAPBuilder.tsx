@@ -27,14 +27,14 @@ interface StepInfo {
 }
 
 const kaffeeElements: PAPElement[] = [
-  { id: "start", type: "start", label: "Start", x: 200, y: 40 },
-  { id: "io1", type: "io", label: "Geld einwerfen", x: 200, y: 120 },
-  { id: "io2", type: "io", label: "Betrag eingeben", x: 200, y: 200 },
-  { id: "dec1", type: "decision", label: "Betrag\n≥ Preis?", x: 200, y: 295 },
-  { id: "op1", type: "operation", label: "Kaffee\nzubereiten", x: 360, y: 295 },
-  { id: "io3", type: "io", label: "Ihr Kaffee", x: 360, y: 385 },
-  { id: "end1", type: "end", label: "Ende", x: 360, y: 465 },
-  { id: "io4", type: "io", label: "Zu wenig\nGuthaben!", x: 200, y: 385 },
+  { id: "start", type: "start", label: "Start", x: 180, y: 45 },
+  { id: "io1", type: "io", label: "Geld einwerfen", x: 180, y: 140 },
+  { id: "io2", type: "io", label: "Betrag eingeben", x: 180, y: 235 },
+  { id: "dec1", type: "decision", label: "Betrag\n≥ Preis?", x: 180, y: 345 },
+  { id: "op1", type: "operation", label: "Kaffee\nzubereiten", x: 420, y: 345 },
+  { id: "io3", type: "io", label: "Ihr Kaffee", x: 420, y: 450 },
+  { id: "end1", type: "end", label: "Ende", x: 420, y: 550 },
+  { id: "io4", type: "io", label: "Zu wenig\nGuthaben!", x: 180, y: 450 },
 ];
 
 const kaffeeConnections: PAPConnection[] = [
@@ -50,12 +50,12 @@ const kaffeeConnections: PAPConnection[] = [
 
 const steps: StepInfo[] = [
   { elementId: "start", title: "Start-Symbol", description: "Der PAP beginnt immer mit dem Start-Symbol — ein grünes Oval nach DIN 66001.", symbol: "🟢 Oval" },
-  { elementId: "io1", title: "Eingabe: Geld einwerfen", description: "Der Nutzer wirft Geld ein. Das ist eine EINGABE — dargestellt als Parallelogramm (lila).", symbol: "📥 Parallelogramm" },
-  { elementId: "io2", title: "Eingabe: Betrag", description: "Der Nutzer gibt den gewünschten Betrag ein — ebenfalls eine Eingabe.", symbol: "📥 Parallelogramm" },
+  { elementId: "io1", title: "Eingabe: Geld einwerfen", description: "Der Nutzer wirft Geld ein. Das ist eine EINGABE — dargestellt als Parallelogramm (lila).", symbol: "🟪 Parallelogramm" },
+  { elementId: "io2", title: "Eingabe: Betrag", description: "Der Nutzer gibt den gewünschten Betrag ein — ebenfalls eine Eingabe.", symbol: "🟪 Parallelogramm" },
   { elementId: "dec1", title: "Entscheidung", description: "Das Herzstück: Eine RAUTE prüft ob der Betrag reicht. Hier verzweigt sich der PAP in JA und NEIN.", symbol: "🔶 Raute" },
   { elementId: "op1", title: "Ja-Pfad: Kaffee zubereiten", description: "Bei 'Ja' wird eine OPERATION ausgeführt — ein blaues Rechteck. Der Kaffee wird zubereitet.", symbol: "🟦 Rechteck" },
-  { elementId: "io4", title: "Nein-Pfad: Fehlermeldung", description: "Bei 'Nein' wird eine Ausgabe 'Zu wenig Guthaben!' angezeigt — Parallelogramm.", symbol: "📥 Parallelogramm" },
-  { elementId: "io3", title: "Ausgabe: Ihr Kaffee", description: "Die Ausgabe 'Ihr Kaffee' erscheint — der Nutzer erhält sein Produkt.", symbol: "📥 Parallelogramm" },
+  { elementId: "io4", title: "Nein-Pfad: Fehlermeldung", description: "Bei 'Nein' wird eine Ausgabe 'Zu wenig Guthaben!' angezeigt — Parallelogramm.", symbol: "🟪 Parallelogramm" },
+  { elementId: "io3", title: "Ausgabe: Ihr Kaffee", description: "Die Ausgabe 'Ihr Kaffee' erscheint — der Nutzer erhält sein Produkt.", symbol: "🟪 Parallelogramm" },
   { elementId: "end1", title: "Ende", description: "Das Programm endet mit dem Ende-Symbol — einem roten Oval. Fertig! ☕", symbol: "🔴 Oval" },
 ];
 
@@ -168,7 +168,7 @@ export function PAPBuilder() {
   const generateChallenge = useCallback(() => {
     if (challengeStep >= steps.length) return;
     const correct = steps[challengeStep].symbol;
-    const allSymbols = ["🟢 Oval", "🟦 Rechteck", "🔶 Raute", "📥 Parallelogramm", "🔴 Oval"];
+    const allSymbols = ["🟢 Oval", "🟦 Rechteck", "🔶 Raute", "🟪 Parallelogramm", "🔴 Oval"];
     const wrong = allSymbols.filter(s => s !== correct);
     const shuffled = [correct, ...wrong.sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
     setChallengeOptions(shuffled);
@@ -249,8 +249,8 @@ export function PAPBuilder() {
 
           <div className="flex flex-col lg:flex-row gap-6">
             {/* SVG */}
-            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[500px]">
-              <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
+            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[600px]">
+              <svg width="560" height="620" viewBox="0 0 560 620" className="max-w-full">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
@@ -305,7 +305,7 @@ export function PAPBuilder() {
                         { s: "🟢", n: "Start/Ende", c: "text-green-400" },
                         { s: "🟦", n: "Operation", c: "text-blue-400" },
                         { s: "🔶", n: "Entscheidung", c: "text-amber-400" },
-                        { s: "📥", n: "Ein-/Ausgabe", c: "text-purple-400" },
+                        { s: "🟪", n: "Ein-/Ausgabe", c: "text-purple-400" },
                       ].map(sym => (
                         <div key={sym.n} className="flex items-center gap-2 px-2.5 py-1.5 bg-slate-900/40 rounded-lg">
                           <span className="text-base">{sym.s}</span>
@@ -343,8 +343,8 @@ export function PAPBuilder() {
           <p className="text-sm text-slate-400 mb-5">Welches Symbol gehört an diese Stelle? Klicke auf die richtige Antwort.</p>
 
           <div className="flex flex-col lg:flex-row gap-5">
-            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[480px]">
-              <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
+            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[600px]">
+              <svg width="560" height="620" viewBox="0 0 560 620" className="max-w-full">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />

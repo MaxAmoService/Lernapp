@@ -88,7 +88,7 @@ export function PAPSymbolOverview({ width = 400, height = 500, className = "" }:
   );
 }
 
-export function PAPExample({ width = 400, height = 700, className = "" }: PAPSymbolProps) {
+export function PAPExample({ width = 540, height = 780, className = "" }: PAPSymbolProps) {
   return (
     <div className={`flex flex-col items-center gap-3 ${className}`}>
       <div className="text-center">
@@ -96,7 +96,7 @@ export function PAPExample({ width = 400, height = 700, className = "" }: PAPSym
         <p className="text-sm text-slate-400">Ein kompletter PAP mit Entscheidung und Rückkopplung</p>
       </div>
       <div className="bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
-        <svg width={width} height={height} viewBox="0 0 420 660" className="max-w-full">
+        <svg width={width} height={height} viewBox="0 0 550 760" className="max-w-full">
           <defs>
             <marker id="ex-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
@@ -110,63 +110,63 @@ export function PAPExample({ width = 400, height = 700, className = "" }: PAPSym
           </defs>
 
           {/* START */}
-          <rect x="150" y="15" width="120" height="48" rx="24" ry="24" fill="#22c55e" stroke="#15803d" strokeWidth="2.5" />
-          <text x="210" y="44" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Start</text>
-          <line x1="210" y1="63" x2="210" y2="95" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <rect x="170" y="15" width="120" height="48" rx="24" ry="24" fill="#22c55e" stroke="#15803d" strokeWidth="2.5" />
+          <text x="230" y="44" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Start</text>
+          <line x1="230" y1="63" x2="230" y2="100" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
           {/* Eingabe: Geld */}
-          <polygon points="125,100 295,100 275,140 105,140" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
-          <text x="200" y="125" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Geld einwerfen</text>
-          <line x1="200" y1="140" x2="200" y2="175" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <polygon points="145,105 315,105 295,145 125,145" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="220" y="130" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Geld einwerfen</text>
+          <line x1="220" y1="145" x2="220" y2="185" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
           {/* Eingabe: Betrag */}
-          <polygon points="125,180 295,180 275,220 105,220" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
-          <text x="200" y="205" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Betrag eingeben</text>
-          <line x1="200" y1="220" x2="200" y2="260" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <polygon points="145,190 315,190 295,230 125,230" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="220" y="215" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Betrag eingeben</text>
+          <line x1="220" y1="230" x2="220" y2="275" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
           {/* Entscheidung */}
-          <polygon points="200,265 295,320 200,375 105,320" fill="#f59e0b" stroke="#b45309" strokeWidth="2.5" />
-          <text x="200" y="315" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Betrag</text>
-          <text x="200" y="333" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">≥ Preis?</text>
+          <polygon points="220,280 325,340 220,400 115,340" fill="#f59e0b" stroke="#b45309" strokeWidth="2.5" />
+          <text x="220" y="335" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Betrag</text>
+          <text x="220" y="353" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">≥ Preis?</text>
 
           {/* JA-Pfeil */}
-          <line x1="295" y1="320" x2="340" y2="320" stroke="#22c55e" strokeWidth="2.5" markerEnd="url(#ex-arrow-green)" />
-          <rect x="326" y="294" width="28" height="18" rx="9" ry="9" fill="#22c55e" />
-          <text x="340" y="307" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Ja</text>
+          <line x1="325" y1="340" x2="380" y2="340" stroke="#22c55e" strokeWidth="2.5" markerEnd="url(#ex-arrow-green)" />
+          <rect x="366" y="314" width="28" height="18" rx="9" ry="9" fill="#22c55e" />
+          <text x="380" y="327" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Ja</text>
 
           {/* Operation: Kaffee */}
-          <rect x="345" y="300" width="70" height="44" rx="3" ry="3" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2.5" />
-          <text x="380" y="320" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Kaffee</text>
-          <text x="380" y="336" textAnchor="middle" fill="white" fontSize="10">zubereiten</text>
-          <line x1="380" y1="344" x2="380" y2="395" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <rect x="385" y="318" width="80" height="44" rx="3" ry="3" fill="#3b82f6" stroke="#1d4ed8" strokeWidth="2.5" />
+          <text x="425" y="338" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Kaffee</text>
+          <text x="425" y="354" textAnchor="middle" fill="white" fontSize="10">zubereiten</text>
+          <line x1="425" y1="362" x2="425" y2="410" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
           {/* Ausgabe: Ihr Kaffee */}
-          <polygon points="305,400 455,400 435,440 285,440" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
-          <text x="370" y="425" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Ihr Kaffee ☕</text>
-          <line x1="370" y1="440" x2="370" y2="485" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <polygon points="350,415 500,415 480,455 330,455" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="415" y="440" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Ihr Kaffee ☕</text>
+          <line x1="415" y1="455" x2="415" y2="500" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
 
           {/* Ende */}
-          <rect x="310" y="490" width="120" height="48" rx="24" ry="24" fill="#ef4444" stroke="#dc2626" strokeWidth="2.5" />
-          <text x="370" y="520" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Ende</text>
+          <rect x="355" y="505" width="120" height="48" rx="24" ry="24" fill="#ef4444" stroke="#dc2626" strokeWidth="2.5" />
+          <text x="415" y="535" textAnchor="middle" fill="white" fontSize="16" fontWeight="bold">Ende</text>
 
           {/* NEIN-Pfeil */}
-          <line x1="200" y1="375" x2="200" y2="425" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#ex-arrow-red)" />
-          <rect x="186" y="392" width="28" height="18" rx="9" ry="9" fill="#ef4444" />
-          <text x="200" y="405" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Nein</text>
+          <line x1="220" y1="400" x2="220" y2="460" stroke="#ef4444" strokeWidth="2.5" markerEnd="url(#ex-arrow-red)" />
+          <rect x="206" y="420" width="28" height="18" rx="9" ry="9" fill="#ef4444" />
+          <text x="220" y="433" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Nein</text>
 
           {/* Ausgabe: Zu wenig */}
-          <polygon points="125,430 295,430 275,470 105,470" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
-          <text x="200" y="455" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Zu wenig Guthaben!</text>
+          <polygon points="145,465 315,465 295,505 125,505" fill="#a855f7" stroke="#6d28d9" strokeWidth="2.5" />
+          <text x="220" y="490" textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">Zu wenig Guthaben!</text>
 
           {/* Rückpfeil */}
-          <line x1="200" y1="470" x2="200" y2="510" stroke="#94a3b8" strokeWidth="2" />
-          <line x1="200" y1="510" x2="70" y2="510" stroke="#94a3b8" strokeWidth="2" />
-          <line x1="70" y1="510" x2="70" y2="125" stroke="#94a3b8" strokeWidth="2" />
-          <line x1="70" y1="125" x2="105" y2="125" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
-          <text x="60" y="320" textAnchor="end" fill="#94a3b8" fontSize="11" transform="rotate(-90, 60, 320)">↩ Erneut versuchen</text>
+          <line x1="220" y1="505" x2="220" y2="550" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="220" y1="550" x2="75" y2="550" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="75" y1="550" x2="75" y2="130" stroke="#94a3b8" strokeWidth="2" />
+          <line x1="75" y1="130" x2="125" y2="130" stroke="#94a3b8" strokeWidth="2" markerEnd="url(#ex-arrow)" />
+          <text x="65" y="345" textAnchor="end" fill="#94a3b8" fontSize="11" transform="rotate(-90, 65, 345)">↩ Erneut versuchen</text>
 
           {/* Legende */}
-          <g transform="translate(10, 580)">
+          <g transform="translate(10, 660)">
             <rect x="0" y="0" width="14" height="14" rx="7" fill="#22c55e" />
             <text x="20" y="12" fill="#94a3b8" fontSize="11">Start/Ende</text>
             <rect x="110" y="0" width="14" height="14" rx="2" fill="#3b82f6" />

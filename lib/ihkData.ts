@@ -318,7 +318,7 @@ Ein Programmablaufplan (PAP) ist eine **grafische Darstellung** eines Algorithmu
 
 ---
 
-## 🟢🔵🔶▱ Die Symbole nach DIN 66001
+## 🟢🔵🔶🟪 Die Symbole nach DIN 66001
 
 Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 
@@ -327,7 +327,7 @@ Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 | 🟢 **Start/Ende** | Oval (abgerundetes Rechteck) | Beginn oder Ende des Programms |
 | 🟦 **Operation** | Rechteck | Berechnung, Zuweisung, eine Aktion |
 | 🔶 **Entscheidung** | Raute | Ja/Nein-Abfrage (if/else) |
-| ▱ **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
+| 🟪 **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
 | ➡️ **Flusspfeil** | Pfeil | Richtung des Ablaufs |
 
 > ✅ **Merke:** Die Raute ist das EINZIGE Symbol mit zwei Ausgängen (Ja/Nein). Alle anderen haben genau einen Ausgang.
@@ -341,10 +341,10 @@ Schau dir den interaktiven PAP oben an! Hier die Schritte im Detail:
 **Schritt 1:** 🟢 **Start**
 - Das Programm beginnt
 
-**Schritt 2:** ▱ **Ausgabe:** "Bitte Geld einwerfen"
+**Schritt 2:** 🟪 **Ausgabe:** "Bitte Geld einwerfen"
 - Der Nutzer wird auf dem Bildschirm informiert
 
-**Schritt 3:** ▱ **Eingabe:** Betrag eingeben
+**Schritt 3:** 🟪 **Eingabe:** Betrag eingeben
 - Der Nutzer wirft Geld ein und tippt den Betrag ein
 
 **Schritt 4:** 🔶 **Entscheidung:** Betrag >= Preis?
@@ -354,7 +354,7 @@ Schau dir den interaktiven PAP oben an! Hier die Schritte im Detail:
 **Schritt 5:** 🟦 **Operation:** Kaffee zubereiten
 - Die Maschine bereitet das Getränk zu
 
-**Schritt 6:** ▱ **Ausgabe:** "Ihr Kaffee ist fertig!"
+**Schritt 6:** 🟪 **Ausgabe:** "Ihr Kaffee ist fertig!"
 - Der Nutzer wird informiert, dass der Kaffee fertig ist
 
 **Schritt 7:** 🟢 **Ende**
