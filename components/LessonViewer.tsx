@@ -279,7 +279,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   };
 
   return (
-    <div className="glass rounded-xl p-5 animate-slide-up">
+    <div className="glass rounded-xl p-6 lg:p-8 animate-slide-up">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
         <div>
@@ -299,15 +299,15 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Visuals (top position) */}
       {lesson.visuals?.filter(v => v.position !== "bottom").map((v, i) => renderVisual(v, i))}
 
-      {/* Math-Interaktive OBEN — man lernt durch Ausprobieren */}
+      {/* Content — Erklärung */}
+      <div className="markdown-content">{renderContent(lesson.content)}</div>
+
+      {/* Interaktive Elemente NACH dem Content — erst lesen, dann ausprobieren */}
       {lesson.interactive && lesson.interactive !== "codeSandbox" && (
         <div className="my-6">
           {renderInteractive(lesson.interactive)}
         </div>
       )}
-
-      {/* Content — Erklärung */}
-      <div className="markdown-content">{renderContent(lesson.content)}</div>
 
       {/* Visuals (bottom position) */}
       {lesson.visuals?.filter(v => v.position === "bottom").map((v, i) => renderVisual(v, i + 100))}

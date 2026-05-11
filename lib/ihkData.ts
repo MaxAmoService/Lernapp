@@ -211,27 +211,35 @@ export const ihkModule: Module = {
       duration: "15 min",
       type: "interactive",
       interactive: "pseudocodeRunner",
-      content: `# Pseudocode — Algorithmen in codenaher Sprache
+      content: `# Pseudocode — Algorithmen in codenaher Sprache 🟦
 
 ## Was ist Pseudocode?
 
-Pseudocode ist eine **sprachunabhängige, formale Sprache**, um Algorithmen zu beschreiben. Er sieht aus wie echter Code, ist aber an keine Programmiersprache gebunden. In der IHK-Prüfung ist Pseudocode ein zentrales Werkzeug — du musst Algorithmen formal beschreiben können, ohne eine bestimmte Sprache zu nutzen.
+**Pseudocode** ist eine **sprachunabhängige, formale Sprache**, um Algorithmen zu beschreiben. Er sieht aus wie echter Code, ist aber an keine Programmiersprache gebunden.
 
-## Wofür braucht man Pseudocode?
+> 💡 Pseudocode ist wie ein **Bauplan für deinen Code** — du beschreibst die Logik, ohne dich um Syntax zu kümmern.
 
-- **Planung:** Vor dem eigentlichen Programmieren den Algorithmus strukturieren
-- **Kommunikation:** Andere Entwickler verstehen die Logik ohne Code lesen zu müssen
-- **IHK-Prüfung:** Algorithmen in Pseudocode beschreiben ist ein typischer Prüfungsauftrag
+---
+
+## Warum braucht man Pseudocode?
+
+- 📋 **Planung:** Algorithmus strukturieren, bevor man programmiert
+- 💬 **Kommunikation:** Logik verständlich machen ohne Code
+- 📝 **IHK-Prüfung:** Algorithmen formal beschreiben — typischer Prüfungsauftrag
+
+---
 
 ## Die wichtigsten Strukturen
 
-### Variablen und Zuweisung
+### 📦 Variablen und Zuweisung
+
 \`\`\`
 meineZahl = 42
 name = "Moritz"
 \`\`\`
 
-### Bedingungen
+### 🔶 Bedingungen (if/else)
+
 \`\`\`
 if (alter >= 18) {
     print("Volljährig")
@@ -240,8 +248,10 @@ if (alter >= 18) {
 }
 \`\`\`
 
-### Schleifen — kopfgesteuert (while)
+### 🔁 Schleifen — kopfgesteuert (while)
+
 Die Bedingung wird **am Anfang** geprüft. Wenn sie nicht erfüllt ist, wird die Schleife gar nicht erst ausgeführt.
+
 \`\`\`
 i = 0
 while (i < 10) {
@@ -250,8 +260,10 @@ while (i < 10) {
 }
 \`\`\`
 
-### Schleifen — fußgesteuert (do-while)
-Die Bedingung wird **am Ende** geprüft. Die Schleife wird **mindestens einmal** ausgeführt, auch wenn die Bedingung von vornherein nicht stimmt.
+### 🔁 Schleifen — fußgesteuert (do-while)
+
+Die Bedingung wird **am Ende** geprüft. Die Schleife wird **mindestens einmal** ausgeführt.
+
 \`\`\`
 i = 0
 do {
@@ -260,7 +272,8 @@ do {
 } while (i < 10)
 \`\`\`
 
-### Switch/Case
+### 🔀 Switch/Case
+
 \`\`\`
 match (eingabe):
     case "ja": print("Bestätigt")
@@ -268,7 +281,9 @@ match (eingabe):
     default: print("Ungültig")
 \`\`\`
 
-## Pseudocode-Beispiel: Bubblesort
+---
+
+## ☕ Beispiel: Bubblesort in Pseudocode
 
 \`\`\`
 function bubbleSort(liste n):
@@ -280,14 +295,22 @@ function bubbleSort(liste n):
                 liste[j+1] = temp
 \`\`\`
 
-## Regeln für die IHK
+> 💡 **Verschachtelte Schleifen** sind typisch für Sortieralgorithmen. Die äußere Schleife zählt die Durchläufe, die innere vergleicht benachbarte Elemente.
 
-1. **Formal codenah** schreiben — keine deutschen Sätze
-2. **Geschweifte Klammern** für Einrückung verwenden
-3. **Englische Begriffe** bevorzugen (if, else, while, for, return)
-4. **Kommentare** mit # oder // ergänzen
-5. **Auf Papier** — für die Prüfung per Hand schreibbar
-6. **Schreibtischtest** durchführen: Variablenwerte in einer Tabelle protokollieren`
+---
+
+## 🎯 Regeln für die IHK-Prüfung
+
+> ❗ **Diese Regeln sichern dir Punkte!**
+
+1. ✏️ **Formal codenah** schreiben — keine deutschen Sätze
+2. { } **Geschweifte Klammern** für Blöcke verwenden
+3. 🇬🇧 **Englische Begriffe** bevorzugen (if, else, while, for, return)
+4. 💬 **Kommentare** mit # oder // ergänzen
+5. 📝 **Auf Papier** — für die Prüfung per Hand schreibbar
+6. 🧪 **Schreibtischtest** durchführen: Variablenwerte in einer Tabelle protokollieren
+
+> ✅ **Merke:** Pseudocode muss lesbar und nachvollziehbar sein. Wenn ein anderer Entwickler den Algorithmus versteht, hast du es richtig gemacht.`
     },
 
     // --- Lektion 2: Programmablaufplan (PAP) ---
@@ -487,15 +510,15 @@ Die Struktur von Bubblesort als Struktogramm:
       duration: "20 min",
       type: "interactive",
       interactive: "sortVisualizer",
-      content: `# Sortieralgorithmen — Bubblesort, Selectionsort, Insertionsort
+      content: `# Sortieralgorithmen — Bubblesort, Selectionsort, Insertionsort 📊
 
 ## Warum Sortieren?
 
-Sortieren ist eine der grundlegendsten Aufgaben in der Informatik. Viele Algorithmen (z.B. binäre Suche) benötigen sortierte Daten als Eingabe. Die IHK verlangt das Verständnis und die Implementierung der wichtigsten Sortierverfahren.
+Sortieren ist eine der **grundlegendsten Aufgaben** in der Informatik. Viele Algorithmen (z.B. binäre Suche) benötigen sortierte Daten als Eingabe. Die IHK verlangt das Verständnis und die Implementierung der wichtigsten Sortierverfahren.
 
 ---
 
-## Bubblesort (Durchlauf-Methode)
+## 🫧 Bubblesort (Durchlauf-Methode)
 
 **Prinzip:** Vergleiche benachbarte Elemente und tausche sie, wenn sie in falscher Reihenfolge sind. Wiederhole das Ganze, bis alles sortiert ist.
 
@@ -512,9 +535,9 @@ Sortieren ist eine der grundlegendsten Aufgaben in der Informatik. Viele Algorit
 **Durchlauf 2:** Das größte Element ist schon hinten, also nur bis n-1 prüfen. Das 5 wandert nach hinten.
 
 **Zeitkomplexität:**
-- Bester Fall: O(n) (bereits sortiert, eine Optimierung)
-- Durchschnitt: O(n²)
-- Schlechtester Fall: O(n²) (umgekehrt sortiert)
+- 🟢 Bester Fall: O(n) (bereits sortiert, eine Optimierung)
+- 🟡 Durchschnitt: O(n²)
+- 🔴 Schlechtester Fall: O(n²) (umgekehrt sortiert)
 
 **Pseudocode:**
 \`\`\`
@@ -528,7 +551,7 @@ for i = 0 to n-2:
 
 ---
 
-## Selectionsort (Auswahlverfahren)
+## 🔍 Selectionsort (Auswahlverfahren)
 
 **Prinzip:** Finde das kleinste Element im unsortierten Teil und tausche es an die erste Position. Wiederhole mit dem Rest.
 
@@ -538,11 +561,11 @@ for i = 0 to n-2:
 - Kleinste: 2 (Position 4) → Tausche mit Position 1 → [1, 2, 5, 3, 4, 8]
 - Und so weiter...
 
-**Zeitkomplexität:** Immer O(n²) —少 Tauschoperationen, aber viele Vergleiche.
+**Zeitkomplexität:** 🟡 Immer O(n²) — wenige Tauschoperationen, aber viele Vergleiche.
 
 ---
 
-## Insertionsort (Einfügemethode)
+## 📥 Insertionsort (Einfügemethode)
 
 **Prinzip:** Baue die sortierte Liste elementweise auf. Nimm das nächste Element und schiebe es an die richtige Stelle.
 
@@ -553,23 +576,34 @@ for i = 0 to n-2:
 - 8 gehört hinten → [1, 2, 3, 4, 5, 8] ✅
 
 **Zeitkomplexität:**
-- Bester Fall: O(n) (fast sortiert — sehr effizient!)
-- Durchschnitt: O(n²)
-- Schlechtester Fall: O(n²)
+- 🟢 Bester Fall: O(n) (fast sortiert — sehr effizient!)
+- 🟡 Durchschnitt: O(n²)
+- 🔴 Schlechtester Fall: O(n²)
 
 ---
 
-## Vergleich
+## ⚔️ Vergleich der Sortieralgorithmen
 
-| | Bubblesort | Selectionsort | Insertionsort |
+| | 🫧 Bubblesort | 🔍 Selectionsort | 📥 Insertionsort |
 |---|---|---|---|
 | **Prinzip** | Nachbarn vergleichen | Kleinstes suchen | Element einfügen |
 | **Vergleiche** | O(n²) | O(n²) | O(n²) |
 | **Tauschungen** | O(n²) | O(n) | O(n²) |
-| **Stabil?** | Ja | Nein | Ja |
+| **Stabil?** | ✅ Ja | ❌ Nein | ✅ Ja |
 | **Best for** | Verständnis | Wenig Tausche | Fast sortiert |
 
-> **Merke:** Alle drei haben O(n²) — für die IHK reicht das. Echte Anwendungen nutzen Quicksort (O(n log n)) oder Mergesort.`,
+> ⚠️ Alle drei haben O(n²) — für die IHK reicht das. Echte Anwendungen nutzen **Quicksort** (O(n log n)) oder **Mergesort**.
+
+---
+
+## 🎯 IHK-Tipps
+
+> ❗ **Diese Tipps sichern dir Punkte!**
+
+- 🧪 Immer einen **Schreibtischtest** machen — Variablen in einer Tabelle protokollieren
+- 📊 Jeden **Durchlauf einzeln** aufschreiben — nicht abkürzen!
+- ⏱️ **Zeitkomplexität** erklären können — nicht nur auswendig lernen
+- 🔄 **Stabilität** erklären: Stabil = gleiche Elemente behalten ihre Reihenfolge`,
       codeExample: `// Insertionsort in Python
 def insertion_sort(arr):
     for i in range(1, len(arr)):
@@ -592,21 +626,21 @@ print(insertion_sort(liste))  # [1, 2, 3, 4, 5, 8]`
       duration: "10 min",
       type: "interactive",
       interactive: "searchVisualizer",
-      content: `# Suchalgorithmen — Lineare und Binäre Suche
+      content: `# Suchalgorithmen — Lineare und Binäre Suche 🔍
 
 ## Warum Suchen?
 
-Daten suchen ist eine der häufigsten Operationen in der Softwareentwicklung — ob in einer Datenbank, einer Datei oder einer Liste. Die Art der Suche bestimmt, wie schnell du dein Ziel findest.
+Daten suchen ist eine der **häufigsten Operationen** in der Softwareentwicklung — ob in einer Datenbank, einer Datei oder einer Liste. Die Art der Suche bestimmt, wie schnell du dein Ziel findest.
 
 ---
 
-## Lineare Suche
+## 🔎 Lineare Suche
 
 **Prinzip:** Gehe die Liste von Anfang bis Ende durch und prüfe jedes Element.
 
 **Voraussetzung:** Keine — die Liste muss NICHT sortiert sein.
 
-**Zeitkomplexität:** O(n) — im schlimmsten Fall musst du alles durchsuchen.
+**Zeitkomplexität:** 🟡 O(n) — im schlimmsten Fall musst du alles durchsuchen.
 
 **Pseudocode:**
 \`\`\`
@@ -618,20 +652,20 @@ function linearSearch(liste, ziel):
 \`\`\`
 
 **Beispiel:** Liste = [2, 4, 5, 3, 1, 8], Ziel = 3
-- Prüfe 2 → nein
-- Prüfe 4 → nein
-- Prüfe 5 → nein
-- Prüfe 3 → JA! Gefunden an Index 3 ✅
+- Prüfe 2 → ❌ nein
+- Prüfe 4 → ❌ nein
+- Prüfe 5 → ❌ nein
+- Prüfe 3 → ✅ JA! Gefunden an Index 3
 
 ---
 
-## Binäre Suche
+## 🎯 Binäre Suche
 
 **Prinzip:** Teile die sortierte Liste in der Mitte. Ist das mittlere Element das Ziel? Falls nicht: Suche nur in der linken oder rechten Hälfte weiter.
 
 **Voraussetzung:** Die Liste MUSS **sortiert** sein!
 
-**Zeitkomplexität:** O(log n) — viel schneller als linear!
+**Zeitkomplexität:** 🟢 O(log n) — viel schneller als linear!
 
 **Pseudocode:**
 \`\`\`
@@ -651,25 +685,36 @@ function binarySearch(liste, ziel):
     return -1  // nicht gefunden
 \`\`\`
 
-**Beispiel:** Sortierte Liste = [1, 2, 3, 4, 5, 8], Ziel = 3
-1. Mitte = (0+5)/2 = 2 → liste[2] = 3 → Gefunden! ✅
+**Beispiel 1:** Sortierte Liste = [1, 2, 3, 4, 5, 8], Ziel = 3
+1. Mitte = (0+5)/2 = 2 → liste[2] = 3 → ✅ Gefunden!
 
 **Beispiel 2:** Sortierte Liste = [1, 2, 3, 4, 5, 8], Ziel = 8
 1. Mitte = 2 → liste[2] = 3 < 8 → Suche rechts (links = 3)
 2. Mitte = (3+5)/2 = 4 → liste[4] = 5 < 8 → Suche rechts (links = 5)
-3. Mitte = (5+5)/2 = 5 → liste[5] = 8 → Gefunden! ✅
+3. Mitte = (5+5)/2 = 5 → liste[5] = 8 → ✅ Gefunden!
 
 ---
 
-## Vergleich
+## ⚔️ Vergleich
 
-| | Lineare Suche | Binäre Suche |
+| | 🔎 Lineare Suche | 🎯 Binäre Suche |
 |---|---|---|
-| **Sortiert nötig?** | Nein | Ja |
-| **Zeitkomplexität** | O(n) | O(log n) |
+| **Sortiert nötig?** | ❌ Nein | ✅ Ja |
+| **Zeitkomplexität** | 🟡 O(n) | 🟢 O(log n) |
 | **Bei 1 Million Einträgen** | max. 1.000.000 Schritte | max. ~20 Schritte |
 
-> **Merke:** Binäre Suche ist exponentiell schneller, braucht aber eine sortierte Liste. In der IHK immer prüfen: Ist die Liste sortiert?`,
+> ❗ **Merke:** Binäre Suche ist exponentiell schneller, braucht aber eine sortierte Liste. In der IHK immer prüfen: Ist die Liste sortiert? Wenn ja → binäre Suche.
+
+---
+
+## 🎯 IHK-Tipps
+
+> 💡 **Diese Tipps sichern dir Punkte!**
+
+- 🧪 Immer einen **Schreibtischtest** machen — besonders bei binärer Suche!
+- 📊 **Voraussetzung** prüfen: Ist die Liste sortiert? → Entscheidet welcher Algorithmus
+- 🔢 **Mitte berechnen** auf Papier üben — Rundungsfehler vermeiden
+- ⏱️ **Zeitkomplexität** erklären können: Warum ist O(log n) schneller?`,
       codeExample: `// Binäre Suche in Python
 def binary_search(arr, ziel):
     links, rechts = 0, len(arr) - 1
@@ -695,54 +740,81 @@ print(binary_search(sortiert, 6))  # -1`
       duration: "15 min",
       type: "interactive",
       interactive: "epkBuilder",
-      content: `# Ereignisgesteuerte Prozesskette (EPK)
+      content: `# Ereignisgesteuerte Prozesskette (EPK) 🔗
 
 ## Was ist eine EPK?
 
-Eine EPK (Ereignisgesteuerte Prozesskette) ist ein Diagramm zur Darstellung von **Geschäftsprozessen**. Sie zeigt die logische und chronologische Abfolge von Ereignissen und Funktionen und wird häufig in der **Prozessoptimierung und Dokumentation** verwendet — auch bei Unternehmen wie Phoenix Contact.
+Eine **EPK** (Ereignisgesteuerte Prozesskette) ist ein Diagramm zur Darstellung von **Geschäftsprozessen**. Sie zeigt die logische und chronologische Abfolge von **Ereignissen** und **Funktionen** — häufig verwendet in der Prozessoptimierung und Dokumentation.
 
-## Wofür braucht man eine EPK?
+> 💡 Die EPK ist wie ein **Flowchart für Geschäftsprozesse** — sie zeigt, was passiert und was das auslöst.
 
-- **Prozessdokumentation:** Abläufe im Unternehmen visualisieren
-- **Prozessoptimierung:** Schwachstellen und Verbesserungspotenziale erkennen
-- **Kommunikation:** Abteilungen verstehen gemeinsame Prozesse
-- **IHK-Prüfung:** Geschäftsprozesse als EPK modellieren
+---
 
-## Die Elemente der EPK
+## Warum braucht man eine EPK?
+
+- 📋 **Prozessdokumentation:** Abläufe im Unternehmen visualisieren
+- 🔧 **Prozessoptimierung:** Schwachstellen und Verbesserungspotenziale erkennen
+- 💬 **Kommunikation:** Abteilungen verstehen gemeinsame Prozesse
+- 📝 **IHK-Prüfung:** Geschäftsprozesse als EPK modellieren
+
+---
+
+## 🧩 Die Elemente der EPK
 
 | Element | Symbol | Beschreibung |
 |---------|--------|-------------|
-| **Ereignis** | Sechseck | Beschreibt, was passiert (z.B. "Bestellung eingegangen") |
-| **Funktion** | Abgerundetes Rechteck | Beschreibt eine Tätigkeit (z.B. "Bestellung bearbeiten") |
-| **Operator** | AND / OR / XOR | Logische Verknüpfung mehrerer Pfade |
-| **Organisation** | Ellipse | Abteilung/Person für eine Funktion |
-| **Information** | Dokument-Symbol | Daten für eine Funktion |
+| 🟢 **Ereignis** | Sechseck | Beschreibt, WAS passiert (z.B. "Bestellung eingegangen") |
+| 🟦 **Funktion** | Abgerundetes Rechteck | Beschreibt eine TÄTIGKEIT (z.B. "Bestellung bearbeiten") |
+| 🔀 **Operator** | AND / OR / XOR | Logische Verknüpfung mehrerer Pfade |
+| 👤 **Organisation** | Ellipse | Abteilung/Person für eine Funktion |
+| 📄 **Information** | Dokument-Symbol | Daten für eine Funktion |
 
-## Die Operatoren
+---
+
+## 🔀 Die Operatoren
 
 ### AND (UND)
-Alle nachfolgenden Pfade werden **parallel** ausgeführt — alle müssen abgearbeitet werden.
+Alle nachfolgenden Pfade werden **parallel** ausgeführt — **alle** müssen abgearbeitet werden.
 
 ### OR (ODER)
-**Mehrere** Pfade können gewählt werden — mindestens einer.
+**Mehrere** Pfade können gewählt werden — **mindestens einer**.
 
 ### XOR (Exklusives Oder)
 Genau **ein** Pfad wird gewählt — entweder der eine oder der andere.
 
-## Grundregel der EPK
+> ⚠️ **Merke:** XOR = genau einer, OR = mindestens einer, ALLE = alle gleichzeitig.
+
+---
+
+## 📐 Grundregel der EPK
 
 **Ereignis → Funktion → Ereignis → Funktion → ...**
 
 Ereignisse und Funktionen **wechseln sich immer ab**. Direkt hintereinander zwei Funktionen oder zwei Ereignisse ist NICHT erlaubt.
 
-## Beispiel: Bestellprozess
+> ❗ **Diese Regel wird in der IHK-Prüfung oft geprüft!**
 
-1. **Ereignis:** Bestellung eingegangen
-2. → **Funktion:** Bestellung prüfen
-3. → **Ereignis:** Bestellung geprüft
-4. → **XOR:**
-   - Ja → **Funktion:** Ware ausliefern → **Ereignis:** Ware geliefert
-   - Nein → **Funktion:** Kunde kontaktieren → **Ereignis:** Kunde informiert`
+---
+
+## ☕ Beispiel: Bestellprozess
+
+1. 🟢 **Ereignis:** Bestellung eingegangen
+2. → 🟦 **Funktion:** Bestellung prüfen
+3. → 🟢 **Ereignis:** Bestellung geprüft
+4. → 🔀 **XOR:**
+   - ✅ Ja → 🟦 **Funktion:** Ware ausliefern → 🟢 **Ereignis:** Ware geliefert
+   - ❌ Nein → 🟦 **Funktion:** Kunde kontaktieren → 🟢 **Ereignis:** Kunde informiert
+
+---
+
+## 🎯 IHK-Tipps
+
+> 💡 **Diese Tipps sichern dir Punkte!**
+
+- 📐 **Ereignis-Funktion-Wechsel** immer einhalten — das wird geprüft!
+- 🔀 **Operatoren** richtig wählen: XOR für Entweder-Oder, AND für Parallel
+- 📝 **Beschriftungen** kurz und präzise formulieren
+- 🧪 Immer prüfen: Beginnt und endet der Prozess mit einem **Ereignis**?`,
 
     },
 
@@ -753,13 +825,17 @@ Ereignisse und Funktionen **wechseln sich immer ab**. Direkt hintereinander zwei
       duration: "18 min",
       type: "interactive",
       interactive: "umlClassDiagram",
-      content: `# UML Klassendiagramme
+      content: `# UML Klassendiagramme 📐
 
 ## Was ist ein Klassendiagramm?
 
 Das Klassendiagramm ist das **wichtigste Strukturdiagramm** in UML. Es zeigt Klassen, Interfaces, deren Attribute, Methoden und die **Beziehungen** zwischen ihnen. Es ist die Blaupause deiner Software-Architektur.
 
-## Aufbau einer Klasse
+> 💡 Das Klassendiagramm ist der **Bauplan deiner Software** — bevor du programmierst, modellierst du die Struktur.
+
+---
+
+## 🧱 Aufbau einer Klasse
 
 \`\`\`
 | ClassName          |
@@ -771,31 +847,36 @@ Das Klassendiagramm ist das **wichtigste Strukturdiagramm** in UML. Es zeigt Kla
 | + method2(arg: T): T |
 \`\`\`
 
-- **-** (Minus) = private
-- **+** (Plus) = public
-- **#** (Raute) = protected
+**Sichtbarkeiten:**
+- **-** (Minus) = 🔒 private
+- **+** (Plus) = 🌐 public
+- **#** (Raute) = 🛡️ protected
 
-## Arten von Beziehungen
+---
 
-### 1. Assoziation
+## 🔗 Arten von Beziehungen
+
+### 1. ➡️ Assoziation
 Einfache Verbindung zwischen Klassen. Zwei Klassen wissen voneinander.
 
-### 2. Aggregation (lose Kopplung)
-Objekte können **unabhängig** existieren. Dargestellt durch eine **leere Raute**.
+### 2. 🔷 Aggregation (lose Kopplung)
+Objekte können **unabhängig** existieren. Dargestellt durch eine **leere Raute** ◇.
 
 **Beispiel:** Student und Vorlesung — Ein Student kann eine Vorlesung besuchen, existiert aber unabhängig davon.
 
-### 3. Komposition (starke Kopplung)
-Objekte sind **existenzabhängig**. Dargestellt durch eine **ausgefüllte Raute**.
+### 3. 🔶 Komposition (starke Kopplung)
+Objekte sind **existenzabhängig**. Dargestellt durch eine **ausgefüllte Raute** ◆.
 
 **Beispiel:** Gebäude und Räume — Ohne das Gebäude können die Räume nicht existieren.
 
-### 4. Vererbung (Generalisierung)
-Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem Dreieck**.
+### 4. 🏗️ Vererbung (Generalisierung)
+Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem Dreieck** ▷.
 
 **Beispiel:** "Auto" erbt von "Fahrzeug" — Auto ist ein Fahrzeug.
 
-## Kardinalitäten und Multiplizitäten
+---
+
+## 🔢 Kardinalitäten und Multiplizitäten
 
 | Symbol | Bedeutung |
 |--------|-----------|
@@ -805,9 +886,11 @@ Eine Klasse erbt von einer anderen. Dargestellt durch einen **Pfeil mit leerem D
 | \`0..1\` | Null oder eine |
 | \`5..10\` | Zwischen 5 und 10 |
 
-**Beispiel:** Ein Kunde hat \`*\` Bestellungen. Eine Bestellung gehört \`1\` Kunde.
+> ❗ **Merke:** Kardinalitäten werden in der IHK-Prüfung oft abgefragt! 1:n und n:m sind die häufigsten.
 
-## Beispiel: Klassendiagramm
+---
+
+## ☕ Beispiel: Bestellsystem
 
 \`\`\`
 Kunde (1) --- Bestellung (*)
@@ -815,9 +898,20 @@ Bestellung (1) --- Artikel (*)
 Bestellung (1) --- Mitarbeiter (1)
 \`\`\`
 
-- Ein Kunde kann mehrere Bestellungen haben
-- Eine Bestellung enthält mehrere Artikel
-- Jede Bestellung wird von einem Mitarbeiter erstellt`
+- 1 Kunde → * Bestellungen (1:n)
+- 1 Bestellung → * Artikel (n:m über Zwischentabelle)
+- 1 Bestellung → 1 Mitarbeiter (1:1)
+
+---
+
+## 🎯 IHK-Tipps
+
+> 💡 **Diese Tipps sichern dir Punkte!**
+
+- 📐 **Beziehungen** sauber zeichnen — Raute immer an der "Besitzer"-Seite
+- 🔢 **Kardinalitäten** an beiden Enden der Verbindung eintragen
+- 🏗️ **Vererbung** erkennen: "ist ein" → Vererbung, "hat ein" → Komposition/Aggregation
+- 📝 **Attribute und Methoden** mit Sichtbarkeit (-/+) versehen`,
     },
 
     // --- Lektion 8: UML Sequenz- und Zustandsdiagramme ---
@@ -827,29 +921,41 @@ Bestellung (1) --- Mitarbeiter (1)
       duration: "15 min",
       type: "interactive",
       interactive: "sequenceDiagram",
-      content: `# UML Sequenz- und Zustandsdiagramme
+      content: `# UML Sequenz- und Zustandsdiagramme 📊
 
-## Sequenzdiagramm
+## 📨 Sequenzdiagramm
 
 ### Was ist ein Sequenzdiagramm?
 
 Ein Sequenzdiagramm zeigt die **zeitliche Abfolge** der Nachrichten (Methodenaufrufe, Events) zwischen Objekten. Du siehst genau, welche Objekte miteinander kommunizieren und in welcher Reihenfolge.
 
-### Elemente
+> 💡 Das Sequenzdiagramm ist wie ein **Protokoll eines Gesprächs** — es zeigt, wer wann was sagt.
 
-- **Lebenslinien (Lifelines):** Gestrichelte Linie unter jedem Objekt — zeigt, wie lange das Objekt existiert
-- **Aktivierungsbalken:** Zeigt, wann ein Objekt gerade arbeitet/aktiv ist
-- **Nachrichten:** Pfeile zwischen Lebenslinien (synchron = volle Pfeilspitze, asynchron = offene Spitze)
-- **Rücknachrichten:** Gestrichelte Pfeile zurück
+---
 
-### Regeln für Aktivierungsbalken
+### 🧩 Elemente
 
-- Balken erscheint am Empfänger einer synchronen Nachricht
-- Bleibt so lange, bis die Antwort gesendet wird
-- **Nur Balken setzen, wenn noch keiner vorhanden** — unnötige Balken weglassen
-- Der gesendende Balken bleibt bestehen, wenn noch weitere Aktionen folgen
+| Element | Beschreibung |
+|---------|-------------|
+| 📏 **Lebenslinien** | Gestrichelte Linie unter jedem Objekt — zeigt Existenzdauer |
+| ▓ **Aktivierungsbalken** | Zeigt, wann ein Objekt gerade arbeitet/aktiv ist |
+| ➡️ **Nachrichten** | Pfeile zwischen Lebenslinien (synchron = volle Spitze, asynchron = offene Spitze) |
+| ➰ **Rücknachrichten** | Gestrichelte Pfeile zurück |
 
-### Beispiel: Online-Bestellung
+---
+
+### 📐 Regeln für Aktivierungsbalken
+
+> ❗ **Diese Regeln werden in der IHK geprüft!**
+
+- ▓ Balken erscheint am **Empfänger** einer synchronen Nachricht
+- ⏳ Bleibt so lange, bis die **Antwort gesendet** wird
+- 🚫 **Nur Balken setzen, wenn noch keiner vorhanden** — unnötige Balken weglassen
+- ▓ Der gesendende Balken bleibt bestehen, wenn noch weitere Aktionen folgen
+
+---
+
+### ☕ Beispiel: Online-Bestellung
 
 \`\`\`
 Kunde -> Bestellsystem: "Produkt auswählen"
@@ -864,21 +970,29 @@ Bestellsystem -> Kunde: "Bestellung bestätigt"
 
 ---
 
-## Zustandsdiagramm (State Machine)
+## 🔄 Zustandsdiagramm (State Machine)
 
 ### Was ist ein Zustandsdiagramm?
 
-Ein Zustandsdiagramm beschreibt die verschiedenen **Zustände** eines Objekts und die **Übergänge** zwischen ihnen. Es ist wie ein endlicher Automat — für jeden Zustand ist definiert, was bei einem Ereignis passiert.
+Ein Zustandsdiagramm beschreibt die verschiedenen **Zustände** eines Objekts und die **Übergänge** zwischen ihnen. Es ist wie ein **endlicher Automat** — für jeden Zustand ist definiert, was bei einem Ereignis passiert.
 
-### Elemente
+> 💡 Das Zustandsdiagramm zeigt das **Verhalten eines Objekts** über seine Lebenszeit.
 
-- **Zustände:** Abgerundete Rechtecke
-- **Anfangszustand:** Gefüllter Kreis
-- **Endzustand:** Gefüllter Kreis mit Ring
-- **Übergänge:** Pfeile mit Beschriftung (Ereignis [Bedingung] / Aktion)
-- **History-State:** (H) — merkt sich den letzten Zustand
+---
 
-### Beispiel: Bestellstatus
+### 🧩 Elemente
+
+| Element | Symbol | Beschreibung |
+|---------|--------|-------------|
+| 🔵 **Zustand** | Abgerundetes Rechteck | Beschreibt einen Zustand des Objekts |
+| ⬤ **Anfangszustand** | Gefüllter Kreis | Startpunkt des Diagramms |
+| ◎ **Endzustand** | Gefüllter Kreis mit Ring | Endpunkt des Diagramms |
+| ➡️ **Übergang** | Pfeil mit Beschriftung | Ereignis [Bedingung] / Aktion |
+| 📌 **History-State** | (H) | Merkt sich den letzten Zustand |
+
+---
+
+### ☕ Beispiel: Bestellstatus
 
 \`\`\`
 [Angelegt] --"Bestätigt"--> [In Bearbeitung]
@@ -888,9 +1002,23 @@ Ein Zustandsdiagramm beschreibt die verschiedenen **Zustände** eines Objekts un
 [Unterwegs] --"Retoure"--> [Rücksendung]
 \`\`\`
 
-### History-State
+---
 
-Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehrt, springt der History-State nicht zum Anfang, sondern an die **letzte Position** zurück. In Aktivitätsdiagrammen wird das auch Pseudostatus genannt.`
+### 📌 History-State
+
+Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehrt, springt der History-State **nicht zum Anfang**, sondern an die **letzte Position** zurück.
+
+---
+
+## 🎯 IHK-Tipps
+
+> 💡 **Diese Tipps sichern dir Punkte!**
+
+- 📨 **Sequenzdiagramm:** Nachrichten chronologisch ordnen — von oben nach unten
+- ▓ **Aktivierungsbalken** nur setzen, wenn nötig — nicht jeder Pfeil braucht einen
+- 🔄 **Zustandsdiagramm:** Alle Übergänge beschriften — Ereignis + Bedingung + Aktion
+- ⬤ **Anfangs- und Endzustand** nie vergessen!
+- 📌 **History-State** erklären können: Wann wird er verwendet?`,
     },
 
     // --- Lektion 9: Netzplantechnik & ER-Modell & Lastenheft ---
@@ -900,52 +1028,70 @@ Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehr
       duration: "20 min",
       type: "interactive",
       interactive: "netzplanBuilder",
-      content: `# Netzplantechnik, ER-Modell & Lasten-/Pflichtenheft
+      content: `# Netzplantechnik, ER-Modell & Lasten-/Pflichtenheft 📋
 
-## Netzplantechnik
+## 🗓️ Netzplantechnik
 
 ### Was ist Netzplantechnik?
 
-Netzplantechnik ist eine Methode aus dem **Projektmanagement**, um Arbeitsabläufe und deren Abhängigkeiten darzustellen. Sie hilft bei der Planung, Steuerung und Überwachung von Projekten.
+Netzplantechnik ist eine Methode aus dem **Projektmanagement**, um Arbeitsabläufe und deren Abhängigkeiten darzustellen. Sie hilft bei der **Planung, Steuerung und Überwachung** von Projekten.
 
-### Aufbau eines Netzknotens
+> 💡 Netzplantechnik zeigt dir den **kritischen Pfad** — den längsten Weg durch das Projekt, der die Mindestdauer bestimmt.
+
+---
+
+### 🧩 Aufbau eines Netzknotens
 
 Jeder Vorgang hat vier Zeitpunkte:
 
 | Abkürzung | Bedeutung | Berechnung |
 |-----------|-----------|------------|
-| **FAZ** | Frühester Anfangszeitpunkt | Vorgänger-FEZ |
-| **FEZ** | Frühester Endzeitpunkt | FAZ + Dauer |
-| **SAZ** | Spätester Anfangszeitpunkt | SEZ − Dauer |
-| **SEZ** | Spätester Endzeitpunkt | Nachfolger-SAZ |
+| 🟢 **FAZ** | Frühester Anfangszeitpunkt | Vorgänger-FEZ |
+| 🟢 **FEZ** | Frühester Endzeitpunkt | FAZ + Dauer |
+| 🔴 **SAZ** | Spätester Anfangszeitpunkt | SEZ − Dauer |
+| 🔴 **SEZ** | Spätester Endzeitpunkt | Nachfolger-SAZ |
 
-### Pufferzeit
+> ❗ **Merke:** FAZ/FEZ werden **vorwärts** berechnet (von links nach rechts), SAZ/SEZ **rückwärts** (von rechts nach links).
+
+---
+
+### ⏱️ Pufferzeit
 
 **Pufferzeit = SAZ − FAZ**
 
 Gibt an, wie viel Spielraum ein Vorgang hat, ohne das gesamte Projekt zu verzögern.
 
-### Kritischer Pfad
+---
 
-Der **kritische Pfad** ist die Kette von Vorgängen, bei denen die **Pufferzeit = 0** ist. Jede Verzögerung auf diesem Pfad verzögert das gesamte Projekt. Er ist der längste Pfad durch das Netzwerk.
+### 🔴 Kritischer Pfad
+
+Der **kritische Pfad** ist die Kette von Vorgängen, bei denen die **Pufferzeit = 0** ist. Jede Verzögerung auf diesem Pfad verzögert das gesamte Projekt. Er ist der **längste Pfad** durch das Netzwerk.
+
+> ⚠️ **Merke:** Kritischer Pfad = Pufferzeit 0 = Kein Spielraum!
 
 ---
 
-## ER-Modell (Entity-Relationship)
+## 🗃️ ER-Modell (Entity-Relationship)
 
 ### Was ist ein ER-Modell?
 
 Das ER-Modell beschreibt die **Datenstruktur** eines Systems unabhängig von einer Datenbank. Es zeigt Entitäten (Datenobjekte), ihre Attribute und Beziehungen zueinander.
 
-### Elemente
+> 💡 Das ER-Modell ist der **Bauplan deiner Datenbank** — bevor du Tabellen erstellst, modellierst du die Struktur.
+
+---
+
+### 🧩 Elemente
 
 | Element | Symbol | Beispiel |
 |---------|--------|---------|
-| **Entitätstyp** | Rechteck | Kunde, Bestellung, Produkt |
-| **Attribut** | Ellipse | Name, Preis, ID |
-| **Beziehung** | Raute | "bestellt", "enthält" |
+| 📦 **Entitätstyp** | Rechteck | Kunde, Bestellung, Produkt |
+| 🏷️ **Attribut** | Ellipse | Name, Preis, ID |
+| 🔗 **Beziehung** | Raute | "bestellt", "enthält" |
 
-### Kardinalitäten
+---
+
+### 🔢 Kardinalitäten
 
 | Typ | Bedeutung | Beispiel |
 |-----|-----------|---------|
@@ -953,7 +1099,11 @@ Das ER-Modell beschreibt die **Datenstruktur** eines Systems unabhängig von ein
 | **1:n** | Eins zu Viele | Kunde → Bestellungen |
 | **n:m** | Viele zu Viele | Schüler ↔ Kurse |
 
-### Beispiel
+> ❗ **Merke:** n:m-Beziehungen werden in relationalen Datenbanken über eine **Zwischentabelle** aufgelöst!
+
+---
+
+### ☕ Beispiel
 
 \`\`\`
 [Kunde] --- (bestellt) --- [Bestellung]
@@ -965,9 +1115,9 @@ Das ER-Modell beschreibt die **Datenstruktur** eines Systems unabhängig von ein
 
 ---
 
-## Lastenheft & Pflichtenheft
+## 📝 Lastenheft & Pflichtenheft
 
-### Lastenheft — WAS soll das System tun?
+### 📋 Lastenheft — WAS soll das System tun?
 
 Das Lastenheft stammt vom **Auftraggeber** und beschreibt die **Anforderungen**:
 
@@ -975,7 +1125,9 @@ Das Lastenheft stammt vom **Auftraggeber** und beschreibt die **Anforderungen**:
 - **Nicht-funktionale Anforderungen:** Performance, Sicherheit, Usability
 - **Rahmenbedingungen:** Budget, Zeit, Technologievorgaben
 
-### Pflichtenheft — WIE wird es umgesetzt?
+---
+
+### ⚙️ Pflichtenheft — WIE wird es umgesetzt?
 
 Das Pflichtenheft stammt vom **Auftragnehmer** und beschreibt die **Lösung**:
 
@@ -985,14 +1137,28 @@ Das Pflichtenheft stammt vom **Auftragnehmer** und beschreibt die **Lösung**:
 - Testkonzepte
 - Zeitplan
 
-### Gegenüberstellung
+---
 
-| | Lastenheft | Pflichtenheft |
+### ⚔️ Gegenüberstellung
+
+| | 📋 Lastenheft | ⚙️ Pflichtenheft |
 |---|---|---|
 | **Wer** | Auftraggeber | Auftragnehmer |
 | **Inhalt** | WAS soll es tun? | WIE wird es umgesetzt? |
 | **Detailgrad** | Anforderungen | Technische Lösung |
-| **Zeitpunkt** | Vor der Ausschreibung | Vor der Entwicklung |`
+| **Zeitpunkt** | Vor der Ausschreibung | Vor der Entwicklung |
+
+---
+
+## 🎯 IHK-Tipps
+
+> 💡 **Diese Tipps sichern dir Punkte!**
+
+- 🗓️ **Netzplan:** FAZ/FEZ vorwärts, SAZ/SEZ rückwärts berechnen — Reihenfolge merken!
+- 🔴 **Kritischer Pfad** immer markieren — Pufferzeit 0 = kritisch
+- 🗃️ **ER-Modell:** Kardinalitäten an beiden Enden eintragen
+- 📝 **Lastenheft vs. Pflichtenheft:** Wer schreibt was? — Das wird oft gefragt!
+- 🧪 Immer prüfen: Wurden alle Beziehungen und Kardinalitäten korrekt modelliert?`,
     },
   ],
 };
