@@ -21,6 +21,14 @@ import { VectorExplorer } from "./interactive/VectorExplorer";
 import { CodeSandbox } from "./interactive/CodeSandbox";
 import { PAPSymbolOverview, PAPExample } from "./visuals/PAPDiagram";
 import { PAPBuilder } from "./interactive/PAPBuilder";
+import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
+import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
+import { SortVisualizer } from "./interactive/SortVisualizer";
+import { SearchVisualizer } from "./interactive/SearchVisualizer";
+import { EPKBuilder } from "./interactive/EPKBuilder";
+import { UMLClassDiagram } from "./interactive/UMLClassDiagram";
+import { SequenceDiagram } from "./interactive/SequenceDiagram";
+import { NetzplanBuilder } from "./interactive/NetzplanBuilder";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -61,6 +69,14 @@ function renderInteractive(type: string, codeExample?: string) {
     vectorExplorer: <VectorExplorer />,
     codeSandbox: <CodeSandbox initialCode={codeExample || '// Schreibe deinen Code hier\nconsole.log("Hallo!");'} />,
     papBuilder: <PAPBuilder />,
+    pseudocodeRunner: <PseudocodeRunner />,
+    struktogrammBuilder: <StruktogrammBuilder />,
+    sortVisualizer: <SortVisualizer />,
+    searchVisualizer: <SearchVisualizer />,
+    epkBuilder: <EPKBuilder />,
+    umlClassDiagram: <UMLClassDiagram />,
+    sequenceDiagram: <SequenceDiagram />,
+    netzplanBuilder: <NetzplanBuilder />,
   };
 
   return (

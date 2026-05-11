@@ -1,10 +1,10 @@
 export interface LessonVisual {
-  type: "triangle" | "circle" | "rectangle" | "square" | "trapezoid" | "parallelogram" | "cube" | "cuboid" | "sphere" | "cylinder" | "cone" | "pyramid" | "coordinate2d" | "coordinate3d" | "functionGraph" | "unitCircle" | "papSymbols" | "papExample";
+  type: "triangle" | "circle" | "rectangle" | "square" | "trapezoid" | "parallelogram" | "cube" | "cuboid" | "sphere" | "cylinder" | "cone" | "pyramid" | "coordinate2d" | "coordinate3d" | "functionGraph" | "unitCircle" | "papSymbols" | "papExample" | "pseudocodeDemo" | "struktogrammDemo" | "sortDemo" | "searchDemo" | "epkDemo" | "umlClassDemo" | "sequenceDemo" | "netzplanDemo";
   props?: Record<string, unknown>;
   position?: "top" | "bottom";
 }
 
-export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder";
+export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder" | "pseudocodeRunner" | "struktogrammBuilder" | "sortVisualizer" | "searchVisualizer" | "epkBuilder" | "umlClassDiagram" | "sequenceDiagram" | "netzplanBuilder";
 
 export interface Lesson {
   id: string;

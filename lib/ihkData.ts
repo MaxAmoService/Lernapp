@@ -209,7 +209,8 @@ export const ihkModule: Module = {
       id: "ihk-1",
       title: "Pseudocode",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "pseudocodeRunner",
       content: `# Pseudocode — Algorithmen in codenaher Sprache
 
 ## Was ist Pseudocode?
@@ -397,7 +398,8 @@ Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärk
       id: "ihk-3",
       title: "Struktogramm (Nassi-Shneiderman)",
       duration: "12 min",
-      type: "text",
+      type: "interactive",
+      interactive: "struktogrammBuilder",
       content: `# Struktogramm (Nassi-Shneiderman)
 
 ## Was ist ein Struktogramm?
@@ -472,7 +474,8 @@ Im Struktogramm siehst du die **verschachtelten Schleifen** als ineinander gesta
       id: "ihk-4",
       title: "Sortieralgorithmen",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "sortVisualizer",
       content: `# Sortieralgorithmen — Bubblesort, Selectionsort, Insertionsort
 
 ## Warum Sortieren?
@@ -576,7 +579,8 @@ print(insertion_sort(liste))  # [1, 2, 3, 4, 5, 8]`
       id: "ihk-5",
       title: "Suchalgorithmen",
       duration: "10 min",
-      type: "text",
+      type: "interactive",
+      interactive: "searchVisualizer",
       content: `# Suchalgorithmen — Lineare und Binäre Suche
 
 ## Warum Suchen?
@@ -678,7 +682,8 @@ print(binary_search(sortiert, 6))  # -1`
       id: "ihk-6",
       title: "Ereignisgesteuerte Prozesskette (EPK)",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "epkBuilder",
       content: `# Ereignisgesteuerte Prozesskette (EPK)
 
 ## Was ist eine EPK?
@@ -735,7 +740,8 @@ Ereignisse und Funktionen **wechseln sich immer ab**. Direkt hintereinander zwei
       id: "ihk-7",
       title: "UML Klassendiagramme",
       duration: "18 min",
-      type: "text",
+      type: "interactive",
+      interactive: "umlClassDiagram",
       content: `# UML Klassendiagramme
 
 ## Was ist ein Klassendiagramm?
@@ -808,7 +814,8 @@ Bestellung (1) --- Mitarbeiter (1)
       id: "ihk-8",
       title: "UML Sequenz- & Zustandsdiagramme",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "sequenceDiagram",
       content: `# UML Sequenz- und Zustandsdiagramme
 
 ## Sequenzdiagramm
@@ -880,7 +887,8 @@ Wenn ein Objekt aus einem Unterzustand unterbrochen wird und später zurückkehr
       id: "ihk-9",
       title: "Netzplantechnik, ER-Modell & Lastenheft",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "netzplanBuilder",
       content: `# Netzplantechnik, ER-Modell & Lasten-/Pflichtenheft
 
 ## Netzplantechnik
