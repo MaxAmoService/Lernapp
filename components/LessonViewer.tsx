@@ -20,6 +20,7 @@ import { UnitCircleInteractive } from "./interactive/UnitCircleInteractive";
 import { VectorExplorer } from "./interactive/VectorExplorer";
 import { CodeSandbox } from "./interactive/CodeSandbox";
 import { PAPSymbolOverview, PAPExample } from "./visuals/PAPDiagram";
+import { StrukExample } from "./visuals/StrukExamples";
 import { PAPBuilder } from "./interactive/PAPBuilder";
 import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
 import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
@@ -51,6 +52,11 @@ function renderVisual(visual: LessonVisual, index: number) {
     unitCircle: <UnitCircle width={w} height={w} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
     papSymbols: <PAPSymbolOverview width={w} height={500} className="w-full max-w-2xl mx-auto" />,
     papExample: <PAPExample width={400} height={700} className="w-full max-w-2xl mx-auto" />,
+    struktSeq: <StrukExample example="sequence" className="w-full max-w-md mx-auto" />,
+    struktIfElse: <StrukExample example="ifelse" className="w-full max-w-md mx-auto" />,
+    struktWhile: <StrukExample example="while" className="w-full max-w-md mx-auto" />,
+    struktFor: <StrukExample example="forloop" className="w-full max-w-md mx-auto" />,
+    struktBubbleSort: <StrukExample example="bubblesort" className="w-full max-w-lg mx-auto" />,
   };
 
   return (

@@ -400,6 +400,13 @@ Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärk
       duration: "12 min",
       type: "interactive",
       interactive: "struktogrammBuilder",
+      visuals: [
+        { type: "struktSeq", position: "top" },
+        { type: "struktIfElse", position: "top" },
+        { type: "struktWhile", position: "top" },
+        { type: "struktFor", position: "top" },
+        { type: "struktBubbleSort", position: "bottom" },
+      ],
       content: `# Struktogramm — Nassi-Shneiderman 📐
 
 ## Was ist ein Struktogramm?
@@ -419,42 +426,16 @@ Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung v
 
 ## Die vier Grundelemente
 
-Schau dir den interaktiven Builder oben an — dort siehst du jedes Element als echtes Nassi-Shneiderman-Diagramm!
+Schau dir die Diagramme oben an — dort siehst du jedes Element als echtes Nassi-Shneiderman-Diagramm!
 
 ### 1. 🟦 Sequenz
-Ein einfaches Rechteck mit Text. Aufeinanderfolgende Anweisungen — die einfachste Struktur.
-
-**In Code:**
-\`\`\`
-x = 5
-y = x + 2
-print(y)
-\`\`\`
-
-**Im Struktogramm:** Drei untereinander stehende Rechtecke mit Monospace-Text.
+Ein einfaches Rechteck mit Monospace-Text. Drei Anweisungen untereinander — die einfachste Struktur. Im Diagramm oben siehst du: \`x = 5\`, \`y = x + 2\`, \`print(y)\`.
 
 ### 2. 🔶 Auswahl (if/else)
-Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil**, rechts der **NEIN-Teil** — genau wie im Nassi-Shneiderman-Standard.
-
-**In Code:**
-\`\`\`
-if (alter >= 18) {
-    print("Volljährig")    // JA (links)
-} else {
-    print("Minderjährig")  // NEIN (rechts)
-}
-\`\`\`
+Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil** (grün), rechts der **NEIN-Teil** (rot). Im Diagramm: \`alter >= 18?\` → links \`Volljährig\`, rechts \`Minderjährig\`.
 
 ### 3. 🔁 Schleife (for / while)
-Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert.
-
-**In Code:**
-\`\`\`
-for i = 0 to 9:
-    print(i)
-\`\`\`
-
-**Im Struktogramm:** Kopf mit \`for i = 0 bis 9\`, darunter eingerückt der Rumpf mit \`print(i)\`.
+Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert. Im Diagramm: \`for i = 0 bis 9\` mit \`print(i)\` als Rumpf.
 
 ### 4. 🟪 Ein-/Ausgabe
 Ein Rechteck mit schrägem Rand (Parallelogramm) — für \`input()\` oder \`print()\`.
@@ -463,24 +444,12 @@ Ein Rechteck mit schrägem Rand (Parallelogramm) — für \`input()\` oder \`pri
 
 ## ☕ Beispiel: Bubblesort als Struktogramm
 
-Schau dir den interaktiven Builder oben an! Hier die Erklärung der Struktur:
+Das vollständige Diagramm findest du unten und im interaktiven Builder oben! Die Struktur:
 
-**Der Algorithmus:**
-\`\`\`
-function bubbleSort(liste, n):
-    for i = 0 to n-2:           ← Äußere Schleife (for)
-        for j = 0 to n-2-i:     ← Innere Schleife (for, verschachtelt)
-            if liste[j] > liste[j+1]:  ← Auswahl (if/else)
-                temp = liste[j]                ← Sequenz
-                liste[j] = liste[j+1]          ← Sequenz
-                liste[j+1] = temp              ← Sequenz
-\`\`\`
-
-**Im Struktogramm siehst du:**
-- 🔁 Die äußere for-Schleife als großer Block mit Bogen links
-- 🔁 Die innere for-Schleife als eingerückter Block darunter
-- 🔶 Die if-Abfrage mit diagonaler Linie — JA-Seite (tauschen) und NEIN-Seite (leer)
-- 🟦 Die drei Tausch-Anweisungen als Sequenz-Rechtecke im JA-Teil
+- 🔁 **Äußere for-Schleife** (\`i = 0 bis n-2\`) — umschließt alles als großer Block mit Bogen links
+- 🔁 **Innere for-Schleife** (\`j = 0 bis n-2-i\`) — eingerückter Block darunter
+- 🔶 **if-Abfrage** (\`liste[j] > liste[j+1]?\`) — diagonale Linie, JA-Seite mit Tausch, NEIN-Seite leer
+- 🟦 **Drei Sequenz-Blöcke** im JA-Teil: temp sichern, verschieben, einsetzen
 
 > 💡 **Verschachtelung** ist die Stärke des Struktogramms — du siehst sofort, welcher Block in welchem steckt!
 

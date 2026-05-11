@@ -1,5 +1,5 @@
 export interface LessonVisual {
-  type: "triangle" | "circle" | "rectangle" | "square" | "trapezoid" | "parallelogram" | "cube" | "cuboid" | "sphere" | "cylinder" | "cone" | "pyramid" | "coordinate2d" | "coordinate3d" | "functionGraph" | "unitCircle" | "papSymbols" | "papExample" | "pseudocodeDemo" | "struktogrammDemo" | "sortDemo" | "searchDemo" | "epkDemo" | "umlClassDemo" | "sequenceDemo" | "netzplanDemo";
+  type: "triangle" | "circle" | "rectangle" | "square" | "trapezoid" | "parallelogram" | "cube" | "cuboid" | "sphere" | "cylinder" | "cone" | "pyramid" | "coordinate2d" | "coordinate3d" | "functionGraph" | "unitCircle" | "papSymbols" | "papExample" | "struktSeq" | "struktIfElse" | "struktWhile" | "struktFor" | "struktBubbleSort";
   props?: Record<string, unknown>;
   position?: "top" | "bottom";
 }
