@@ -22,7 +22,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-dark-950 text-slate-100">
         <AuthProvider>
           <Navbar />
-          <main className="max-w-7xl mx-auto px-2 sm:px-3 lg:px-4 py-4">
+          <main className="max-w-[1400px] mx-auto px-2 sm:px-3 lg:px-4 py-3">
             {children}
           </main>
           <Footer />

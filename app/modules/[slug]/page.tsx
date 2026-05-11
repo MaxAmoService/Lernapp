@@ -182,7 +182,7 @@ export default function ModulePage() {
         </div>
       </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {/* Lesson List */}
         <aside className="lg:col-span-1">
           <div className="glass rounded-xl p-3 sticky top-24">
@@ -244,7 +244,7 @@ export default function ModulePage() {
         </aside>
 
         {/* Lesson Content */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-3">
           {selectedLesson ? (
             selectedLesson.type === "quiz" ? (
               <Quiz

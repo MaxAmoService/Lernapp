@@ -110,7 +110,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     const flushTable = () => {
       if (tableRows.length > 0) {
         elements.push(
-          <div key={`table-wrap-${keyIndex++}`} className="overflow-x-auto my-4">
+          <div key={`table-wrap-${keyIndex++}`} className="overflow-x-auto my-5 rounded-xl border border-slate-700/50">
             <table className="w-full border-collapse">
               <tbody>{tableRows}</tbody>
             </table>
@@ -179,9 +179,9 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         if (!cells.every(c => c.match(/^[\s:-]+$/))) {
           inTable = true;
           tableRows.push(
-            <tr key={`tr-${keyIndex++}`} className="border-b border-slate-700/50">
+            <tr key={`tr-${keyIndex++}`} className="border-b border-slate-700/40 last:border-0">
               {cells.map((cell, ci) => (
-                <td key={ci} className="px-4 py-2 text-slate-300 bg-slate-800/30">
+                <td key={ci} className="px-4 py-2.5 text-slate-200 bg-slate-800/40 first:bg-slate-800/60">
                   <InlineText text={cell} />
                 </td>
               ))}
@@ -255,16 +255,16 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       // List items
       else if (line.startsWith("- ")) {
         const text = line.slice(2);
-        elements.push(<li key={`li-${keyIndex++}`} className="text-slate-300 ml-4 mb-1 list-disc list-inside"><InlineText text={text} /></li>);
+        elements.push(<li key={`li-${keyIndex++}`} className="text-slate-200 ml-4 mb-1.5 list-none pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-blue-400 before:font-bold"><InlineText text={text} /></li>);
       } else if (/^\d+\.\s/.test(line)) {
         const text = line.replace(/^\d+\.\s/, "");
-        elements.push(<li key={`oli-${keyIndex++}`} className="text-slate-300 ml-4 mb-1 list-decimal list-inside"><InlineText text={text} /></li>);
+        elements.push(<li key={`oli-${keyIndex++}`} className="text-slate-200 ml-4 mb-1.5 list-decimal list-inside marker:text-blue-400 marker:font-bold"><InlineText text={text} /></li>);
       } else if (!line.trim()) {
-        elements.push(<br key={`br-${keyIndex++}`} />);
+        elements.push(<div key={`br-${keyIndex++}`} className="h-3" />);
       }
       // Regular paragraph
       else {
-        elements.push(<p key={`p-${keyIndex++}`} className="text-slate-300 mb-2"><InlineText text={line} /></p>);
+        elements.push(<p key={`p-${keyIndex++}`} className="text-slate-200 mb-3 leading-relaxed"><InlineText text={line} /></p>);
       }
     });
 
@@ -273,11 +273,11 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   };
 
   return (
-    <div className="glass rounded-xl p-4 animate-slide-up">
+    <div className="glass rounded-xl p-5 animate-slide-up">
       {/* Header */}
       <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
         <div>
-          <h1 className="text-2xl font-bold text-white">{lesson.title}</h1>
+          <h1 className="text-3xl font-bold text-white">{lesson.title}</h1>
           <p className="text-sm text-slate-400 mt-1">
             ⏱️ {lesson.duration} • {getTypeLabel(lesson.type)}
           </p>
