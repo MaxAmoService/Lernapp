@@ -1,4 +1,5 @@
 import { mathModules, mathCategories, mathQuizzes, MathCategory } from "./mathData";
+import { ihkModule, ihkCategories } from "./ihkData";
 import { LessonVisual, InteractiveType } from "./types";
 
 export interface Lesson {
@@ -41,6 +42,7 @@ export const categories: Category[] = [
     description: "Lerne moderne Programmiersprachen und Frameworks",
   },
   ...mathCategories,
+  ...ihkCategories,
 ];
 
 export const modules: Module[] = [
@@ -910,7 +912,7 @@ f'(x) = 2x ✓`,
 ];
 
 // Combine all modules
-export const allModules: Module[] = [...modules, ...mathModules];
+export const allModules: Module[] = [...modules, ...mathModules, ihkModule];
 
 export function getModule(slug: string): Module | undefined {
   return allModules.find((m) => m.slug === slug);
