@@ -42,7 +42,7 @@ function renderVisual(visual: LessonVisual, index: number) {
     functionGraph: <FunctionGraph width={500} height={350} className="w-full max-w-md mx-auto" {...(visual.props || {})} />,
     unitCircle: <UnitCircle width={w} height={w} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
     papSymbols: <PAPSymbolOverview width={w} height={500} className="w-full max-w-2xl mx-auto" />,
-    papExample: <PAPExample width={400} height={600} className="w-full max-w-2xl mx-auto" />,
+    papExample: <PAPExample width={400} height={700} className="w-full max-w-2xl mx-auto" />,
   };
 
   return (

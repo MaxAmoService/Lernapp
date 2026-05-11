@@ -247,9 +247,9 @@ export function PAPBuilder() {
           </div>
           <p className="text-sm text-slate-400 mb-5">Baue den PAP Schritt für Schritt auf und lerne jedes Symbol kennen.</p>
 
-          <div className="flex flex-col lg:flex-row gap-5">
+          <div className="flex flex-col lg:flex-row gap-6">
             {/* SVG */}
-            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[480px]">
+            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[500px]">
               <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
@@ -257,7 +257,6 @@ export function PAPBuilder() {
                   </marker>
                 </defs>
                 {kaffeeElements.map(el => {
-                  const elIdx = kaffeeElements.findIndex(e => e.id === el.id);
                   const stepIdx = steps.findIndex(s => s.elementId === el.id);
                   const isVisible = stepIdx >= 0 && stepIdx < maxVisibleElements;
                   const isPulsing = step > 0 && steps[step - 1]?.elementId === el.id;
@@ -267,37 +266,50 @@ export function PAPBuilder() {
               </svg>
             </div>
 
-            {/* Info-Panel */}
-            <div className="lg:w-72 flex flex-col">
+            {/* Info-Panel — größer */}
+            <div className="lg:w-96 flex flex-col">
               {step === 0 ? (
-                <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
-                  <div className="text-4xl mb-3">👆</div>
-                  <p className="text-slate-300 font-medium">Klicke auf &quot;Weiter&quot;</p>
-                  <p className="text-sm text-slate-500 mt-1">um den PAP aufzubauen</p>
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-6">
+                  <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
+                    <span className="text-3xl">👆</span>
+                  </div>
+                  <p className="text-white font-semibold text-lg">Bereit zum Lernen?</p>
+                  <p className="text-sm text-slate-400 mt-2 max-w-xs">Klicke auf "Weiter" und baue den PAP Schritt für Schritt auf. Jeder Schritt erklärt ein neues Symbol.</p>
                 </div>
               ) : currentStep && (
-                <div key={animKey} className="animate-fade-in">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-lg font-bold">
-                      {step}/{maxSteps}
+                <div key={animKey} className="animate-fade-in flex flex-col h-full">
+                  {/* Step-Header */}
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                      {step}
                     </span>
-                    <span className="text-xs text-slate-500">{currentStep.symbol}</span>
+                    <div>
+                      <p className="text-xs text-blue-400 font-medium">Schritt {step} von {maxSteps}</p>
+                      <p className="text-xs text-slate-500">{currentStep.symbol}</p>
+                    </div>
                   </div>
-                  <h5 className="text-white font-bold text-lg mb-2">{currentStep.title}</h5>
-                  <p className="text-sm text-slate-300 leading-relaxed">{currentStep.description}</p>
+
+                  {/* Titel */}
+                  <h5 className="text-white font-bold text-xl mb-3">{currentStep.title}</h5>
+
+                  {/* Beschreibung in Box */}
+                  <div className="p-4 bg-slate-800/60 rounded-xl border border-slate-700/30 mb-4">
+                    <p className="text-sm text-slate-200 leading-relaxed">{currentStep.description}</p>
+                  </div>
 
                   {/* Symbol-Legende */}
-                  <div className="mt-4 p-3 bg-slate-800/50 rounded-lg border border-slate-700/30">
-                    <p className="text-xs text-slate-500 font-medium mb-2">Symbole</p>
-                    <div className="grid grid-cols-2 gap-1.5 text-xs">
+                  <div className="mt-auto p-4 bg-gradient-to-br from-slate-800/40 to-slate-800/20 rounded-xl border border-slate-700/20">
+                    <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Symbol-Übersicht</p>
+                    <div className="grid grid-cols-2 gap-2">
                       {[
-                        { s: "🟢", n: "Start/Ende" },
-                        { s: "🟦", n: "Operation" },
-                        { s: "🔶", n: "Entscheidung" },
-                        { s: "📥", n: "Ein-/Ausgabe" },
+                        { s: "🟢", n: "Start/Ende", c: "text-green-400" },
+                        { s: "🟦", n: "Operation", c: "text-blue-400" },
+                        { s: "🔶", n: "Entscheidung", c: "text-amber-400" },
+                        { s: "📥", n: "Ein-/Ausgabe", c: "text-purple-400" },
                       ].map(sym => (
-                        <div key={sym.n} className="flex items-center gap-1.5 text-slate-400">
-                          <span>{sym.s}</span><span>{sym.n}</span>
+                        <div key={sym.n} className="flex items-center gap-2 px-2.5 py-1.5 bg-slate-900/40 rounded-lg">
+                          <span className="text-base">{sym.s}</span>
+                          <span className={`text-xs font-medium ${sym.c}`}>{sym.n}</span>
                         </div>
                       ))}
                     </div>
@@ -306,13 +318,13 @@ export function PAPBuilder() {
               )}
 
               {/* Controls */}
-              <div className="flex gap-2 mt-4">
+              <div className="flex gap-3 mt-5">
                 <button onClick={prevStep} disabled={step === 0}
-                  className="flex-1 px-4 py-2.5 bg-slate-700/50 text-slate-300 rounded-xl disabled:opacity-20 hover:bg-slate-700 transition-all text-sm font-medium">
+                  className="flex-1 px-5 py-3 bg-slate-700/50 text-slate-300 rounded-xl disabled:opacity-20 hover:bg-slate-700 transition-all text-sm font-semibold">
                   ← Zurück
                 </button>
                 <button onClick={nextStep} disabled={step >= maxSteps}
-                  className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-xl disabled:opacity-20 hover:bg-blue-500 transition-all text-sm font-medium shadow-lg shadow-blue-500/20">
+                  className="flex-1 px-5 py-3 bg-blue-600 text-white rounded-xl disabled:opacity-20 hover:bg-blue-500 transition-all text-sm font-semibold shadow-lg shadow-blue-500/20">
                   Weiter →
                 </button>
               </div>
