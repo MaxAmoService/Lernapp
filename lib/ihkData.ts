@@ -401,19 +401,15 @@ Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärk
       type: "interactive",
       interactive: "struktogrammBuilder",
       visuals: [
-        { type: "struktSeq", position: "top" },
-        { type: "struktIfElse", position: "top" },
-        { type: "struktWhile", position: "top" },
-        { type: "struktFor", position: "top" },
         { type: "struktBubbleSort", position: "bottom" },
       ],
       content: `# Struktogramm — Nassi-Shneiderman 📐
 
 ## Was ist ein Struktogramm?
 
-Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung von Algorithmen, die **keine Sprünge (goto)** erlaubt. Es erzwingt **strukturierte Programmierung** und ist damit enger an modernem Code als der PAP.
+Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung von Algorithmen, die **keine Sprünge (goto)** erlaubt. Es erzwingt **strukturierte Programmierung** — du kannst nur Blöcke stapeln, nicht springen.
 
-> 💡 Denk an das Struktogramm wie einen **Baukasten** — du kannst nur Blöcke stapeln, nicht springen. Das erzwingt saubere, nachvollziehbare Logik.
+> 💡 Im interaktiven Builder oben siehst du ein echtes Nassi-Shneiderman-Diagramm: Bubblesort mit verschachtelten Schleifen und if/else.
 
 ## Wofür braucht man ein Struktogramm?
 
@@ -426,25 +422,27 @@ Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung v
 
 ## Die vier Grundelemente
 
-Schau dir die Diagramme oben an — dort siehst du jedes Element als echtes Nassi-Shneiderman-Diagramm!
+Im Nassi-Shneiderman-Diagramm gibt es vier Elemente. Im Builder oben erkennst du sie an den Farben:
 
-### 1. 🟦 Sequenz
-Ein einfaches Rechteck mit Monospace-Text. Drei Anweisungen untereinander — die einfachste Struktur. Im Diagramm oben siehst du: \`x = 5\`, \`y = x + 2\`, \`print(y)\`.
+### 🟦 Sequenz
+Ein einfaches **Rechteck** mit Monospace-Text. Drei Anweisungen untereinander — die einfachste Struktur. Beispiel: \`x = 5\` → \`y = x + 2\` → \`print(y)\`.
 
-### 2. 🔶 Auswahl (if/else)
-Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil** (grün), rechts der **NEIN-Teil** (rot). Im Diagramm: \`alter >= 18?\` → links \`Volljährig\`, rechts \`Minderjährig\`.
+### 🔶 Auswahl (if/else)
+Ein Block mit **diagonaler Linie** von oben-links nach unten-rechts. Die Bedingung steht oben. Links der **JA-Teil** (grün), rechts der **NEIN-Teil** (rot). Beispiel: \`alter >= 18?\` → links \`Volljährig\`, rechts \`Minderjährig\`.
 
-### 3. 🔁 Schleife (for / while)
-Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert. Im Diagramm: \`for i = 0 bis 9\` mit \`print(i)\` als Rumpf.
+### 🔁 Schleife (for / while)
+Ein Block mit **Bedingung im Kopf** und dem Schleifenrumpf darunter — eingerückt. Links ist ein **Schleifen-Bogen**, der den umschlossenen Bereich markiert. Beispiel: \`for i = 0 bis 9\` mit \`print(i)\` als Rumpf.
 
-### 4. 🟪 Ein-/Ausgabe
-Ein Rechteck mit schrägem Rand (Parallelogramm) — für \`input()\` oder \`print()\`.
+### 🟪 Ein-/Ausgabe
+Ein Rechteck mit **schrägem Rand** (Parallelogramm) — für \`input()\` oder \`print()\`.
 
 ---
 
-## ☕ Beispiel: Bubblesort als Struktogramm
+## ☕ Beispiel: Bubblesort
 
-Das vollständige Diagramm findest du unten und im interaktiven Builder oben! Die Struktur:
+Das vollständige Diagramm findest du **unten** und im **interaktiven Builder** oben!
+
+Die Struktur von Bubblesort als Struktogramm:
 
 - 🔁 **Äußere for-Schleife** (\`i = 0 bis n-2\`) — umschließt alles als großer Block mit Bogen links
 - 🔁 **Innere for-Schleife** (\`j = 0 bis n-2-i\`) — eingerückter Block darunter
@@ -456,8 +454,6 @@ Das vollständige Diagramm findest du unten und im interaktiven Builder oben! Di
 ---
 
 ## ⚔️ Struktogramm vs. PAP
-
-Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärken:
 
 | | Struktogramm | PAP |
 |---|---|---|
