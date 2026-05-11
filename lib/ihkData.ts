@@ -318,7 +318,7 @@ Ein Programmablaufplan (PAP) ist eine **grafische Darstellung** eines Algorithmu
 
 ---
 
-## 🟢🔵🔶📥 Die Symbole nach DIN 66001
+## 🟢🔵🔶▱ Die Symbole nach DIN 66001
 
 Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 
@@ -327,7 +327,7 @@ Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 | 🟢 **Start/Ende** | Oval (abgerundetes Rechteck) | Beginn oder Ende des Programms |
 | 🟦 **Operation** | Rechteck | Berechnung, Zuweisung, eine Aktion |
 | 🔶 **Entscheidung** | Raute | Ja/Nein-Abfrage (if/else) |
-| 📥 **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
+| ▱ **Ein-/Ausgabe** | Parallelogramm | Benutzereingabe oder Bildschirmausgabe |
 | ➡️ **Flusspfeil** | Pfeil | Richtung des Ablaufs |
 
 > ✅ **Merke:** Die Raute ist das EINZIGE Symbol mit zwei Ausgängen (Ja/Nein). Alle anderen haben genau einen Ausgang.
@@ -336,16 +336,31 @@ Jedes Symbol hat eine feste Bedeutung. Merke dir die Formen!
 
 ## ☕ Beispiel: PAP für eine Kaffeemaschine
 
-Schau dir den interaktiven PAP oben an! Hier die Schritte:
+Schau dir den interaktiven PAP oben an! Hier die Schritte im Detail:
 
-1. 🟢 **Start** — Das Programm beginnt
-2. 📥 **Ausgabe:** "Bitte Geld einwerfen" — Der Nutzer wird informiert
-3. 📥 **Eingabe:** Betrag — Der Nutzer gibt Geld ein
-4. 🔶 **Entscheidung:** Betrag >= Preis?
-   - ✅ **Ja →** 🟦 Kaffee zubereiten → 📥 "Ihr Kaffee" → 🟢 Ende
-   - ❌ **Nein →** 📥 "Zu wenig Guthaben!" → zurück zu Schritt 2
+**Schritt 1:** 🟢 **Start**
+- Das Programm beginnt
 
-> 💡 Der **Rückpfeil** (Nein → Schritt 2) ist typisch für PAPs: Der Nutzer wird solange nach Geld gefragt, bis genug da ist.
+**Schritt 2:** ▱ **Ausgabe:** "Bitte Geld einwerfen"
+- Der Nutzer wird auf dem Bildschirm informiert
+
+**Schritt 3:** ▱ **Eingabe:** Betrag eingeben
+- Der Nutzer wirft Geld ein und tippt den Betrag ein
+
+**Schritt 4:** 🔶 **Entscheidung:** Betrag >= Preis?
+- ✅ **Ja →** weiter zu Schritt 5
+- ❌ **Nein →** zurück zu Schritt 3 (erneut eingeben)
+
+**Schritt 5:** 🟦 **Operation:** Kaffee zubereiten
+- Die Maschine bereitet das Getränk zu
+
+**Schritt 6:** ▱ **Ausgabe:** "Ihr Kaffee ist fertig!"
+- Der Nutzer wird informiert, dass der Kaffee fertig ist
+
+**Schritt 7:** 🟢 **Ende**
+- Das Programm endet
+
+> 💡 Der **Rückpfeil** (Nein → Schritt 3) ist typisch für PAPs: Der Nutzer wird solange nach Geld gefragt, bis genug da ist.
 
 ---
 
