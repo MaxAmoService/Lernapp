@@ -247,9 +247,9 @@ export function PAPBuilder() {
           </div>
           <p className="text-sm text-slate-400 mb-5">Baue den PAP Schritt für Schritt auf und lerne jedes Symbol kennen.</p>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col lg:flex-row gap-6">
             {/* SVG */}
-            <div className="w-full flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
+            <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
               <svg width="560" height="620" viewBox="0 0 560 620" className="w-full h-auto">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
@@ -342,8 +342,8 @@ export function PAPBuilder() {
           </div>
           <p className="text-sm text-slate-400 mb-5">Welches Symbol gehört an diese Stelle? Klicke auf die richtige Antwort.</p>
 
-          <div className="flex flex-col gap-5">
-            <div className="w-full flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30">
+          <div className="flex flex-col lg:flex-row gap-5">
+            <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30">
               <svg width="560" height="620" viewBox="0 0 560 620" className="w-full h-auto">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
