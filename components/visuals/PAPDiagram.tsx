@@ -96,7 +96,7 @@ export function PAPExample({ width = 540, height = 780, className = "" }: PAPSym
         <p className="text-sm text-slate-400">Ein kompletter PAP mit Entscheidung und Rückkopplung</p>
       </div>
       <div className="bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
-        <svg width={width} height={height} viewBox="0 0 550 760" className="max-w-full">
+        <svg width={width} height={height} viewBox="0 0 550 760" className="w-full h-auto">
           <defs>
             <marker id="ex-arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
               <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />

@@ -247,10 +247,10 @@ export function PAPBuilder() {
           </div>
           <p className="text-sm text-slate-400 mb-5">Baue den PAP Schritt für Schritt auf und lerne jedes Symbol kennen.</p>
 
-          <div className="flex flex-col lg:flex-row gap-6">
+          <div className="flex flex-col gap-6">
             {/* SVG */}
-            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[600px]">
-              <svg width="560" height="620" viewBox="0 0 560 620" className="max-w-full">
+            <div className="w-full flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
+              <svg width="560" height="620" viewBox="0 0 560 620" className="w-full h-auto">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
@@ -342,9 +342,9 @@ export function PAPBuilder() {
           </div>
           <p className="text-sm text-slate-400 mb-5">Welches Symbol gehört an diese Stelle? Klicke auf die richtige Antwort.</p>
 
-          <div className="flex flex-col lg:flex-row gap-5">
-            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[600px]">
-              <svg width="560" height="620" viewBox="0 0 560 620" className="max-w-full">
+          <div className="flex flex-col gap-5">
+            <div className="w-full flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30">
+              <svg width="560" height="620" viewBox="0 0 560 620" className="w-full h-auto">
                 <defs>
                   <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
                     <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
