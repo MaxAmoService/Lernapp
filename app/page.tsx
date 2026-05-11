@@ -138,28 +138,95 @@ export default function Dashboard() {
         </p>
       </section>
 
-      {/* Continue Learning / Available Courses */}
+      {/* Continue Learning — nur gestartete Module + Merkliste */}
       <section>
-        <h2 className="text-2xl font-bold mb-6">
-          {user ? "Weiter lernen" : "Verfügbare Kurse"}
-        </h2>
-        {categories.map((cat) => {
-          const catModules = modules.filter((m) => m.category === cat.id);
-          if (catModules.length === 0) return null;
+        {(() => {
+          const startedModules = modules.filter((m) => {
+            if (!user) return false;
+            const completed = user.completedLessons[m.slug]?.length || 0;
+            return completed > 0 && completed < m.lessons.length;
+          });
+          const savedModules = user?.savedModules
+            ? modules.filter((m) => user.savedModules?.includes(m.slug))
+            : [];
+          const notStartedModules = modules.filter((m) => {
+            if (!user) return true;
+            const completed = user.completedLessons[m.slug]?.length || 0;
+            return completed === 0 && !user.savedModules?.includes(m.slug);
+          });
+
           return (
-            <div key={cat.id} className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">{cat.icon}</span>
-                <h3 className="text-xl font-semibold">{cat.name}</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {catModules.map((module) => (
-                  <ModuleCard key={module.id} module={module} />
-                ))}
-              </div>
-            </div>
+            <>
+              {/* Gestartete Module — prominent */}
+              {startedModules.length > 0 && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span className="text-blue-400">▶</span> Weiter lernen
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {startedModules.map((module) => (
+                      <ModuleCard key={module.id} module={module} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Gemerkte Module */}
+              {savedModules.length > 0 && (
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <span className="text-yellow-400">🔖</span> Gemerkt
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {savedModules.map((module) => (
+                      <ModuleCard key={module.id} module={module} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Nicht gestartete — kleiner */}
+              {notStartedModules.length > 0 && (
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                    <span className="text-slate-500">📚</span>
+                    <span className="text-slate-400">Noch nicht begonnen</span>
+                    <span className="text-sm text-slate-600">({notStartedModules.length})</span>
+                  </h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {notStartedModules.map((module) => (
+                      <ModuleCard key={module.id} module={module} />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Nicht eingeloggt — alle Module */}
+              {!user && (
+                <div>
+                  <h2 className="text-2xl font-bold mb-6">Verfügbare Kurse</h2>
+                  {categories.map((cat) => {
+                    const catModules = modules.filter((m) => m.category === cat.id);
+                    if (catModules.length === 0) return null;
+                    return (
+                      <div key={cat.id} className="mb-8">
+                        <div className="flex items-center gap-3 mb-4">
+                          <span className="text-2xl">{cat.icon}</span>
+                          <h3 className="text-xl font-semibold">{cat.name}</h3>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                          {catModules.map((module) => (
+                            <ModuleCard key={module.id} module={module} />
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </>
           );
-        })}
+        })()}
       </section>
 
       {/* Quick Actions */}

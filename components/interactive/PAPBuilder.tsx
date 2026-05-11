@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 
-// PAP-Element Typen
 type PAPType = "start" | "end" | "operation" | "decision" | "io";
 
 interface PAPElement {
@@ -11,8 +10,6 @@ interface PAPElement {
   label: string;
   x: number;
   y: number;
-  jaText?: string;
-  neinText?: string;
 }
 
 interface PAPConnection {
@@ -22,16 +19,22 @@ interface PAPConnection {
   color?: string;
 }
 
-// Vordefiniertes Beispiel: Kaffeemaschine
+interface StepInfo {
+  elementId: string;
+  title: string;
+  description: string;
+  symbol: string;
+}
+
 const kaffeeElements: PAPElement[] = [
-  { id: "start", type: "start", label: "Start", x: 200, y: 30 },
-  { id: "io1", type: "io", label: "Geld einwerfen", x: 200, y: 110 },
-  { id: "io2", type: "io", label: "Betrag eingeben", x: 200, y: 190 },
-  { id: "dec1", type: "decision", label: "Betrag >= Preis?", x: 200, y: 280, jaText: "Ja", neinText: "Nein" },
-  { id: "op1", type: "operation", label: "Kaffee\nzubereiten", x: 350, y: 280 },
-  { id: "io3", type: "io", label: "Ihr Kaffee", x: 350, y: 370 },
-  { id: "end1", type: "end", label: "Ende", x: 350, y: 450 },
-  { id: "io4", type: "io", label: "Zu wenig\nGuthaben!", x: 200, y: 370 },
+  { id: "start", type: "start", label: "Start", x: 200, y: 40 },
+  { id: "io1", type: "io", label: "Geld einwerfen", x: 200, y: 120 },
+  { id: "io2", type: "io", label: "Betrag eingeben", x: 200, y: 200 },
+  { id: "dec1", type: "decision", label: "Betrag\n≥ Preis?", x: 200, y: 295 },
+  { id: "op1", type: "operation", label: "Kaffee\nzubereiten", x: 360, y: 295 },
+  { id: "io3", type: "io", label: "Ihr Kaffee", x: 360, y: 385 },
+  { id: "end1", type: "end", label: "Ende", x: 360, y: 465 },
+  { id: "io4", type: "io", label: "Zu wenig\nGuthaben!", x: 200, y: 385 },
 ];
 
 const kaffeeConnections: PAPConnection[] = [
@@ -39,114 +42,62 @@ const kaffeeConnections: PAPConnection[] = [
   { from: "io1", to: "io2" },
   { from: "io2", to: "dec1" },
   { from: "dec1", to: "op1", label: "Ja", color: "#22c55e" },
+  { from: "dec1", to: "io4", label: "Nein", color: "#ef4444" },
   { from: "op1", to: "io3" },
   { from: "io3", to: "end1" },
-  { from: "dec1", to: "io4", label: "Nein", color: "#ef4444" },
-  { from: "io4", to: "io1", label: "Zurück", color: "#94a3b8" },
+  { from: "io4", to: "io1", label: "↩", color: "#94a3b8" },
 ];
 
-// Quiz-Modus: Lückentext
+const steps: StepInfo[] = [
+  { elementId: "start", title: "Start-Symbol", description: "Der PAP beginnt immer mit dem Start-Symbol — ein grünes Oval nach DIN 66001.", symbol: "🟢 Oval" },
+  { elementId: "io1", title: "Eingabe: Geld einwerfen", description: "Der Nutzer wirft Geld ein. Das ist eine EINGABE — dargestellt als Parallelogramm (lila).", symbol: "📥 Parallelogramm" },
+  { elementId: "io2", title: "Eingabe: Betrag", description: "Der Nutzer gibt den gewünschten Betrag ein — ebenfalls eine Eingabe.", symbol: "📥 Parallelogramm" },
+  { elementId: "dec1", title: "Entscheidung", description: "Das Herzstück: Eine RAUTE prüft ob der Betrag reicht. Hier verzweigt sich der PAP in JA und NEIN.", symbol: "🔶 Raute" },
+  { elementId: "op1", title: "Ja-Pfad: Kaffee zubereiten", description: "Bei 'Ja' wird eine OPERATION ausgeführt — ein blaues Rechteck. Der Kaffee wird zubereitet.", symbol: "🟦 Rechteck" },
+  { elementId: "io4", title: "Nein-Pfad: Fehlermeldung", description: "Bei 'Nein' wird eine Ausgabe 'Zu wenig Guthaben!' angezeigt — Parallelogramm.", symbol: "📥 Parallelogramm" },
+  { elementId: "io3", title: "Ausgabe: Ihr Kaffee", description: "Die Ausgabe 'Ihr Kaffee' erscheint — der Nutzer erhält sein Produkt.", symbol: "📥 Parallelogramm" },
+  { elementId: "end1", title: "Ende", description: "Das Programm endet mit dem Ende-Symbol — einem roten Oval. Fertig! ☕", symbol: "🔴 Oval" },
+];
+
 const quizQuestions = [
-  {
-    id: "q1",
-    question: "Welches Symbol verwendet man für eine Entscheidung im PAP?",
-    options: ["Rechteck", "Raute", "Oval", "Parallelogramm"],
-    correct: 1,
-    explanation: "Die Raute (Diamant) steht für eine Entscheidung — eine Ja/Nein-Verzweigung.",
-  },
-  {
-    id: "q2",
-    question: "Was wird im PAP mit einem Oval dargestellt?",
-    options: ["Operation", "Start/Ende", "Eingabe", "Entscheidung"],
-    correct: 1,
-    explanation: "Das Oval (abgerundetes Rechteck) steht für Start oder Ende des Programms.",
-  },
-  {
-    id: "q3",
-    question: "Wie heißt die Norm, die den PAP definiert?",
-    options: ["DIN 5001", "DIN 66001", "ISO 9001", "DIN 13301"],
-    correct: 1,
-    explanation: "DIN 66001 definiert die Symbole und Regeln für Programmablaufpläne.",
-  },
-  {
-    id: "q4",
-    question: "Was steht im Parallelogramm?",
-    options: ["Berechnung", "Entscheidung", "Ein-/Ausgabe", "Start"],
-    correct: 2,
-    explanation: "Das Parallelogramm steht für Ein- oder Ausgabe — z.B. Benutzereingabe oder Bildschirmausgabe.",
-  },
+  { id: "q1", question: "Welches Symbol verwendet man für eine Entscheidung im PAP?", options: ["Rechteck", "Raute", "Oval", "Parallelogramm"], correct: 1, explanation: "Die Raute (Diamant) steht für eine Entscheidung — eine Ja/Nein-Verzweigung." },
+  { id: "q2", question: "Was wird im PAP mit einem Oval dargestellt?", options: ["Operation", "Start/Ende", "Eingabe", "Entscheidung"], correct: 1, explanation: "Das Oval (abgerundetes Rechteck) steht für Start oder Ende des Programms." },
+  { id: "q3", question: "Wie heißt die Norm, die den PAP definiert?", options: ["DIN 5001", "DIN 66001", "ISO 9001", "DIN 13301"], correct: 1, explanation: "DIN 66001 definiert die Symbole und Regeln für Programmablaufpläne." },
+  { id: "q4", question: "Was steht im Parallelogramm?", options: ["Berechnung", "Entscheidung", "Ein-/Ausgabe", "Start"], correct: 2, explanation: "Das Parallelogramm steht für Ein- oder Ausgabe — z.B. Benutzereingabe oder Bildschirmausgabe." },
+  { id: "q5", question: "Ein Algorithmus hat keine Verzweigung. Welches Symbol braucht er NICHT?", options: ["Oval", "Rechteck", "Raute", "Parallelogramm"], correct: 2, explanation: "Ohne Verzweigung braucht man keine Raute (Entscheidung). Die anderen Symbole sind immer nötig." },
 ];
 
 function getColor(type: PAPType): string {
-  switch (type) {
-    case "start": return "#22c55e";
-    case "end": return "#ef4444";
-    case "operation": return "#3b82f6";
-    case "decision": return "#f59e0b";
-    case "io": return "#a855f7";
-  }
+  switch (type) { case "start": return "#22c55e"; case "end": return "#ef4444"; case "operation": return "#3b82f6"; case "decision": return "#f59e0b"; case "io": return "#a855f7"; }
 }
-
 function getStroke(type: PAPType): string {
-  switch (type) {
-    case "start": return "#15803d";
-    case "end": return "#dc2626";
-    case "operation": return "#1d4ed8";
-    case "decision": return "#b45309";
-    case "io": return "#6d28d9";
-  }
+  switch (type) { case "start": return "#15803d"; case "end": return "#dc2626"; case "operation": return "#1d4ed8"; case "decision": return "#b45309"; case "io": return "#6d28d9"; }
+}
+function getGlow(type: PAPType): string {
+  switch (type) { case "start": return "#22c55e80"; case "end": return "#ef444480"; case "operation": return "#3b82f680"; case "decision": return "#f59e0b80"; case "io": return "#a855f780"; }
 }
 
-function renderElement(el: PAPElement, isHighlighted: boolean, onClick?: () => void) {
+function renderElement(el: PAPElement, isHighlighted: boolean, isPulsing: boolean) {
   const color = getColor(el.type);
   const stroke = getStroke(el.type);
-  const opacity = isHighlighted ? 1 : 0.6;
+  const glow = getGlow(el.type);
+  const opacity = isHighlighted ? 1 : 0.35;
   const lines = el.label.split("\n");
-  const lineHeight = 14;
+  const lineHeight = el.type === "decision" ? 15 : 14;
   const startY = el.y - (lines.length - 1) * lineHeight / 2;
+  const filter = isPulsing ? `drop-shadow(0 0 12px ${glow})` : undefined;
+
+  const common = { opacity, filter, style: { transition: "all 0.5s ease" } };
 
   switch (el.type) {
-    case "start":
-    case "end":
-      return (
-        <g key={el.id} opacity={opacity} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
-          <rect x={el.x - 55} y={el.y - 22} width="110" height="44" rx="22" ry="22"
-            fill={color} stroke={stroke} strokeWidth="2" />
-          {lines.map((l, i) => (
-            <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">{l}</text>
-          ))}
-        </g>
-      );
+    case "start": case "end":
+      return <g key={el.id} {...common}><rect x={el.x - 55} y={el.y - 22} width="110" height="44" rx="22" ry="22" fill={color} stroke={stroke} strokeWidth={isPulsing ? 3 : 2} />{lines.map((l, i) => <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">{l}</text>)}</g>;
     case "operation":
-      return (
-        <g key={el.id} opacity={opacity} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
-          <rect x={el.x - 55} y={el.y - 22} width="110" height="44" rx="3" ry="3"
-            fill={color} stroke={stroke} strokeWidth="2" />
-          {lines.map((l, i) => (
-            <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>
-          ))}
-        </g>
-      );
+      return <g key={el.id} {...common}><rect x={el.x - 55} y={el.y - 22} width="110" height="44" rx="3" ry="3" fill={color} stroke={stroke} strokeWidth={isPulsing ? 3 : 2} />{lines.map((l, i) => <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>)}</g>;
     case "decision":
-      return (
-        <g key={el.id} opacity={opacity} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
-          <polygon points={`${el.x},${el.y - 30} ${el.x + 60},${el.y} ${el.x},${el.y + 30} ${el.x - 60},${el.y}`}
-            fill={color} stroke={stroke} strokeWidth="2" />
-          {lines.map((l, i) => (
-            <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>
-          ))}
-        </g>
-      );
+      return <g key={el.id} {...common}><polygon points={`${el.x},${el.y - 32} ${el.x + 65},${el.y} ${el.x},${el.y + 32} ${el.x - 65},${el.y}`} fill={color} stroke={stroke} strokeWidth={isPulsing ? 3 : 2} />{lines.map((l, i) => <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>)}</g>;
     case "io":
-      return (
-        <g key={el.id} opacity={opacity} onClick={onClick} style={{ cursor: onClick ? "pointer" : "default" }}>
-          <polygon points={`${el.x - 45},${el.y - 22} ${el.x + 55},${el.y - 22} ${el.x + 45},${el.y + 22} ${el.x - 55},${el.y + 22}`}
-            fill={color} stroke={stroke} strokeWidth="2" />
-          {lines.map((l, i) => (
-            <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>
-          ))}
-        </g>
-      );
+      return <g key={el.id} {...common}><polygon points={`${el.x - 48},${el.y - 22} ${el.x + 58},${el.y - 22} ${el.x + 48},${el.y + 22} ${el.x - 58},${el.y + 22}`} fill={color} stroke={stroke} strokeWidth={isPulsing ? 3 : 2} />{lines.map((l, i) => <text key={i} x={el.x} y={startY + i * lineHeight} textAnchor="middle" fill="white" fontSize="11" fontWeight="bold">{l}</text>)}</g>;
   }
 }
 
@@ -156,77 +107,97 @@ function renderConnections(elements: PAPElement[], connections: PAPConnection[],
     const from = elMap[conn.from];
     const to = elMap[conn.to];
     if (!from || !to) return null;
-
     const isHighlighted = i < highlightUpTo;
-    const color = conn.color || (isHighlighted ? "#94a3b8" : "#475569");
-    const opacity = isHighlighted ? 1 : 0.3;
+    const color = conn.color || (isHighlighted ? "#94a3b8" : "#334155");
+    const opacity = isHighlighted ? 1 : 0.15;
 
-    // Berechne Start- und Endpunkte
-    let x1 = from.x, y1 = from.y + 22;
-    let x2 = to.x, y2 = to.y - 22;
-
-    // Spezialfall: Zurück-Pfeil (io4 -> io1)
     if (conn.from === "io4" && conn.to === "io1") {
-      return (
-        <g key={i} opacity={opacity}>
-          <line x1={from.x - 55} y1={from.y} x2={from.x - 70} y2={from.y} stroke={color} strokeWidth="2" />
-          <line x1={from.x - 70} y1={from.y} x2={from.x - 70} y2={elMap[conn.to].y} stroke={color} strokeWidth="2" />
-          <line x1={from.x - 70} y1={elMap[conn.to].y} x2={elMap[conn.to].x - 55} y2={elMap[conn.to].y} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
-          {conn.label && (
-            <text x={from.x - 80} y={(from.y + elMap[conn.to].y) / 2} textAnchor="end" fill={color} fontSize="10">{conn.label}</text>
-          )}
-        </g>
-      );
+      return <g key={i} opacity={opacity} style={{ transition: "opacity 0.5s ease" }}>
+        <path d={`M ${from.x - 58} ${from.y} L ${from.x - 75} ${from.y} L ${from.x - 75} ${elMap["io1"].y} L ${elMap["io1"].x - 55} ${elMap["io1"].y}`} fill="none" stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
+        {conn.label && <text x={from.x - 82} y={(from.y + elMap["io1"].y) / 2} textAnchor="end" fill={color} fontSize="12" fontWeight="bold">{conn.label}</text>}
+      </g>;
     }
-
-    // Horizontale Verbindung (decision -> operation)
     if (from.type === "decision" && to.type === "operation" && from.y === to.y) {
-      x1 = from.x + 60;
-      y1 = from.y;
-      x2 = to.x - 55;
-      y2 = to.y;
-      return (
-        <g key={i} opacity={opacity}>
-          <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
-          {conn.label && <text x={(x1 + x2) / 2} y={y1 - 8} textAnchor="middle" fill={color} fontSize="11" fontWeight="bold">{conn.label}</text>}
-        </g>
-      );
+      return <g key={i} opacity={opacity} style={{ transition: "opacity 0.5s ease" }}>
+        <line x1={from.x + 65} y1={from.y} x2={to.x - 55} y2={to.y} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
+        {conn.label && <text x={(from.x + 65 + to.x - 55) / 2} y={from.y - 10} textAnchor="middle" fill={color} fontSize="12" fontWeight="bold">{conn.label}</text>}
+      </g>;
     }
-
-    // Vertikale Verbindung
-    return (
-      <g key={i} opacity={opacity}>
-        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
-        {conn.label && <text x={x1 + 12} y={(y1 + y2) / 2} textAnchor="start" fill={color} fontSize="11" fontWeight="bold">{conn.label}</text>}
-      </g>
-    );
+    if (from.type === "decision" && to.type === "io" && conn.label === "Nein") {
+      return <g key={i} opacity={opacity} style={{ transition: "opacity 0.5s ease" }}>
+        <line x1={from.x} y1={from.y + 32} x2={to.x} y2={to.y - 22} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
+        <text x={from.x + 15} y={(from.y + 32 + to.y - 22) / 2} textAnchor="start" fill={color} fontSize="12" fontWeight="bold">{conn.label}</text>
+      </g>;
+    }
+    return <g key={i} opacity={opacity} style={{ transition: "opacity 0.5s ease" }}>
+      <line x1={from.x} y1={from.y + 22} x2={to.x} y2={to.y - 22} stroke={color} strokeWidth="2" markerEnd="url(#arrow)" />
+    </g>;
   });
 }
 
 export function PAPBuilder() {
-  const [mode, setMode] = useState<"explore" | "quiz">("explore");
+  const [mode, setMode] = useState<"explore" | "quiz" | "challenge">("explore");
   const [step, setStep] = useState(0);
   const [quizIdx, setQuizIdx] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
+  const [animKey, setAnimKey] = useState(0);
 
-  const maxSteps = kaffeeConnections.length;
+  // Challenge mode state
+  const [challengeStep, setChallengeStep] = useState(0);
+  const [challengeOptions, setChallengeOptions] = useState<string[]>([]);
+  const [challengeFeedback, setChallengeFeedback] = useState<string | null>(null);
+
+  const maxSteps = steps.length;
 
   const nextStep = useCallback(() => {
     setStep(s => Math.min(s + 1, maxSteps));
+    setAnimKey(k => k + 1);
   }, [maxSteps]);
 
   const prevStep = useCallback(() => {
     setStep(s => Math.max(s - 1, 0));
+    setAnimKey(k => k + 1);
   }, []);
 
-  const handleAnswer = useCallback((idx: number) => {
+  useEffect(() => {
+    if (mode === "challenge") generateChallenge();
+  }, [mode, challengeStep]);
+
+  const generateChallenge = useCallback(() => {
+    if (challengeStep >= steps.length) return;
+    const correct = steps[challengeStep].symbol;
+    const allSymbols = ["🟢 Oval", "🟦 Rechteck", "🔶 Raute", "📥 Parallelogramm", "🔴 Oval"];
+    const wrong = allSymbols.filter(s => s !== correct);
+    const shuffled = [correct, ...wrong.sort(() => Math.random() - 0.5).slice(0, 2)].sort(() => Math.random() - 0.5);
+    setChallengeOptions(shuffled);
+    setChallengeFeedback(null);
+  }, [challengeStep]);
+
+  const handleChallengeAnswer = useCallback((opt: string) => {
+    const correct = steps[challengeStep].symbol;
+    if (opt === correct) {
+      setChallengeFeedback("✅ Richtig!");
+      setTimeout(() => {
+        setChallengeStep(s => s + 1);
+        setAnimKey(k => k + 1);
+      }, 1200);
+    } else {
+      setChallengeFeedback(`❌ Falsch! Richtig wäre: ${correct}`);
+    }
+  }, [challengeStep]);
+
+  const resetChallenge = useCallback(() => {
+    setChallengeStep(0);
+    setChallengeFeedback(null);
+    setAnimKey(k => k + 1);
+  }, []);
+
+  const handleQuizAnswer = useCallback((idx: number) => {
     setSelectedAnswer(idx);
     setShowExplanation(true);
-    if (idx === quizQuestions[quizIdx].correct) {
-      setScore(s => s + 1);
-    }
+    if (idx === quizQuestions[quizIdx].correct) setScore(s => s + 1);
   }, [quizIdx]);
 
   const nextQuestion = useCallback(() => {
@@ -242,129 +213,212 @@ export function PAPBuilder() {
     setScore(0);
   }, []);
 
+  const currentStep = steps[step - 1];
+  const maxVisibleElements = mode === "explore" ? step : (mode === "challenge" ? challengeStep : steps.length);
+  const maxVisibleConns = mode === "explore" ? Math.max(0, step - 1) : (mode === "challenge" ? Math.max(0, challengeStep - 1) : kaffeeConnections.length);
+
   return (
-    <div className="p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
+    <div className="p-5 bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl border border-slate-700/40 backdrop-blur-sm">
       {/* Mode-Toggle */}
-      <div className="flex gap-2 mb-4">
-        <button
-          onClick={() => setMode("explore")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === "explore" ? "bg-blue-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}
-        >
-          🔍 PAP erkunden
-        </button>
-        <button
-          onClick={() => setMode("quiz")}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${mode === "quiz" ? "bg-amber-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}
-        >
-          📝 Quiz
-        </button>
+      <div className="flex gap-2 mb-5">
+        {[
+          { key: "explore" as const, label: "🔍 Erkunden", color: "blue" },
+          { key: "challenge" as const, label: "🎯 Challenge", color: "emerald" },
+          { key: "quiz" as const, label: "📝 Quiz", color: "amber" },
+        ].map(m => (
+          <button key={m.key} onClick={() => setMode(m.key)}
+            className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${mode === m.key
+              ? m.key === "explore" ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                : m.key === "challenge" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-500/30"
+                  : "bg-amber-600 text-white shadow-lg shadow-amber-500/30"
+              : "bg-slate-700/50 text-slate-400 hover:bg-slate-700 hover:text-slate-200"
+            }`}>
+            {m.label}
+          </button>
+        ))}
       </div>
 
-      {mode === "explore" ? (
+      {/* EXPLORE MODE */}
+      {mode === "explore" && (
         <>
-          <h4 className="text-lg font-bold text-white mb-2">Kaffeemaschine — Schritt für Schritt</h4>
-          <p className="text-sm text-slate-400 mb-4">
-            Klicke auf &quot;Weiter&quot; um den PAP aufzubauen. Jeder Schritt fügt eine neue Verbindung hinzu.
-          </p>
-
-          <div className="flex justify-center overflow-x-auto">
-            <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
-              <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
-                  <polygon points="0 0, 10 3.5, 0 7" fill="currentColor" />
-                </marker>
-              </defs>
-
-              {/* Alle Elemente */}
-              {kaffeeElements.map(el => {
-                const elIdx = kaffeeElements.indexOf(el);
-                const isHighlighted = elIdx <= step;
-                return renderElement(el, isHighlighted);
-              })}
-
-              {/* Verbindungen */}
-              {renderConnections(kaffeeElements, kaffeeConnections, step)}
-            </svg>
+          <div className="flex items-center gap-3 mb-4">
+            <h4 className="text-lg font-bold text-white">Kaffeemaschine — Schritt für Schritt</h4>
+            <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full font-medium">DIN 66001</span>
           </div>
+          <p className="text-sm text-slate-400 mb-5">Baue den PAP Schritt für Schritt auf und lerne jedes Symbol kennen.</p>
 
-          {/* Controls */}
-          <div className="flex items-center justify-between mt-4">
-            <button
-              onClick={prevStep}
-              disabled={step === 0}
-              className="px-4 py-2 bg-slate-700 text-slate-300 rounded-lg disabled:opacity-30 hover:bg-slate-600 transition-colors"
-            >
-              ← Zurück
-            </button>
-            <span className="text-sm text-slate-400">
-              Schritt {step} / {maxSteps}
-            </span>
-            <button
-              onClick={nextStep}
-              disabled={step >= maxSteps}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg disabled:opacity-30 hover:bg-blue-500 transition-colors"
-            >
-              Weiter →
-            </button>
-          </div>
-
-          {/* Erklärung */}
-          {step > 0 && step <= maxSteps && (
-            <div className="mt-4 p-3 bg-slate-900/50 rounded-lg border border-slate-700/30">
-              <p className="text-sm text-slate-300">
-                <span className="font-bold text-blue-400">Schritt {step}:</span>{" "}
-                {step === 1 && "Der PAP beginnt mit dem Start-Symbol (Oval)."}
-                {step === 2 && "Der Nutzer wirft Geld ein — eine Eingabe (Parallelogramm)."}
-                {step === 3 && "Der Nutzer gibt den Betrag ein — weitere Eingabe."}
-                {step === 4 && "Entscheidung (Raute): Reicht der Betrag? Die Ja/Nein-Verzweigung zeigt zwei Pfade."}
-                {step === 5 && "Bei 'Ja': Der Kaffee wird zubereitet (Operation/Rechteck)."}
-                {step === 6 && "Die Ausgabe 'Ihr Kaffee' erscheint (Parallelogramm)."}
-                {step === 7 && "Das Programm endet mit dem Ende-Symbol."}
-                {step === 8 && "Bei 'Nein': Fehlermeldung als Ausgabe. Der Pfeil zurück zeigt, dass der Nutzer erneut Geld einwerfen muss."}
-              </p>
+          <div className="flex flex-col lg:flex-row gap-5">
+            {/* SVG */}
+            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[480px]">
+              <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
+                <defs>
+                  <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+                  </marker>
+                </defs>
+                {kaffeeElements.map(el => {
+                  const elIdx = kaffeeElements.findIndex(e => e.id === el.id);
+                  const stepIdx = steps.findIndex(s => s.elementId === el.id);
+                  const isVisible = stepIdx >= 0 && stepIdx < maxVisibleElements;
+                  const isPulsing = step > 0 && steps[step - 1]?.elementId === el.id;
+                  return renderElement(el, isVisible, isPulsing);
+                })}
+                {renderConnections(kaffeeElements, kaffeeConnections, maxVisibleConns)}
+              </svg>
             </div>
-          )}
-        </>
-      ) : (
-        <>
-          <h4 className="text-lg font-bold text-white mb-2">PAP-Quiz</h4>
-          <p className="text-sm text-slate-400 mb-4">
-            Teste dein Wissen über PAP-Symbole und die DIN 66001.
-          </p>
 
-          {quizIdx < quizQuestions.length ? (
-            <div className="space-y-4">
-              <div className="p-4 bg-slate-900/50 rounded-lg border border-slate-700/30">
-                <p className="text-white font-medium mb-3">
-                  Frage {quizIdx + 1} / {quizQuestions.length}: {quizQuestions[quizIdx].question}
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {quizQuestions[quizIdx].options.map((opt, i) => {
-                    let btnClass = "bg-slate-700 hover:bg-slate-600 text-slate-200";
-                    if (showExplanation) {
-                      if (i === quizQuestions[quizIdx].correct) {
-                        btnClass = "bg-green-600/80 text-white border-green-400";
-                      } else if (i === selectedAnswer) {
-                        btnClass = "bg-red-600/80 text-white border-red-400";
-                      } else {
-                        btnClass = "bg-slate-800 text-slate-500";
-                      }
-                    }
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => !showExplanation && handleAnswer(i)}
-                        disabled={showExplanation}
-                        className={`p-3 rounded-lg text-sm text-left border border-transparent transition-colors ${btnClass}`}
-                      >
+            {/* Info-Panel */}
+            <div className="lg:w-72 flex flex-col">
+              {step === 0 ? (
+                <div className="flex-1 flex flex-col items-center justify-center text-center p-4">
+                  <div className="text-4xl mb-3">👆</div>
+                  <p className="text-slate-300 font-medium">Klicke auf &quot;Weiter&quot;</p>
+                  <p className="text-sm text-slate-500 mt-1">um den PAP aufzubauen</p>
+                </div>
+              ) : currentStep && (
+                <div key={animKey} className="animate-fade-in">
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2.5 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-lg font-bold">
+                      {step}/{maxSteps}
+                    </span>
+                    <span className="text-xs text-slate-500">{currentStep.symbol}</span>
+                  </div>
+                  <h5 className="text-white font-bold text-lg mb-2">{currentStep.title}</h5>
+                  <p className="text-sm text-slate-300 leading-relaxed">{currentStep.description}</p>
+
+                  {/* Symbol-Legende */}
+                  <div className="mt-4 p-3 bg-slate-800/50 rounded-lg border border-slate-700/30">
+                    <p className="text-xs text-slate-500 font-medium mb-2">Symbole</p>
+                    <div className="grid grid-cols-2 gap-1.5 text-xs">
+                      {[
+                        { s: "🟢", n: "Start/Ende" },
+                        { s: "🟦", n: "Operation" },
+                        { s: "🔶", n: "Entscheidung" },
+                        { s: "📥", n: "Ein-/Ausgabe" },
+                      ].map(sym => (
+                        <div key={sym.n} className="flex items-center gap-1.5 text-slate-400">
+                          <span>{sym.s}</span><span>{sym.n}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Controls */}
+              <div className="flex gap-2 mt-4">
+                <button onClick={prevStep} disabled={step === 0}
+                  className="flex-1 px-4 py-2.5 bg-slate-700/50 text-slate-300 rounded-xl disabled:opacity-20 hover:bg-slate-700 transition-all text-sm font-medium">
+                  ← Zurück
+                </button>
+                <button onClick={nextStep} disabled={step >= maxSteps}
+                  className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-xl disabled:opacity-20 hover:bg-blue-500 transition-all text-sm font-medium shadow-lg shadow-blue-500/20">
+                  Weiter →
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* CHALLENGE MODE */}
+      {mode === "challenge" && (
+        <>
+          <div className="flex items-center gap-3 mb-4">
+            <h4 className="text-lg font-bold text-white">Symbol-Challenge</h4>
+            <span className="px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs rounded-full font-medium">{challengeStep}/{steps.length}</span>
+          </div>
+          <p className="text-sm text-slate-400 mb-5">Welches Symbol gehört an diese Stelle? Klicke auf die richtige Antwort.</p>
+
+          <div className="flex flex-col lg:flex-row gap-5">
+            <div className="flex-1 flex justify-center bg-slate-900/40 rounded-xl p-4 border border-slate-700/30 min-h-[480px]">
+              <svg width="420" height="500" viewBox="0 0 420 500" className="max-w-full">
+                <defs>
+                  <marker id="arrow" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#94a3b8" />
+                  </marker>
+                </defs>
+                {kaffeeElements.map(el => {
+                  const stepIdx = steps.findIndex(s => s.elementId === el.id);
+                  const isVisible = stepIdx >= 0 && stepIdx < challengeStep;
+                  const isPulsing = challengeStep < steps.length && steps[challengeStep]?.elementId === el.id;
+                  return renderElement(el, isVisible, isPulsing);
+                })}
+                {renderConnections(kaffeeElements, kaffeeConnections, Math.max(0, challengeStep - 1))}
+              </svg>
+            </div>
+
+            <div className="lg:w-72 flex flex-col">
+              {challengeStep < steps.length ? (
+                <>
+                  <div className="mb-4">
+                    <p className="text-xs text-slate-500 mb-1">Schritt {challengeStep + 1}</p>
+                    <h5 className="text-white font-bold text-lg">{steps[challengeStep].title}</h5>
+                    <p className="text-sm text-slate-400 mt-1">{steps[challengeStep].description}</p>
+                  </div>
+                  <p className="text-sm text-slate-300 font-medium mb-3">Welches Symbol ist das?</p>
+                  <div className="space-y-2">
+                    {challengeOptions.map((opt, i) => (
+                      <button key={i} onClick={() => handleChallengeAnswer(opt)}
+                        disabled={!!challengeFeedback}
+                        className={`w-full p-3 rounded-xl text-sm font-medium text-left transition-all ${challengeFeedback
+                          ? opt === steps[challengeStep].symbol
+                            ? "bg-emerald-600/60 border-2 border-emerald-400 text-white"
+                            : "bg-slate-800/50 text-slate-500"
+                          : "bg-slate-700/50 text-slate-200 hover:bg-slate-700 hover:border-slate-500 border-2 border-transparent"
+                        }`}>
                         {opt}
                       </button>
-                    );
+                    ))}
+                  </div>
+                  {challengeFeedback && (
+                    <div className={`mt-3 p-3 rounded-lg text-sm font-medium ${challengeFeedback.startsWith("✅") ? "bg-emerald-900/40 text-emerald-300" : "bg-red-900/40 text-red-300"}`}>
+                      {challengeFeedback}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <div className="flex-1 flex flex-col items-center justify-center text-center">
+                  <div className="text-5xl mb-3">🏆</div>
+                  <h5 className="text-white font-bold text-xl">Geschafft!</h5>
+                  <p className="text-slate-400 mt-2">Du kennst jetzt alle PAP-Symbole.</p>
+                  <button onClick={resetChallenge} className="mt-4 px-6 py-2.5 bg-emerald-600 text-white rounded-xl hover:bg-emerald-500 transition-all font-medium">
+                    Nochmal 🔄
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* QUIZ MODE */}
+      {mode === "quiz" && (
+        <>
+          <div className="flex items-center gap-3 mb-4">
+            <h4 className="text-lg font-bold text-white">PAP-Quiz</h4>
+            <span className="px-2 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full font-medium">Score: {score}/{quizQuestions.length}</span>
+          </div>
+
+          {quizIdx < quizQuestions.length ? (
+            <div className="max-w-xl">
+              <div className="p-5 bg-slate-900/50 rounded-xl border border-slate-700/30">
+                <p className="text-xs text-slate-500 mb-1">Frage {quizIdx + 1} / {quizQuestions.length}</p>
+                <p className="text-white font-medium text-lg mb-4">{quizQuestions[quizIdx].question}</p>
+                <div className="space-y-2">
+                  {quizQuestions[quizIdx].options.map((opt, i) => {
+                    let cls = "bg-slate-700/50 hover:bg-slate-700 text-slate-200 border-2 border-transparent";
+                    if (showExplanation) {
+                      if (i === quizQuestions[quizIdx].correct) cls = "bg-emerald-600/40 text-white border-emerald-400";
+                      else if (i === selectedAnswer) cls = "bg-red-600/40 text-white border-red-400";
+                      else cls = "bg-slate-800/30 text-slate-600 border-transparent";
+                    }
+                    return <button key={i} onClick={() => !showExplanation && handleQuizAnswer(i)} disabled={showExplanation}
+                      className={`w-full p-3 rounded-xl text-sm font-medium text-left transition-all ${cls}`}>{opt}</button>;
                   })}
                 </div>
-
                 {showExplanation && (
-                  <div className="mt-3 p-3 bg-slate-800/50 rounded-lg">
+                  <div className="mt-4 p-3 bg-slate-800/50 rounded-lg">
                     <p className="text-sm text-slate-300">
                       {selectedAnswer === quizQuestions[quizIdx].correct ? "✅ Richtig!" : "❌ Falsch!"}{" "}
                       {quizQuestions[quizIdx].explanation}
@@ -372,27 +426,26 @@ export function PAPBuilder() {
                   </div>
                 )}
               </div>
-
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-slate-400">
-                  Punkte: {score} / {quizQuestions.length}
-                </span>
+              <div className="flex items-center justify-between mt-3">
+                <div className="flex gap-1">
+                  {quizQuestions.map((_, i) => (
+                    <div key={i} className={`w-2 h-2 rounded-full ${i < quizIdx ? "bg-amber-500" : i === quizIdx ? "bg-white" : "bg-slate-700"}`} />
+                  ))}
+                </div>
                 {showExplanation && (
-                  <button
-                    onClick={quizIdx < quizQuestions.length - 1 ? nextQuestion : resetQuiz}
-                    className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-500 transition-colors"
-                  >
-                    {quizIdx < quizQuestions.length - 1 ? "Nächste Frage →" : "Quiz neustarten 🔄"}
+                  <button onClick={quizIdx < quizQuestions.length - 1 ? nextQuestion : resetQuiz}
+                    className="px-5 py-2 bg-amber-600 text-white rounded-xl hover:bg-amber-500 transition-all text-sm font-medium">
+                    {quizIdx < quizQuestions.length - 1 ? "Nächste Frage →" : "Nochmal 🔄"}
                   </button>
                 )}
               </div>
             </div>
           ) : (
-            <div className="text-center p-6">
-              <p className="text-2xl mb-2">🎉</p>
-              <p className="text-white font-bold">Quiz abgeschlossen!</p>
-              <p className="text-slate-400">Du hast {score} von {quizQuestions.length} Fragen richtig beantwortet.</p>
-              <button onClick={resetQuiz} className="mt-4 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-500 transition-colors">
+            <div className="text-center py-8">
+              <div className="text-5xl mb-3">🎉</div>
+              <p className="text-white font-bold text-xl">Quiz abgeschlossen!</p>
+              <p className="text-slate-400 mt-1">{score} von {quizQuestions.length} richtig</p>
+              <button onClick={resetQuiz} className="mt-4 px-6 py-2.5 bg-amber-600 text-white rounded-xl hover:bg-amber-500 transition-all font-medium">
                 Nochmal versuchen
               </button>
             </div>

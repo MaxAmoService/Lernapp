@@ -13,6 +13,7 @@ export interface User {
   completedModules: string[];
   completedLessons: Record<string, string[]>; // moduleId -> lessonIds
   quizScores: Record<string, number>; // moduleId -> score
+  savedModules?: string[]; // gemerkte Module
 }
 
 export interface AuthState {
