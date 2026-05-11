@@ -19,6 +19,8 @@ import { IntegralExplorer } from "./interactive/IntegralExplorer";
 import { UnitCircleInteractive } from "./interactive/UnitCircleInteractive";
 import { VectorExplorer } from "./interactive/VectorExplorer";
 import { CodeSandbox } from "./interactive/CodeSandbox";
+import { PAPSymbolOverview, PAPExample } from "./visuals/PAPDiagram";
+import { PAPBuilder } from "./interactive/PAPBuilder";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -39,6 +41,8 @@ function renderVisual(visual: LessonVisual, index: number) {
     coordinate3d: <CoordinateSystem3D width={w} height={h} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
     functionGraph: <FunctionGraph width={500} height={350} className="w-full max-w-md mx-auto" {...(visual.props || {})} />,
     unitCircle: <UnitCircle width={w} height={w} className="w-full max-w-sm mx-auto" {...(visual.props || {})} />,
+    papSymbols: <PAPSymbolOverview width={w} height={500} className="w-full max-w-2xl mx-auto" />,
+    papExample: <PAPExample width={400} height={600} className="w-full max-w-2xl mx-auto" />,
   };
 
   return (
@@ -56,6 +60,7 @@ function renderInteractive(type: string, codeExample?: string) {
     unitCircleInteractive: <UnitCircleInteractive />,
     vectorExplorer: <VectorExplorer />,
     codeSandbox: <CodeSandbox initialCode={codeExample || '// Schreibe deinen Code hier\nconsole.log("Hallo!");'} />,
+    papBuilder: <PAPBuilder />,
   };
 
   return (

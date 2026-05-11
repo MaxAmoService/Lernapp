@@ -293,8 +293,13 @@ function bubbleSort(liste n):
     {
       id: "ihk-2",
       title: "Programmablaufplan (PAP)",
-      duration: "12 min",
-      type: "text",
+      duration: "15 min",
+      type: "interactive",
+      visuals: [
+        { type: "papSymbols", position: "top" },
+        { type: "papExample", position: "bottom" },
+      ],
+      interactive: "papBuilder",
       content: `# Programmablaufplan (PAP) — DIN 66001
 
 ## Was ist ein PAP?
