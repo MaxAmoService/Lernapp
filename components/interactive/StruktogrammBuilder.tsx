@@ -64,264 +64,100 @@ const exploreSteps: StepInfo[] = [
   { blockId: "assign2", title: "Tausch: temp einsetzen", description: "Das gesicherte Element (temp) wird an die Position des zweiten geschoben. Tausch abgeschlossen! ✅", symbol: "🟦 Sequenz" },
 ];
 
-const availableBlocks: { type: BlockType; label: string; icon: string; color: string }[] = [
-  { type: "sequence", label: "Sequenz", icon: "🟦", color: "blue" },
-  { type: "if", label: "Auswahl (if/else)", icon: "🔶", color: "amber" },
-  { type: "while", label: "Schleife (while)", icon: "🔁", color: "purple" },
-  { type: "io", label: "Ein-/Ausgabe", icon: "🟪", color: "pink" },
+const availableBlocks: { type: BlockType; label: string; icon: string }[] = [
+  { type: "sequence", label: "Sequenz", icon: "🟦" },
+  { type: "if", label: "Auswahl (if/else)", icon: "🔶" },
+  { type: "while", label: "Schleife (while)", icon: "🔁" },
+  { type: "io", label: "Ein-/Ausgabe", icon: "🟪" },
 ];
 
-function getBlockColor(type: BlockType): string {
+function getBlockColors(type: BlockType) {
   switch (type) {
-    case "sequence": return "#3b82f6";
-    case "if": return "#f59e0b";
-    case "while": return "#a855f7";
-    case "io": return "#ec4899";
+    case "sequence": return { border: "border-blue-500/60", bg: "bg-blue-600/20", activeBorder: "border-blue-400", activeBg: "bg-blue-500/40", text: "text-blue-200" };
+    case "if": return { border: "border-amber-500/60", bg: "bg-amber-600/20", activeBorder: "border-amber-400", activeBg: "bg-amber-500/40", text: "text-amber-200" };
+    case "while": return { border: "border-purple-500/60", bg: "bg-purple-600/20", activeBorder: "border-purple-400", activeBg: "bg-purple-500/40", text: "text-purple-200" };
+    case "io": return { border: "border-pink-500/60", bg: "bg-pink-600/20", activeBorder: "border-pink-400", activeBg: "bg-pink-500/40", text: "text-pink-200" };
   }
 }
 
-function StrukBlockSVG({
+function BlockComponent({
   block,
-  x,
-  y,
-  width,
   activeId,
 }: {
   block: StrukBlock;
-  x: number;
-  y: number;
-  width: number;
   activeId: string | null;
-}): { element: JSX.Element; height: number } {
+}) {
   const isActive = activeId === block.id;
-  const color = getBlockColor(block.type);
-  const headerH = 38;
-  const padding = 10;
-  const childGap = 4;
+  const colors = getBlockColors(block.type);
+
+  const headerClasses = `
+    px-4 py-2.5 font-mono text-sm font-bold border-2 rounded-lg transition-all duration-300
+    ${isActive ? `${colors.activeBorder} ${colors.activeBg} text-white shadow-lg` : `${colors.border} ${colors.bg} ${colors.text}`}
+  `;
 
   if (block.type === "sequence" || block.type === "io") {
-    const h = headerH;
-    return {
-      height: h,
-      element: (
-        <g key={block.id}>
-          <rect
-            x={x}
-            y={y}
-            width={width}
-            height={h}
-            rx={6}
-            fill={isActive ? color + "70" : color + "25"}
-            stroke={isActive ? color : color + "50"}
-            strokeWidth={isActive ? 3 : 1.5}
-            style={{ transition: "all 0.4s ease" }}
-          />
-          {isActive && (
-            <rect x={x} y={y} width={width} height={h} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
-          )}
-          <text
-            x={x + width / 2}
-            y={y + h / 2 + 1}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={13}
-            fontWeight={isActive ? "bold" : "normal"}
-            fontFamily="monospace"
-          >
-            {block.label}
-          </text>
-        </g>
-      ),
-    };
+    return (
+      <div data-block-id={block.id} className={headerClasses}>
+        {block.type === "io" && <span className="mr-1.5">📥</span>}
+        {block.label}
+      </div>
+    );
   }
 
   if (block.type === "while") {
-    let childY = y + headerH + childGap;
-    const childElements: JSX.Element[] = [];
-    let totalChildH = 0;
-    const childWidth = width - padding * 2;
-
-    if (block.children) {
-      for (const child of block.children) {
-        const result = StrukBlockSVG({ block: child, x: x + padding, y: childY, width: childWidth, activeId });
-        childElements.push(result.element);
-        childY += result.height + childGap;
-        totalChildH += result.height + childGap;
-      }
-    }
-
-    const totalH = headerH + (totalChildH > 0 ? totalChildH + padding : 0) + 4;
-
-    return {
-      height: totalH,
-      element: (
-        <g key={block.id}>
-          <rect
-            x={x}
-            y={y}
-            width={width}
-            height={headerH}
-            rx={6}
-            fill={isActive ? color + "70" : color + "25"}
-            stroke={isActive ? color : color + "50"}
-            strokeWidth={isActive ? 3 : 1.5}
-            style={{ transition: "all 0.4s ease" }}
-          />
-          {isActive && (
-            <rect x={x} y={y} width={width} height={headerH} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
+    return (
+      <div data-block-id={block.id} className="flex flex-col">
+        <div className={headerClasses}>
+          <span className="mr-1.5">🔁</span>{block.label}
+        </div>
+        <div className={`ml-4 mt-1 border-l-2 border-dashed ${isActive ? "border-purple-400" : "border-purple-500/30"} pl-3 py-2 space-y-1.5`}>
+          {block.children && block.children.length > 0 ? (
+            block.children.map((child) => (
+              <BlockComponent key={child.id} block={child} activeId={activeId} />
+            ))
+          ) : (
+            <div className="text-xs text-slate-500 italic py-2">Schleifenrumpf (leer)</div>
           )}
-          <text
-            x={x + width / 2}
-            y={y + headerH / 2 + 1}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={13}
-            fontWeight={isActive ? "bold" : "normal"}
-            fontFamily="monospace"
-          >
-            🔁 {block.label}
-          </text>
-          {totalChildH > 0 && (
-            <rect
-              x={x + 2}
-              y={y + headerH}
-              width={width - 4}
-              height={totalChildH + padding}
-              rx={4}
-              fill={color + "08"}
-              stroke={color + "30"}
-              strokeWidth={1}
-              strokeDasharray="6 3"
-            />
-          )}
-          {childElements}
-        </g>
-      ),
-    };
+        </div>
+      </div>
+    );
   }
 
   if (block.type === "if") {
-    let thenY = y + headerH + childGap;
-    const thenElements: JSX.Element[] = [];
-    let thenH = 0;
-    const halfWidth = (width - padding * 2 - 10) / 2;
-
-    if (block.children) {
-      for (const child of block.children) {
-        const result = StrukBlockSVG({ block: child, x: x + padding, y: thenY, width: halfWidth, activeId });
-        thenElements.push(result.element);
-        thenY += result.height + childGap;
-        thenH += result.height + childGap;
-      }
-    }
-
-    let elseY = y + headerH + childGap;
-    const elseElements: JSX.Element[] = [];
-    let elseH = 0;
-    const elseX = x + padding + halfWidth + 10;
-
-    if (block.elseChildren) {
-      for (const child of block.elseChildren) {
-        const result = StrukBlockSVG({ block: child, x: elseX, y: elseY, width: halfWidth, activeId });
-        elseElements.push(result.element);
-        elseY += result.height + childGap;
-        elseH += result.height + childGap;
-      }
-    }
-
-    const bodyH = Math.max(thenH, elseH, 40);
-    const totalH = headerH + bodyH + padding + 4;
-
-    return {
-      height: totalH,
-      element: (
-        <g key={block.id}>
-          <rect
-            x={x}
-            y={y}
-            width={width}
-            height={headerH}
-            rx={6}
-            fill={isActive ? color + "70" : color + "25"}
-            stroke={isActive ? color : color + "50"}
-            strokeWidth={isActive ? 3 : 1.5}
-            style={{ transition: "all 0.4s ease" }}
-          />
-          {isActive && (
-            <rect x={x} y={y} width={width} height={headerH} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
-          )}
-          <text
-            x={x + width / 2}
-            y={y + headerH / 2 + 1}
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={13}
-            fontWeight={isActive ? "bold" : "normal"}
-            fontFamily="monospace"
-          >
-            ❓ {block.label}
-          </text>
-          <line
-            x1={x + halfWidth + padding + 5}
-            y1={y + headerH}
-            x2={x + halfWidth + padding + 5}
-            y2={y + totalH}
-            stroke={color + "40"}
-            strokeWidth={1.5}
-          />
-          <rect
-            x={x + 2}
-            y={y + headerH}
-            width={halfWidth + padding - 2}
-            height={bodyH + padding}
-            rx={4}
-            fill="#22c55e08"
-            stroke="#22c55e20"
-            strokeWidth={1}
-          />
-          <text x={x + padding + 6} y={y + headerH + 16} fill="#22c55e90" fontSize={10} fontWeight="bold">
-            JA ✓
-          </text>
-          <rect
-            x={elseX - 2}
-            y={y + headerH}
-            width={halfWidth + padding - 2}
-            height={bodyH + padding}
-            rx={4}
-            fill="#ef444408"
-            stroke="#ef444420"
-            strokeWidth={1}
-          />
-          <text x={elseX + 6} y={y + headerH + 16} fill="#ef444490" fontSize={10} fontWeight="bold">
-            NEIN ✗
-          </text>
-          {thenElements}
-          {elseElements}
-        </g>
-      ),
-    };
+    return (
+      <div data-block-id={block.id} className="flex flex-col">
+        <div className={headerClasses}>
+          <span className="mr-1.5">❓</span>{block.label}
+        </div>
+        <div className="flex gap-1 mt-1">
+          {/* JA-Seite */}
+          <div className={`flex-1 ml-4 border-l-2 border-t-2 rounded-tl-lg ${isActive ? "border-green-400" : "border-green-500/30"} pl-3 pt-2 pb-2 space-y-1.5`}>
+            <div className="text-xs font-bold text-green-400 uppercase tracking-wider mb-1">✓ Ja</div>
+            {block.children && block.children.length > 0 ? (
+              block.children.map((child) => (
+                <BlockComponent key={child.id} block={child} activeId={activeId} />
+              ))
+            ) : (
+              <div className="text-xs text-slate-500 italic py-2">—</div>
+            )}
+          </div>
+          {/* NEIN-Seite */}
+          <div className={`flex-1 border-r-2 border-t-2 rounded-tr-lg ${isActive ? "border-red-400" : "border-red-500/30"} pr-3 pt-2 pb-2 space-y-1.5 text-right`}>
+            <div className="text-xs font-bold text-red-400 uppercase tracking-wider mb-1">✗ Nein</div>
+            {block.elseChildren && block.elseChildren.length > 0 ? (
+              block.elseChildren.map((child) => (
+                <BlockComponent key={child.id} block={child} activeId={activeId} />
+              ))
+            ) : (
+              <div className="text-xs text-slate-500 italic py-2">—</div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
   }
 
-  return { height: headerH, element: <g key={block.id} /> };
-}
-
-function calculateTotalHeight(blocks: StrukBlock[]): number {
-  let h = 0;
-  for (const block of blocks) {
-    if (block.type === "sequence" || block.type === "io") h += 42;
-    else if (block.type === "while") {
-      const childH = block.children ? calculateTotalHeight(block.children) : 0;
-      h += 42 + childH + 14;
-    } else if (block.type === "if") {
-      const thenH = block.children ? calculateTotalHeight(block.children) : 0;
-      const elseH = block.elseChildren ? calculateTotalHeight(block.elseChildren) : 0;
-      h += 42 + Math.max(thenH, elseH, 40) + 18;
-    }
-  }
-  return h;
+  return <div className={headerClasses}>{block.label}</div>;
 }
 
 function flattenBlocks(blocks: StrukBlock[]): StrukBlock[] {
@@ -376,10 +212,6 @@ export function StruktogrammBuilder() {
     [nextId]
   );
 
-  const svgWidth = 560;
-  const svgHeight = Math.max(calculateTotalHeight(exampleBlocks) + 60, 400);
-  const userSvgHeight = Math.max(calculateTotalHeight(userBlocks) + 60, 300);
-
   const currentStep = exploreIdx >= 0 ? exploreSteps[exploreIdx] : null;
 
   return (
@@ -390,18 +222,16 @@ export function StruktogrammBuilder() {
 
       {/* Mode Toggle */}
       <div className="flex gap-2 mb-5">
-        {[
-          { key: "explore" as const, label: "🔍 Bubblesort erkunden", color: "blue" },
-          { key: "build" as const, label: "🔨 Eigene bauen", color: "emerald" },
-        ].map((m) => (
+        {([
+          { key: "explore" as const, label: "🔍 Bubblesort erkunden" },
+          { key: "build" as const, label: "🔨 Eigene bauen" },
+        ]).map((m) => (
           <button
             key={m.key}
             onClick={() => { setMode(m.key); if (m.key === "explore") { setExploreIdx(-1); setActiveId(null); } }}
             className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
               mode === m.key
-                ? m.key === "explore"
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
-                  : "bg-emerald-600 text-white shadow-lg shadow-emerald-500/30"
+                ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
                 : "bg-slate-700/50 text-slate-400 hover:bg-slate-700 hover:text-slate-200"
             }`}
           >
@@ -413,22 +243,15 @@ export function StruktogrammBuilder() {
       {mode === "explore" && (
         <>
           <p className="text-sm text-slate-400 mb-4">
-            Erkunde das Bubblesort-Struktogramm Schritt für Schritt. Jeder Block wird farbig hervorgehoben und erklärt.
+            Erkunde das Bubblesort-Struktogramm Schritt für Schritt. Jeder Block wird hervorgehoben und erklärt.
           </p>
           <div className="flex flex-col lg:flex-row gap-5">
-            <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
-              <svg width={svgWidth} height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto">
-                <defs>
-                  <filter id="strukt-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="3" result="blur" />
-                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
-                  </filter>
-                </defs>
-                {exampleBlocks.map((block) => {
-                  const result = StrukBlockSVG({ block, x: 20, y: 20, width: svgWidth - 40, activeId });
-                  return result.element;
-                })}
-              </svg>
+            <div className="w-full lg:w-3/5 bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
+              <div className="space-y-1.5">
+                {exampleBlocks.map((block) => (
+                  <BlockComponent key={block.id} block={block} activeId={activeId} />
+                ))}
+              </div>
             </div>
             <div className="lg:w-2/5 flex flex-col gap-4">
               {/* Step Info */}
@@ -447,7 +270,7 @@ export function StruktogrammBuilder() {
                 ) : (
                   <div className="text-center py-4">
                     <div className="text-4xl mb-2">📐</div>
-                    <p className="text-slate-400">Klicke auf <strong className="text-white">Weiter</strong> um jeden Block zu erkunden.</p>
+                    <p className="text-slate-400">Klicke auf <strong className="text-white">Start</strong> um jeden Block zu erkunden.</p>
                   </div>
                 )}
               </div>
@@ -505,20 +328,19 @@ export function StruktogrammBuilder() {
             Baue dein eigenes Struktogramm! Wähle einen Blocktyp und füge ihn hinzu.
           </p>
           <div className="flex flex-col lg:flex-row gap-5">
-            <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[300px]">
+            <div className="w-full lg:w-3/5 bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[200px]">
               {userBlocks.length === 0 ? (
-                <div className="flex flex-col items-center justify-center text-center">
+                <div className="flex flex-col items-center justify-center text-center py-12">
                   <div className="text-5xl mb-3">📐</div>
                   <p className="text-white font-semibold text-lg">Noch keine Blöcke</p>
                   <p className="text-sm text-slate-400 mt-2">Wähle rechts einen Blocktyp aus zum Starten.</p>
                 </div>
               ) : (
-                <svg width={svgWidth} height={userSvgHeight} viewBox={`0 0 ${svgWidth} ${userSvgHeight}`} className="w-full h-auto">
-                  {userBlocks.map((block) => {
-                    const result = StrukBlockSVG({ block, x: 20, y: 20, width: svgWidth - 40, activeId: null });
-                    return result.element;
-                  })}
-                </svg>
+                <div className="space-y-1.5">
+                  {userBlocks.map((block) => (
+                    <BlockComponent key={block.id} block={block} activeId={null} />
+                  ))}
+                </div>
               )}
             </div>
             <div className="lg:w-2/5 flex flex-col gap-4">
