@@ -47,6 +47,23 @@ const exampleBlocks: StrukBlock[] = [
   },
 ];
 
+interface StepInfo {
+  blockId: string;
+  title: string;
+  description: string;
+  symbol: string;
+}
+
+const exploreSteps: StepInfo[] = [
+  { blockId: "fn", title: "Funktion: bubbleSort", description: "Das Struktogramm beginnt mit der Hauptfunktion. Im Struktogramm ist jede Funktion ein großer Block, der alles enthält.", symbol: "🟦 Sequenz" },
+  { blockId: "for-i", title: "Äußere Schleife", description: "Die for-Schleife iteriert über alle Elemente. Im Struktogramm wird eine Schleife als Block mit Bedingung oben dargestellt — der Schleifenrumpf ist darunter eingerückt.", symbol: "🔁 Schleife" },
+  { blockId: "for-j", title: "Innere Schleife", description: "Die innere Schleife vergleicht benachbarte Elemente. Sie ist IN der äußeren Schleife verschachtelt — im Struktogramm siehst du das an der Einrückung.", symbol: "🔁 Schleife" },
+  { blockId: "if-swap", title: "Entscheidung: Tauschen?", description: "Die Raute (if/else) prüft ob zwei benachbarte Elemente vertauscht werden müssen. Links der JA-Teil (tauschen), rechts der NEIN-Teil (nichts tun).", symbol: "❓ Auswahl" },
+  { blockId: "temp", title: "Tausch: temp sichern", description: "Im JA-Teil: Zuerst sichern wir das erste Element in einer temporären Variable. Das ist der klassische Tausch-Algorithmus.", symbol: "🟦 Sequenz" },
+  { blockId: "assign1", title: "Tausch: Element verschieben", description: "Das zweite Element wird an die Position des ersten geschoben.", symbol: "🟦 Sequenz" },
+  { blockId: "assign2", title: "Tausch: temp einsetzen", description: "Das gesicherte Element (temp) wird an die Position des zweiten geschoben. Tausch abgeschlossen! ✅", symbol: "🟦 Sequenz" },
+];
+
 const availableBlocks: { type: BlockType; label: string; icon: string; color: string }[] = [
   { type: "sequence", label: "Sequenz", icon: "🟦", color: "blue" },
   { type: "if", label: "Auswahl (if/else)", icon: "🔶", color: "amber" },
@@ -63,34 +80,23 @@ function getBlockColor(type: BlockType): string {
   }
 }
 
-function getBlockBg(type: BlockType): string {
-  switch (type) {
-    case "sequence": return "bg-blue-600/30 border-blue-500/40";
-    case "if": return "bg-amber-600/30 border-amber-500/40";
-    case "while": return "bg-purple-600/30 border-purple-500/40";
-    case "io": return "bg-pink-600/30 border-pink-500/40";
-  }
-}
-
 function StrukBlockSVG({
   block,
   x,
   y,
   width,
   activeId,
-  depth = 0,
 }: {
   block: StrukBlock;
   x: number;
   y: number;
   width: number;
   activeId: string | null;
-  depth?: number;
 }): { element: JSX.Element; height: number } {
   const isActive = activeId === block.id;
   const color = getBlockColor(block.type);
-  const headerH = 36;
-  const padding = 8;
+  const headerH = 38;
+  const padding = 10;
   const childGap = 4;
 
   if (block.type === "sequence" || block.type === "io") {
@@ -104,19 +110,22 @@ function StrukBlockSVG({
             y={y}
             width={width}
             height={h}
-            rx={4}
-            fill={isActive ? color + "60" : color + "25"}
-            stroke={isActive ? color : color + "60"}
-            strokeWidth={isActive ? 2.5 : 1.5}
-            style={{ transition: "all 0.3s ease" }}
+            rx={6}
+            fill={isActive ? color + "70" : color + "25"}
+            stroke={isActive ? color : color + "50"}
+            strokeWidth={isActive ? 3 : 1.5}
+            style={{ transition: "all 0.4s ease" }}
           />
+          {isActive && (
+            <rect x={x} y={y} width={width} height={h} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
+          )}
           <text
             x={x + width / 2}
             y={y + h / 2 + 1}
             textAnchor="middle"
             dominantBaseline="middle"
             fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={12}
+            fontSize={13}
             fontWeight={isActive ? "bold" : "normal"}
             fontFamily="monospace"
           >
@@ -135,7 +144,7 @@ function StrukBlockSVG({
 
     if (block.children) {
       for (const child of block.children) {
-        const result = StrukBlockSVG({ block: child, x: x + padding, y: childY, width: childWidth, activeId, depth: depth + 1 });
+        const result = StrukBlockSVG({ block: child, x: x + padding, y: childY, width: childWidth, activeId });
         childElements.push(result.element);
         childY += result.height + childGap;
         totalChildH += result.height + childGap;
@@ -148,42 +157,43 @@ function StrukBlockSVG({
       height: totalH,
       element: (
         <g key={block.id}>
-          {/* Header */}
           <rect
             x={x}
             y={y}
             width={width}
             height={headerH}
-            rx={4}
-            fill={isActive ? color + "60" : color + "25"}
-            stroke={isActive ? color : color + "60"}
-            strokeWidth={isActive ? 2.5 : 1.5}
-            style={{ transition: "all 0.3s ease" }}
+            rx={6}
+            fill={isActive ? color + "70" : color + "25"}
+            stroke={isActive ? color : color + "50"}
+            strokeWidth={isActive ? 3 : 1.5}
+            style={{ transition: "all 0.4s ease" }}
           />
+          {isActive && (
+            <rect x={x} y={y} width={width} height={headerH} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
+          )}
           <text
             x={x + width / 2}
             y={y + headerH / 2 + 1}
             textAnchor="middle"
             dominantBaseline="middle"
             fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={12}
+            fontSize={13}
             fontWeight={isActive ? "bold" : "normal"}
             fontFamily="monospace"
           >
             🔁 {block.label}
           </text>
-          {/* Body */}
           {totalChildH > 0 && (
             <rect
               x={x + 2}
               y={y + headerH}
               width={width - 4}
               height={totalChildH + padding}
-              rx={3}
+              rx={4}
               fill={color + "08"}
               stroke={color + "30"}
               strokeWidth={1}
-              strokeDasharray="4 2"
+              strokeDasharray="6 3"
             />
           )}
           {childElements}
@@ -196,11 +206,11 @@ function StrukBlockSVG({
     let thenY = y + headerH + childGap;
     const thenElements: JSX.Element[] = [];
     let thenH = 0;
-    const halfWidth = (width - padding * 2 - 8) / 2;
+    const halfWidth = (width - padding * 2 - 10) / 2;
 
     if (block.children) {
       for (const child of block.children) {
-        const result = StrukBlockSVG({ block: child, x: x + padding, y: thenY, width: halfWidth, activeId, depth: depth + 1 });
+        const result = StrukBlockSVG({ block: child, x: x + padding, y: thenY, width: halfWidth, activeId });
         thenElements.push(result.element);
         thenY += result.height + childGap;
         thenH += result.height + childGap;
@@ -210,84 +220,83 @@ function StrukBlockSVG({
     let elseY = y + headerH + childGap;
     const elseElements: JSX.Element[] = [];
     let elseH = 0;
-    const elseX = x + padding + halfWidth + 8;
+    const elseX = x + padding + halfWidth + 10;
 
     if (block.elseChildren) {
       for (const child of block.elseChildren) {
-        const result = StrukBlockSVG({ block: child, x: elseX, y: elseY, width: halfWidth, activeId, depth: depth + 1 });
+        const result = StrukBlockSVG({ block: child, x: elseX, y: elseY, width: halfWidth, activeId });
         elseElements.push(result.element);
         elseY += result.height + childGap;
         elseH += result.height + childGap;
       }
     }
 
-    const bodyH = Math.max(thenH, elseH, 30);
+    const bodyH = Math.max(thenH, elseH, 40);
     const totalH = headerH + bodyH + padding + 4;
 
     return {
       height: totalH,
       element: (
         <g key={block.id}>
-          {/* Header — full width */}
           <rect
             x={x}
             y={y}
             width={width}
             height={headerH}
-            rx={4}
-            fill={isActive ? color + "60" : color + "25"}
-            stroke={isActive ? color : color + "60"}
-            strokeWidth={isActive ? 2.5 : 1.5}
-            style={{ transition: "all 0.3s ease" }}
+            rx={6}
+            fill={isActive ? color + "70" : color + "25"}
+            stroke={isActive ? color : color + "50"}
+            strokeWidth={isActive ? 3 : 1.5}
+            style={{ transition: "all 0.4s ease" }}
           />
+          {isActive && (
+            <rect x={x} y={y} width={width} height={headerH} rx={6} fill="none" stroke={color} strokeWidth={3} opacity={0.4} className="animate-pulse" />
+          )}
           <text
             x={x + width / 2}
             y={y + headerH / 2 + 1}
             textAnchor="middle"
             dominantBaseline="middle"
             fill={isActive ? "white" : "#cbd5e1"}
-            fontSize={12}
+            fontSize={13}
             fontWeight={isActive ? "bold" : "normal"}
             fontFamily="monospace"
           >
             ❓ {block.label}
           </text>
-          {/* Divider line */}
           <line
-            x1={x + halfWidth + padding + 4}
+            x1={x + halfWidth + padding + 5}
             y1={y + headerH}
-            x2={x + halfWidth + padding + 4}
+            x2={x + halfWidth + padding + 5}
             y2={y + totalH}
             stroke={color + "40"}
             strokeWidth={1.5}
           />
-          {/* Then area */}
           <rect
             x={x + 2}
             y={y + headerH}
             width={halfWidth + padding - 2}
             height={bodyH + padding}
-            rx={3}
+            rx={4}
             fill="#22c55e08"
             stroke="#22c55e20"
             strokeWidth={1}
           />
-          <text x={x + padding + 4} y={y + headerH + 14} fill="#22c55e80" fontSize={9} fontWeight="bold">
-            JA
+          <text x={x + padding + 6} y={y + headerH + 16} fill="#22c55e90" fontSize={10} fontWeight="bold">
+            JA ✓
           </text>
-          {/* Else area */}
           <rect
             x={elseX - 2}
             y={y + headerH}
             width={halfWidth + padding - 2}
             height={bodyH + padding}
-            rx={3}
+            rx={4}
             fill="#ef444408"
             stroke="#ef444420"
             strokeWidth={1}
           />
-          <text x={elseX + 4} y={y + headerH + 14} fill="#ef444480" fontSize={9} fontWeight="bold">
-            NEIN
+          <text x={elseX + 6} y={y + headerH + 16} fill="#ef444490" fontSize={10} fontWeight="bold">
+            NEIN ✗
           </text>
           {thenElements}
           {elseElements}
@@ -302,14 +311,14 @@ function StrukBlockSVG({
 function calculateTotalHeight(blocks: StrukBlock[]): number {
   let h = 0;
   for (const block of blocks) {
-    if (block.type === "sequence" || block.type === "io") h += 40;
+    if (block.type === "sequence" || block.type === "io") h += 42;
     else if (block.type === "while") {
       const childH = block.children ? calculateTotalHeight(block.children) : 0;
-      h += 40 + childH + 12;
+      h += 42 + childH + 14;
     } else if (block.type === "if") {
       const thenH = block.children ? calculateTotalHeight(block.children) : 0;
       const elseH = block.elseChildren ? calculateTotalHeight(block.elseChildren) : 0;
-      h += 40 + Math.max(thenH, elseH, 30) + 16;
+      h += 42 + Math.max(thenH, elseH, 40) + 18;
     }
   }
   return h;
@@ -335,24 +344,25 @@ export function StruktogrammBuilder() {
   const [exploreIdx, setExploreIdx] = useState(-1);
 
   const exploreBlock = useCallback(() => {
-    setExploreIdx((i) => Math.min(i + 1, allExampleBlocks.length - 1));
-    if (exploreIdx + 1 < allExampleBlocks.length) {
-      setActiveId(allExampleBlocks[exploreIdx + 1].id);
-    }
+    const newIdx = Math.min(exploreIdx + 1, allExampleBlocks.length - 1);
+    setExploreIdx(newIdx);
+    setActiveId(allExampleBlocks[newIdx].id);
   }, [exploreIdx, allExampleBlocks]);
 
   const prevExplore = useCallback(() => {
-    setExploreIdx((i) => Math.max(i - 1, -1));
-    if (exploreIdx > 0) {
-      setActiveId(allExampleBlocks[exploreIdx - 1].id);
-    } else {
-      setActiveId(null);
-    }
+    const newIdx = Math.max(exploreIdx - 1, -1);
+    setExploreIdx(newIdx);
+    setActiveId(newIdx >= 0 ? allExampleBlocks[newIdx].id : null);
   }, [exploreIdx, allExampleBlocks]);
+
+  const resetExplore = useCallback(() => {
+    setExploreIdx(-1);
+    setActiveId(null);
+  }, []);
 
   const addBlock = useCallback(
     (type: BlockType) => {
-      const label = type === "if" ? "Bedingung?" : type === "while" ? "while (true)" : type === "io" ? "print(...)" : "Anweisung";
+      const label = type === "if" ? "Bedingung?" : type === "while" ? "while (true)" : type === "io" ? "input(x)" : "Anweisung";
       const newBlock: StrukBlock = {
         id: `user-${nextId}`,
         type,
@@ -366,25 +376,27 @@ export function StruktogrammBuilder() {
     [nextId]
   );
 
-  const svgWidth = 500;
+  const svgWidth = 560;
   const svgHeight = Math.max(calculateTotalHeight(exampleBlocks) + 60, 400);
+  const userSvgHeight = Math.max(calculateTotalHeight(userBlocks) + 60, 300);
+
+  const currentStep = exploreIdx >= 0 ? exploreSteps[exploreIdx] : null;
 
   return (
     <div className="p-5 bg-gradient-to-br from-slate-800/60 to-slate-900/60 rounded-2xl border border-slate-700/40 backdrop-blur-sm">
       <div className="flex items-center gap-3 mb-4">
-        <h4 className="text-lg font-bold text-white">📐 Struktogramm Builder</h4>
-        <span className="px-2 py-0.5 bg-indigo-500/20 text-indigo-400 text-xs rounded-full font-medium">Nassi-Shneiderman</span>
+        <h4 className="text-lg font-bold text-white">📐 Struktogramm — Nassi-Shneiderman</h4>
       </div>
 
       {/* Mode Toggle */}
       <div className="flex gap-2 mb-5">
         {[
-          { key: "explore" as const, label: "🔍 Erkunden", color: "blue" },
-          { key: "build" as const, label: "🔨 Bauen", color: "emerald" },
+          { key: "explore" as const, label: "🔍 Bubblesort erkunden", color: "blue" },
+          { key: "build" as const, label: "🔨 Eigene bauen", color: "emerald" },
         ].map((m) => (
           <button
             key={m.key}
-            onClick={() => setMode(m.key)}
+            onClick={() => { setMode(m.key); if (m.key === "explore") { setExploreIdx(-1); setActiveId(null); } }}
             className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
               mode === m.key
                 ? m.key === "explore"
@@ -401,11 +413,17 @@ export function StruktogrammBuilder() {
       {mode === "explore" && (
         <>
           <p className="text-sm text-slate-400 mb-4">
-            Erkunde das Bubblesort-Struktogramm Schritt für Schritt. Jeder Klick hebt den nächsten Block hervor.
+            Erkunde das Bubblesort-Struktogramm Schritt für Schritt. Jeder Block wird farbig hervorgehoben und erklärt.
           </p>
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30">
               <svg width={svgWidth} height={svgHeight} viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="w-full h-auto">
+                <defs>
+                  <filter id="strukt-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+                  </filter>
+                </defs>
                 {exampleBlocks.map((block) => {
                   const result = StrukBlockSVG({ block, x: 20, y: 20, width: svgWidth - 40, activeId });
                   return result.element;
@@ -413,35 +431,46 @@ export function StruktogrammBuilder() {
               </svg>
             </div>
             <div className="lg:w-2/5 flex flex-col gap-4">
-              <div className="p-4 bg-slate-800/60 rounded-xl border border-slate-700/30">
-                <p className="text-xs text-indigo-400 font-bold uppercase tracking-wider mb-2">
-                  {exploreIdx >= 0 ? `Block ${exploreIdx + 1} / ${allExampleBlocks.length}` : "Bereit?"}
+              {/* Step Info */}
+              <div className="p-5 bg-slate-800/60 rounded-xl border border-slate-700/30 min-h-[120px]">
+                <p className="text-xs text-blue-400 font-bold uppercase tracking-wider mb-2">
+                  {exploreIdx >= 0 ? `Schritt ${exploreIdx + 1} von ${exploreSteps.length}` : "▶ Bereit zum Erkunden"}
                 </p>
-                {exploreIdx >= 0 ? (
+                {currentStep ? (
                   <div>
-                    <p className="text-white font-bold text-lg mb-1">{allExampleBlocks[exploreIdx].label}</p>
-                    <p className="text-sm text-slate-400">
-                      Typ: <span className="text-indigo-300 font-mono">{allExampleBlocks[exploreIdx].type}</span>
-                    </p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-2 py-0.5 bg-blue-500/20 text-blue-300 text-xs rounded-full font-mono">{currentStep.symbol}</span>
+                    </div>
+                    <p className="text-white font-bold text-lg mb-2">{currentStep.title}</p>
+                    <p className="text-sm text-slate-300 leading-relaxed">{currentStep.description}</p>
                   </div>
                 ) : (
-                  <p className="text-sm text-slate-400">Klicke auf &quot;Weiter&quot; um jeden Block des Struktogramms zu erkunden.</p>
+                  <div className="text-center py-4">
+                    <div className="text-4xl mb-2">📐</div>
+                    <p className="text-slate-400">Klicke auf <strong className="text-white">Weiter</strong> um jeden Block zu erkunden.</p>
+                  </div>
                 )}
               </div>
 
               {/* Legende */}
               <div className="p-4 bg-slate-800/40 rounded-xl border border-slate-700/20">
-                <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Legende</p>
+                <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-3">Symbole</p>
                 <div className="space-y-2">
-                  {availableBlocks.map((b) => (
-                    <div key={b.type} className="flex items-center gap-2">
+                  {[
+                    { icon: "🟦", label: "Sequenz — Anweisung, Zuweisung", color: "text-blue-300" },
+                    { icon: "🔶", label: "Auswahl — if/else Verzweigung", color: "text-amber-300" },
+                    { icon: "🔁", label: "Schleife — while/for Wiederholung", color: "text-purple-300" },
+                    { icon: "🟪", label: "Ein-/Ausgabe — input/print", color: "text-pink-300" },
+                  ].map((b, i) => (
+                    <div key={i} className="flex items-center gap-2">
                       <span className="text-base">{b.icon}</span>
-                      <span className="text-xs text-slate-400">{b.label}</span>
+                      <span className={`text-xs ${b.color}`}>{b.label}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
+              {/* Controls */}
               <div className="flex gap-3 mt-auto">
                 <button
                   onClick={prevExplore}
@@ -451,11 +480,18 @@ export function StruktogrammBuilder() {
                   ← Zurück
                 </button>
                 <button
+                  onClick={resetExplore}
+                  disabled={exploreIdx < 0}
+                  className="px-4 py-2.5 bg-slate-700/50 text-slate-300 rounded-xl disabled:opacity-20 hover:bg-slate-700 transition-all text-sm font-semibold"
+                >
+                  ↺
+                </button>
+                <button
                   onClick={exploreBlock}
                   disabled={exploreIdx >= allExampleBlocks.length - 1}
                   className="flex-1 px-4 py-2.5 bg-blue-600 text-white rounded-xl disabled:opacity-20 hover:bg-blue-500 transition-all text-sm font-semibold shadow-lg shadow-blue-500/20"
                 >
-                  Weiter →
+                  {exploreIdx < 0 ? "Start ▶" : "Weiter →"}
                 </button>
               </div>
             </div>
@@ -466,18 +502,18 @@ export function StruktogrammBuilder() {
       {mode === "build" && (
         <>
           <p className="text-sm text-slate-400 mb-4">
-            Baue dein eigenes Struktogramm! Wähle unten einen Blocktyp aus und füge ihn hinzu.
+            Baue dein eigenes Struktogramm! Wähle einen Blocktyp und füge ihn hinzu.
           </p>
           <div className="flex flex-col lg:flex-row gap-5">
             <div className="w-full lg:w-3/5 flex justify-center bg-slate-900/40 rounded-xl p-5 border border-slate-700/30 min-h-[300px]">
               {userBlocks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center text-center">
                   <div className="text-5xl mb-3">📐</div>
-                  <p className="text-white font-semibold">Noch keine Blöcke</p>
-                  <p className="text-sm text-slate-400 mt-1">Wähle links einen Blocktyp aus zum Starten.</p>
+                  <p className="text-white font-semibold text-lg">Noch keine Blöcke</p>
+                  <p className="text-sm text-slate-400 mt-2">Wähle rechts einen Blocktyp aus zum Starten.</p>
                 </div>
               ) : (
-                <svg width={svgWidth} height={Math.max(calculateTotalHeight(userBlocks) + 60, 300)} viewBox={`0 0 ${svgWidth} ${Math.max(calculateTotalHeight(userBlocks) + 60, 300)}`} className="w-full h-auto">
+                <svg width={svgWidth} height={userSvgHeight} viewBox={`0 0 ${svgWidth} ${userSvgHeight}`} className="w-full h-auto">
                   {userBlocks.map((block) => {
                     const result = StrukBlockSVG({ block, x: 20, y: 20, width: svgWidth - 40, activeId: null });
                     return result.element;
@@ -501,8 +537,15 @@ export function StruktogrammBuilder() {
                   ))}
                 </div>
               </div>
+              <div className="p-4 bg-slate-800/40 rounded-xl border border-slate-700/20">
+                <p className="text-xs text-slate-500 font-bold uppercase tracking-wider mb-2">Tipp</p>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  Struktogramme erzwingen <strong className="text-white">strukturierte Programmierung</strong> — keine Sprünge (goto) möglich.
+                  Jede Struktur hat ein Pendant in modernen Programmiersprachen.
+                </p>
+              </div>
               <button
-                onClick={() => setUserBlocks([])}
+                onClick={() => { setUserBlocks([]); setNextId(1); }}
                 className="px-4 py-2.5 bg-red-600/20 text-red-400 rounded-xl hover:bg-red-600/30 transition-all text-sm font-medium border border-red-500/20"
               >
                 🗑 Alles löschen

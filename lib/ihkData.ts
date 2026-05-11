@@ -400,16 +400,27 @@ Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärk
       duration: "12 min",
       type: "interactive",
       interactive: "struktogrammBuilder",
-      content: `# Struktogramm (Nassi-Shneiderman)
+      content: `# Struktogramm — Nassi-Shneiderman 📐
 
 ## Was ist ein Struktogramm?
 
-Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung von Algorithmen, die **keine Sprünge (goto)** erlaubt. Es erzwingt strukturierte Programmierung und ist damit enger an modernem Code als der PAP.
+Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung von Algorithmen, die **keine Sprünge (goto)** erlaubt. Es erzwingt **strukturierte Programmierung** und ist damit enger an modernem Code als der PAP.
 
-## Die drei Grundstrukturen
+> 💡 Denk an das Struktogramm wie einen **Baukasten** — du kannst nur Blöcke stapeln, nicht springen. Das erzwingt saubere, nachvollziehbare Logik.
 
-### 1. Sequenz
-Aufeinanderfolgende Anweisungen — einfache Abfolge von Codezeilen.
+## Wofür braucht man ein Struktogramm?
+
+- 🧱 **Struktur:** Erzwingt saubere, verschachtelte Programmierung
+- 💻 **Code-Nähe:** Jede Struktur hat ein Pendant in jeder Programmiersprache
+- 📝 **IHK-Prüfung:** Algorithmen als Struktogramm zeichnen ist eine typische Aufgabe
+- 🚫 **Keine Sprünge:** Im Gegensatz zum PAP sind goto-Sprünge unmöglich
+
+---
+
+## 🟦🔶🔁🟪 Die drei Grundstrukturen
+
+### 1. 🟦 Sequenz
+Aufeinanderfolgende Anweisungen — die einfachste Struktur.
 
 \`\`\`
 | Anweisung 1              |
@@ -417,56 +428,104 @@ Aufeinanderfolgende Anweisungen — einfache Abfolge von Codezeilen.
 | Anweisung 3              |
 \`\`\`
 
-### 2. Auswahl (If-Then-Else)
-Eine Bedingung führt zu zwei verschiedenen Pfaden.
-
+**In Code:**
 \`\`\`
-            | Bedingung |
-|------------+-----------|
-| Dann-Teil | Else-Teil |
+x = 5
+y = x + 2
+print(y)
 \`\`\`
 
-### 3. Wiederholung (Schleife)
-Ein Block wird wiederholt, solange eine Bedingung stimmt.
+### 2. 🔶 Auswahl (If-Then-Else)
+Eine Bedingung führt zu zwei verschiedenen Pfaden — links JA, rechts NEIN.
 
 \`\`\`
-| while (Bedingung)        |
-|--------------------------|
-| Schleifenrumpf           |
+          | Bedingung |
+|----------+-----------|
+| JA-Teil  | NEIN-Teil |
 \`\`\`
 
-## Beispiel: Bubblesort als Struktogramm
+**In Code:**
+\`\`\`
+if (alter >= 18) {
+    print("Volljährig")    // JA
+} else {
+    print("Minderjährig")  // NEIN
+}
+\`\`\`
 
+### 3. 🔁 Wiederholung (Schleife)
+Ein Block wird wiederholt, solange eine Bedingung stimmt. Der Schleifenrumpf ist darunter eingerückt.
+
+\`\`\`
+| while (Bedingung)  |
+|--------------------|
+| Schleifenrumpf     |
+\`\`\`
+
+**In Code:**
+\`\`\`
+i = 0
+while (i < 10) {
+    print(i)
+    i = i + 1
+}
+\`\`\`
+
+> ✅ **Merke:** Im Struktogramm werden Schleifen als Blöcke dargestellt — die Bedingung steht oben, der Rumpf darunter. Verschachtelung sieht man an der Einrückung!
+
+---
+
+## ☕ Beispiel: Bubblesort als Struktogramm
+
+Schau dir den interaktiven Builder oben an! Hier die Erklärung:
+
+**Die Struktur:**
 \`\`\`
 function bubbleSort(liste, n):
-    for i = 0 to n-2:
-        for j = 0 to n-2-i:
-            if liste[j] > liste[j+1]:
-                tausche(liste[j], liste[j+1])
+    for i = 0 to n-2:           ← Äußere Schleife
+        for j = 0 to n-2-i:     ← Innere Schleife (verschachtelt!)
+            if liste[j] > liste[j+1]:  ← Auswahl
+                tausche(liste[j], liste[j+1])  ← Sequenz
 \`\`\`
 
-Im Struktogramm siehst du die **verschachtelten Schleifen** als ineinander gestapelte Blöcke — die äußere Schleife enthält die innere, die wiederum die Auswahl (if) enthält.
+**Im Struktogramm siehst du:**
+- 🟦 Die Funktion als großer äußerer Block
+- 🔁 Die äußere for-Schleife als eingerückter Block
+- 🔁 Die innere for-Schleife als noch tiefer eingerückter Block
+- 🔶 Die if-Abfrage als Raute mit JA/NEIN-Teil
+- 🟦 Die drei Tausch-Anweisungen als Sequenz-Blöcke
 
-## Struktogramm vs. PAP
+> 💡 **Verschachtelung** ist die Stärke des Struktogramms — du siehst sofort, welcher Block in welchem steckt!
 
-| Struktogramm | PAP |
-|-------------|-----|
-| Keine Sprünge möglich | Sprünge (goto) möglich |
-| Einfach in Code übertragbar | Schwerer in Code übertragbar |
-| Gut für strukturierte Logik | Kann auch unstrukturierte Logik darstellen |
-| Weniger flexibel | Flexibler |
+---
 
-## Vorteile
+## ⚔️ Struktogramm vs. PAP
 
-- Erzwingt saubere, strukturierte Programmierung
-- **Direkt auf Code übertragbar** — jede Struktur hat ein Pendant in jeder Programmiersprache
-- Übersichtlich bei mittleren Algorithmen
+Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärken:
 
-## Nachteile
+| | Struktogramm | PAP |
+|---|---|---|
+| 🚫 Sprünge | Keine möglich — strukturiert! | Erlaubt (goto möglich) |
+| 💻 Code-Nähe | Direkt übertragbar | Schwerer übertragbar |
+| 📐 Struktur | Immer übersichtlich | Kann unübersichtlich werden |
+| 🔄 Flexibilität | Eingeschränkt | Sehr flexibel |
+| 📝 IHK-Prüfung | Beide wichtig! | Beide wichtig! |
 
-- **Nicht geeignet** für unstrukturierte Abläufe oder parallele Prozesse
-- Bei sehr großen Programmen unübersichtlich
-- In der Praxis selten verwendet (außer in der IHK)`
+> ℹ️ **Für die IHK:** Beide sind wichtig! Das Struktogramm zeigt saubere Struktur, der PAP zeigt Flexibilität.
+
+---
+
+## 🎯 Tipps für die IHK-Prüfung
+
+> ❗ **Diese Tipps können Punkte bringen!**
+
+- ✏️ Struktogramme **auf Papier** zeichnen — sauber und lesbar
+- 📏 Blöcke **bündig** ausrichten — Verschachtelung muss sichtbar sein
+- 🔁 Schleifen **immer** mit Bedingung oben und Rumpf darunter
+- 🔶 Auswahl **immer** mit JA/Links und NEIN/Rechts
+- 🧪 **Schreibtischtest** durchführen — Variablenwerte protokollieren
+
+> 📝 **Merke:** Das Struktogramm erzwingt strukturierte Programmierung. In der Prüfung immer prüfen: Kann der Algorithmus strukturiert dargestellt werden? Wenn ja → Struktogramm. Wenn Sprünge nötig sind → PAP.`
     },
 
     // --- Lektion 4: Sortieralgorithmen ---

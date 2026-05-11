@@ -185,7 +185,7 @@ export default function ModulePage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {/* Lesson List */}
         <aside className="lg:col-span-1">
-          <div className="glass rounded-xl p-3 sticky top-24">
+          <div className="glass rounded-xl p-2 sticky top-24">
             {/* Merkblatt */}
             {module.merkblatt && (
               <div className="mb-6">
