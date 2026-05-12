@@ -279,7 +279,8 @@ Anwendung | Transport | Internet | Netzwerkzugang
       id: "netz-1",
       title: "OSI-Referenzmodell",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "osiCapsuleViewer",
       content: `# OSI-Referenzmodell — Die 7 Schichten 🧅
 
 ## Was ist das OSI-Modell?
@@ -322,13 +323,20 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 | Netzwerk | Internet |
 | Sicherung, Physikalisch | Netzwerkzugang |
 
-> ❗ **IHK-Tipp:** Das TCP/IP-Modell ist das praktische Modell — das Internet nutzt es. OSI ist nur ein Referenzmodell.`,
+> ❗ **IHK-Tipp:** Das TCP/IP-Modell ist das praktische Modell — das Internet nutzt es. OSI ist nur ein Referenzmodell.
+
+## 🔐 Interaktiv ausprobieren
+
+[INTERACTIVE]
+
+> 💡 Der OSI-Kapselungs-Viewer zeigt dir, wie Daten Schicht für Schicht verpackt werden — klicke durch die Animation!`,
     },
     {
       id: "netz-2",
       title: "TCP/IP-Modell & Protokolle",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "tcpHandshakeSimulator",
       content: `# TCP/IP-Modell & Protokolle 🌐
 
 ## Die 4 Schichten des TCP/IP-Modells
@@ -367,13 +375,20 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 | 143 | IMAP | E-Mail |
 | 443 | HTTPS | Sicheres Web |
 
-> ❗ **IHK-Tipp:** Port-Nummern auswendig lernen — besonders 80, 443, 22, 25, 53!`,
+> ❗ **IHK-Tipp:** Port-Nummern auswendig lernen — besonders 80, 443, 22, 25, 53!
+
+## 🤝 TCP-Handshake ausprobieren
+
+[INTERACTIVE]
+
+> 💡 Der TCP-Handshake-Simulator zeigt dir den 3-Wege-Handshake live — mit Paketverlust-Simulation!`,
     },
     {
       id: "netz-3",
       title: "IPv4-Adressierung",
       duration: "18 min",
-      type: "text",
+      type: "interactive",
+      interactive: "macConverter",
       content: `# IPv4-Adressierung 🔢
 
 ## Aufbau einer IPv4-Adresse
@@ -404,13 +419,20 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 - **Broadcast-Adresse**: Letzte im Subnetz (Host-Bits = 1)
 - **Nutzbare Hosts**: Alles dazwischen
 
-> ❗ **IHK-Tipp:** Subnetting-Berechnungen kommen in AP1 und AP2 regelmäßig dran!`,
+> ❗ **IHK-Tipp:** Subnetting-Berechnungen kommen in AP1 und AP2 regelmäßig dran!
+
+## 🔢 Binär/Dezimal-Konverter
+
+[INTERACTIVE]
+
+> 💡 Der MAC/IP-Konverter zeigt dir Binär und Dezimal im Wechsel — übe die Umrechnung!`,
     },
     {
       id: "netz-4",
       title: "Subnetting",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "subnetCalculator",
       content: `# Subnetting — Netzwerke aufteilen 🧮
 
 ## Warum Subnetting?
@@ -458,7 +480,13 @@ IP UND Maske = Netzwerkadresse
 Ergebnis (AND) = 11000000.10101000.00000001.10000000 = 192.168.1.128
 \`\`\`
 
-> ❗ **IHK-Tipp:** Übe Subnetting auf Papier — in der Prüfung gibt es keinen Taschenrechner für Binär!`,
+> ❗ **IHK-Tipp:** Übe Subnetting auf Papier — in der Prüfung gibt es keinen Taschenrechner für Binär!
+
+## 🧮 Subnetting-Rechner
+
+[INTERACTIVE]
+
+> 💡 Der Subnetting-Rechner zeigt dir Netzwerkadresse, Broadcast und Hosts — probiere verschiedene CIDR-Notationen aus!`,
     },
     {
       id: "netz-5",
@@ -501,7 +529,8 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
       id: "netz-6",
       title: "Netzwerkgeräte",
       duration: "12 min",
-      type: "text",
+      type: "interactive",
+      interactive: "networkBuilder",
       content: `# Netzwerkgeräte — Wer macht was? 🔧
 
 ## Die wichtigsten Geräte
@@ -529,7 +558,13 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 - **Kollisionsdomäne**: Bereich in dem Pakete kollidieren können (Switch trennt diese)
 - **Broadcast-Domäne**: Bereich in dem Broadcasts ankommen (Router trennt diese)
 
-> ❗ **IHK-Tipp:** Merke: Switch = Schicht 2 = MAC, Router = Schicht 3 = IP. Das kommt IMMER dran!`,
+> ❗ **IHK-Tipp:** Merke: Switch = Schicht 2 = MAC, Router = Schicht 3 = IP. Das kommt IMMER dran!
+
+## 🔧 Netzwerk bauen
+
+[INTERACTIVE]
+
+> 💡 Der Netzwerk-Builder zeigt dir, wie Geräte zusammenhängen — baue dein eigenes Netzwerk!`,
     },
     {
       id: "netz-7",
@@ -567,7 +602,8 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
       id: "netz-8",
       title: "Wichtige Netzwerkprotokolle",
       duration: "18 min",
-      type: "text",
+      type: "interactive",
+      interactive: "dnsLookup",
       content: `# Wichtige Netzwerkprotokolle 📡
 
 ## DNS — Domain Name System
@@ -597,13 +633,24 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 - **SSH** (22): Verschlüsselt ✅
 - **Telnet** (23): Unverschlüsselt ❌
 
-> ❗ **IHK-Tipp:** IMMER HTTPS, IMAP und SSH empfehlen — Sicherheit wird in der Prüfung großgeschrieben!`,
+> ❗ **IHK-Tipp:** IMMER HTTPS, IMAP und SSH empfehlen — Sicherheit wird in der Prüfung großgeschrieben!
+
+## 🔍 DNS-Lookup
+
+[INTERACTIVE]
+
+## 📡 DHCP — DORA-Prozess
+
+[INTERACTIVE]
+
+> 💡 Der DNS-Lookup zeigt dir die Auflösung Schritt für Schritt. Der DHCP-Explorer zeigt den DORA-Prozess live!`,
     },
     {
       id: "netz-9",
       title: "WLAN",
       duration: "12 min",
-      type: "text",
+      type: "interactive",
+      interactive: "wlanConfigurator",
       content: `# WLAN — Drahtlose Netzwerke 📶
 
 ## IEEE 802.11 Standards
@@ -638,13 +685,20 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 **WPA2-Personal (PSK):** Ein gemeinsames Passwort — für Heimnetzwerke.
 **WPA2-Enterprise (802.1X):** Individuelle Anmeldung via RADIUS — für Unternehmen.
 
-> ❗ **IHK-Tipp:** WEP ist UNSICHER — in der Prüfung immer mindestens WPA2 empfehlen!`,
+> ❗ **IHK-Tipp:** WEP ist UNSICHER — in der Prüfung immer mindestens WPA2 empfehlen!
+
+## 📶 WLAN konfigurieren
+
+[INTERACTIVE]
+
+> 💡 Der WLAN-Konfigurator zeigt dir, welche Einstellungen sicher sind — experimentiere mit Sicherheitsstandards!`,
     },
     {
       id: "netz-10",
       title: "Netzwerksicherheit",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "firewallRuleBuilder",
       content: `# Netzwerksicherheit — Schutzmaßnahmen 🔒
 
 ## VLAN — Virtual Local Area Network
@@ -675,13 +729,20 @@ Enthält öffentliche Server (Web, Mail) — durch **2 Firewalls** geschützt.
 Switch-Begrenzung der MAC-Adressen pro Port.
 Schützt gegen: MAC-Flooding, unautorisierte Geräte.
 
-> ❗ **IHK-Tipp:** VLAN, VPN und Firewall sind DIE Sicherheitsthemen — immer mit konkreten Beispielen erklären!`,
+> ❗ **IHK-Tipp:** VLAN, VPN und Firewall sind DIE Sicherheitsthemen — immer mit konkreten Beispielen erklären!
+
+## 🔥 Firewall-Regeln bauen
+
+[INTERACTIVE]
+
+> 💡 Der Firewall-Regel-Builder zeigt dir, wie Regeln Pakete filtern — baue eigene Regeln und teste Pakete!`,
     },
     {
       id: "netz-11",
       title: "Kabel & Übertragungsmedien",
       duration: "10 min",
-      type: "text",
+      type: "interactive",
+      interactive: "cableComparer",
       content: `# Kabel & Übertragungsmedien 🔌
 
 ## Kupfer: Twisted Pair
@@ -717,7 +778,13 @@ Vorteile: Keine EMI, hohe Bandbreite, lange Strecken
 | Reichweite | 100m | 100km+ |
 | Installation | ✅ Einfach | ❌ Spezialwerkzeug |
 
-> ❗ **IHK-Tipp:** 100m Segmentlänge bei Kupfer IMMER im Kopf haben!`,
+> ❗ **IHK-Tipp:** 100m Segmentlänge bei Kupfer IMMER im Kopf haben!
+
+## 🔌 Kabel vergleichen
+
+[INTERACTIVE]
+
+> 💡 Der Kabel-Vergleich zeigt dir alle Eigenschaften auf einen Blick — wähle Kabel zum Vergleich aus!`,
     },
     {
       id: "netz-12",

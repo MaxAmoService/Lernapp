@@ -1,22 +1,12 @@
-# IHK Diagramme & Darstellungen — Build Progress
+# IHK Module — Build Progress
 
-## Status: IN PROGRESS
+## ✅ Modul 1: Diagramme & Darstellungen (FERTIG)
+- 9 Lektionen, Flashcards, Quizzes
+- Deployed: https://lernapp-nine.vercel.app
 
-### Dateien
-- [ ] lib/ihkData.ts — Module data (lessons + flashcards)
-- [ ] components/IHKFlashcards.tsx — Spaced repetition flashcard viewer
-- [ ] components/DiagramLabeling.tsx — Drag & drop diagram labeling
-- [ ] components/AlgorithmTracer.tsx — Step-by-step algorithm visualization
-- [ ] lib/data.ts — Integration (import + add to modules array)
-- [ ] Build test
-
-### Lektionen (9)
-1. Pseudocode
-2. PAP (Programmablaufplan)
-3. Struktogramme
-4. Sortieralgorithmen
-5. Suchalgorithmen
-6. EPK
-7. UML-Diagramme (Klasse, Sequenz, Aktivität, Zustand, Use Case)
-8. BPMN
-9. Lasten- & Pflichtenheft
+## ✅ Modul 2: Netzwerktechnik (FERTIG — 12.05.2026)
+- 12 Lektionen (OSI, TCP/IP, IPv4, Subnetting, IPv6, Geräte, Topologien, Protokolle, WLAN, Sicherheit, Kabel, Tools)
+- 75+ Flashcards (alle IHK-relevanten Netzwerk-Themen)
+- 40+ Quiz-Fragen (Multiple Choice mit Erklärungen)
+- Interaktive Komponenten: OSI Explorer, Subnet Calculator, ARP Simulator, etc.
+- Deployed: https://lernapp-nine.vercel.app (Vercel auto-deploy on main push)

@@ -35,6 +35,13 @@ import { SubnetCalculator } from "./interactive/SubnetCalculator";
 import { OSIExplorer } from "./interactive/OSIExplorer";
 import { ProtocolAnalyzer } from "./interactive/ProtocolAnalyzer";
 import { MACConverter } from "./interactive/MACConverter";
+import { OSICapsuleViewer } from "./interactive/OSICapsuleViewer";
+import { TCPHandshakeSimulator } from "./interactive/TCPHandshakeSimulator";
+import { DHCPExplorer } from "./interactive/DHCPExplorer";
+import { DNSLookup } from "./interactive/DNSLookup";
+import { FirewallRuleBuilder } from "./interactive/FirewallRuleBuilder";
+import { WLANConfigurator } from "./interactive/WLANConfigurator";
+import { CableComparer } from "./interactive/CableComparer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -93,6 +100,13 @@ function renderInteractive(type: string, codeExample?: string) {
     osiExplorer: <OSIExplorer />,
     protocolAnalyzer: <ProtocolAnalyzer />,
     macConverter: <MACConverter />,
+    osiCapsuleViewer: <OSICapsuleViewer />,
+    tcpHandshakeSimulator: <TCPHandshakeSimulator />,
+    dhcpExplorer: <DHCPExplorer />,
+    dnsLookup: <DNSLookup />,
+    firewallRuleBuilder: <FirewallRuleBuilder />,
+    wlanConfigurator: <WLANConfigurator />,
+    cableComparer: <CableComparer />,
   };
 
   return (
