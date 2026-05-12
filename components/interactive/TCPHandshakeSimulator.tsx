@@ -127,14 +127,14 @@ export function TCPHandshakeSimulator() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🤝 TCP-Handshake — Interaktiv</h3>
       <p className="text-slate-300 text-sm mb-4">
         Erlebe den TCP 3-Wege-Handshake und die Verbindungsbeendigung live!
       </p>
 
       {/* Modus Toggle */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button
           onClick={() => { setMode("handshake"); resetSimulation(); }}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -154,7 +154,7 @@ export function TCPHandshakeSimulator() {
       </div>
 
       {/* Optionen */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
           <input
             type="checkbox"
@@ -176,7 +176,7 @@ export function TCPHandshakeSimulator() {
       </div>
 
       {/* Steuerung */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
         <button
           onClick={startSimulation}
           disabled={isAnimating}
@@ -194,9 +194,9 @@ export function TCPHandshakeSimulator() {
 
       {/* Visualisierung */}
       <div className="bg-slate-900 rounded-lg p-4 mb-4">
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-3">
           {/* Client */}
-          <div className="text-center w-24">
+          <div className="text-center w-full sm:w-24 flex sm:block items-center gap-2">
             <div className="w-16 h-16 mx-auto bg-blue-600 rounded-lg flex items-center justify-center text-2xl mb-2">
               💻
             </div>
@@ -267,7 +267,7 @@ export function TCPHandshakeSimulator() {
           </div>
 
           {/* Server */}
-          <div className="text-center w-24">
+          <div className="text-center w-full sm:w-24 flex sm:block items-center gap-2">
             <div className="w-16 h-16 mx-auto bg-green-600 rounded-lg flex items-center justify-center text-2xl mb-2">
               🖥️
             </div>

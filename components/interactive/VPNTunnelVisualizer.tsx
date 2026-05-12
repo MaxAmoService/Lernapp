@@ -35,14 +35,14 @@ export function VPNTunnelVisualizer() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔒 VPN-Tunnel — Verschlüsselte Verbindung</h3>
       <p className="text-slate-300 text-sm mb-4">
         Wie schützt VPN deine Verbindung? Erlebe den Tunnel-Aufbau live!
       </p>
 
       {/* VPN-Typ */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button onClick={() => { setVpnType("remote-access"); setPhase(0); }}
           className={`px-4 py-2 rounded-lg text-sm font-medium ${vpnType === "remote-access" ? "bg-blue-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}>
           💻 Remote Access
@@ -53,7 +53,7 @@ export function VPNTunnelVisualizer() {
         </button>
       </div>
 
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
           <input type="checkbox" checked={showEncapsulation} onChange={(e) => setShowEncapsulation(e.target.checked)} className="rounded" />
           📦 Kapselung zeigen
@@ -67,9 +67,9 @@ export function VPNTunnelVisualizer() {
 
       {/* Visualisierung */}
       <div className="bg-slate-900 rounded-lg p-4 mb-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-3">
           {/* Linke Seite */}
-          <div className="text-center w-28">
+          <div className="text-center w-full sm:w-28 flex sm:block items-center gap-2">
             <div className="w-16 h-16 mx-auto bg-blue-600 rounded-lg flex items-center justify-center text-2xl mb-2">
               {vpnType === "remote-access" ? "💻" : "🏢"}
             </div>
@@ -130,7 +130,7 @@ export function VPNTunnelVisualizer() {
           </div>
 
           {/* Rechte Seite */}
-          <div className="text-center w-28">
+          <div className="text-center w-full sm:w-28 flex sm:block items-center gap-2">
             <div className="w-16 h-16 mx-auto bg-green-600 rounded-lg flex items-center justify-center text-2xl mb-2">
               {vpnType === "remote-access" ? "🖥️" : "🏢"}
             </div>

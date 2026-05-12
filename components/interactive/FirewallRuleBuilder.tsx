@@ -78,7 +78,7 @@ export function FirewallRuleBuilder() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔥 Firewall-Regel-Builder</h3>
       <p className="text-slate-300 text-sm mb-4">
         Baue Firewall-Regeln und teste Pakete — was kommt durch, was wird blockiert?

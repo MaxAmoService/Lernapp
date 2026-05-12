@@ -129,14 +129,14 @@ export function OSICapsuleViewer() {
     : LAYERS.slice(animationStep);
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔐 OSI-Kapselung — Interaktiv</h3>
       <p className="text-slate-300 text-sm mb-4">
         Siehst du wie eine Nachricht Schicht für Schicht verpackt wird — wie eine Zwiebel!
       </p>
 
       {/* Richtung Toggle */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button
           onClick={() => { setDirection("send"); resetAnimation(); }}
           className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -160,7 +160,7 @@ export function OSICapsuleViewer() {
       </div>
 
       {/* Animations-Steuerung */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
         <button
           onClick={startAnimation}
           disabled={isAnimating}
@@ -205,7 +205,7 @@ export function OSICapsuleViewer() {
                 backgroundColor: isVisible ? `${layer.color}15` : "transparent",
               }}
             >
-              <div className="flex items-center gap-3 p-3">
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3">
                 {/* Schicht-Nummer */}
                 <div
                   className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0"

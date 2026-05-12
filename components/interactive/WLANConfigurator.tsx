@@ -53,13 +53,13 @@ export function WLANConfigurator() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">📶 WLAN-Konfigurator</h3>
       <p className="text-slate-300 text-sm mb-4">
         Konfiguriere ein WLAN-Netzwerk und sieh, welche Einstellungen sicher sind!
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
         {/* SSID */}
         <div>
           <label className="text-slate-400 text-xs mb-1 block">📡 Netzwerkname (SSID)</label>

@@ -159,11 +159,11 @@ export default function ModulePage() {
           <ArrowLeft className="w-4 h-4 mr-2" />
           Zurück zu allen Modulen
         </a>
-        <div className="flex items-start gap-4">
-          <span className="text-5xl">{module.icon}</span>
-          <div className="flex-1">
-            <h1 className="text-3xl font-bold mb-2">{module.title}</h1>
-            <p className="text-slate-400 mb-4">{module.description}</p>
+        <div className="flex items-start gap-3 sm:gap-4">
+          <span className="text-3xl sm:text-5xl">{module.icon}</span>
+          <div className="flex-1 min-w-0">
+            <h1 className="text-xl sm:text-3xl font-bold mb-1 sm:mb-2">{module.title}</h1>
+            <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-none">{module.description}</p>
             <div className="max-w-md">
               <ProgressBar value={progress} />
               <p className="text-sm text-slate-400 mt-2">
@@ -175,9 +175,46 @@ export default function ModulePage() {
       </section>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-        {/* Lesson List */}
+        {/* Lesson List — Mobile: oben als Dropdown, Desktop: Sidebar */}
         <aside className="lg:col-span-1">
-          <div className="glass rounded-xl p-2 sticky top-24">
+          {/* Mobile: Auswahlliste */}
+          <div className="lg:hidden mb-4">
+            <select
+              value={selectedLesson?.id || ""}
+              onChange={(e) => {
+                const lesson = module.lessons.find((l) => l.id === e.target.value);
+                if (lesson) { setSelectedLesson(lesson); window.scrollTo({ top: 0, behavior: "smooth" }); }
+              }}
+              className="w-full bg-slate-800 text-white rounded-lg px-4 py-3 text-sm border border-slate-600"
+            >
+              <option value="">📖 Lektion wählen...</option>
+              {module.lessons.map((lesson, index) => (
+                <option key={lesson.id} value={lesson.id}>
+                  {completedLessons.has(lesson.id) ? "✅" : "⬜"} {index + 1}. {lesson.title} ({lesson.duration})
+                </option>
+              ))}
+            </select>
+            {/* Merkblatt Mobile */}
+            {module.merkblatt && (
+              <button
+                onClick={() => setShowMerkblatt(!showMerkblatt)}
+                className="w-full mt-2 flex items-center justify-between p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg text-sm"
+              >
+                <span className="flex items-center gap-2 text-yellow-400 font-medium">
+                  <BookOpen className="w-4 h-4" /> Merkblatt
+                </span>
+                {showMerkblatt ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              </button>
+            )}
+            {showMerkblatt && module.merkblatt && (
+              <div className="mt-2 p-3 bg-slate-800/50 rounded-lg border border-slate-700 text-sm">
+                <MerkblattContent content={module.merkblatt} />
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: Sticky Sidebar */}
+          <div className="hidden lg:block glass rounded-xl p-2 sticky top-24">
             {/* Merkblatt */}
             {module.merkblatt && (
               <div className="mb-6">
@@ -236,7 +273,7 @@ export default function ModulePage() {
         </aside>
 
         {/* Lesson Content */}
-        <div className="lg:col-span-3">
+        <div className="lg:col-span-3 min-w-0">
           {selectedLesson ? (
             selectedLesson.type === "quiz" ? (
               <Quiz

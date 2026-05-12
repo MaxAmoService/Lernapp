@@ -80,7 +80,7 @@ export function DHCPExplorer() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">📡 DHCP — DORA-Prozess interaktiv</h3>
       <p className="text-slate-300 text-sm mb-4">
         Wie bekommt ein Gerät automatisch eine IP-Adresse? Erlebe den DORA-Prozess live!
@@ -108,7 +108,7 @@ export function DHCPExplorer() {
       </div>
 
       {/* Steuerung */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
         <button onClick={startDORA} disabled={isAnimating}
           className="px-4 py-2 bg-green-600 hover:bg-green-500 disabled:bg-slate-600 text-white rounded-lg text-sm font-medium">
           ▶️ DORA starten
@@ -119,7 +119,7 @@ export function DHCPExplorer() {
       </div>
 
       {/* Status */}
-      <div className="grid grid-cols-2 gap-4 mb-6">
+      <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-4 sm:mb-6">
         <div className="bg-slate-900 rounded-lg p-3 text-center">
           <p className="text-slate-400 text-xs">💻 Client-IP</p>
           <p className={`font-mono font-bold text-lg ${clientIP === "0.0.0.0" ? "text-red-400" : "text-green-400"}`}>
@@ -150,7 +150,7 @@ export function DHCPExplorer() {
               }`}
               style={{ backgroundColor: isActive ? `${step.color}15` : "transparent" }}
             >
-              <div className="flex items-center gap-3 p-3">
+              <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold shrink-0"
                   style={{ backgroundColor: step.color }}>
                   {step.id}

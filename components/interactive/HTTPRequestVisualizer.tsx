@@ -69,14 +69,14 @@ export function HTTPRequestVisualizer() {
   const { headers: respHeaders, status } = buildResponse();
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🌐 HTTP-Request — Live mit Headers</h3>
       <p className="text-slate-300 text-sm mb-4">
         Sieh was bei einem HTTP-Request wirklich passiert — mit allen Headers!
       </p>
 
       {/* URL-Leiste */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <select value={method} onChange={(e) => setMethod(e.target.value)}
           className="bg-slate-700 text-white rounded-lg px-3 py-2 text-sm font-mono font-bold">
           {HTTP_METHODS.map((m) => <option key={m} value={m}>{m}</option>)}
@@ -98,7 +98,7 @@ export function HTTPRequestVisualizer() {
       </div>
 
       {/* Optionen */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
           <input type="checkbox" checked={useHTTPS} onChange={(e) => setUseHTTPS(e.target.checked)} className="rounded" />
           🔒 HTTPS (verschlüsselt)
@@ -118,7 +118,7 @@ export function HTTPRequestVisualizer() {
 
       {/* Visualisierung */}
       <div className="bg-slate-900 rounded-lg p-4 mb-4">
-        <div className="flex justify-between items-start gap-4">
+        <div className="flex flex-col sm:flex-row justify-between items-start gap-3 sm:gap-4">
           {/* Client */}
           <div className="text-center w-28 shrink-0">
             <div className="w-16 h-16 mx-auto bg-blue-600 rounded-lg flex items-center justify-center text-2xl mb-2">💻</div>

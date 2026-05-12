@@ -319,12 +319,12 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   };
 
   return (
-    <div className="glass rounded-xl p-6 lg:p-8 animate-slide-up">
+    <div className="glass rounded-xl p-4 sm:p-6 lg:p-8 animate-slide-up">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
-        <div>
-          <h1 className="text-3xl font-bold text-white">{lesson.title}</h1>
-          <p className="text-sm text-slate-400 mt-1">
+      <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-700">
+        <div className="min-w-0 flex-1">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">{lesson.title}</h1>
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             ⏱️ {lesson.duration} • {getTypeLabel(lesson.type)}
           </p>
         </div>
@@ -362,11 +362,11 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       )}
 
       {/* Actions */}
-      <div className="flex items-center justify-between mt-8 pt-4 border-t border-slate-700">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-slate-700">
         {!isCompleted ? (
           <button
             onClick={onComplete}
-            className="flex items-center gap-2 px-6 py-2.5 bg-green-500 hover:bg-green-600 rounded-lg font-medium transition-colors"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-green-500 hover:bg-green-600 rounded-lg font-medium transition-colors text-sm sm:text-base"
           >
             <CheckCircle2 className="w-4 h-4" />
             Als abgeschlossen markieren
@@ -384,7 +384,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               onNext?.();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="flex items-center gap-2 px-6 py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-sm sm:text-base"
           >
             Nächste Lektion
             <ChevronRight className="w-4 h-4" />

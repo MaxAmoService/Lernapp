@@ -114,14 +114,14 @@ export function CableComparer() {
   const selectedItems = items.filter((i) => selected.includes(i.name));
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔌 Kabel-Vergleich — Interaktiv</h3>
       <p className="text-slate-300 text-sm mb-4">
         Vergleiche Netzwerkkabel — wähle bis zu 3 zum Vergleich aus!
       </p>
 
       {/* Modus Toggle */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button
           onClick={() => { setMode("copper"); setSelected([]); }}
           className={`px-4 py-2 rounded-lg text-sm font-medium ${
@@ -141,7 +141,7 @@ export function CableComparer() {
       </div>
 
       {/* Kabel-Auswahl */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mb-4">
         {items.map((item) => (
           <button
             key={item.name}

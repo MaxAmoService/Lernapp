@@ -237,6 +237,85 @@ pre code {
   margin: 1rem 0;
 }
 
+/* ===== MOBILE RESPONSIVE ===== */
+
+/* Interactive components — smaller on mobile */
+@media (max-width: 640px) {
+  .markdown-content h1 {
+    @apply text-2xl mb-4;
+  }
+  .markdown-content h2 {
+    @apply text-xl mb-3;
+  }
+  .markdown-content h3 {
+    @apply text-lg mb-2;
+  }
+  .markdown-content p {
+    @apply text-sm mb-3;
+  }
+  .markdown-content table {
+    font-size: 0.75rem;
+  }
+  .markdown-content th,
+  .markdown-content td {
+    @apply px-2 py-1;
+  }
+
+  /* Interactive component containers */
+  .interactive-container {
+    @apply p-3 !important;
+  }
+  .interactive-container h3 {
+    @apply text-base !important;
+  }
+  .interactive-container p {
+    @apply text-xs !important;
+  }
+
+  /* Grids stack on mobile */
+  .interactive-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+  .interactive-grid-3 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Smaller buttons */
+  .interactive-container button {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  /* Smaller inputs */
+  .interactive-container input,
+  .interactive-container select {
+    @apply text-xs py-1.5;
+  }
+
+  /* Code blocks scroll */
+  pre {
+    @apply text-xs p-3;
+  }
+
+  /* Tables in interactive components */
+  .interactive-container table {
+    font-size: 0.65rem;
+  }
+  .interactive-container th,
+  .interactive-container td {
+    @apply px-1 py-0.5;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .markdown-content h1 {
+    @apply text-2xl;
+  }
+  .markdown-content h2 {
+    @apply text-xl;
+  }
+}
+
 table {
   width: 100%;
   border-collapse: collapse;

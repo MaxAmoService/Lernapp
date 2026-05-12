@@ -83,14 +83,14 @@ export function EncryptionDemo() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔐 Verschlüsselung — Interaktiv erleben</h3>
       <p className="text-slate-300 text-sm mb-4">
         Wie schützt HTTPS deine Daten? Erlebe Verschlüsselung von Caesar bis TLS!
       </p>
 
       {/* Modus Toggle */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <button onClick={() => setMode("caesar")}
           className={`px-3 py-2 rounded-lg text-sm font-medium ${mode === "caesar" ? "bg-blue-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}>
           🔤 Caesar

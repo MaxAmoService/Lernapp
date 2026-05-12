@@ -62,14 +62,14 @@ export function DNSLookup() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">🔍 DNS-Lookup — Schritt für Schritt</h3>
       <p className="text-slate-300 text-sm mb-4">
         Wie wird aus &quot;google.com&quot; eine IP-Adresse? Verfolge die Anfrage durch das DNS-System!
       </p>
 
       {/* Domain-Eingabe */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex flex-wrap gap-2 mb-4">
         <input
           type="text"
           value={domain}
@@ -90,7 +90,7 @@ export function DNSLookup() {
       </div>
 
       {/* Optionen */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
           <input type="checkbox" checked={cached} onChange={(e) => setCached(e.target.checked)} className="rounded" />
           ⚡ Aus Cache (schnell)

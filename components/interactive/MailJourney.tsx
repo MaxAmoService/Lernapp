@@ -126,7 +126,7 @@ export function MailJourney() {
   };
 
   return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+    <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
       <h3 className="text-xl font-bold text-white mb-2">📧 E-Mail-Reise — Von dir zum Empfänger</h3>
       <p className="text-slate-300 text-sm mb-4">
         Verfolge eine E-Mail auf ihrem gesamten Weg — von der Erstellung bis zum Empfänger!
@@ -164,7 +164,7 @@ export function MailJourney() {
       </div>
 
       {/* Optionen */}
-      <div className="flex gap-4 mb-4">
+      <div className="flex flex-wrap gap-4 mb-4">
         <label className="flex items-center gap-2 text-sm text-slate-300 cursor-pointer">
           <input type="checkbox" checked={showHeaders} onChange={(e) => setShowHeaders(e.target.checked)} className="rounded" />
           📋 SMTP-Protokoll zeigen
@@ -172,7 +172,7 @@ export function MailJourney() {
       </div>
 
       {/* Steuerung */}
-      <div className="flex gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
         <button onClick={startJourney} disabled={isAnimating}
           className="px-4 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-600 text-white rounded-lg text-sm font-medium">
           📧 E-Mail abschicken!
