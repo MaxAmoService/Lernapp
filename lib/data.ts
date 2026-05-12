@@ -1,5 +1,6 @@
 import { mathModules, mathCategories, mathQuizzes, MathCategory } from "./mathData";
 import { ihkModule, ihkCategories } from "./ihkData";
+import { netzwerkModule } from "./netzwerkData";
 import { LessonVisual, InteractiveType } from "./types";
 
 export interface Lesson {
@@ -912,7 +913,7 @@ f'(x) = 2x ✓`,
 ];
 
 // Combine all modules
-export const allModules: Module[] = [...modules, ...mathModules, ihkModule];
+export const allModules: Module[] = [...modules, ...mathModules, ihkModule, netzwerkModule];
 
 export function getModule(slug: string): Module | undefined {
   return allModules.find((m) => m.slug === slug);

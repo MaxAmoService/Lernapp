@@ -30,6 +30,11 @@ import { EPKBuilder } from "./interactive/EPKBuilder";
 import { UMLClassDiagram } from "./interactive/UMLClassDiagram";
 import { SequenceDiagram } from "./interactive/SequenceDiagram";
 import { NetzplanBuilder } from "./interactive/NetzplanBuilder";
+import { NetworkBuilder } from "./interactive/NetworkBuilder";
+import { SubnetCalculator } from "./interactive/SubnetCalculator";
+import { OSIExplorer } from "./interactive/OSIExplorer";
+import { ProtocolAnalyzer } from "./interactive/ProtocolAnalyzer";
+import { MACConverter } from "./interactive/MACConverter";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -83,6 +88,11 @@ function renderInteractive(type: string, codeExample?: string) {
     umlClassDiagram: <UMLClassDiagram />,
     sequenceDiagram: <SequenceDiagram />,
     netzplanBuilder: <NetzplanBuilder />,
+    networkBuilder: <NetworkBuilder />,
+    subnetCalculator: <SubnetCalculator />,
+    osiExplorer: <OSIExplorer />,
+    protocolAnalyzer: <ProtocolAnalyzer />,
+    macConverter: <MACConverter />,
   };
 
   return (

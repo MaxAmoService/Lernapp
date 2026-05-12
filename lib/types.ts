@@ -4,7 +4,7 @@ export interface LessonVisual {
   position?: "top" | "bottom";
 }
 
-export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder" | "pseudocodeRunner" | "struktogrammBuilder" | "sortVisualizer" | "searchVisualizer" | "epkBuilder" | "umlClassDiagram" | "sequenceDiagram" | "netzplanBuilder";
+export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder" | "pseudocodeRunner" | "struktogrammBuilder" | "sortVisualizer" | "searchVisualizer" | "epkBuilder" | "umlClassDiagram" | "sequenceDiagram" | "netzplanBuilder" | "networkBuilder" | "subnetCalculator" | "osiExplorer" | "protocolAnalyzer" | "macConverter" | "packetJourney" | "ethernetFrameBuilder" | "arpSimulator" | "vlanExplorer";
 
 export interface Lesson {
   id: string;

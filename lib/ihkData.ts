@@ -927,6 +927,7 @@ export const ihkCategories = [
     description: "Vorbereitung auf die IHK-Prüfung: Fachinformatiker Anwendungsentwicklung",
     subCategories: [
       { id: "diagramme", name: "Diagramme & Darstellungen", description: "UML, PAP, Struktogramme, EPK, Algorithmen, Netzplantechnik, ER-Modell" },
+      { id: "netzwerk", name: "Netzwerktechnik", description: "OSI, TCP/IP, IPv4/IPv6, Subnetting, WLAN, Sicherheit, Protokolle" },
     ],
   },
 ];
