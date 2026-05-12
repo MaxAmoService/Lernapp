@@ -54,7 +54,7 @@ export const modules: Module[] = [
     icon: "⚛️",
     color: "#61dafb",
     category: "programmieren",
-    progress: 35,
+    progress: 0,
     merkblatt: "## 📋 Merkblatt: React\n\n### Grundlagen\n- Komponenten = Funktionen die JSX zurückgeben\n- JSX = HTML-ähnliche Syntax in JavaScript\n- Props = Daten von Eltern → Kinder (read-only)\n- State = interner Zustand mit useState()\n\n### Hooks\n- useState(): State verwalten\n- useEffect(): Nebeneffekte (API, Timer)\n- useContext(): Context nutzen\n\n### Regeln\n- Komponenten immer mit Großbuchstaben\n- Hooks nur auf oberster Ebene\n- state nie direkt manipulieren, sondern setState() nutzen",
     lessons: [
       {
@@ -918,11 +918,4 @@ export function getModule(slug: string): Module | undefined {
   return allModules.find((m) => m.slug === slug);
 }
 
-export function getTotalProgress(): number {
-  const totalLessons = modules.reduce((acc, m) => acc + m.lessons.length, 0);
-  const completedLessons = modules.reduce(
-    (acc, m) => acc + Math.floor((m.progress / 100) * m.lessons.length),
-    0
-  );
-  return Math.round((completedLessons / totalLessons) * 100);
-}
+

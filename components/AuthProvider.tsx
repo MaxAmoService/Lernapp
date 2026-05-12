@@ -1,15 +1,29 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import { User, getCurrentUser, setSession, clearSession, loginUser, registerUser, saveUserProgress } from "@/lib/auth";
+import {
+  User,
+  getCurrentUser,
+  setSession,
+  clearSession,
+  loginUser,
+  registerUser,
+  saveUserProgress,
+  toggleSaveModuleForUser,
+  verifyEmailCode,
+  resetAllData,
+} from "@/lib/auth";
 
 interface AuthContextType {
   user: User | null;
   login: (username: string, password: string) => boolean;
-  register: (username: string, email: string, password: string) => boolean;
+  register: (username: string, email: string, password: string) => { pending: true; code: string } | null;
+  verifyEmail: (code: string) => boolean;
   logout: () => void;
   updateUser: (user: User) => void;
   completeLesson: (moduleId: string, lessonId: string, quizScore?: number) => void;
+  toggleSaveModule: (moduleSlug: string) => void;
+  resetAll: () => void;
   isLoading: boolean;
 }
 
@@ -20,7 +34,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check for existing session
     const currentUser = getCurrentUser();
     if (currentUser) {
       setUser(currentUser);
@@ -38,11 +51,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return false;
   };
 
-  const register = (username: string, email: string, password: string): boolean => {
-    const newUser = registerUser(username, email, password);
-    if (newUser) {
-      setUser(newUser);
-      setSession(username);
+  const register = (username: string, email: string, password: string): { pending: true; code: string } | null => {
+    const result = registerUser(username, email, password);
+    return result;
+  };
+
+  const verifyEmail = (code: string): boolean => {
+    const verifiedUser = verifyEmailCode(code);
+    if (verifiedUser) {
+      setUser(verifiedUser);
+      setSession(verifiedUser.username);
       return true;
     }
     return false;
@@ -55,7 +73,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const updateUser = (updatedUser: User) => {
     setUser(updatedUser);
-    // Update in localStorage
     const users = JSON.parse(localStorage.getItem("learnhub_users") || "{}");
     if (users[updatedUser.username]) {
       users[updatedUser.username].user = updatedUser;
@@ -71,8 +88,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const toggleSaveModule = (moduleSlug: string) => {
+    if (!user) return;
+    const updatedUser = toggleSaveModuleForUser(user.username, moduleSlug);
+    if (updatedUser) {
+      setUser(updatedUser);
+    }
+  };
+
+  const resetAll = () => {
+    resetAllData();
+    setUser(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, logout, updateUser, completeLesson, isLoading }}>
+    <AuthContext.Provider value={{
+      user, login, register, verifyEmail, logout, updateUser,
+      completeLesson, toggleSaveModule, resetAll, isLoading
+    }}>
       {children}
     </AuthContext.Provider>
   );

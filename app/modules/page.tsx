@@ -3,18 +3,18 @@
 import { useState, useMemo } from "react";
 import { allModules, categories } from "@/lib/data";
 import { ModuleCard } from "@/components/ModuleCard";
+import { useAuth } from "@/components/AuthProvider";
 import {
   BookOpen,
   Search,
   ChevronDown,
   ChevronRight,
-  BarChart3,
-  CheckCircle2,
   TrendingUp,
   Sparkles,
 } from "lucide-react";
 
 export default function ModulesPage() {
+  const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
@@ -47,17 +47,13 @@ export default function ModulesPage() {
       .filter((group) => group.modules.length > 0);
   }, [filteredModules]);
 
-  // Stats
+  // Real stats from user data
   const totalModules = allModules.length;
-  const mathModules = allModules.filter((m) => m.category !== "programmieren").length;
-  const programmingModules = allModules.filter((m) => m.category === "programmieren").length;
-  const completedModules = allModules.filter((m) => m.progress === 100).length;
-  const avgProgress =
-    totalModules > 0
-      ? Math.round(
-          allModules.reduce((sum, m) => sum + (m.progress || 0), 0) / totalModules
-        )
-      : 0;
+  const totalLessons = allModules.reduce((acc, m) => acc + m.lessons.length, 0);
+  const completedLessons = user
+    ? allModules.reduce((acc, m) => acc + (user.completedLessons[m.slug]?.length || 0), 0)
+    : 0;
+  const avgProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
 
   return (
     <div className="space-y-8 animate-fade-in">
@@ -73,20 +69,16 @@ export default function ModulesPage() {
       </section>
 
       {/* Stats Bar */}
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="glass rounded-xl p-4 text-center">
           <div className="text-2xl font-bold text-blue-400">{totalModules}</div>
           <div className="text-xs text-slate-400 mt-1">Module gesamt</div>
         </div>
         <div className="glass rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-purple-400">{mathModules}</div>
-          <div className="text-xs text-slate-400 mt-1">Mathematik</div>
+          <div className="text-2xl font-bold text-green-400">{completedLessons}</div>
+          <div className="text-xs text-slate-400 mt-1">Lektionen erledigt</div>
         </div>
-        <div className="glass rounded-xl p-4 text-center">
-          <div className="text-2xl font-bold text-cyan-400">{programmingModules}</div>
-          <div className="text-xs text-slate-400 mt-1">Programmieren</div>
-        </div>
-        <div className="glass rounded-xl p-4 text-center">
+        <div className="glass rounded-xl p-4 text-center col-span-2 md:col-span-1">
           <div className="flex items-center justify-center gap-2">
             <TrendingUp className="w-5 h-5 text-emerald-400" />
             <span className="text-2xl font-bold text-emerald-400">{avgProgress}%</span>
@@ -97,7 +89,6 @@ export default function ModulesPage() {
 
       {/* Search & Filter */}
       <section className="max-w-2xl mx-auto space-y-4">
-        {/* Search */}
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
           <input
@@ -109,7 +100,6 @@ export default function ModulesPage() {
           />
         </div>
 
-        {/* Category Filter */}
         <div className="flex flex-wrap gap-2 justify-center">
           <button
             onClick={() => setSelectedCategory(null)}
@@ -144,22 +134,14 @@ export default function ModulesPage() {
         </div>
       </section>
 
-      {/* Modules by Category - Accordion */}
+      {/* Modules by Category */}
       {groupedModules.length > 0 ? (
         <div className="space-y-6">
           {groupedModules.map((group) => {
             const isExpanded = expandedCategories.has(group.id);
-            const catProgress =
-              group.modules.length > 0
-                ? Math.round(
-                    group.modules.reduce((s, m) => s + (m.progress || 0), 0) /
-                      group.modules.length
-                  )
-                : 0;
 
             return (
               <section key={group.id} className="glass rounded-xl overflow-hidden">
-                {/* Category Header - Clickable */}
                 <button
                   onClick={() => toggleCategory(group.id)}
                   className="w-full flex items-center gap-4 p-5 hover:bg-slate-800/50 transition-colors text-left"
@@ -170,18 +152,6 @@ export default function ModulesPage() {
                     <p className="text-slate-400 text-sm">{group.description}</p>
                   </div>
                   <div className="flex items-center gap-4">
-                    {/* Mini progress bar */}
-                    <div className="hidden md:flex items-center gap-2">
-                      <div className="w-24 h-2 bg-slate-700 rounded-full overflow-hidden">
-                        <div
-                          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all"
-                          style={{ width: `${catProgress}%` }}
-                        />
-                      </div>
-                      <span className="text-xs text-slate-400 w-10 text-right">
-                        {catProgress}%
-                      </span>
-                    </div>
                     <span className="text-sm text-slate-500">
                       {group.modules.length}{" "}
                       {group.modules.length === 1 ? "Modul" : "Module"}
@@ -194,7 +164,6 @@ export default function ModulesPage() {
                   </div>
                 </button>
 
-                {/* Modules Grid - Collapsible */}
                 {isExpanded && (
                   <div className="px-5 pb-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

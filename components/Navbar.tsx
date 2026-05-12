@@ -27,7 +27,8 @@ export function Navbar() {
               <a href="/" className="text-slate-300 hover:text-white transition-colors">
                 Dashboard
               </a>
-              <a href="/modules" className="text-slate-300 hover:text-white transition-colors">
+              <a href="/modules" className="text-slate-300 hover:text-white transition-colors flex items-center gap-1.5">
+                <BookOpen className="w-4 h-4" />
                 Module
               </a>
               
@@ -44,32 +45,39 @@ export function Navbar() {
             </div>
 
             {/* Mobile Menu Button */}
-            <button
-              onClick={() => setShowMobileMenu(!showMobileMenu)}
-              className="md:hidden p-2 text-slate-400 hover:text-white"
-            >
-              {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+            <div className="md:hidden flex items-center gap-2">
+              {user && <UserProfile />}
+              <button
+                onClick={() => setShowMobileMenu(!showMobileMenu)}
+                className="p-2 text-slate-400 hover:text-white"
+              >
+                {showMobileMenu ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </button>
+            </div>
           </div>
 
           {/* Mobile Menu */}
           {showMobileMenu && (
             <div className="md:hidden py-4 border-t border-slate-800 animate-slide-up">
               <div className="flex flex-col gap-4">
-                <a href="/" className="text-slate-300 hover:text-white transition-colors">
-                  Dashboard
+                <a
+                  href="/"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="text-slate-300 hover:text-white transition-colors py-2"
+                >
+                  📊 Dashboard
                 </a>
-                <a href="/modules" className="text-slate-300 hover:text-white transition-colors">
-                  Module
+                <a
+                  href="/modules"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="text-slate-300 hover:text-white transition-colors py-2"
+                >
+                  📚 Module
                 </a>
-                {user ? (
-                  <div className="pt-4 border-t border-slate-800">
-                    <UserProfile />
-                  </div>
-                ) : (
+                {!user && (
                   <button
-                    onClick={() => setShowLogin(true)}
-                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
+                    onClick={() => { setShowLogin(true); setShowMobileMenu(false); }}
+                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-center"
                   >
                     Anmelden
                   </button>

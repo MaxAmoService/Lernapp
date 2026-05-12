@@ -96,10 +96,9 @@ export default function ModulePage() {
   const [showLogin, setShowLogin] = useState(false);
   const [showMerkblatt, setShowMerkblatt] = useState(false);
 
-  // Get completed lessons for this module (from user or localStorage fallback)
+  // Get completed lessons ONLY from user data (no localStorage fallback to prevent ghost progress)
   const completedLessons = new Set(
-    user?.completedLessons[params.slug as string] || 
-    (typeof window !== "undefined" ? JSON.parse(localStorage.getItem(`completed-${params.slug}`) || "[]") : [])
+    user?.completedLessons[params.slug as string] || []
   );
 
   if (!module) {
@@ -129,15 +128,8 @@ export default function ModulePage() {
       return;
     }
 
-    // Save to user profile
+    // Save to user profile only (no separate localStorage backup)
     completeLesson(module.slug, lessonId);
-    
-    // Also save to localStorage as backup
-    const completed = JSON.parse(localStorage.getItem(`completed-${params.slug}`) || "[]");
-    if (!completed.includes(lessonId)) {
-      completed.push(lessonId);
-      localStorage.setItem(`completed-${params.slug}`, JSON.stringify(completed));
-    }
   };
 
   const goToNextLesson = () => {

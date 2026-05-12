@@ -1,8 +1,6 @@
 "use client";
 
-import type { Metadata } from "next";
 import "./globals.css";
-import "katex/dist/katex.min.css";
 import "katex/dist/katex.min.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import { Navbar } from "@/components/Navbar";
@@ -16,8 +14,9 @@ export default function RootLayout({
   return (
     <html lang="de">
       <head>
-        <title>LearnHub - Modular Learning Platform</title>
-        <meta name="description" content="Lerne React, TypeScript, Next.js und mehr mit interaktiven Lektionen" />
+        <title>LearnHub — Interaktive Lernplattform</title>
+        <meta name="description" content="Lerne Mathe, Programmierung und IHK-Inhalte interaktiv und kostenlos" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="min-h-screen bg-dark-950 text-slate-100">
         <AuthProvider>
