@@ -42,6 +42,10 @@ import { DNSLookup } from "./interactive/DNSLookup";
 import { FirewallRuleBuilder } from "./interactive/FirewallRuleBuilder";
 import { WLANConfigurator } from "./interactive/WLANConfigurator";
 import { CableComparer } from "./interactive/CableComparer";
+import { MailJourney } from "./interactive/MailJourney";
+import { HTTPRequestVisualizer } from "./interactive/HTTPRequestVisualizer";
+import { EncryptionDemo } from "./interactive/EncryptionDemo";
+import { VPNTunnelVisualizer } from "./interactive/VPNTunnelVisualizer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -107,6 +111,10 @@ function renderInteractive(type: string, codeExample?: string) {
     firewallRuleBuilder: <FirewallRuleBuilder />,
     wlanConfigurator: <WLANConfigurator />,
     cableComparer: <CableComparer />,
+    mailJourney: <MailJourney />,
+    httpRequestVisualizer: <HTTPRequestVisualizer />,
+    encryptionDemo: <EncryptionDemo />,
+    vpnTunnelVisualizer: <VPNTunnelVisualizer />,
   };
 
   return (

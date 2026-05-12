@@ -381,7 +381,13 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 
 [INTERACTIVE]
 
-> 💡 Der TCP-Handshake-Simulator zeigt dir den 3-Wege-Handshake live — mit Paketverlust-Simulation!`,
+> 💡 Der TCP-Handshake-Simulator zeigt dir den 3-Wege-Handshake live — mit Paketverlust-Simulation!
+
+## 🔐 Verschlüsselung
+
+[INTERACTIVE]
+
+> 💡 Verschlüsselung von Caesar bis TLS — wie schützt HTTPS deine Daten?`,
     },
     {
       id: "netz-3",
@@ -643,7 +649,17 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 
 [INTERACTIVE]
 
-> 💡 Der DNS-Lookup zeigt dir die Auflösung Schritt für Schritt. Der DHCP-Explorer zeigt den DORA-Prozess live!`,
+> 💡 Der DNS-Lookup zeigt dir die Auflösung Schritt für Schritt. Der DHCP-Explorer zeigt den DORA-Prozess live!
+
+## 🌐 HTTP-Request live
+
+[INTERACTIVE]
+
+## 📧 E-Mail verschicken
+
+[INTERACTIVE]
+
+> 💡 Der HTTP-Request zeigt dir Headers und Status-Codes live. Die Mail-Reise zeigt den Weg einer E-Mail!`,
     },
     {
       id: "netz-9",
@@ -735,7 +751,13 @@ Schützt gegen: MAC-Flooding, unautorisierte Geräte.
 
 [INTERACTIVE]
 
-> 💡 Der Firewall-Regel-Builder zeigt dir, wie Regeln Pakete filtern — baue eigene Regeln und teste Pakete!`,
+> 💡 Der Firewall-Regel-Builder zeigt dir, wie Regeln Pakete filtern — baue eigene Regeln und teste Pakete!
+
+## 🔒 VPN-Tunnel
+
+[INTERACTIVE]
+
+> 💡 Der VPN-Tunnel-Visualizer zeigt dir, wie ein verschlossener Tunnel aufgebaut wird — mit Site-to-Site und Remote Access!`,
     },
     {
       id: "netz-11",

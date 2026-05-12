@@ -4,7 +4,7 @@ export interface LessonVisual {
   position?: "top" | "bottom";
 }
 
-export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder" | "pseudocodeRunner" | "struktogrammBuilder" | "sortVisualizer" | "searchVisualizer" | "epkBuilder" | "umlClassDiagram" | "sequenceDiagram" | "netzplanBuilder" | "networkBuilder" | "subnetCalculator" | "osiExplorer" | "protocolAnalyzer" | "macConverter" | "packetJourney" | "ethernetFrameBuilder" | "arpSimulator" | "vlanExplorer" | "osiCapsuleViewer" | "tcpHandshakeSimulator" | "dhcpExplorer" | "dnsLookup" | "firewallRuleBuilder" | "wlanConfigurator" | "cableComparer";
+export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integralExplorer" | "unitCircleInteractive" | "vectorExplorer" | "codeSandbox" | "papBuilder" | "pseudocodeRunner" | "struktogrammBuilder" | "sortVisualizer" | "searchVisualizer" | "epkBuilder" | "umlClassDiagram" | "sequenceDiagram" | "netzplanBuilder" | "networkBuilder" | "subnetCalculator" | "osiExplorer" | "protocolAnalyzer" | "macConverter" | "packetJourney" | "ethernetFrameBuilder" | "arpSimulator" | "vlanExplorer" | "osiCapsuleViewer" | "tcpHandshakeSimulator" | "dhcpExplorer" | "dnsLookup" | "firewallRuleBuilder" | "wlanConfigurator" | "cableComparer" | "mailJourney" | "httpRequestVisualizer" | "encryptionDemo" | "vpnTunnelVisualizer";
 
 export interface Lesson {
   id: string;

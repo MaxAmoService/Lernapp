@@ -29,3 +29,7 @@ export { DNSLookup } from "./DNSLookup";
 export { FirewallRuleBuilder } from "./FirewallRuleBuilder";
 export { WLANConfigurator } from "./WLANConfigurator";
 export { CableComparer } from "./CableComparer";
+export { MailJourney } from "./MailJourney";
+export { HTTPRequestVisualizer } from "./HTTPRequestVisualizer";
+export { EncryptionDemo } from "./EncryptionDemo";
+export { VPNTunnelVisualizer } from "./VPNTunnelVisualizer";
