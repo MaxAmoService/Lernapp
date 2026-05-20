@@ -63,10 +63,10 @@ body {
 pre {
   background: #1e293b;
   border-radius: 8px;
-  padding: 1rem;
+  padding: 1.25rem;
   overflow-x: auto;
   font-family: "Fira Code", "Consolas", monospace;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   line-height: 1.7;
 }
 
@@ -85,27 +85,27 @@ pre code {
 
 /* Markdown Content — Desktop-first (text-heavy educational app) */
 .markdown-content h1 {
-  @apply text-4xl font-bold mb-6 text-white;
+  @apply text-5xl font-bold mb-6 text-white;
 }
 
 .markdown-content h2 {
-  @apply text-3xl font-semibold mb-4 text-blue-400;
+  @apply text-4xl font-semibold mb-5 text-blue-400;
 }
 
 .markdown-content h3 {
-  @apply text-2xl font-semibold mb-3 text-slate-200;
+  @apply text-3xl font-semibold mb-4 text-slate-200;
 }
 
 .markdown-content p {
-  @apply mb-4 text-slate-300 text-lg leading-relaxed;
+  @apply mb-5 text-slate-300 text-xl leading-relaxed;
 }
 
 .markdown-content ul {
-  @apply list-disc list-inside mb-4 text-slate-300 text-lg;
+  @apply list-disc list-inside mb-5 text-slate-300 text-xl;
 }
 
 .markdown-content ol {
-  @apply list-decimal list-inside mb-4 text-slate-300 text-lg;
+  @apply list-decimal list-inside mb-5 text-slate-300 text-xl;
 }
 
 .markdown-content li {
@@ -117,15 +117,15 @@ pre code {
 }
 
 .markdown-content table {
-  @apply w-full mb-4 border-collapse text-lg;
+  @apply w-full mb-5 border-collapse text-xl;
 }
 
 .markdown-content th {
-  @apply bg-slate-800 p-3 text-left border border-slate-700 text-lg font-semibold;
+  @apply bg-slate-800 p-4 text-left border border-slate-700 text-xl font-semibold;
 }
 
 .markdown-content td {
-  @apply p-3 border border-slate-700 text-lg;
+  @apply p-4 border border-slate-700 text-xl;
 }
 
 /* Animations */
@@ -186,7 +186,7 @@ pre code {
 /* KaTeX — larger for readability */
 .katex {
   color: #f0f9ff;
-  font-size: 1.25em;
+  font-size: 1.4em;
 }
 
 .katex .mord,
@@ -239,45 +239,41 @@ pre code {
 
 /* ===== MOBILE RESPONSIVE ===== */
 
-/* Interactive components — smaller on mobile */
 @media (max-width: 640px) {
   .markdown-content h1 {
-    @apply text-3xl mb-4;
+    @apply text-4xl mb-4;
   }
   .markdown-content h2 {
-    @apply text-2xl mb-3;
+    @apply text-3xl mb-3;
   }
   .markdown-content h3 {
-    @apply text-xl mb-2;
+    @apply text-2xl mb-2;
   }
   .markdown-content p {
-    @apply text-base mb-3;
+    @apply text-lg mb-4;
   }
   .markdown-content table {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
   .markdown-content th,
   .markdown-content td {
     @apply px-2 py-1;
   }
 
-  /* KaTeX slightly smaller on mobile */
   .katex {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
 
-  /* Interactive component containers */
   .interactive-container {
     @apply p-3 !important;
   }
   .interactive-container h3 {
-    @apply text-lg !important;
+    @apply text-xl !important;
   }
   .interactive-container p {
-    @apply text-sm !important;
+    @apply text-base !important;
   }
 
-  /* Grids stack on mobile */
   .interactive-grid-2 {
     grid-template-columns: 1fr !important;
   }
@@ -285,25 +281,21 @@ pre code {
     grid-template-columns: 1fr !important;
   }
 
-  /* Smaller buttons */
   .interactive-container button {
-    @apply px-3 py-1.5 text-sm;
+    @apply px-3 py-1.5 text-base;
   }
 
-  /* Smaller inputs */
   .interactive-container input,
   .interactive-container select {
-    @apply text-sm py-1.5;
+    @apply text-base py-1.5;
   }
 
-  /* Code blocks scroll */
   pre {
-    @apply text-sm p-3;
+    @apply text-base p-3;
   }
 
-  /* Tables in interactive components */
   .interactive-container table {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
   .interactive-container th,
   .interactive-container td {
@@ -314,10 +306,10 @@ pre code {
 /* Tablet adjustments */
 @media (min-width: 641px) and (max-width: 1023px) {
   .markdown-content h1 {
-    @apply text-3xl;
+    @apply text-4xl;
   }
   .markdown-content h2 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
 }
 
@@ -331,7 +323,7 @@ table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid rgba(71, 85, 105, 0.5);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
 }
 
 table th {
