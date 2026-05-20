@@ -35,6 +35,7 @@ export interface Category {
   name: string;
   icon: string;
   description: string;
+  subCategories?: { id: string; name: string; description: string }[];
 }
 
 export interface QuizQuestion {
