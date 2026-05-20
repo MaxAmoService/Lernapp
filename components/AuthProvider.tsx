@@ -13,6 +13,8 @@ import {
   verifyEmailCode,
   resetAllData,
 } from "@/lib/auth";
+import { getUserId, saveProgress, loadProgress, subscribeToProgress } from "@/lib/firebaseStorage";
+import { syncToFirebase, syncFromFirebase } from "@/lib/flashcards";
 
 interface AuthContextType {
   user: User | null;
@@ -46,6 +48,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (loggedInUser) {
       setUser(loggedInUser);
       setSession(username);
+      // Sync with Firebase
+      const userId = getUserId(loggedInUser);
+      if (userId) {
+        syncFromFirebase(userId);
+      }
       return true;
     }
     return false;
@@ -85,6 +92,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const updatedUser = saveUserProgress(user.username, moduleId, lessonId, quizScore);
     if (updatedUser) {
       setUser(updatedUser);
+      // Sync to Firebase
+      const userId = getUserId(updatedUser);
+      if (userId) {
+        saveProgress(userId, {
+          completedLessons: updatedUser.completedLessons || {},
+          savedModules: updatedUser.savedModules || [],
+          lastUpdated: Date.now(),
+        });
+      }
     }
   };
 

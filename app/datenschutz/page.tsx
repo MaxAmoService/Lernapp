@@ -17,8 +17,8 @@ export default function Datenschutz() {
         <section>
           <h2 className="text-xl font-semibold text-white mb-3">2. Verantwortliche Stelle</h2>
           <p className="text-sm">
-            Max Amo Service<br />
-            Inhaber: Moritz Amo<br />
+            Moritz Knieper<br />
+            Inhaber: Moritz Knieper<br />
             Schlader Weg 24<br />
             58809 Neuenrade<br />
             E-Mail: maxamoservice@gmail.com

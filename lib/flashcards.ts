@@ -109,7 +109,7 @@ export function getDeckStats(
   return { total, studied, due, mastered };
 }
 
-// localStorage Speicherung
+// localStorage Speicherung (offline cache)
 const STORAGE_KEY = "learnhub-flashcard-progress";
 
 export function loadProgress(): Record<string, DeckProgress> {
@@ -147,4 +147,43 @@ export function saveDeckProgress(moduleId: string, deck: DeckProgress) {
   const all = loadProgress();
   all[moduleId] = deck;
   saveProgress(all);
+}
+
+// ─── Firebase Sync ──────────────────────────────────────────────────────────
+// Syncs localStorage data with Firebase when user is logged in
+
+export async function syncToFirebase(userId: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const { saveFlashcardData } = await import("./firebaseStorage");
+    const localData = loadProgress();
+    await saveFlashcardData(userId, {
+      decks: localData,
+      lastUpdated: Date.now(),
+    });
+  } catch (err) {
+    console.error("Failed to sync flashcards to Firebase:", err);
+  }
+}
+
+export async function syncFromFirebase(userId: string) {
+  if (typeof window === "undefined") return;
+  try {
+    const { loadFlashcardData } = await import("./firebaseStorage");
+    const remoteData = await loadFlashcardData(userId);
+    if (remoteData?.decks) {
+      // Merge: remote wins if newer
+      const localData = loadProgress();
+      const merged: Record<string, DeckProgress> = { ...localData };
+      for (const [moduleId, deck] of Object.entries(remoteData.decks)) {
+        const localDeck = localData[moduleId];
+        if (!localDeck || deck.lastStudy > localDeck.lastStudy) {
+          merged[moduleId] = { ...deck, moduleId };
+        }
+      }
+      saveProgress(merged);
+    }
+  } catch (err) {
+    console.error("Failed to sync flashcards from Firebase:", err);
+  }
 }

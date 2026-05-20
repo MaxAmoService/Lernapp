@@ -7,7 +7,7 @@ export default function Impressum() {
         <section>
           <h2 className="text-xl font-semibold text-white mb-3">Angaben gemäß § 5 DDG</h2>
           <p>
-            Moritz Amo<br />
+            Moritz Knieper<br />
             Schlader Weg 24<br />
             58809 Neuenrade
           </p>
@@ -23,7 +23,7 @@ export default function Impressum() {
         <section>
           <h2 className="text-xl font-semibold text-white mb-3">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
           <p>
-            Moritz Amo<br />
+            Moritz Knieper<br />
             Schlader Weg 24<br />
             58809 Neuenrade
           </p>
