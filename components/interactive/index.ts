@@ -33,3 +33,4 @@ export { MailJourney } from "./MailJourney";
 export { HTTPRequestVisualizer } from "./HTTPRequestVisualizer";
 export { EncryptionDemo } from "./EncryptionDemo";
 export { VPNTunnelVisualizer } from "./VPNTunnelVisualizer";
+export { SubnettingTrainer } from "./SubnettingTrainer";

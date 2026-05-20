@@ -46,6 +46,7 @@ import { MailJourney } from "./interactive/MailJourney";
 import { HTTPRequestVisualizer } from "./interactive/HTTPRequestVisualizer";
 import { EncryptionDemo } from "./interactive/EncryptionDemo";
 import { VPNTunnelVisualizer } from "./interactive/VPNTunnelVisualizer";
+import { SubnettingTrainer } from "./interactive/SubnettingTrainer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -115,6 +116,7 @@ function renderInteractive(type: string, codeExample?: string) {
     httpRequestVisualizer: <HTTPRequestVisualizer />,
     encryptionDemo: <EncryptionDemo />,
     vpnTunnelVisualizer: <VPNTunnelVisualizer />,
+    subnettingTrainer: <SubnettingTrainer />,
   };
 
   return (
@@ -300,11 +302,20 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       } else if (!line.trim()) {
         elements.push(<div key={`br-${keyIndex++}`} className="h-3" />);
       }
-      // Interactive marker
-      else if (line.trim() === "[INTERACTIVE]" && interactiveType && interactiveType !== "codeSandbox") {
+      // Interactive marker — supports [INTERACTIVE] and [INTERACTIVE:type]
+      else if (
+        (line.trim() === "[INTERACTIVE]" || line.trim().startsWith("[INTERACTIVE:")) &&
+        interactiveType &&
+        interactiveType !== "codeSandbox"
+      ) {
+        let specificType: string | undefined;
+        const match = line.trim().match(/^\[INTERACTIVE:(\w+)\]$/);
+        if (match) {
+          specificType = match[1];
+        }
         elements.push(
           <div key={`interactive-${keyIndex++}`} className="my-8">
-            {renderInteractive(interactiveType)}
+            {renderInteractive(specificType || interactiveType)}
           </div>
         );
       }

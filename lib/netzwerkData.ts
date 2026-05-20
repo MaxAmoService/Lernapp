@@ -435,64 +435,208 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
     },
     {
       id: "netz-4",
-      title: "Subnetting",
-      duration: "20 min",
+      title: "Subnetting — Schritt für Schritt",
+      duration: "35 min",
       type: "interactive",
       interactive: "subnetCalculator",
       content: `# Subnetting — Netzwerke aufteilen 🧮
 
-## Warum Subnetting?
-- Netzwerke in kleinere Segmente aufteilen
-- Broadcast-Traffic reduzieren
-- Sicherheit erhöhen (VLANs)
-- IP-Adressen effizient nutzen
+## Was ist Subnetting?
 
-## CIDR-Notation
-\`IP-Adresse/Präfixlänge\`
-Beispiel: \`192.168.1.0/24\` → 24 Bit Netzwerk, 8 Bit Host
+Subnetting bedeutet, ein großes Netzwerk in **kleinere Teilnetze (Subnetze)** aufzuteilen. Das bringt drei Vorteile:
 
-## Die Formeln
+- 🔒 **Sicherheit**: Abteilungen werden voneinander getrennt
+- ⚡ **Performance**: Broadcast-Traffic bleibt im Subnetz
+- 📦 **Effizienz**: IP-Adressen werden besser genutzt
 
-| Formel | Zweck |
-|--------|-------|
-| **2^n** | Anzahl Subnetze (n = entliehene Bits) |
-| **2^h - 2** | Nutzbare Hosts (h = Host-Bits) |
-| **32 - /Praefix** | Host-Bits |
+> ❗ **IHK-Tipp:** Subnetting kommt in JEDER AP1/AP2-Prüfung dran — es ist DIE Aufgabe, die du können MUSST!
 
-## Beispielrechnung
+## Die CIDR-Notation (Classless Inter-Domain Routing)
 
-Aufgabe: \`192.168.1.0/26\` — wie viele Subnetze und Hosts?
+Eine IP-Adresse mit CIDR hat das Format:
 
-1. /26 → 26 Bit Netzwerk → 32 - 26 = **6 Host-Bits**
-2. Hosts: 2^6 - 2 = **62 nutzbare Hosts**
-3. Subnetzmaske: 255.255.255.192
+$$\\text{IP-Adresse} / \\text{Präfixlänge}$$
 
-## Subnetzmaske berechnen
+Beispiel: **192.168.1.0/24**
 
-| /Praefix | Maske | Letztes Oktett |
-|----------|-------|----------------|
-| /24 | 255.255.255.0 | 00000000 = 0 |
-| /25 | 255.255.255.128 | 10000000 = 128 |
-| /26 | 255.255.255.192 | 11000000 = 192 |
-| /27 | 255.255.255.224 | 11100000 = 224 |
-| /28 | 255.255.255.240 | 11110000 = 240 |
+Die Zahl nach dem Schrägstrich gibt an, wie viele Bits für die **Netzwerkadresse** reserviert sind:
 
-## UND-Verknüpfung (AND)
-IP UND Maske = Netzwerkadresse
+$$\\underbrace{192.168.1.0}_{\\text{IP-Adresse}} \\ / \\ \\underbrace{24}_{\\text{Netzwerk-Bits}}$$
 
-\`\`\`
-192.168.1.130  = 11000000.10101000.00000001.10000010
-255.255.255.192 = 11111111.11111111.11111111.11000000
-Ergebnis (AND) = 11000000.10101000.00000001.10000000 = 192.168.1.128
-\`\`\`
+Das bedeutet: **24 Bits** für das Netzwerk, **8 Bits** für Hosts:
 
-> ❗ **IHK-Tipp:** Übe Subnetting auf Papier — in der Prüfung gibt es keinen Taschenrechner für Binär!
+$$32 - 24 = 8 \\text{ Host-Bits}$$
 
-## 🧮 Subnetting-Rechner
+## Die Subnetzmaske
 
-[INTERACTIVE]
+Die Subnetzmaske bestimmt, welcher Teil einer IP-Adresse das Netzwerk und welcher den Host identifiziert. Sie wird binär geschrieben — erst alle 1en (Netzwerk), dann alle 0en (Host):
 
-> 💡 Der Subnetting-Rechner zeigt dir Netzwerkadresse, Broadcast und Hosts — probiere verschiedene CIDR-Notationen aus!`,
+$$\\text{Maske für /24: } \\underbrace{11111111.11111111.11111111}_{24 \\times 1}.\\underbrace{00000000}_{8 \\times 0} = 255.255.255.0$$
+
+### Subnetzmaske berechnen — Schritt für Schritt
+
+Gegeben: CIDR /26
+
+**Schritt 1:** Schreibe 26 Einsen, dann 6 Nullen (32 - 26 = 6):
+
+$$\\underbrace{11111111.11111111.11111111.11}_{26}\\underbrace{000000}_{6}$$
+
+**Schritt 2:** Teile in 4 Oktette à 8 Bit:
+
+$$11111111 . 11111111 . 11111111 . 11000000$$
+
+**Schritt 3:** Rechne jedes Oktett in Dezimal:
+
+$$255 . 255 . 255 . 192$$
+
+> ✅ **Ergebnis:** /26 → Subnetzmaske = **255.255.255.192**
+
+### Wichtige CIDR-Werte merken
+
+| CIDR | Maske | Letztes Oktett (Binär) | Hosts ($2^h - 2$) |
+|------|-------|------------------------|---------------------|
+| /24 | 255.255.255.0 | 00000000 = 0 | $2^8 - 2 = 254$ |
+| /25 | 255.255.255.128 | 10000000 = 128 | $2^7 - 2 = 126$ |
+| /26 | 255.255.255.192 | 11000000 = 192 | $2^6 - 2 = 62$ |
+| /27 | 255.255.255.224 | 11100000 = 224 | $2^5 - 2 = 30$ |
+| /28 | 255.255.255.240 | 11110000 = 240 | $2^4 - 2 = 14$ |
+| /29 | 255.255.255.248 | 11111000 = 248 | $2^3 - 2 = 6$ |
+| /30 | 255.255.255.252 | 11111100 = 252 | $2^2 - 2 = 2$ |
+
+## Die Grundformeln
+
+### Anzahl der nutzbaren Hosts
+
+$$\\text{Nutzbare Hosts} = 2^h - 2$$
+
+Wobei $h$ = Anzahl der Host-Bits (die 0en in der Subnetzmaske).
+
+> 💡 Die **-2** kommen von der **Netzwerkadresse** (alle Host-Bits = 0) und der **Broadcast-Adresse** (alle Host-Bits = 1) — diese beiden sind reserviert und können nicht an Geräte vergeben werden.
+
+### Anzahl der Subnetze
+
+$$\\text{Anzahl Subnetze} = 2^s$$
+
+Wobei $s$ = Anzahl der "entliehenen" Bits (wenn man von einem Standard-Netzwerk in kleinere Subnetze aufteilt).
+
+### Richtige CIDR für gewünschte Host-Anzahl
+
+Gegeben: Du brauchst mindestens $n$ Hosts. Gesucht: Die CIDR-Notation.
+
+**Schritt 1:** Finde die kleinste Zweierpotenz $2^h$ mit $2^h - 2 \\geq n$
+
+**Schritt 2:** Berechne CIDR: $32 - h$
+
+**Beispiel:** 500 Hosts benötigt?
+
+$$2^h - 2 \\geq 500 \\Rightarrow 2^h \\geq 502 \\Rightarrow h = 9 \\ (2^9 = 512)$$
+
+$$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbaren Hosts}$$
+
+> ❗ **IHK-Tipp:** In der Prüfung musst du oft die "passende" CIDR-Notation für eine bestimmte Host-Anzahl finden — merke dir die Zweierpotenzen: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024!
+
+## Die UND-Verknüpfung (AND-Operation) — Schritt für Schritt
+
+Um die **Netzwerkadresse** zu finden, wendet man die **UND-Verknüpfung** (AND) auf IP-Adresse und Subnetzmaske an:
+
+$$\\text{Netzwerkadresse} = \\text{IP-Adresse} \\ \\mathbf{AND} \\ \\text{Subnetzmaske}$$
+
+### Regeln der UND-Verknüpfung
+
+$$1 \\ \\mathbf{AND} \\ 1 = 1 \\qquad 1 \\ \\mathbf{AND} \\ 0 = 0 \\qquad 0 \\ \\mathbf{AND} \\ 1 = 0 \\qquad 0 \\ \\mathbf{AND} \\ 0 = 0$$
+
+> 💡 Merke: **Nur wenn BEIDE 1 sind, kommt 1 heraus.** Sonst immer 0.
+
+### Beispiel: 192.168.1.130 mit Maske /26
+
+**Schritt 1:** IP-Adresse in Binär:
+
+$$192.168.1.130 = \\underbrace{11000000}_{192}.\\underbrace{10101000}_{168}.\\underbrace{00000001}_{1}.\\underbrace{10000010}_{130}$$
+
+**Schritt 2:** Subnetzmaske /26 in Binär:
+
+$$255.255.255.192 = \\underbrace{11111111}_{255}.\\underbrace{11111111}_{255}.\\underbrace{11111111}_{255}.\\underbrace{11000000}_{192}$$
+
+**Schritt 3:** AND-Verknüpfung — bit für bit:
+
+$$\\begin{aligned} \\text{IP:}  &\\quad 11000000.10101000.00000001.\\mathbf{10}000010 \\\\ \\text{Maske:} &\\quad 11111111.11111111.11111111.\\mathbf{11}000000 \\\\ \\text{AND:} &\\quad 11000000.10101000.00000001.\\mathbf{10}000000 \\end{aligned}$$
+
+**Schritt 4:** Ergebnis in Dezimal:
+
+$$11000000.10101000.00000001.10000000 = \\mathbf{192.168.1.128}$$
+
+> ✅ **Netzwerkadresse: 192.168.1.128**
+
+### Broadcast-Adresse berechnen
+
+Die Broadcast-Adresse erhält man, indem man alle Host-Bits auf 1 setzt:
+
+$$\\begin{aligned} \\text{Netzwerk:} &\\quad 11000000.10101000.00000001.10\\underbrace{000000}_{\\text{Host-Bits}} \\\\ \\text{Broadcast:} &\\quad 11000000.10101000.00000001.10\\underbrace{111111}_{\\text{alle 1en}} \\end{aligned}$$
+
+$$\\Rightarrow 192.168.1.10111111 = 192.168.1.191$$
+
+### Erste und letzte nutzbare Host-Adresse
+
+$$\\text{Erster Host} = \\text{Netzwerkadresse} + 1 = 192.168.1.129$$
+
+$$\\text{Letzter Host} = \\text{Broadcast} - 1 = 192.168.1.190$$
+
+$$\\text{Anzahl nutzbarer Hosts} = 2^6 - 2 = 62$$
+
+> ❗ **IHK-Tipp:** Übe diese Schritte auf Papier! In der Prüfung darfst du keinen Taschenrechner für Binär-Arithmetik benutzen.
+
+## VLSM — Variable Length Subnet Mask
+
+**VLSM** erlaubt es, verschiedene Subnetze mit **verschiedenen Präfixlängen** zu erstellen. Das spart IP-Adressen!
+
+### VLSM-Beispiel: Eine Firma mit 4 Abteilungen
+
+| Abteilung | Benötigte Hosts | Gewähltes CIDR | Verfügbare Hosts | Subnetzmaske |
+|-----------|-----------------|----------------|-------------------|--------------|
+| Vertrieb | 50 | /26 | 62 | 255.255.255.192 |
+| Entwicklung | 20 | /27 | 30 | 255.255.255.224 |
+| Verwaltung | 10 | /28 | 14 | 255.255.255.240 |
+| Geschäftsführung | 5 | /29 | 6 | 255.255.255.248 |
+
+**Berechnung für Vertrieb (50 Hosts):**
+
+$$2^h - 2 \\geq 50 \\Rightarrow 2^h \\geq 52 \\Rightarrow h = 6 \\ (2^6 = 64) \\Rightarrow /26$$
+
+**Berechnung für Entwicklung (20 Hosts):**
+
+$$2^h - 2 \\geq 20 \\Rightarrow 2^h \\geq 22 \\Rightarrow h = 5 \\ (2^5 = 32) \\Rightarrow /27$$
+
+> 💡 **Vorteil:** Ohne VLSM müsste ALLES auf /26 gesetzt werden — 4 × /26 = 248 Adressen. Mit VLSM: 62 + 30 + 14 + 6 = **112 Adressen** — über 50% gespart!
+
+### VLSM aufteilen: Schritt für Schritt
+
+Ausgangsnetzwerk: **192.168.1.0/24**
+
+**Schritt 1:** Vertrieb (/26) bekommt den ersten Block:
+- Netz: 192.168.1.0/26 → 192.168.1.0 – 192.168.1.63
+
+**Schritt 2:** Entwicklung (/27) bekommt den nächsten freien Block:
+- Netz: 192.168.1.64/27 → 192.168.1.64 – 192.168.1.95
+
+**Schritt 3:** Verwaltung (/28):
+- Netz: 192.168.1.96/28 → 192.168.1.96 – 192.168.1.111
+
+**Schritt 4:** Geschäftsführung (/29):
+- Netz: 192.168.1.112/29 → 192.168.1.112 – 192.168.1.119
+
+> ❗ **IHK-Tipp:** VLSM-Aufgaben sind die schwierigsten Subnetting-Aufgaben — IMMER mit der größten Abteilung anfangen!
+
+## 🧮 Interaktiver Subnetting-Rechner
+
+Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere verschiedene Eingaben aus!
+
+[INTERACTIVE:subnetCalculator]
+
+## 🏋️ IHK Subnetting-Trainer
+
+Hier kannst du gezielt für die IHK-Prüfung üben — mit VLSM-Szenarien, geführten Aufgaben und Zeitdruck!
+
+[INTERACTIVE:subnettingTrainer]`,
     },
     {
       id: "netz-5",
