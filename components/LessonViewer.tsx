@@ -274,8 +274,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               <div key={`callout-${keyIndex++}`} className={`my-4 p-4 rounded-xl border-l-4 ${style.bg} ${style.border} flex items-start gap-3`}>
                 <span className="text-lg mt-0.5 shrink-0">{style.icon}</span>
                 <div>
-                  <span className={`text-xs font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
-                  <p className={`${style.text} text-sm mt-1 leading-relaxed`}><InlineText text={content} /></p>
+                  <span className={`text-sm font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
+                  <p className={`${style.text} text-base mt-1 leading-relaxed`}><InlineText text={content} /></p>
                 </div>
               </div>
             );

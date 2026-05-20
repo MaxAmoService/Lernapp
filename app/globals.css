@@ -66,7 +66,7 @@ pre {
   padding: 1rem;
   overflow-x: auto;
   font-family: "Fira Code", "Consolas", monospace;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.7;
 }
 
@@ -75,7 +75,7 @@ code {
   padding: 0.2em 0.4em;
   border-radius: 4px;
   font-family: "Fira Code", "Consolas", monospace;
-  font-size: 0.875em;
+  font-size: 0.95em;
 }
 
 pre code {
@@ -97,15 +97,15 @@ pre code {
 }
 
 .markdown-content p {
-  @apply mb-4 text-slate-300;
+  @apply mb-4 text-slate-300 text-lg leading-relaxed;
 }
 
 .markdown-content ul {
-  @apply list-disc list-inside mb-4 text-slate-300;
+  @apply list-disc list-inside mb-4 text-slate-300 text-lg;
 }
 
 .markdown-content ol {
-  @apply list-decimal list-inside mb-4 text-slate-300;
+  @apply list-decimal list-inside mb-4 text-slate-300 text-lg;
 }
 
 .markdown-content li {
@@ -121,11 +121,11 @@ pre code {
 }
 
 .markdown-content th {
-  @apply bg-slate-800 p-3 text-left border border-slate-700;
+  @apply bg-slate-800 p-3 text-left border border-slate-700 text-base;
 }
 
 .markdown-content td {
-  @apply p-3 border border-slate-700;
+  @apply p-3 border border-slate-700 text-base;
 }
 
 /* Animations */
@@ -251,10 +251,10 @@ pre code {
     @apply text-lg mb-2;
   }
   .markdown-content p {
-    @apply text-sm mb-3;
+    @apply text-base mb-3;
   }
   .markdown-content table {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
   .markdown-content th,
   .markdown-content td {
@@ -266,10 +266,10 @@ pre code {
     @apply p-3 !important;
   }
   .interactive-container h3 {
-    @apply text-base !important;
+    @apply text-lg !important;
   }
   .interactive-container p {
-    @apply text-xs !important;
+    @apply text-sm !important;
   }
 
   /* Grids stack on mobile */
@@ -282,13 +282,13 @@ pre code {
 
   /* Smaller buttons */
   .interactive-container button {
-    @apply px-3 py-1.5 text-xs;
+    @apply px-3 py-1.5 text-sm;
   }
 
   /* Smaller inputs */
   .interactive-container input,
   .interactive-container select {
-    @apply text-xs py-1.5;
+    @apply text-sm py-1.5;
   }
 
   /* Code blocks scroll */
@@ -298,11 +298,11 @@ pre code {
 
   /* Tables in interactive components */
   .interactive-container table {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
   }
   .interactive-container th,
   .interactive-container td {
-    @apply px-1 py-0.5;
+    @apply px-2 py-1;
   }
 }
 
