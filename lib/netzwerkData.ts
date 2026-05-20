@@ -435,11 +435,10 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
     },
     {
       id: "netz-4",
-      title: "Subnetting — Schritt für Schritt",
-      duration: "35 min",
-      type: "interactive",
-      interactive: "subnetCalculator",
-      content: `# Subnetting — Netzwerke aufteilen 🧮
+      title: "Subnetting Grundlagen — CIDR & Subnetzmaske",
+      duration: "10 min",
+      type: "text",
+      content: `# Subnetting Grundlagen — CIDR & Subnetzmaske 🧮
 
 ## Was ist Subnetting?
 
@@ -491,7 +490,7 @@ $$255 . 255 . 255 . 192$$
 
 > ✅ **Ergebnis:** /26 → Subnetzmaske = **255.255.255.192**
 
-### Wichtige CIDR-Werte merken
+## Wichtige CIDR-Werte merken
 
 | CIDR | Maske | Letztes Oktett (Binär) | Hosts ($2^h - 2$) |
 |------|-------|------------------------|---------------------|
@@ -503,9 +502,16 @@ $$255 . 255 . 255 . 192$$
 | /29 | 255.255.255.248 | 11111000 = 248 | $2^3 - 2 = 6$ |
 | /30 | 255.255.255.252 | 11111100 = 252 | $2^2 - 2 = 2$ |
 
-## Die Grundformeln
+> 💡 Merke dir die Tabelle — in der Prüfung musst du schnell die passende CIDR-Notation erkennen!`,
+    },
+    {
+      id: "netz-5",
+      title: "Subnetting Formeln",
+      duration: "10 min",
+      type: "text",
+      content: `# Subnetting Formeln 📐
 
-### Anzahl der nutzbaren Hosts
+## Anzahl der nutzbaren Hosts
 
 $$\\text{Nutzbare Hosts} = 2^h - 2$$
 
@@ -513,13 +519,16 @@ Wobei $h$ = Anzahl der Host-Bits (die 0en in der Subnetzmaske).
 
 > 💡 Die **-2** kommen von der **Netzwerkadresse** (alle Host-Bits = 0) und der **Broadcast-Adresse** (alle Host-Bits = 1) — diese beiden sind reserviert und können nicht an Geräte vergeben werden.
 
-### Anzahl der Subnetze
+**Beispiel /26:**
+$$32 - 26 = 6 \\text{ Host-Bits} \\Rightarrow 2^6 - 2 = 62 \\text{ nutzbare Hosts}$$
+
+## Anzahl der Subnetze
 
 $$\\text{Anzahl Subnetze} = 2^s$$
 
 Wobei $s$ = Anzahl der "entliehenen" Bits (wenn man von einem Standard-Netzwerk in kleinere Subnetze aufteilt).
 
-### Richtige CIDR für gewünschte Host-Anzahl
+## Richtige CIDR für gewünschte Host-Anzahl
 
 Gegeben: Du brauchst mindestens $n$ Hosts. Gesucht: Die CIDR-Notation.
 
@@ -533,9 +542,23 @@ $$2^h - 2 \\geq 500 \\Rightarrow 2^h \\geq 502 \\Rightarrow h = 9 \\ (2^9 = 512)
 
 $$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbaren Hosts}$$
 
-> ❗ **IHK-Tipp:** In der Prüfung musst du oft die "passende" CIDR-Notation für eine bestimmte Host-Anzahl finden — merke dir die Zweierpotenzen: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024!
+> ❗ **IHK-Tipp:** Merke dir die Zweierpotenzen: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024!
 
-## Die UND-Verknüpfung (AND-Operation) — Schritt für Schritt
+## Netzwerk- und Broadcast-Adresse
+
+- **Netzwerkadresse**: Erste im Subnetz (Host-Bits = 0)
+- **Broadcast-Adresse**: Letzte im Subnetz (Host-Bits = 1)
+- **Nutzbare Hosts**: Alles dazwischen`,
+    },
+    {
+      id: "netz-6",
+      title: "AND-Verknüpfung & Netzwerkadresse",
+      duration: "12 min",
+      type: "interactive",
+      interactive: "subnetCalculator",
+      content: `# AND-Verknüpfung & Netzwerkadresse 🔍
+
+## Die UND-Verknüpfung (AND-Operation)
 
 Um die **Netzwerkadresse** zu finden, wendet man die **UND-Verknüpfung** (AND) auf IP-Adresse und Subnetzmaske an:
 
@@ -547,7 +570,7 @@ $$1 \\ \\mathbf{AND} \\ 1 = 1 \\qquad 1 \\ \\mathbf{AND} \\ 0 = 0 \\qquad 0 \\ \
 
 > 💡 Merke: **Nur wenn BEIDE 1 sind, kommt 1 heraus.** Sonst immer 0.
 
-### Beispiel: 192.168.1.130 mit Maske /26
+## Beispiel: 192.168.1.130 mit Maske /26
 
 **Schritt 1:** IP-Adresse in Binär:
 
@@ -567,7 +590,7 @@ $$11000000.10101000.00000001.10000000 = \\mathbf{192.168.1.128}$$
 
 > ✅ **Netzwerkadresse: 192.168.1.128**
 
-### Broadcast-Adresse berechnen
+## Broadcast-Adresse berechnen
 
 Die Broadcast-Adresse erhält man, indem man alle Host-Bits auf 1 setzt:
 
@@ -575,7 +598,7 @@ $$\\begin{aligned} \\text{Netzwerk:} &\\quad 11000000.10101000.00000001.10\\unde
 
 $$\\Rightarrow 192.168.1.10111111 = 192.168.1.191$$
 
-### Erste und letzte nutzbare Host-Adresse
+## Erste und letzte nutzbare Host-Adresse
 
 $$\\text{Erster Host} = \\text{Netzwerkadresse} + 1 = 192.168.1.129$$
 
@@ -585,11 +608,25 @@ $$\\text{Anzahl nutzbarer Hosts} = 2^6 - 2 = 62$$
 
 > ❗ **IHK-Tipp:** Übe diese Schritte auf Papier! In der Prüfung darfst du keinen Taschenrechner für Binär-Arithmetik benutzen.
 
-## VLSM — Variable Length Subnet Mask
+## 🧮 Interaktiver Subnetting-Rechner
+
+Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere verschiedene Eingaben aus!
+
+[INTERACTIVE:subnetCalculator]`,
+    },
+    {
+      id: "netz-7",
+      title: "VLSM — Variable Subnetze",
+      duration: "12 min",
+      type: "interactive",
+      interactive: "subnettingTrainer",
+      content: `# VLSM — Variable Length Subnet Mask 📊
+
+## Was ist VLSM?
 
 **VLSM** erlaubt es, verschiedene Subnetze mit **verschiedenen Präfixlängen** zu erstellen. Das spart IP-Adressen!
 
-### VLSM-Beispiel: Eine Firma mit 4 Abteilungen
+## VLSM-Beispiel: Eine Firma mit 4 Abteilungen
 
 | Abteilung | Benötigte Hosts | Gewähltes CIDR | Verfügbare Hosts | Subnetzmaske |
 |-----------|-----------------|----------------|-------------------|--------------|
@@ -608,7 +645,7 @@ $$2^h - 2 \\geq 20 \\Rightarrow 2^h \\geq 22 \\Rightarrow h = 5 \\ (2^5 = 32) \\
 
 > 💡 **Vorteil:** Ohne VLSM müsste ALLES auf /26 gesetzt werden — 4 × /26 = 248 Adressen. Mit VLSM: 62 + 30 + 14 + 6 = **112 Adressen** — über 50% gespart!
 
-### VLSM aufteilen: Schritt für Schritt
+## VLSM aufteilen: Schritt für Schritt
 
 Ausgangsnetzwerk: **192.168.1.0/24**
 
@@ -626,12 +663,6 @@ Ausgangsnetzwerk: **192.168.1.0/24**
 
 > ❗ **IHK-Tipp:** VLSM-Aufgaben sind die schwierigsten Subnetting-Aufgaben — IMMER mit der größten Abteilung anfangen!
 
-## 🧮 Interaktiver Subnetting-Rechner
-
-Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere verschiedene Eingaben aus!
-
-[INTERACTIVE:subnetCalculator]
-
 ## 🏋️ IHK Subnetting-Trainer
 
 Hier kannst du gezielt für die IHK-Prüfung üben — mit VLSM-Szenarien, geführten Aufgaben und Zeitdruck!
@@ -639,7 +670,7 @@ Hier kannst du gezielt für die IHK-Prüfung üben — mit VLSM-Szenarien, gefü
 [INTERACTIVE:subnettingTrainer]`,
     },
     {
-      id: "netz-5",
+      id: "netz-8",
       title: "IPv6",
       duration: "12 min",
       type: "text",
@@ -676,7 +707,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 > ❗ **IHK-Tipp:** IPv6-Adressen können lang sein — die Vereinfachungsregeln kennen!`,
     },
     {
-      id: "netz-6",
+      id: "netz-9",
       title: "Netzwerkgeräte",
       duration: "12 min",
       type: "interactive",
@@ -717,7 +748,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 > 💡 Der Netzwerk-Builder zeigt dir, wie Geräte zusammenhängen — baue dein eigenes Netzwerk!`,
     },
     {
-      id: "netz-7",
+      id: "netz-10",
       title: "Netzwerktopologien",
       duration: "10 min",
       type: "text",
@@ -749,7 +780,7 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
 > ❗ **IHK-Tipp:** In der Prüfung nach SPoFs fragen — immer an Redundanz denken!`,
     },
     {
-      id: "netz-8",
+      id: "netz-11",
       title: "Wichtige Netzwerkprotokolle",
       duration: "18 min",
       type: "interactive",
@@ -806,7 +837,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 > 💡 Der HTTP-Request zeigt dir Headers und Status-Codes live. Die Mail-Reise zeigt den Weg einer E-Mail!`,
     },
     {
-      id: "netz-9",
+      id: "netz-12",
       title: "WLAN",
       duration: "12 min",
       type: "interactive",
@@ -854,7 +885,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 > 💡 Der WLAN-Konfigurator zeigt dir, welche Einstellungen sicher sind — experimentiere mit Sicherheitsstandards!`,
     },
     {
-      id: "netz-10",
+      id: "netz-13",
       title: "Netzwerksicherheit",
       duration: "15 min",
       type: "interactive",
@@ -904,7 +935,7 @@ Schützt gegen: MAC-Flooding, unautorisierte Geräte.
 > 💡 Der VPN-Tunnel-Visualizer zeigt dir, wie ein verschlossener Tunnel aufgebaut wird — mit Site-to-Site und Remote Access!`,
     },
     {
-      id: "netz-11",
+      id: "netz-14",
       title: "Kabel & Übertragungsmedien",
       duration: "10 min",
       type: "interactive",
@@ -953,7 +984,7 @@ Vorteile: Keine EMI, hohe Bandbreite, lange Strecken
 > 💡 Der Kabel-Vergleich zeigt dir alle Eigenschaften auf einen Blick — wähle Kabel zum Vergleich aus!`,
     },
     {
-      id: "netz-12",
+      id: "netz-15",
       title: "Netzwerk-Tools & Befehle",
       duration: "12 min",
       type: "text",
