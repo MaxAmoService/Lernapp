@@ -66,7 +66,7 @@ pre {
   padding: 1rem;
   overflow-x: auto;
   font-family: "Fira Code", "Consolas", monospace;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.7;
 }
 
@@ -83,17 +83,17 @@ pre code {
   padding: 0;
 }
 
-/* Markdown Content */
+/* Markdown Content — Desktop-first (text-heavy educational app) */
 .markdown-content h1 {
-  @apply text-3xl font-bold mb-6 text-white;
+  @apply text-4xl font-bold mb-6 text-white;
 }
 
 .markdown-content h2 {
-  @apply text-2xl font-semibold mb-4 text-blue-400;
+  @apply text-3xl font-semibold mb-4 text-blue-400;
 }
 
 .markdown-content h3 {
-  @apply text-xl font-semibold mb-3 text-slate-200;
+  @apply text-2xl font-semibold mb-3 text-slate-200;
 }
 
 .markdown-content p {
@@ -117,15 +117,15 @@ pre code {
 }
 
 .markdown-content table {
-  @apply w-full mb-4 border-collapse;
+  @apply w-full mb-4 border-collapse text-lg;
 }
 
 .markdown-content th {
-  @apply bg-slate-800 p-3 text-left border border-slate-700 text-base;
+  @apply bg-slate-800 p-3 text-left border border-slate-700 text-lg font-semibold;
 }
 
 .markdown-content td {
-  @apply p-3 border border-slate-700 text-base;
+  @apply p-3 border border-slate-700 text-lg;
 }
 
 /* Animations */
@@ -183,10 +183,10 @@ pre code {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
-/* KaTeX Syntax Highlighting */
+/* KaTeX — larger for readability */
 .katex {
   color: #f0f9ff;
-  font-size: 1.1em;
+  font-size: 1.25em;
 }
 
 .katex .mord,
@@ -242,23 +242,28 @@ pre code {
 /* Interactive components — smaller on mobile */
 @media (max-width: 640px) {
   .markdown-content h1 {
-    @apply text-2xl mb-4;
+    @apply text-3xl mb-4;
   }
   .markdown-content h2 {
-    @apply text-xl mb-3;
+    @apply text-2xl mb-3;
   }
   .markdown-content h3 {
-    @apply text-lg mb-2;
+    @apply text-xl mb-2;
   }
   .markdown-content p {
     @apply text-base mb-3;
   }
   .markdown-content table {
-    font-size: 0.875rem;
+    font-size: 0.95rem;
   }
   .markdown-content th,
   .markdown-content td {
     @apply px-2 py-1;
+  }
+
+  /* KaTeX slightly smaller on mobile */
+  .katex {
+    font-size: 1.1em;
   }
 
   /* Interactive component containers */
@@ -293,12 +298,12 @@ pre code {
 
   /* Code blocks scroll */
   pre {
-    @apply text-xs p-3;
+    @apply text-sm p-3;
   }
 
   /* Tables in interactive components */
   .interactive-container table {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
   .interactive-container th,
   .interactive-container td {
@@ -309,10 +314,10 @@ pre code {
 /* Tablet adjustments */
 @media (min-width: 641px) and (max-width: 1023px) {
   .markdown-content h1 {
-    @apply text-2xl;
+    @apply text-3xl;
   }
   .markdown-content h2 {
-    @apply text-xl;
+    @apply text-2xl;
   }
 }
 
@@ -326,6 +331,7 @@ table td {
   padding: 0.75rem 1rem;
   text-align: left;
   border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+  font-size: 1.05rem;
 }
 
 table th {

@@ -247,7 +247,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         );
       } else if (line.startsWith("### ")) {
         flushTable();
-        elements.push(<h3 key={`h-${keyIndex++}`} className="text-xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
+        elements.push(<h3 key={`h-${keyIndex++}`} className="text-2xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
       }
       // Callout boxes: > 💡 text or > [!TIP] text etc.
       else if (line.startsWith("> ")) {
@@ -334,15 +334,15 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Header */}
       <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-700">
         <div className="min-w-0 flex-1">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">{lesson.title}</h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">{lesson.title}</h1>
+          <p className="text-sm sm:text-base text-slate-400 mt-1">
             ⏱️ {lesson.duration} • {getTypeLabel(lesson.type)}
           </p>
         </div>
         {isCompleted && (
           <div className="flex items-center gap-2 text-green-400">
             <CheckCircle2 className="w-5 h-5" />
-            <span className="text-sm">Abgeschlossen</span>
+            <span className="text-base">Abgeschlossen</span>
           </div>
         )}
       </div>
@@ -359,7 +359,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* CodeSandbox UNTEN — erst lernen, dann anwenden */}
       {lesson.interactive === "codeSandbox" && (
         <div className="mt-8">
-          <h3 className="text-lg font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
+          <h3 className="text-xl font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
           {renderInteractive("codeSandbox", lesson.codeExample)}
         </div>
       )}
@@ -367,7 +367,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Code Example — nur wenn KEIN CodeSandbox */}
       {lesson.codeExample && lesson.interactive !== "codeSandbox" && (
         <div className="mt-8">
-          <h3 className="text-lg font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
+          <h3 className="text-xl font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
           <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
         </div>
       )}
@@ -377,7 +377,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         {!isCompleted ? (
           <button
             onClick={onComplete}
-            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-green-500 hover:bg-green-600 rounded-lg font-medium transition-colors text-sm sm:text-base"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-green-500 hover:bg-green-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
           >
             <CheckCircle2 className="w-4 h-4" />
             Als abgeschlossen markieren
@@ -395,7 +395,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               onNext?.();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-sm sm:text-base"
+            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
           >
             Nächste Lektion
             <ChevronRight className="w-4 h-4" />
