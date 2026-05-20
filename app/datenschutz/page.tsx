@@ -19,6 +19,8 @@ export default function Datenschutz() {
           <p className="text-sm">
             Max Amo Service<br />
             Inhaber: Moritz Amo<br />
+            Schlader Weg 24<br />
+            58809 Neuenrade<br />
             E-Mail: maxamoservice@gmail.com
           </p>
         </section>
@@ -41,6 +43,7 @@ export default function Datenschutz() {
             Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet sogenannte
             &quot;Cookies&quot;. Die durch das Cookie erzeugten Informationen über Ihre Benutzung dieser Website
             werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert.
+            Die Datenübertragung in die USA erfolgt auf Grundlage des EU-US Data Privacy Frameworks.
           </p>
           <p className="text-sm mt-2">
             <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung). Die Nutzung
@@ -52,6 +55,25 @@ export default function Datenschutz() {
             IP-Anonymisierung aktiviert. Ihre IP-Adresse wird von Google innerhalb von
             Mitgliedstaaten der Europäischen Union oder in anderen Vertragsstaaten des Abkommens
             über den Europäischen Wirtschaftsraum vor der Übermittlung in die USA gekürzt.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Datenübertragung in die USA:</strong> Die Datenübertragung in die USA erfolgt
+            auf Grundlage des EU-US Data Privacy Frameworks (DPF), für das die USA von der
+            EU-Kommission als angemessen eingestuft wurden. Google LLC ist unter dem DPF zertifiziert.
+            Weitere Informationen:{" "}
+            <a
+              href="https://www.dataprivacyframework.gov/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              dataprivacyframework.gov
+            </a>
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Auftragsverarbeitung:</strong> Wir haben mit Google einen Vertrag zur
+            Auftragsverarbeitung (AVV) abgeschlossen. Dieser stellt sicher, dass Google die Daten
+            unserer Nutzer nur nach unseren Weisungen und unter Einhaltung der DSGVO verarbeitet.
           </p>
           <p className="text-sm mt-2">
             <strong>Widerspruch:</strong> Sie können die Erfassung Ihrer Daten durch Google Analytics
