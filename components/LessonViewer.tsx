@@ -247,7 +247,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         );
       } else if (line.startsWith("### ")) {
         flushTable();
-        elements.push(<h3 key={`h-${keyIndex++}`} className="text-3xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
+        elements.push(<h3 key={`h-${keyIndex++}`} className="text-2xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
       }
       // Callout boxes: > 💡 text or > [!TIP] text etc.
       else if (line.startsWith("> ")) {
@@ -274,8 +274,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               <div key={`callout-${keyIndex++}`} className={`my-4 p-4 rounded-xl border-l-4 ${style.bg} ${style.border} flex items-start gap-3`}>
                 <span className="text-lg mt-0.5 shrink-0">{style.icon}</span>
                 <div>
-                  <span className={`text-base font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
-                  <p className={`${style.text} text-lg mt-1 leading-relaxed`}><InlineText text={content} /></p>
+                  <span className={`text-sm font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
+                  <p className={`${style.text} text-base mt-1 leading-relaxed`}><InlineText text={content} /></p>
                 </div>
               </div>
             );
@@ -334,15 +334,15 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Header */}
       <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-700">
         <div className="min-w-0 flex-1">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">{lesson.title}</h1>
-          <p className="text-base sm:text-lg text-slate-400 mt-1">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">{lesson.title}</h1>
+          <p className="text-sm sm:text-base text-slate-400 mt-1">
             ⏱️ {lesson.duration} • {getTypeLabel(lesson.type)}
           </p>
         </div>
         {isCompleted && (
           <div className="flex items-center gap-2 text-green-400">
             <CheckCircle2 className="w-5 h-5" />
-            <span className="text-lg">Abgeschlossen</span>
+            <span className="text-base">Abgeschlossen</span>
           </div>
         )}
       </div>
@@ -359,7 +359,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* CodeSandbox UNTEN — erst lernen, dann anwenden */}
       {lesson.interactive === "codeSandbox" && (
         <div className="mt-8">
-          <h3 className="text-2xl font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
+          <h3 className="text-xl font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
           {renderInteractive("codeSandbox", lesson.codeExample)}
         </div>
       )}
@@ -367,7 +367,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       {/* Code Example — nur wenn KEIN CodeSandbox */}
       {lesson.codeExample && lesson.interactive !== "codeSandbox" && (
         <div className="mt-8">
-          <h3 className="text-2xl font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
+          <h3 className="text-xl font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
           <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
         </div>
       )}
