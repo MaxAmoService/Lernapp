@@ -84,6 +84,41 @@ function renderVisual(visual: LessonVisual, index: number) {
 }
 
 function renderInteractive(type: string, codeExample?: string) {
+  const interactiveNames: Record<string, string> = {
+    functionExplorer: "Funktionen-Explorer",
+    tangentExplorer: "Tangenten-Explorer",
+    integralExplorer: "Integral-Rechner",
+    unitCircleInteractive: "Einheitskreis",
+    vectorExplorer: "Vektoren-Explorer",
+    codeSandbox: "Code-Sandbox",
+    papBuilder: "PAP-Builder",
+    pseudocodeRunner: "Pseudocode-Runner",
+    struktogrammBuilder: "Struktogramm-Builder",
+    sortVisualizer: "Sortier-Visualisierung",
+    searchVisualizer: "Such-Visualisierung",
+    epkBuilder: "EPK-Builder",
+    umlClassDiagram: "UML Klassendiagramm",
+    sequenceDiagram: "Sequenzdiagramm",
+    netzplanBuilder: "Netzplan-Builder",
+    networkBuilder: "Netzwerk-Builder",
+    subnetCalculator: "Subnetting-Rechner",
+    osiExplorer: "OSI-Explorer",
+    protocolAnalyzer: "Protokoll-Analyse",
+    macConverter: "MAC/IP-Konverter",
+    osiCapsuleViewer: "OSI-Kapselung",
+    tcpHandshakeSimulator: "TCP-Handshake",
+    dhcpExplorer: "DHCP-Explorer",
+    dnsLookup: "DNS-Lookup",
+    firewallRuleBuilder: "Firewall-Regeln",
+    wlanConfigurator: "WLAN-Konfigurator",
+    cableComparer: "Kabel-Vergleich",
+    mailJourney: "E-Mail-Weg",
+    httpRequestVisualizer: "HTTP-Request",
+    encryptionDemo: "Verschlüsselung",
+    vpnTunnelVisualizer: "VPN-Tunnel",
+    subnettingTrainer: "Subnetting-Trainer",
+  };
+
   const components: Record<string, JSX.Element> = {
     functionExplorer: <FunctionExplorer />,
     tangentExplorer: <TangentExplorer />,
@@ -119,9 +154,20 @@ function renderInteractive(type: string, codeExample?: string) {
     subnettingTrainer: <SubnettingTrainer />,
   };
 
+  const name = interactiveNames[type] || type;
+
   return (
-    <div className="my-6">
-      {components[type] || <p className="text-red-400">Unbekannter Interaktiv-Typ: {type}</p>}
+    <div className="my-8 max-w-4xl mx-auto">
+      <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl overflow-hidden">
+        <div className="px-5 py-3 border-b border-slate-700/50 bg-slate-800/60">
+          <h3 className="text-lg font-semibold text-green-400 flex items-center gap-2">
+            🧪 Übung: {name}
+          </h3>
+        </div>
+        <div className="p-4 sm:p-6">
+          {components[type] || <p className="text-red-400">Unbekannter Interaktiv-Typ: {type}</p>}
+        </div>
+      </div>
     </div>
   );
 }
@@ -358,17 +404,33 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
 
       {/* CodeSandbox UNTEN — erst lernen, dann anwenden */}
       {lesson.interactive === "codeSandbox" && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold text-green-400 mb-3">🧪 Ausprobieren</h3>
-          {renderInteractive("codeSandbox", lesson.codeExample)}
+        <div className="my-8 max-w-4xl mx-auto">
+          <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-slate-700/50 bg-slate-800/60">
+              <h3 className="text-lg font-semibold text-green-400 flex items-center gap-2">
+                🧪 Ausprobieren
+              </h3>
+            </div>
+            <div className="p-4 sm:p-6">
+              {renderInteractive("codeSandbox", lesson.codeExample)}
+            </div>
+          </div>
         </div>
       )}
 
       {/* Code Example — nur wenn KEIN CodeSandbox */}
       {lesson.codeExample && lesson.interactive !== "codeSandbox" && (
-        <div className="mt-8">
-          <h3 className="text-xl font-semibold text-blue-400 mb-3">💻 Code-Beispiel</h3>
-          <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
+        <div className="my-8 max-w-4xl mx-auto">
+          <div className="bg-slate-800/40 border border-slate-700/50 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-slate-700/50 bg-slate-800/60">
+              <h3 className="text-lg font-semibold text-blue-400 flex items-center gap-2">
+                💻 Code-Beispiel
+              </h3>
+            </div>
+            <div className="p-4 sm:p-6">
+              <CodeBlock code={lesson.codeExample} language="tsx" filename="example.tsx" />
+            </div>
+          </div>
         </div>
       )}
 
