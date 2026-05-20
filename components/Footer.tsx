@@ -13,9 +13,8 @@ export function Footer() {
             © 2026 LearnHub - Built with Next.js & ❤️
           </p>
           <div className="flex gap-4 text-slate-500 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Über</a>
-            <a href="#" className="hover:text-white transition-colors">Datenschutz</a>
-            <a href="#" className="hover:text-white transition-colors">Impressum</a>
+            <a href="/datenschutz" className="hover:text-white transition-colors">Datenschutz</a>
+            <a href="/impressum" className="hover:text-white transition-colors">Impressum</a>
           </div>
         </div>
       </div>

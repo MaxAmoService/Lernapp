@@ -5,6 +5,8 @@ import "katex/dist/katex.min.css";
 import { AuthProvider } from "@/components/AuthProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CookieConsent } from "@/components/CookieConsent";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 
 export default function RootLayout({
   children,
@@ -19,12 +21,14 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className="min-h-screen bg-dark-950 text-slate-100">
+        <GoogleAnalytics />
         <AuthProvider>
           <Navbar />
           <main className="w-[84%] max-w-none mx-auto px-1 py-2">
             {children}
           </main>
           <Footer />
+          <CookieConsent />
         </AuthProvider>
       </body>
     </html>
