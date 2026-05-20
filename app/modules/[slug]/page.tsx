@@ -24,7 +24,11 @@ import {
   ChevronDown,
   ChevronUp,
   Target,
+  Layers,
 } from "lucide-react";
+import { FlashcardViewer } from "@/components/FlashcardViewer";
+import { getFlashcardsForModule } from "@/lib/flashcardData";
+import { fireConfetti } from "@/components/Confetti";
 
 // Merkblatt Content Component with full Markdown support
 function MerkblattContent({ content }: { content: string }) {
@@ -95,6 +99,7 @@ export default function ModulePage() {
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [showLogin, setShowLogin] = useState(false);
   const [showMerkblatt, setShowMerkblatt] = useState(false);
+  const [showFlashcards, setShowFlashcards] = useState(false);
 
   // Get completed lessons ONLY from user data (no localStorage fallback to prevent ghost progress)
   const completedLessons = new Set(
@@ -130,6 +135,7 @@ export default function ModulePage() {
 
     // Save to user profile only (no separate localStorage backup)
     completeLesson(module.slug, lessonId);
+    fireConfetti();
   };
 
   const goToNextLesson = () => {
@@ -179,11 +185,20 @@ export default function ModulePage() {
         <aside className="lg:col-span-1">
           {/* Mobile: Auswahlliste */}
           <div className="lg:hidden mb-4">
+            {/* Flashcard Button Mobile */}
+            {getFlashcardsForModule(module.slug).length > 0 && (
+              <button
+                onClick={() => { setShowFlashcards(true); setSelectedLesson(null); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                className="w-full mb-2 flex items-center justify-center gap-2 p-3 bg-purple-500/10 border border-purple-500/30 rounded-lg text-sm text-purple-300 font-medium"
+              >
+                <Layers className="w-4 h-4" /> 🃏 Karteikarten lernen
+              </button>
+            )}
             <select
               value={selectedLesson?.id || ""}
               onChange={(e) => {
                 const lesson = module.lessons.find((l) => l.id === e.target.value);
-                if (lesson) { setSelectedLesson(lesson); window.scrollTo({ top: 0, behavior: "smooth" }); }
+                if (lesson) { setSelectedLesson(lesson); setShowFlashcards(false); window.scrollTo({ top: 0, behavior: "smooth" }); }
               }}
               className="w-full bg-slate-800 text-white rounded-lg px-4 py-3 text-sm border border-slate-600"
             >
@@ -236,6 +251,25 @@ export default function ModulePage() {
               </div>
             )}
             <h2 className="text-lg font-semibold mb-4">Lektionen</h2>
+            {/* Flashcard Button */}
+            {getFlashcardsForModule(module.slug).length > 0 && (
+              <button
+                onClick={() => { setShowFlashcards(true); setSelectedLesson(null); }}
+                className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors mb-2 ${
+                  showFlashcards
+                    ? "bg-purple-500/20 border border-purple-500/50"
+                    : "bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30"
+                }`}
+              >
+                <div className="p-1.5 rounded bg-purple-500/30">
+                  <Layers className="w-4 h-4 text-purple-400" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-purple-300">🃏 Karteikarten</p>
+                  <p className="text-xs text-purple-400/70">Spaced Repetition</p>
+                </div>
+              </button>
+            )}
             <nav className="space-y-2">
               {module.lessons.map((lesson, index) => {
                 const isCompleted = completedLessons.has(lesson.id);
@@ -244,7 +278,7 @@ export default function ModulePage() {
                 return (
                   <button
                     key={lesson.id}
-                    onClick={() => { setSelectedLesson(lesson); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                    onClick={() => { setSelectedLesson(lesson); setShowFlashcards(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                     className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors ${
                       isSelected
                         ? "bg-blue-500/20 border border-blue-500/50"
@@ -274,7 +308,30 @@ export default function ModulePage() {
 
         {/* Lesson Content */}
         <div className="lg:col-span-3 min-w-0">
-          {selectedLesson ? (
+          {showFlashcards ? (
+            <div className="glass rounded-xl p-4 sm:p-6 lg:p-8 animate-slide-up">
+              <div className="flex items-center justify-between mb-6 pb-4 border-b border-slate-700">
+                <div>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                    🃏 Karteikarten
+                  </h1>
+                  <p className="text-sm text-slate-400 mt-1">
+                    Spaced Repetition — lerne effizient mit dem SM-2 Algorithmus
+                  </p>
+                </div>
+                <button
+                  onClick={() => setShowFlashcards(false)}
+                  className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg text-sm transition-colors"
+                >
+                  Schließen
+                </button>
+              </div>
+              <FlashcardViewer
+                moduleId={module.slug}
+                cards={getFlashcardsForModule(module.slug)}
+              />
+            </div>
+          ) : selectedLesson ? (
             selectedLesson.type === "quiz" ? (
               <Quiz
                 moduleSlug={module.slug}
