@@ -47,6 +47,12 @@ import { HTTPRequestVisualizer } from "./interactive/HTTPRequestVisualizer";
 import { EncryptionDemo } from "./interactive/EncryptionDemo";
 import { VPNTunnelVisualizer } from "./interactive/VPNTunnelVisualizer";
 import { SubnettingTrainer } from "./interactive/SubnettingTrainer";
+import { RelationalModelExplorer } from "./interactive/RelationalModelExplorer";
+import { ERDiagramBuilder } from "./interactive/ERDiagramBuilder";
+import { NormalisationTrainer } from "./interactive/NormalisationTrainer";
+import { SQLPlayground } from "./interactive/SQLPlayground";
+import { JoinVisualizer } from "./interactive/JoinVisualizer";
+import { DBPlanningPhases } from "./interactive/DBPlanningPhases";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -117,6 +123,12 @@ function renderInteractive(type: string, codeExample?: string) {
     encryptionDemo: "Verschlüsselung",
     vpnTunnelVisualizer: "VPN-Tunnel",
     subnettingTrainer: "Subnetting-Trainer",
+    relationalModelExplorer: "Kardinalitäten-Explorer",
+    erDiagramBuilder: "ER-Diagramm Builder",
+    normalisationTrainer: "Normalisierungs-Trainer",
+    sqlPlayground: "SQL Playground",
+    joinVisualizer: "JOIN-Visualisierer",
+    dbPlanningPhases: "DB-Phasen Guide",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -152,6 +164,12 @@ function renderInteractive(type: string, codeExample?: string) {
     encryptionDemo: <EncryptionDemo />,
     vpnTunnelVisualizer: <VPNTunnelVisualizer />,
     subnettingTrainer: <SubnettingTrainer />,
+    relationalModelExplorer: <RelationalModelExplorer />,
+    erDiagramBuilder: <ERDiagramBuilder />,
+    normalisationTrainer: <NormalisationTrainer />,
+    sqlPlayground: <SQLPlayground />,
+    joinVisualizer: <JoinVisualizer />,
+    dbPlanningPhases: <DBPlanningPhases />,
   };
 
   const name = interactiveNames[type] || type;

@@ -5,6 +5,7 @@ import { reactModule } from "./reactData";
 import { typescriptModule } from "./typescriptData";
 import { nextjsModule } from "./nextjsData";
 import { javascriptModule } from "./javascriptData";
+import { datenbankModule } from "./datenbankData";
 import { Category } from "./types";
 
 // Re-export types for backward compatibility
@@ -29,7 +30,7 @@ export const modules = [
 ];
 
 // Combine all modules
-export const allModules = [...modules, ...mathModules, ihkModule, netzwerkModule];
+export const allModules = [...modules, ...mathModules, ihkModule, netzwerkModule, datenbankModule];
 
 export function getModule(slug: string) {
   return allModules.find((m) => m.slug === slug);

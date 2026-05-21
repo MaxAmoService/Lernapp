@@ -1,0 +1,959 @@
+import { Module } from "./types";
+
+// ============================================================================
+// IHK "Datenbanken" — Modul-Daten
+// Quelle: IHK Kursunterlagen + AP1/AP2 Prüfungsthemen
+// ============================================================================
+
+export const datenbankModule: Module = {
+  id: "ihk-datenbanken",
+  slug: "ihk-datenbanken",
+  title: "Datenbanken",
+  description: "IHK AP1/AP2: ER-Modelle, Normalisierung, SQL (DDL/DML/DQL/DCL/TCL), JOINs, ACID, Referenzielle Integrität, Backups",
+  icon: "🗄️",
+  color: "#8B5CF6",
+  category: "programmieren",
+  progress: 0,
+  merkblatt: `## 📋 Merkblatt: Datenbanken (IHK)
+
+### Grundbegriffe
+- **Atomar**: Ein Wert pro Zelle — nicht weiter teilbar
+- **Primärschlüssel (PK)**: Macht jeden Eintrag eindeutig identifizierbar (z.B. ID)
+- **Fremdschlüssel (FK)**: Verweis auf einen Primärschlüssel einer anderen Tabelle
+- **Referenzielle Integrität**: FK muss immer auf existierenden PK verweisen
+- **Entität**: Ein Eintrag in einer Tabelle (Zeile)
+- **Attribute**: Eigenschaften einer Entität (Spalten)
+- **Kardinalität**: 1:1, 1:n, n:m — Beziehungen zwischen Tabellen
+
+### Kardinalitäten
+- **1:1**: Ein Mitarbeiter hat genau einen Arbeitsplatz
+- **1:n**: Ein Kunde hat viele Bestellungen
+- **n:m**: Schüler ↔ Kurse → erzeugt IMMER eine Verweistabelle!
+
+### Normalisierung
+- **1NF**: Alle Werte atomar, keine wiederholenden Gruppen
+- **2NF**: 1NF + alle Nicht-Schlüssel-Attribute vollständig abhängig vom PK
+- **3NF**: 2NF + keine transitiven Abhängigkeiten
+- Ziel: Redundanzen & Anomalien vermeiden
+
+### SQL-Kategorien
+- **DDL** (Data Definition): CREATE, ALTER, DROP, TRUNCATE
+- **DML** (Data Manipulation): INSERT, UPDATE, DELETE
+- **DQL** (Data Query): SELECT
+- **DCL** (Data Control): GRANT, REVOKE
+- **TCL** (Transaction Control): COMMIT, ROLLBACK, SAVEPOINT
+
+### JOINs
+- **INNER JOIN**: Nur passende Zeilen aus beiden Tabellen
+- **LEFT JOIN**: Alle links + passende rechts (NULL wenn kein Match)
+- **RIGHT JOIN**: Alle rechts + passende links
+- **CROSS JOIN**: Kartesisches Produkt (jede Kombination)
+
+### ACID-Prinzip
+- **A**tomicity: Transaktion ganz oder gar nicht
+- **C**onsistency: Datenbank bleibt konsistent
+- **I**solation: Transaktionen beeinflussen sich nicht
+- **D**urability: Nach Commit dauerhaft gespeichert
+
+### Datenbank-Phasen
+1. **Extern**: Anforderungen sammeln (Was will der Kunde?)
+2. **Konzeptionell**: ER-Modell erstellen
+3. **Logisch**: Tabellen, Normalisierung, PK/FK festlegen
+4. **Physisch**: Implementierung in DBMS (z.B. PostgreSQL)
+
+### Wichtige Befehle
+\`\`\`sql
+-- Tabelle erstellen
+CREATE TABLE kunde (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE
+);
+
+-- Daten einfügen
+INSERT INTO kunde (name, email) VALUES ('Max', 'max@b.de');
+
+-- Abfrage mit JOIN
+SELECT b.id, k.name, b.datum
+FROM bestellung b
+JOIN kunde k ON b.kunde_id = k.id;
+
+-- Löschen vs. Kürzen
+DELETE FROM tabelle WHERE id = 1;  -- löscht Zeile(n)
+TRUNCATE TABLE tabelle;            -- leert ganze Tabelle
+DROP TABLE tabelle;                -- entfernt Tabelle komplett
+\`\`\`
+
+### Backups
+- **Full Backup**: Komplette Sicherung (regelmäßig)
+- **Transaktions-Backup**: Nur Änderungen seit letztem Backup
+- **Wiederherstellung**: Full + Transaktions-Backups zusammen einspielen`,
+
+  lessons: [
+    // =====================================================================
+    // LEKTION 1: Grundbegriffe
+    // =====================================================================
+    {
+      id: "db-1",
+      title: "Grundbegriffe & Vokabeln",
+      duration: "12 min",
+      type: "text",
+      content: `# Grundbegriffe & Vokabeln 📖
+
+## Was ist eine Datenbank?
+
+Eine **Datenbank** ist eine strukturierte Sammlung von Daten, die effizient gespeichert, verwaltet und abgerufen werden können. In der IHK arbeiten wir hauptsächlich mit **relationalen Datenbanken**.
+
+> 💡 **Merke:** Eine Datenbank ist KEIN Excel! Excel kann keine referenzielle Integrität garantieren.
+
+## Die wichtigsten Begriffe
+
+### Primärschlüssel (Primary Key / PK)
+- Macht jeden Eintrag **eindeutig identifizierbar**
+- Beispiel: Kunden-ID, Bestellnummer, Matrikelnummer
+- **Regeln**: Eindeutig, NOT NULL, sich nie ändernd
+
+> 💡 Der Primärschlüssel ist wie der **Personalausweis** — jeder hat genau einen und er ist eindeutig.
+
+### Fremdschlüssel (Foreign Key / FK)
+- **Verweis** auf einen Primärschlüssel einer anderen Tabelle
+- Stellt die **Beziehung** zwischen zwei Tabellen her
+- Beispiel: In der Tabelle "Bestellung" verweist \`kunde_id\` auf den PK der Tabelle "Kunde"
+
+### Atomarität
+- Jede Zelle enthält **genau einen Wert** — nicht mehr teilbar
+- ❌ Falsch: "Max, Moritz" in einer Zelle
+- ✅ Richtig: Separate Zeilen für jeden Namen
+
+### Referenzielle Integrität
+- Ein Fremdschlüssel **muss** auf einen existierenden Primärschlüssel verweisen
+- Man kann NICHT einfach einen Kunden löschen, wenn noch Bestellungen auf ihn verweisen
+- Schützt vor **verwaisten Datensätzen** (Dangling References)
+
+### Entität & Attribute
+- **Entität** = Eine Zeile in der Tabelle (z.B. ein konkreter Kunde)
+- **Attribute** = Die Spalten (z.B. Name, Email, Telefon)
+
+### Kardinalität
+Beschreibt, wie viele Entitäten an einer Beziehung teilnehmen:
+- **1:1** — Ein Mitarbeiter hat genau einen Arbeitsplatz
+- **1:n** — Ein Kunde hat viele Bestellungen
+- **n:m** — Schüler besuchen viele Kurse, Kurse haben viele Schüler
+
+### Redundanz
+- Wenn dieselbe Information **mehrfach** gespeichert wird
+- Problem: Bei einer Änderung müssen ALLE Kopien angepasst werden
+
+### Anomalien
+Durch fehlende Normalisierung können drei Probleme auftreten:
+- **Einfügeanomalie**: Man kann keinen Kunden ohne Bestellung eintragen
+- **Änderungsanomalie**: Kundenadresse muss in JEDER Bestellung geändert werden
+- **Löschanomalie**: Löscht man die letzte Bestellung, verschwindet der Kunde
+
+> ❗ **IHK-Tipp:** Diese Begriffe kommen in JEDER Prüfung — sowohl in AP1 als auch AP2!`,
+    },
+
+    // =====================================================================
+    // LEKTION 2: Relationale Datenbanken & Kardinalitäten
+    // =====================================================================
+    {
+      id: "db-2",
+      title: "Relationale Datenbanken & Kardinalitäten",
+      duration: "15 min",
+      type: "interactive",
+      interactive: "relationalModelExplorer",
+      content: `# Relationale Datenbanken & Kardinalitäten 🔗
+
+## Was bedeutet "relational"?
+
+**Relational** bedeutet: Die Tabellen stehen in **Relation** zueinander — sie hängen über Schlüssel zusammen.
+
+> 💡 "Relational" kommt nicht von "Beziehung", sondern von **Relation** = mathematischer Begriff für Tabelle!
+
+## Die drei Beziehungstypen
+
+### 1:1 — Eins-zu-Eins
+Ein Datensatz der Tabelle A ist **genau einem** Datensatz der Tabelle B zugeordnet.
+
+**Beispiel:** Mitarbeiter ↔ Arbeitsplatz
+- Jeder Mitarbeiter hat genau einen Arbeitsplatz
+- Jeder Arbeitsplatz gehört genau einem Mitarbeiter
+
+**Wann sinnvoll?** Datenschutz (Gehaltsdaten extra Tabelle) oder Auslagerung großer Felder.
+
+> 💡 Bei 1:1 wird der FK meist in die "untergeordnete" Tabelle gelegt.
+
+### 1:n — Eins-zu-viele
+Ein Datensatz der Tabelle A kann **mehrere** Datensätze der Tabelle B haben.
+
+**Beispiel:** Kunde → Bestellungen
+- Ein Kunde kann viele Bestellungen haben
+- Jede Bestellung gehört zu GENAU einem Kunden
+
+**FK-Regel:** Der Fremdschlüssel kommt IMMER auf die **n-Seite** (die "viele" Seite).
+
+> 💡 Das ist die häufigste Beziehung in relationalen Datenbanken!
+
+### n:m — Viele-zu-viele
+Datensätze beider Tabellen können **mehrere** Partner haben.
+
+**Beispiel:** Schüler ↔ Kurse
+- Ein Schüler besucht viele Kurse
+- Ein Kunde hat viele Schüler
+
+**WICHTIG:** n:m-Beziehungen erzeugen immer eine **Verweistabelle** (auch: Assoziationstabelle, Join-Tabelle)!
+
+Die Verweistabelle enthält:
+- Die **Fremdschlüssel** beider Tabellen als zusammengesetzten Primärschlüssel
+- Optional **Beziehungsattribute** (z.B. Note, Datum)
+
+> ❗ **IHK-Tipp:** Immer BEIDE Richtungen prüfen! Wenn du dir unsicher bist, ob 1:n oder n:m — frag: "Kann A mehrere B haben UND B mehrere A?" → Dann n:m.
+
+## Verweistabelle Beispiel
+
+Schüler (ID, Name) ↔ Kurs (ID, Fach) → SchülerKurs (Schüler_ID, Kurs_ID, Note)
+
+| Schüler_ID | Kurs_ID | Note |
+|------------|---------|------|
+| 1 | 1 | 2 |
+| 1 | 3 | 1 |
+| 2 | 1 | 3 |
+| 3 | 2 | 2 |
+
+## 🔗 Interaktiver Kardinalitäten-Explorer
+
+Probiere verschiedene Beziehungstypen aus und sieh dir die resultierenden Tabellen an!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 3: Entity-Relationship-Modell
+    // =====================================================================
+    {
+      id: "db-3",
+      title: "Entity-Relationship-Modell (ERM)",
+      duration: "18 min",
+      type: "interactive",
+      interactive: "erDiagramBuilder",
+      content: `# Entity-Relationship-Modell (ERM) 🏗️
+
+## Was ist das ER-Modell?
+
+Das **ER-Modell** (Entity-Relationship-Modell) ist ein Hilfsmittel zur **Datenbankplanung**. Es entsteht in der **konzeptionellen Phase** und stellt dar:
+- Welche **Entitäten** (Tabellen) es gibt
+- Welche **Attribute** sie haben
+- Welche **Beziehungen** zwischen ihnen bestehen
+
+> 💡 Das ER-Modell ist der **Bauplan** der Datenbank — wie ein Architektenplan für ein Haus.
+
+## Symbole im ER-Modell
+
+| Symbol | Bedeutung |
+|--------|-----------|
+| **Rechteck** | Entität (Tabelle) |
+| **Ellipse** | Attribut (Spalte) |
+| **Raute (Diamond)** | Beziehung |
+| **Unterstrichen** | Primärschlüssel |
+| **Linie** | Verbindung |
+
+## ER-Modell Regeln
+
+1. **Primärschlüssel** werden unterstrichen
+2. **Beziehungen** werden in der Raute benannt (Verb!)
+3. **Kardinalität** wird an die Linie geschrieben
+4. **Attribute** können auch an einer Raute stehen (wenn sinnvoll, z.B. bei n:m)
+
+## Beispiel: Online-Shop
+
+**Entitäten:** Kunde, Bestellung, Produkt, Kategorie
+
+**Beziehungen:**
+- Kunde **hat** Bestellung (1:n)
+- Bestellung **enthält** Produkt (n:m → Verweistabelle "Bestellposition")
+- Produkt **gehört zu** Kategorie (n:1)
+
+## Häufige Fehler
+
+- ❌ **Kreise** im Diagramm → Ringabhängigkeiten vermeiden
+- ❌ **Redundante** Beziehungen → z.B. Bestellhistorie wenn schon Bestellung existiert
+- ❌ **Singular/Plural** falsch → Immer Singular für Entitätsnamen
+- ❌ **n:m** wenn eigentlich 1:n → Immer beide Richtungen prüfen!
+
+> ❗ **IHK-Tipp:** In der Prüfung musst du ein ER-Modell aus einer Aufgabenstellung erstellen können — übe mit dem Builder!
+
+## 🏗️ ER-Diagramm Builder
+
+Baue dein eigenes ER-Diagramm — füge Entitäten, Attribute und Beziehungen hinzu!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 4: Normalisierung
+    // =====================================================================
+    {
+      id: "db-4",
+      title: "Normalisierung — 1NF, 2NF, 3NF",
+      duration: "20 min",
+      type: "interactive",
+      interactive: "normalisationTrainer",
+      content: `# Normalisierung — 1NF, 2NF, 3NF 📊
+
+## Warum normalisieren?
+
+Ziel der Normalisierung:
+- ✅ **Redundanzen** vermeiden
+- ✅ **Anomalien** verhindern
+- ✅ **Datenintegrität** sicherstellen
+- ⚖️ Balance zwischen Redundanz, Performance und Flexibilität
+
+> 💡 Wir normalisieren bis zur **3NF** — das ist der IHK-Standard. Höhere Formen (BCNF, 4NF, 5NF) sind für die Prüfung irrelevant.
+
+## Erste Normalform (1NF)
+
+**Regel:** Alle Werte müssen **atomar** sein — keine wiederholenden Gruppen, keine mehrwertigen Attribute.
+
+### Prüf-Fragen:
+- Gibt es Spalten mit **mehreren Werten** in einer Zelle?
+- Gibt es **wiederholende Spalten** (z.B. Telefon1, Telefon2, Telefon3)?
+
+### Beispiel — NICHT 1NF:
+
+| KundenID | Name | Telefonnummern |
+|----------|------|----------------|
+| 1 | Max | 0171-123, 0172-456 |
+| 2 | Lisa | 0173-789 |
+
+### Beispiel — 1NF:
+
+| KundenID | Name | Telefon |
+|----------|------|---------|
+| 1 | Max | 0171-123 |
+| 1 | Max | 0172-456 |
+| 2 | Lisa | 0173-789 |
+
+## Zweite Normalform (2NF)
+
+**Regel:** 1NF + Alle Nicht-Schlüssel-Attribute sind **vollständig funktional abhängig** vom gesamten Primärschlüssel.
+
+Das Problem tritt nur bei **zusammengesetzten Primärschlüsseln** auf!
+
+### Prüf-Fragen:
+- Hat die Tabelle einen **zusammengesetzten PK**?
+- Gibt es Attribute, die nur von **einem Teil** des PK abhängen?
+
+### Beispiel — NICHT 2NF:
+
+Bestellung(PK: BestellungID, PK: ProduktID, ProduktName, Menge)
+
+- **ProduktName** hängt nur von ProduktID ab — NICHT vom gesamten PK!
+- **Menge** hängt von beiden ab — das ist okay.
+
+### Lösung: Aufteilen in zwei Tabellen
+- Bestellung(BestellungID, ProduktID, Menge)
+- Produkt(ProduktID, ProduktName)
+
+## Dritte Normalform (3NF)
+
+**Regel:** 2NF + Keine **transitiven Abhängigkeiten** — Nicht-Schlüssel-Attribute dürfen nicht von anderen Nicht-Schlüssel-Attributen abhängen.
+
+### Was ist eine transitive Abhängigkeit?
+PK → Attribut A → Attribut B
+
+Wenn A von PK abhängt und B von A, dann ist B **transitiv** vom PK abhängig.
+
+### Beispiel — NICHT 3NF:
+
+Kunde(KundenID, Name, PLZ, Stadt)
+
+- **Stadt** hängt von **PLZ** ab (PLZ → Stadt)
+- PLZ ist KEIN Schlüssel → transitive Abhängigkeit!
+
+### Lösung: PLZ in eigene Tabelle
+- Kunde(KundenID, Name, PLZ)
+- Ort(PLZ, Stadt)
+
+> ❗ **IHK-Tipp:** Die Normalisierung kommt als Aufgabe in JEDER Prüfung — meist als "Bringen Sie die Tabelle in die 3NF!"
+
+## 📊 Normalisierungs-Trainier
+
+Bringe Schritt für Schritt eine denormalisierte Tabelle in die 3NF — mit Erklärung zu jedem Schritt!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 5: SQL — Alle Kategorien
+    // =====================================================================
+    {
+      id: "db-5",
+      title: "SQL — DDL, DML, DQL, DCL & TCL",
+      duration: "20 min",
+      type: "interactive",
+      interactive: "sqlPlayground",
+      content: `# SQL — Die Sprache der Datenbanken 💾
+
+## Was ist SQL?
+
+**SQL** (Structured Query Language) ist eine **deklarative Sprache** für relationale Datenbanken.
+- Keine Programmiersprache (keine Schleifen!)
+- Deklarativ: Du beschreibst **was** du willst, nicht **wie**
+- Nach dem **ACID-Prinzip**
+
+> 💡 Merke: SQL = "Was", nicht "Wie". Du sagst "Gib mir alle Kunden aus Berlin" — die Datenbank findet den Weg.
+
+## SQL vs. NoSQL
+
+| Eigenschaft | SQL | NoSQL |
+|-------------|-----|-------|
+| Struktur | Tabellen (Schema) | Dokumente, Key-Value, etc. |
+| Beziehungen | JOINs ✅ | Schwer abzubilden |
+| Skalierung | Vertikal | Horizontal |
+| ACID | ✅ Ja | Teilweise |
+| Beispiel | PostgreSQL, MySQL | MongoDB, Redis |
+
+## Die 5 SQL-Kategorien
+
+Merksätze:
+- **DDL** → ich mache was an einer Tabelle (Struktur)
+- **DML** → Datenanpassung in einer Tabelle (Inhalt)
+- **DQL** → Query = Anfrage für Daten
+- **DCL** → Rechtedefinierung
+- **TCL** → für Wartung/Transaktionen
+
+### DDL — Data Definition Language
+
+Strukturen erstellen, ändern, löschen:
+
+\`\`\`sql
+-- Tabelle erstellen
+CREATE TABLE kunde (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  email VARCHAR(255) UNIQUE,
+  erstellt_am TIMESTAMP DEFAULT NOW()
+);
+
+-- Spalte hinzufügen
+ALTER TABLE kunde ADD COLUMN telefon VARCHAR(20);
+
+-- Tabelle leeren (Struktur bleibt)
+TRUNCATE TABLE kunde;
+
+-- Tabelle komplett entfernen
+DROP TABLE kunde;
+\`\`\`
+
+| Befehl | Was es macht |
+|--------|-------------|
+| CREATE | Erstellt Tabelle/Struktur |
+| ALTER | Ändert Spalten |
+| DROP | Entfernt Tabelle KOMPLETT |
+| TRUNCATE | Leert Tabelle, Struktur bleibt |
+
+### DML — Data Manipulation Language
+
+Daten einfügen, ändern, löschen:
+
+\`\`\`sql
+-- Daten einfügen
+INSERT INTO kunde (name, email) VALUES ('Max', 'max@b.de');
+
+-- Daten ändern
+UPDATE kunde SET email = 'neu@b.de' WHERE id = 1;
+
+-- Daten löschen
+DELETE FROM kunde WHERE id = 1;
+\`\`\`
+
+> ⚠️ **ACHTUNG:** \`DELETE FROM kunde\` ohne WHERE löscht ALLE Zeilen!
+
+### DQL — Data Query Language
+
+Daten abfragen:
+
+\`\`\`sql
+-- Alle Kunden
+SELECT * FROM kunde;
+
+-- Bestimmte Spalten mit Filter
+SELECT name, email FROM kunde WHERE plz = '10115';
+
+-- Sortierung und Limit
+SELECT * FROM kunde ORDER BY name ASC LIMIT 10;
+
+-- Aggregationen
+SELECT COUNT(*) AS anzahl FROM kunde;
+SELECT AVG(preis) AS durchschnitt FROM produkt;
+\`\`\`
+
+### DCL — Data Control Language
+
+Rechte verwalten:
+
+\`\`\`sql
+GRANT SELECT ON kunde TO benutzer;
+REVOKE INSERT ON kunde FROM benutzer;
+\`\`\`
+
+### TCL — Transaction Control Language
+
+Transaktionen steuern:
+
+\`\`\`sql
+BEGIN;
+UPDATE konto SET saldo = saldo - 100 WHERE id = 1;
+UPDATE konto SET saldo = saldo + 100 WHERE id = 2;
+COMMIT;  -- oder ROLLBACK;
+\`\`\`
+
+> ❗ **IHK-Tipp:** Merke dir die Abkürzungen DDL, DML, DQL, DCL, TCL — kommen als Multiple-Choice dran!
+
+## 💾 SQL Playground
+
+Schreibe eigene SQL-Befehle und sieh die Ergebnisse live!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 6: JOINs
+    // =====================================================================
+    {
+      id: "db-6",
+      title: "JOINs — Tabellen verknüpfen",
+      duration: "18 min",
+      type: "interactive",
+      interactive: "joinVisualizer",
+      content: `# JOINs — Tabellen verknüpfen 🔀
+
+## Was ist ein JOIN?
+
+Ein **JOIN** kombiniert Daten aus **zwei oder mehr Tabellen** basierend auf einem gemeinsamen Attribut (meist PK/FK).
+
+> 💡 JOINs sind DER Grund, warum relationale Datenbanken so mächtig sind — sie verbinden verknüpfte Daten!
+
+## INNER JOIN
+
+Nur Zeilen, die in **beiden** Tabellen einen Match haben.
+
+\`\`\`sql
+SELECT k.name, b.datum, b.betrag
+FROM kunde k
+INNER JOIN bestellung b ON k.id = b.kunde_id;
+\`\`\`
+
+> 💡 INNER JOIN = "Nur Kunden, die auch bestellt haben"
+
+## LEFT JOIN (LEFT OUTER JOIN)
+
+**Alle** Zeilen der linken Tabelle + passende der rechten. NULL wenn kein Match.
+
+\`\`\`sql
+SELECT k.name, b.datum
+FROM kunde k
+LEFT JOIN bestellung b ON k.id = b.kunde_id;
+\`\`\`
+
+> 💡 LEFT JOIN = "Alle Kunden, auch die ohne Bestellung"
+
+## RIGHT JOIN (RIGHT OUTER JOIN)
+
+**Alle** Zeilen der rechten Tabelle + passende der linken.
+
+\`\`\`sql
+SELECT k.name, b.datum
+FROM kunde k
+RIGHT JOIN bestellung b ON k.id = b.kunde_id;
+\`\`\`
+
+## CROSS JOIN
+
+**Jede** Kombination — kartesisches Produkt. Vorsicht: Sehr viele Zeilen!
+
+\`\`\`sql
+SELECT * FROM farbe CROSS JOIN größe;
+-- 3 Farben × 4 Größen = 12 Zeilen
+\`\`\`
+
+## JOIN-Übersicht
+
+| JOIN-Typ | Ergebnis |
+|----------|----------|
+| INNER | Nur Matches in beiden Tabellen |
+| LEFT | Alle links + Matches rechts |
+| RIGHT | Alle rechts + Matches links |
+| CROSS | Jede Kombination (A × B) |
+
+## JOIN vs. SELECT mit WHERE
+
+Theoretisch kann man auch mit SELECT verknüpfen:
+
+\`\`\`sql
+-- Das gleiche wie INNER JOIN:
+SELECT * FROM kunde, bestellung
+WHERE kunde.id = bestellung.kunde_id;
+\`\`\`
+
+Aber: **JOIN ist schneller** (besserer Query-Plan) und **lesbarer**!
+
+> ❗ **IHK-Tipp:** In Prüfungen musst du oft das richtige JOIN-Typ erkennen oder eine JOIN-Abfrage schreiben!
+
+## 🔀 JOIN-Visualisierer
+
+Sieh visuell, welche Zeilen bei welchem JOIN-Typ übrig bleiben!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 7: ACID-Prinzip
+    // =====================================================================
+    {
+      id: "db-7",
+      title: "Das ACID-Prinzip",
+      duration: "10 min",
+      type: "text",
+      content: `# Das ACID-Prinzip 🧪
+
+## Was ist ACID?
+
+**ACID** beschreibt die vier Eigenschaften, die eine Transaktion in einer relationalen Datenbank garantieren muss.
+
+> 💡 ACID ist wie ein Sicherheitsversprechen der Datenbank: "Deine Daten sind sicher — egal was passiert."
+
+## Die vier Eigenschaften
+
+### A — Atomicity (Atomarität)
+
+**"Alles oder nichts"**
+
+Eine Transaktion wird entweder **vollständig** ausgeführt oder **gar nicht**.
+
+**Beispiel — Banküberweisung:**
+\`\`\`sql
+BEGIN;
+UPDATE konto SET saldo = saldo - 100 WHERE id = 1;  -- Abheben
+UPDATE konto SET saldo = saldo + 100 WHERE id = 2;  -- Einzahlen
+COMMIT;
+\`\`\`
+
+Falls der Server zwischen den beiden UPDATEs abstürzt → wird alles **rückgängig** gemacht (ROLLBACK). Kein Geld verloren!
+
+### C — Consistency (Konsistenz)
+
+**"Die Datenbank bleibt in einem gültigen Zustand"**
+
+Alle Regeln (Constraints, Trigger, Fremdschlüssel) werden eingehalten.
+
+**Beispiel:**
+- Ein Kontostand darf nie unter 0 fallen (wenn Constraint existiert)
+- Ein Fremdschlüssel muss auf existierenden PK verweisen
+- UNIQUE-Constraint wird nicht verletzt
+
+### I — Isolation (Isolation)
+
+**"Transaktionen beeinflussen sich nicht gegenseitig"**
+
+Mehrere Transaktionen können gleichzeitig laufen, ohne sich zu stören.
+
+**Beispiel:** Zwei Kunden bestellen gleichzeitig den letzten Artikel im Lager → die Datenbank stellt sicher, dass nur einer bekommt.
+
+**Isolation-Levels:**
+| Level | Dirty Read | Non-Repeatable Read | Phantom Read |
+|-------|-----------|-------------------|-------------|
+| Read Uncommitted | Möglich | Möglich | Möglich |
+| Read Committed | ❌ Verhindert | Möglich | Möglich |
+| Repeatable Read | ❌ Verhindert | ❌ Verhindert | Möglich |
+| Serializable | ❌ Verhindert | ❌ Verhindert | ❌ Verhindert |
+
+### D — Durability (Dauerhaftigkeit)
+
+**"Nach COMMIT dauerhaft gespeichert"**
+
+Sobald eine Transaktion erfolgreich abgeschlossen (COMMIT) ist, bleiben die Daten auch bei Stromausfall oder Crash erhalten.
+
+> 💡 Die Datenbank schreibt in ein **Transaktionslog** (WAL) — bei einem Crash wird das Log eingespielt.
+
+## ACID — Merksatz
+
+> **A**lles oder nichts → **C**onsistent → **I**soliert → **D**auerhaft
+
+> ❗ **IHK-Tipp:** ACID kommt als Multiple-Choice-Frage dran — und in AP2 als Erklärungsaufgabe!`,
+    },
+
+    // =====================================================================
+    // LEKTION 8: IHK SQL-Übungsaufgaben
+    // =====================================================================
+    {
+      id: "db-8",
+      title: "IHK Übungsaufgaben — SQL",
+      duration: "25 min",
+      type: "interactive",
+      interactive: "sqlPlayground",
+      content: `# IHK Übungsaufgaben — SQL 📝
+
+Hier übst du typische IHK-Prüfungsaufgaben zu SQL. Die Aufgaben basieren auf realen AP1/AP2-Prüfungen.
+
+## Aufgabe 1: Produktionsdaten
+
+Gegeben: Tabelle \`ProductionData\` mit Spalten: OrderID, Width, Length, Thickness, Quantity
+
+### a) Alle Produktionsdaten für Bestellung 736298
+\`\`\`sql
+SELECT Width, Length, Thickness, Quantity
+FROM ProductionData
+WHERE OrderID = 736298;
+\`\`\`
+
+### b) Anzahl aller Einträge mit Thickness = 2
+\`\`\`sql
+SELECT COUNT(*) AS Anzahl
+FROM ProductionData
+WHERE Thickness = 2;
+\`\`\`
+
+### c) Gesamtanzahl mit Thickness=2 UND Width=200 UND Length=300
+\`\`\`sql
+SELECT COUNT(*) AS Gesamtanzahl
+FROM ProductionData
+WHERE Thickness = 2 AND Width = 200 AND Length = 300;
+\`\`\`
+
+## Aufgabe 2: Ticketsystem
+
+Gegeben: Tabelle \`Ticket\` mit: TicketID, Prioritaet, Zustand, ErfassungsDatum, KundenID, Problembeschreibung
+
+### a) Anzahl der Tickets nach Priorität
+\`\`\`sql
+SELECT Prioritaet, COUNT(*) AS Anzahl
+FROM Ticket
+GROUP BY Prioritaet;
+\`\`\`
+
+### b) Anzahl der Tickets
+\`\`\`sql
+SELECT COUNT(*) AS Anzahl
+FROM Ticket;
+\`\`\`
+
+### c) Alle offenen Tickets, die älter als 2 Monate sind
+\`\`\`sql
+SELECT Problembeschreibung, Prioritaet, Zustand, ErfassungsDatum
+FROM Ticket
+WHERE Zustand = 'offen'
+AND ErfassungsDatum < CURRENT_DATE - INTERVAL '2 months'
+ORDER BY ErfassungsDatum;
+\`\`\`
+
+> 💡 Diese Abfrage zeigt: Problembeschreibung, Priorität, Zustand und Erfassungsdatum aller offenen Tickets, deren Erfassungsdatum mehr als zwei Monate zurückliegt, sortiert nach Erfassungsdatum.
+
+## Aufgabe 3: KFZ-Versicherung
+
+### a) Durchschnittliche Versicherungssumme
+\`\`\`sql
+SELECT AVG(Versicherung_Summe) AS Durchschnitt
+FROM KFZ_Versicherung;
+\`\`\`
+
+### b) Versicherungen über 10 Mio ohne Garage im Mai 2022
+\`\`\`sql
+SELECT VID FROM KFZ_Versicherung
+WHERE Versicherung_Summe > 10000000
+AND Garage = FALSE
+AND Vertragsbeginn BETWEEN '2022-05-01' AND '2022-05-31';
+\`\`\`
+
+> ❗ **IHK-Tipp:** BETWEEN ist inklusive — also genau der Monat Mai!
+
+## 💻 Übe selbst im SQL Playground
+
+Nutze den Playground unten, um eigene Queries zu schreiben und zu testen!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 9: Datenbank planen — Die vier Phasen
+    // =====================================================================
+    {
+      id: "db-9",
+      title: "Datenbank planen — Die 4 Phasen",
+      duration: "15 min",
+      type: "interactive",
+      interactive: "dbPlanningPhases",
+      content: `# Datenbank planen — Die 4 Phasen 📋
+
+## Übersicht
+
+Eine Datenbank wird in **4 Phasen** geplant:
+
+1. **Externe Phase** — Anforderungen sammeln
+2. **Konzeptionelle Phase** — ER-Modell erstellen
+3. **Logische Phase** — Tabellen, Normalisierung, PK/FK
+4. **Physische Phase** — Implementierung im DBMS
+
+> 💡 Die Phasen sind wie ein Architektenprozess: Erst Wünsche, dann Bauplan, dann technische Zeichnung, dann Bau.
+
+## Phase 1: Extern (Anforderungsanalyse)
+
+**Ziel:** Verstehen, was der Kunde braucht.
+
+**Fragen:**
+- Welche Daten sollen gespeichert werden?
+- Wer nutzt die Datenbank?
+- Welche Prozesse müssen abgebildet werden?
+- Welche Reports/Berichte werden benötigt?
+
+**Beispiel — Zeiterfassungssystem:**
+- Mitarbeitende können Arbeitszeit erfassen
+- Es gibt ein Arbeitszeitkonto
+- Arbeitszeiten werden auf dem Konto verrechnet
+- Mitarbeiter können Gleitzeit und Urlaub beantragen
+
+**Ergebnis:** Eine Anforderungsliste (Text)
+
+## Phase 2: Konzeptionell (ER-Modell)
+
+**Ziel:** Visuelles Modell der Datenbank.
+
+**Tätigkeiten:**
+- Entitäten identifizieren
+- Attribute festlegen
+- Beziehungen mit Kardinalitäten zeichnen
+- Primärschlüssel bestimmen
+
+**Ergebnis:** ER-Diagramm
+
+> 💡 In der IHK-Prüfung musst du oft ein ER-Modell aus einer Aufgabenstellung zeichnen!
+
+## Phase 3: Logisch (Tabellenentwurf)
+
+**Ziel:** Normale Tabellen mit PK/FK.
+
+**Tätigkeiten:**
+- ER-Modell in Tabellen umwandeln
+- Normalisierung durchführen (1NF → 2NF → 3NF)
+- Fremdschlüssel zuordnen
+- Datentypen festlegen
+
+**Ergebnis:** Tabellenschema mit Datentypen
+
+## Phase 4: Physisch (Implementierung)
+
+**Ziel:** Die Datenbank in einem DBMS erstellen.
+
+**Tätigkeiten:**
+- SQL CREATE TABLE schreiben
+- Indexe erstellen
+- Testdaten einfügen
+- Views und Stored Procedures erstellen
+
+**Ergebnis:** Lauffähige Datenbank
+
+## Beispiel: Zeiterfassungssystem
+
+### Extern:
+- Mitarbeiter erfassen Arbeitszeiten
+- Arbeitszeitkonto wird verwaltet
+- Gleitzeit und Urlaub beantragbar
+
+### Konzeptionell:
+- Entitäten: Mitarbeiter, Arbeitszeit, Antrag, Arbeitszeitkonto
+- Beziehungen: Mitarbeiter hat Arbeitszeiten (1:n), Mitarbeiter hat Anträge (1:n)
+
+### Logisch:
+- Mitarbeiter(MitarbeiterID, Name, Abteilung)
+- Arbeitszeit(ZeitID, MitarbeiterID FK, Startzeit, Endzeit)
+- Antrag(AntragID, MitarbeiterID FK, Typ, Status, Datum)
+
+### Physisch:
+\`\`\`sql
+CREATE TABLE mitarbeiter (
+  mitarbeiter_id SERIAL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  abteilung VARCHAR(50)
+);
+\`\`\`
+
+> ❗ **IHK-Tipp:** In der AP2 musst du oft eine Datenbank komplett durchplanen — von der externen Phase bis zum SQL-Code!
+
+## 📋 Phasen-Interaktiver Guide
+
+Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vorlagen an!
+
+[INTERACTIVE]`,
+    },
+
+    // =====================================================================
+    // LEKTION 10: Backups
+    // =====================================================================
+    {
+      id: "db-10",
+      title: "Backups & Datenwiederherstellung",
+      duration: "10 min",
+      type: "text",
+      content: `# Backups & Datenwiederherstellung 💾
+
+## Warum Backups?
+
+> 💡 **Kein Backup = Keine Mitleid.** Datenverlust kann durch Hardwareausfall, menschliche Fehler oder Cyberangriffe passieren.
+
+## Backup-Strategien
+
+### Full Backup (Vollständige Sicherung)
+- Speichert die **gesamte Datenbank**
+- **Vorteil:** Einfache Wiederherstellung
+- **Nachteil:** Braucht viel Speicher und Zeit
+- **Empfehlung:** Regelmäßig (z.B. täglich nachts)
+
+### Transaktions-Backup (Inkrementelle Sicherung)
+- Speichert nur die **Änderungen** seit dem letzten Backup
+- **Vorteil:** Schnell, wenig Speicher
+- **Nachteil:** Wiederherstellung braucht alle vorherigen Backups
+- **Empfehlung:** Häufiger als Full Backup (z.B. stündlich)
+
+## Wiederherstellung (Restore)
+
+Die Reihenfolge beim Einspielen:
+1. Letztes **Full Backup** einspielen
+2. Alle **Transaktions-Backups** der Reihe nach einspielen
+3. Datenbank ist wieder auf dem Stand des letzten Transaktions-Backups
+
+> 💡 Ohne Full Backup sind die Transaktions-Backups nutzlos — sie bauen aufeinander auf!
+
+## Backup-Strategie-Beispiel
+
+| Zeitpunkt | Backup-Typ | Datenstand |
+|-----------|-----------|------------|
+| Sonntag 02:00 | Full Backup | Sonntag 02:00 |
+| Montag 08:00 | Transaktion | Montag 08:00 |
+| Montag 12:00 | Transaktion | Montag 12:00 |
+| Montag 16:00 | Transaktion | Montag 16:00 |
+| Dienstag 02:00 | Full Backup | Dienstag 02:00 |
+
+**Crash am Montag 14:00:** → Full (So) + Transaktion (Mo 08:00) + Transaktion (Mo 12:00) einspielen
+
+## PostgreSQL Backups
+
+\`\`\`bash
+# Full Backup (pg_dump)
+pg_dump -U benutzer datenbank > backup.sql
+
+# Restore
+psql -U benutzer datenbank < backup.sql
+\`\`\`
+
+## Best Practices
+
+- ✅ Backups **automatisieren** (Cron-Job, pg_cron)
+- ✅ Backups **testen** (Restore probieren!)
+- ✅ Backups an **verschiedenen Orten** speichern (3-2-1-Regel)
+- ✅ **Wiederherstellungszeit** dokumentieren
+- ❌ Backups auf **derselben Festplatte** wie die Datenbank!
+
+> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. Transaktions-Backup unterscheiden können!`,
+    },
+  ],
+};
