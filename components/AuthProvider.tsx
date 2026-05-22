@@ -43,6 +43,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Alte localStorage-Daten bereinigen (Migration von localStorage → Firebase)
+  useEffect(() => {
+    const legacyKeys = [
+      "learnhub_users",
+      "learnhub_login_attempts",
+      "learnhub_pending_verification",
+      "learnhub_session",
+    ];
+    legacyKeys.forEach(key => localStorage.removeItem(key));
+    // Auch alte completed-* Keys löschen
+    Object.keys(localStorage).forEach(key => {
+      if (key.startsWith("completed-")) localStorage.removeItem(key);
+    });
+    sessionStorage.removeItem("learnhub_session");
+  }, []);
+
   // Firebase Auth State Listener
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
