@@ -489,6 +489,13 @@ export default function ProfilePage() {
               </button>
             </div>
             <div className="flex items-center justify-between p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3"><Bell className="w-5 h-5 text-emerald-400" /><div><p className="font-medium">Online-Status</p><p className="text-xs text-slate-400">{user.statusHidden ? "Versteckt" : "Sichtbar für andere"}</p></div></div>
+              <button onClick={async () => { await updateProfile({ statusHidden: !user.statusHidden }); }}
+                className={`w-12 h-6 rounded-full transition-colors relative ${!user.statusHidden ? "bg-emerald-500" : "bg-slate-600"}`}>
+                <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${!user.statusHidden ? "translate-x-6" : "translate-x-0.5"}`} />
+              </button>
+            </div>
+            <div className="flex items-center justify-between p-4 bg-slate-800/40 rounded-xl">
               <div className="flex items-center gap-3"><Users className="w-5 h-5 text-amber-400" /><div><p className="font-medium">Bestenliste</p><p className="text-xs text-slate-400">{user.leaderboardOptIn ? "Sichtbar" : "Deaktiviert"}</p></div></div>
               <button onClick={async () => { await updateProfile({ leaderboardOptIn: !user.leaderboardOptIn }); }}
                 className={`w-12 h-6 rounded-full transition-colors relative ${user.leaderboardOptIn ? "bg-amber-500" : "bg-slate-600"}`}>

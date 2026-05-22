@@ -50,6 +50,7 @@ export interface UserProfile {
   };
   leaderboardOptIn: boolean;
   equippedFrame: string;
+  statusHidden: boolean;
 }
 
 // ─── Konstanten ─────────────────────────────────────────────────────────────
@@ -133,6 +134,7 @@ export async function registerUser(
     settings: { theme: "dark", notifications: true, language: "de" },
     leaderboardOptIn: false,
     equippedFrame: "none",
+    statusHidden: false,
   };
   await setDoc(doc(db, "users", firebaseUser.uid), {
     ...profile,
@@ -184,6 +186,7 @@ export async function loginUser(email: string, password: string): Promise<UserPr
       settings: { theme: "dark", notifications: true, language: "de" },
       leaderboardOptIn: false,
     equippedFrame: "none",
+    statusHidden: false,
     };
     await setDoc(doc(db, "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
   } else if (!profile.emailVerified) {

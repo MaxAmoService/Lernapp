@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
+import { setOnline, setOffline } from "@/lib/presence";
 import {
   UserProfile,
   getUserProfile,
@@ -71,6 +72,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               profile.emailVerified = firebaseUser.emailVerified;
             }
             setUser(profile);
+            setOnline(firebaseUser.uid);
           } else {
             setUser(null);
           }
@@ -97,6 +99,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = async () => {
+    if (user) await setOffline(user.uid);
     await logoutUser();
     setUser(null);
   };

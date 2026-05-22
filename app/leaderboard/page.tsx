@@ -5,6 +5,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { getLeaderboard, getUserLevel } from "@/lib/auth";
 import type { LeaderboardEntry } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
+import { OnlineStatus } from "@/components/OnlineStatus";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -157,9 +158,12 @@ export default function LeaderboardPage() {
                 {/* Name */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <p className={`font-semibold truncate ${isCurrentUser ? "text-blue-300" : "text-white"}`}>
-                      {entry.displayName}
-                    </p>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <p className={`font-semibold truncate ${isCurrentUser ? "text-blue-300" : "text-white"}`}>
+                        {entry.displayName}
+                      </p>
+                      <OnlineStatus uid={entry.uid} size="sm" />
+                    </div>
                     {isCurrentUser && (
                       <span className="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] font-bold rounded-md uppercase">
                         Du

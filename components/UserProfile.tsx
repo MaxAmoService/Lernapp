@@ -91,8 +91,8 @@ export function UserProfile() {
             <div className="flex items-center gap-4">
               <div className="relative">
                 <AvatarFrame avatar={user.avatar} frameId={user.equippedFrame} level={levelInfo.level} size="lg" />
-                {/* Online indicator */}
-                <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900" />
+                {/* Online indicator — außerhalb des Rahmens */}
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900 shadow-[0_0_6px_rgba(52,211,153,0.5)] z-20" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-bold text-white text-lg truncate">{user.displayName || user.username}</p>
