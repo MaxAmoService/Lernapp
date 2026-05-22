@@ -462,3 +462,124 @@ table tr:hover td {
 .frame-neon { animation: neon-blink 2s ease-in-out infinite; border-radius: 9999px; }
 .frame-gold { animation: gold-shimmer 2.5s ease-in-out infinite; border-radius: 9999px; }
 .frame-ice { animation: ice-glow 2s ease-in-out infinite; border-radius: 9999px; }
+
+/* Fire Orbit — Feuer das umkreist (Steam-Stil) */
+@keyframes fire-orbit {
+  0% {
+    box-shadow:
+      0 -18px 8px -4px #f97316,
+      12px -12px 8px -4px #ef4444,
+      18px 0 8px -4px #f97316,
+      12px 12px 8px -4px #dc2626,
+      0 18px 8px -4px #f97316,
+      -12px 12px 8px -4px #ef4444,
+      -18px 0 8px -4px #f97316,
+      -12px -12px 8px -4px #dc2626;
+  }
+  12.5% {
+    box-shadow:
+      -12px -12px 8px -4px #f97316,
+      0 -18px 8px -4px #ef4444,
+      12px -12px 8px -4px #f97316,
+      18px 0 8px -4px #dc2626,
+      12px 12px 8px -4px #f97316,
+      0 18px 8px -4px #ef4444,
+      -12px 12px 8px -4px #f97316,
+      -18px 0 8px -4px #dc2626;
+  }
+  25% {
+    box-shadow:
+      -18px 0 8px -4px #f97316,
+      -12px -12px 8px -4px #ef4444,
+      0 -18px 8px -4px #f97316,
+      12px -12px 8px -4px #dc2626,
+      18px 0 8px -4px #f97316,
+      12px 12px 8px -4px #ef4444,
+      0 18px 8px -4px #f97316,
+      -12px 12px 8px -4px #dc2626;
+  }
+  37.5% {
+    box-shadow:
+      -12px 12px 8px -4px #f97316,
+      -18px 0 8px -4px #ef4444,
+      -12px -12px 8px -4px #f97316,
+      0 -18px 8px -4px #dc2626,
+      12px -12px 8px -4px #f97316,
+      18px 0 8px -4px #ef4444,
+      12px 12px 8px -4px #f97316,
+      0 18px 8px -4px #dc2626;
+  }
+  50% {
+    box-shadow:
+      0 18px 8px -4px #f97316,
+      -12px 12px 8px -4px #ef4444,
+      -18px 0 8px -4px #f97316,
+      -12px -12px 8px -4px #dc2626,
+      0 -18px 8px -4px #f97316,
+      12px -12px 8px -4px #ef4444,
+      18px 0 8px -4px #f97316,
+      12px 12px 8px -4px #dc2626;
+  }
+  62.5% {
+    box-shadow:
+      12px 12px 8px -4px #f97316,
+      0 18px 8px -4px #ef4444,
+      -12px 12px 8px -4px #f97316,
+      -18px 0 8px -4px #dc2626,
+      -12px -12px 8px -4px #f97316,
+      0 -18px 8px -4px #ef4444,
+      12px -12px 8px -4px #f97316,
+      18px 0 8px -4px #dc2626;
+  }
+  75% {
+    box-shadow:
+      18px 0 8px -4px #f97316,
+      12px 12px 8px -4px #ef4444,
+      0 18px 8px -4px #f97316,
+      -12px 12px 8px -4px #dc2626,
+      -18px 0 8px -4px #f97316,
+      -12px -12px 8px -4px #ef4444,
+      0 -18px 8px -4px #f97316,
+      12px -12px 8px -4px #dc2626;
+  }
+  87.5% {
+    box-shadow:
+      12px -12px 8px -4px #f97316,
+      18px 0 8px -4px #ef4444,
+      12px 12px 8px -4px #f97316,
+      0 18px 8px -4px #dc2626,
+      -12px 12px 8px -4px #f97316,
+      -18px 0 8px -4px #ef4444,
+      -12px -12px 8px -4px #f97316,
+      0 -18px 8px -4px #dc2626;
+  }
+  100% {
+    box-shadow:
+      0 -18px 8px -4px #f97316,
+      12px -12px 8px -4px #ef4444,
+      18px 0 8px -4px #f97316,
+      12px 12px 8px -4px #dc2626,
+      0 18px 8px -4px #f97316,
+      -12px 12px 8px -4px #ef4444,
+      -18px 0 8px -4px #f97316,
+      -12px -12px 8px -4px #dc2626;
+  }
+}
+
+/* Energy Ring — Elektrischer Energie-Ring */
+@keyframes energy {
+  0% { box-shadow: 0 0 0 3px #06b6d4, 0 0 20px rgba(6,182,212,0.6), 0 0 40px rgba(6,182,212,0.2), inset 0 0 12px rgba(6,182,212,0.15); }
+  33% { box-shadow: 0 0 0 3px #0ea5e9, 0 0 24px rgba(14,165,233,0.7), 0 0 48px rgba(14,165,233,0.25), inset 0 0 16px rgba(14,165,233,0.2); }
+  66% { box-shadow: 0 0 0 3px #38bdf8, 0 0 28px rgba(56,189,248,0.6), 0 0 52px rgba(56,189,248,0.2), inset 0 0 20px rgba(56,189,248,0.15); }
+  100% { box-shadow: 0 0 0 3px #06b6d4, 0 0 20px rgba(6,182,212,0.6), 0 0 40px rgba(6,182,212,0.2), inset 0 0 12px rgba(6,182,212,0.15); }
+}
+
+/* Shadow — Dunkler pulsierender Schatten */
+@keyframes shadow {
+  0%, 100% { box-shadow: 0 0 0 3px #6366f1, 0 0 16px rgba(99,102,241,0.5), 0 0 32px rgba(99,102,241,0.2), 0 4px 16px rgba(0,0,0,0.5); }
+  50% { box-shadow: 0 0 0 4px #818cf8, 0 0 24px rgba(129,140,248,0.6), 0 0 48px rgba(129,140,248,0.25), 0 6px 24px rgba(0,0,0,0.6); }
+}
+
+.frame-fire-orbit { animation: fire-orbit 3s linear infinite; border-radius: 9999px; }
+.frame-energy { animation: energy 2s ease-in-out infinite; border-radius: 9999px; }
+.frame-shadow { animation: shadow 2.5s ease-in-out infinite; border-radius: 9999px; }

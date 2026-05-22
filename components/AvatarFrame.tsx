@@ -42,6 +42,12 @@ function getFrameStyle(frameId: string, size: string): React.CSSProperties {
       return {};
     case "ice":
       return { boxShadow: `0 0 0 ${s.ring} #67e8f9, 0 0 16px rgba(103,232,249,0.4)` };
+    case "fire-orbit":
+      return {};
+    case "energy":
+      return {};
+    case "shadow":
+      return {};
     case "gold":
       return { boxShadow: `0 0 0 ${s.ring} #fbbf24, 0 0 20px rgba(251,191,36,0.5), 0 0 40px rgba(251,191,36,0.2)` };
     case "rainbow":
@@ -83,6 +89,12 @@ function getFrameClass(frameId: string): string {
       return "frame-gold";
     case "ice":
       return "frame-ice";
+    case "fire-orbit":
+      return "frame-fire-orbit";
+    case "energy":
+      return "frame-energy";
+    case "shadow":
+      return "frame-shadow";
     default:
       return "";
   }

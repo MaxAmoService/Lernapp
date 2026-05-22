@@ -96,6 +96,9 @@ export const FRAMES: FrameOption[] = [
   // Legendary (Level 10) — special
   { id: "pulse", name: "Pulsieren", unlockLevel: 10, rarity: "legendary", animated: true },
   { id: "cosmic", name: "Kosmisch", unlockLevel: 10, rarity: "legendary", animated: true },
+  { id: "fire-orbit", name: "Feuer-Orbit", unlockLevel: 10, rarity: "legendary", animated: true },
+  { id: "energy", name: "Energie", unlockLevel: 10, rarity: "legendary", animated: true },
+  { id: "shadow", name: "Schatten", unlockLevel: 10, rarity: "legendary", animated: true },
 
   // Leaderboard-Exklusiv
   { id: "champion", name: "Champion", unlockLevel: 0, rarity: "legendary", animated: true, leaderboardRank: 1 },

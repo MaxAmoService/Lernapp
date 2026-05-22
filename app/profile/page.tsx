@@ -7,8 +7,10 @@ import { getUserLevel, validatePassword } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
 import {
   AVATARS, FRAMES, getUnlockedAvatars, getUnlockedFrames,
-  getRarityColor, getRarityBg, type AvatarOption, type FrameOption,
+  getRarityColor, getRarityBg, isAvatarUnlocked, isFrameUnlocked,
+  type AvatarOption, type FrameOption,
 } from "@/lib/rewards";
+import { getLeaderboard } from "@/lib/auth";
 import {
   User, Mail, Lock, Camera, Save, Loader2, CheckCircle2, AlertCircle,
   Shield, Bell, Palette, Trophy, Flame, Zap, BookOpen, ArrowLeft,
@@ -79,8 +81,19 @@ export default function ProfilePage() {
   }
 
   const levelInfo = getUserLevel(user.totalXP);
-  const unlockedAvatars = getUnlockedAvatars(levelInfo.level);
-  const unlockedFrames = getUnlockedFrames(levelInfo.level);
+  const [leaderboardRank, setLeaderboardRank] = useState<number | undefined>(undefined);
+
+  // Leaderboard-Rang laden
+  useEffect(() => {
+    if (!user) return;
+    getLeaderboard(50).then((entries) => {
+      const rank = entries.find(e => e.uid === user.uid);
+      setLeaderboardRank(rank?.rank);
+    }).catch(() => {});
+  }, [user]);
+
+  const unlockedAvatars = getUnlockedAvatars(levelInfo.level, leaderboardRank);
+  const unlockedFrames = getUnlockedFrames(levelInfo.level, leaderboardRank);
 
   const showMessage = (type: "success" | "error", msg: string) => {
     if (type === "success") { setSuccess(msg); setError(""); }
@@ -239,32 +252,42 @@ export default function ProfilePage() {
             <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Avatare</h4>
             <div className="grid grid-cols-8 sm:grid-cols-12 gap-2">
               {AVATARS.map((a) => {
-                const unlocked = levelInfo.level >= a.unlockLevel || (a.unlockLevel === 0 && unlockedAvatars.some(ua => ua.id === a.id));
+                const unlocked = isAvatarUnlocked(a, levelInfo.level, leaderboardRank);
                 const isSelected = avatar === a.emoji;
+                const tooltip = !unlocked
+                  ? a.leaderboardRank !== undefined
+                    ? `Nur für Platz ${a.leaderboardRank} in der Bestenliste`
+                    : `Level ${a.unlockLevel} freischalten`
+                  : a.name;
                 return (
-                  <button
-                    key={a.id}
-                    onClick={() => unlocked && setAvatar(a.emoji)}
-                    disabled={!unlocked}
-                    className={`relative w-full aspect-square rounded-xl flex items-center justify-center text-2xl transition-all ${
-                      isSelected
-                        ? `${getRarityBg(a.rarity)} border-2 ring-2 ring-blue-500/50 scale-110`
-                        : unlocked
-                          ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60 hover:scale-105"
-                          : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
-                    }`}
-                    title={unlocked ? a.name : `Level ${a.unlockLevel} freischalten`}
-                  >
-                    {a.emoji}
-                    {!unlocked && (
-                      <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
-                        <LockIcon className="w-3.5 h-3.5 text-slate-500" />
-                      </div>
-                    )}
-                    {a.rarity === "legendary" && unlocked && (
-                      <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 border border-slate-900" />
-                    )}
-                  </button>
+                  <div key={a.id} className="relative group/avatar">
+                    <button
+                      onClick={() => unlocked && setAvatar(a.emoji)}
+                      disabled={!unlocked}
+                      className={`relative w-full aspect-square rounded-xl flex items-center justify-center text-2xl transition-all ${
+                        isSelected
+                          ? `${getRarityBg(a.rarity)} border-2 ring-2 ring-blue-500/50 scale-110`
+                          : unlocked
+                            ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60 hover:scale-105"
+                            : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
+                      }`}
+                    >
+                      {a.emoji}
+                      {!unlocked && (
+                        <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
+                          <LockIcon className="w-3.5 h-3.5 text-slate-500" />
+                        </div>
+                      )}
+                      {a.rarity === "legendary" && unlocked && (
+                        <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 border border-slate-900" />
+                      )}
+                    </button>
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-center whitespace-nowrap opacity-0 group-hover/avatar:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
+                      <span className={getRarityColor(a.rarity)}>{a.name}</span>
+                      {!unlocked && <span className="block text-slate-500 mt-0.5">🔒 {tooltip}</span>}
+                    </div>
+                  </div>
                 );
               })}
             </div>
@@ -275,37 +298,48 @@ export default function ProfilePage() {
             <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Rahmen</h4>
             <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
               {FRAMES.map((f) => {
-                const unlocked = levelInfo.level >= f.unlockLevel;
+                const unlocked = isFrameUnlocked(f, levelInfo.level, leaderboardRank);
                 const isSelected = equippedFrame === f.id;
+                const tooltip = !unlocked
+                  ? f.leaderboardRank !== undefined
+                    ? `Nur für Platz ${f.leaderboardRank} in der Bestenliste`
+                    : `Level ${f.unlockLevel} freischalten`
+                  : f.name;
                 return (
-                  <button
-                    key={f.id}
-                    onClick={() => unlocked && setEquippedFrame(f.id)}
-                    disabled={!unlocked}
-                    className={`relative flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
-                      isSelected
-                        ? `${getRarityBg(f.rarity)} border-2 ring-2 ring-blue-500/50`
-                        : unlocked
-                          ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60"
-                          : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
-                    }`}
-                    title={unlocked ? f.name : `Level ${f.unlockLevel} freischalten`}
-                  >
-                    <AvatarFrame avatar="🎓" frameId={f.id} level={levelInfo.level} size="sm" />
-                    <span className={`text-[10px] font-medium ${isSelected ? "text-blue-400" : "text-slate-500"}`}>
-                      {f.name}
-                    </span>
-                    {f.animated && unlocked && (
-                      <span className="absolute -top-1 -right-1 text-[8px] px-1 py-0.5 bg-amber-500/20 text-amber-400 rounded font-bold">
-                        ✨
+                  <div key={f.id} className="relative group/frame">
+                    <button
+                      onClick={() => unlocked && setEquippedFrame(f.id)}
+                      disabled={!unlocked}
+                      className={`relative flex flex-col items-center gap-2 p-3 rounded-xl transition-all w-full ${
+                        isSelected
+                          ? `${getRarityBg(f.rarity)} border-2 ring-2 ring-blue-500/50`
+                          : unlocked
+                            ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60"
+                            : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
+                      }`}
+                    >
+                      <AvatarFrame avatar="🎓" frameId={f.id} level={levelInfo.level} leaderboardRank={leaderboardRank} size="sm" />
+                      <span className={`text-[10px] font-medium truncate ${isSelected ? "text-blue-400" : "text-slate-500"}`}>
+                        {f.name}
                       </span>
-                    )}
-                    {!unlocked && (
-                      <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
-                        <LockIcon className="w-3.5 h-3.5 text-slate-500" />
-                      </div>
-                    )}
-                  </button>
+                      {f.animated && unlocked && (
+                        <span className="absolute -top-1 -right-1 text-[8px] px-1 py-0.5 bg-amber-500/20 text-amber-400 rounded font-bold">
+                          ✨
+                        </span>
+                      )}
+                      {!unlocked && (
+                        <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
+                          <LockIcon className="w-3.5 h-3.5 text-slate-500" />
+                        </div>
+                      )}
+                    </button>
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-center whitespace-nowrap opacity-0 group-hover/frame:opacity-100 transition-opacity pointer-events-none z-50 shadow-lg">
+                      <span className={getRarityColor(f.rarity)}>{f.name}</span>
+                      {f.animated && <span className="ml-1 text-amber-400">✨</span>}
+                      {!unlocked && <span className="block text-slate-500 mt-0.5">🔒 {tooltip}</span>}
+                    </div>
+                  </div>
                 );
               })}
             </div>
