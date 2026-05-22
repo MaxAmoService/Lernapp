@@ -18,7 +18,9 @@ export default function Dashboard() {
 
   // Modules with actual progress
   const startedModules = user ? modules.filter((m) => {
-    const completed = user.completedLessons[m.slug]?.length || 0;
+    const allCompleted = user.completedLessons[m.slug] || [];
+    const lessonIdSet = new Set(m.lessons.map(l => l.id));
+    const completed = allCompleted.filter(id => lessonIdSet.has(id)).length;
     return completed > 0 && completed < m.lessons.length;
   }) : [];
 
@@ -32,10 +34,14 @@ export default function Dashboard() {
 
   const totalLessons = modules.reduce((acc, m) => acc + m.lessons.length, 0);
   const completedLessons = user
-    ? modules.reduce((acc, m) => acc + (user.completedLessons[m.slug]?.length || 0), 0)
+    ? modules.reduce((acc, m) => {
+      const allCompleted = user.completedLessons[m.slug] || [];
+      const lessonIdSet = new Set(m.lessons.map(l => l.id));
+      return acc + allCompleted.filter(id => lessonIdSet.has(id)).length;
+    }, 0)
     : 0;
 
-  const totalProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
+  const totalProgress = totalLessons > 0 ? Math.min(100, Math.round((completedLessons / totalLessons) * 100)) : 0;
 
   return (
     <div className="space-y-8 animate-fade-in">

@@ -14,10 +14,12 @@ export function ModuleCard({ module, compact }: ModuleCardProps) {
   const { user } = useAuth();
   const category = categories.find(c => c.id === module.category);
 
-  const completedLessons = user?.completedLessons[module.slug]?.length || 0;
+  const allCompleted = user?.completedLessons[module.slug] || [];
+  const lessonIdSet = new Set(module.lessons.map(l => l.id));
+  const completedCount = allCompleted.filter(id => lessonIdSet.has(id)).length;
   const totalLessons = module.lessons.length;
-  const realProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
-  const isCompleted = completedLessons === totalLessons && totalLessons > 0;
+  const realProgress = totalLessons > 0 ? Math.min(100, Math.round((completedCount / totalLessons) * 100)) : 0;
+  const isCompleted = completedCount === totalLessons && totalLessons > 0;
 
   return (
     <div className="glass rounded-xl overflow-hidden card-hover group">
@@ -64,7 +66,7 @@ export function ModuleCard({ module, compact }: ModuleCardProps) {
         <div className="flex items-center gap-4 mt-4 text-sm text-slate-400">
           <span className="flex items-center gap-1">
             <BookOpen className="w-4 h-4" />
-            {completedLessons > 0 ? `${completedLessons}/${totalLessons}` : totalLessons} Lektionen
+            {completedCount > 0 ? `${completedCount}/${totalLessons}` : totalLessons} Lektionen
           </span>
           <span className="flex items-center gap-1">
             <Clock className="w-4 h-4" />

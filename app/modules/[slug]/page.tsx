@@ -104,11 +104,6 @@ export default function ModulePage() {
   const [showFlashcards, setShowFlashcards] = useState(false);
   const [showModuleComplete, setShowModuleComplete] = useState(false);
 
-  // Get completed lessons ONLY from user data (no localStorage fallback to prevent ghost progress)
-  const completedLessons = new Set(
-    user?.completedLessons[params.slug as string] || []
-  );
-
   if (!module) {
     return (
       <div className="text-center py-20">
@@ -119,6 +114,12 @@ export default function ModulePage() {
       </div>
     );
   }
+
+  // Get completed lessons ONLY from user data (no localStorage fallback to prevent ghost progress)
+  const allCompleted = user?.completedLessons[params.slug as string] || [];
+  // Nur echte Lektion-IDs zählen ("quiz" etc. ausschließen)
+  const lessonIds = new Set(module.lessons.map(l => l.id));
+  const completedLessons = new Set(allCompleted.filter(id => lessonIds.has(id)));
 
   const getLessonIcon = (type: Lesson["type"]) => {
     switch (type) {
@@ -171,7 +172,7 @@ export default function ModulePage() {
   };
 
   const isSaved = user?.savedModules?.includes(module.slug) || false;
-  const progress = Math.round((completedLessons.size / module.lessons.length) * 100);
+  const progress = Math.min(100, Math.round((completedLessons.size / module.lessons.length) * 100));
 
   return (
     <div className="animate-fade-in">
