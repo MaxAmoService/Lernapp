@@ -5,8 +5,7 @@ import { getUserLevel } from "@/lib/auth";
 import { AvatarFrame } from "./AvatarFrame";
 import { FrameOnlineStatus } from "./OnlineStatus";
 import {
-  LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings,
-  Bell, BookOpen, Moon, Sun, BarChart3, Target, Crown
+  LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings, Crown
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
@@ -177,16 +176,7 @@ export function UserProfile() {
               <ChevronDown className="w-3.5 h-3.5 text-slate-600 -rotate-90" />
             </Link>
             <Link
-              href="/profile"
-              onClick={() => setShowMenu(false)}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all duration-150 group"
-            >
-              <BarChart3 className="w-4 h-4 text-slate-500 group-hover:text-violet-400 transition-colors" />
-              <span className="flex-1">Statistiken</span>
-              <ChevronDown className="w-3.5 h-3.5 text-slate-600 -rotate-90" />
-            </Link>
-            <Link
-              href="/profile"
+              href="/profile#settings"
               onClick={() => setShowMenu(false)}
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-slate-300 hover:text-white hover:bg-slate-800/80 transition-all duration-150 group"
             >

@@ -57,6 +57,10 @@ export default function ProfilePage() {
       setNotifications(user.settings?.notifications ?? true);
       setNewEmail(user.email);
     }
+    // Hash-basiertes Tab-Opening
+    if (typeof window !== "undefined" && window.location.hash === "#settings") {
+      setActiveTab("settings");
+    }
   }, [user]);
 
   if (isLoading) {
