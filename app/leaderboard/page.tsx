@@ -181,12 +181,12 @@ export default function LeaderboardPage() {
                       <span>{entry.completedModules}</span>
                     </div>
                   </div>
-                  <div className="text-right min-w-[60px]">
-                    <div className="flex items-center gap-1">
+                  <div className="text-right min-w-[70px]">
+                    <div className="flex items-center gap-1 justify-end">
                       <Zap className="w-4 h-4 text-amber-400" />
                       <span className="text-lg font-bold text-white">{entry.totalXP}</span>
+                      <span className="text-[10px] text-slate-500 uppercase tracking-wider self-end mb-0.5">XP</span>
                     </div>
-                    <p className="text-[10px] text-slate-500 uppercase tracking-wider">XP</p>
                   </div>
                 </div>
               </div>
