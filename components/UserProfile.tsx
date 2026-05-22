@@ -2,6 +2,7 @@
 
 import { useAuth } from "./AuthProvider";
 import { getUserLevel } from "@/lib/auth";
+import { AvatarFrame } from "./AvatarFrame";
 import {
   LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings,
   Bell, BookOpen, Moon, Sun, BarChart3, Target, Crown
@@ -60,7 +61,7 @@ export function UserProfile() {
         className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-800/80 transition-all duration-200 group"
       >
         <div className="relative">
-          <span className="text-2xl block">{user.avatar}</span>
+          <AvatarFrame avatar={user.avatar} frameId={user.equippedFrame} level={getUserLevel(user.totalXP).level} size="md" />
           {user.streak >= 3 && (
             <span className="absolute -bottom-0.5 -right-0.5 text-[10px]">🔥</span>
           )}
@@ -89,9 +90,7 @@ export function UserProfile() {
           <div className="relative px-5 pt-5 pb-4 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-500/30 to-violet-500/30 flex items-center justify-center text-3xl border-2 border-slate-700">
-                  {user.avatar}
-                </div>
+                <AvatarFrame avatar={user.avatar} frameId={user.equippedFrame} level={levelInfo.level} size="lg" />
                 {/* Online indicator */}
                 <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900" />
               </div>

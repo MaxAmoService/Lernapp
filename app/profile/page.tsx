@@ -4,13 +4,16 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
 import { getUserLevel, validatePassword } from "@/lib/auth";
+import { AvatarFrame } from "@/components/AvatarFrame";
+import {
+  AVATARS, FRAMES, getUnlockedAvatars, getUnlockedFrames,
+  getRarityColor, getRarityBg, type AvatarOption, type FrameOption,
+} from "@/lib/rewards";
 import {
   User, Mail, Lock, Camera, Save, Loader2, CheckCircle2, AlertCircle,
   Shield, Bell, Palette, Trophy, Flame, Zap, BookOpen, ArrowLeft,
-  Eye, EyeOff, RefreshCw, Edit3, X, Users
+  Eye, EyeOff, RefreshCw, Edit3, X, Users, Sparkles, Lock as LockIcon,
 } from "lucide-react";
-
-const AVATARS = ["🤓", "😎", "🦊", "🐱", "🦄", "🐸", "🐼", "🦁", "🐯", "🐨", "🐻", "🐰", "🦊", "🐨", "🦋", "🐙"];
 
 type Tab = "profile" | "security" | "settings" | "stats";
 
@@ -27,9 +30,10 @@ export default function ProfilePage() {
   const [displayName, setDisplayName] = useState("");
   const [bio, setBio] = useState("");
   const [avatar, setAvatar] = useState("");
+  const [equippedFrame, setEquippedFrame] = useState("none");
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
 
-  // Security fields
+  // Security
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -39,17 +43,15 @@ export default function ProfilePage() {
 
   // Settings
   const [notifications, setNotifications] = useState(true);
-
-  // DSGVO Account löschen
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [deletePassword, setDeletePassword] = useState("");
-  const [deleteStep, setDeleteStep] = useState(0);
 
   useEffect(() => {
     if (user) {
       setDisplayName(user.displayName || user.username);
       setBio(user.bio || "");
       setAvatar(user.avatar || "🤓");
+      setEquippedFrame(user.equippedFrame || "none");
       setNotifications(user.settings?.notifications ?? true);
       setNewEmail(user.email);
     }
@@ -68,11 +70,8 @@ export default function ProfilePage() {
       <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
         <span className="text-6xl">🔒</span>
         <h2 className="text-2xl font-bold">Nicht eingeloggt</h2>
-        <p className="text-slate-400">Bitte melde dich an, um dein Profil zu sehen.</p>
-        <button
-          onClick={() => router.push("/")}
-          className="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors"
-        >
+        <p className="text-slate-400">Bitte melde dich an.</p>
+        <button onClick={() => router.push("/")} className="px-6 py-2 bg-blue-500 hover:bg-blue-600 rounded-lg transition-colors">
           Zur Startseite
         </button>
       </div>
@@ -80,6 +79,8 @@ export default function ProfilePage() {
   }
 
   const levelInfo = getUserLevel(user.totalXP);
+  const unlockedAvatars = getUnlockedAvatars(levelInfo.level);
+  const unlockedFrames = getUnlockedFrames(levelInfo.level);
 
   const showMessage = (type: "success" | "error", msg: string) => {
     if (type === "success") { setSuccess(msg); setError(""); }
@@ -94,6 +95,7 @@ export default function ProfilePage() {
         displayName: displayName.trim() || user.username,
         bio: bio.trim(),
         avatar,
+        equippedFrame,
       });
       showMessage("success", "Profil gespeichert! ✅");
     } catch {
@@ -105,70 +107,34 @@ export default function ProfilePage() {
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError("");
-
-    if (newPassword !== confirmNewPassword) {
-      showMessage("error", "Passwörter stimmen nicht überein");
-      return;
-    }
-
-    const validation = validatePassword(newPassword);
-    if (!validation.valid) {
-      showMessage("error", validation.error!);
-      return;
-    }
-
+    if (newPassword !== confirmNewPassword) { showMessage("error", "Passwörter stimmen nicht überein"); return; }
+    const v = validatePassword(newPassword);
+    if (!v.valid) { showMessage("error", v.error!); return; }
     setSaving(true);
     try {
       await updatePassword(currentPassword, newPassword);
-      setCurrentPassword("");
-      setNewPassword("");
-      setConfirmNewPassword("");
+      setCurrentPassword(""); setNewPassword(""); setConfirmNewPassword("");
       showMessage("success", "Passwort geändert! 🔐");
     } catch (err: unknown) {
       const code = (err as { code?: string })?.code;
-      if (code === "auth/invalid-credential" || code === "auth/wrong-password") {
-        showMessage("error", "Aktuelles Passwort ist falsch");
-      } else {
-        showMessage("error", "Passwort konnte nicht geändert werden");
-      }
-    } finally {
-      setSaving(false);
-    }
+      if (code === "auth/invalid-credential") showMessage("error", "Aktuelles Passwort ist falsch");
+      else showMessage("error", "Passwort konnte nicht geändert werden");
+    } finally { setSaving(false); }
   };
 
   const handleChangeEmail = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newEmail.includes("@")) {
-      showMessage("error", "Ungültige E-Mail-Adresse");
-      return;
-    }
+    if (!newEmail.includes("@")) { showMessage("error", "Ungültige E-Mail"); return; }
     setSaving(true);
     try {
       await updateEmail(emailPassword, newEmail);
       setEmailPassword("");
-      showMessage("success", "E-Mail geändert! Bestätigungs-E-Mail gesendet. 📧");
+      showMessage("success", "E-Mail geändert! 📧");
     } catch (err: unknown) {
       const code = (err as { code?: string })?.code;
-      if (code === "auth/invalid-credential") {
-        showMessage("error", "Passwort ist falsch");
-      } else if (code === "auth/email-already-in-use") {
-        showMessage("error", "Diese E-Mail wird bereits verwendet");
-      } else {
-        showMessage("error", "E-Mail konnte nicht geändert werden");
-      }
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const handleResendVerification = async () => {
-    try {
-      await resendVerification();
-      showMessage("success", "Bestätigungs-E-Mail erneut gesendet! 📧");
-    } catch {
-      showMessage("error", "E-Mail konnte nicht gesendet werden");
-    }
+      if (code === "auth/invalid-credential") showMessage("error", "Passwort ist falsch");
+      else showMessage("error", "E-Mail konnte nicht geändert werden");
+    } finally { setSaving(false); }
   };
 
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
@@ -179,369 +145,297 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto py-8 px-4">
+    <div className="max-w-4xl mx-auto py-6 sm:py-8 px-4">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-8">
-        <button
-          onClick={() => router.back()}
-          className="p-2 rounded-lg hover:bg-slate-800 transition-colors"
-        >
+      <div className="flex items-center gap-3 mb-6">
+        <button onClick={() => router.back()} className="p-2 rounded-lg hover:bg-slate-800 transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
-        <h1 className="text-3xl font-bold">Mein Profil</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold">Mein Profil</h1>
       </div>
 
-      {/* Status Messages */}
+      {/* Messages */}
       {success && (
-        <div className="mb-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 flex items-center gap-2 animate-slide-up">
-          <CheckCircle2 className="w-5 h-5 flex-shrink-0" /> {success}
+        <div className="mb-4 p-3 bg-green-500/20 border border-green-500/50 rounded-xl text-green-400 flex items-center gap-2 animate-slide-up">
+          <CheckCircle2 className="w-4 h-4" /> {success}
         </div>
       )}
       {error && (
-        <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 flex items-center gap-2 animate-slide-up">
-          <AlertCircle className="w-5 h-5 flex-shrink-0" /> {error}
+        <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 flex items-center gap-2 animate-slide-up">
+          <AlertCircle className="w-4 h-4" /> {error}
         </div>
       )}
 
       {/* Profile Header Card */}
-      <div className="glass rounded-2xl p-6 mb-6">
-        <div className="flex flex-col sm:flex-row items-center gap-6">
-          {/* Avatar */}
+      <div className="glass rounded-2xl p-5 sm:p-6 mb-6">
+        <div className="flex flex-col sm:flex-row items-center gap-5">
+          {/* Avatar with Frame */}
           <div className="relative group">
             <button
               onClick={() => setShowAvatarPicker(!showAvatarPicker)}
-              className="w-24 h-24 rounded-full bg-slate-800 flex items-center justify-center text-5xl border-4 border-slate-700 hover:border-blue-500 transition-colors relative"
+              className="relative rounded-full hover:opacity-90 transition-opacity"
             >
-              {avatar}
+              <AvatarFrame
+                avatar={avatar}
+                frameId={equippedFrame}
+                level={levelInfo.level}
+                size="xl"
+              />
               <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <Camera className="w-6 h-6 text-white" />
               </div>
             </button>
-
-            {/* Avatar Picker */}
-            {showAvatarPicker && (
-              <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 glass rounded-xl p-4 z-20 animate-slide-up">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-sm font-medium text-slate-300">Avatar wählen</span>
-                  <button onClick={() => setShowAvatarPicker(false)}>
-                    <X className="w-4 h-4 text-slate-400 hover:text-white" />
-                  </button>
-                </div>
-                <div className="grid grid-cols-8 gap-2">
-                  {AVATARS.map((a, i) => (
-                    <button
-                      key={i}
-                      onClick={() => { setAvatar(a); setShowAvatarPicker(false); }}
-                      className={`w-10 h-10 rounded-lg flex items-center justify-center text-2xl hover:bg-slate-700 transition-colors ${a === avatar ? "bg-blue-500/30 ring-2 ring-blue-500" : ""}`}
-                    >
-                      {a}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* User Info */}
           <div className="text-center sm:text-left flex-1">
-            <h2 className="text-2xl font-bold">{user.displayName || user.username}</h2>
-            <p className="text-slate-400">@{user.username}</p>
+            <h2 className="text-xl sm:text-2xl font-bold">{user.displayName || user.username}</h2>
+            <p className="text-slate-400 text-sm">@{user.username}</p>
             <div className="flex flex-wrap gap-2 mt-2 justify-center sm:justify-start">
-              <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm rounded-full">
+              <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full font-medium">
                 Level {levelInfo.level} — {levelInfo.title}
               </span>
               {!user.emailVerified && (
-                <span className="px-3 py-1 bg-amber-500/20 text-amber-400 text-sm rounded-full flex items-center gap-1">
+                <span className="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full flex items-center gap-1">
                   <AlertCircle className="w-3 h-3" /> E-Mail nicht bestätigt
                 </span>
               )}
             </div>
           </div>
 
-          {/* Quick Stats */}
-          <div className="flex gap-4">
+          <div className="flex gap-5">
             <div className="text-center">
-              <Flame className="w-6 h-6 text-orange-400 mx-auto" />
+              <Flame className="w-5 h-5 text-orange-400 mx-auto" />
               <p className="text-lg font-bold">{user.streak}</p>
-              <p className="text-xs text-slate-400">Streak</p>
+              <p className="text-[10px] text-slate-500 uppercase">Streak</p>
             </div>
             <div className="text-center">
-              <Zap className="w-6 h-6 text-yellow-400 mx-auto" />
+              <Zap className="w-5 h-5 text-yellow-400 mx-auto" />
               <p className="text-lg font-bold">{user.totalXP}</p>
-              <p className="text-xs text-slate-400">XP</p>
+              <p className="text-[10px] text-slate-500 uppercase">XP</p>
             </div>
           </div>
         </div>
       </div>
 
+      {/* Avatar & Frame Picker */}
+      {showAvatarPicker && (
+        <div className="glass rounded-2xl p-5 sm:p-6 mb-6 animate-slide-up">
+          <div className="flex items-center justify-between mb-5">
+            <h3 className="text-lg font-bold flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-amber-400" /> Avatar & Rahmen
+            </h3>
+            <button onClick={() => setShowAvatarPicker(false)} className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white">
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Preview */}
+          <div className="flex items-center justify-center mb-6 py-4">
+            <AvatarFrame avatar={avatar} frameId={equippedFrame} level={levelInfo.level} size="xl" />
+          </div>
+
+          {/* Avatars */}
+          <div className="mb-6">
+            <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Avatare</h4>
+            <div className="grid grid-cols-8 sm:grid-cols-12 gap-2">
+              {AVATARS.map((a) => {
+                const unlocked = levelInfo.level >= a.unlockLevel || (a.unlockLevel === 0 && unlockedAvatars.some(ua => ua.id === a.id));
+                const isSelected = avatar === a.emoji;
+                return (
+                  <button
+                    key={a.id}
+                    onClick={() => unlocked && setAvatar(a.emoji)}
+                    disabled={!unlocked}
+                    className={`relative w-full aspect-square rounded-xl flex items-center justify-center text-2xl transition-all ${
+                      isSelected
+                        ? `${getRarityBg(a.rarity)} border-2 ring-2 ring-blue-500/50 scale-110`
+                        : unlocked
+                          ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60 hover:scale-105"
+                          : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
+                    }`}
+                    title={unlocked ? a.name : `Level ${a.unlockLevel} freischalten`}
+                  >
+                    {a.emoji}
+                    {!unlocked && (
+                      <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
+                        <LockIcon className="w-3.5 h-3.5 text-slate-500" />
+                      </div>
+                    )}
+                    {a.rarity === "legendary" && unlocked && (
+                      <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 border border-slate-900" />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Frames */}
+          <div>
+            <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Rahmen</h4>
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+              {FRAMES.map((f) => {
+                const unlocked = levelInfo.level >= f.unlockLevel;
+                const isSelected = equippedFrame === f.id;
+                return (
+                  <button
+                    key={f.id}
+                    onClick={() => unlocked && setEquippedFrame(f.id)}
+                    disabled={!unlocked}
+                    className={`relative flex flex-col items-center gap-2 p-3 rounded-xl transition-all ${
+                      isSelected
+                        ? `${getRarityBg(f.rarity)} border-2 ring-2 ring-blue-500/50`
+                        : unlocked
+                          ? "bg-slate-800/60 border border-slate-700/40 hover:bg-slate-700/60"
+                          : "bg-slate-800/30 border border-slate-800/40 opacity-40 cursor-not-allowed"
+                    }`}
+                    title={unlocked ? f.name : `Level ${f.unlockLevel} freischalten`}
+                  >
+                    <AvatarFrame avatar="🎓" frameId={f.id} level={levelInfo.level} size="sm" />
+                    <span className={`text-[10px] font-medium ${isSelected ? "text-blue-400" : "text-slate-500"}`}>
+                      {f.name}
+                    </span>
+                    {f.animated && unlocked && (
+                      <span className="absolute -top-1 -right-1 text-[8px] px-1 py-0.5 bg-amber-500/20 text-amber-400 rounded font-bold">
+                        ✨
+                      </span>
+                    )}
+                    {!unlocked && (
+                      <div className="absolute inset-0 rounded-xl bg-black/40 flex items-center justify-center">
+                        <LockIcon className="w-3.5 h-3.5 text-slate-500" />
+                      </div>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Save */}
+          <button
+            onClick={async () => {
+              setSaving(true);
+              try {
+                await updateProfile({ avatar, equippedFrame });
+                showMessage("success", "Avatar gespeichert! ✅");
+                setShowAvatarPicker(false);
+              } catch { showMessage("error", "Fehler beim Speichern"); }
+              finally { setSaving(false); }
+            }}
+            disabled={saving}
+            className="mt-5 w-full py-3 bg-gradient-to-r from-blue-600 to-violet-600 hover:from-blue-500 hover:to-violet-500 disabled:from-slate-700 disabled:to-slate-700 rounded-xl font-semibold text-white transition-all flex items-center justify-center gap-2"
+          >
+            {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+            Avatar speichern
+          </button>
+        </div>
+      )}
+
       {/* Tabs */}
-      <div className="flex gap-1 mb-6 overflow-x-auto pb-1">
+      <div className="flex gap-1 mb-5 overflow-x-auto pb-1">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => { setActiveTab(tab.id); setSuccess(""); setError(""); }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-colors whitespace-nowrap ${
-              activeTab === tab.id
-                ? "bg-blue-500/20 text-blue-400"
-                : "text-slate-400 hover:text-white hover:bg-slate-800"
+            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg font-medium text-sm transition-colors whitespace-nowrap ${
+              activeTab === tab.id ? "bg-blue-500/20 text-blue-400" : "text-slate-400 hover:text-white hover:bg-slate-800"
             }`}
           >
-            {tab.icon}
-            {tab.label}
+            {tab.icon} {tab.label}
           </button>
         ))}
       </div>
 
       {/* Tab Content */}
-      <div className="glass rounded-2xl p-6">
-        {/* ===== PROFILE TAB ===== */}
+      <div className="glass rounded-2xl p-5 sm:p-6">
+        {/* ===== PROFILE ===== */}
         {activeTab === "profile" && (
-          <div className="space-y-6">
+          <div className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                <User className="w-4 h-4 inline mr-2" />
-                Anzeigename
-              </label>
-              <input
-                type="text"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                placeholder="Dein Anzeigename"
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-slate-500"
-              />
-              <p className="text-xs text-slate-500 mt-1">So sehen dich andere Nutzer</p>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Anzeigename</label>
+              <input type="text" value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder="Dein Name"
+                className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-500" />
             </div>
-
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                <Edit3 className="w-4 h-4 inline mr-2" />
-                Über mich
-              </label>
-              <textarea
-                value={bio}
-                onChange={(e) => setBio(e.target.value)}
-                placeholder="Erzähl etwas über dich..."
-                maxLength={200}
-                rows={3}
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-slate-500 resize-none"
-              />
-              <p className="text-xs text-slate-500 mt-1">{bio.length}/200 Zeichen</p>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Über mich</label>
+              <textarea value={bio} onChange={(e) => setBio(e.target.value)} placeholder="Erzähl etwas über dich..." maxLength={200} rows={3}
+                className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-500 resize-none" />
+              <p className="text-[11px] text-slate-600 mt-1">{bio.length}/200</p>
             </div>
-
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                <Mail className="w-4 h-4 inline mr-2" />
-                E-Mail
-              </label>
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">E-Mail</label>
               <div className="flex items-center gap-3">
-                <input
-                  type="email"
-                  value={user.email}
-                  disabled
-                  className="flex-1 px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-400 cursor-not-allowed"
-                />
+                <input type="email" value={user.email} disabled className="flex-1 px-4 py-3 bg-slate-800/30 border border-slate-700/60 rounded-xl text-slate-400 cursor-not-allowed" />
                 {user.emailVerified ? (
-                  <span className="px-3 py-2 bg-green-500/20 text-green-400 text-sm rounded-lg flex items-center gap-1">
-                    <CheckCircle2 className="w-4 h-4" /> Bestätigt
-                  </span>
+                  <span className="px-3 py-2 bg-green-500/20 text-green-400 text-xs rounded-lg flex items-center gap-1"><CheckCircle2 className="w-3.5 h-3.5" /> OK</span>
                 ) : (
-                  <button
-                    onClick={handleResendVerification}
-                    className="px-3 py-2 bg-amber-500/20 text-amber-400 text-sm rounded-lg hover:bg-amber-500/30 transition-colors flex items-center gap-1"
-                  >
-                    <RefreshCw className="w-4 h-4" /> Bestätigen
-                  </button>
+                  <button onClick={resendVerification} className="px-3 py-2 bg-amber-500/20 text-amber-400 text-xs rounded-lg hover:bg-amber-500/30"><RefreshCw className="w-3.5 h-3.5" /></button>
                 )}
               </div>
-              <p className="text-xs text-slate-500 mt-1">Ändern unter „Sicherheit"</p>
             </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                Benutzername
-              </label>
-              <input
-                type="text"
-                value={user.username}
-                disabled
-                className="w-full px-4 py-3 bg-slate-800/50 border border-slate-700 rounded-lg text-slate-400 cursor-not-allowed"
-              />
-              <p className="text-xs text-slate-500 mt-1">Benutzername kann nicht geändert werden</p>
-            </div>
-
-            <button
-              onClick={handleSaveProfile}
-              disabled={saving}
-              className="w-full py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-            >
-              {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
-              {saving ? "Wird gespeichert..." : "Profil speichern"}
+            <button onClick={handleSaveProfile} disabled={saving}
+              className="w-full py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 rounded-xl font-medium transition-colors flex items-center justify-center gap-2">
+              {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />} Profil speichern
             </button>
           </div>
         )}
 
-        {/* ===== SECURITY TAB ===== */}
+        {/* ===== SECURITY ===== */}
         {activeTab === "security" && (
           <div className="space-y-8">
-            {/* Change Password */}
+            <form onSubmit={handleChangePassword} className="space-y-4">
+              <h3 className="text-lg font-semibold flex items-center gap-2"><Lock className="w-5 h-5 text-blue-400" /> Passwort ändern</h3>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Aktuelles Passwort</label>
+                <input type={showPw ? "text" : "password"} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white" required />
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Neues Passwort</label>
+                <input type={showPw ? "text" : "password"} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Min. 6 Zeichen"
+                  className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-500" required />
+              </div>
+              <div>
+                <label className="block text-xs text-slate-400 mb-1">Bestätigen</label>
+                <input type={showPw ? "text" : "password"} value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  className={`w-full px-4 py-3 bg-slate-800/60 border rounded-xl focus:outline-none focus:ring-2 text-white ${confirmNewPassword && newPassword !== confirmNewPassword ? "border-red-500/50" : "border-slate-700/60"}`} required />
+              </div>
+              <button type="submit" disabled={saving} className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 rounded-xl font-medium transition-colors flex items-center gap-2">
+                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />} Ändern
+              </button>
+            </form>
+            <hr className="border-slate-700/50" />
+            <form onSubmit={handleChangeEmail} className="space-y-4">
+              <h3 className="text-lg font-semibold flex items-center gap-2"><Mail className="w-5 h-5 text-blue-400" /> E-Mail ändern</h3>
+              <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white" required />
+              <input type="password" value={emailPassword} onChange={(e) => setEmailPassword(e.target.value)} placeholder="Passwort zur Bestätigung"
+                className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-white placeholder-slate-500" required />
+              <button type="submit" disabled={saving} className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 rounded-xl font-medium transition-colors flex items-center gap-2">
+                {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />} E-Mail ändern
+              </button>
+            </form>
+            <hr className="border-slate-700/50" />
             <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Lock className="w-5 h-5 text-blue-400" />
-                Passwort ändern
-              </h3>
-              <form onSubmit={handleChangePassword} className="space-y-4">
-                <div>
-                  <label className="block text-sm text-slate-300 mb-1">Aktuelles Passwort</label>
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                    <input
-                      type={showPw ? "text" : "password"}
-                      value={currentPassword}
-                      onChange={(e) => setCurrentPassword(e.target.value)}
-                      className="w-full pl-10 pr-10 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                      required
-                    />
-                    <button type="button" onClick={() => setShowPw(!showPw)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white">
-                      {showPw ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm text-slate-300 mb-1">Neues Passwort</label>
-                  <input
-                    type={showPw ? "text" : "password"}
-                    value={newPassword}
-                    onChange={(e) => setNewPassword(e.target.value)}
-                    placeholder="Min. 6 Zeichen + Zahl"
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white placeholder-slate-500"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm text-slate-300 mb-1">Neues Passwort bestätigen</label>
-                  <input
-                    type={showPw ? "text" : "password"}
-                    value={confirmNewPassword}
-                    onChange={(e) => setConfirmNewPassword(e.target.value)}
-                    className={`w-full px-4 py-3 bg-slate-800 border rounded-lg focus:outline-none focus:ring-2 text-white ${
-                      confirmNewPassword && newPassword !== confirmNewPassword ? "border-red-500 focus:ring-red-500" : "border-slate-700 focus:ring-blue-500"
-                    }`}
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 rounded-lg font-medium transition-colors flex items-center gap-2"
-                >
-                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-                  Passwort ändern
-                </button>
-              </form>
-            </div>
-
-            <hr className="border-slate-700" />
-
-            {/* Change Email */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Mail className="w-5 h-5 text-blue-400" />
-                E-Mail ändern
-              </h3>
-              <form onSubmit={handleChangeEmail} className="space-y-4">
-                <div>
-                  <label className="block text-sm text-slate-300 mb-1">Neue E-Mail-Adresse</label>
-                  <input
-                    type="email"
-                    value={newEmail}
-                    onChange={(e) => setNewEmail(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm text-slate-300 mb-1">Passwort zur Bestätigung</label>
-                  <input
-                    type="password"
-                    value={emailPassword}
-                    onChange={(e) => setEmailPassword(e.target.value)}
-                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={saving}
-                  className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 rounded-lg font-medium transition-colors flex items-center gap-2"
-                >
-                  {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />}
-                  E-Mail ändern
-                </button>
-              </form>
-            </div>
-
-            <hr className="border-slate-700" />
-
-            {/* DSGVO: Account löschen */}
-            <div>
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-red-400" />
-                Account löschen
-              </h3>
-              <p className="text-slate-400 text-sm mb-4">
-                Alle deine Daten werden permanent gelöscht. Dies kann nicht rückgängig gemacht werden.
-              </p>
-
+              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2"><AlertCircle className="w-5 h-5 text-red-400" /> Account löschen</h3>
+              <p className="text-slate-400 text-sm mb-4">Alle Daten werden permanent gelöscht.</p>
               {!showDeleteConfirm ? (
-                <button
-                  onClick={() => setShowDeleteConfirm(true)}
-                  className="px-6 py-3 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg font-medium transition-colors"
-                >
-                  Account unwiderruflich löschen
-                </button>
+                <button onClick={() => setShowDeleteConfirm(true)} className="px-6 py-3 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-xl font-medium">Account löschen</button>
               ) : (
-                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-lg space-y-4">
+                <div className="p-4 bg-red-500/10 border border-red-500/30 rounded-xl space-y-3">
                   <p className="text-red-400 font-medium">⚠️ Bist du sicher?</p>
-                  <p className="text-slate-400 text-sm">
-                    Alle Lernfortschritte, Statistiken und dein Account werden permanent gelöscht.
-                  </p>
-                  <div>
-                    <label className="block text-sm text-slate-300 mb-1">Passwort zur Bestätigung</label>
-                    <input
-                      type="password"
-                      value={deletePassword}
-                      onChange={(e) => setDeletePassword(e.target.value)}
-                      placeholder="Dein aktuelles Passwort"
-                      className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 text-white"
-                    />
-                  </div>
+                  <input type="password" value={deletePassword} onChange={(e) => setDeletePassword(e.target.value)} placeholder="Passwort"
+                    className="w-full px-4 py-3 bg-slate-800/60 border border-slate-700/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500/50 text-white" />
                   <div className="flex gap-3">
-                    <button
-                      onClick={() => { setShowDeleteConfirm(false); setDeletePassword(""); }}
-                      className="flex-1 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
-                    >
-                      Abbrechen
-                    </button>
-                    <button
-                      onClick={async () => {
-                        if (!deletePassword) return;
-                        setSaving(true);
-                        try {
-                          await deleteUserAccount(deletePassword);
-                          router.push("/");
-                        } catch (err: unknown) {
-                          const code = (err as { code?: string })?.code;
-                          if (code === "auth/invalid-credential") showMessage("error", "Passwort ist falsch");
-                          else showMessage("error", "Account konnte nicht gelöscht werden");
-                        } finally {
-                          setSaving(false);
-                        }
-                      }}
-                      disabled={saving || !deletePassword}
-                      className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg font-medium transition-colors flex items-center justify-center gap-2"
-                    >
-                      {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
-                      Ja, Account löschen
+                    <button onClick={() => { setShowDeleteConfirm(false); setDeletePassword(""); }} className="flex-1 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-xl">Abbrechen</button>
+                    <button onClick={async () => {
+                      if (!deletePassword) return;
+                      setSaving(true);
+                      try { await deleteUserAccount(deletePassword); router.push("/"); }
+                      catch { showMessage("error", "Löschen fehlgeschlagen"); }
+                      finally { setSaving(false); }
+                    }} disabled={saving || !deletePassword} className="flex-1 py-2.5 bg-red-500 hover:bg-red-600 disabled:bg-slate-700 rounded-xl font-medium">
+                      {saving ? <Loader2 className="w-4 h-4 animate-spin mx-auto" /> : "Löschen"}
                     </button>
                   </div>
                 </div>
@@ -550,183 +444,73 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* ===== SETTINGS TAB ===== */}
+        {/* ===== SETTINGS ===== */}
         {activeTab === "settings" && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Bell className="w-5 h-5 text-blue-400" />
-                <div>
-                  <p className="font-medium">Benachrichtigungen</p>
-                  <p className="text-sm text-slate-400">Erinnerungen zum Lernen</p>
-                </div>
-              </div>
-              <button
-                onClick={async () => {
-                  const newVal = !notifications;
-                  setNotifications(newVal);
-                  await updateProfile({ settings: { ...user.settings, notifications: newVal } });
-                }}
-                className={`w-12 h-6 rounded-full transition-colors relative ${notifications ? "bg-blue-500" : "bg-slate-600"}`}
-              >
+          <div className="space-y-4">
+            <div className="flex items-center justify-between p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3"><Bell className="w-5 h-5 text-blue-400" /><div><p className="font-medium">Benachrichtigungen</p><p className="text-xs text-slate-400">Lern-Erinnerungen</p></div></div>
+              <button onClick={async () => { const v = !notifications; setNotifications(v); await updateProfile({ settings: { ...user.settings, notifications: v } }); }}
+                className={`w-12 h-6 rounded-full transition-colors relative ${notifications ? "bg-blue-500" : "bg-slate-600"}`}>
                 <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${notifications ? "translate-x-6" : "translate-x-0.5"}`} />
               </button>
             </div>
-
-            {/* Leaderboard Opt-in */}
-            <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Users className="w-5 h-5 text-amber-400" />
-                <div>
-                  <p className="font-medium">Bestenliste</p>
-                  <p className="text-sm text-slate-400">
-                    {user.leaderboardOptIn
-                      ? "Dein Profil ist in der Bestenliste sichtbar"
-                      : "Aktivieren, um dich mit anderen zu vergleichen"}
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={async () => {
-                  const newVal = !user.leaderboardOptIn;
-                  await updateProfile({ leaderboardOptIn: newVal });
-                }}
-                className={`w-12 h-6 rounded-full transition-colors relative ${user.leaderboardOptIn ? "bg-amber-500" : "bg-slate-600"}`}
-              >
+            <div className="flex items-center justify-between p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3"><Users className="w-5 h-5 text-amber-400" /><div><p className="font-medium">Bestenliste</p><p className="text-xs text-slate-400">{user.leaderboardOptIn ? "Sichtbar" : "Deaktiviert"}</p></div></div>
+              <button onClick={async () => { await updateProfile({ leaderboardOptIn: !user.leaderboardOptIn }); }}
+                className={`w-12 h-6 rounded-full transition-colors relative ${user.leaderboardOptIn ? "bg-amber-500" : "bg-slate-600"}`}>
                 <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${user.leaderboardOptIn ? "translate-x-6" : "translate-x-0.5"}`} />
               </button>
             </div>
-
-            <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
-              <div className="flex items-center gap-3">
-                <Palette className="w-5 h-5 text-purple-400" />
-                <div>
-                  <p className="font-medium">Design</p>
-                  <p className="text-sm text-slate-400">Aktuell: Dunkel</p>
-                </div>
-              </div>
-              <span className="px-3 py-1 bg-slate-700 text-slate-400 text-sm rounded-full">Dark Mode</span>
+            <div className="flex items-center justify-between p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3"><Palette className="w-5 h-5 text-violet-400" /><div><p className="font-medium">Design</p><p className="text-xs text-slate-400">Dunkel</p></div></div>
+              <span className="px-3 py-1 bg-slate-700 text-slate-400 text-xs rounded-full">Dark Mode</span>
             </div>
-
-            <div className="p-4 bg-slate-800/50 rounded-lg">
-              <div className="flex items-center gap-3 mb-3">
-                <BookOpen className="w-5 h-5 text-green-400" />
-                <div>
-                  <p className="font-medium">Gespeicherte Module</p>
-                  <p className="text-sm text-slate-400">{user.savedModules?.length || 0} Module gemerkt</p>
-                </div>
-              </div>
+            <div className="p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3 mb-2"><BookOpen className="w-5 h-5 text-green-400" /><div><p className="font-medium">Gespeicherte Module</p><p className="text-xs text-slate-400">{user.savedModules?.length || 0}</p></div></div>
               {user.savedModules && user.savedModules.length > 0 ? (
-                <div className="flex flex-wrap gap-2">
-                  {user.savedModules.map((slug) => (
-                    <span key={slug} className="px-3 py-1 bg-blue-500/20 text-blue-400 text-sm rounded-full">
-                      {slug}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-sm text-slate-500 italic">Noch keine Module gespeichert</p>
-              )}
+                <div className="flex flex-wrap gap-1.5 mt-2">{user.savedModules.map((s) => <span key={s} className="px-2.5 py-1 bg-blue-500/15 text-blue-400 text-xs rounded-lg">{s}</span>)}</div>
+              ) : <p className="text-xs text-slate-600 italic">Keine</p>}
             </div>
           </div>
         )}
 
-        {/* ===== STATS TAB ===== */}
+        {/* ===== STATS ===== */}
         {activeTab === "stats" && (
           <div className="space-y-6">
-            {/* Level Progress */}
-            <div className="p-4 bg-slate-800/50 rounded-lg">
-              <div className="flex items-center justify-between mb-3">
+            <div className="p-4 bg-slate-800/40 rounded-xl">
+              <div className="flex items-center justify-between mb-2">
                 <h3 className="font-semibold">Level {levelInfo.level} — {levelInfo.title}</h3>
-                <span className="text-sm text-slate-400">{levelInfo.xpToNext} XP bis Level {levelInfo.level + 1}</span>
+                <span className="text-xs text-slate-400">{levelInfo.xpToNext} XP bis Level {levelInfo.level + 1}</span>
               </div>
-              <div className="h-3 bg-slate-700 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all"
-                  style={{ width: `${levelInfo.progress}%` }}
-                />
+              <div className="h-2.5 bg-slate-700 rounded-full overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-blue-500 to-violet-500 rounded-full transition-all" style={{ width: `${levelInfo.progress}%` }} />
               </div>
             </div>
-
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="p-4 bg-slate-800/50 rounded-lg text-center">
-                <Flame className="w-8 h-8 text-orange-400 mx-auto mb-2" />
-                <p className="text-2xl font-bold">{user.streak}</p>
-                <p className="text-sm text-slate-400">Tage Streak</p>
-              </div>
-              <div className="p-4 bg-slate-800/50 rounded-lg text-center">
-                <Zap className="w-8 h-8 text-yellow-400 mx-auto mb-2" />
-                <p className="text-2xl font-bold">{user.totalXP}</p>
-                <p className="text-sm text-slate-400">Gesamt XP</p>
-              </div>
-              <div className="p-4 bg-slate-800/50 rounded-lg text-center">
-                <Trophy className="w-8 h-8 text-purple-400 mx-auto mb-2" />
-                <p className="text-2xl font-bold">{user.completedModules.length}</p>
-                <p className="text-sm text-slate-400">Module fertig</p>
-              </div>
-              <div className="p-4 bg-slate-800/50 rounded-lg text-center">
-                <BookOpen className="w-8 h-8 text-green-400 mx-auto mb-2" />
-                <p className="text-2xl font-bold">
-                  {Object.values(user.completedLessons).flat().length}
-                </p>
-                <p className="text-sm text-slate-400">Lektionen</p>
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Flame className="w-6 h-6 text-orange-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.streak}</p><p className="text-[10px] text-slate-500 uppercase">Streak</p></div>
+              <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Zap className="w-6 h-6 text-yellow-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.totalXP}</p><p className="text-[10px] text-slate-500 uppercase">XP</p></div>
+              <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Trophy className="w-6 h-6 text-violet-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.completedModules.length}</p><p className="text-[10px] text-slate-500 uppercase">Module</p></div>
+              <div className="p-4 bg-slate-800/40 rounded-xl text-center"><BookOpen className="w-6 h-6 text-green-400 mx-auto mb-1" /><p className="text-xl font-bold">{Object.values(user.completedLessons).flat().length}</p><p className="text-[10px] text-slate-500 uppercase">Lektionen</p></div>
             </div>
-
-            {/* Achievements */}
             <div>
               <h3 className="font-semibold mb-3">🏆 Erfolge</h3>
-              <div className="flex flex-wrap gap-2">
-                {user.streak >= 3 && (
-                  <span className="px-3 py-1.5 bg-orange-500/20 text-orange-400 text-sm rounded-full">🔥 3+ Tage Streak</span>
-                )}
-                {user.completedModules.length >= 1 && (
-                  <span className="px-3 py-1.5 bg-green-500/20 text-green-400 text-sm rounded-full">🎯 Erstes Modul</span>
-                )}
-                {user.totalXP >= 100 && (
-                  <span className="px-3 py-1.5 bg-purple-500/20 text-purple-400 text-sm rounded-full">⭐ 100 XP</span>
-                )}
-                {user.totalXP >= 500 && (
-                  <span className="px-3 py-1.5 bg-yellow-500/20 text-yellow-400 text-sm rounded-full">💎 500 XP</span>
-                )}
-                {user.totalXP >= 1000 && (
-                  <span className="px-3 py-1.5 bg-blue-500/20 text-blue-400 text-sm rounded-full">🏅 1000 XP</span>
-                )}
-                {user.streak >= 7 && (
-                  <span className="px-3 py-1.5 bg-red-500/20 text-red-400 text-sm rounded-full">🔥 7 Tage Streak</span>
-                )}
-                {user.streak >= 30 && (
-                  <span className="px-3 py-1.5 bg-pink-500/20 text-pink-400 text-sm rounded-full">👑 30 Tage Streak</span>
-                )}
-                {(user.savedModules?.length || 0) >= 3 && (
-                  <span className="px-3 py-1.5 bg-cyan-500/20 text-cyan-400 text-sm rounded-full">📚 Sammler</span>
-                )}
-                {user.completedModules.length >= 5 && (
-                  <span className="px-3 py-1.5 bg-emerald-500/20 text-emerald-400 text-sm rounded-full">🎓 5 Module</span>
-                )}
-                {user.completedModules.length === 0 && user.streak < 3 && user.totalXP < 100 && (
-                  <span className="text-sm text-slate-500 italic">Spiele Erfolge frei! 🎮</span>
-                )}
+              <div className="flex flex-wrap gap-1.5">
+                {user.streak >= 3 && <span className="px-2.5 py-1 bg-orange-500/15 text-orange-400 text-xs rounded-lg">🔥 3+ Streak</span>}
+                {user.streak >= 7 && <span className="px-2.5 py-1 bg-red-500/15 text-red-400 text-xs rounded-lg">🔥 7 Streak</span>}
+                {user.streak >= 30 && <span className="px-2.5 py-1 bg-amber-500/15 text-amber-400 text-xs rounded-lg">👑 30 Streak</span>}
+                {user.completedModules.length >= 1 && <span className="px-2.5 py-1 bg-green-500/15 text-green-400 text-xs rounded-lg">🎯 1 Modul</span>}
+                {user.completedModules.length >= 5 && <span className="px-2.5 py-1 bg-blue-500/15 text-blue-400 text-xs rounded-lg">🎓 5 Module</span>}
+                {user.totalXP >= 100 && <span className="px-2.5 py-1 bg-purple-500/15 text-purple-400 text-xs rounded-lg">⭐ 100 XP</span>}
+                {user.totalXP >= 500 && <span className="px-2.5 py-1 bg-cyan-500/15 text-cyan-400 text-xs rounded-lg">💎 500 XP</span>}
+                {user.totalXP >= 1000 && <span className="px-2.5 py-1 bg-yellow-500/15 text-yellow-400 text-xs rounded-lg">🏅 1000 XP</span>}
+                {user.completedModules.length === 0 && user.streak < 3 && user.totalXP < 100 && <span className="text-xs text-slate-600 italic">Spiele Erfolge frei! 🎮</span>}
               </div>
             </div>
-
-            {/* Account Info */}
-            <div className="p-4 bg-slate-800/50 rounded-lg">
-              <h3 className="font-semibold mb-3">📋 Account-Info</h3>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Mitglied seit</span>
-                  <span>{new Date(user.createdAt).toLocaleDateString("de-DE")}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">Letzte Aktivität</span>
-                  <span>{new Date(user.lastActive).toLocaleDateString("de-DE")}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-400">E-Mail verifiziert</span>
-                  <span>{user.emailVerified ? "✅ Ja" : "❌ Nein"}</span>
-                </div>
+            <div className="p-4 bg-slate-800/40 rounded-xl">
+              <h3 className="font-semibold mb-2">📋 Info</h3>
+              <div className="space-y-1.5 text-sm">
+                <div className="flex justify-between"><span className="text-slate-400">Mitglied seit</span><span>{new Date(user.createdAt).toLocaleDateString("de-DE")}</span></div>
+                <div className="flex justify-between"><span className="text-slate-400">Letzte Aktivität</span><span>{new Date(user.lastActive).toLocaleDateString("de-DE")}</span></div>
               </div>
             </div>
           </div>
