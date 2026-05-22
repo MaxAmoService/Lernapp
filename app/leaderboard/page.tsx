@@ -15,7 +15,7 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     loadEntries();
-  }, []);
+  }, [user?.leaderboardOptIn]);
 
   async function loadEntries() {
     setLoading(true);
@@ -34,7 +34,8 @@ export default function LeaderboardPage() {
     setOptingIn(true);
     try {
       await toggleLeaderboard(!user.leaderboardOptIn);
-      if (!user.leaderboardOptIn) await loadEntries();
+      // Reload nach kurzem Delay (Firestore braucht manchmal Moment)
+      setTimeout(() => loadEntries(), 500);
     } finally {
       setOptingIn(false);
     }

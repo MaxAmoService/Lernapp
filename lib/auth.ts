@@ -344,8 +344,9 @@ export interface LeaderboardEntry {
 
 export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEntry[]> {
   try {
-    // Alle Users mit leaderboardOptIn = true laden
     const { collection, query, where, getDocs } = await import("firebase/firestore");
+
+    // 1. Query: Users mit leaderboardOptIn = true
     const q = query(
       collection(db, "users"),
       where("leaderboardOptIn", "==", true)
@@ -353,23 +354,49 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
     const snap = await getDocs(q);
 
     const entries: LeaderboardEntry[] = [];
+    const seenUids = new Set<string>();
+
     snap.forEach((doc) => {
       const data = doc.data() as UserProfile;
-      const levelInfo = getUserLevel(data.totalXP);
+      // Sicherstellen dass die Daten vollständig sind
+      if (!data.uid || !data.username) return;
+      const levelInfo = getUserLevel(data.totalXP || 0);
       entries.push({
         uid: data.uid,
         username: data.username,
         displayName: data.displayName || data.username,
-        avatar: data.avatar,
-        totalXP: data.totalXP,
-        streak: data.streak,
+        avatar: data.avatar || "🎓",
+        totalXP: data.totalXP || 0,
+        streak: data.streak || 0,
         completedModules: data.completedModules?.length || 0,
         level: levelInfo.level,
         levelTitle: levelInfo.title,
       });
+      seenUids.add(data.uid);
     });
 
-    // Client-seitig nach XP sortieren (kein Composite Index nötig)
+    // 2. Falls currentUser opted-in aber nicht in Query-Ergebnis
+    // (z.B. weil Firestore das Feld noch nicht indexiert hat)
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      const currentProfile = await getUserProfile(currentUser.uid);
+      if (currentProfile?.leaderboardOptIn && !seenUids.has(currentUser.uid)) {
+        const levelInfo = getUserLevel(currentProfile.totalXP || 0);
+        entries.push({
+          uid: currentProfile.uid,
+          username: currentProfile.username,
+          displayName: currentProfile.displayName || currentProfile.username,
+          avatar: currentProfile.avatar || "🎓",
+          totalXP: currentProfile.totalXP || 0,
+          streak: currentProfile.streak || 0,
+          completedModules: currentProfile.completedModules?.length || 0,
+          level: levelInfo.level,
+          levelTitle: levelInfo.title,
+        });
+      }
+    }
+
+    // Client-seitig nach XP sortieren
     entries.sort((a, b) => b.totalXP - a.totalXP);
 
     return entries.slice(0, limit);
