@@ -31,7 +31,7 @@ export function ModuleCard({ module, compact }: ModuleCardProps) {
             e.stopPropagation();
             toggleSaveModule(module.slug);
           }}
-          className="absolute top-3 right-3 z-10 p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 transition-colors"
+          className="absolute top-3 left-3 z-10 p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 transition-colors"
           title={isSaved ? "Aus Merkliste entfernen" : "Merken"}
         >
           {isSaved ? (
