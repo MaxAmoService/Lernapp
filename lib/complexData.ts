@@ -7,7 +7,7 @@ export const complexModule: Module = {
   description: "Von der imaginären Einheit bis zu Wurzeln in der Gaußschen Ebene — interaktiv und verständlich",
   icon: "🌀",
   color: "#8b5cf6",
-  category: "mathe",
+  category: "analysis",
   progress: 0,
   merkblatt: `## 📋 Merkblatt: Komplexe Zahlen
 

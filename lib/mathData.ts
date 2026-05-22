@@ -56,6 +56,7 @@ export const mathCategories: MathCategory[] = [
       { id: "differentialrechnung", name: "Differentialrechnung", description: "Ableitungen, Regeln, Anwendungen" },
       { id: "integralrechnung", name: "Integralrechnung", description: "Stammfunktionen, bestimmte Integrale" },
       { id: "reihen", name: "Reihen & Potenzreihen", description: "Konvergenz, Taylor, Maclaurin" },
+      { id: "komplexe-zahlen", name: "Komplexe Zahlen", description: "Gaußsche Ebene, Darstellungsformen, Rechenregeln" },
     ],
   },
   {
