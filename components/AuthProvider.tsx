@@ -62,33 +62,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Firebase Auth State Listener
+  let heartbeat: NodeJS.Timeout | null = null;
+  let handleUnload: (() => void) | null = null;
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
         try {
           let profile = await getUserProfile(firebaseUser.uid);
-          if (!profile) profile = await getUserProfile(firebaseUser.uid);
           if (profile) {
-            // E-Mail-Verifikation syncen
             if (profile.emailVerified !== firebaseUser.emailVerified) {
               await updateUserProfile(firebaseUser.uid, { emailVerified: firebaseUser.emailVerified });
               profile.emailVerified = firebaseUser.emailVerified;
             }
             setUser(profile);
-            // Presence initialisieren
-            setOnline(firebaseUser.uid);
-            // Heartbeat: alle 30 Sekunden Status refreshen
-            const heartbeat = setInterval(() => refreshPresence(firebaseUser.uid), 30000);
-            // Bei Page-Unload → offline setzen
-            const handleUnload = () => {
+
+            // Presence: non-blocking (RTDB muss aktiviert sein)
+            setOnline(firebaseUser.uid).catch(() => {});
+            heartbeat = setInterval(() => refreshPresence(firebaseUser.uid).catch(() => {}), 30000);
+            handleUnload = () => {
               try {
                 const statusRef = ref(rtdb, `status/${firebaseUser.uid}`);
                 set(statusRef, { state: "offline", lastChanged: Date.now(), uid: firebaseUser.uid });
               } catch { /* ok */ }
             };
             window.addEventListener("beforeunload", handleUnload);
-            // Cleanup
-            return () => { clearInterval(heartbeat); window.removeEventListener("beforeunload", handleUnload); };
           } else {
             setUser(null);
           }
@@ -102,7 +100,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      if (heartbeat) clearInterval(heartbeat);
+      if (handleUnload) window.removeEventListener("beforeunload", handleUnload);
+    };
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
