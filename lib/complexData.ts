@@ -126,15 +126,14 @@ $6 \\cdot (-1) = -6$
 $2j \\cdot 3j = -6$ ✓
 [GUIDED_END]
 
----
-
-## 🎯 Übung
-
-1. $j^8 = ?$ → $1$ (denn $8 \\bmod 4 = 0$)
-2. $j^{15} = ?$ → $-j$ (denn $15 \\bmod 4 = 3$)
-3. $(1+j) + (3-2j) = ?$ → $4 - j$
-4. $(2j)^2 = ?$ → $-4$
-5. $j^3 + j^4 + j^5 = ?$ → $1$`,
+[PRACTICE_START]
+TITLE:Potenzen von j & Grundlagen
+[Q:$j^8 = ?$||$1$ — denn $8 \bmod 4 = 0$, also $j^8 = (j^4)^2 = 1^2 = 1$]
+[Q:$j^{15} = ?$||$-j$ — denn $15 \bmod 4 = 3$, also $j^{15} = j^3 = -j$]
+[Q:$(1+j) + (3-2j) = ? || $4 - j$ — Real: $1+3=4$, Imag: $1-2=-1$]
+[Q:$(2j)^2 = ? || $-4$ — $(2j)^2 = 4j^2 = 4(-1) = -4$]
+[Q:$j^3 + j^4 + j^5 = ? || $1$ — $-j + 1 + j = 1$]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -181,13 +180,14 @@ $z = -3 + 2j$ liegt bei $(-3 | 2)$ mit Betrag $r = \\sqrt{13}$ ✓
 
 ---
 
-## 🎯 Übung
-
-1. $z_1 = 2 + 3j$ → $(2 | 3)$
-2. $z_2 = -4 + j$ → $(-4 | 1)$
-3. $z_3 = -3 - 2j$ → $(-3 | -2)$
-4. $z_4 = 5j$ → $(0 | 5)$
-5. $z_5 = -4$ → $(-4 | 0)$`,
+[PRACTICE_START]
+TITLE:Gaußsche Ebene — Zahlen einzeichnen
+[Q:$z_1 = 2 + 3j$ — wo liegt der Punkt?$(2 || 3)$ — Re=2, Im=3, also 2 rechts, 3 oben]
+[Q:$z_2 = -4 + j$ — wo liegt der Punkt?$(-4 || 1)$ — Re=-4, Im=1, also 4 links, 1 oben]
+[Q:$z_3 = -3 - 2j$ — wo liegt der Punkt?$(-3 || -2)$ — Re=-3, Im=-2, also 3 links, 2 unten]
+[Q:$z_4 = 5j$ — wo liegt der Punkt?$(0 || 5)$ — rein imaginär, auf der Im-Achse]
+[Q:$z_5 = -4$ — wo liegt der Punkt?$(-4 || 0)$ — reell, auf der Re-Achse]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -275,13 +275,14 @@ $z = 3\\sqrt{2} \\cdot e^{j225°}$ ✓ (Probe: $x = 4.24 \\cdot \\cos(225°) = -
 
 ---
 
-## 🎯 Übung
-
-1. $1 + j$ → $\\sqrt{2} e^{j45°}$
-2. $2e^{j60°}$ → $1 + 1.732j$
-3. $-4 + 4j$ → $4\\sqrt{2} e^{j135°}$
-4. $3e^{j270°}$ → $-3j$
-5. $-5$ → $5e^{j180°}$`,
+[PRACTICE_START]
+TITLE:Darstellungsformen umrechnen
+[Q:$1 + j$ in Exponentialform?$\sqrt{2} e^{j45°}$ — $r=\sqrt{2}$, $\varphi=45°$ (Q I)]
+[Q:$2e^{j60°}$ in Normalform?$1 + 1.732j$ — $x=2\cos60°=1$, $y=2\sin60°=1.732$]
+[Q:$-4 + 4j$ in Exponentialform?$4\sqrt{2} e^{j135°}$ — $r=4\sqrt{2}$, Q II: $\varphi=135°$]
+[Q:$3e^{j270°}$ in Normalform?$-3j$ — $x=3\cos270°=0$, $y=3\sin270°=-3$]
+[Q:$-5$ in Exponentialform?$5e^{j180°}$ — $r=5$, $\varphi=180°$ (reell, negativ)]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -340,13 +341,14 @@ $8 - 2j$ ✓
 
 ---
 
-## 🎯 Übung
-
-1. $(5 + 3j) + (2 - 7j)$ → $7 - 4j$
-2. $(2j) + (3 - 5j)$ → $3 - 3j$
-3. $(1 + 2j) + (3 + 4j) + (-5 - j)$ → $-1 + 5j$
-4. $(4 - 2j) - (4 - 2j)$ → $0$
-5. $(10 + 0j) - (3 + 7j)$ → $7 - 7j$`,
+[PRACTICE_START]
+TITLE:Addition & Subtraktion
+[Q:$(5 + 3j) + (2 - 7j) = ? || $7 - 4j$ — Real: $5+2=7$, Imag: $3-7=-4$]
+[Q:$(2j) + (3 - 5j) = ? || $3 - 3j$ — Real: $0+3=3$, Imag: $2-5=-3$]
+[Q:$(1 + 2j) + (3 + 4j) + (-5 - j) = ? || $-1 + 5j$ — Real: $1+3-5=-1$, Imag: $2+4-1=5$]
+[Q:$(4 - 2j) - (4 - 2j) = ? || $0$ — gleiche Zahlen, Differenz ist 0]
+[Q:$(10) - (3 + 7j) = ? || $7 - 7j$ — Real: $10-3=7$, Imag: $0-7=-7$]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -408,13 +410,14 @@ $12e^{j50°}$ ✓
 
 ---
 
-## 🎯 Übung
-
-1. $(1+j)(1-j)$ → $2$
-2. $(3+2j)(1+4j)$ → $-5+14j$
-3. $2e^{j15°} \\cdot 5e^{j45°}$ → $10e^{j60°}$
-4. $(1+j)^2$ → $2j$
-5. $(2e^{j90°})^3$ → $-8j$`,
+[PRACTICE_START]
+TITLE:Multiplikation
+[Q:$(1+j)(1-j) = ? || $2$ — FOIL: $1 - j + j - j^2 = 1 + 1 = 2$]
+[Q:$(3+2j)(1+4j) = ? || $-5+14j$ — $3+12j+2j+8j^2 = 3+14j-8 = -5+14j$]
+[Q:$2e^{j15°} \cdot 5e^{j45°} = ? || $10e^{j60°}$ — Beträge: $2\cdot5=10$, Winkel: $15°+45°=60°$]
+[Q:$(1+j)^2 = ? || $2j$ — $(1+j)(1+j) = 1+2j+j^2 = 1+2j-1 = 2j$]
+[Q:$(2e^{j90°})^3 = ? || $-8j$ — $8e^{j270°} = 8(\cos270° + j\sin270°) = -8j$]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -478,13 +481,14 @@ $3e^{j50°}$ ✓
 
 ---
 
-## 🎯 Übung
-
-1. $\\frac{1+j}{1-j}$ → $j$
-2. $\\frac{4+2j}{2+j}$ → $2$ (reell!)
-3. $\\frac{10e^{j90°}}{2e^{j30°}}$ → $5e^{j60°}$
-4. $\\frac{2-3j}{4+j}$ → $\\frac{5}{17} - \\frac{14}{17}j$
-5. $\\frac{j}{1+j}$ → $\\frac{1}{2} + \\frac{1}{2}j$`,
+[PRACTICE_START]
+TITLE:Division komplexer Zahlen
+[Q:$\frac{1+j}{1-j} = ? || $j$ — Erweiterung mit $(1+j)$: Nenner $= 2$, Zähler $= 2j$, Ergebnis $= j$]
+[Q:$\frac{4+2j}{2+j} = ? || $2$ (reell!) — Erweiterung mit $(2-j)$: Nenner $= 5$, Zähler $= 10$]
+[Q:$\frac{10e^{j90°}}{2e^{j30°}} = ? || $5e^{j60°}$ — Beträge: $10/2=5$, Winkel: $90°-30°=60°$]
+[Q:$\frac{2-3j}{4+j} = ? || $\frac{5}{17} - \frac{14}{17}j$ — Erweiterung mit $(4-j)$]
+[Q:$\frac{j}{1+j} = ? || $\frac{1}{2} + \frac{1}{2}j$ — Erweiterung mit $(1-j)$]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -538,13 +542,14 @@ $(1+j)^4 = -4$ ✓
 
 ---
 
-## 🎯 Übung
-
-1. $(2e^{j15°})^3$ → $8e^{j45°}$
-2. $j^{17}$ → $j$ ($17 \\bmod 4 = 1$)
-3. $(1+j)^6$ → $-8j$
-4. $(\\sqrt{3}+j)^3$ → $8j$
-5. $(-1)^5$ → $-1$`,
+[PRACTICE_START]
+TITLE:Potenzieren nach De Moivre
+[Q:$(2e^{j15°})^3 = ? || $8e^{j45°}$ — $2^3=8$, Winkel: $3\cdot15°=45°$]
+[Q:$j^{17} = ? || $j$ — $17 \bmod 4 = 1$, also $j^{17} = j^1 = j$]
+[Q:$(1+j)^6 = ? || $-8j$ — $z=\sqrt{2}e^{j45°}$, $z^6=8e^{j270°}=-8j$]
+[Q:$(\sqrt{3}+j)^3 = ? || $8j$ — $r=2$, $\varphi=30°$, $z^3=8e^{j90°}=8j$]
+[Q:$(-1)^5 = ? || $-1$ — $(-1)^5 = -1$ (ungerade Potenz)]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -592,13 +597,14 @@ Drei Wurzeln: $2$, $-1+1.732j$, $-1-1.732j$ → gleichseitiges Dreieck auf Kreis
 
 ---
 
-## 🎯 Übung
-
-1. $\\sqrt[3]{-8}$ → $1+1.732j$, $-2$, $1-1.732j$
-2. $\\sqrt[4]{16}$ → $2, 2j, -2, -2j$ (Quadrat!)
-3. $\\sqrt{-1}$ → $j, -j$
-4. Warum hat $z = 0$ nur eine Wurzel? → $0^{1/n} = 0$
-5. $n$-te Wurzeln von $z \\neq 0$? → genau $n$ Stück`,
+[PRACTICE_START]
+TITLE:Radizieren — Wurzeln berechnen
+[Q:$\sqrt[3]{-8}$ — alle 3 Wurzeln?$1+1.732j$, $-2$, $1-1.732j$ — Radius $= 2$, gleichseitiges Dreieck]
+[Q:$\sqrt[4]{16}$ — alle 4 Wurzeln?$2, 2j, -2, -2j$ — Radius $= 2$, Quadrat auf Kreis]
+[Q:$\sqrt{-1}$ — beide Wurzeln?$j, -j$ — $e^{j90°}$ und $e^{j270°}$]
+[Q:Warum hat $z = 0$ nur eine Wurzel?$0^{1/n} = 0$ für alle $n$ — kein Kreis, nur Ursprung]
+[Q:Wie viele $n$-te Wurzeln hat $z \neq 0$?Genau $n$ — Fundamentalsatz der Algebra]
+[PRACTICE_END]`,
     },
 
     // ══════════════════════════════════════════════════════════════

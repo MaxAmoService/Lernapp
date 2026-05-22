@@ -7,6 +7,7 @@ import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
 import { GuidedExercise } from "./GuidedExercise";
+import { PracticeExercises } from "./PracticeExercises";
 import {
   Triangle, Circle, Rectangle, Square, Trapezoid, Parallelogram,
   Cube, Cuboid, Sphere, Cylinder, Cone, Pyramid
@@ -436,6 +437,42 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               title={guidedTitle}
               steps={guidedSteps}
               result={guidedResult}
+            />
+          );
+        }
+      }
+      // Practice Exercises markers
+      else if (line.trim() === "[PRACTICE_START]") {
+        const practiceExercises: { question: string; answer: string }[] = [];
+        let practiceTitle = "Übung";
+        let pi = lineIndex + 1;
+        while (pi < lines.length && lines[pi].trim() !== "[PRACTICE_END]") {
+          const pl = lines[pi].trim();
+          if (pl.startsWith("TITLE:")) {
+            practiceTitle = pl.slice(6).trim();
+          } else if (pl.startsWith("[Q:" )) {
+            // Format: [Q:question||answer]
+            const inner = pl.slice(3, -1);
+            const sepIdx = inner.indexOf("||");
+            if (sepIdx !== -1) {
+              practiceExercises.push({
+                question: inner.slice(0, sepIdx).trim(),
+                answer: inner.slice(sepIdx + 2).trim(),
+              });
+            }
+          }
+          pi++;
+        }
+        // Skip all lines from [PRACTICE_START] to [PRACTICE_END]
+        for (let skip = lineIndex; skip <= pi; skip++) {
+          skipLines.add(skip);
+        }
+        if (practiceExercises.length > 0) {
+          elements.push(
+            <PracticeExercises
+              key={`practice-${keyIndex++}`}
+              title={practiceTitle}
+              exercises={practiceExercises}
             />
           );
         }
