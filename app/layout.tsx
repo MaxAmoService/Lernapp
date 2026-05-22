@@ -24,7 +24,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <AuthProvider>
           <Navbar />
-          <main className="w-[84%] max-w-none mx-auto px-1 py-2">
+          <main className="w-[92%] sm:w-[88%] lg:w-[84%] max-w-none mx-auto px-1 py-2">
             {children}
           </main>
           <Footer />

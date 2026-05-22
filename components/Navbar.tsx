@@ -34,7 +34,7 @@ export function Navbar() {
             : "bg-slate-900/50 backdrop-blur-sm border-b border-transparent"
         }`}
       >
-        <div className="w-[84%] max-w-none mx-auto px-1">
+        <div className="w-[92%] sm:w-[84%] max-w-none mx-auto px-1">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2.5 group">
@@ -115,6 +115,14 @@ export function Navbar() {
                 >
                   <LayoutGrid className="w-4 h-4 text-slate-500" />
                   Module
+                </Link>
+                <Link
+                  href="/leaderboard"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all"
+                >
+                  <Trophy className="w-4 h-4 text-slate-500" />
+                  Bestenliste
                 </Link>
                 {user && (
                   <Link

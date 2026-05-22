@@ -60,7 +60,7 @@ export default function LeaderboardPage() {
       {user && !isOptedIn && (
         <div className="mb-8 p-6 rounded-2xl bg-gradient-to-r from-blue-500/10 via-violet-500/10 to-purple-500/10 border border-blue-500/20 relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-500/10 to-transparent rounded-full -translate-y-8 translate-x-8" />
-          <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-4">
+          <div className="relative flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
             <div className="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center flex-shrink-0">
               <Lock className="w-6 h-6 text-blue-400" />
             </div>
@@ -126,7 +126,7 @@ export default function LeaderboardPage() {
             return (
               <div
                 key={entry.uid}
-                className={`relative flex items-center gap-4 p-4 rounded-xl transition-all duration-200 group ${
+                className={`relative flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-200 group ${
                   isCurrentUser
                     ? "bg-blue-500/10 border border-blue-500/30 shadow-md shadow-blue-500/10"
                     : "bg-slate-800/40 border border-slate-700/40 hover:bg-slate-800/60 hover:border-slate-700/60"
@@ -167,7 +167,7 @@ export default function LeaderboardPage() {
                 </div>
 
                 {/* Stats */}
-                <div className="flex items-center gap-4 flex-shrink-0">
+                <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
                   <div className="text-right hidden sm:block">
                     <div className="flex items-center gap-1 text-sm text-slate-400">
                       <Flame className="w-3.5 h-3.5 text-orange-400" />

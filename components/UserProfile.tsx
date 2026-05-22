@@ -84,7 +84,7 @@ export function UserProfile() {
 
       {/* Dropdown */}
       {showMenu && (
-        <div className="absolute right-0 top-full mt-2 w-80 rounded-2xl overflow-hidden animate-slide-up z-50 shadow-2xl shadow-black/50 border border-slate-700/80 bg-slate-900/95 backdrop-blur-xl">
+        <div className="absolute right-0 top-full mt-2 w-[calc(100vw-2rem)] sm:w-80 max-w-[320px] rounded-2xl overflow-hidden animate-slide-up z-50 shadow-2xl shadow-black/50 border border-slate-700/80 bg-slate-900/95 backdrop-blur-xl">
           {/* Header with gradient */}
           <div className="relative px-5 pt-5 pb-4 bg-gradient-to-br from-slate-800 via-slate-900 to-slate-800">
             <div className="flex items-center gap-4">
