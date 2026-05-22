@@ -396,94 +396,92 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // Guided Exercise markers
       else if (line.trim() === "[GUIDED_START]") {
-        const guidedSteps: string[] = [];
-        let guidedTitle = "";
-        let guidedResult = "";
-        let gi = lineIndex + 1;
-        // Parse the GUIDED block
-        while (gi < lines.length && lines[gi].trim() !== "[GUIDED_END]") {
-          const gl = lines[gi].trim();
-          if (gl.startsWith("TITLE:")) {
-            guidedTitle = gl.slice(6).trim();
-            gi++;
-          } else if (gl === "[STEP]") {
-            gi++;
-            let stepContent = "";
-            while (gi < lines.length && lines[gi].trim() !== "[STEP]" && lines[gi].trim() !== "[RESULT]" && lines[gi].trim() !== "[GUIDED_END]") {
-              stepContent += (stepContent ? "\n" : "") + lines[gi];
+        try {
+          const guidedSteps: string[] = [];
+          let guidedTitle = "";
+          let guidedResult = "";
+          let gi = lineIndex + 1;
+          while (gi < lines.length && lines[gi].trim() !== "[GUIDED_END]") {
+            const gl = lines[gi].trim();
+            if (gl.startsWith("TITLE:")) {
+              guidedTitle = gl.slice(6).trim();
+              gi++;
+            } else if (gl === "[STEP]") {
+              gi++;
+              let stepContent = "";
+              while (gi < lines.length) {
+                const sl = lines[gi].trim();
+                if (sl === "[STEP]" || sl === "[RESULT]" || sl === "[GUIDED_END]") break;
+                stepContent += (stepContent ? "\n" : "") + lines[gi];
+                gi++;
+              }
+              guidedSteps.push(stepContent.trim());
+            } else if (gl === "[RESULT]") {
+              gi++;
+              let resultContent = "";
+              while (gi < lines.length) {
+                if (lines[gi].trim() === "[GUIDED_END]") break;
+                resultContent += (resultContent ? "\n" : "") + lines[gi];
+                gi++;
+              }
+              guidedResult = resultContent.trim();
+            } else {
               gi++;
             }
-            guidedSteps.push(stepContent.trim());
-          } else if (gl === "[RESULT]") {
-            gi++;
-            let resultContent = "";
-            while (gi < lines.length && lines[gi].trim() !== "[GUIDED_END]") {
-              resultContent += (resultContent ? "\n" : "") + lines[gi];
-              gi++;
-            }
-            guidedResult = resultContent.trim();
-          } else {
-            gi++;
           }
-        }
-        // Skip all lines from [GUIDED_START] to [GUIDED_END]
-        for (let skip = lineIndex; skip <= gi; skip++) {
-          skipLines.add(skip);
-        }
-        if (guidedSteps.length > 0 && guidedResult) {
-          elements.push(
-            <GuidedExercise
-              key={`guided-${keyIndex++}`}
-              title={guidedTitle}
-              steps={guidedSteps}
-              result={guidedResult}
-            />
-          );
+          for (let skip = lineIndex; skip <= gi; skip++) {
+            skipLines.add(skip);
+          }
+          if (guidedSteps.length > 0 && guidedResult) {
+            elements.push(
+              <GuidedExercise key={`guided-${keyIndex++}`} title={guidedTitle} steps={guidedSteps} result={guidedResult} />
+            );
+          }
+        } catch (e) {
+          console.error("GuidedExercise parse error:", e);
         }
       }
       // Practice Exercises markers
       else if (line.trim() === "[PRACTICE_START]") {
-        const practiceExercises: { question: string; answer: string }[] = [];
-        let practiceTitle = "Übung";
-        let pi = lineIndex + 1;
-        while (pi < lines.length && lines[pi].trim() !== "[PRACTICE_END]") {
-          const pl = lines[pi].trim();
-          if (pl.startsWith("TITLE:")) {
-            practiceTitle = pl.slice(6).trim();
-          } else if (pl === "[Q]") {
-            // Multi-line format: [Q] question line(s) [A] answer line(s)
+        try {
+          const practiceExercises: { question: string; answer: string }[] = [];
+          let practiceTitle = "Übung";
+          let pi = lineIndex + 1;
+          while (pi < lines.length && lines[pi].trim() !== "[PRACTICE_END]") {
+            const pl = lines[pi].trim();
+            if (pl.startsWith("TITLE:")) {
+              practiceTitle = pl.slice(6).trim();
+              pi++;
+            } else if (pl === "[Q]") {
+              pi++;
+              let question = "";
+              while (pi < lines.length && lines[pi].trim() !== "[A]" && lines[pi].trim() !== "[PRACTICE_END]") {
+                question += (question ? " " : "") + lines[pi].trim();
+                pi++;
+              }
+              if (pi < lines.length && lines[pi].trim() === "[A]") pi++;
+              let answer = "";
+              while (pi < lines.length && lines[pi].trim() !== "[Q]" && lines[pi].trim() !== "[PRACTICE_END]") {
+                answer += (answer ? " " : "") + lines[pi].trim();
+                pi++;
+              }
+              if (question && answer) {
+                practiceExercises.push({ question: question.trim(), answer: answer.trim() });
+              }
+              pi--;
+            }
             pi++;
-            let question = "";
-            while (pi < lines.length && lines[pi].trim() !== "[A]" && lines[pi].trim() !== "[PRACTICE_END]") {
-              question += (question ? " " : "") + lines[pi].trim();
-              pi++;
-            }
-            // Skip [A]
-            if (pi < lines.length && lines[pi].trim() === "[A]") pi++;
-            let answer = "";
-            while (pi < lines.length && lines[pi].trim() !== "[Q]" && lines[pi].trim() !== "[PRACTICE_END]") {
-              answer += (answer ? " " : "") + lines[pi].trim();
-              pi++;
-            }
-            if (question && answer) {
-              practiceExercises.push({ question: question.trim(), answer: answer.trim() });
-            }
-            pi--; // adjust for loop increment
           }
-          pi++;
-        }
-        // Skip all lines from [PRACTICE_START] to [PRACTICE_END]
-        for (let skip = lineIndex; skip <= pi; skip++) {
-          skipLines.add(skip);
-        }
-        if (practiceExercises.length > 0) {
-          elements.push(
-            <PracticeExercises
-              key={`practice-${keyIndex++}`}
-              title={practiceTitle}
-              exercises={practiceExercises}
-            />
-          );
+          for (let skip = lineIndex; skip <= pi; skip++) {
+            skipLines.add(skip);
+          }
+          if (practiceExercises.length > 0) {
+            elements.push(
+              <PracticeExercises key={`practice-${keyIndex++}`} title={practiceTitle} exercises={practiceExercises} />
+            );
+          }
+        } catch (e) {
+          console.error("PracticeExercises parse error:", e);
         }
       }
       else if (!line.trim()) {
