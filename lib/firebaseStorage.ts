@@ -2,10 +2,8 @@
 // Firebase Firestore Storage — User Data Persistence
 // ============================================================================
 
-import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
-import { app } from "./firebase";
-
-const db = getFirestore(app);
+import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
+import { db } from "./firebase";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -121,8 +119,8 @@ export function subscribeToFlashcards(
 
 // ─── Helper ─────────────────────────────────────────────────────────────────
 
-export function getUserId(user: { username: string } | null): string | null {
+export function getUserId(user: { uid?: string; username?: string } | null): string | null {
   if (!user) return null;
-  // Use username as ID (could be changed to Firebase Auth UID later)
-  return `user_${user.username}`;
+  // Prefer Firebase UID, fallback to username-based ID
+  return user.uid || (user.username ? `user_${user.username}` : null);
 }

@@ -21,7 +21,7 @@ export default function Datenschutz() {
             Inhaber: Moritz Knieper<br />
             Schlader Weg 24<br />
             58809 Neuenrade<br />
-            E-Mail: maxamoservice@gmail.com
+            E-Mail: learnhub.official.app@gmail.com
           </p>
         </section>
 
@@ -136,7 +136,7 @@ export default function Datenschutz() {
           <h2 className="text-xl font-semibold text-white mb-3">8. Kontakt</h2>
           <p className="text-sm">
             Bei Fragen zum Datenschutz kontaktieren Sie uns bitte unter:<br />
-            E-Mail: maxamoservice@gmail.com
+            E-Mail: learnhub.official.app@gmail.com
           </p>
         </section>
       </div>

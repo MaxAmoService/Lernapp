@@ -1,119 +1,73 @@
-// localStorage-based auth system with email verification simulation
+// ============================================================================
+// Firebase Auth + Firestore — Sicheres User-System (DSGVO-konform)
+// ============================================================================
 
-export interface User {
-  id: string;
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
+  updatePassword as fbUpdatePassword,
+  updateEmail as fbUpdateEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
+  deleteUser,
+  type User as FirebaseUser,
+} from "firebase/auth";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { auth, db } from "./firebase";
+
+// ─── Types ──────────────────────────────────────────────────────────────────
+
+export interface UserProfile {
+  uid: string;
   username: string;
   email: string;
   emailVerified: boolean;
   avatar: string;
+  bio: string;
+  displayName: string;
   createdAt: string;
   streak: number;
   lastActive: string;
   totalXP: number;
   completedModules: string[];
-  completedLessons: Record<string, string[]>; // moduleId -> lessonIds
-  quizScores: Record<string, number>; // moduleId -> score
-  savedModules?: string[]; // gemerkte Module
+  completedLessons: Record<string, string[]>;
+  quizScores: Record<string, number>;
+  savedModules: string[];
+  settings: {
+    theme: "dark" | "light";
+    notifications: boolean;
+    language: string;
+  };
 }
 
-export interface AuthState {
-  user: User | null;
-  isAuthenticated: boolean;
+export interface PendingVerification {
+  email: string;
+  code: string;
+  username: string;
+  passwordHash: string;
+  attempts: number;
+  createdAt: number; // timestamp ms
+  expiresAt: number; // timestamp ms
 }
 
-// ---- Rate Limiting ----
-interface LoginAttempt {
-  count: number;
-  lastAttempt: number;
-  lockedUntil?: number;
-}
+// ─── Konstanten ─────────────────────────────────────────────────────────────
 
-function getLoginAttempts(): Record<string, LoginAttempt> {
-  if (typeof window === "undefined") return {};
-  const data = localStorage.getItem("learnhub_login_attempts");
-  return data ? JSON.parse(data) : {};
-}
+const AVATARS = ["🤓", "😎", "🦊", "🐱", "🦄", "🐸", "🐼", "🦁", "🐯", "🐨", "🐻", "🐰", "🦋", "🐙", "🦉", "🐧"];
+const MAX_VERIFY_ATTEMPTS = 5;
+const CODE_EXPIRY_MS = 10 * 60 * 1000; // 10 Minuten
+const MAX_CODES_PER_EMAIL = 3; // Max Codes pro E-Mail in 10 Min
 
-function saveLoginAttempts(attempts: Record<string, LoginAttempt>) {
-  localStorage.setItem("learnhub_login_attempts", JSON.stringify(attempts));
-}
+// ─── Helpers ────────────────────────────────────────────────────────────────
 
-export function isAccountLocked(username: string): { locked: boolean; remainingSeconds: number } {
-  const attempts = getLoginAttempts();
-  const attempt = attempts[username];
-  if (!attempt) return { locked: false, remainingSeconds: 0 };
-
-  if (attempt.lockedUntil && Date.now() < attempt.lockedUntil) {
-    return { locked: true, remainingSeconds: Math.ceil((attempt.lockedUntil - Date.now()) / 1000) };
-  }
-
-  // Lock expired, reset
-  if (attempt.lockedUntil && Date.now() >= attempt.lockedUntil) {
-    delete attempts[username];
-    saveLoginAttempts(attempts);
-  }
-
-  return { locked: false, remainingSeconds: 0 };
-}
-
-function recordLoginAttempt(username: string, success: boolean) {
-  const attempts = getLoginAttempts();
-  if (!attempts[username]) {
-    attempts[username] = { count: 0, lastAttempt: Date.now() };
-  }
-
-  if (success) {
-    delete attempts[username];
-  } else {
-    attempts[username].count++;
-    attempts[username].lastAttempt = Date.now();
-    // Lock after 5 failed attempts for 5 minutes
-    if (attempts[username].count >= 5) {
-      attempts[username].lockedUntil = Date.now() + 5 * 60 * 1000;
-    }
-  }
-
-  saveLoginAttempts(attempts);
-}
-
-// ---- Password Hashing (bcryptjs) ----
-// Simple hash with salt for client-side use
-export function hashPassword(password: string): string {
-  const salt = generateId().slice(0, 8);
-  let hash = 0;
-  const saltedPassword = salt + password;
-  for (let i = 0; i < saltedPassword.length; i++) {
-    const char = saltedPassword.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  return salt + ":" + Math.abs(hash).toString(36);
-}
-
-export function verifyPassword(password: string, storedHash: string): boolean {
-  const parts = storedHash.split(":");
-  if (parts.length !== 2) {
-    // Legacy unsalted hash — verify old format
-    let hash = 0;
-    for (let i = 0; i < password.length; i++) {
-      const char = password.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash;
-    }
-    return Math.abs(hash).toString(36) + password.length === storedHash;
-  }
-  const [salt] = parts;
-  let hash = 0;
-  const saltedPassword = salt + password;
-  for (let i = 0; i < saltedPassword.length; i++) {
-    const char = saltedPassword.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
-    hash = hash & hash;
-  }
-  return Math.abs(hash).toString(36) === parts[1];
-}
-
-// ---- Password Validation ----
 export function validatePassword(password: string): { valid: boolean; error?: string } {
   if (password.length < 6) return { valid: false, error: "Passwort muss mindestens 6 Zeichen lang sein" };
   if (!/[0-9]/.test(password)) return { valid: false, error: "Passwort muss mindestens eine Zahl enthalten" };
@@ -121,285 +75,22 @@ export function validatePassword(password: string): { valid: boolean; error?: st
   return { valid: true };
 }
 
-// Generate simple ID
-export function generateId(): string {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-}
-
-// ---- Email Verification ----
-export function generateVerificationCode(): string {
+function generateCode(): string {
   return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-export function savePendingVerification(email: string, code: string, username: string, passwordHash: string) {
-  localStorage.setItem("learnhub_pending_verification", JSON.stringify({
-    email, code, username, passwordHash, timestamp: Date.now()
-  }));
-}
-
-export function getPendingVerification(): { email: string; code: string; username: string; passwordHash: string; timestamp: number } | null {
-  if (typeof window === "undefined") return null;
-  const data = localStorage.getItem("learnhub_pending_verification");
-  return data ? JSON.parse(data) : null;
-}
-
-export function clearPendingVerification() {
-  localStorage.removeItem("learnhub_pending_verification");
-}
-
-export function verifyEmailCode(inputCode: string): User | null {
-  const pending = getPendingVerification();
-  if (!pending) return null;
-
-  // Code expires after 10 minutes
-  if (Date.now() - pending.timestamp > 10 * 60 * 1000) {
-    clearPendingVerification();
-    return null;
+// Einfacher Hash für Passwort-Speicherung in Pending-Verifications
+function hashPasswordSimple(password: string): string {
+  const salt = Math.random().toString(36).substring(2, 10);
+  let hash = 0;
+  for (let i = 0; i < (salt + password).length; i++) {
+    const char = (salt + password).charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash;
   }
-
-  if (inputCode !== pending.code) return null;
-
-  // Create the actual user
-  const avatars = ["🤓", "😎", "🦊", "🐱", "🦄", "🐸", "🐼", "🦁", "🐯", "🐨"];
-  const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
-
-  const user: User = {
-    id: generateId(),
-    username: pending.username,
-    email: pending.email,
-    emailVerified: true,
-    avatar: randomAvatar,
-    createdAt: new Date().toISOString(),
-    streak: 1,
-    lastActive: new Date().toISOString(),
-    totalXP: 0,
-    completedModules: [],
-    completedLessons: {},
-    quizScores: {},
-    savedModules: [],
-  };
-
-  const users = getUsers();
-  users[pending.username] = { user, passwordHash: pending.passwordHash };
-  saveUsers(users);
-  clearPendingVerification();
-
-  return user;
+  return salt + ":" + Math.abs(hash).toString(36);
 }
 
-// ---- User Storage ----
-
-// Get all users from localStorage
-export function getUsers(): Record<string, { user: User; passwordHash: string }> {
-  if (typeof window === "undefined") return {};
-  const data = localStorage.getItem("learnhub_users");
-  return data ? JSON.parse(data) : {};
-}
-
-// Save users to localStorage
-export function saveUsers(users: Record<string, { user: User; passwordHash: string }>): void {
-  localStorage.setItem("learnhub_users", JSON.stringify(users));
-}
-
-// Register new user — starts verification flow
-export function registerUser(username: string, email: string, password: string): { pending: true; code: string } | null {
-  const users = getUsers();
-
-  // Check if username exists
-  if (users[username]) {
-    return null;
-  }
-
-  // Check if email already used
-  for (const key in users) {
-    if (users[key].user.email === email) {
-      return null;
-    }
-  }
-
-  const passwordHash = hashPassword(password);
-  const code = generateVerificationCode();
-
-  savePendingVerification(email, code, username, passwordHash);
-
-  return { pending: true, code };
-}
-
-// Login user
-export function loginUser(username: string, password: string): User | null {
-  // Check rate limit
-  const lockStatus = isAccountLocked(username);
-  if (lockStatus.locked) {
-    return null;
-  }
-
-  const users = getUsers();
-  const userData = users[username];
-
-  if (!userData) {
-    recordLoginAttempt(username, false);
-    return null;
-  }
-
-  if (!verifyPassword(password, userData.passwordHash)) {
-    recordLoginAttempt(username, false);
-    return null;
-  }
-
-  // Check if email is verified
-  if (!userData.user.emailVerified) {
-    return null;
-  }
-
-  recordLoginAttempt(username, true);
-
-  // Update streak
-  const user = updateStreak(userData.user);
-
-  // Save updated user
-  users[username].user = user;
-  saveUsers(users);
-
-  return user;
-}
-
-// Update streak
-export function updateStreak(user: User): User {
-  const today = new Date().toDateString();
-  const lastActive = new Date(user.lastActive).toDateString();
-  const yesterday = new Date(Date.now() - 86400000).toDateString();
-
-  if (lastActive === today) {
-    return user;
-  } else if (lastActive === yesterday) {
-    return {
-      ...user,
-      streak: user.streak + 1,
-      lastActive: new Date().toISOString(),
-    };
-  } else {
-    return {
-      ...user,
-      streak: 1,
-      lastActive: new Date().toISOString(),
-    };
-  }
-}
-
-// Save user progress
-export function saveUserProgress(
-  username: string,
-  moduleId: string,
-  lessonId: string,
-  quizScore?: number
-): User | null {
-  const users = getUsers();
-  const userData = users[username];
-
-  if (!userData) return null;
-
-  const user = userData.user;
-
-  // Add lesson to completed
-  if (!user.completedLessons[moduleId]) {
-    user.completedLessons[moduleId] = [];
-  }
-  if (!user.completedLessons[moduleId].includes(lessonId)) {
-    user.completedLessons[moduleId].push(lessonId);
-    user.totalXP += 10;
-  }
-
-  // Save quiz score if provided
-  if (quizScore !== undefined) {
-    const oldScore = user.quizScores[moduleId] || 0;
-    if (quizScore > oldScore) {
-      user.quizScores[moduleId] = quizScore;
-      user.totalXP += (quizScore - oldScore) * 2;
-    }
-  }
-
-  // Check if module is complete
-  try {
-    const { getModule } = require("./data");
-    const mod = getModule(moduleId);
-    if (mod) {
-      const completedCount = user.completedLessons[moduleId]?.length || 0;
-      if (completedCount >= mod.lessons.length && !user.completedModules.includes(moduleId)) {
-        user.completedModules.push(moduleId);
-        user.totalXP += 50;
-      }
-    }
-  } catch (e) {
-    // Module check optional
-  }
-
-  // Update streak
-  const updatedUser = updateStreak(user);
-
-  users[username].user = updatedUser;
-  saveUsers(users);
-
-  return updatedUser;
-}
-
-// Toggle save/bookmark module
-export function toggleSaveModuleForUser(username: string, moduleSlug: string): User | null {
-  const users = getUsers();
-  const userData = users[username];
-  if (!userData) return null;
-
-  const user = userData.user;
-  if (!user.savedModules) user.savedModules = [];
-
-  const index = user.savedModules.indexOf(moduleSlug);
-  if (index >= 0) {
-    user.savedModules.splice(index, 1);
-  } else {
-    user.savedModules.push(moduleSlug);
-  }
-
-  users[username].user = user;
-  saveUsers(users);
-  return user;
-}
-
-// Get current user from session
-export function getCurrentUser(): User | null {
-  if (typeof window === "undefined") return null;
-  const session = sessionStorage.getItem("learnhub_session");
-  if (!session) return null;
-
-  const { username } = JSON.parse(session);
-  const users = getUsers();
-  return users[username]?.user || null;
-}
-
-// Set session
-export function setSession(username: string): void {
-  sessionStorage.setItem("learnhub_session", JSON.stringify({ username }));
-}
-
-// Clear session
-export function clearSession(): void {
-  sessionStorage.removeItem("learnhub_session");
-}
-
-// Reset ALL data (admin function)
-export function resetAllData(): void {
-  localStorage.removeItem("learnhub_users");
-  localStorage.removeItem("learnhub_login_attempts");
-  localStorage.removeItem("learnhub_pending_verification");
-  sessionStorage.removeItem("learnhub_session");
-  // Also clear any per-module completion keys
-  const keys = Object.keys(localStorage);
-  keys.forEach(key => {
-    if (key.startsWith("completed-")) {
-      localStorage.removeItem(key);
-    }
-  });
-}
-
-// Get user level based on XP
 export function getUserLevel(xp: number): { level: number; title: string; xpToNext: number; progress: number } {
   const levels = [
     { xp: 0, title: "Anfänger" },
@@ -411,26 +102,360 @@ export function getUserLevel(xp: number): { level: number; title: string; xpToNe
     { xp: 5000, title: "Guru" },
     { xp: 10000, title: "Legende" },
   ];
-
   let currentLevel = 0;
   for (let i = levels.length - 1; i >= 0; i--) {
-    if (xp >= levels[i].xp) {
-      currentLevel = i;
-      break;
-    }
+    if (xp >= levels[i].xp) { currentLevel = i; break; }
   }
-
   const nextLevel = Math.min(currentLevel + 1, levels.length - 1);
   const currentXP = levels[currentLevel].xp;
   const nextXP = levels[nextLevel].xp;
-  const xpInLevel = xp - currentXP;
-  const xpNeeded = nextXP - currentXP;
-  const progress = currentLevel === levels.length - 1 ? 100 : Math.round((xpInLevel / xpNeeded) * 100);
-
-  return {
-    level: currentLevel + 1,
-    title: levels[currentLevel].title,
-    xpToNext: nextXP - xp,
-    progress,
-  };
+  const progress = currentLevel === levels.length - 1 ? 100 : Math.round(((xp - currentXP) / (nextXP - currentXP)) * 100);
+  return { level: currentLevel + 1, title: levels[currentLevel].title, xpToNext: nextXP - xp, progress };
 }
+
+// ─── E-Mail senden ──────────────────────────────────────────────────────────
+
+async function sendVerificationEmail(email: string, code: string, username: string): Promise<boolean> {
+  try {
+    const response = await fetch("/api/send-code", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, code, username }),
+    });
+    if (response.ok) return true;
+    const err = await response.json().catch(() => ({}));
+    console.error("E-Mail API error:", err);
+    return false;
+  } catch (err) {
+    console.error("E-Mail send error:", err);
+    return false;
+  }
+}
+
+// ─── Registration: Verification Code erstellen ─────────────────────────────
+
+export async function createVerification(
+  email: string,
+  password: string,
+  username: string
+): Promise<{ code: string; sent: boolean }> {
+  // Prüfen ob E-Mail bereits bei Firebase Auth registriert ist
+  // (wir können das client-seitig nicht direkt prüfen, aber wir versuchen es beim Verify)
+
+  // Prüfen ob Username bereits vergeben
+  const usernameSnap = await getDoc(doc(db, "usernames", username));
+  if (usernameSnap.exists()) {
+    throw new Error("Benutzername ist bereits vergeben");
+  }
+
+  // Rate Limit: Prüfen wie viele Codes für diese E-Mail existieren
+  const pendingRef = doc(db, "pending_verifications", email);
+  const existingSnap = await getDoc(pendingRef);
+  if (existingSnap.exists()) {
+    const existing = existingSnap.data() as PendingVerification;
+    const recentCodes = existing.createdAt > Date.now() - (10 * 60 * 1000) ? 1 : 0;
+    if (recentCodes >= MAX_CODES_PER_EMAIL) {
+      throw new Error("Zu viele Codes angefordert. Bitte warte 10 Minuten.");
+    }
+  }
+
+  const code = generateCode();
+  const passwordHash = hashPasswordSimple(password);
+
+  // In Firestore speieren (NICHT den echten User anlegen!)
+  await setDoc(pendingRef, {
+    email,
+    code,
+    username,
+    passwordHash,
+    attempts: 0,
+    createdAt: Date.now(),
+    expiresAt: Date.now() + CODE_EXPIRY_MS,
+  });
+
+  // E-Mail senden
+  const sent = await sendVerificationEmail(email, code, username);
+
+  return { code, sent };
+}
+
+// ─── Verification Code prüfen + User erstellen ─────────────────────────────
+
+export async function verifyCodeAndCreateUser(
+  email: string,
+  inputCode: string
+): Promise<UserProfile> {
+  const pendingRef = doc(db, "pending_verifications", email);
+  const snap = await getDoc(pendingRef);
+
+  if (!snap.exists()) {
+    throw new Error("Kein Verifizierungscode gefunden. Bitte erneut registrieren.");
+  }
+
+  const pending = snap.data() as PendingVerification;
+
+  // Abgelaufen?
+  if (Date.now() > pending.expiresAt) {
+    await deleteDoc(pendingRef);
+    throw new Error("Code ist abgelaufen. Bitte erneut registrieren.");
+  }
+
+  // Zu viele Versuche?
+  if (pending.attempts >= MAX_VERIFY_ATTEMPTS) {
+    await deleteDoc(pendingRef);
+    throw new Error("Zu viele Fehlversuche. Bitte erneut registrieren.");
+  }
+
+  // Code prüfen
+  if (inputCode !== pending.code) {
+    await updateDoc(pendingRef, { attempts: pending.attempts + 1 });
+    throw new Error(`Falscher Code. Noch ${MAX_VERIFY_ATTEMPTS - pending.attempts - 1} Versuche.`);
+  }
+
+  // Code korrekt → Firebase Auth User erstellen
+  let firebaseUser: FirebaseUser;
+  try {
+    const credential = await createUserWithEmailAndPassword(auth, email, pending.passwordHash.split(":")[0] + pending.passwordHash);
+    firebaseUser = credential.user;
+  } catch (err: unknown) {
+    // Falls E-Mail bereits bei Firebase Auth existiert
+    if ((err as { code?: string })?.code === "auth/email-already-in-use") {
+      await deleteDoc(pendingRef);
+      throw new Error("Diese E-Mail ist bereits registriert. Bitte einloggen.");
+    }
+    throw err;
+  }
+
+  // Display Name setzen
+  await updateProfile(firebaseUser, { displayName: pending.username });
+
+  // Username reservieren
+  await setDoc(doc(db, "usernames", pending.username), {
+    uid: firebaseUser.uid,
+    createdAt: serverTimestamp(),
+  });
+
+  // User-Profil in Firestore anlegen (erst NACH Verifizierung!)
+  const profile: UserProfile = {
+    uid: firebaseUser.uid,
+    username: pending.username,
+    email,
+    emailVerified: true,
+    avatar: AVATARS[Math.floor(Math.random() * AVATARS.length)],
+    bio: "",
+    displayName: pending.username,
+    createdAt: new Date().toISOString(),
+    streak: 1,
+    lastActive: new Date().toISOString(),
+    totalXP: 0,
+    completedModules: [],
+    completedLessons: {},
+    quizScores: {},
+    savedModules: [],
+    settings: { theme: "dark", notifications: true, language: "de" },
+  };
+
+  await setDoc(doc(db, "users", firebaseUser.uid), {
+    ...profile,
+    createdAt: serverTimestamp(),
+  });
+
+  // Pending Verification löschen
+  await deleteDoc(pendingRef);
+
+  return profile;
+}
+
+// ─── Login ──────────────────────────────────────────────────────────────────
+
+export async function loginUser(email: string, password: string): Promise<UserProfile> {
+  const credential = await signInWithEmailAndPassword(auth, email, password);
+  const firebaseUser = credential.user;
+
+  // Profil aus Firestore laden
+  let profile = await getUserProfile(firebaseUser.uid);
+
+  if (!profile) {
+    // Edge Case: User existiert in Auth aber nicht in Firestore
+    // → Profil nachtragen
+    profile = {
+      uid: firebaseUser.uid,
+      username: firebaseUser.displayName || email.split("@")[0],
+      email: firebaseUser.email || email,
+      emailVerified: firebaseUser.emailVerified,
+      avatar: AVATARS[0],
+      bio: "",
+      displayName: firebaseUser.displayName || "",
+      createdAt: new Date().toISOString(),
+      streak: 1,
+      lastActive: new Date().toISOString(),
+      totalXP: 0,
+      completedModules: [],
+      completedLessons: {},
+      quizScores: {},
+      savedModules: [],
+      settings: { theme: "dark", notifications: true, language: "de" },
+    };
+    await setDoc(doc(db, "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
+  }
+
+  // Streak updaten
+  const updated = updateStreak(profile);
+  await updateUserProfile(firebaseUser.uid, { streak: updated.streak, lastActive: updated.lastActive });
+
+  return updated;
+}
+
+// ─── Logout ─────────────────────────────────────────────────────────────────
+
+export async function logoutUser(): Promise<void> {
+  await signOut(auth);
+}
+
+// ─── Profile CRUD ───────────────────────────────────────────────────────────
+
+export async function getUserProfile(uid: string): Promise<UserProfile | null> {
+  try {
+    const snap = await getDoc(doc(db, "users", uid));
+    if (snap.exists()) return snap.data() as UserProfile;
+    return null;
+  } catch (err) {
+    console.error("Failed to load user profile:", err);
+    return null;
+  }
+}
+
+export async function updateUserProfile(uid: string, updates: Partial<UserProfile>): Promise<void> {
+  try {
+    await updateDoc(doc(db, "users", uid), {
+      ...updates,
+      lastActive: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("Failed to update profile:", err);
+    throw err;
+  }
+}
+
+// ─── Passwort / E-Mail ändern ───────────────────────────────────────────────
+
+async function reauthenticate(password: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user || !user.email) throw new Error("Nicht eingeloggt");
+  const credential = EmailAuthProvider.credential(user.email, password);
+  await reauthenticateWithCredential(user, credential);
+}
+
+export async function changePassword(currentPw: string, newPw: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Nicht eingeloggt");
+  await reauthenticate(currentPw);
+  await fbUpdatePassword(user, newPw);
+}
+
+export async function changeEmail(currentPw: string, newEmail: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Nicht eing로그gt");
+  await reauthenticate(currentPw);
+  await fbUpdateEmail(user, newEmail);
+  await updateUserProfile(user.uid, { email: newEmail, emailVerified: false });
+}
+
+// ─── DSGVO: Account löschen ─────────────────────────────────────────────────
+
+export async function deleteAccount(password: string): Promise<void> {
+  const user = auth.currentUser;
+  if (!user) throw new Error("Nicht eingeloggt");
+
+  await reauthenticate(password);
+
+  // Firestore-Daten löschen
+  const username = user.displayName;
+  if (username) {
+    await deleteDoc(doc(db, "usernames", username)).catch(() => {});
+  }
+  await deleteDoc(doc(db, "users", user.uid)).catch(() => {});
+
+  // Firebase Auth User löschen
+  await deleteUser(user);
+}
+
+// ─── Streak ─────────────────────────────────────────────────────────────────
+
+function updateStreak(profile: UserProfile): UserProfile {
+  const today = new Date().toDateString();
+  const lastActive = new Date(profile.lastActive).toDateString();
+  const yesterday = new Date(Date.now() - 86400000).toDateString();
+
+  if (lastActive === today) return profile;
+  if (lastActive === yesterday) return { ...profile, streak: profile.streak + 1, lastActive: new Date().toISOString() };
+  return { ...profile, streak: 1, lastActive: new Date().toISOString() };
+}
+
+// ─── Progress ───────────────────────────────────────────────────────────────
+
+export async function saveUserProgress(
+  uid: string,
+  moduleId: string,
+  lessonId: string,
+  quizScore?: number
+): Promise<UserProfile | null> {
+  const profile = await getUserProfile(uid);
+  if (!profile) return null;
+
+  if (!profile.completedLessons[moduleId]) profile.completedLessons[moduleId] = [];
+  if (!profile.completedLessons[moduleId].includes(lessonId)) {
+    profile.completedLessons[moduleId].push(lessonId);
+    profile.totalXP += 10;
+  }
+
+  if (quizScore !== undefined) {
+    const old = profile.quizScores[moduleId] || 0;
+    if (quizScore > old) {
+      profile.quizScores[moduleId] = quizScore;
+      profile.totalXP += (quizScore - old) * 2;
+    }
+  }
+
+  try {
+    const { getModule } = await import("./data");
+    const mod = getModule(moduleId);
+    if (mod) {
+      const count = profile.completedLessons[moduleId]?.length || 0;
+      if (count >= mod.lessons.length && !profile.completedModules.includes(moduleId)) {
+        profile.completedModules.push(moduleId);
+        profile.totalXP += 50;
+      }
+    }
+  } catch { /* ok */ }
+
+  const updated = updateStreak(profile);
+  await updateUserProfile(uid, {
+    completedLessons: updated.completedLessons,
+    completedModules: updated.completedModules,
+    quizScores: updated.quizScores,
+    totalXP: updated.totalXP,
+    streak: updated.streak,
+    lastActive: updated.lastActive,
+  });
+  return updated;
+}
+
+export async function toggleSaveModule(uid: string, slug: string): Promise<UserProfile | null> {
+  const profile = await getUserProfile(uid);
+  if (!profile) return null;
+  if (!profile.savedModules) profile.savedModules = [];
+  const i = profile.savedModules.indexOf(slug);
+  if (i >= 0) profile.savedModules.splice(i, 1);
+  else profile.savedModules.push(slug);
+  await updateUserProfile(uid, { savedModules: profile.savedModules });
+  return profile;
+}
+
+// ─── Legacy Compat ──────────────────────────────────────────────────────────
+
+export function isAccountLocked(): { locked: boolean; remainingSeconds: number } {
+  return { locked: false, remainingSeconds: 0 };
+}
+
+export type User = UserProfile;

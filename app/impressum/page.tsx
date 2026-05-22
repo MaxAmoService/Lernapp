@@ -16,7 +16,7 @@ export default function Impressum() {
         <section>
           <h2 className="text-xl font-semibold text-white mb-3">Kontakt</h2>
           <p>
-            E-Mail: maxamoservice@gmail.com
+            E-Mail: learnhub.official.app@gmail.com
           </p>
         </section>
 

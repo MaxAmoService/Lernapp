@@ -2,8 +2,9 @@
 
 import { useAuth } from "./AuthProvider";
 import { getUserLevel } from "@/lib/auth";
-import { LogOut, Trophy, Flame, Star, Zap, ChevronDown, Settings } from "lucide-react";
+import { LogOut, Trophy, Flame, Star, Zap, ChevronDown, Settings, User } from "lucide-react";
 import { useState } from "react";
+import Link from "next/link";
 
 export function UserProfile() {
   const { user, logout } = useAuth();
@@ -22,7 +23,7 @@ export function UserProfile() {
       >
         <span className="text-2xl">{user.avatar}</span>
         <div className="hidden md:block text-left">
-          <p className="text-sm font-medium">{user.username}</p>
+          <p className="text-sm font-medium">{user.displayName || user.username}</p>
           <p className="text-xs text-slate-400">Lvl {levelInfo.level} • {user.totalXP} XP</p>
         </div>
         <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showMenu ? "rotate-180" : ""}`} />
@@ -38,7 +39,7 @@ export function UserProfile() {
             <div className="flex items-center gap-4 mb-4 pb-4 border-b border-slate-700">
               <span className="text-4xl">{user.avatar}</span>
               <div>
-                <p className="font-semibold">{user.username}</p>
+                <p className="font-semibold">{user.displayName || user.username}</p>
                 <p className="text-sm text-blue-400">{levelInfo.title}</p>
                 {user.email && (
                   <p className="text-xs text-slate-500">{user.email}</p>
@@ -78,6 +79,16 @@ export function UserProfile() {
                 />
               </div>
             </div>
+
+            {/* Profile Link */}
+            <Link
+              href="/profile"
+              onClick={() => setShowMenu(false)}
+              className="w-full flex items-center gap-2 p-2 mb-2 bg-slate-800/50 hover:bg-slate-700/50 rounded-lg transition-colors text-sm"
+            >
+              <User className="w-4 h-4 text-blue-400" />
+              Mein Profil bearbeiten
+            </Link>
 
             {/* Achievements */}
             <div className="mb-4">
