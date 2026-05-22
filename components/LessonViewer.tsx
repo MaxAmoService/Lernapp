@@ -450,16 +450,25 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           const pl = lines[pi].trim();
           if (pl.startsWith("TITLE:")) {
             practiceTitle = pl.slice(6).trim();
-          } else if (pl.startsWith("[Q:" )) {
-            // Format: [Q:question||answer]
-            const inner = pl.slice(3, -1);
-            const sepIdx = inner.indexOf("||");
-            if (sepIdx !== -1) {
-              practiceExercises.push({
-                question: inner.slice(0, sepIdx).trim(),
-                answer: inner.slice(sepIdx + 2).trim(),
-              });
+          } else if (pl === "[Q]") {
+            // Multi-line format: [Q] question line(s) [A] answer line(s)
+            pi++;
+            let question = "";
+            while (pi < lines.length && lines[pi].trim() !== "[A]" && lines[pi].trim() !== "[PRACTICE_END]") {
+              question += (question ? " " : "") + lines[pi].trim();
+              pi++;
             }
+            // Skip [A]
+            if (pi < lines.length && lines[pi].trim() === "[A]") pi++;
+            let answer = "";
+            while (pi < lines.length && lines[pi].trim() !== "[Q]" && lines[pi].trim() !== "[PRACTICE_END]") {
+              answer += (answer ? " " : "") + lines[pi].trim();
+              pi++;
+            }
+            if (question && answer) {
+              practiceExercises.push({ question: question.trim(), answer: answer.trim() });
+            }
+            pi--; // adjust for loop increment
           }
           pi++;
         }
