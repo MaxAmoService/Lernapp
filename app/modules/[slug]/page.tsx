@@ -102,6 +102,7 @@ export default function ModulePage() {
   const [showLogin, setShowLogin] = useState(false);
   const [showMerkblatt, setShowMerkblatt] = useState(false);
   const [showFlashcards, setShowFlashcards] = useState(false);
+  const [showModuleComplete, setShowModuleComplete] = useState(false);
 
   // Get completed lessons ONLY from user data (no localStorage fallback to prevent ghost progress)
   const completedLessons = new Set(
@@ -135,9 +136,24 @@ export default function ModulePage() {
       return;
     }
 
-    // Save to user profile only (no separate localStorage backup)
+    // Nicht doppelt abschließen
+    if (completedLessons.has(lessonId)) return;
+
+    // Lektion abschließen
     completeLesson(module.slug, lessonId);
-    fireConfetti();
+
+    // Prüfen ob jetzt alle Lektionen fertig sind
+    const newCompleted = new Set(completedLessons);
+    newCompleted.add(lessonId);
+    if (newCompleted.size >= module.lessons.length) {
+      // Modul komplett! 🎉
+      fireConfetti();
+      setTimeout(() => fireConfetti(), 300);
+      setTimeout(() => fireConfetti(), 600);
+      setShowModuleComplete(true);
+    } else {
+      fireConfetti();
+    }
   };
 
   const goToNextLesson = () => {
@@ -388,6 +404,54 @@ export default function ModulePage() {
       </div>
 
       <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
+
+      {/* Modul abgeschlossen Overlay */}
+      {showModuleComplete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={() => setShowModuleComplete(false)}>
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
+          <div className="relative w-full max-w-lg rounded-3xl overflow-hidden border border-emerald-500/30 bg-slate-900/95 backdrop-blur-xl shadow-2xl shadow-emerald-500/10 animate-slide-up" onClick={(e) => e.stopPropagation()}>
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-green-400 to-teal-400" />
+            <div className="p-8 text-center">
+              <div className="text-6xl mb-4">🎉</div>
+              <h2 className="text-3xl font-bold text-white mb-2">Modul abgeschlossen!</h2>
+              <p className="text-lg text-slate-300 mb-1">{module.icon} {module.title}</p>
+              <p className="text-slate-400 mb-6">Du hast alle {module.lessons.length} Lektionen gemeistert.</p>
+
+              <div className="flex items-center justify-center gap-6 mb-8">
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center mx-auto mb-2">
+                    <CheckCircle2 className="w-7 h-7 text-emerald-400" />
+                  </div>
+                  <p className="text-2xl font-bold text-white">{module.lessons.length}</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Lektionen</p>
+                </div>
+                <div className="text-center">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-500/20 flex items-center justify-center mx-auto mb-2">
+                    <span className="text-2xl">⚡</span>
+                  </div>
+                  <p className="text-2xl font-bold text-amber-400">+50</p>
+                  <p className="text-xs text-slate-500 uppercase tracking-wider">Bonus XP</p>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href="/modules"
+                  className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-medium text-slate-300 transition-colors text-center"
+                >
+                  Alle Module
+                </a>
+                <a
+                  href="/leaderboard"
+                  className="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl font-semibold text-white transition-all text-center"
+                >
+                  🏆 Bestenliste
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
