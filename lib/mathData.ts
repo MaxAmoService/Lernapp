@@ -1014,12 +1014,16 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
     ],
   },
 
-  // =============== KOMPLEXE ZAHLEN ===============
+  // =============== KOMPLEXE ZAHLEN (moved to complexData.ts) ===============
+  // Old module removed - replaced by comprehensive version in complexData.ts
+
+  /*
+  // =============== KOMPLEXE ZAHLEN (OLD - REMOVED) ===============
   {
-    id: "m-komplexe-zahlen",
-    slug: "mathe-komplexe-zahlen",
-    title: "Komplexe Zahlen",
-    description: "Imaginäre Zahlen und komplexe Ebene",
+    id: "m-komplexe-zahlen-OLD",
+    slug: "mathe-komplexe-zahlen-OLD",
+    title: "Komplexe Zahlen OLD",
+    description: "OLD - moved to complexData.ts",
     icon: "🌀",
     color: "#8b5cf6",
     category: "komplexe-numerik",
@@ -1189,6 +1193,7 @@ $|z^n| = r^n$, $\arg(z^n) = n \cdot \varphi$
       },
     ],
   },
+  */
 
   // =============== NUMERIK ===============
   {

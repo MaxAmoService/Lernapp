@@ -34,3 +34,8 @@ export { HTTPRequestVisualizer } from "./HTTPRequestVisualizer";
 export { EncryptionDemo } from "./EncryptionDemo";
 export { VPNTunnelVisualizer } from "./VPNTunnelVisualizer";
 export { SubnettingTrainer } from "./SubnettingTrainer";
+export { ComplexPlaneViewer } from "./ComplexPlaneViewer";
+export { ComplexFormConverter } from "./ComplexFormConverter";
+export { ComplexOperationsCalculator } from "./ComplexOperationsCalculator";
+export { ComplexPowerCalculator } from "./ComplexPowerCalculator";
+export { ComplexRootCalculator } from "./ComplexRootCalculator";

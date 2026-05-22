@@ -53,6 +53,11 @@ import { NormalisationTrainer } from "./interactive/NormalisationTrainer";
 import { SQLPlayground } from "./interactive/SQLPlayground";
 import { JoinVisualizer } from "./interactive/JoinVisualizer";
 import { DBPlanningPhases } from "./interactive/DBPlanningPhases";
+import { ComplexPlaneViewer } from "./interactive/ComplexPlaneViewer";
+import { ComplexFormConverter } from "./interactive/ComplexFormConverter";
+import { ComplexOperationsCalculator } from "./interactive/ComplexOperationsCalculator";
+import { ComplexPowerCalculator } from "./interactive/ComplexPowerCalculator";
+import { ComplexRootCalculator } from "./interactive/ComplexRootCalculator";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -129,6 +134,11 @@ function renderInteractive(type: string, codeExample?: string) {
     sqlPlayground: "SQL Playground",
     joinVisualizer: "JOIN-Visualisierer",
     dbPlanningPhases: "DB-Phasen Guide",
+    complexPlaneViewer: "Gaußsche Zahlenebene",
+    complexFormConverter: "Form-Rechner",
+    complexOperationsCalculator: "Operations-Rechner",
+    complexPowerCalculator: "Potenz-Rechner",
+    complexRootCalculator: "Wurzel-Rechner",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -170,6 +180,11 @@ function renderInteractive(type: string, codeExample?: string) {
     sqlPlayground: <SQLPlayground />,
     joinVisualizer: <JoinVisualizer />,
     dbPlanningPhases: <DBPlanningPhases />,
+    complexPlaneViewer: <ComplexPlaneViewer />,
+    complexFormConverter: <ComplexFormConverter />,
+    complexOperationsCalculator: <ComplexOperationsCalculator />,
+    complexPowerCalculator: <ComplexPowerCalculator />,
+    complexRootCalculator: <ComplexRootCalculator />,
   };
 
   const name = interactiveNames[type] || type;
