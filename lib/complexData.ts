@@ -57,13 +57,11 @@ $j^1 = j$ → $j^2 = -1$ → $j^3 = -j$ → $j^4 = 1$ (zyklisch!)`,
       type: "text",
       content: `# Warum brauchen wir komplexe Zahlen?
 
-Stell dir vor, du sollst diese Gleichung lösen:
-
-$$x^2 + 1 = 0$$
+Stell dir vor, du sollst $x^2 + 1 = 0$ lösen.
 
 Umformen: $x^2 = -1$
 
-Aber: **Keine reelle Zahl quadriert zu $-1$!** Denn $x^2 \\geq 0$ für alle $x \\in \\mathbb{R}$.
+**Keine reelle Zahl quadriert zu $-1$!** Denn $x^2 \\geq 0$ für alle $x \\in \\mathbb{R}$.
 
 Also erfinden wir eine neue Zahl.
 
@@ -71,21 +69,19 @@ Also erfinden wir eine neue Zahl.
 
 ## Die imaginäre Einheit $j$
 
-Wir **definieren** eine Zahl $j$ mit:
-
 $$j = \\sqrt{-1} \\quad \\Rightarrow \\quad j^2 = -1$$
 
-Das ist keine "normale" Zahl — sie existiert nicht auf der reellen Zahlengerade. Aber mit ihr können wir rechnen!
+Das ist keine "normale" Zahl — aber mit ihr können wir rechnen!
 
 ---
 
 ## Komplexe Zahlen
 
-$$z = \\underbrace{x}_{\\text{Realteil}} + j \\cdot \\underbrace{y}_{\\text{Imaginärteil}}$$
+$$z = x + j \\cdot y$$
 
-- $x = \\text{Re}(z)$ — der "normale" Teil
-- $y = \\text{Im}(z)$ — der $j$-Teil
-- Wenn $y = 0$: $z = x$ — eine reelle Zahl (Spezialfall!)
+- $x = \\text{Re}(z)$ — der Realteil
+- $y = \\text{Im}(z)$ — der Imaginärteil
+- Wenn $y = 0$: $z = x$ — reelle Zahl (Spezialfall!)
 
 ---
 
@@ -93,7 +89,7 @@ $$z = \\underbrace{x}_{\\text{Realteil}} + j \\cdot \\underbrace{y}_{\\text{Imag
 
 | Zahl | Re | Im | Bemerkung |
 |------|---:|---:|-----------|
-| $3 + 4j$ | 3 | 4 | "normale" komplexe Zahl |
+| $3 + 4j$ | 3 | 4 | komplexe Zahl |
 | $-2 + 5j$ | -2 | 5 | negativer Realteil |
 | $7$ | 7 | 0 | reell! |
 | $-3j$ | 0 | -3 | rein imaginär |
@@ -106,27 +102,29 @@ $j^1 = j$ → $j^2 = -1$ → $j^3 = -j$ → $j^4 = 1$ → $j^5 = j$ → ...
 
 **Alle 4 Schritte wiederholt sich alles!**
 
----
+[GUIDED_START]
+TITLE:Berechne $j^6$
+[STEP]
+$j^6 = j^4 \\cdot j^2$
+[STEP]
+$j^4 = (j^2)^2 = (-1)^2 = 1$
+[STEP]
+$j^6 = 1 \\cdot (-1) = -1$
+[RESULT]
+$j^6 = -1$ ✓
+[GUIDED_END]
 
-## 📝 Geführte Aufgabe
-
-**Aufgabe:** Berechne $j^6$.
-
-**Schritt 1:** $j^6 = j^4 \\cdot j^2$
-
-**Schritt 2:** $j^4 = (j^2)^2 = (-1)^2 = 1$
-
-**Schritt 3:** $j^6 = 1 \\cdot (-1) = -1$ ✓
-
----
-
-**Aufgabe:** Berechne $2j \\cdot 3j$.
-
-**Schritt 1:** $2j \\cdot 3j = 6j^2$
-
-**Schritt 2:** $j^2 = -1$
-
-**Schritt 3:** $6 \\cdot (-1) = -6$ ✓
+[GUIDED_START]
+TITLE:Berechne $2j \\cdot 3j$
+[STEP]
+$2j \\cdot 3j = 6j^2$
+[STEP]
+$j^2 = -1$
+[STEP]
+$6 \\cdot (-1) = -6$
+[RESULT]
+$2j \\cdot 3j = -6$ ✓
+[GUIDED_END]
 
 ---
 
@@ -136,11 +134,11 @@ $j^1 = j$ → $j^2 = -1$ → $j^3 = -j$ → $j^4 = 1$ → $j^5 = j$ → ...
 2. $j^{15} = ?$ → $-j$ (denn $15 \\bmod 4 = 3$)
 3. $(1+j) + (3-2j) = ?$ → $4 - j$
 4. $(2j)^2 = ?$ → $-4$
-5. $j^3 + j^4 + j^5 = ?$ → $-j + 1 + j = 1$`,
+5. $j^3 + j^4 + j^5 = ?$ → $1$`,
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 2: Gaußsche Ebene (INTERAKTIV)
+    // LEKTION 2: Gaußsche Ebene
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-2",
@@ -150,13 +148,12 @@ $j^1 = j$ → $j^2 = -1$ → $j^3 = -j$ → $j^4 = 1$ → $j^5 = j$ → ...
       interactive: "complexPlaneViewer",
       content: `# Die Gaußsche Zahlenebene
 
-Reelle Zahlen leben auf einer **Zahlenachse** (1D). Komplexe Zahlen brauchen eine **Ebene** (2D).
+Reelle Zahlen leben auf einer Zahlengerade (1D). Komplexe Zahlen brauchen eine **Ebene** (2D).
 
 ---
 
 ## So funktioniert's
 
-Die **Gaußsche Ebene** hat zwei Achsen:
 - **Horizontal:** Realteil $\\text{Re}(z)$
 - **Vertikal:** Imaginärteil $\\text{Im}(z)$
 
@@ -168,23 +165,23 @@ $z = x + jy$ → Punkt bei $(x | y)$
 
 ---
 
-## 📝 Geführte Aufgabe
-
-**Aufgabe:** Zeichne $z = -3 + 2j$ ein.
-
-**Schritt 1:** Realteil ablesen: $x = -3$ → gehe 3 nach **links**
-
-**Schritt 2:** Imaginärteil ablesen: $y = 2$ → gehe 2 nach **oben**
-
-**Schritt 3:** Punkt markieren bei $(-3 | 2)$ ✓
-
-**Schritt 4:** Abstand zum Ursprung: $r = \\sqrt{(-3)^2 + 2^2} = \\sqrt{13} \\approx 3.6$
+[GUIDED_START]
+TITLE:Zeichne $z = -3 + 2j$ ein
+[STEP]
+Realteil ablesen: $x = -3$ → gehe 3 nach **links**
+[STEP]
+Imaginärteil ablesen: $y = 2$ → gehe 2 nach **oben**
+[STEP]
+Punkt markieren bei $(-3 | 2)$
+[STEP]
+Abstand: $r = \\sqrt{(-3)^2 + 2^2} = \\sqrt{13} \\approx 3.6$
+[RESULT]
+$z = -3 + 2j$ liegt bei $(-3 | 2)$ mit Betrag $r = \\sqrt{13}$ ✓
+[GUIDED_END]
 
 ---
 
 ## 🎯 Übung
-
-Zeichne diese Zahlen ein (nutze die Ebene oben!):
 
 1. $z_1 = 2 + 3j$ → $(2 | 3)$
 2. $z_2 = -4 + j$ → $(-4 | 1)$
@@ -194,7 +191,7 @@ Zeichne diese Zahlen ein (nutze die Ebene oben!):
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 3: Darstellungsformen (INTERAKTIV)
+    // LEKTION 3: Darstellungsformen
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-3",
@@ -231,7 +228,7 @@ $$z = r \\cdot e^{j\\varphi}$$
 
 Euler-Formel: $e^{j\\varphi} = \\cos\\varphi + j\\sin\\varphi$
 
-Super zum **Multiplizieren** (Beträge ×, Winkel +) und **Dividieren** (Beträge ÷, Winkel −).
+Super zum **Multiplizieren** und **Dividieren**.
 
 ---
 
@@ -239,19 +236,17 @@ Super zum **Multiplizieren** (Beträge ×, Winkel +) und **Dividieren** (Beträg
 
 ---
 
-## Umrechnung: Normal → Polar
-
-**Gegeben:** $z = 3 + 4j$
-
-**Schritt 1 — Betrag (Pythagoras):**
-$$r = \\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$$
-
-**Schritt 2 — Winkel:**
-$$\\tan\\varphi = \\frac{4}{3} = 1.333 \\quad \\Rightarrow \\quad \\varphi = 53.13°$$
-
-**Schritt 3 — Quadrant prüfen:** $x > 0, y > 0$ → Quadrant I → keine Korrektur! ✓
-
-**Ergebnis:** $z = 5e^{j53.13°}$
+[GUIDED_START]
+TITLE:Wandle $z = 3 + 4j$ in Exponentialform um
+[STEP]
+Betrag berechnen (Pythagoras): $r = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$
+[STEP]
+Winkel berechnen: $\\tan\\varphi = \\frac{4}{3} = 1.333$ → $\\varphi = 53.13°$
+[STEP]
+Quadrant prüfen: $x > 0, y > 0$ → Quadrant I → keine Korrektur!
+[RESULT]
+$z = 5 e^{j53.13°}$ ✓
+[GUIDED_END]
 
 ---
 
@@ -264,23 +259,19 @@ $$\\tan\\varphi = \\frac{4}{3} = 1.333 \\quad \\Rightarrow \\quad \\varphi = 53.
 | III (links unten) | − | − | $+180°$ |
 | IV (rechts unten) | + | − | $+360°$ |
 
----
-
-## 📝 Geführte Aufgabe
-
-**Aufgabe:** Wandle $z = -3 - 3j$ in Exponentialform um.
-
-**Schritt 1:** $r = \\sqrt{(-3)^2 + (-3)^2} = \\sqrt{18} = 3\\sqrt{2} \\approx 4.24$
-
-**Schritt 2:** $\\arctan((-3)/(-3)) = \\arctan(1) = 45°$
-
-**Schritt 3:** $x < 0, y < 0$ → Quadrant III → $+180°$
-
-**Schritt 4:** $\\varphi = 45° + 180° = 225°$
-
-**Ergebnis:** $z = 3\\sqrt{2} \\cdot e^{j225°}$ ✓
-
-**Probe:** $x = 4.24 \\cdot \\cos(225°) = -3$ ✓
+[GUIDED_START]
+TITLE:Wandle $z = -3 - 3j$ um (Quadrant III!)
+[STEP]
+$r = \\sqrt{(-3)^2 + (-3)^2} = \\sqrt{18} = 3\\sqrt{2} \\approx 4.24$
+[STEP]
+$\\arctan((-3)/(-3)) = \\arctan(1) = 45°$
+[STEP]
+$x < 0, y < 0$ → Quadrant III → Korrektur: $+180°$
+[STEP]
+$\\varphi = 45° + 180° = 225°$
+[RESULT]
+$z = 3\\sqrt{2} \\cdot e^{j225°}$ ✓ (Probe: $x = 4.24 \\cdot \\cos(225°) = -3$ ✓)
+[GUIDED_END]
 
 ---
 
@@ -317,35 +308,35 @@ $$z_1 - z_2 = (x_1 - x_2) + j(y_1 - y_2)$$
 
 ---
 
-## 📝 Geführte Aufgabe
+[GUIDED_START]
+TITLE:$(3 + 2j) + (1 - 4j)$
+[STEP]
+Realteile addieren: $3 + 1 = 4$
+[STEP]
+Imaginärteile addieren: $2 + (-4) = -2$
+[RESULT]
+$4 - 2j$ ✓
+[GUIDED_END]
 
-**Aufgabe:** $(3 + 2j) + (1 - 4j)$
+[GUIDED_START]
+TITLE:$(-1 + 4j) - (3 + 2j)$
+[STEP]
+Realteile: $-1 - 3 = -4$
+[STEP]
+Imaginärteile: $4 - 2 = 2$
+[RESULT]
+$-4 + 2j$ ✓
+[GUIDED_END]
 
-**Schritt 1 — Realteile:** $3 + 1 = 4$
-
-**Schritt 2 — Imaginärteile:** $2 + (-4) = -2$
-
-**Ergebnis:** $4 - 2j$ ✓
-
----
-
-**Aufgabe:** $(-1 + 4j) - (3 + 2j)$
-
-**Schritt 1 — Realteile:** $-1 - 3 = -4$
-
-**Schritt 2 — Imaginärteile:** $4 - 2 = 2$
-
-**Ergebnis:** $-4 + 2j$ ✓
-
----
-
-**Aufgabe:** $(6 + j) - (-2 + 3j)$
-
-**Schritt 1 — Realteile:** $6 - (-2) = 8$
-
-**Schritt 2 — Imaginärteile:** $1 - 3 = -2$
-
-**Ergebnis:** $8 - 2j$ ✓
+[GUIDED_START]
+TITLE:$(6 + j) - (-2 + 3j)$
+[STEP]
+Realteile: $6 - (-2) = 8$
+[STEP]
+Imaginärteile: $1 - 3 = -2$
+[RESULT]
+$8 - 2j$ ✓
+[GUIDED_END]
 
 ---
 
@@ -359,7 +350,7 @@ $$z_1 - z_2 = (x_1 - x_2) + j(y_1 - y_2)$$
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 5: Multiplikation (INTERAKTIV)
+    // LEKTION 5: Multiplikation
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-5",
@@ -371,11 +362,11 @@ $$z_1 - z_2 = (x_1 - x_2) + j(y_1 - y_2)$$
 
 ---
 
-## In Normalform (FOIL-Verfahren)
+## In Normalform (FOIL)
 
 $$z_1 \\cdot z_2 = (x_1 x_2 - y_1 y_2) + j(x_1 y_2 + x_2 y_1)$$
 
-**Woher?** Ausmultiplizieren (FOIL) + $j^2 = -1$ einsetzen.
+Ausmultiplizieren + $j^2 = -1$ einsetzen.
 
 ---
 
@@ -391,27 +382,29 @@ $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
 
 ---
 
-## 📝 Geführte Aufgabe
+[GUIDED_START]
+TITLE:$(2 + 3j) \\cdot (1 - 2j)$
+[STEP]
+Erste Terme: $2 \\cdot 1 = 2$
+[STEP]
+$j^2$-Term: $3j \\cdot (-2j) = -6j^2 = +6$
+[STEP]
+Kreuzterme: $2 \\cdot (-2j) + 3j \\cdot 1 = -4j + 3j = -j$
+[STEP]
+Zusammen: $(2+6) + j(-1) = 8 - j$
+[RESULT]
+$(2+3j)(1-2j) = 8 - j$ ✓
+[GUIDED_END]
 
-**Aufgabe:** $(2 + 3j) \\cdot (1 - 2j)$
-
-**Schritt 1 — Erste Terme:** $2 \\cdot 1 = 2$
-
-**Schritt 2 — $j^2$-Term:** $3j \\cdot (-2j) = -6j^2 = +6$
-
-**Schritt 3 — Kreuzterme:** $2 \\cdot (-2j) + 3j \\cdot 1 = -4j + 3j = -j$
-
-**Schritt 4 — Zusammen:** $(2+6) + j(-1) = 8 - j$ ✓
-
----
-
-**Aufgabe (Exponential):** $4e^{j20°} \\cdot 3e^{j30°}$
-
-**Schritt 1:** Beträge: $4 \\cdot 3 = 12$
-
-**Schritt 2:** Winkel: $20° + 30° = 50°$
-
-**Ergebnis:** $12e^{j50°}$ ✓
+[GUIDED_START]
+TITLE:$4e^{j20°} \\cdot 3e^{j30°}$ (Exponentialform)
+[STEP]
+Beträge: $4 \\cdot 3 = 12$
+[STEP]
+Winkel: $20° + 30° = 50°$
+[RESULT]
+$12e^{j50°}$ ✓
+[GUIDED_END]
 
 ---
 
@@ -425,7 +418,7 @@ $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 6: Konjugierte & Division (INTERAKTIV)
+    // LEKTION 6: Konjugierte & Division
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-6",
@@ -433,7 +426,7 @@ $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
       duration: "20 min",
       type: "interactive",
       interactive: "complexOperationsCalculator",
-      content: `# Das Komplex Konjugierte & Division
+      content: `# Konjugierte & Division
 
 ---
 
@@ -441,21 +434,15 @@ $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
 
 $$\\bar{z} = x - jy$$
 
-**Geometrisch:** Spiegelung an der Re-Achse!
-
-$z = 3+4j$ → $\\bar{z} = 3-4j$
-
-**Wichtig:** $z \\cdot \\bar{z} = x^2 + y^2 = |z|^2$ — immer reell!
+**Spiegelung an der Re-Achse!** $z \\cdot \\bar{z} = x^2 + y^2 = |z|^2$ (immer reell!)
 
 ---
 
 ## Division
 
-$$\\frac{z_1}{z_2} = \\frac{x_1+jy_1}{x_2+jy_2}$$
-
 **Problem:** Im Nenner steht ein $j$!
 
-**Lösung:** Erweitere mit dem **konjugierten des Nenners** — dann wird der Nenner reell!
+**Lösung:** Erweitere mit dem **konjugierten des Nenners** — Nenner wird reell!
 
 ---
 
@@ -463,30 +450,31 @@ $$\\frac{z_1}{z_2} = \\frac{x_1+jy_1}{x_2+jy_2}$$
 
 ---
 
-## 📝 Geführte Aufgabe
+[GUIDED_START]
+TITLE:$\\frac{3+4j}{1-2j}$
+[STEP]
+Konjugierten bilden: $\\overline{1-2j} = 1+2j$
+[STEP]
+Erweitern: $\\frac{3+4j}{1-2j} \\cdot \\frac{1+2j}{1+2j}$
+[STEP]
+Nenner: $(1-2j)(1+2j) = 1+4 = 5$ ← reell! ✓
+[STEP]
+Zähler: $(3+4j)(1+2j) = 3+6j+4j+8j^2 = -5+10j$
+[STEP]
+Teilen: $\\frac{-5+10j}{5} = -1+2j$
+[RESULT]
+$\\frac{3+4j}{1-2j} = -1 + 2j$ ✓
+[GUIDED_END]
 
-**Aufgabe:** $\\frac{3+4j}{1-2j}$
-
-**Schritt 1:** Konjugierten bilden: $\\overline{1-2j} = 1+2j$
-
-**Schritt 2:** Erweitern:
-$$\\frac{3+4j}{1-2j} \\cdot \\frac{1+2j}{1+2j}$$
-
-**Schritt 3 — Nenner:** $(1-2j)(1+2j) = 1+4 = 5$ ← reell! ✓
-
-**Schritt 4 — Zähler:** $(3+4j)(1+2j) = 3+6j+4j+8j^2 = -5+10j$
-
-**Schritt 5:** $\\frac{-5+10j}{5} = -1+2j$ ✓
-
----
-
-**Aufgabe (Exponential):** $\\frac{12e^{j80°}}{4e^{j30°}}$
-
-**Schritt 1:** Beträge: $12/4 = 3$
-
-**Schritt 2:** Winkel: $80° - 30° = 50°$
-
-**Ergebnis:** $3e^{j50°}$ ✓
+[GUIDED_START]
+TITLE:$\\frac{12e^{j80°}}{4e^{j30°}}$ (Exponentialform)
+[STEP]
+Beträge: $12/4 = 3$
+[STEP]
+Winkel: $80° - 30° = 50°$
+[RESULT]
+$3e^{j50°}$ ✓
+[GUIDED_END]
 
 ---
 
@@ -500,7 +488,7 @@ $$\\frac{3+4j}{1-2j} \\cdot \\frac{1+2j}{1+2j}$$
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 7: Potenzieren (INTERAKTIV)
+    // LEKTION 7: Potenzieren
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-7",
@@ -534,19 +522,19 @@ $$z^n = r^n \\cdot e^{jn\\varphi}$$
 | 4 | $1$ | $(j^2)^2$ |
 | 5 | $j$ | Zyklus! |
 
-**$j^n$ hängt nur von $n \\bmod 4$ ab!**
-
 ---
 
-## 📝 Geführte Aufgabe
-
-**Aufgabe:** $(1+j)^4$
-
-**Schritt 1:** Umrechnen: $r = \\sqrt{2}$, $\\varphi = 45°$
-
-**Schritt 2:** De Moivre: $z^4 = (\\sqrt{2})^4 \\cdot e^{j(4 \\cdot 45°)} = 4e^{j180°}$
-
-**Schritt 3:** Zurück: $4e^{j180°} = 4(-1) = -4$ ✓
+[GUIDED_START]
+TITLE:$(1+j)^4$
+[STEP]
+Umrechnen: $r = \\sqrt{2}$, $\\varphi = 45°$
+[STEP]
+De Moivre: $z^4 = (\\sqrt{2})^4 \\cdot e^{j(4 \\cdot 45°)} = 4e^{j180°}$
+[STEP]
+Zurück: $4e^{j180°} = 4(-1) = -4$
+[RESULT]
+$(1+j)^4 = -4$ ✓
+[GUIDED_END]
 
 ---
 
@@ -560,7 +548,7 @@ $$z^n = r^n \\cdot e^{jn\\varphi}$$
     },
 
     // ══════════════════════════════════════════════════════════════
-    // LEKTION 8: Radizieren (INTERAKTIV)
+    // LEKTION 8: Radizieren
     // ══════════════════════════════════════════════════════════════
     {
       id: "kz-8",
@@ -578,10 +566,6 @@ Bei reellen Zahlen: $\\sqrt{4} = 2$ (eindeutig). Bei komplexen: **$n$ verschiede
 
 $$w_k = r^{1/n} \\cdot e^{j \\frac{\\varphi + 2k\\pi}{n}}, \\quad k = 0, 1, \\ldots, n-1$$
 
----
-
-## Geometrisch
-
 Die Wurzeln liegen als **gleichmäßiges $n$-Eck** auf einem Kreis mit Radius $r^{1/n}$!
 
 ---
@@ -590,20 +574,21 @@ Die Wurzeln liegen als **gleichmäßiges $n$-Eck** auf einem Kreis mit Radius $r
 
 ---
 
-## 📝 Geführte Aufgabe
-
-**Aufgabe:** Alle Kubikwurzeln von $8$
-
-**Schritt 1:** $8 = 8e^{j0°}$
-
-**Schritt 2:** Radius: $8^{1/3} = 2$
-
-**Schritt 3 — Wurzeln:**
-- $w_0 = 2e^{j0°} = 2$
-- $w_1 = 2e^{j120°} = -1 + 1.732j$
-- $w_2 = 2e^{j240°} = -1 - 1.732j$
-
-→ Gleichseitiges Dreieck auf Kreis mit Radius 2! ✓
+[GUIDED_START]
+TITLE:Alle Kubikwurzeln von $8$
+[STEP]
+$8 = 8e^{j0°}$ (reelle Zahl, $\\varphi = 0°$)
+[STEP]
+Radius: $8^{1/3} = 2$
+[STEP]
+$w_0 = 2e^{j0°} = 2$
+[STEP]
+$w_1 = 2e^{j120°} = -1 + 1.732j$
+[STEP]
+$w_2 = 2e^{j240°} = -1 - 1.732j$
+[RESULT]
+Drei Wurzeln: $2$, $-1+1.732j$, $-1-1.732j$ → gleichseitiges Dreieck auf Kreis mit Radius 2 ✓
+[GUIDED_END]
 
 ---
 

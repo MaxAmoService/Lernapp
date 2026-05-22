@@ -6,6 +6,7 @@ import { CheckCircle2, ChevronRight } from "lucide-react";
 import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
+import { GuidedExercise } from "./GuidedExercise";
 import {
   Triangle, Circle, Rectangle, Square, Trapezoid, Parallelogram,
   Cube, Cuboid, Sphere, Cylinder, Cone, Pyramid
@@ -217,6 +218,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   const renderContent = (content: string, interactiveType?: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
+    const contentLines = lines; // alias for GUIDED parsing
+    const skipLines = new Set<number>();
     let inCodeBlock = false;
     let codeContent = "";
     let codeLang = "";
@@ -240,7 +243,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
     };
 
-    lines.forEach((line) => {
+    lines.forEach((line, lineIndex) => {
+      if (skipLines.has(lineIndex)) return;
       // Block math $$...$$
       if (line.trim().startsWith("$$") && !inCodeBlock) {
         flushTable();
@@ -378,7 +382,71 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       } else if (/^\d+\.\s/.test(line)) {
         const text = line.replace(/^\d+\.\s/, "");
         elements.push(<li key={`oli-${keyIndex++}`} className="text-slate-200 ml-4 mb-1.5 list-decimal list-inside marker:text-blue-400 marker:font-bold"><InlineText text={text} /></li>);
-      } else if (!line.trim()) {
+      }
+      // Styled divider (---)
+      else if (line.trim() === "---") {
+        elements.push(
+          <div key={`divider-${keyIndex++}`} className="my-6 flex items-center gap-4">
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
+            <div className="w-1.5 h-1.5 rounded-full bg-slate-600" />
+            <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
+          </div>
+        );
+      }
+      // Guided Exercise markers
+      else if (line.trim() === "[GUIDED_START]") {
+        // Collect lines until [GUIDED_END]
+        const guidedLines: string[] = [];
+        let guidedTitle = "";
+        let gi = contentLines.indexOf(line) + 1;
+        while (gi < contentLines.length && contentLines[gi].trim() !== "[GUIDED_END]") {
+          const gl = contentLines[gi].trim();
+          if (gl.startsWith("TITLE:")) {
+            guidedTitle = gl.slice(6).trim();
+          } else if (gl === "[STEP]") {
+            // collect step content
+            gi++;
+            let stepContent = "";
+            while (gi < contentLines.length && contentLines[gi].trim() !== "[STEP]" && contentLines[gi].trim() !== "[RESULT]" && contentLines[gi].trim() !== "[GUIDED_END]") {
+              stepContent += (stepContent ? "\n" : "") + contentLines[gi];
+              gi++;
+            }
+            guidedLines.push(stepContent.trim());
+            continue;
+          } else if (gl === "[RESULT]") {
+            gi++;
+            let resultContent = "";
+            while (gi < contentLines.length && contentLines[gi].trim() !== "[GUIDED_END]") {
+              resultContent += (resultContent ? "\n" : "") + contentLines[gi];
+              gi++;
+            }
+            guidedLines.push("RESULT:" + resultContent.trim());
+            continue;
+          }
+          gi++;
+        }
+        // Skip the original lines in the forEach
+        const startIdx = contentLines.indexOf(line);
+        const endIdx = contentLines.indexOf("[GUIDED_END]", startIdx);
+        if (endIdx !== -1) {
+          for (let skip = startIdx; skip <= endIdx; skip++) {
+            skipLines.add(skip);
+          }
+        }
+        const resultLine = guidedLines.find(l => l.startsWith("RESULT:"));
+        const stepLines = guidedLines.filter(l => !l.startsWith("RESULT:"));
+        if (stepLines.length > 0 && resultLine) {
+          elements.push(
+            <GuidedExercise
+              key={`guided-${keyIndex++}`}
+              title={guidedTitle}
+              steps={stepLines}
+              result={resultLine.slice(7)}
+            />
+          );
+        }
+      }
+      else if (!line.trim()) {
         elements.push(<div key={`br-${keyIndex++}`} className="h-3" />);
       }
       // Interactive marker — supports [INTERACTIVE] and [INTERACTIVE:type]
