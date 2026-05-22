@@ -218,7 +218,6 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
   const renderContent = (content: string, interactiveType?: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
-    const contentLines = lines; // alias for GUIDED parsing
     const skipLines = new Set<number>();
     let inCodeBlock = false;
     let codeContent = "";
@@ -243,8 +242,9 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
     };
 
-    lines.forEach((line, lineIndex) => {
-      if (skipLines.has(lineIndex)) return;
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+      const line = lines[lineIndex];
+      if (skipLines.has(lineIndex)) continue;
       // Block math $$...$$
       if (line.trim().startsWith("$$") && !inCodeBlock) {
         flushTable();
@@ -395,53 +395,47 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // Guided Exercise markers
       else if (line.trim() === "[GUIDED_START]") {
-        // Collect lines until [GUIDED_END]
-        const guidedLines: string[] = [];
+        const guidedSteps: string[] = [];
         let guidedTitle = "";
-        let gi = contentLines.indexOf(line) + 1;
-        while (gi < contentLines.length && contentLines[gi].trim() !== "[GUIDED_END]") {
-          const gl = contentLines[gi].trim();
+        let guidedResult = "";
+        let gi = lineIndex + 1;
+        // Parse the GUIDED block
+        while (gi < lines.length && lines[gi].trim() !== "[GUIDED_END]") {
+          const gl = lines[gi].trim();
           if (gl.startsWith("TITLE:")) {
             guidedTitle = gl.slice(6).trim();
+            gi++;
           } else if (gl === "[STEP]") {
-            // collect step content
             gi++;
             let stepContent = "";
-            while (gi < contentLines.length && contentLines[gi].trim() !== "[STEP]" && contentLines[gi].trim() !== "[RESULT]" && contentLines[gi].trim() !== "[GUIDED_END]") {
-              stepContent += (stepContent ? "\n" : "") + contentLines[gi];
+            while (gi < lines.length && lines[gi].trim() !== "[STEP]" && lines[gi].trim() !== "[RESULT]" && lines[gi].trim() !== "[GUIDED_END]") {
+              stepContent += (stepContent ? "\n" : "") + lines[gi];
               gi++;
             }
-            guidedLines.push(stepContent.trim());
-            continue;
+            guidedSteps.push(stepContent.trim());
           } else if (gl === "[RESULT]") {
             gi++;
             let resultContent = "";
-            while (gi < contentLines.length && contentLines[gi].trim() !== "[GUIDED_END]") {
-              resultContent += (resultContent ? "\n" : "") + contentLines[gi];
+            while (gi < lines.length && lines[gi].trim() !== "[GUIDED_END]") {
+              resultContent += (resultContent ? "\n" : "") + lines[gi];
               gi++;
             }
-            guidedLines.push("RESULT:" + resultContent.trim());
-            continue;
-          }
-          gi++;
-        }
-        // Skip the original lines in the forEach
-        const startIdx = contentLines.indexOf(line);
-        const endIdx = contentLines.indexOf("[GUIDED_END]", startIdx);
-        if (endIdx !== -1) {
-          for (let skip = startIdx; skip <= endIdx; skip++) {
-            skipLines.add(skip);
+            guidedResult = resultContent.trim();
+          } else {
+            gi++;
           }
         }
-        const resultLine = guidedLines.find(l => l.startsWith("RESULT:"));
-        const stepLines = guidedLines.filter(l => !l.startsWith("RESULT:"));
-        if (stepLines.length > 0 && resultLine) {
+        // Skip all lines from [GUIDED_START] to [GUIDED_END]
+        for (let skip = lineIndex; skip <= gi; skip++) {
+          skipLines.add(skip);
+        }
+        if (guidedSteps.length > 0 && guidedResult) {
           elements.push(
             <GuidedExercise
               key={`guided-${keyIndex++}`}
               title={guidedTitle}
-              steps={stepLines}
-              result={resultLine.slice(7)}
+              steps={guidedSteps}
+              result={guidedResult}
             />
           );
         }
@@ -470,7 +464,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       else {
         elements.push(<p key={`p-${keyIndex++}`} className="text-slate-200 mb-3 leading-relaxed"><InlineText text={line} /></p>);
       }
-    });
+    }
 
     flushTable();
     return elements;
