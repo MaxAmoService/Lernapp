@@ -1,5 +1,5 @@
 // ============================================================================
-// Reward System — Avatare & Frames freischalten
+// Reward System — Avatare & Frames freischalten (mit Animationen)
 // ============================================================================
 
 export interface AvatarOption {
@@ -8,6 +8,7 @@ export interface AvatarOption {
   name: string;
   unlockLevel: number;
   rarity: "common" | "rare" | "epic" | "legendary";
+  leaderboardRank?: number; // Nur für diesen Rang freischalten
 }
 
 export interface FrameOption {
@@ -15,14 +16,14 @@ export interface FrameOption {
   name: string;
   unlockLevel: number;
   rarity: "common" | "rare" | "epic" | "legendary";
-  css: string; // Tailwind classes for the frame
   animated: boolean;
+  leaderboardRank?: number;
 }
 
 // ─── Avatare ────────────────────────────────────────────────────────────────
 
 export const AVATARS: AvatarOption[] = [
-  // Common (Level 1 — immer verfügbar)
+  // Common (Level 1)
   { id: "nerd", emoji: "🤓", name: "Nerd", unlockLevel: 1, rarity: "common" },
   { id: "cool", emoji: "😎", name: "Cool", unlockLevel: 1, rarity: "common" },
   { id: "cat", emoji: "🐱", name: "Katze", unlockLevel: 1, rarity: "common" },
@@ -30,7 +31,7 @@ export const AVATARS: AvatarOption[] = [
   { id: "panda", emoji: "🐼", name: "Panda", unlockLevel: 1, rarity: "common" },
   { id: "koala", emoji: "🐨", name: "Koala", unlockLevel: 1, rarity: "common" },
 
-  // Uncommon (Level 2)
+  // Common (Level 2)
   { id: "fox", emoji: "🦊", name: "Fuchs", unlockLevel: 2, rarity: "common" },
   { id: "owl", emoji: "🦉", name: "Eule", unlockLevel: 2, rarity: "common" },
   { id: "penguin", emoji: "🐧", name: "Pinguin", unlockLevel: 2, rarity: "common" },
@@ -59,101 +60,109 @@ export const AVATARS: AvatarOption[] = [
   { id: "rocket", emoji: "🚀", name: "Rakete", unlockLevel: 8, rarity: "legendary" },
   { id: "alien", emoji: "👽", name: "Alien", unlockLevel: 8, rarity: "legendary" },
 
-  // Leaderboard Exklusiv
-  { id: "trophy", emoji: "🏆", name: "Trophäe", unlockLevel: 0, rarity: "legendary" }, // Top 1
-  { id: "medal1", emoji: "🥇", name: "Gold", unlockLevel: 0, rarity: "legendary" },     // Top 1
-  { id: "medal2", emoji: "🥈", name: "Silber", unlockLevel: 0, rarity: "epic" },        // Top 3
-  { id: "medal3", emoji: "🥉", name: "Bronze", unlockLevel: 0, rarity: "epic" },        // Top 5
+  // Leaderboard-Exklusiv (nur für Platzhalter)
+  { id: "trophy", emoji: "🏆", name: "Champion", unlockLevel: 0, rarity: "legendary", leaderboardRank: 1 },
+  { id: "medal1", emoji: "🥇", name: "Gold-Medaille", unlockLevel: 0, rarity: "legendary", leaderboardRank: 1 },
+  { id: "medal2", emoji: "🥈", name: "Silber-Medaille", unlockLevel: 0, rarity: "epic", leaderboardRank: 2 },
+  { id: "medal3", emoji: "🥉", name: "Bronze-Medaille", unlockLevel: 0, rarity: "epic", leaderboardRank: 3 },
 ];
 
 // ─── Frames ─────────────────────────────────────────────────────────────────
 
 export const FRAMES: FrameOption[] = [
-  // Common (immer verfügbar)
-  { id: "none", name: "Kein Rahmen", unlockLevel: 1, rarity: "common", css: "", animated: false },
-  { id: "slate", name: "Grau", unlockLevel: 1, rarity: "common", css: "ring-2 ring-slate-500", animated: false },
-  { id: "blue", name: "Blau", unlockLevel: 1, rarity: "common", css: "ring-2 ring-blue-500", animated: false },
+  // Common (immer)
+  { id: "none", name: "Kein", unlockLevel: 1, rarity: "common", animated: false },
+  { id: "slate", name: "Grau", unlockLevel: 1, rarity: "common", animated: false },
+  { id: "blue", name: "Blau", unlockLevel: 1, rarity: "common", animated: false },
 
   // Rare (Level 2)
-  { id: "emerald", name: "Smaragd", unlockLevel: 2, rarity: "rare", css: "ring-2 ring-emerald-500", animated: false },
-  { id: "amber", name: "Bernstein", unlockLevel: 2, rarity: "rare", css: "ring-2 ring-amber-500", animated: false },
+  { id: "emerald", name: "Smaragd", unlockLevel: 2, rarity: "rare", animated: false },
+  { id: "rose", name: "Rose", unlockLevel: 2, rarity: "rare", animated: false },
 
   // Rare (Level 3)
-  { id: "violet", name: "Violett", unlockLevel: 3, rarity: "rare", css: "ring-2 ring-violet-500", animated: false },
-  { id: "rose", name: "Rose", unlockLevel: 3, rarity: "rare", css: "ring-2 ring-rose-500", animated: false },
+  { id: "violet", name: "Violett", unlockLevel: 3, rarity: "rare", animated: false },
+  { id: "amber", name: "Bernstein", unlockLevel: 3, rarity: "rare", animated: false },
 
-  // Epic (Level 5)
-  { id: "gradient-blue", name: "Blau-Gradient", unlockLevel: 5, rarity: "epic", css: "ring-2 ring-gradient-to-r from-blue-500 to-cyan-400", animated: false },
-  { id: "gradient-fire", name: "Feuer", unlockLevel: 5, rarity: "epic", css: "ring-2 ring-gradient-to-r from-orange-500 to-red-500", animated: false },
-  { id: "neon", name: "Neon", unlockLevel: 5, rarity: "epic", css: "ring-2 ring-green-400 shadow-[0_0_12px_rgba(74,222,128,0.6)]", animated: false },
+  // Epic (Level 5) — animiert
+  { id: "neon", name: "Neon", unlockLevel: 5, rarity: "epic", animated: true },
+  { id: "flame", name: "Flammen", unlockLevel: 5, rarity: "epic", animated: true },
+  { id: "ice", name: "Eis", unlockLevel: 5, rarity: "epic", animated: true },
 
-  // Legendary (Level 8)
-  { id: "gold", name: "Gold", unlockLevel: 8, rarity: "legendary", css: "ring-2 ring-amber-400 shadow-[0_0_16px_rgba(251,191,36,0.5)]", animated: false },
-  { id: "rainbow", name: "Regenbogen", unlockLevel: 8, rarity: "legendary", css: "ring-2 ring-transparent", animated: true },
+  // Legendary (Level 7) — animiert
+  { id: "gold", name: "Gold", unlockLevel: 7, rarity: "legendary", animated: true },
+  { id: "rainbow", name: "Regenbogen", unlockLevel: 7, rarity: "legendary", animated: true },
+  { id: "galaxy", name: "Galaxie", unlockLevel: 7, rarity: "legendary", animated: true },
 
-  // Animated Legendary (Level 10)
-  { id: "pulse-glow", name: "Pulsieren", unlockLevel: 10, rarity: "legendary", css: "ring-2 ring-blue-400", animated: true },
-  { id: "fire-ring", name: "Feuer-Ring", unlockLevel: 10, rarity: "legendary", css: "ring-2 ring-orange-400", animated: true },
+  // Legendary (Level 10) — special
+  { id: "pulse", name: "Pulsieren", unlockLevel: 10, rarity: "legendary", animated: true },
+  { id: "cosmic", name: "Kosmisch", unlockLevel: 10, rarity: "legendary", animated: true },
+
+  // Leaderboard-Exklusiv
+  { id: "champion", name: "Champion", unlockLevel: 0, rarity: "legendary", animated: true, leaderboardRank: 1 },
+  { id: "silver", name: "Silber", unlockLevel: 0, rarity: "epic", animated: true, leaderboardRank: 2 },
+  { id: "bronze-frame", name: "Bronze", unlockLevel: 0, rarity: "epic", animated: true, leaderboardRank: 3 },
 ];
-
-// ─── Leaderboard Exklusiv-Frames ────────────────────────────────────────────
-
-export const LEADERBOARD_FRAMES: Record<number, FrameOption> = {
-  1: { id: "champion", name: "Champion", unlockLevel: 0, rarity: "legendary", css: "ring-2 ring-amber-400", animated: true },
-  2: { id: "runner-up", name: "Vizemeister", unlockLevel: 0, rarity: "epic", css: "ring-2 ring-slate-300", animated: false },
-  3: { id: "third", name: "Bronze", unlockLevel: 0, rarity: "epic", css: "ring-2 ring-orange-600", animated: false },
-};
 
 // ─── Helper ─────────────────────────────────────────────────────────────────
 
 export function getUnlockedAvatars(level: number, leaderboardRank?: number): AvatarOption[] {
   return AVATARS.filter((a) => {
-    if (a.unlockLevel > 0) return level >= a.unlockLevel;
-    // Leaderboard-Exklusiv
-    if (a.id === "trophy" || a.id === "medal1") return leaderboardRank === 1;
-    if (a.id === "medal2") return leaderboardRank !== undefined && leaderboardRank <= 3;
-    if (a.id === "medal3") return leaderboardRank !== undefined && leaderboardRank <= 5;
-    return false;
+    if (a.leaderboardRank !== undefined) {
+      return leaderboardRank !== undefined && leaderboardRank <= a.leaderboardRank;
+    }
+    return level >= a.unlockLevel;
   });
 }
 
-export function getUnlockedFrames(level: number): FrameOption[] {
-  return FRAMES.filter((f) => level >= f.unlockLevel);
+export function getUnlockedFrames(level: number, leaderboardRank?: number): FrameOption[] {
+  return FRAMES.filter((f) => {
+    if (f.leaderboardRank !== undefined) {
+      return leaderboardRank !== undefined && leaderboardRank <= f.leaderboardRank;
+    }
+    return level >= f.unlockLevel;
+  });
 }
 
-export function getFrameCSS(frameId: string, level: number, leaderboardRank?: number): string {
-  // Leaderboard-Frames haben Priorität
-  if (leaderboardRank !== undefined) {
-    if (leaderboardRank === 1) return LEADERBOARD_FRAMES[1].css;
-    if (leaderboardRank <= 3) return LEADERBOARD_FRAMES[3].css;
+export function isAvatarUnlocked(avatar: AvatarOption, level: number, leaderboardRank?: number): boolean {
+  if (avatar.leaderboardRank !== undefined) {
+    return leaderboardRank !== undefined && leaderboardRank <= avatar.leaderboardRank;
   }
-
-  const frame = FRAMES.find((f) => f.id === frameId);
-  if (!frame || level < frame.unlockLevel) return "";
-  return frame.css;
+  return level >= avatar.unlockLevel;
 }
 
-export function isFrameAnimated(frameId: string, level: number, leaderboardRank?: number): boolean {
-  if (leaderboardRank !== undefined && leaderboardRank <= 3) return true;
-  const frame = FRAMES.find((f) => f.id === frameId);
-  if (!frame) return false;
-  return frame.animated && level >= frame.unlockLevel;
+export function isFrameUnlocked(frame: FrameOption, level: number, leaderboardRank?: number): boolean {
+  if (frame.leaderboardRank !== undefined) {
+    return leaderboardRank !== undefined && leaderboardRank <= frame.leaderboardRank;
+  }
+  return level >= frame.unlockLevel;
 }
 
-export function getRarityColor(rarity: AvatarOption["rarity"]): string {
+export function getRarityColor(rarity: string): string {
   switch (rarity) {
     case "common": return "text-slate-400";
     case "rare": return "text-blue-400";
     case "epic": return "text-violet-400";
     case "legendary": return "text-amber-400";
+    default: return "text-slate-400";
   }
 }
 
-export function getRarityBg(rarity: AvatarOption["rarity"]): string {
+export function getRarityBg(rarity: string): string {
   switch (rarity) {
     case "common": return "bg-slate-500/15 border-slate-500/30";
     case "rare": return "bg-blue-500/15 border-blue-500/30";
     case "epic": return "bg-violet-500/15 border-violet-500/30";
     case "legendary": return "bg-amber-500/15 border-amber-500/30";
+    default: return "bg-slate-500/15 border-slate-500/30";
+  }
+}
+
+export function getRarityBorder(rarity: string): string {
+  switch (rarity) {
+    case "common": return "border-slate-500";
+    case "rare": return "border-blue-500";
+    case "epic": return "border-violet-500";
+    case "legendary": return "border-amber-500";
+    default: return "border-slate-500";
   }
 }
