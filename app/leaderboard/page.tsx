@@ -5,12 +5,12 @@ import { useAuth } from "@/components/AuthProvider";
 import { getLeaderboard, getUserLevel } from "@/lib/auth";
 import type { LeaderboardEntry } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
-import { OnlineStatus, FrameOnlineStatus } from "@/components/OnlineStatus";
+import { FrameOnlineStatus } from "@/components/OnlineStatus";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
 export default function LeaderboardPage() {
-  const { user, toggleLeaderboard } = useAuth();
+  const { user, toggleLeaderboard, updateProfile } = useAuth();
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [optingIn, setOptingIn] = useState(false);
@@ -24,6 +24,24 @@ export default function LeaderboardPage() {
     try {
       const data = await getLeaderboard(50);
       setEntries(data);
+
+      // Champion-Items auto-entfernen wenn überholt
+      if (user && updateProfile) {
+        const myRank = data.findIndex((e) => e.uid === user.uid) + 1;
+        const frame = user.equippedFrame;
+        const avatar = user.avatar;
+        const needsReset =
+          (frame === "champion" && myRank !== 1) ||
+          (frame === "silver" && myRank !== 2) ||
+          (frame === "bronze-frame" && myRank !== 3) ||
+          ((avatar === "🏆" || avatar === "🥇") && myRank !== 1) ||
+          (avatar === "🥈" && myRank !== 2) ||
+          (avatar === "🥉" && myRank !== 3);
+
+        if (needsReset) {
+          await updateProfile({ equippedFrame: "none", avatar: "🎓" });
+        }
+      }
     } catch (err) {
       console.error("Leaderboard error:", err);
     } finally {
@@ -165,7 +183,6 @@ export default function LeaderboardPage() {
                       <p className={`font-semibold truncate ${isCurrentUser ? "text-blue-300" : "text-white"}`}>
                         {entry.displayName}
                       </p>
-                      <OnlineStatus uid={entry.uid} size="sm" />
                     </div>
                     {isCurrentUser && (
                       <span className="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] font-bold rounded-md uppercase">
