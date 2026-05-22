@@ -25,6 +25,8 @@ import {
   ChevronUp,
   Target,
   Layers,
+  Bookmark,
+  BookmarkCheck,
 } from "lucide-react";
 import { FlashcardViewer } from "@/components/FlashcardViewer";
 import { getFlashcardsForModule } from "@/lib/flashcardData";
@@ -94,7 +96,7 @@ function MerkblattContent({ content }: { content: string }) {
 
 export default function ModulePage() {
   const params = useParams();
-  const { user, completeLesson } = useAuth();
+  const { user, completeLesson, toggleSaveModule } = useAuth();
   const module = getModule(params.slug as string);
   const [selectedLesson, setSelectedLesson] = useState<Lesson | null>(null);
   const [showLogin, setShowLogin] = useState(false);
@@ -152,6 +154,7 @@ export default function ModulePage() {
     return currentIndex < module.lessons.length - 1;
   };
 
+  const isSaved = user?.savedModules?.includes(module.slug) || false;
   const progress = Math.round((completedLessons.size / module.lessons.length) * 100);
 
   return (
@@ -168,7 +171,22 @@ export default function ModulePage() {
         <div className="flex items-start gap-3 sm:gap-4">
           <span className="text-3xl sm:text-5xl">{module.icon}</span>
           <div className="flex-1 min-w-0">
-            <h1 className="text-xl sm:text-3xl font-bold mb-1 sm:mb-2">{module.title}</h1>
+            <div className="flex items-center gap-3 mb-1 sm:mb-2">
+              <h1 className="text-xl sm:text-3xl font-bold">{module.title}</h1>
+              {user && (
+                <button
+                  onClick={() => toggleSaveModule(module.slug)}
+                  className="p-2 rounded-lg hover:bg-slate-800/80 transition-colors flex-shrink-0"
+                  title={isSaved ? "Aus Merkliste entfernen" : "Modul merken"}
+                >
+                  {isSaved ? (
+                    <BookmarkCheck className="w-5 h-5 text-yellow-400" />
+                  ) : (
+                    <Bookmark className="w-5 h-5 text-slate-500 hover:text-slate-300" />
+                  )}
+                </button>
+              )}
+            </div>
             <p className="text-slate-400 mb-3 sm:mb-4 text-sm sm:text-base line-clamp-2 sm:line-clamp-none">{module.description}</p>
             <div className="max-w-md">
               <ProgressBar value={progress} />

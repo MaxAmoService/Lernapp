@@ -3,7 +3,7 @@
 import { Module, categories } from "@/lib/data";
 import { useAuth } from "./AuthProvider";
 import { ProgressBar } from "./ProgressBar";
-import { Clock, BookOpen, CheckCircle2, Bookmark, BookmarkCheck } from "lucide-react";
+import { Clock, BookOpen, CheckCircle2 } from "lucide-react";
 
 interface ModuleCardProps {
   module: Module;
@@ -11,37 +11,16 @@ interface ModuleCardProps {
 }
 
 export function ModuleCard({ module, compact }: ModuleCardProps) {
-  const { user, toggleSaveModule } = useAuth();
+  const { user } = useAuth();
   const category = categories.find(c => c.id === module.category);
 
-  // Calculate REAL progress from user data
   const completedLessons = user?.completedLessons[module.slug]?.length || 0;
   const totalLessons = module.lessons.length;
   const realProgress = totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0;
   const isCompleted = completedLessons === totalLessons && totalLessons > 0;
-  const isSaved = user?.savedModules?.includes(module.slug) || false;
 
   return (
-    <div className="glass rounded-xl overflow-hidden card-hover group relative">
-      {/* Save/Bookmark button */}
-      {user && (
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleSaveModule(module.slug);
-          }}
-          className="absolute top-3 left-3 z-10 p-2 rounded-lg bg-slate-800/80 hover:bg-slate-700 transition-colors"
-          title={isSaved ? "Aus Merkliste entfernen" : "Merken"}
-        >
-          {isSaved ? (
-            <BookmarkCheck className="w-4 h-4 text-yellow-400" />
-          ) : (
-            <Bookmark className="w-4 h-4 text-slate-400" />
-          )}
-        </button>
-      )}
-
+    <div className="glass rounded-xl overflow-hidden card-hover group">
       <a
         href={`/modules/${module.slug}`}
         className="block p-6"
