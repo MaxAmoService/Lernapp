@@ -7,7 +7,7 @@ import { getUserLevel, validatePassword } from "@/lib/auth";
 import {
   User, Mail, Lock, Camera, Save, Loader2, CheckCircle2, AlertCircle,
   Shield, Bell, Palette, Trophy, Flame, Zap, BookOpen, ArrowLeft,
-  Eye, EyeOff, RefreshCw, Edit3, X
+  Eye, EyeOff, RefreshCw, Edit3, X, Users
 } from "lucide-react";
 
 const AVATARS = ["🤓", "😎", "🦊", "🐱", "🦄", "🐸", "🐼", "🦁", "🐯", "🐨", "🐻", "🐰", "🦊", "🐨", "🦋", "🐙"];
@@ -570,6 +570,30 @@ export default function ProfilePage() {
                 className={`w-12 h-6 rounded-full transition-colors relative ${notifications ? "bg-blue-500" : "bg-slate-600"}`}
               >
                 <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${notifications ? "translate-x-6" : "translate-x-0.5"}`} />
+              </button>
+            </div>
+
+            {/* Leaderboard Opt-in */}
+            <div className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg">
+              <div className="flex items-center gap-3">
+                <Users className="w-5 h-5 text-amber-400" />
+                <div>
+                  <p className="font-medium">Bestenliste</p>
+                  <p className="text-sm text-slate-400">
+                    {user.leaderboardOptIn
+                      ? "Dein Profil ist in der Bestenliste sichtbar"
+                      : "Aktivieren, um dich mit anderen zu vergleichen"}
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={async () => {
+                  const newVal = !user.leaderboardOptIn;
+                  await updateProfile({ leaderboardOptIn: newVal });
+                }}
+                className={`w-12 h-6 rounded-full transition-colors relative ${user.leaderboardOptIn ? "bg-amber-500" : "bg-slate-600"}`}
+              >
+                <div className={`w-5 h-5 bg-white rounded-full absolute top-0.5 transition-transform ${user.leaderboardOptIn ? "translate-x-6" : "translate-x-0.5"}`} />
               </button>
             </div>
 

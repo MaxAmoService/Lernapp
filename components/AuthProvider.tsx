@@ -16,6 +16,7 @@ import {
   changeEmail,
   deleteAccount,
   resendVerificationEmail,
+  toggleLeaderboardOptIn,
 } from "@/lib/auth";
 
 interface AuthContextType {
@@ -33,6 +34,7 @@ interface AuthContextType {
   completeLesson: (moduleId: string, lessonId: string, quizScore?: number) => Promise<void>;
   toggleSaveModule: (moduleSlug: string) => Promise<void>;
   refreshUser: () => Promise<void>;
+  toggleLeaderboard: (optIn: boolean) => Promise<void>;
   resetAll: () => void;
 }
 
@@ -141,6 +143,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (profile) setUser(profile);
   };
 
+  const toggleLeaderboardFn = async (optIn: boolean) => {
+    if (!user) return;
+    await toggleLeaderboardOptIn(user.uid, optIn);
+    setUser({ ...user, leaderboardOptIn: optIn });
+  };
+
   const resetAll = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("learnhub_users");
@@ -160,7 +168,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       login, register, logout,
       updateProfile, updatePassword, updateEmail, resendVerification, deleteUserAccount,
       completeLesson, toggleSaveModule: toggleSaveModuleFn,
-      refreshUser, resetAll,
+      refreshUser, toggleLeaderboard: toggleLeaderboardFn, resetAll,
     }}>
       {children}
     </AuthContext.Provider>

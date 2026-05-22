@@ -48,6 +48,7 @@ export interface UserProfile {
     notifications: boolean;
     language: string;
   };
+  leaderboardOptIn: boolean;
 }
 
 // ─── Konstanten ─────────────────────────────────────────────────────────────
@@ -129,6 +130,7 @@ export async function registerUser(
     quizScores: {},
     savedModules: [],
     settings: { theme: "dark", notifications: true, language: "de" },
+    leaderboardOptIn: false,
   };
   await setDoc(doc(db, "users", firebaseUser.uid), {
     ...profile,
@@ -178,6 +180,7 @@ export async function loginUser(email: string, password: string): Promise<UserPr
       quizScores: {},
       savedModules: [],
       settings: { theme: "dark", notifications: true, language: "de" },
+      leaderboardOptIn: false,
     };
     await setDoc(doc(db, "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
   } else if (!profile.emailVerified) {
@@ -323,6 +326,59 @@ export async function toggleSaveModule(uid: string, slug: string): Promise<UserP
   if (i >= 0) profile.savedModules.splice(i, 1); else profile.savedModules.push(slug);
   await updateUserProfile(uid, { savedModules: profile.savedModules });
   return profile;
+}
+
+// ─── Leaderboard ───────────────────────────────────────────────────────────
+
+export interface LeaderboardEntry {
+  uid: string;
+  username: string;
+  displayName: string;
+  avatar: string;
+  totalXP: number;
+  streak: number;
+  completedModules: number;
+  level: number;
+  levelTitle: string;
+}
+
+export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEntry[]> {
+  try {
+    // Alle Users mit leaderboardOptIn = true laden
+    const { collection, query, where, orderBy, getDocs } = await import("firebase/firestore");
+    const q = query(
+      collection(db, "users"),
+      where("leaderboardOptIn", "==", true),
+      orderBy("totalXP", "desc")
+    );
+    const snap = await getDocs(q);
+
+    const entries: LeaderboardEntry[] = [];
+    snap.forEach((doc) => {
+      const data = doc.data() as UserProfile;
+      const levelInfo = getUserLevel(data.totalXP);
+      entries.push({
+        uid: data.uid,
+        username: data.username,
+        displayName: data.displayName || data.username,
+        avatar: data.avatar,
+        totalXP: data.totalXP,
+        streak: data.streak,
+        completedModules: data.completedModules?.length || 0,
+        level: levelInfo.level,
+        levelTitle: levelInfo.title,
+      });
+    });
+
+    return entries.slice(0, limit);
+  } catch (err) {
+    console.error("Failed to load leaderboard:", err);
+    return [];
+  }
+}
+
+export async function toggleLeaderboardOptIn(uid: string, optIn: boolean): Promise<void> {
+  await updateUserProfile(uid, { leaderboardOptIn: optIn });
 }
 
 // ─── Legacy Compat ──────────────────────────────────────────────────────────

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 import { UserProfile } from "./UserProfile";
 import { LoginModal } from "./LoginModal";
-import { BookOpen, Menu, X, Search, Home, LayoutGrid, GraduationCap } from "lucide-react";
+import { BookOpen, Menu, X, Search, Home, LayoutGrid, GraduationCap, Trophy } from "lucide-react";
 import Link from "next/link";
 
 export function Navbar() {
@@ -61,6 +61,13 @@ export function Navbar() {
               >
                 <LayoutGrid className="w-4 h-4" />
                 Module
+              </Link>
+              <Link
+                href="/leaderboard"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-150"
+              >
+                <Trophy className="w-4 h-4" />
+                Bestenliste
               </Link>
 
               <div className="w-px h-6 bg-slate-700/60 mx-2" />

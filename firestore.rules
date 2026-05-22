@@ -6,9 +6,14 @@ service cloud.firestore {
     // ║  DSGVO-konforme Security Rules                              ║
     // ╚══════════════════════════════════════════════════════════════╝
 
-    // User-Profil: nur der eigene User
+    // User-Profil: eigener User kann alles lesen/schreiben
+    // Leaderboard-opted-in Users sind für alle lesbar
     match /users/{userId} {
-      allow read, update: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && (
+        request.auth.uid == userId ||
+        resource.data.leaderboardOptIn == true
+      );
+      allow update: if request.auth != null && request.auth.uid == userId;
       allow create: if request.auth != null && request.auth.uid == userId;
       allow delete: if request.auth != null && request.auth.uid == userId;
 
