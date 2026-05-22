@@ -42,13 +42,20 @@ export function CodeSandbox({
   const highlightRef = useRef<HTMLElement>(null);
   const outputRef = useRef<HTMLDivElement>(null);
 
-  // Prism theme inject
+  // Prism theme inject + Babel preload (für JSX)
   useEffect(() => {
     if (!document.getElementById("prism-sandbox-theme")) {
       const style = document.createElement("style");
       style.id = "prism-sandbox-theme";
       style.textContent = prismTheme;
       document.head.appendChild(style);
+    }
+    // Babel für JSX transpilation preloaden
+    if (!document.getElementById("babel-standalone")) {
+      const script = document.createElement("script");
+      script.id = "babel-standalone";
+      script.src = "https://unpkg.com/@babel/standalone/babel.min.js";
+      document.head.appendChild(script);
     }
   }, []);
 
@@ -87,13 +94,43 @@ export function CodeSandbox({
     };
 
     try {
+      let executableCode = code;
+
+      // JSX erkennen und transpilieren
+      const hasJSX = /<[A-Z][a-zA-Z]*[\s/>]/.test(code) || /<>|<\//.test(code);
+      if (hasJSX && typeof window !== "undefined") {
+        // Babel laden wenn noch nicht geladen
+        const babelId = "babel-standalone";
+        if (!document.getElementById(babelId)) {
+          const script = document.createElement("script");
+          script.id = babelId;
+          script.src = "https://unpkg.com/@babel/standalone/babel.min.js";
+          document.head.appendChild(script);
+          // Warte auf Laden (synchron im try-catch)
+          throw new Error("JSX erkannt — bitte nochmal klicken (Babel wird geladen)");
+        }
+        // @ts-ignore
+        if (window.Babel) {
+          // @ts-ignore
+          executableCode = window.Babel.transform(code, {
+            presets: ["react"],
+            filename: "sandbox.jsx",
+          }).code;
+        }
+      }
+
       // eslint-disable-next-line no-eval
-      const result = eval(code);
+      const result = eval(executableCode);
       if (result !== undefined) {
         logs.push({ type: "result", text: "→ " + formatValue(result), time: now() });
       }
     } catch (e) {
-      logs.push({ type: "error", text: "❌ " + (e instanceof Error ? e.message : String(e)), time: now() });
+      const msg = e instanceof Error ? e.message : String(e);
+      if (msg.includes("Babel wird geladen")) {
+        logs.push({ type: "info", text: "⏳ Babel wird geladen... Bitte nochmal ▶ Run klicken.", time: now() });
+      } else {
+        logs.push({ type: "error", text: "❌ " + msg, time: now() });
+      }
     } finally {
       console.log = originalConsole.log;
       console.warn = originalConsole.warn;
@@ -101,7 +138,6 @@ export function CodeSandbox({
       console.info = originalConsole.info;
       setOutput(logs);
       setIsRunning(false);
-      // Auto-scroll output
       setTimeout(() => outputRef.current?.scrollTo({ top: outputRef.current.scrollHeight, behavior: "smooth" }), 50);
     }
   }, [code]);
