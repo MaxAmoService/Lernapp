@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "@/components/AuthProvider";
 import { getLeaderboard, getUserLevel } from "@/lib/auth";
 import type { LeaderboardEntry } from "@/lib/auth";
+import { AvatarFrame } from "@/components/AvatarFrame";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -144,10 +145,14 @@ export default function LeaderboardPage() {
                   )}
                 </div>
 
-                {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-slate-700/60 border border-slate-600/40 flex items-center justify-center text-xl flex-shrink-0">
-                  {entry.avatar}
-                </div>
+                {/* Avatar with Frame */}
+                <AvatarFrame
+                  avatar={entry.avatar}
+                  frameId={entry.equippedFrame}
+                  level={entry.level}
+                  leaderboardRank={entry.rank}
+                  size="md"
+                />
 
                 {/* Name */}
                 <div className="flex-1 min-w-0">

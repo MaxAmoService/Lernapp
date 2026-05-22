@@ -338,11 +338,13 @@ export interface LeaderboardEntry {
   username: string;
   displayName: string;
   avatar: string;
+  equippedFrame: string;
   totalXP: number;
   streak: number;
   completedModules: number;
   level: number;
   levelTitle: string;
+  rank: number;
 }
 
 export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEntry[]> {
@@ -365,16 +367,21 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
         username: data.username,
         displayName: data.displayName || data.username,
         avatar: data.avatar || "🎓",
+        equippedFrame: data.equippedFrame || "none",
         totalXP: data.totalXP || 0,
         streak: data.streak || 0,
         completedModules: data.completedModules?.length || 0,
         level: levelInfo.level,
         levelTitle: levelInfo.title,
+        rank: 0,
       });
     });
 
     // Client-seitig nach XP sortieren
     entries.sort((a, b) => b.totalXP - a.totalXP);
+
+    // Ränge vergeben
+    entries.forEach((entry, i) => { entry.rank = i + 1; });
 
     return entries.slice(0, limit);
   } catch (err) {

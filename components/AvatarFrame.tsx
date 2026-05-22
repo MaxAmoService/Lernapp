@@ -91,14 +91,13 @@ function getFrameClass(frameId: string): string {
 export function AvatarFrame({ avatar, frameId = "none", level, leaderboardRank, size = "md", className = "" }: AvatarFrameProps) {
   const s = SIZES[size as keyof typeof SIZES] || SIZES.md;
   const frame = FRAMES.find(f => f.id === frameId);
-  const isAnimated = frame?.animated && (frame.leaderboardRank === undefined || (leaderboardRank !== undefined && leaderboardRank <= frame.leaderboardRank));
   const style = getFrameStyle(frameId, size);
-  const frameClass = isAnimated ? getFrameClass(frameId) : "";
+  const frameClass = frame?.animated ? getFrameClass(frameId) : "";
 
   return (
     <div className={`relative flex items-center justify-center flex-shrink-0 ${className}`}>
-      {/* Animated glow ring (behind avatar) */}
-      {isAnimated && (
+      {/* Animated glow ring */}
+      {frameClass ? (
         <div
           className={`absolute inset-0 rounded-full ${frameClass}`}
           style={{
@@ -106,15 +105,13 @@ export function AvatarFrame({ avatar, frameId = "none", level, leaderboardRank, 
             animationDuration: frameId === "rainbow" ? "3s" : frameId === "flame" ? "1.5s" : "2s",
           }}
         />
-      )}
-
-      {/* Static frame (non-animated) */}
-      {!isAnimated && frameId !== "none" && (
+      ) : frameId !== "none" ? (
+        /* Static frame */
         <div
           className="absolute inset-0 rounded-full"
           style={style}
         />
-      )}
+      ) : null}
 
       {/* Avatar */}
       <div

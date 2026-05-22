@@ -108,7 +108,7 @@ export const FRAMES: FrameOption[] = [
 export function getUnlockedAvatars(level: number, leaderboardRank?: number): AvatarOption[] {
   return AVATARS.filter((a) => {
     if (a.leaderboardRank !== undefined) {
-      return leaderboardRank !== undefined && leaderboardRank <= a.leaderboardRank;
+      return leaderboardRank !== undefined && leaderboardRank === a.leaderboardRank;
     }
     return level >= a.unlockLevel;
   });
@@ -117,7 +117,7 @@ export function getUnlockedAvatars(level: number, leaderboardRank?: number): Ava
 export function getUnlockedFrames(level: number, leaderboardRank?: number): FrameOption[] {
   return FRAMES.filter((f) => {
     if (f.leaderboardRank !== undefined) {
-      return leaderboardRank !== undefined && leaderboardRank <= f.leaderboardRank;
+      return leaderboardRank !== undefined && leaderboardRank === f.leaderboardRank;
     }
     return level >= f.unlockLevel;
   });
@@ -125,14 +125,15 @@ export function getUnlockedFrames(level: number, leaderboardRank?: number): Fram
 
 export function isAvatarUnlocked(avatar: AvatarOption, level: number, leaderboardRank?: number): boolean {
   if (avatar.leaderboardRank !== undefined) {
-    return leaderboardRank !== undefined && leaderboardRank <= avatar.leaderboardRank;
+    // Exakter Rang — nur der Besitzer kann es auswählen
+    return leaderboardRank !== undefined && leaderboardRank === avatar.leaderboardRank;
   }
   return level >= avatar.unlockLevel;
 }
 
 export function isFrameUnlocked(frame: FrameOption, level: number, leaderboardRank?: number): boolean {
   if (frame.leaderboardRank !== undefined) {
-    return leaderboardRank !== undefined && leaderboardRank <= frame.leaderboardRank;
+    return leaderboardRank !== undefined && leaderboardRank === frame.leaderboardRank;
   }
   return level >= frame.unlockLevel;
 }
