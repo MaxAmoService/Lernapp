@@ -6,8 +6,7 @@ import { auth } from "@/lib/firebase";
 import {
   UserProfile,
   getUserProfile,
-  createVerification,
-  verifyCodeAndCreateUser,
+  registerUser,
   loginUser,
   logoutUser,
   saveUserProgress,
@@ -16,6 +15,7 @@ import {
   changePassword,
   changeEmail,
   deleteAccount,
+  resendVerificationEmail,
 } from "@/lib/auth";
 
 interface AuthContextType {
@@ -23,14 +23,13 @@ interface AuthContextType {
   isLoading: boolean;
   isEmailVerified: boolean;
   login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, username: string) => Promise<{ code: string; sent: boolean }>;
-  verifyEmail: (email: string, code: string) => Promise<void>;
+  register: (email: string, password: string, username: string) => Promise<{ needsVerification: boolean }>;
   logout: () => Promise<void>;
   updateProfile: (updates: Partial<UserProfile>) => Promise<void>;
   updatePassword: (currentPw: string, newPw: string) => Promise<void>;
   updateEmail: (currentPw: string, newEmail: string) => Promise<void>;
-  deleteUserAccount: (password: string) => Promise<void>;
   resendVerification: () => Promise<void>;
+  deleteUserAccount: (password: string) => Promise<void>;
   completeLesson: (moduleId: string, lessonId: string, quizScore?: number) => Promise<void>;
   toggleSaveModule: (moduleSlug: string) => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -43,16 +42,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Alte localStorage-Daten bereinigen (Migration von localStorage → Firebase)
+  // Alte localStorage-Daten bereinigen (Migration)
   useEffect(() => {
     const legacyKeys = [
-      "learnhub_users",
-      "learnhub_login_attempts",
-      "learnhub_pending_verification",
-      "learnhub_session",
+      "learnhub_users", "learnhub_login_attempts",
+      "learnhub_pending_verification", "learnhub_session",
     ];
     legacyKeys.forEach(key => localStorage.removeItem(key));
-    // Auch alte completed-* Keys löschen
     Object.keys(localStorage).forEach(key => {
       if (key.startsWith("completed-")) localStorage.removeItem(key);
     });
@@ -65,12 +61,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (firebaseUser) {
         try {
           let profile = await getUserProfile(firebaseUser.uid);
-          if (!profile) {
-            // Edge Case: Auth-User ohne Firestore-Profil
-            profile = await getUserProfile(firebaseUser.uid);
-          }
+          if (!profile) profile = await getUserProfile(firebaseUser.uid);
           if (profile) {
-            // Email-Verifikation syncen
+            // E-Mail-Verifikation syncen
             if (profile.emailVerified !== firebaseUser.emailVerified) {
               await updateUserProfile(firebaseUser.uid, { emailVerified: firebaseUser.emailVerified });
               profile.emailVerified = firebaseUser.emailVerified;
@@ -98,15 +91,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const register = async (email: string, password: string, username: string) => {
-    // Erstellt Pending Verification in Firestore + sendet Code
-    const result = await createVerification(email, password, username);
-    return result;
-  };
-
-  const verifyEmail = async (email: string, code: string): Promise<void> => {
-    // Prüft Code + erstellt Firebase Auth User + Firestore Profil
-    const profile = await verifyCodeAndCreateUser(email, code);
-    setUser(profile);
+    return await registerUser(email, password, username);
   };
 
   const logout = async () => {
@@ -129,18 +114,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (user) setUser({ ...user, email: newEmail, emailVerified: false });
   };
 
+  const resendVerification = async () => {
+    await resendVerificationEmail();
+  };
+
   const deleteUserAccount = async (password: string) => {
     await deleteAccount(password);
     setUser(null);
-  };
-
-  const resendVerification = async () => {
-    const user = auth.currentUser;
-    if (user) {
-      // Firebase Auth sendet Verifikations-Email erneut
-      const { sendEmailVerification } = await import("firebase/auth");
-      await sendEmailVerification(user);
-    }
   };
 
   const completeLesson = async (moduleId: string, lessonId: string, quizScore?: number) => {
@@ -177,8 +157,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <AuthContext.Provider value={{
       user, isLoading, isEmailVerified: user?.emailVerified ?? false,
-      login, register, verifyEmail, logout,
-      updateProfile, updatePassword, updateEmail, deleteUserAccount, resendVerification,
+      login, register, logout,
+      updateProfile, updatePassword, updateEmail, resendVerification, deleteUserAccount,
       completeLesson, toggleSaveModule: toggleSaveModuleFn,
       refreshUser, resetAll,
     }}>

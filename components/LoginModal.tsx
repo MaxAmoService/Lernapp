@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "./AuthProvider";
 import { validatePassword } from "@/lib/auth";
-import { X, User, Mail, Lock, Eye, EyeOff, Shield, CheckCircle2, Loader2, ArrowLeft, RefreshCw } from "lucide-react";
+import { X, User, Mail, Lock, Eye, EyeOff, Shield, CheckCircle2, Loader2, ArrowLeft, RefreshCw, ExternalLink } from "lucide-react";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -13,33 +13,22 @@ interface LoginModalProps {
 type Step = "login" | "register" | "verify" | "success";
 
 export function LoginModal({ isOpen, onClose }: LoginModalProps) {
-  const { login, register, verifyEmail } = useAuth();
+  const { login, register, resendVerification } = useAuth();
   const [step, setStep] = useState<Step>("login");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [verificationCode, setVerificationCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
-  const [emailSent, setEmailSent] = useState(false);
-
-  // Resend Cooldown
-  useEffect(() => {
-    if (resendCooldown <= 0) return;
-    const t = setInterval(() => {
-      setResendCooldown(s => { if (s <= 1) { clearInterval(t); return 0; } return s - 1; });
-    }, 1000);
-    return () => clearInterval(t);
-  }, [resendCooldown]);
 
   if (!isOpen) return null;
 
   const reset = () => {
     setUsername(""); setEmail(""); setPassword(""); setConfirmPassword("");
-    setVerificationCode(""); setError(""); setResendCooldown(0); setEmailSent(false);
+    setError(""); setResendCooldown(0);
   };
 
   const handleClose = () => { reset(); setStep("login"); onClose(); };
@@ -58,12 +47,15 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
       handleClose();
     } catch (err: unknown) {
       const code = (err as { code?: string })?.code;
+      const msg = (err as Error)?.message || "";
       if (code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password") {
         setError("Ungültige E-Mail oder Passwort");
       } else if (code === "auth/too-many-requests") {
         setError("Zu viele Versuche. Bitte warte einen Moment.");
-      } else if (code === "auth/user-disabled") {
-        setError("Dieses Konto wurde deaktiviert.");
+      } else if (msg.includes("bestätige")) {
+        // E-Mail nicht bestätigt
+        setError(msg);
+        setStep("verify");
       } else {
         setError("Anmeldung fehlgeschlagen.");
       }
@@ -72,7 +64,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
     }
   };
 
-  // ─── Register → Code senden ───────────────────────────────────────────────
+  // ─── Register ─────────────────────────────────────────────────────────────
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -87,50 +79,33 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
     setLoading(true);
     try {
-      const result = await register(email, password, username);
-      setEmailSent(result.sent);
+      await register(email, password, username);
       setStep("verify");
     } catch (err: unknown) {
-      const msg = (err as Error)?.message || "Registrierung fehlgeschlagen";
-      setError(msg);
+      const code = (err as { code?: string })?.code;
+      if (code === "auth/email-already-in-use") {
+        setError("Diese E-Mail ist bereits registriert");
+      } else {
+        setError((err as Error)?.message || "Registrierung fehlgeschlagen");
+      }
     } finally {
       setLoading(false);
     }
   };
 
-  // ─── Code verifizieren ────────────────────────────────────────────────────
-
-  const handleVerify = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (verificationCode.length !== 6) { setError("Code muss 6 Ziffern lang sein"); return; }
-
-    setLoading(true);
-    try {
-      await verifyEmail(email, verificationCode);
-      setStep("success");
-      setTimeout(() => handleClose(), 2000);
-    } catch (err: unknown) {
-      const msg = (err as Error)?.message || "Verifizierung fehlgeschlagen";
-      setError(msg);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ─── Code erneut senden ───────────────────────────────────────────────────
+  // ─── E-Mail erneut senden ─────────────────────────────────────────────────
 
   const handleResend = async () => {
     if (resendCooldown > 0) return;
     setLoading(true);
     try {
-      const result = await register(email, password, username);
-      setEmailSent(result.sent);
+      await resendVerification();
       setResendCooldown(60);
-      setError("");
+      const timer = setInterval(() => {
+        setResendCooldown(s => { if (s <= 1) { clearInterval(timer); return 0; } return s - 1; });
+      }, 1000);
     } catch {
-      setError("Code konnte nicht erneut gesendet werden");
+      setError("E-Mail konnte nicht erneut gesendet werden");
     } finally {
       setLoading(false);
     }
@@ -263,7 +238,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
           </>
         )}
 
-        {/* ===== EMAIL VERIFICATION (6-stelliger Code) ===== */}
+        {/* ===== EMAIL VERIFICATION (Link) ===== */}
         {step === "verify" && (
           <>
             <div className="text-center mb-8">
@@ -271,51 +246,48 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                 <Mail className="w-8 h-8 text-blue-400" />
               </div>
               <h2 className="text-2xl font-bold">E-Mail bestätigen</h2>
-              <p className="text-slate-400 mt-2">Wir haben einen 6-stelligen Code an</p>
+              <p className="text-slate-400 mt-2">Wir haben einen Bestätigungslink an</p>
               <p className="text-blue-400 font-medium mt-1">{email}</p>
               <p className="text-slate-400 mt-1 text-sm">gesendet.</p>
             </div>
 
-            {/* Hinweis wenn E-Mail nicht gesendet werden konnte */}
-            {!emailSent && (
-              <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg">
-                <p className="text-amber-400 text-sm font-medium">⚠️ E-Mail-Versand fehlgeschlagen</p>
-                <p className="text-slate-400 text-xs mt-1">
-                  Der Code konnte nicht per E-Mail gesendet werden. Prüfe ob RESEND_API_KEY konfiguriert ist.
-                </p>
-              </div>
-            )}
+            <div className="mb-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg space-y-2">
+              <p className="text-blue-400 text-sm font-medium flex items-center gap-2">
+                <Mail className="w-4 h-4" /> So geht&apos;s:
+              </p>
+              <ol className="text-slate-300 text-sm space-y-1 list-decimal list-inside">
+                <li>Öffne dein E-Mail-Postfach</li>
+                <li>Klicke auf den Bestätigungslink</li>
+                <li>Komm hierher zurück und melde dich an</li>
+              </ol>
+              <p className="text-slate-500 text-xs mt-2">Tipp: Auch im Spam-Ordner nachsehen!</p>
+            </div>
 
             {error && <div className="mb-4 p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm flex items-center gap-2"><span>⚠️</span> {error}</div>}
 
-            <form onSubmit={handleVerify} className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-300 mb-2">6-stelliger Code</label>
-                <input
-                  type="text"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, "").slice(0, 6))}
-                  placeholder="000000"
-                  maxLength={6}
-                  className="w-full py-3 px-4 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-white text-center text-2xl tracking-[0.5em] font-mono placeholder-slate-500"
-                  required autoFocus
-                />
-              </div>
-              <button type="submit" disabled={loading || verificationCode.length !== 6}
-                className="w-full py-3 bg-green-500 hover:bg-green-600 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
-                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <CheckCircle2 className="w-5 h-5" />}
-                {loading ? "Wird bestätigt..." : "E-Mail bestätigen"}
+            <div className="space-y-3">
+              <button onClick={() => { setStep("login"); setError(""); }}
+                className="w-full py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
+                <CheckCircle2 className="w-5 h-5" />
+                E-Mail bestätigt — Jetzt einloggen
               </button>
-            </form>
 
-            <div className="mt-4 flex flex-col gap-2">
               <button onClick={handleResend} disabled={resendCooldown > 0 || loading}
-                className="w-full py-2.5 bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 disabled:text-slate-500 rounded-lg text-sm transition-colors flex items-center justify-center gap-2">
+                className="w-full py-3 bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 disabled:text-slate-500 rounded-lg font-medium transition-colors flex items-center justify-center gap-2">
                 <RefreshCw className={`w-4 h-4 ${resendCooldown > 0 ? "animate-spin" : ""}`} />
-                {resendCooldown > 0 ? `Erneut senden in ${resendCooldown}s` : "Code erneut senden"}
+                {resendCooldown > 0 ? `Erneut senden in ${resendCooldown}s` : "Bestätigungslink erneut senden"}
               </button>
-              <button onClick={() => { setStep("register"); setError(""); setVerificationCode(""); }}
-                className="text-sm text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1">
+
+              <a href="https://mail.google.com" target="_blank" rel="noopener noreferrer"
+                className="w-full py-3 bg-slate-800 hover:bg-slate-700 rounded-lg font-medium transition-colors flex items-center justify-center gap-2 text-slate-300">
+                <ExternalLink className="w-4 h-4" />
+                Gmail öffnen
+              </a>
+            </div>
+
+            <div className="mt-6 text-center">
+              <button onClick={() => { setStep("register"); setError(""); }}
+                className="text-sm text-slate-400 hover:text-white transition-colors flex items-center justify-center gap-1 mx-auto">
                 <ArrowLeft className="w-4 h-4" /> Zurück zur Registrierung
               </button>
             </div>
@@ -329,8 +301,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
               <CheckCircle2 className="w-10 h-10 text-green-400" />
             </div>
             <h2 className="text-2xl font-bold mb-2">Willkommen, {username}! 🎉</h2>
-            <p className="text-slate-400">Dein Konto wurde erstellt und bestätigt.</p>
-            <p className="text-slate-500 text-sm mt-2">Du wirst automatisch eingeloggt...</p>
+            <p className="text-slate-400">Dein Konto wurde erstellt.</p>
           </div>
         )}
       </div>
