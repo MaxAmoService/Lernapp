@@ -344,21 +344,17 @@ export interface LeaderboardEntry {
 
 export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEntry[]> {
   try {
-    const { collection, query, where, getDocs } = await import("firebase/firestore");
+    const { collection, getDocs } = await import("firebase/firestore");
 
-    // 1. Query: Users mit leaderboardOptIn = true
-    const q = query(
-      collection(db, "users"),
-      where("leaderboardOptIn", "==", true)
-    );
-    const snap = await getDocs(q);
+    // Alle Users laden (Firestore Free Tier: keine Composite-Index-Probleme)
+    const snap = await getDocs(collection(db, "users"));
 
     const entries: LeaderboardEntry[] = [];
-    const seenUids = new Set<string>();
 
     snap.forEach((doc) => {
       const data = doc.data() as UserProfile;
-      // Sicherstellen dass die Daten vollständig sind
+      // Nur opted-in Users
+      if (data.leaderboardOptIn !== true) return;
       if (!data.uid || !data.username) return;
       const levelInfo = getUserLevel(data.totalXP || 0);
       entries.push({
@@ -372,29 +368,7 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
         level: levelInfo.level,
         levelTitle: levelInfo.title,
       });
-      seenUids.add(data.uid);
     });
-
-    // 2. Falls currentUser opted-in aber nicht in Query-Ergebnis
-    // (z.B. weil Firestore das Feld noch nicht indexiert hat)
-    const currentUser = auth.currentUser;
-    if (currentUser) {
-      const currentProfile = await getUserProfile(currentUser.uid);
-      if (currentProfile?.leaderboardOptIn && !seenUids.has(currentUser.uid)) {
-        const levelInfo = getUserLevel(currentProfile.totalXP || 0);
-        entries.push({
-          uid: currentProfile.uid,
-          username: currentProfile.username,
-          displayName: currentProfile.displayName || currentProfile.username,
-          avatar: currentProfile.avatar || "🎓",
-          totalXP: currentProfile.totalXP || 0,
-          streak: currentProfile.streak || 0,
-          completedModules: currentProfile.completedModules?.length || 0,
-          level: levelInfo.level,
-          levelTitle: levelInfo.title,
-        });
-      }
-    }
 
     // Client-seitig nach XP sortieren
     entries.sort((a, b) => b.totalXP - a.totalXP);
@@ -407,7 +381,17 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
 }
 
 export async function toggleLeaderboardOptIn(uid: string, optIn: boolean): Promise<void> {
-  await updateUserProfile(uid, { leaderboardOptIn: optIn });
+  try {
+    // setDoc mit merge: erstellt das Feld falls es noch nicht existiert
+    await setDoc(doc(db, "users", uid), {
+      leaderboardOptIn: optIn,
+      lastActive: new Date().toISOString(),
+    }, { merge: true });
+    console.log(`[Leaderboard] ${uid} → ${optIn ? "ON" : "OFF"}`);
+  } catch (err) {
+    console.error("[Leaderboard] Toggle failed:", err);
+    throw err;
+  }
 }
 
 // ─── Legacy Compat ──────────────────────────────────────────────────────────
