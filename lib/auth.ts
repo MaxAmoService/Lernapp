@@ -345,11 +345,10 @@ export interface LeaderboardEntry {
 export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEntry[]> {
   try {
     // Alle Users mit leaderboardOptIn = true laden
-    const { collection, query, where, orderBy, getDocs } = await import("firebase/firestore");
+    const { collection, query, where, getDocs } = await import("firebase/firestore");
     const q = query(
       collection(db, "users"),
-      where("leaderboardOptIn", "==", true),
-      orderBy("totalXP", "desc")
+      where("leaderboardOptIn", "==", true)
     );
     const snap = await getDocs(q);
 
@@ -369,6 +368,9 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
         levelTitle: levelInfo.title,
       });
     });
+
+    // Client-seitig nach XP sortieren (kein Composite Index nötig)
+    entries.sort((a, b) => b.totalXP - a.totalXP);
 
     return entries.slice(0, limit);
   } catch (err) {
