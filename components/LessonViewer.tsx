@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { Lesson } from "@/lib/data";
 import { LessonVisual } from "@/lib/types";
 import { CheckCircle2, ChevronRight } from "lucide-react";
@@ -200,25 +199,6 @@ interface LessonViewerProps {
 }
 
 export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext }: LessonViewerProps) {
-  // Auto-complete when scrolling to bottom (90% of content viewed)
-  useEffect(() => {
-    if (isCompleted) return;
-
-    let completed = false;
-    const handleScroll = () => {
-      if (completed) return;
-      const scrollBottom = window.innerHeight + window.scrollY;
-      const docHeight = document.documentElement.scrollHeight;
-      // Mark as completed when user scrolls to 85% of the page
-      if (scrollBottom >= docHeight * 0.85) {
-        completed = true;
-        onComplete();
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isCompleted, onComplete]);
   const renderContent = (content: string, interactiveType?: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
@@ -492,8 +472,6 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         {hasNext && (
           <button
             onClick={() => {
-              // Auto-complete current lesson before going next
-              if (!isCompleted) onComplete();
               onNext?.();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
