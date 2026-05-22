@@ -1,97 +1,64 @@
 // ============================================================================
-// Presence System — Online/Offline Status via Firebase Realtime Database
+// Presence System — Online/Offline via Firestore (kein RTDB nötig)
 // ============================================================================
 
-import { getDatabase, ref, set, onDisconnect, serverTimestamp as rtdbTimestamp } from "firebase/database";
-import { doc, updateDoc, getFirestore } from "firebase/firestore";
+import { doc, updateDoc, getFirestore, onSnapshot } from "firebase/firestore";
 import { app } from "./firebase";
 
-const rtdb = getDatabase(app);
 const db = getFirestore(app);
 
-let initialized = false;
+const HEARTBEAT_INTERVAL = 20_000; // 20 Sekunden
+const ONLINE_THRESHOLD = 60_000;   // 60 Sekunden = als online betrachtet
+
+let heartbeatTimer: NodeJS.Timeout | null = null;
+let unloadHandler: (() => void) | null = null;
 
 /**
- * Setzt den User als online und registriert onDisconnect.
- * Bei Tab-Schloss → automatisch offline via RTDB onDisconnect.
+ * Startet Presence-System: Heartbeat + Page-Unload Detection.
  */
 export async function setOnline(uid: string): Promise<void> {
-  if (initialized) return;
-  initialized = true;
+  // Sofort als online markieren
+  await writeStatus(uid, "online");
 
-  const statusRef = ref(rtdb, `status/${uid}`);
+  // Heartbeat: alle 20s Status refreshen
+  if (heartbeatTimer) clearInterval(heartbeatTimer);
+  heartbeatTimer = setInterval(() => writeStatus(uid, "online").catch(() => {}), HEARTBEAT_INTERVAL);
 
-  try {
-    // Online setzen
-    await set(statusRef, {
-      state: "online",
-      lastChanged: rtdbTimestamp(),
-      uid,
-    });
-
-    // Bei Disconnect (Tab schließen, Internet weg, etc.) → offline
-    onDisconnect(statusRef).set({
-      state: "offline",
-      lastChanged: rtdbTimestamp(),
-      uid,
-    });
-
-    // Firestore auch updaten
-    await updateDoc(doc(db, "users", uid), {
-      "status.state": "online",
-      "status.lastChanged": new Date().toISOString(),
-      lastActive: new Date().toISOString(),
-    }).catch(() => {});
-
-    console.log("[Presence] Online:", uid);
-  } catch (err) {
-    console.error("[Presence] setOnline error:", err);
-  }
+  // Bei Tab schließen → offline
+  if (unloadHandler) window.removeEventListener("beforeunload", unloadHandler);
+  unloadHandler = () => {
+    // navigator.sendBeacon ist zuverlässiger als fetch bei Page-Unload
+    const data = JSON.stringify({ state: "offline", lastChanged: Date.now() });
+    navigator.sendBeacon(`/api/presence?uid=${uid}`, data);
+    // Fallback: direkt in Firestore (best-effort)
+    writeStatus(uid, "offline").catch(() => {});
+  };
+  window.addEventListener("beforeunload", unloadHandler);
 }
 
 /**
- * Setzt den User als offline (manuell bei Logout).
+ * Stoppt Presence-System und setzt offline.
  */
 export async function setOffline(uid: string): Promise<void> {
-  try {
-    const statusRef = ref(rtdb, `status/${uid}`);
-    await set(statusRef, {
-      state: "offline",
-      lastChanged: rtdbTimestamp(),
-      uid,
-    });
-
-    await updateDoc(doc(db, "users", uid), {
-      "status.state": "offline",
-      "status.lastChanged": new Date().toISOString(),
-    }).catch(() => {});
-
-    initialized = false;
-    console.log("[Presence] Offline:", uid);
-  } catch (err) {
-    console.error("[Presence] setOffline error:", err);
-  }
+  if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
+  if (unloadHandler) { window.removeEventListener("beforeunload", unloadHandler); unloadHandler = null; }
+  await writeStatus(uid, "offline");
 }
 
 /**
- * Heartbeat: Hält die Verbindung am Leben.
- * Sollte alle 60 Sekunden aufgerufen werden.
+ * Prüft ob ein User online ist (basierend auf lastHeartbeat).
  */
-export async function refreshPresence(uid: string): Promise<void> {
-  try {
-    const statusRef = ref(rtdb, `status/${uid}`);
-    await set(statusRef, {
-      state: "online",
-      lastChanged: rtdbTimestamp(),
-      uid,
-    });
-  } catch { /* ok */ }
+export function isUserOnline(lastHeartbeat: string | undefined): boolean {
+  if (!lastHeartbeat) return false;
+  return Date.now() - new Date(lastHeartbeat).getTime() < ONLINE_THRESHOLD;
 }
 
-export type PresenceState = "online" | "offline";
+// ─── Intern ─────────────────────────────────────────────────────────────────
 
-export interface UserPresence {
-  state: PresenceState;
-  lastChanged: number;
-  uid?: string;
+async function writeStatus(uid: string, state: "online" | "offline"): Promise<void> {
+  await updateDoc(doc(db, "users", uid), {
+    "status.state": state,
+    "status.lastChanged": new Date().toISOString(),
+    lastActive: new Date().toISOString(),
+  }).catch(() => {});
 }

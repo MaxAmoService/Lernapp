@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { doc, onSnapshot, getFirestore } from "firebase/firestore";
 import { app } from "@/lib/firebase";
-import type { UserPresence } from "@/lib/presence";
 
-const rtdb = getDatabase(app);
+const db = getFirestore(app);
+const ONLINE_THRESHOLD = 60_000; // 60 Sekunden
 
 interface OnlineStatusProps {
   uid: string;
@@ -22,7 +22,7 @@ const SIZES = {
 };
 
 /**
- * Zeigt den Online-Status eines Users an (Echtzeit via RTDB).
+ * Zeigt den Online-Status eines Users an (Echtzeit via Firestore).
  */
 export function OnlineStatus({ uid, hidden, size = "sm", showText = false, className = "" }: OnlineStatusProps) {
   const isOnline = useOnlineStatus(uid, hidden);
@@ -70,7 +70,7 @@ export function FrameOnlineStatus({ uid, hidden, className = "" }: { uid: string
 }
 
 /**
- * Hook: Abonniert den Online-Status eines Users (Echtzeit).
+ * Hook: Echtzeit Online-Status via Firestore onSnapshot.
  */
 export function useOnlineStatus(uid: string, hidden?: boolean): boolean {
   const [isOnline, setIsOnline] = useState(false);
@@ -78,18 +78,22 @@ export function useOnlineStatus(uid: string, hidden?: boolean): boolean {
   useEffect(() => {
     if (hidden || !uid) { setIsOnline(false); return; }
 
-    const statusRef = ref(rtdb, `status/${uid}`);
-    const unsubscribe = onValue(statusRef, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val() as UserPresence;
-        setIsOnline(data.state === "online");
+    const userRef = doc(db, "users", uid);
+    const unsubscribe = onSnapshot(userRef, (snap) => {
+      if (snap.exists()) {
+        const data = snap.data();
+        const state = data?.status?.state;
+        const lastChanged = data?.status?.lastChanged;
+        if (state === "online" && lastChanged) {
+          const age = Date.now() - new Date(lastChanged).getTime();
+          setIsOnline(age < ONLINE_THRESHOLD);
+        } else {
+          setIsOnline(false);
+        }
       } else {
         setIsOnline(false);
       }
-    }, (err) => {
-      console.error("[Presence] Listen error:", err);
-      setIsOnline(false);
-    });
+    }, () => setIsOnline(false));
 
     return () => unsubscribe();
   }, [uid, hidden]);

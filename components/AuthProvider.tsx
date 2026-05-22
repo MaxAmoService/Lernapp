@@ -3,10 +3,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { setOnline, setOffline, refreshPresence } from "@/lib/presence";
-import { getDatabase, ref, set } from "firebase/database";
-import { app } from "@/lib/firebase";
-const rtdb = getDatabase(app);
+import { setOnline, setOffline } from "@/lib/presence";
 import {
   UserProfile,
   getUserProfile,
@@ -62,9 +59,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   // Firebase Auth State Listener
-  let heartbeat: NodeJS.Timeout | null = null;
-  let handleUnload: (() => void) | null = null;
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (firebaseUser) {
@@ -77,16 +71,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
             }
             setUser(profile);
 
-            // Presence: non-blocking (RTDB muss aktiviert sein)
+            // Presence: Heartbeat + Page-Unload Detection
             setOnline(firebaseUser.uid).catch(() => {});
-            heartbeat = setInterval(() => refreshPresence(firebaseUser.uid).catch(() => {}), 30000);
-            handleUnload = () => {
-              try {
-                const statusRef = ref(rtdb, `status/${firebaseUser.uid}`);
-                set(statusRef, { state: "offline", lastChanged: Date.now(), uid: firebaseUser.uid });
-              } catch { /* ok */ }
-            };
-            window.addEventListener("beforeunload", handleUnload);
           } else {
             setUser(null);
           }
@@ -100,11 +86,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
     });
 
-    return () => {
-      unsubscribe();
-      if (heartbeat) clearInterval(heartbeat);
-      if (handleUnload) window.removeEventListener("beforeunload", handleUnload);
-    };
+    return () => unsubscribe();
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {
