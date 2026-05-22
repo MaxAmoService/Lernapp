@@ -3,7 +3,10 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import { setOnline, setOffline } from "@/lib/presence";
+import { setOnline, setOffline, refreshPresence } from "@/lib/presence";
+import { getDatabase, ref, set } from "firebase/database";
+import { app } from "@/lib/firebase";
+const rtdb = getDatabase(app);
 import {
   UserProfile,
   getUserProfile,
@@ -72,7 +75,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
               profile.emailVerified = firebaseUser.emailVerified;
             }
             setUser(profile);
+            // Presence initialisieren
             setOnline(firebaseUser.uid);
+            // Heartbeat: alle 30 Sekunden Status refreshen
+            const heartbeat = setInterval(() => refreshPresence(firebaseUser.uid), 30000);
+            // Bei Page-Unload → offline setzen
+            const handleUnload = () => {
+              try {
+                const statusRef = ref(rtdb, `status/${firebaseUser.uid}`);
+                set(statusRef, { state: "offline", lastChanged: Date.now(), uid: firebaseUser.uid });
+              } catch { /* ok */ }
+            };
+            window.addEventListener("beforeunload", handleUnload);
+            // Cleanup
+            return () => { clearInterval(heartbeat); window.removeEventListener("beforeunload", handleUnload); };
           } else {
             setUser(null);
           }

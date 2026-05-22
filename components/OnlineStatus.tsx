@@ -12,6 +12,7 @@ interface OnlineStatusProps {
   hidden?: boolean;
   size?: "sm" | "md" | "lg";
   showText?: boolean;
+  className?: string;
 }
 
 const SIZES = {
@@ -21,39 +22,25 @@ const SIZES = {
 };
 
 /**
- * Zeigt den Online-Status eines Users an.
- * Liest Echtzeit-Status aus Firebase Realtime Database.
+ * Zeigt den Online-Status eines Users an (Echtzeit via RTDB).
  */
-export function OnlineStatus({ uid, hidden, size = "sm", showText = false }: OnlineStatusProps) {
-  const [presence, setPresence] = useState<UserPresence | null>(null);
-
-  useEffect(() => {
-    if (hidden) return;
-
-    const statusRef = ref(rtdb, `status/${uid}`);
-    const unsubscribe = onValue(statusRef, (snapshot) => {
-      if (snapshot.exists()) {
-        setPresence(snapshot.val() as UserPresence);
-      } else {
-        setPresence({ state: "offline", lastChanged: 0 });
-      }
-    });
-
-    return () => unsubscribe();
-  }, [uid, hidden]);
+export function OnlineStatus({ uid, hidden, size = "sm", showText = false, className = "" }: OnlineStatusProps) {
+  const isOnline = useOnlineStatus(uid, hidden);
 
   if (hidden) return null;
 
-  const isOnline = presence?.state === "online";
   const s = SIZES[size];
 
   return (
-    <div className="flex items-center gap-1.5">
-      <div className={`${s} rounded-full flex-shrink-0 ${
-        isOnline
-          ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]"
-          : "bg-slate-500"
-      }`} />
+    <div className={`flex items-center gap-1.5 ${className}`}>
+      <div
+        className={`${s} rounded-full flex-shrink-0 transition-colors duration-300 ${
+          isOnline
+            ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)]"
+            : "bg-slate-500"
+        }`}
+        title={isOnline ? "Online" : "Offline"}
+      />
       {showText && (
         <span className={`text-xs ${isOnline ? "text-emerald-400" : "text-slate-500"}`}>
           {isOnline ? "Online" : "Offline"}
@@ -64,13 +51,32 @@ export function OnlineStatus({ uid, hidden, size = "sm", showText = false }: Onl
 }
 
 /**
- * Hook: Abonniert den Online-Status eines Users.
+ * Online-Indicator für den AvatarFrame — sitzt am Rahmen.
+ */
+export function FrameOnlineStatus({ uid, hidden, className = "" }: { uid: string; hidden?: boolean; className?: string }) {
+  const isOnline = useOnlineStatus(uid, hidden);
+
+  if (hidden) return null;
+
+  return (
+    <div
+      className={`absolute w-4 h-4 rounded-full border-2 border-slate-900 transition-all duration-300 z-20 ${
+        isOnline
+          ? "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]"
+          : "bg-slate-500"
+      } ${className}`}
+    />
+  );
+}
+
+/**
+ * Hook: Abonniert den Online-Status eines Users (Echtzeit).
  */
 export function useOnlineStatus(uid: string, hidden?: boolean): boolean {
   const [isOnline, setIsOnline] = useState(false);
 
   useEffect(() => {
-    if (hidden) { setIsOnline(false); return; }
+    if (hidden || !uid) { setIsOnline(false); return; }
 
     const statusRef = ref(rtdb, `status/${uid}`);
     const unsubscribe = onValue(statusRef, (snapshot) => {
@@ -80,6 +86,9 @@ export function useOnlineStatus(uid: string, hidden?: boolean): boolean {
       } else {
         setIsOnline(false);
       }
+    }, (err) => {
+      console.error("[Presence] Listen error:", err);
+      setIsOnline(false);
     });
 
     return () => unsubscribe();

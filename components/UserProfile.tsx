@@ -3,6 +3,7 @@
 import { useAuth } from "./AuthProvider";
 import { getUserLevel } from "@/lib/auth";
 import { AvatarFrame } from "./AvatarFrame";
+import { FrameOnlineStatus } from "./OnlineStatus";
 import {
   LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings,
   Bell, BookOpen, Moon, Sun, BarChart3, Target, Crown
@@ -91,8 +92,7 @@ export function UserProfile() {
             <div className="flex items-center gap-4">
               <div className="relative">
                 <AvatarFrame avatar={user.avatar} frameId={user.equippedFrame} level={levelInfo.level} size="lg" />
-                {/* Online indicator — außerhalb des Rahmens */}
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-slate-900 shadow-[0_0_6px_rgba(52,211,153,0.5)] z-20" />
+                <FrameOnlineStatus uid={user.uid} className="-bottom-1 -right-1" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-bold text-white text-lg truncate">{user.displayName || user.username}</p>

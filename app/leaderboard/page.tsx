@@ -5,7 +5,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { getLeaderboard, getUserLevel } from "@/lib/auth";
 import type { LeaderboardEntry } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
-import { OnlineStatus } from "@/components/OnlineStatus";
+import { OnlineStatus, FrameOnlineStatus } from "@/components/OnlineStatus";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -146,14 +146,17 @@ export default function LeaderboardPage() {
                   )}
                 </div>
 
-                {/* Avatar with Frame */}
-                <AvatarFrame
-                  avatar={entry.avatar}
-                  frameId={entry.equippedFrame}
-                  level={entry.level}
-                  leaderboardRank={entry.rank}
-                  size="md"
-                />
+                {/* Avatar with Frame + Online Status */}
+                <div className="relative">
+                  <AvatarFrame
+                    avatar={entry.avatar}
+                    frameId={entry.equippedFrame}
+                    level={entry.level}
+                    leaderboardRank={entry.rank}
+                    size="md"
+                  />
+                  <FrameOnlineStatus uid={entry.uid} hidden={false} className="-bottom-0.5 -right-0.5" />
+                </div>
 
                 {/* Name */}
                 <div className="flex-1 min-w-0">
