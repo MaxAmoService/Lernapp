@@ -110,16 +110,16 @@ function UserCard({ name, email, age, role }) {
 // Komponente mit Props verwenden
 <UserCard
   name="Moritz"
-  email="moritz@example.com"
+  email="moritz@amo.com"
   age={22}
   role="Student"
 />
 
 // Listen von Komponenten rendern
 const users = [
-  { id: 1, name: "Anna", email: "anna@test.de", age: 25 },
-  { id: 2, name: "Max", email: "max@test.de", age: 30 },
-  { id: 3, name: "Lisa", email: "lisa@test.de", age: 28 },
+  { id: 1, name: "Anna", email: "anna@amo.com", age: 25 },
+  { id: 2, name: "Max", email: "max@amo.com", age: 30 },
+  { id: 3, name: "Lisa", email: "lisa@amo.com", age: 28 },
 ];
 
 // map() erstellt für jeden User eine UserCard

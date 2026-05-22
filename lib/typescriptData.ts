@@ -121,7 +121,7 @@ interface User {
 const user: User = {
   id: 1,
   name: "Moritz",
-  email: "moritz@example.com",
+  email: "moritz@amo.com",
   // age und bio können weggelassen werden
 };
 
@@ -135,7 +135,7 @@ interface Admin extends User {
 const admin: Admin = {
   id: 2,
   name: "SuperAdmin",
-  email: "admin@example.com",
+  email: "admin@amo.com",
   role: "admin",
   permissions: ["read", "write", "delete"],
 };
@@ -254,7 +254,7 @@ interface User {
 // T = User
 const userResponse: ApiResponse<User> = {
   success: true,
-  data: { id: 1, name: "Moritz", email: "moritz@example.com" },
+  data: { id: 1, name: "Moritz", email: "moritz@amo.com" },
   message: "Benutzer geladen",
 };
 
@@ -262,8 +262,8 @@ const userResponse: ApiResponse<User> = {
 const listResponse: ApiResponse<User[]> = {
   success: true,
   data: [
-    { id: 1, name: "Anna", email: "anna@test.de" },
-    { id: 2, name: "Max", email: "max@test.de" },
+    { id: 1, name: "Anna", email: "anna@amo.com" },
+    { id: 2, name: "Max", email: "max@amo.com" },
   ],
   message: "Alle Benutzer geladen",
 };`,
