@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "./AuthProvider";
 import { mathQuizzes } from "@/lib/mathData";
+import { complexQuizzes } from "@/lib/complexData";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
 import { CheckCircle2, XCircle, RotateCcw, Trophy, Send } from "lucide-react";
@@ -153,6 +154,7 @@ const quizData: Record<string, QuizQuestion[]> = {
 const allQuizData: Record<string, QuizQuestion[]> = {
   ...quizData,
   ...mathQuizzes,
+  ...complexQuizzes,
 };
 
 // Component to render questions with math

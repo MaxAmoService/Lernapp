@@ -4,204 +4,256 @@ export const complexModule: Module = {
   id: "m-komplexe-zahlen",
   slug: "mathe-komplexe-zahlen",
   title: "Komplexe Zahlen",
-  description: "Imaginäre Zahlen, Gaußsche Ebene, Darstellungsformen, Rechenregeln und Anwendungen",
+  description: "Von der imaginären Einheit bis zu Wurzeln in der Gaußschen Ebene — interaktiv und verständlich",
   icon: "🌀",
   color: "#8b5cf6",
-  category: "komplexe-numerik",
+  category: "mathe",
   progress: 0,
   merkblatt: `## 📋 Merkblatt: Komplexe Zahlen
 
-### 🎯 Definition
-$$z = x + jy$$
-- $x = \\text{Re}(z)$: Realteil
-- $y = \\text{Im}(z)$: Imaginärteil
-- $j^2 = -1$ (imaginäre Einheit)
+### Grundlagen
+- **Imaginäre Einheit:** $j = \\sqrt{-1}$, also $j^2 = -1$
+- **Komplexe Zahl:** $z = x + jy$ mit $x, y \\in \\mathbb{R}$
+- **Realteil:** $\\text{Re}(z) = x$ · **Imaginärteil:** $\\text{Im}(z) = y$
 
-### 📐 Darstellungsformen
+### Darstellungsformen
+| Form | Schreibweise | Wann nutzen? |
+|------|-------------|--------------|
+| **Normalform** | $z = x + jy$ | Addieren, Subtrahieren |
+| **Trigonometrisch** | $z = r(\\cos\\varphi + j\\sin\\varphi)$ | Winkel sichtbar |
+| **Exponentialform** | $z = r \\cdot e^{j\\varphi}$ | Multiplizieren, Dividieren |
 
-| Form | Schreibweise |
-|------|-------------|
-| **Normalform** | $z = x + jy$ |
-| **Trigonometrisch** | $z = r(\\cos\\varphi + j\\sin\\varphi)$ |
-| **Exponentialform** | $z = r \\cdot e^{j\\varphi}$ |
+### Umrechnung
+- **Betrag:** $r = |z| = \\sqrt{x^2 + y^2}$
+- **Winkel:** $\\varphi = \\arctan\\frac{y}{x}$ (+ Quadrantenkorrektur!)
 
-**Umrechnung:** $r = \\sqrt{x^2 + y^2}$, $\\varphi = \\arctan\\frac{y}{x}$ (+ Quadrantenkorrektur)
+### Quadranten-Regeln
+| Q | x | y | $\\varphi$ |
+|---|---|---|-----------|
+| I | + | + | $\\arctan(y/x)$ |
+| II | − | + | $\\arctan(y/x) + 180°$ |
+| III | − | − | $\\arctan(y/x) + 180°$ |
+| IV | + | − | $\\arctan(y/x) + 360°$ |
 
-### 📐 Rechenregeln
-
-| Operation | Formel |
-|-----------|--------|
-| Addition | $(x_1+jy_1) + (x_2+jy_2) = (x_1+x_2) + j(y_1+y_2)$ |
-| Multiplikation | $z_1 z_2 = r_1 r_2 e^{j(\\varphi_1+\\varphi_2)}$ |
-| Konjugiertes | $\\bar{z} = x - jy$ |
-| Betrag | $|z| = \\sqrt{x^2 + y^2}$ |
-| Division | $\\frac{z_1}{z_2} = \\frac{r_1}{r_2} e^{j(\\varphi_1-\\varphi_2)}$ |
-
-### 💡 Wichtige Formeln
-- $z \\cdot \\bar{z} = |z|^2 = x^2 + y^2$
+### Rechenregeln
+- **Addition:** $(x_1+x_2) + j(y_1+y_2)$
+- **Multiplikation:** $r_1 r_2 \\cdot e^{j(\\varphi_1+\\varphi_2)}$ → Beträge ×, Winkel +
+- **Division:** $\\frac{r_1}{r_2} \\cdot e^{j(\\varphi_1-\\varphi_2)}$ → Beträge ÷, Winkel −
+- **Konjugiertes:** $\\bar{z} = x - jy$ (Spiegelung an Re-Achse)
 - **De Moivre:** $z^n = r^n e^{jn\\varphi}$
-- **Wurzeln:** $w_k = r^{1/n} e^{j(\\varphi+2k\\pi)/n}$, $k = 0, 1, \\ldots, n-1$
+- **Wurzeln:** $w_k = r^{1/n} e^{j(\\varphi+2k\\pi)/n}$, $k = 0, \\ldots, n{-}1$
 
-### 💡 Potenzen von j
-$j^1 = j$, $j^2 = -1$, $j^3 = -j$, $j^4 = 1$ (zyklisch mit Periode 4)
-
-### 💡 Quadranten-Regeln für φ
-| Quadrant | Bedingung | φ |
-|----------|-----------|---|
-| I | $x > 0, y > 0$ | $\\arctan(y/x)$ |
-| II | $x < 0, y > 0$ | $\\arctan(y/x) + 180°$ |
-| III | $x < 0, y < 0$ | $\\arctan(y/x) + 180°$ |
-| IV | $x > 0, y < 0$ | $\\arctan(y/x) + 360°$ |`,
+### Potenzen von j
+$j^1 = j$ → $j^2 = -1$ → $j^3 = -j$ → $j^4 = 1$ (zyklisch!)`,
 
   lessons: [
-    // ====== LEKTION 1: Grundlagen ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 1: Grundlagen
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-1",
-      title: "Komplexe Zahlen — Grundlagen",
-      duration: "15 min",
+      title: "Warum komplexe Zahlen?",
+      duration: "12 min",
       type: "text",
-      content: `# Komplexe Zahlen — Grundlagen
+      content: `# Warum brauchen wir komplexe Zahlen?
 
-## Warum komplexe Zahlen?
-
-In der reellen Zahlenmenge $\\mathbb{R}$ hat die Gleichung
+Stell dir vor, du sollst diese Gleichung lösen:
 
 $$x^2 + 1 = 0$$
 
-**keine Lösung**, denn $x^2 \\geq 0$ für alle $x \\in \\mathbb{R}$, also ist $x^2 + 1 \\geq 1 > 0$.
+Umformen gibt: $x^2 = -1$
 
-Um solche Gleichungen lösen zu können, erweitern wir die Zahlenmenge um die **imaginäre Einheit**:
+Aber: **Keine reelle Zahl quadriert zu $-1$!** Denn $x^2 \\geq 0$ für alle $x \\in \\mathbb{R}$.
 
-## Die imaginäre Einheit
+Also erfinden wir eine neue Zahl.
+
+---
+
+## Die imaginäre Einheit $j$
+
+Wir **definieren** eine neue Zahl $j$ mit der Eigenschaft:
 
 $$j = \\sqrt{-1}$$
 
-Damit gilt:
+Das heißt automatisch:
 
 $$j^2 = -1$$
 
-> **Hinweis:** In der Mathematik wird oft $i$ verwendet, in der Elektrotechnik und bei technischen Studiengängen ist $j$ üblich, da $i$ bereits für den elektrischen Strom steht.
+**Das ist keine normale Zahl** — sie existiert nicht auf der reellen Zahlenachse. Aber mit ihr können wir rechnen!
 
-## Definition einer komplexen Zahl
+---
 
-Eine komplexe Zahl $z$ hat die Form:
+## Komplexe Zahlen
+
+Eine **komplexe Zahl** hat die Form:
 
 $$z = x + j \\cdot y$$
 
 wobei:
-- $x = \\text{Re}(z)$ der **Realteil** ist
-- $y = \\text{Im}(z)$ der **Imaginärteil** ist
-- $j^2 = -1$
+- $x$ ist der **Realteil** — $\\text{Re}(z) = x$ (der "normale" Teil)
+- $y$ ist der **Imaginärteil** — $\\text{Im}(z) = y$ (der $j$-Teil)
+- $x$ und $y$ sind reelle Zahlen
+
+**Merke:** Wenn $y = 0$, dann ist $z = x$ — eine ganz normale reelle Zahl. Reelle Zahlen sind also ein Sonderfall komplexer Zahlen!
+
+---
 
 ## Beispiele
 
-| Zahl | $\\text{Re}(z)$ | $\\text{Im}(z)$ |
-|------|-----------------|-----------------|
-| $z = 3 + 2j$ | $3$ | $2$ |
-| $z = -1 + 4j$ | $-1$ | $4$ |
-| $z = 5$ | $5$ | $0$ (reell) |
-| $z = -3j$ | $0$ | $-3$ (rein imaginär) |
-| $z = 0$ | $0$ | $0$ |
+| Zahl | $\\text{Re}(z)$ | $\\text{Im}(z)$ | Bemerkung |
+|------|------|------|------|
+| $z = 3 + 4j$ | 3 | 4 | "normale" komplexe Zahl |
+| $z = -2 + 5j$ | -2 | 5 | negativer Realteil |
+| $z = 7$ | 7 | 0 | reelle Zahl! |
+| $z = -3j$ | 0 | -3 | rein imaginär |
+| $z = j$ | 0 | 1 | die imaginäre Einheit selbst |
 
-## Reelle Zahlen als Spezialfall
+---
 
-Jede reelle Zahl ist auch eine komplexe Zahl mit $\\text{Im}(z) = 0$:
+## Warum $j$ und nicht $i$?
 
-$$\\mathbb{R} \\subset \\mathbb{C}$$
+In der Mathematik benutzt man oft $i$. In der **Elektrotechnik** und **Informatik** benutzt man $j$, weil $i$ schon für den Strom steht. In diesem Kurs nutzen wir $j$. 🎯
 
-## Gleichheit zweier komplexer Zahlen
+---
 
-$z_1 = x_1 + jy_1$ und $z_2 = x_2 + jy_2$ sind genau dann gleich, wenn:
+## 💡 Erste Rechnungen mit $j$
 
-$$x_1 = x_2 \\quad \\text{und} \\quad y_1 = y_2$$
+Da $j^2 = -1$ gilt, können wir vereinfachen:
 
-Realteile und Imaginärteile müssen einzeln übereinstimmen.`,
+- $j^3 = j^2 \\cdot j = (-1) \\cdot j = -j$
+- $j^4 = j^2 \\cdot j^2 = (-1) \\cdot (-1) = 1$
+- $j^5 = j^4 \\cdot j = 1 \\cdot j = j$ — und von vorne!
+
+**Die Potenzen von $j$ wiederholen sich alle 4 Schritte:** $j, -1, -j, 1, j, -1, -j, 1, \\ldots$
+
+---
+
+## 🎯 Übung: Erste Schritte
+
+**Aufgabe 1:** Berechne $j^6$.
+
+*Lösung:* $j^6 = j^4 \\cdot j^2 = 1 \\cdot (-1) = -1$
+
+**Aufgabe 2:** Berechne $2j \\cdot 3j$.
+
+*Lösung:* $2j \\cdot 3j = 6j^2 = 6 \\cdot (-1) = -6$
+
+**Aufgabe 3:** Vereinfache $(1 + j) + (3 - 2j)$.
+
+*Lösung:* $(1+3) + j(1-2) = 4 - j$ — Realteile zusammen, Imaginärteile zusammen!`,
     },
 
-    // ====== LEKTION 2: Gaußsche Zahlenebene ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 2: Gaußsche Ebene
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-2",
-      title: "Gaußsche Zahlenebene",
-      duration: "18 min",
+      title: "Die Gaußsche Zahlenebene",
+      duration: "15 min",
       type: "interactive",
-      interactive: "complexPlaneViewer" as const,
-      content: `# Gaußsche Zahlenebene
+      interactive: "complexPlaneViewer",
+      content: `# Die Gaußsche Zahlenebene
 
-## Komplexe Zahlen als Punkte
+Reelle Zahlen leben auf einer **Zahlenachse** (1D). Komplexe Zahlen brauchen eine **Ebene** (2D).
 
-Jede komplexe Zahl $z = x + jy$ lässt sich als **Punkt** $(x, y)$ in einer Ebene darstellen:
+---
 
-- **Horizontale Achse** (x-Achse): Realteil $\\text{Re}(z)$
-- **Vertikale Achse** (y-Achse): Imaginärteil $\\text{Im}(z)$
+## So funktioniert's
 
-Diese Darstellung heißt **Gaußsche Zahlenebene** (auch: komplexer Zahlenstrahl, Argand-Diagramm).
+Die **Gaußsche Ebene** (auch: komplexes Zahlenfeld) hat zwei Achsen:
 
-## Beispiele zum Einzeichnen
+- **Horizontale Achse (x):** Realteil $\\text{Re}(z)$
+- **Vertikale Achse (y):** Imaginärteil $\\text{Im}(z)$
 
-| Komplexe Zahl | Punkt in der Ebene |
-|---------------|-------------------|
-| $z_1 = 3 + 2j$ | $(3, 2)$ |
-| $z_2 = -2 + 4j$ | $(-2, 4)$ |
-| $z_3 = -3 - j$ | $(-3, -1)$ |
-| $z_4 = 4 - 3j$ | $(4, -3)$ |
-| $z_5 = 5$ | $(5, 0)$ auf der Re-Achse |
-| $z_6 = -4j$ | $(0, -4)$ auf der Im-Achse |
-| $z_7 = 1 + j$ | $(1, 1)$ |
-| $z_8 = -2 + 2j$ | $(-2, 2)$ |
+Jede komplexe Zahl $z = x + jy$ ist ein **Punkt** in dieser Ebene bei den Koordinaten $(x | y)$.
 
-## Geometrische Interpretation
+---
 
-- **Reelle Zahlen** liegen auf der x-Achse
-- **Rein imaginäre Zahlen** liegen auf der y-Achse
-- Die Ebene wird durch die beiden Achsen in **4 Quadranten** geteilt
+## Beispiele einzeichnen
 
-## Konjugierte
+| Zahl | Re | Im | Position |
+|------|---:|---:|----------|
+| $z_1 = 3 + 4j$ | 3 | 4 | rechts oben |
+| $z_2 = -2 + 3j$ | -2 | 3 | links oben |
+| $z_3 = -5 - 4j$ | -5 | -4 | links unten |
+| $z_4 = 6$ | 6 | 0 | auf der Re-Achse |
+| $z_5 = -3j$ | 0 | -3 | auf der Im-Achse |
 
-Die **konjugierte** Zahl $\\bar{z} = x - jy$ ist die Spiegelung von $z$ an der reellen Achse (x-Achse).
+---
 
-## Betrag (Abstand zum Ursprung)
+## 💡 Das kannst du jetzt interaktiv ausprobieren!
 
-Der Betrag $|z|$ ist der Abstand des Punktes $(x, y)$ zum Ursprung:
+**Klicke auf die Ebene** — es wird dir die komplexe Zahl an der Stelle angezeigt. Oder gib eine Zahl ein und sie wird eingezeichnet.
 
-$$|z| = \\sqrt{x^2 + y^2}$$
+---
 
-Dies entspricht dem Satz des Pythagoras!
+## Wichtige Punkte
 
-## Übung
+- $z = 4$ liegt auf der **reellen Achse** (rechts vom Ursprung)
+- $z = -j$ liegt auf der **imaginären Achse** (unten)
+- $z = 0$ ist der **Ursprung**
+- Der **Abstand vom Ursprung** ist der Betrag $|z| = \\sqrt{x^2 + y^2}$ (Pythagoras!)
 
-Klicke auf die Gaußsche Ebene, um die zugehörige komplexe Zahl abzulesen. Zeichne die folgenden Zahlen ein und bestimme ihren Betrag.`,
+---
+
+## 🎯 Übung
+
+Versuche diese Zahlen in die Gaußsche Ebene einzuzeichnen:
+
+1. $z_1 = 2 + 3j$ → Punkt bei $(2 | 3)$
+2. $z_2 = -4 + j$ → Punkt bei $(-4 | 1)$
+3. $z_3 = -3 - 2j$ → Punkt bei $(-3 | -2)$
+4. $z_4 = 5j$ → Punkt bei $(0 | 5)$
+5. $z_5 = -4$ → Punkt bei $(-4 | 0)$`,
     },
 
-    // ====== LEKTION 3: Darstellungsformen ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 3: Darstellungsformen
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-3",
       title: "Darstellungsformen",
-      duration: "22 min",
+      duration: "20 min",
       type: "interactive",
-      interactive: "complexFormConverter" as const,
-      content: `# Darstellungsformen komplexer Zahlen
+      interactive: "complexFormConverter",
+      content: `# Die drei Darstellungsformen
 
-Komplexe Zahlen können auf drei verschiedene Arten dargestellt werden.
+Eine komplexe Zahl kann man auf **drei Arten** schreiben. Jede hat Vorteile.
 
-## 1. Normalform (algebraische Form)
+---
+
+## 1. Normalform (Kartesische Form)
 
 $$z = x + jy$$
 
-Die einfachste und gebräuchlichste Form.
-
-**Beispiel:** $z = 3 + 4j$
+Das ist die Form die du bisher kennst. Gut zum **Addieren** und **Subtrahieren**.
 
 ---
 
 ## 2. Trigonometrische Form
 
-$$z = r \\cdot (\\cos\\varphi + j \\cdot \\sin\\varphi)$$
+$$z = r \\cdot (\\cos\\varphi + j\\sin\\varphi)$$
 
-wobei:
-- $r = |z| = \\sqrt{x^2 + y^2}$ der **Betrag** ist
-- $\\varphi = \\arg(z)$ das **Argument** (Winkel) ist
+Hier beschreiben wir die Zahl durch:
+- $r = |z|$ — der **Betrag** (Abstand vom Ursprung)
+- $\\varphi$ — der **Winkel** gegen die positive reelle Achse
 
-**Beispiel:** $z = 2(\\cos 60° + j \\sin 60°) = 2 \\cdot \\left(\\frac{1}{2} + j\\frac{\\sqrt{3}}{2}\\right) = 1 + j\\sqrt{3}$
+**Woher kommen $r$ und $\\varphi$?**
+
+In der Gaußschen Ebene bildet $z = x + jy$ ein **rechtwinkliges Dreieck**:
+- Die Hypotenuse ist $r$ (der Betrag)
+- Die Ankathete ist $x$ (der Realteil)
+- Die Gegenkathete ist $y$ (der Imaginärteil)
+
+Aus der Schulmathematik:
+$$r = \\sqrt{x^2 + y^2}$$
+
+Das ist einfach der **Pythagoras!** $r$ ist die Hypotenuse des Dreiecks.
+
+Für den Winkel:
+$$\\tan\\varphi = \\frac{y}{x} \\quad \\Rightarrow \\quad \\varphi = \\arctan\\frac{y}{x}$$
+
+**Achtung:** $\\arctan$ liefert nur Werte zwischen $-90°$ und $+90°$. Je nach **Quadrant** musst du korrigieren!
 
 ---
 
@@ -209,288 +261,318 @@ wobei:
 
 $$z = r \\cdot e^{j\\varphi}$$
 
-Basierend auf der **Euler-Formel**:
+Das ist die **kürzeste** Schreibweise. Die **Euler-Formel** sagt:
 
 $$e^{j\\varphi} = \\cos\\varphi + j\\sin\\varphi$$
 
-**Beispiel:** $z = 5e^{j\\cdot 90°} = 5j$
+Die Exponentialform ist super zum **Multiplizieren** und **Dividieren**.
 
 ---
 
-## Umrechnung: Normalform → Polarform
+## Umrechnung: Normal → Polar
 
-### Schritt 1: Betrag r
+**Gegeben:** $z = 3 + 4j$
 
-$$r = \\sqrt{x^2 + y^2}$$
+**Schritt 1: Betrag $r$ berechnen**
+$$r = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$$
 
-### Schritt 2: Winkel φ
+**Schritt 2: Winkel $\\varphi$ berechnen**
+$$\\tan\\varphi = \\frac{4}{3} = 1.333 \\quad \\Rightarrow \\quad \\varphi = \\arctan(1.333) = 53.13°$$
 
-$$\\varphi = \\arctan\\left(\\frac{y}{x}\\right)$$
+**Schritt 3: Quadrant prüfen**
+$x = 3 > 0$ und $y = 4 > 0$ → **Quadrant I** → keine Korrektur nötig!
 
-**Achtung:** Der einfache $\\arctan$ liefert nur Werte zwischen $-90°$ und $+90°$. Man muss den **Quadranten** beachten!
-
-### Quadranten-Regeln
-
-| Quadrant | Bedingung | Korrektur |
-|----------|-----------|-----------|
-| I | $x > 0, y > 0$ | $\\varphi = \\arctan(y/x)$ |
-| II | $x < 0, y > 0$ | $\\varphi = \\arctan(y/x) + 180°$ |
-| III | $x < 0, y < 0$ | $\\varphi = \\arctan(y/x) + 180°$ |
-| IV | $x > 0, y < 0$ | $\\varphi = \\arctan(y/x) + 360°$ |
+**Ergebnis:**
+- Trigonometrisch: $z = 5 \\cdot (\\cos 53.13° + j\\sin 53.13°)$
+- Exponential: $z = 5 \\cdot e^{j \\cdot 53.13°}$
 
 ---
 
-## Beispiel: Umrechnung
+## Umrechnung: Polar → Normal
 
-$z = -1 + j\\sqrt{3}$
+**Gegeben:** $z = 4 \\cdot e^{j \\cdot 30°}$
 
-**Schritt 1:** $r = \\sqrt{(-1)^2 + (\\sqrt{3})^2} = \\sqrt{1 + 3} = 2$
+**Schritt 1: Realteil**
+$$x = r \\cdot \\cos\\varphi = 4 \\cdot \\cos 30° = 4 \\cdot 0.866 = 3.464$$
 
-**Schritt 2:** $\\arctan\\left(\\frac{\\sqrt{3}}{-1}\\right) = \\arctan(-\\sqrt{3}) = -60°$
+**Schritt 2: Imaginärteil**
+$$y = r \\cdot \\sin\\varphi = 4 \\cdot \\sin 30° = 4 \\cdot 0.5 = 2$$
 
-**Quadrant:** $x = -1 < 0$, $y = \\sqrt{3} > 0$ → **Quadrant II**
-
-$\\varphi = -60° + 180° = 120°$
-
-**Ergebnis:** $z = 2e^{j \\cdot 120°}$
+**Ergebnis:** $z = 3.464 + 2j$
 
 ---
 
-## Umrechnung: Polarform → Normalform
+## ⚡ Quadranten-Regeln
 
-$$x = r \\cos\\varphi, \\quad y = r \\sin\\varphi$$
+Das Wichtigste: **Prüfe IMMER den Quadranten** bevor du $\\varphi$ abliest!
 
-**Beispiel:** $z = 3e^{j \\cdot 45°}$
+| Quadrant | Bedingung | $\\varphi$ berechnen |
+|----------|-----------|---------------------|
+| **I** (rechts oben) | $x > 0, y > 0$ | $\\arctan(y/x)$ |
+| **II** (links oben) | $x < 0, y > 0$ | $\\arctan(y/x) + 180°$ |
+| **III** (links unten) | $x < 0, y < 0$ | $\\arctan(y/x) + 180°$ |
+| **IV** (rechts unten) | $x > 0, y < 0$ | $\\arctan(y/x) + 360°$ |
 
-$x = 3\\cos 45° = 3 \\cdot \\frac{\\sqrt{2}}{2} = \\frac{3\\sqrt{2}}{2}$
+**Beispiel Quadrant II:** $z = -1 + j$
+- $r = \\sqrt{1+1} = \\sqrt{2}$
+- $\\arctan(1/(-1)) = \\arctan(-1) = -45°$
+- Quadrant II: $\\varphi = -45° + 180° = 135°$ ✓
 
-$y = 3\\sin 45° = 3 \\cdot \\frac{\\sqrt{2}}{2} = \\frac{3\\sqrt{2}}{2}$
+---
 
-$z = \\frac{3\\sqrt{2}}{2} + j\\frac{3\\sqrt{2}}{2}$`,
+## 🎯 Übung: Umrechnung
+
+**Aufgabe 1:** Wandle $z = 1 + j$ in die Exponentialform um.
+- $r = \\sqrt{1+1} = \\sqrt{2} \\approx 1.414$
+- $\\varphi = \\arctan(1/1) = 45°$ (Quadrant I)
+- $z = \\sqrt{2} \\cdot e^{j45°}$
+
+**Aufgabe 2:** Wandle $z = 2e^{j60°}$ in die Normalform um.
+- $x = 2\\cos 60° = 2 \\cdot 0.5 = 1$
+- $y = 2\\sin 60° = 2 \\cdot 0.866 = 1.732$
+- $z = 1 + 1.732j$
+
+**Aufgabe 3:** Wandle $z = -3 - 3j$ um.
+- $r = \\sqrt{9+9} = \\sqrt{18} = 3\\sqrt{2}$
+- $\\arctan((-3)/(-3)) = \\arctan(1) = 45°$
+- Quadrant III: $\\varphi = 45° + 180° = 225°$
+- $z = 3\\sqrt{2} \\cdot e^{j225°}$`,
     },
 
-    // ====== LEKTION 4: Addition & Subtraktion ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 4: Addition & Subtraktion
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-4",
       title: "Addition & Subtraktion",
-      duration: "15 min",
+      duration: "12 min",
       type: "exercises",
-      content: `# Addition & Subtraktion komplexer Zahlen
+      content: `# Addition & Subtraktion
 
-## Rechenregel
+Die einfachste Rechenart bei komplexen Zahlen!
 
-Für $z_1 = x_1 + jy_1$ und $z_2 = x_2 + jy_2$ gilt:
+---
 
-### Addition
+## Die Regel
 
+Gegeben: $z_1 = x_1 + jy_1$ und $z_2 = x_2 + jy_2$
+
+**Addition:**
 $$z_1 + z_2 = (x_1 + x_2) + j(y_1 + y_2)$$
 
-Realteile und Imaginärteile werden **getrennt** addiert.
-
-### Subtraktion
-
+**Subtraktion:**
 $$z_1 - z_2 = (x_1 - x_2) + j(y_1 - y_2)$$
 
-Analog werden Realteile und Imaginärteile getrennt subtrahiert.
+**Einfach:** Realteile zusammen, Imaginärteile zusammen!
 
 ---
 
-## Beispiele
+## Beispiel Schritt für Schritt
 
-### Beispiel 1: Addition
+**Aufgabe:** $(3 + 2j) + (1 - 4j)$
 
-$z_1 = 3 + 2j$, $z_2 = 1 + 4j$
+**Schritt 1 — Realteile addieren:** $3 + 1 = 4$
 
-$z_1 + z_2 = (3 + 1) + j(2 + 4) = 4 + 6j$
+**Schritt 2 — Imaginärteile addieren:** $2 + (-4) = -2$
 
-### Beispiel 2: Subtraktion
-
-$z_1 = 5 + 3j$, $z_2 = 2 + 7j$
-
-$z_1 - z_2 = (5 - 2) + j(3 - 7) = 3 - 4j$
-
-### Beispiel 3: Gemischt
-
-$(2 + 3j) + (4 - 5j) - (1 + 2j)$
-
-$= (2 + 4 - 1) + j(3 - 5 - 2) = 5 - 4j$
+**Ergebnis:** $4 - 2j$ ✓
 
 ---
 
-## Geometrische Interpretation
+## Geometrische Bedeutung
 
-Addition und Subtraktion komplexer Zahlen entsprechen der **Vektoraddition** in der Gaußschen Ebene:
+In der Gaußschen Ebene ist Addition **Vektoraddition**:
 
-- $z_1$ und $z_2$ werden als Vektoren vom Ursprung aus gezeichnet
-- $z_1 + z_2$: **Parallelogrammregel** (Vektorspitze von $z_1$ zum Anfang von $z_2$)
-- $z_1 - z_2$: Verbindungsvektor von $z_2$ nach $z_1$
+- $z_1 = 3 + 2j$ ist ein Punkt bei $(3 | 2)$
+- $z_2 = 1 - 4j$ ist ein Punkt bei $(1 | -4)$
+- $z_1 + z_2 = 4 - 2j$ ist der Punkt bei $(4 | -2)$
+
+Du kannst auch **Pfeile** (Vektoren) vom Ursprung zu $z_1$ und $z_2$ zeichnen. Die Summe ist das **Parallelogramm**!
 
 ---
 
-## Übungsaufgaben
+## ⚡ Wichtig
 
-Berechne die folgenden Ausdrücke und kontrolliere die Lösungen:
+Addition funktioniert **nur in der Normalform!** In der Exponentialform musst du zuerst umrechnen.
 
-**Aufgabe 1:** $(3 + 2j) + (4 - 3j) = ?$
+---
 
-*Lösung:* $7 - j$
+## 🎯 Übungsaufgaben
 
-**Aufgabe 2:** $(1 + 5j) - (3 + 2j) = ?$
+**1)** $(5 + 3j) + (2 - 7j)$
+> Lösung: $7 - 4j$
 
-*Lösung:* $-2 + 3j$
+**2)** $(-1 + 4j) - (3 + 2j)$
+> Lösung: $(-1-3) + j(4-2) = -4 + 2j$
 
-**Aufgabe 3:** $(2 - j) + (-3 + 4j) + (1 - 2j) = ?$
+**3)** $(2j) + (3 - 5j)$
+> Lösung: $3 + j(2-5) = 3 - 3j$
 
-*Lösung:* $0 + j = j$
+**4)** $(6 + j) - (-2 + 3j)$
+> Lösung: $(6-(-2)) + j(1-3) = 8 - 2j$
 
-**Aufgabe 4:** $(6 + 2j) - (6 + 2j) = ?$
-
-*Lösung:* $0$
-
-**Aufgabe 5:** $|z_1 + z_2|$ mit $z_1 = 3 + 4j$, $z_2 = 1 - 4j$
-
-*Lösung:* $z_1 + z_2 = 4$, also $|z_1 + z_2| = 4$`,
+**5)** $(1 + 2j) + (3 + 4j) + (-5 - j)$
+> Lösung: $(1+3-5) + j(2+4-1) = -1 + 5j$`,
     },
 
-    // ====== LEKTION 5: Multiplikation ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 5: Multiplikation
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-5",
       title: "Multiplikation",
-      duration: "20 min",
+      duration: "18 min",
       type: "interactive",
-      interactive: "complexOperationsCalculator" as const,
+      interactive: "complexOperationsCalculator",
       content: `# Multiplikation komplexer Zahlen
 
-## Multiplikation in Normalform
+Bei der Multiplikation wird es interessant — hier zeigt sich der Vorteil der Exponentialform!
 
-Für $z_1 = x_1 + jy_1$ und $z_2 = x_2 + jy_2$:
+---
+
+## In Normalform (FOIL-Verfahren)
+
+Gegeben: $z_1 = x_1 + jy_1$ und $z_2 = x_2 + jy_2$
 
 $$z_1 \\cdot z_2 = (x_1 x_2 - y_1 y_2) + j(x_1 y_2 + x_2 y_1)$$
 
-### Herleitung
+**Woher kommt das?** Einfach ausmultiplizieren (FOIL):
 
-$(x_1 + jy_1)(x_2 + jy_2) = x_1 x_2 + jx_1 y_2 + jx_2 y_1 + j^2 y_1 y_2$
+$$z_1 \\cdot z_2 = x_1 x_2 + x_1(jy_2) + (jy_1)x_2 + (jy_1)(jy_2)$$
+
+$$= x_1 x_2 + j x_1 y_2 + j x_2 y_1 + j^2 y_1 y_2$$
 
 Da $j^2 = -1$:
 
-$= x_1 x_2 + jx_1 y_2 + jx_2 y_1 - y_1 y_2$
-
-$= (x_1 x_2 - y_1 y_2) + j(x_1 y_2 + x_2 y_1)$
-
-### Beispiel 1
-
-$z_1 = 2 + 3j$, $z_2 = 1 + 4j$
-
-Realteil: $2 \\cdot 1 - 3 \\cdot 4 = 2 - 12 = -10$
-
-Imaginärteil: $2 \\cdot 4 + 1 \\cdot 3 = 8 + 3 = 11$
-
-$z_1 \\cdot z_2 = -10 + 11j$
+$$= x_1 x_2 - y_1 y_2 + j(x_1 y_2 + x_2 y_1)$$
 
 ---
 
-## Multiplikation in Exponentialform
+## Beispiel Schritt für Schritt
+
+**Aufgabe:** $(2 + 3j) \\cdot (1 - 2j)$
+
+**Schritt 1 — Realteile:** $2 \\cdot 1 = 2$
+
+**Schritt 2 — $j^2$-Term:** $3j \\cdot (-2j) = -6j^2 = -6 \\cdot (-1) = +6$
+
+**Schritt 3 — Kreuzterme:** $2 \\cdot (-2j) + 3j \\cdot 1 = -4j + 3j = -j$
+
+**Schritt 4 — Zusammenfassen:** $(2 + 6) + j(-1) = 8 - j$
+
+---
+
+## In Exponentialform (viel einfacher!)
 
 $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
 
-**Regel:** Beträge **multiplizieren**, Winkel **addieren**!
+**Die Regel:** Beträge **multiplizieren**, Winkel **addieren**!
 
-### Beispiel 2
+**Beispiel:** $(4 e^{j20°}) \\cdot (3 e^{j30°})$
+- Betrag: $4 \\cdot 3 = 12$
+- Winkel: $20° + 30° = 50°$
+- Ergebnis: $12 e^{j50°}$
 
-$z_1 = 2e^{j \\cdot 30°}$, $z_2 = 3e^{j \\cdot 45°}$
-
-$z_1 \\cdot z_2 = 6e^{j \\cdot 75°}$
-
----
-
-## Multiplikation in trigonometrischer Form
-
-$$z_1 \\cdot z_2 = r_1 r_2 [\\cos(\\varphi_1 + \\varphi_2) + j\\sin(\\varphi_1 + \\varphi_2)]$$
+Das ist **deutlich einfacher** als in Normalform!
 
 ---
 
-## Spezialfall: Multiplikation mit j
+## 💡 Warum ist das wichtig?
 
-$z \\cdot j = (x + jy) \\cdot j = xj + j^2 y = -y + jx$
-
-Geometrisch: **Rotation um 90°** gegen den Uhrzeigersinn!
+In der Elektrotechnik und Signalverarbeitung werden Signale oft als komplexe Zahlen dargestellt. Multiplikation bedeutet dann: **Amplitude ändern** (Beträge ×) und **Phase drehen** (Winkel +).
 
 ---
 
-## Übungsaufgaben
+## 🎯 Übungsaufgaben
 
-**Aufgabe 1:** $(2 + j)(3 - 2j) = ?$
+**1)** $(1 + j) \\cdot (1 - j)$
+> Lösung: $1 - j + j - j^2 = 1 + 1 = 2$
 
-*Lösung:* $6 - 4j + 3j - 2j^2 = 6 - j + 2 = 8 - j$
+**2)** $(3 + 2j) \\cdot (1 + 4j)$
+> Lösung: $(3-8) + j(12+2) = -5 + 14j$
 
-**Aufgabe 2:** $(1 + j)^2 = ?$
+**3)** $2e^{j15°} \\cdot 5e^{j45°}$
+> Lösung: $10e^{j60°}$
 
-*Lösung:* $1 + 2j + j^2 = 1 + 2j - 1 = 2j$
+**4)** Berechne $(1+j)^2$ in Normalform.
+> Lösung: $1 + 2j + j^2 = 1 + 2j - 1 = 2j$
 
-**Aufgabe 3:** Berechne $j^{10}$
-
-*Lösung:* $j^{10} = (j^4)^2 \\cdot j^2 = 1 \\cdot (-1) = -1$
-
-**Aufgabe 4:** $2e^{j60°} \\cdot 3e^{j30°} = ?$
-
-*Lösung:* $6e^{j90°} = 6j$`,
+**5)** Berechne $(1+j)^2$ in Exponentialform (zuerst umrechnen!).
+> $1+j = \\sqrt{2} e^{j45°}$ → $(\\sqrt{2})^2 e^{j90°} = 2e^{j90°} = 2j$ ✓`,
     },
 
-    // ====== LEKTION 6: Komplex Konjugierte & Division ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 6: Konjugierte & Division
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-6",
-      title: "Komplex Konjugierte & Division",
+      title: "Konjugierte & Division",
       duration: "20 min",
       type: "interactive",
-      interactive: "complexOperationsCalculator" as const,
-      content: `# Komplex Konjugierte & Division
+      interactive: "complexOperationsCalculator",
+      content: `# Das Komplex Konjugierte & Division
 
-## Komplex Konjugierte
+---
 
-Die **konjugiert komplexe** Zahl von $z = x + jy$ ist:
+## Das Komplex Konjugierte
+
+Für $z = x + jy$ ist das **konjugierte**:
 
 $$\\bar{z} = x - jy$$
 
-Geometrisch: **Spiegelung an der reellen Achse** (x-Achse) in der Gaußschen Ebene.
+**Geometrisch:** Spiegelung an der reellen Achse! Der Punkt $(x | y)$ wird zu $(x | -y)$.
 
-### Wichtige Eigenschaften
-
-| Eigenschaft | Formel |
-|------------|--------|
-| Doppelte Konjugation | $\\overline{\\bar{z}} = z$ |
-| Summe | $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$ |
-| Produkt | $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$ |
-| Betrag | $|\\bar{z}| = |z|$ |
-
-### Schlüssel-Formel
-
-$$z \\cdot \\bar{z} = (x + jy)(x - jy) = x^2 + y^2 = |z|^2$$
-
-Das Produkt einer Zahl mit ihrem Konjugierten ergibt immer eine **reelle Zahl** (nämlich das Quadrat des Betrags)!
+**Beispiele:**
+- $z = 3 + 4j$ → $\\bar{z} = 3 - 4j$
+- $z = -2 - j$ → $\\bar{z} = -2 + j$
+- $z = 5j$ → $\\bar{z} = -5j$
 
 ---
 
-## Division in Normalform
+## Wichtige Eigenschaft
 
-Um $\\frac{z_1}{z_2} = \\frac{x_1 + jy_1}{x_2 + jy_2}$ zu berechnen, erweitern wir mit dem **konjugierten Nenner**:
+$$z \\cdot \\bar{z} = (x + jy)(x - jy) = x^2 - (jy)^2 = x^2 - j^2 y^2 = x^2 + y^2$$
 
-$$\\frac{z_1}{z_2} = \\frac{z_1 \\cdot \\bar{z_2}}{z_2 \\cdot \\bar{z_2}} = \\frac{(x_1 + jy_1)(x_2 - jy_2)}{x_2^2 + y_2^2}$$
+Das ist **immer reell** und **immer positiv!** In fact:
 
-### Beispiel 1
+$$z \\cdot \\bar{z} = |z|^2$$
 
-$$\\frac{3 + 2j}{1 + j}$$
+Das nutzen wir für die Division.
 
-Erweitern mit $\\bar{z_2} = 1 - j$:
+---
 
-$$= \\frac{(3 + 2j)(1 - j)}{(1 + j)(1 - j)} = \\frac{3 - 3j + 2j - 2j^2}{1 + 1} = \\frac{3 - j + 2}{2} = \\frac{5 - j}{2} = 2{,}5 - 0{,}5j$$
+## Division — Das Problem
 
-### Beispiel 2
+$$\\frac{z_1}{z_2} = \\frac{x_1 + jy_1}{x_2 + jy_2}$$
 
-$$\\frac{4 + 2j}{2 - 3j}$$
+Das Problem: Im **Nenner** steht ein $j$. Wir wollen aber eine komplexe Zahl in Normalform — also $a + jb$ — und **nicht** $a + jb$ im Nenner!
 
-Erweitern mit $2 + 3j$:
+**Lösung:** Erweitere den Bruch mit dem **konjugierten des Nenners!**
 
-$$= \\frac{(4 + 2j)(2 + 3j)}{(2 - 3j)(2 + 3j)} = \\frac{8 + 12j + 4j + 6j^2}{4 + 9} = \\frac{8 + 16j - 6}{13} = \\frac{2 + 16j}{13}$$
+---
+
+## Division — Schritt für Schritt
+
+**Aufgabe:** $\\frac{3 + 4j}{1 - 2j}$
+
+**Schritt 1 — Konjugierten des Nenners bilden:**
+$\\overline{1 - 2j} = 1 + 2j$
+
+**Schritt 2 — Bruch erweitern:**
+$$\\frac{3 + 4j}{1 - 2j} \\cdot \\frac{1 + 2j}{1 + 2j}$$
+
+**Schritt 3 — Nenner ausrechnen:**
+$$(1 - 2j)(1 + 2j) = 1^2 + 2^2 = 1 + 4 = 5$$
+
+Der Nenner ist jetzt **reell!** Das war das Ziel.
+
+**Schritt 4 — Zähler ausrechnen:**
+$$(3 + 4j)(1 + 2j) = 3 + 6j + 4j + 8j^2 = 3 + 10j - 8 = -5 + 10j$$
+
+**Schritt 5 — Teilen:**
+$$\\frac{-5 + 10j}{5} = -1 + 2j$$
+
+**Fertig!** ✓
 
 ---
 
@@ -498,555 +580,306 @@ $$= \\frac{(4 + 2j)(2 + 3j)}{(2 - 3j)(2 + 3j)} = \\frac{8 + 12j + 4j + 6j^2}{4 +
 
 $$\\frac{z_1}{z_2} = \\frac{r_1}{r_2} \\cdot e^{j(\\varphi_1 - \\varphi_2)}$$
 
-**Regel:** Beträge **dividieren**, Winkel **subtrahieren**!
+**Die Regel:** Beträge **dividieren**, Winkel **subtrahieren!**
 
-### Beispiel 3
-
-$$\\frac{6e^{j90°}}{2e^{j30°}} = 3e^{j60°}$$
+**Beispiel:** $\\frac{12 e^{j80°}}{4 e^{j30°}} = 3 e^{j50°}$
 
 ---
 
-## Übungsaufgaben
+## 🎯 Übungsaufgaben
 
-**Aufgabe 1:** Berechne $\\bar{z}$ für $z = 5 - 3j$
+**1)** Berechne $\\frac{1 + j}{1 - j}$.
+> Erweiterung mit $(1+j)$: Nenner $= 1+1=2$, Zähler $= (1+j)^2 = 2j$
+> Ergebnis: $\\frac{2j}{2} = j$
 
-*Lösung:* $\\bar{z} = 5 + 3j$
+**2)** Berechne $\\frac{4 + 2j}{2 + j}$.
+> Erweiterung mit $(2-j)$: Nenner $= 4+1=5$, Zähler $= 8-4j+4j-2j^2 = 10$
+> Ergebnis: $\\frac{10}{5} = 2$ (reell!)
 
-**Aufgabe 2:** Berechne $z \\cdot \\bar{z}$ für $z = 3 + 4j$
+**3)** Berechne $\\frac{10 e^{j90°}}{2 e^{j30°}}$.
+> Ergebnis: $5 e^{j60°}$
 
-*Lösung:* $z \\cdot \\bar{z} = 9 + 16 = 25 = |z|^2$
+**4)** Zeige: $\\frac{z}{\\bar{z}}$ hat immer Betrag 1.
+> $|\\frac{z}{\\bar{z}}| = \\frac{|z|}{|\\bar{z}|} = \\frac{|z|}{|z|} = 1$ ✓
 
-**Aufgabe 3:** $\\frac{2 + j}{1 - j} = ?$
-
-*Lösung:* $\\frac{(2+j)(1+j)}{(1-j)(1+j)} = \\frac{2+2j+j+j^2}{2} = \\frac{1+3j}{2} = 0{,}5 + 1{,}5j$`,
+**5)** Berechne $\\frac{2-3j}{4+j}$.
+> Erweiterung mit $(4-j)$: Nenner $= 16+1=17$, Zähler $= 8-2j-12j+3j^2 = 5-14j$
+> Ergebnis: $\\frac{5}{17} - \\frac{14}{17}j$`,
     },
 
-    // ====== LEKTION 7: Potenzieren (De Moivre) ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 7: Potenzieren (De Moivre)
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-7",
-      title: "Potenzieren (De Moivre)",
-      duration: "18 min",
+      title: "Potenzieren — De Moivre",
+      duration: "15 min",
       type: "interactive",
-      interactive: "complexPowerCalculator" as const,
-      content: `# Potenzieren — De Moivresche Formel
+      interactive: "complexPowerCalculator",
+      content: `# Potenzieren nach De Moivre
 
-## De Moivresche Formel
+---
 
-Für eine komplexe Zahl in Exponentialform $z = r \\cdot e^{j\\varphi}$ gilt:
+## Die Formel
+
+Für $z = r e^{j\\varphi}$ gilt:
 
 $$z^n = r^n \\cdot e^{jn\\varphi}$$
 
-In trigonometrischer Form:
+Oder in trigonometrischer Form:
 
-$$z^n = r^n \\cdot (\\cos(n\\varphi) + j\\sin(n\\varphi))$$
+$$z^n = r^n (\\cos(n\\varphi) + j\\sin(n\\varphi))$$
 
-**Regel:** Betrag potenzieren, Winkel mit n multiplizieren!
+**Die Regel:** Betrag **potenzieren**, Winkel **vervielfachen!**
 
----
-
-## Beispiel 1: Quadrat
-
-$z = 1 + j$ → in Polarform: $r = \\sqrt{2}$, $\\varphi = 45°$
-
-$z^2 = (\\sqrt{2})^2 \\cdot e^{j \\cdot 90°} = 2e^{j90°} = 2j$
-
-Probe in Normalform: $(1+j)^2 = 1 + 2j + j^2 = 2j$ ✓
+Das heißt **Satz von de Moivre** (1707).
 
 ---
 
-## Beispiel 2: Kubik
+## Beispiel Schritt für Schritt
 
-$z = 2e^{j30°}$
+**Aufgabe:** Berechne $(1 + j)^4$
 
-$z^3 = 2^3 \\cdot e^{j \\cdot 90°} = 8e^{j90°} = 8j$
+**Schritt 1 — In Exponentialform umwandeln:**
+$r = \\sqrt{1^2 + 1^2} = \\sqrt{2}$
+$\\varphi = 45°$ (Quadrant I)
+$z = \\sqrt{2} \\cdot e^{j45°}$
 
----
+**Schritt 2 — De Moivre anwenden:**
+$z^4 = (\\sqrt{2})^4 \\cdot e^{j(4 \\cdot 45°)}$
+$= 4 \\cdot e^{j180°}$
 
-## Potenzen von j
+**Schritt 3 — Zurück in Normalform:**
+$4 e^{j180°} = 4(\\cos 180° + j\\sin 180°) = 4(-1 + 0j) = -4$
 
-Die imaginäre Einheit $j$ hat einen **zyklischen** Potenzkreislauf mit Periode 4:
-
-| Potenz | Wert | Erklärung |
-|--------|------|-----------|
-| $j^0$ | $1$ | Definition |
-| $j^1$ | $j$ | Definition |
-| $j^2$ | $-1$ | Definition |
-| $j^3$ | $j^2 \\cdot j = -j$ | |
-| $j^4$ | $j^2 \\cdot j^2 = 1$ | Zyklus beginnt von vorn |
-| $j^5$ | $j$ | = $j^1$ |
-| $j^n$ | $j^{n \\bmod 4}$ | Allgemein |
-
-### Beispiel 3
-
-$j^{17} = j^{17 \\bmod 4} = j^1 = j$
-
-$j^{22} = j^{22 \\bmod 4} = j^2 = -1$
-
-$j^{100} = j^{100 \\bmod 4} = j^0 = 1$
+**Ergebnis:** $(1+j)^4 = -4$ ✓
 
 ---
 
-## Beispiel 4: Komplexe Potenz
+## Potenzen von $j$ — der Zyklus
 
-$(1 + j)^6 = ?$
+Da $j = e^{j90°}$ gilt:
 
-In Polarform: $z = \\sqrt{2} e^{j45°}$
+$$j^n = e^{jn \\cdot 90°}$$
 
-$z^6 = (\\sqrt{2})^6 \\cdot e^{j \\cdot 270°} = 8 \\cdot e^{j270°} = 8(\\cos 270° + j\\sin 270°) = 8(0 - j) = -8j$
+| $n$ | $j^n$ | Erklärung |
+|-----|-------|-----------|
+| 1 | $j$ | $e^{j90°}$ |
+| 2 | $-1$ | $e^{j180°}$ |
+| 3 | $-j$ | $e^{j270°}$ |
+| 4 | $1$ | $e^{j360°}$ |
+| 5 | $j$ | Zyklus von 4! |
+
+**Merke:** $j^n$ hängt nur von $n \\mod 4$ ab!
 
 ---
 
-## Anwendung: Reelle und imaginäre Teile extrahieren
+## 🎯 Übungsaufgaben
 
-Aus $z^n = r^n(\\cos n\\varphi + j\\sin n\\varphi)$ folgt:
+**1)** Berechne $(2e^{j15°})^3$.
+> $= 8 e^{j45°}$
 
-$$\\text{Re}(z^n) = r^n \\cos(n\\varphi)$$
+**2)** Berechne $j^{17}$.
+> $17 \\mod 4 = 1$ → $j^{17} = j$
 
-$$\\text{Im}(z^n) = r^n \\sin(n\\varphi)$$
+**3)** Berechne $(1+j)^6$.
+> $z = \\sqrt{2} e^{j45°}$ → $z^6 = 8 e^{j270°} = -8j$
 
-Das ist nützlich, um trigonometrische Ausdrücke zu berechnen.`,
+**4)** Berechne $(\\sqrt{3} + j)^3$.
+> $r = 2$, $\\varphi = 30°$ → $z^3 = 8 e^{j90°} = 8j$
+
+**5)** Zeige: $|z^n| = |z|^n$.
+> $|z^n| = |r^n e^{jn\\varphi}| = r^n = |z|^n$ ✓`,
     },
 
-    // ====== LEKTION 8: Radizieren ======
+    // ══════════════════════════════════════════════════════════════
+    // LEKTION 8: Radizieren
+    // ══════════════════════════════════════════════════════════════
     {
       id: "kz-8",
-      title: "Radizieren",
-      duration: "22 min",
+      title: "Radizieren — Wurzeln",
+      duration: "18 min",
       type: "interactive",
-      interactive: "complexRootCalculator" as const,
-      content: `# Radizieren — n-te Wurzeln komplexer Zahlen
-
-## Formel für n-te Wurzeln
-
-Die $n$-ten Wurzeln von $z = r \\cdot e^{j\\varphi}$ sind:
-
-$$w_k = r^{1/n} \\cdot e^{j(\\varphi + 2k\\pi)/n}$$
-
-wobei $k = 0, 1, 2, \\ldots, n-1$.
-
-> **Wichtig:** Es gibt immer genau $n$ verschiedene $n$-te Wurzeln!
+      interactive: "complexRootCalculator",
+      content: `# Wurzeln komplexer Zahlen
 
 ---
 
-## Beispiel 1: Kubikwurzeln von 8
+## Das Besondere
 
-$z = 8 = 8e^{j \\cdot 0°}$ → $r = 8$, $\\varphi = 0°$
+Bei reellen Zahlen hat $\\sqrt{4} = 2$ (eindeutig).
 
-$n = 3$: $w_k = 8^{1/3} \\cdot e^{j(0° + k \\cdot 360°)/3} = 2 \\cdot e^{jk \\cdot 120°}$
-
-| $k$ | Winkel | Wurzel |
-|-----|--------|--------|
-| $0$ | $0°$ | $w_0 = 2$ |
-| $1$ | $120°$ | $w_1 = 2e^{j120°} = -1 + j\\sqrt{3}$ |
-| $2$ | $240°$ | $w_2 = 2e^{j240°} = -1 - j\\sqrt{3}$ |
-
-Die drei Wurzeln bilden ein **gleichseitiges Dreieck** in der Gaußschen Ebene!
+Bei komplexen Zahlen hat **jede Zahl $n$ verschiedene $n$-te Wurzeln!**
 
 ---
 
-## Beispiel 2: Quadratwurzeln von $j$
+## Die Formel
 
-$z = j = e^{j90°}$ → $r = 1$, $\\varphi = 90°$
+Für $z = r e^{j\\varphi}$ sind die $n$-ten Wurzeln:
 
-$n = 2$: $w_k = 1^{1/2} \\cdot e^{j(90° + k \\cdot 360°)/2}$
+$$w_k = r^{1/n} \\cdot e^{j \\frac{\\varphi + 2k\\pi}{n}}$$
 
-| $k$ | Winkel | Wurzel |
-|-----|--------|--------|
-| $0$ | $45°$ | $w_0 = e^{j45°} = \\frac{\\sqrt{2}}{2} + j\\frac{\\sqrt{2}}{2}$ |
-| $1$ | $225°$ | $w_1 = e^{j225°} = -\\frac{\\sqrt{2}}{2} - j\\frac{\\sqrt{2}}{2}$ |
+wobei $k = 0, 1, 2, \\ldots, n-1$
 
 ---
 
-## Beispiel 3: 4. Wurzeln von $16$
+## Was bedeutet das geometrisch?
 
-$z = 16 = 16e^{j \\cdot 0°}$ → $r = 16$, $\\varphi = 0°$
+Die $n$ Wurzeln liegen als **gleichmäßiges $n$-Eck** auf einem Kreis mit Radius $r^{1/n}$ um den Ursprung!
 
-$n = 4$: $w_k = 16^{1/4} \\cdot e^{jk \\cdot 90°} = 2 \\cdot e^{jk \\cdot 90°}$
-
-| $k$ | Winkel | Wurzel |
-|-----|--------|--------|
-| $0$ | $0°$ | $w_0 = 2$ |
-| $1$ | $90°$ | $w_1 = 2j$ |
-| $2$ | $180°$ | $w_2 = -2$ |
-| $3$ | $270°$ | $w_3 = -2j$ |
-
-Die vier Wurzeln bilden ein **Quadrat** in der Gaußschen Ebene!
+- **3 Wurzeln** → gleichseitiges Dreieck
+- **4 Wurzeln** → Quadrat
+- **5 Wurzeln** → regelmäßiges Fünfeck
 
 ---
 
-## Geometrische Anschauung
+## Beispiel: Kubikwurzeln von $8$
 
-Die $n$-ten Wurzeln einer komplexen Zahl:
-- Liegen auf einem **Kreis** mit Radius $r^{1/n}$
-- Sind **gleichmäßig verteilt** (Winkelabstand: $\\frac{360°}{n}$)
-- Bilden die Ecken eines **regelmäßigen n-Ecks**
+**Aufgabe:** Berechne $\\sqrt[3]{8}$ (alle 3 Wurzeln)
+
+$8 = 8 e^{j0°}$ (reelle Zahl, also $\\varphi = 0°$)
+
+$r^{1/3} = 8^{1/3} = 2$
+
+**Wurzel $k = 0$:**
+$w_0 = 2 e^{j \\frac{0° + 0°}{3}} = 2 e^{j0°} = 2$
+
+**Wurzel $k = 1$:**
+$w_1 = 2 e^{j \\frac{0° + 360°}{3}} = 2 e^{j120°} = 2(\\cos 120° + j\\sin 120°) = -1 + 1.732j$
+
+**Wurzel $k = 2$:**
+$w_2 = 2 e^{j \\frac{0° + 720°}{3}} = 2 e^{j240°} = 2(\\cos 240° + j\\sin 240°) = -1 - 1.732j$
+
+Die drei Wurzeln bilden ein **gleichseitiges Dreieck** auf einem Kreis mit Radius 2!
 
 ---
 
-## Beispiel 4: Kubikwurzeln von $8i$
+## Beispiel: Quadratwurzeln von $j$
 
-$z = 8j = 8e^{j90°}$ → $r = 8$, $\\varphi = 90°$
+**Aufgabe:** Berechne $\\sqrt{j}$
 
-$n = 3$: $w_k = 2 \\cdot e^{j(90° + k \\cdot 360°)/3}$
+$j = 1 \\cdot e^{j90°}$ → $r = 1$, $\\varphi = 90°$
 
-| $k$ | Winkel | Wurzel |
-|-----|--------|--------|
-| $0$ | $30°$ | $w_0 = 2e^{j30°} = \\sqrt{3} + j$ |
-| $1$ | $150°$ | $w_1 = 2e^{j150°} = -\\sqrt{3} + j$ |
-| $2$ | $270°$ | $w_2 = 2e^{j270°} = -2j$ |
+$r^{1/2} = 1$, $n = 2$
 
-Probe: $(\\sqrt{3} + j)^3 = 8j$ ✓`,
+**Wurzel $k = 0$:**
+$w_0 = e^{j \\frac{90°}{2}} = e^{j45°} = \\frac{\\sqrt{2}}{2} + j\\frac{\\sqrt{2}}{2}$
+
+**Wurzel $k = 1$:**
+$w_1 = e^{j \\frac{90° + 360°}{2}} = e^{j225°} = -\\frac{\\sqrt{2}}{2} - j\\frac{\\sqrt{2}}{2}$
+
+**Probe:** $w_0^2 = (e^{j45°})^2 = e^{j90°} = j$ ✓
+
+---
+
+## 🎯 Übungsaufgaben
+
+**1)** Berechne alle 3 Kubikwurzeln von $-8$.
+> $-8 = 8e^{j180°}$, Radius $= 2$
+> $w_0 = 2e^{j60°} = 1 + 1.732j$
+> $w_1 = 2e^{j180°} = -2$
+> $w_2 = 2e^{j300°} = 1 - 1.732j$
+
+**2)** Berechne die 4 vierten Wurzeln von $16$.
+> $16 = 16e^{j0°}$, Radius $= 2$
+> $w_0 = 2$, $w_1 = 2j$, $w_2 = -2$, $w_3 = -2j$ (Quadrat!)
+
+**3)** Berechne $\\sqrt{-1}$ (beide Wurzeln).
+> $-1 = e^{j180°}$ → $w_0 = e^{j90°} = j$, $w_1 = e^{j270°} = -j$
+
+**4)** Warum hat $z = 0$ nur eine Wurzel?
+> $0^{1/n} = 0$ für alle $n$. Kein Kreis, nur der Ursprung.
+
+**5)** Wie viele $n$-te Wurzeln hat eine komplexe Zahl?
+> Immer genau $n$ (Fundamentalsatz der Algebra).`,
+    },
+
+    // ══════════════════════════════════════════════════════════════
+    // QUIZ
+    // ══════════════════════════════════════════════════════════════
+    {
+      id: "kz-quiz",
+      title: "Test: Komplexe Zahlen",
+      duration: "15 min",
+      type: "quiz",
+      content: "# Teste dein Wissen!\n\nBeantworte die 10 Fragen. Du brauchst mindestens 80% zum Bestehen.",
+    },
+  ],
+
+};
+
+// Quiz questions for the complex numbers module
+export const complexQuizzes: Record<string, QuizQuestion[]> = {
+  "mathe-komplexe-zahlen": [
+    {
+      question: "Was ist $j^2$?",
+      type: "multiple",
+      options: ["$1$", "$-1$", "$j$", "$-j$"],
+      correct: 1,
+      explanation: "Die imaginäre Einheit $j$ ist definiert als $j = \\sqrt{-1}$, also $j^2 = -1$.",
+    },
+    {
+      question: "Was ist der Betrag von $z = 3 + 4j$?",
+      type: "multiple",
+      options: ["$7$", "$5$", "$25$", "$\\sqrt{7}$"],
+      correct: 1,
+      explanation: "$|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9+16} = \\sqrt{25} = 5$",
+    },
+    {
+      question: "Was ist das konjugierte von $z = 2 - 5j$?",
+      type: "multiple",
+      options: ["$-2 + 5j$", "$2 + 5j$", "$-2 - 5j$", "$5 - 2j$"],
+      correct: 1,
+      explanation: "Konjugiertes: Vorzeichen des Imaginärteils umkehren. $\\bar{z} = 2 + 5j$",
+    },
+    {
+      question: "In welchem Quadrant liegt $z = -3 + 2j$?",
+      type: "multiple",
+      options: ["I", "II", "III", "IV"],
+      correct: 1,
+      explanation: "$x = -3 < 0$ und $y = 2 > 0$ → Quadrant II (links oben)",
+    },
+    {
+      question: "Was ist $(1 + j) + (2 - 3j)$?",
+      type: "multiple",
+      options: ["$3 - 2j$", "$3 + 2j$", "$-1 - 2j$", "$3 - 4j$"],
+      correct: 0,
+      explanation: "Realteile: $1+2=3$, Imaginärteile: $1+(-3)=-2$. Ergebnis: $3 - 2j$",
+    },
+    {
+      question: "Was ist $(2e^{j30°}) \\cdot (3e^{j60°})$?",
+      type: "multiple",
+      options: ["$6e^{j90°}$", "$5e^{j90°}$", "$6e^{j180°}$", "$e^{j90°}$"],
+      correct: 0,
+      explanation: "Beträge: $2 \\cdot 3 = 6$, Winkel: $30° + 60° = 90°$. Ergebnis: $6e^{j90°}$",
+    },
+    {
+      question: "Wie viele $n$-te Wurzeln hat eine komplexe Zahl $z \\neq 0$?",
+      type: "multiple",
+      options: ["$1$", "$2$", "$n$", "$n-1$"],
+      correct: 2,
+      explanation: "Jede komplexe Zahl $z \\neq 0$ hat genau $n$ verschiedene $n$-te Wurzeln.",
+    },
+    {
+      question: "Was ist $j^4$?",
+      type: "multiple",
+      options: ["$j$", "$-1$", "$-j$", "$1$"],
+      correct: 3,
+      explanation: "$j^4 = j^2 \\cdot j^2 = (-1)(-1) = 1$. Die Potenzen von $j$ haben Periode 4.",
+    },
+    {
+      question: "Was ist $z \\cdot \\bar{z}$ für $z = 3 + 4j$?",
+      type: "multiple",
+      options: ["$25$", "$7$", "$0$", "$5$"],
+      correct: 0,
+      explanation: "$z \\cdot \\bar{z} = |z|^2 = 3^2 + 4^2 = 9 + 16 = 25$",
+    },
+    {
+      question: "Was ist das Ergebnis von $\\frac{6e^{j90°}}{2e^{j30°}}$?",
+      type: "multiple",
+      options: ["$3e^{j60°}$", "$3e^{j120°}$", "$12e^{j60°}$", "$3e^{j30°}$"],
+      correct: 0,
+      explanation: "Beträge: $6/2 = 3$, Winkel: $90° - 30° = 60°$. Ergebnis: $3e^{j60°}$",
     },
   ],
 };
-
-// ==================== QUIZ ====================
-
-export const complexQuiz: QuizQuestion[] = [
-  {
-    question: "Was ist $j^2$?",
-    type: "multiple",
-    options: ["$1$", "$-1$", "$j$", "$-j$"],
-    correct: 1,
-    explanation: "Die imaginäre Einheit ist definiert durch $j^2 = -1$.",
-  },
-  {
-    question: "Was ist der Realteil von $z = 3 - 5j$?",
-    type: "multiple",
-    options: ["$-5$", "$3$", "$5$", "$-3$"],
-    correct: 1,
-    explanation: "$z = 3 - 5j$: Der Realteil ist der Koeffizient ohne $j$, also $\\text{Re}(z) = 3$.",
-  },
-  {
-    question: "Berechne den Betrag von $z = 3 + 4j$.",
-    type: "multiple",
-    options: ["$7$", "$5$", "$25$", "$\\sqrt{7}$"],
-    correct: 1,
-    explanation: "$|z| = \\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5$.",
-  },
-  {
-    question: "Was ergibt $(2 + 3j) + (1 - 4j)$?",
-    type: "input",
-    correct: "3-j",
-    explanation: "$(2+1) + j(3-4) = 3 - j$.",
-  },
-  {
-    question: "Was ist das Konjugierte von $z = 5 + 2j$?",
-    type: "multiple",
-    options: ["$-5 - 2j$", "$5 - 2j$", "$-5 + 2j$", "$2 + 5j$"],
-    correct: 1,
-    explanation: "Das Konjugierte erhält man, indem man das Vorzeichen des Imaginärteils ändert: $\\bar{z} = 5 - 2j$.",
-  },
-  {
-    question: "Berechne $z \\cdot \\bar{z}$ für $z = 1 + 2j$.",
-    type: "input",
-    correct: "5",
-    explanation: "$z \\cdot \\bar{z} = (1+2j)(1-2j) = 1 + 4 = 5 = |z|^2$.",
-  },
-  {
-    question: "Was ergibt $(1+j)^2$?",
-    type: "multiple",
-    options: ["$2j$", "$2 + 2j$", "$1 + 2j$", "$-2j$"],
-    correct: 0,
-    explanation: "$(1+j)^2 = 1 + 2j + j^2 = 1 + 2j - 1 = 2j$.",
-  },
-  {
-    question: "Was ist $j^7$?",
-    type: "multiple",
-    options: ["$j$", "$-1$", "$-j$", "$1$"],
-    correct: 2,
-    explanation: "$j^7 = j^{7 \\bmod 4} = j^3 = j^2 \\cdot j = -j$.",
-  },
-  {
-    question: "In welcher Form schreibt man $z = r(\\cos\\varphi + j\\sin\\varphi)$?",
-    type: "multiple",
-    options: ["Normalform", "Exponentialform", "Trigonometrische Form", "Polarkoordinaten-Form"],
-    correct: 2,
-    explanation: "$z = r(\\cos\\varphi + j\\sin\\varphi)$ ist die trigonometrische Form.",
-  },
-  {
-    question: "Wie viele $n$-te Wurzeln hat eine komplexe Zahl?",
-    type: "multiple",
-    options: ["$1$", "$2$", "$n-1$", "$n$"],
-    correct: 3,
-    explanation: "Nach dem Fundamentalsatz der Algebra hat jede komplexe Zahl genau $n$ verschiedene $n$-te Wurzeln.",
-  },
-];
-
-// ==================== EXERCISES ====================
-
-export interface ComplexExercise {
-  id: string;
-  lessonId: string;
-  difficulty: 1 | 2 | 3;
-  type: "input" | "multiple";
-  question: string;
-  hint?: string;
-  expectedAnswer?: string;
-  tolerance?: number;
-  format?: string;
-  options?: { label: string; value: string }[];
-  correctOption?: string;
-  solution: string;
-}
-
-export const complexExercises: ComplexExercise[] = [
-  // === Lektion 1: Grundlagen ===
-  {
-    id: "kz-ue-1-1",
-    lessonId: "kz-1",
-    difficulty: 1,
-    type: "input",
-    question: "Was ist der Realteil von $z = 7 - 3j$?",
-    expectedAnswer: "7",
-    format: "Zahl",
-    solution: "$\\text{Re}(7 - 3j) = 7$",
-  },
-  {
-    id: "kz-ue-1-2",
-    lessonId: "kz-1",
-    difficulty: 1,
-    type: "input",
-    question: "Was ist der Imaginärteil von $z = 4 + 9j$?",
-    expectedAnswer: "9",
-    format: "Zahl",
-    solution: "$\\text{Im}(4 + 9j) = 9$",
-  },
-  {
-    id: "kz-ue-1-3",
-    lessonId: "kz-1",
-    difficulty: 1,
-    type: "multiple",
-    question: "Welche Gleichung hat keine reelle Lösung?",
-    options: [
-      { label: "$x^2 - 4 = 0$", value: "a" },
-      { label: "$x^2 + 1 = 0$", value: "b" },
-      { label: "$x^2 - 1 = 0$", value: "c" },
-      { label: "$x^2 = 0$", value: "d" },
-    ],
-    correctOption: "b",
-    solution: "$x^2 + 1 = 0 \\Rightarrow x^2 = -1$. Keine reelle Zahl quadriert ergibt $-1$.",
-  },
-
-  // === Lektion 2: Gaußsche Ebene ===
-  {
-    id: "kz-ue-2-1",
-    lessonId: "kz-2",
-    difficulty: 1,
-    type: "input",
-    question: "Berechne den Betrag von $z = 6 + 8j$.",
-    expectedAnswer: "10",
-    format: "Zahl",
-    hint: "$|z| = \\sqrt{x^2 + y^2}$",
-    solution: "$|z| = \\sqrt{36 + 64} = \\sqrt{100} = 10$",
-  },
-  {
-    id: "kz-ue-2-2",
-    lessonId: "kz-2",
-    difficulty: 2,
-    type: "input",
-    question: "Berechne den Betrag von $z = 1 - j$.",
-    expectedAnswer: "1.414",
-    tolerance: 0.01,
-    format: "Dezimalzahl",
-    hint: "$|z| = \\sqrt{1^2 + (-1)^2}$",
-    solution: "$|z| = \\sqrt{1 + 1} = \\sqrt{2} \\approx 1{,}414$",
-  },
-  {
-    id: "kz-ue-2-3",
-    lessonId: "kz-2",
-    difficulty: 2,
-    type: "multiple",
-    question: "In welchem Quadranten liegt $z = -3 + 2j$?",
-    options: [
-      { label: "Quadrant I", value: "a" },
-      { label: "Quadrant II", value: "b" },
-      { label: "Quadrant III", value: "c" },
-      { label: "Quadrant IV", value: "d" },
-    ],
-    correctOption: "b",
-    solution: "$x = -3 < 0$, $y = 2 > 0$ → Quadrant II.",
-  },
-
-  // === Lektion 3: Darstellungsformen ===
-  {
-    id: "kz-ue-3-1",
-    lessonId: "kz-3",
-    difficulty: 2,
-    type: "input",
-    question: "Berechne den Betrag $r$ von $z = 5 + 12j$.",
-    expectedAnswer: "13",
-    format: "Zahl",
-    hint: "$r = \\sqrt{x^2 + y^2}$",
-    solution: "$r = \\sqrt{25 + 144} = \\sqrt{169} = 13$",
-  },
-  {
-    id: "kz-ue-3-2",
-    lessonId: "kz-3",
-    difficulty: 2,
-    type: "input",
-    question: "Berechne den Winkel $\\varphi$ von $z = 1 + j$ in Grad.",
-    expectedAnswer: "45",
-    format: "Grad",
-    hint: "$\\varphi = \\arctan(y/x)$",
-    solution: "$\\varphi = \\arctan(1/1) = 45°$",
-  },
-  {
-    id: "kz-ue-3-3",
-    lessonId: "kz-3",
-    difficulty: 3,
-    type: "input",
-    question: "Berechne den Winkel $\\varphi$ von $z = -1 - j$ in Grad (0° bis 360°).",
-    expectedAnswer: "225",
-    format: "Grad",
-    hint: "Quadrant III: $\\varphi = \\arctan(y/x) + 180°$",
-    solution: "$\\arctan((-1)/(-1)) = 45°$. Quadrant III: $\\varphi = 45° + 180° = 225°$.",
-  },
-
-  // === Lektion 4: Addition & Subtraktion ===
-  {
-    id: "kz-ue-4-1",
-    lessonId: "kz-4",
-    difficulty: 1,
-    type: "input",
-    question: "$(4 + 3j) + (2 - 5j) = ?$ (Format: a+bj)",
-    expectedAnswer: "6-2j",
-    format: "Komplexe Zahl",
-    solution: "$(4+2) + j(3-5) = 6 - 2j$",
-  },
-  {
-    id: "kz-ue-4-2",
-    lessonId: "kz-4",
-    difficulty: 1,
-    type: "input",
-    question: "$(7 + j) - (3 + 4j) = ?$ (Format: a+bj)",
-    expectedAnswer: "4-3j",
-    format: "Komplexe Zahl",
-    solution: "$(7-3) + j(1-4) = 4 - 3j$",
-  },
-  {
-    id: "kz-ue-4-3",
-    lessonId: "kz-4",
-    difficulty: 2,
-    type: "input",
-    question: "$(2 + 3j) + (1 - 2j) - (3 + j) = ?$ (Format: a+bj)",
-    expectedAnswer: "0",
-    format: "Komplexe Zahl",
-    solution: "$(2+1-3) + j(3-2-1) = 0 + 0j = 0$",
-  },
-
-  // === Lektion 5: Multiplikation ===
-  {
-    id: "kz-ue-5-1",
-    lessonId: "kz-5",
-    difficulty: 2,
-    type: "input",
-    question: "$(1 + 2j)(3 - j) = ?$ (Format: a+bj)",
-    expectedAnswer: "5+5j",
-    format: "Komplexe Zahl",
-    solution: "$(3 - j + 6j - 2j^2) = 3 + 5j + 2 = 5 + 5j$",
-  },
-  {
-    id: "kz-ue-5-2",
-    lessonId: "kz-5",
-    difficulty: 2,
-    type: "input",
-    question: "$(2 + j)^2 = ?$ (Format: a+bj)",
-    expectedAnswer: "3+4j",
-    format: "Komplexe Zahl",
-    solution: "$(2+j)^2 = 4 + 4j + j^2 = 4 + 4j - 1 = 3 + 4j$",
-  },
-  {
-    id: "kz-ue-5-3",
-    lessonId: "kz-5",
-    difficulty: 3,
-    type: "input",
-    question: "Berechne $j^{15}$.",
-    expectedAnswer: "-j",
-    format: "Komplexe Zahl",
-    hint: "$15 \\bmod 4 = 3$",
-    solution: "$j^{15} = j^{15 \\bmod 4} = j^3 = -j$",
-  },
-
-  // === Lektion 6: Division ===
-  {
-    id: "kz-ue-6-1",
-    lessonId: "kz-6",
-    difficulty: 2,
-    type: "input",
-    question: "$\\frac{4}{1+j} = ?$ (Format: a+bj)",
-    expectedAnswer: "2-2j",
-    format: "Komplexe Zahl",
-    hint: "Mit $1-j$ erweitern",
-    solution: "$\\frac{4(1-j)}{(1+j)(1-j)} = \\frac{4-4j}{2} = 2 - 2j$",
-  },
-  {
-    id: "kz-ue-6-2",
-    lessonId: "kz-6",
-    difficulty: 3,
-    type: "input",
-    question: "$\\frac{3+4j}{2-j} = ?$ (Format: a+bj)",
-    expectedAnswer: "0.4+2.2j",
-    tolerance: 0.01,
-    format: "Komplexe Zahl",
-    hint: "Mit $2+j$ erweitern",
-    solution: "$\\frac{(3+4j)(2+j)}{4+1} = \\frac{6+3j+8j-4}{5} = \\frac{2+11j}{5} = 0{,}4 + 2{,}2j$",
-  },
-
-  // === Lektion 7: Potenzieren ===
-  {
-    id: "kz-ue-7-1",
-    lessonId: "kz-7",
-    difficulty: 2,
-    type: "input",
-    question: "Berechne $(e^{j60°})^3$ in der Form $a+bj$.",
-    expectedAnswer: "-1",
-    format: "Komplexe Zahl",
-    hint: "De Moivre: $(e^{j\\varphi})^n = e^{jn\\varphi}$",
-    solution: "$e^{j180°} = \\cos 180° + j\\sin 180° = -1 + 0j = -1$",
-  },
-  {
-    id: "kz-ue-7-2",
-    lessonId: "kz-7",
-    difficulty: 3,
-    type: "input",
-    question: "Berechne $(1+j)^4$ in der Form $a+bj$.",
-    expectedAnswer: "-4",
-    format: "Komplexe Zahl",
-    hint: "$(1+j)^2 = 2j$, dann quadrieren",
-    solution: "$(1+j)^2 = 2j$. Dann $(2j)^2 = 4j^2 = -4$.",
-  },
-
-  // === Lektion 8: Radizieren ===
-  {
-    id: "kz-ue-8-1",
-    lessonId: "kz-8",
-    difficulty: 2,
-    type: "input",
-    question: "Wie viele verschiedene Quadratwurzeln hat eine komplexe Zahl?",
-    expectedAnswer: "2",
-    format: "Zahl",
-    solution: "Jede komplexe Zahl hat genau $n = 2$ Quadratwurzeln.",
-  },
-  {
-    id: "kz-ue-8-2",
-    lessonId: "kz-8",
-    difficulty: 3,
-    type: "input",
-    question: "Berechne die reelle Quadratwurzel von $z = -4$ (die mit positivem Imaginärteil). (Format: a+bj)",
-    expectedAnswer: "2j",
-    format: "Komplexe Zahl",
-    hint: "$-4 = 4e^{j180°}$, $\\sqrt{4} = 2$",
-    solution: "$-4 = 4e^{j180°}$. $w_0 = 2e^{j90°} = 2j$. $w_1 = 2e^{j270°} = -2j$. Die mit positivem Imaginärteil: $2j$.",
-  },
-  {
-    id: "kz-ue-8-3",
-    lessonId: "kz-8",
-    difficulty: 3,
-    type: "input",
-    question: "Wie viele Kubikwurzeln hat $z = 27$?",
-    expectedAnswer: "3",
-    format: "Zahl",
-    solution: "Jede komplexe Zahl hat genau 3 Kubikwurzeln ($n = 3$).",
-  },
-];
