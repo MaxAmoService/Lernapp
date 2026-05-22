@@ -12,10 +12,10 @@ interface AvatarFrameProps {
 }
 
 const SIZES = {
-  sm: { outer: "w-9 h-9", inner: "w-6 h-6", text: "text-base", ring: "2px" },
-  md: { outer: "w-12 h-12", inner: "w-9 h-9", text: "text-xl", ring: "2px" },
-  lg: { outer: "w-16 h-16", inner: "w-12 h-12", text: "text-3xl", ring: "3px" },
-  xl: { outer: "w-24 h-24", inner: "w-18 h-18", text: "text-5xl", ring: "3px" },
+  sm: { outer: "w-8 h-8", inner: "w-6 h-6", text: "text-base", ring: "2px" },
+  md: { outer: "w-10 h-10", inner: "w-8 h-8", text: "text-xl", ring: "2px" },
+  lg: { outer: "w-14 h-14", inner: "w-12 h-12", text: "text-3xl", ring: "2px" },
+  xl: { outer: "w-20 h-20", inner: "w-18 h-18", text: "text-5xl", ring: "2px" },
 };
 
 function getFrameStyle(frameId: string, size: string): React.CSSProperties {
