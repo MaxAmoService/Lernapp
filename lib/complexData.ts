@@ -332,13 +332,15 @@ $(3 + 2j) + (1 - 4j)$: Starte bei $(3, 2)$, gehe um $(1, -4)$ — landest bei $(
 
 ---
 
-## In Normalform (FOIL)
+## Weg 1: Normalform (FOIL)
 
 $$z_1 \\cdot z_2 = (x_1 x_2 - y_1 y_2) + j(x_1 y_2 + x_2 y_1)$$
 
 Ausmultiplizieren (FOIL: First, Outer, Inner, Last) und $j^2 = -1$ einsetzen.
 
-Herkunft der Formel:
+---
+
+### Herkunft der Formel
 
 $(x_1 + jy_1)(x_2 + jy_2)$
 
@@ -350,11 +352,65 @@ $= (x_1 x_2 - y_1 y_2) + j(x_1 y_2 + x_2 y_1)$
 
 ---
 
-## In Exponentialform (viel einfacher!)
+### Beispiel 1: $(2 + 3j) \\cdot (1 - 2j)$
+
+Schritt 1: First: $2 \\cdot 1 = 2$
+
+Schritt 2: Outer: $2 \\cdot (-2j) = -4j$
+
+Schritt 3: Inner: $3j \\cdot 1 = 3j$
+
+Schritt 4: Last: $3j \\cdot (-2j) = -6j^2 = +6$
+
+Schritt 5: Zusammen: $(2 + 6) + j(-4 + 3) = 8 - j$
+
+Ergebnis: $8 - j$ ✅
+
+---
+
+### Beispiel 2: $(1 + j)^2 = (1+j)(1+j)$
+
+Schritt 1: First: $1 \\cdot 1 = 1$
+
+Schritt 2: Outer + Inner: $1 \\cdot j + j \\cdot 1 = 2j$
+
+Schritt 3: Last: $j \\cdot j = j^2 = -1$
+
+Schritt 4: Zusammen: $1 + 2j - 1 = 2j$
+
+Ergebnis: $2j$ ✅
+
+> **Merke:** $(1+j)^2 = 2j$ — eine rein imaginäre Zahl! Das überrascht viele.
+
+---
+
+## Weg 2: Exponentialform (viel einfacher!)
 
 $$z_1 \\cdot z_2 = r_1 r_2 \\cdot e^{j(\\varphi_1 + \\varphi_2)}$$
 
 Beträge multiplizieren, Winkel addieren! Das ist der große Vorteil der Exponentialform.
+
+---
+
+### Beispiel 3: $3e^{j20°} \\cdot 4e^{j30°}$
+
+Schritt 1: Beträge: $3 \\cdot 4 = 12$
+
+Schritt 2: Winkel: $20° + 30° = 50°$
+
+Ergebnis: $12e^{j50°}$ ✅
+
+---
+
+### Beispiel 4: $2e^{j90°} \\cdot 3e^{j90°}$
+
+Schritt 1: Beträge: $2 \\cdot 3 = 6$
+
+Schritt 2: Winkel: $90° + 90° = 180°$
+
+Ergebnis: $6e^{j180°} = -6$ ✅
+
+> **Wann welchen Weg?** Exponentialform ist schneller, aber man muss erst umrechnen. Für schnelle Kopfrechnung: Normalform + FOIL.
 
 ---
 
@@ -380,11 +436,21 @@ $$\\bar{z} = x - jy$$
 
 Man spiegelt den Imaginärteil an der reellen Achse. In der Gaußschen Ebene: Spiegelung an der x-Achse.
 
+---
+
 ### Wichtige Eigenschaften
 
 - $z \\cdot \\bar{z} = x^2 + y^2 = |z|^2$ — immer reell und positiv!
 - $\\overline{z_1 + z_2} = \\bar{z_1} + \\bar{z_2}$
 - $\\overline{z_1 \\cdot z_2} = \\bar{z_1} \\cdot \\bar{z_2}$
+
+---
+
+### Beispiel 1: Konjugiertes bilden
+
+$z = 3 - 4j \\Rightarrow \\bar{z} = 3 + 4j$
+
+$z \\cdot \\bar{z} = (3-4j)(3+4j) = 9 + 16 = 25 = |z|^2$ ✅
 
 ---
 
@@ -406,11 +472,51 @@ Der Nenner wird zu $|z_2|^2$ — eine reelle Zahl!
 
 ---
 
+### Beispiel 2: $\\frac{3+4j}{1-2j}$
+
+Schritt 1: Konjugierten bilden: $\\overline{1-2j} = 1+2j$
+
+Schritt 2: Nenner: $(1-2j)(1+2j) = 1 + 4 = 5$ — reell!
+
+Schritt 3: Zähler: $(3+4j)(1+2j) = 3 + 6j + 4j + 8j^2 = -5 + 10j$
+
+Schritt 4: Teilen: $\\frac{-5+10j}{5} = -1 + 2j$
+
+Ergebnis: $-1 + 2j$ ✅
+
+---
+
+### Beispiel 3: $\\frac{6+2j}{2+j}$
+
+Schritt 1: Konjugierten: $2-j$
+
+Schritt 2: Nenner: $(2+j)(2-j) = 4 + 1 = 5$
+
+Schritt 3: Zähler: $(6+2j)(2-j) = 12 - 6j + 4j - 2j^2 = 14 - 2j$
+
+Schritt 4: Teilen: $\\frac{14-2j}{5} = 2{,}8 - 0{,}4j$
+
+Ergebnis: $2{,}8 - 0{,}4j$ ✅
+
+---
+
 ## In Exponentialform (viel einfacher!)
 
 $$\\frac{z_1}{z_2} = \\frac{r_1}{r_2} \\cdot e^{j(\\varphi_1 - \\varphi_2)}$$
 
 Beträge dividieren, Winkel subtrahieren!
+
+---
+
+### Beispiel 4: $\\frac{12e^{j80°}}{4e^{j30°}}$
+
+Schritt 1: Beträge: $12 / 4 = 3$
+
+Schritt 2: Winkel: $80° - 30° = 50°$
+
+Ergebnis: $3e^{j50°}$ ✅
+
+> **Merke:** Division in Exponentialform ist fast trivial — Beträge dividieren, Winkel subtrahieren.
 
 ---
 
@@ -446,6 +552,42 @@ $z^n = (r \\cdot e^{j\\varphi})^n = r^n \\cdot (e^{j\\varphi})^n = r^n \\cdot e^
 
 ---
 
+### Beispiel 1: $(1+j)^4$
+
+Schritt 1: Umrechnen: $r = \\sqrt{2}$, $\\varphi = 45°$
+
+Schritt 2: De Moivre: $z^4 = (\\sqrt{2})^4 \\cdot e^{j(4 \\cdot 45°)} = 4 \\cdot e^{j180°}$
+
+Schritt 3: Zurück: $4e^{j180°} = 4(-1) = -4$
+
+Ergebnis: $(1+j)^4 = -4$ ✅
+
+> **Erstaunlich!** Eine komplexe Zahl hoch 4 kann eine negative reelle Zahl sein.
+
+---
+
+### Beispiel 2: $(2e^{j15°})^3$
+
+Schritt 1: Betrag: $2^3 = 8$
+
+Schritt 2: Winkel: $3 \\cdot 15° = 45°$
+
+Ergebnis: $8e^{j45°}$ ✅
+
+---
+
+### Beispiel 3: $(\\sqrt{3} + j)^3$
+
+Schritt 1: Umrechnen: $r = \\sqrt{3+1} = 2$, $\\varphi = 30°$
+
+Schritt 2: De Moivre: $z^3 = 2^3 \\cdot e^{j(3 \\cdot 30°)} = 8e^{j90°}$
+
+Schritt 3: Zurück: $8e^{j90°} = 8(\\cos90° + j\\sin90°) = 8j$
+
+Ergebnis: $(\\sqrt{3}+j)^3 = 8j$ ✅
+
+---
+
 ## Potenzen von $j$ — der Zyklus
 
 | $n$ | $j^n$ | Warum |
@@ -457,6 +599,20 @@ $z^n = (r \\cdot e^{j\\varphi})^n = r^n \\cdot (e^{j\\varphi})^n = r^n \\cdot e^
 | 5 | $j$ | Zyklus! |
 
 Formel: $j^n = j^{(n \\text{ mod } 4)}$
+
+---
+
+### Beispiel 4: $j^{17}$
+
+$17 \\text{ mod } 4 = 1$ (denn $17 = 4 \\cdot 4 + 1$)
+
+Also $j^{17} = j^1 = j$ ✅
+
+### Beispiel 5: $j^{100}$
+
+$100 \\text{ mod } 4 = 0$ (denn $100 = 4 \\cdot 25$)
+
+Also $j^{100} = j^4 = 1$ ✅
 
 ---
 
@@ -496,17 +652,49 @@ Geometrisch: Die Wurzeln liegen als gleichmäßiges $n$-Eck auf einem Kreis mit 
 
 ---
 
-## Beispiel: Kubikwurzeln von $8$
+### Beispiel 1: Kubikwurzeln von $8$
 
 $8 = 8e^{j0°}$, Radius $= 8^{1/3} = 2$
 
 | $k$ | Winkel | Wurzel |
 |-----|--------|--------|
 | 0 | $0°$ | $2$ |
-| 1 | $120°$ | $-1 + 1.732j$ |
-| 2 | $240°$ | $-1 - 1.732j$ |
+| 1 | $120°$ | $-1 + 1{,}732j$ |
+| 2 | $240°$ | $-1 - 1{,}732j$ |
 
 Gleichseitiges Dreieck auf dem Kreis!
+
+---
+
+### Beispiel 2: Quadratwurzeln von $j$
+
+$j = 1 \\cdot e^{j90°}$, Radius $= 1^{1/2} = 1$
+
+| $k$ | Winkel | Wurzel |
+|-----|--------|--------|
+| 0 | $45°$ | $\\frac{1}{\\sqrt{2}} + j\\frac{1}{\\sqrt{2}} \\approx 0{,}707 + 0{,}707j$ |
+| 1 | $225°$ | $-\\frac{1}{\\sqrt{2}} - j\\frac{1}{\\sqrt{2}} \\approx -0{,}707 - 0{,}707j$ |
+
+Merke: $\\sqrt{j} = \\pm(0{,}707 + 0{,}707j)$ — zwei Wurzeln!
+
+---
+
+### Beispiel 3: $\\sqrt[4]{16}$
+
+$16 = 16e^{j0°}$, Radius $= 16^{1/4} = 2$
+
+| $k$ | Winkel | Wurzel |
+|-----|--------|--------|
+| 0 | $0°$ | $2$ |
+| 1 | $90°$ | $2j$ |
+| 2 | $180°$ | $-2$ |
+| 3 | $270°$ | $-2j$ |
+
+4 Wurzeln auf einem Kreis der Radius 2 — Quadrat!
+
+---
+
+> **Merke:** Die $n$-ten Wurzeln von $z \\neq 0$ bilden immer ein regelmäßiges $n$-Eck auf dem Kreis mit Radius $r^{1/n}$.
 
 ---
 
