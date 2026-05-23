@@ -1011,6 +1011,44 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
 - $\\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$
 - $\\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}$
 
+
+
+---
+
+## Schritt-fuer-Schritt Beispiele
+
+### Beispiel 1: Konvergenzradius bestimmen
+
+$\sum_{n=0}^{\infty} \frac{x^n}{n+1}$
+
+Schritt 1: $a_n = \frac{1}{n+1}$
+
+Schritt 2: $R = \lim_{n\to\infty} \left|\frac{a_n}{a_{n+1}}\right| = \lim_{n\to\infty} \frac{n+2}{n+1} = 1$
+
+Schritt 3: Konvergenzradius $R = 1$. Die Reihe konvergiert fuer $|x| < 1$.
+
+### Beispiel 2: Reihe in eine bekannte Funktion umformen
+
+$\sum_{n=0}^{\infty} \frac{x^n}{n!}$
+
+Erkenne: Das ist die Taylor-Reihe von $e^x$!
+
+Also: $\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$ fuer alle $x \in \mathbb{R}$ ($R = \infty$).
+
+> **Merke:** Potenzreihen kann man gliedweise ableiten und integrieren -- der Konvergenzradius bleibt gleich!
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Entwickle $\frac{1}{1+x}$ als Potenzreihe um $a=0$
+
+**Schritt 1:** Erkenne: $\frac{1}{1+x} = \frac{1}{1-(-x)}$
+
+**Schritt 2:** Geometrische Reihe: $\frac{1}{1-r} = \sum r^n$ mit $r = -x$
+
+**Schritt 3:** Einsetzen: $\frac{1}{1+x} = \sum_{n=0}^{\infty} (-1)^n x^n$
+
+**Schritt 4:** Konvergenz: $|-x| < 1$ -> $|x| < 1$ -> $R = 1$
+[GUIDED_END]
+
 [PRACTICE_START]
 **Aufgabe 1:** Bestimme den Konvergenzradius von $\sum_{n=0}^{\infty} \frac{x^n}{2^n}$
 
@@ -2239,6 +2277,34 @@ $N(15) = 1000 \\cdot (\\frac{1}{2})^{15/5} = 1000 \\cdot \\frac{1}{8} = 125$
 
 > **Merke:** $e^x$ ist DIE Exponentialfunktion — sie beschreibt natürliches Wachstum überall in der Natur!
 
+
+
+---
+
+## Stetiges Wachstum -- Zinseszins
+
+$$K(t) = K_0 \cdot e^{rt}$$
+
+### Beispiel 2: Zinseszins
+
+1000 Euro zu 5% ueber 10 Jahre, stetig verzinst:
+
+$K(10) = 1000 \cdot e^{0{,}05 \cdot 10} = 1000 \cdot e^{0{,}5} = 1000 \cdot 1{,}6487 = 1648{,}70$ Euro
+
+Vergleich einfach: $1000 \cdot 1{,}5 = 1500$ Euro. Stetig verzinst gibt mehr!
+
+### Beispiel 3: Wann hat sich das Kapital verdoppelt?
+
+$2000 = 1000 \cdot e^{0{,}05t}$
+
+$2 = e^{0{,}05t}$
+
+$\ln(2) = 0{,}05t$
+
+$t = \frac{\ln(2)}{0{,}05} = \frac{0{,}693}{0{,}05} = 13{,}86$ Jahre
+
+> **Merke:** Verdopplungszeit $T_2 = \frac{\ln 2}{r}$. Bei 5%: ca. 14 Jahre.
+
 [PRACTICE_START]
 **Aufgabe:** Eine Bakterienkultur verdoppelt sich alle 3 Stunden. Start: 100. Nach 12 Stunden?
 
@@ -2518,7 +2584,67 @@ $\\frac{1}{4} = 0{,}25$, $\\frac{1}{3} = 0{,}333...$, $\\frac{1}{2} = 0{,}5$
 Brüche lassen sich auf dem Zahlenstrahl darstellen. $\\frac{3}{4}$ liegt bei 0,75.
 
 ### Beispiel
-Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\\frac{3}{8}$ gegessen. Es bleiben $\\frac{5}{8}$.`,
+Teile einen Kuchen in 8 Stücke. Wenn du 3 isst, hast du $\\frac{3}{8}$ gegessen. Es bleiben $\\frac{5}{8}$.
+
+## Gemischte Zahlen und unechte Brueche
+
+Ein **unechter Bruch** hat $Z \geq N$: $\frac{7}{4}$
+
+Eine **gemischte Zahl** = Ganze Zahl + echter Bruch: $1\frac{3}{4}$
+
+### Umrechnung: Ungecht -> Gemischt
+
+$\frac{7}{4} = 7 \div 4 = 1$ Rest $3 = 1\frac{3}{4}$
+
+### Umrechnung: Gemischt -> Ungecht
+
+$1\frac{3}{4} = \frac{1 \cdot 4 + 3}{4} = \frac{7}{4}$
+
+---
+
+## Dezimalzahlen als Bruch
+
+$0{,}75 = \frac{75}{100} = \frac{3}{4}$ (kuerzen durch 25)
+
+$0{,}333... = \frac{1}{3}$ (periodische Dezimalzahl)
+
+> **Merke:** Jede endliche Dezimalzahl laesst sich als Bruch schreiben. Umgekehrt: Teile $Z \div N$ fuer die Dezimaldarstellung.
+
+---
+
+## Brueche vergleichen
+
+Gleicher Nenner: $\frac{2}{5}$ vs $\frac{3}{5}$ -> $\frac{3}{5}$ ist groesser
+
+Verschiedene Nenner: $\frac{2}{3}$ vs $\frac{3}{5}$
+-> $\frac{2}{3} = \frac{10}{15}$, $\frac{3}{5} = \frac{9}{15}$ -> $\frac{2}{3} > \frac{3}{5}$
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Wandle $\frac{22}{7}$ in eine gemischte Zahl um
+
+**Schritt 1:** Teile: $22 \div 7 = 3$ Rest $1$
+
+**Schritt 2:** Ganzer Teil: $3$
+
+**Schritt 3:** Rest als Zaehler: $\frac{1}{7}$
+
+**Ergebnis:** $\frac{22}{7} = 3\frac{1}{7}$
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Wandle $\frac{11}{3}$ in eine gemischte Zahl um
+
+**Loesung:** $11 \div 3 = 3$ Rest $2$ -> $3\frac{2}{3}$
+
+**Aufgabe 2:** Wandle $2\frac{5}{8}$ in einen unechten Bruch um
+
+**Loesung:** $\frac{2 \cdot 8 + 5}{8} = \frac{21}{8}$
+
+**Aufgabe 3:** Ordne: $\frac{1}{2}$, $\frac{3}{5}$, $\frac{2}{3}$
+
+**Loesung:** $\frac{1}{2} = \frac{15}{30}$, $\frac{3}{5} = \frac{18}{30}$, $\frac{2}{3} = \frac{20}{30}$
+Also: $\frac{1}{2} < \frac{3}{5} < \frac{2}{3}$
+[PRACTICE_END]`,
       },
       {
         id: "m-br-2",
@@ -2797,6 +2923,56 @@ $D = b^2 - 4ac$ bestimmt die Anzahl der Lösungen:
 - $D > 0$: Zwei Lösungen
 - $D = 0$: Eine Lösung (doppelt)
 - $D < 0$: Keine reelle Lösung
+
+
+
+---
+
+## Die abc-Formel (Mitternachtsformel)
+
+Fuer $ax^2 + bx + c = 0$:
+
+$$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
+
+### Beispiel 2: abc-Formel anwenden
+
+$2x^2 + 3x - 2 = 0$ ($a=2$, $b=3$, $c=-2$)
+
+$x = \frac{-3 \pm \sqrt{9 + 16}}{4} = \frac{-3 \pm 5}{4}$
+
+$x_1 = \frac{-3+5}{4} = \frac{1}{2}$, $x_2 = \frac{-3-5}{4} = -2$
+
+---
+
+## Die Diskriminante -- 3 Faelle
+
+$$D = b^2 - 4ac$$
+
+| $D$ | Bedeutung | Loesungen |
+|-----|-----------|----------|
+| $D > 0$ | Zwei verschiedene reelle Loesungen | $x_{1,2} = \frac{-b \pm \sqrt{D}}{2a}$ |
+| $D = 0$ | Eine doppelte Loesung | $x = \frac{-b}{2a}$ |
+| $D < 0$ | Keine reellen Loesungen | (nur komplexe) |
+
+### Beispiel 3: D-Bestimmung
+
+$x^2 - 4x + 4 = 0$: $D = 16 - 16 = 0$ -> doppelte Loesung $x = 2$
+
+$x^2 + x + 1 = 0$: $D = 1 - 4 = -3 < 0$ -> keine reellen Loesungen
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Loese $3x^2 - 6x + 2 = 0$ vollstaendig
+
+**Schritt 1:** $a=3$, $b=-6$, $c=2$
+
+**Schritt 2:** Diskriminante: $D = 36 - 24 = 12 > 0$ -> zwei Loesungen
+
+**Schritt 3:** $x = \frac{6 \pm \sqrt{12}}{6} = 1 \pm \frac{\sqrt{3}}{3}$
+
+**Schritt 4:** $x_1 \approx 1{,}577$, $x_2 \approx 0{,}423$
+
+**Probe:** $3(1{,}577)^2 - 6(1{,}577) + 2 \approx 0$
+[GUIDED_END]
 
 [PRACTICE_START]
 **Aufgabe 1:** Löse $x^2 - 5x + 6 = 0$ mit der pq-Formel
@@ -3375,7 +3551,43 @@ Anhand von $f''(x)$:
 5. Monotonie (Vorzeichen von $f'(x)$)
 6. Krümmung (Vorzeichen von $f''(x)$)
 
-> **Merke:** Wendepunkt = Krümmungswechsel. Monotonie zeigt $f'$, Krümmung zeigt $f''$!`,
+> **Merke:** Wendepunkt = Krümmungswechsel. Monotonie zeigt $f'$, Krümmung zeigt $f''$!
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Fuehre eine vollstaendige Kurvendiskussion fuer $f(x) = x^3 - 3x + 2$ durch
+
+**Schritt 1: Definitionsbereich:** $D = \mathbb{R}$ (Polynom)
+
+**Schritt 2: Symmetrie:** Weder gerade noch ungerade
+
+**Schritt 3: Nullstellen:** $x^3 - 3x + 2 = (x-1)^2(x+2) = 0$
+$x_1 = 1$ (doppelt), $x_2 = -2$
+
+**Schritt 4: Ableitungen:**
+$f^{\prime}(x) = 3x^2 - 3 = 3(x-1)(x+1)$
+$f^{\prime\prime}(x) = 6x$
+
+**Schritt 5: Extrema:**
+$f^{\prime}(x) = 0$ bei $x = 1$ und $x = -1$
+$f^{\prime\prime}(-1) = -6 < 0$ -> Max bei $(-1, 4)$
+$f^{\prime\prime}(1) = 6 > 0$ -> Min bei $(1, 0)$
+
+**Schritt 6: Wendepunkt:**
+$f^{\prime\prime}(x) = 0$ bei $x = 0$. $f(0) = 2$. Wendepunkt bei $(0, 2)$.
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Finde die Extrema von $f(x) = x^3 - 12x + 5$
+
+**Loesung:** $f^{\prime}(x) = 3x^2 - 12 = 0$ -> $x = \pm 2$
+$f^{\prime\prime}(-2) = -12 < 0$ -> Max bei $(-2, 21)$
+$f^{\prime\prime}(2) = 12 > 0$ -> Min bei $(2, -11)$
+
+**Aufgabe 2:** Finde den Wendepunkt von $f(x) = x^4 - 4x^3$
+
+**Loesung:** $f^{\prime\prime}(x) = 12x^2 - 24x = 12x(x-2) = 0$ bei $x = 0$ und $x = 2$
+Pruefe Vorzeichenwechsel -> Wendepunkte bei $(0, 0)$ und $(2, -16)$
+[PRACTICE_END]`,
       },
       {
         id: "m-kd-4",
@@ -3497,6 +3709,71 @@ $\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ y - 2z = -4 \\end{cases}$
 $\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\\frac{7}{3}z = -7 \\end{cases}$
 
 **Rückwärts:** $z = 3$, $y = 2$, $x = 1$
+
+
+
+---
+
+## Das Gauß-Verfahren -- Schritt fuer Schritt
+
+### Algorithmus
+
+1. **Elimination:** Verwende Zeile 1, um die erste Spalte in Zeile 2 und 3 zu 0 zu machen
+2. **Fortsetzen:** Verwende Zeile 2, um die zweite Spalte in Zeile 3 zu 0 zu machen
+3. **Ruecksubstitution:** Loese von unten nach oben auf
+
+### Notation -- Erweiterte Koeffizientenmatrix
+
+Das System $2x + y = 5$, $4x + 3y = 11$ wird zu:
+$$\left(\begin{array}{cc|c} 2 & 1 & 5 \\ 4 & 3 & 11 \end{array}\right)$$
+
+### Beispiel 2: System mit keiner Loesung
+
+$x + y = 3$, $2x + 2y = 7$
+
+$$\left(\begin{array}{cc|c} 1 & 1 & 3 \\ 2 & 2 & 7 \end{array}\right) \\xrightarrow{Z_2 - 2Z_1} \left(\begin{array}{cc|c} 1 & 1 & 3 \\ 0 & 0 & 1 \end{array}\right)$$
+
+Zeile 2 sagt $0 = 1$ -> **Widerspruch!** Keine Loesung.
+
+### Beispiel 3: System mit unendlich vielen Loesungen
+
+$x + y = 3$, $2x + 2y = 6$
+
+$$\left(\begin{array}{cc|c} 1 & 1 & 3 \\ 2 & 2 & 6 \end{array}\right) \\xrightarrow{Z_2 - 2Z_1} \left(\begin{array}{cc|c} 1 & 1 & 3 \\ 0 & 0 & 0 \end{array}\right)$$
+
+Zeile 2 sagt $0 = 0$ -> immer wahr. $y = t$ (frei), $x = 3 - t$. **Unendlich viele Loesungen!**
+
+> **Merke:** $0 = 0$ -> unendlich viele Loesungen. $0 = c$ (mit $c \neq 0$) -> keine Loesung.
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Loese mit Gauss:
+$x + 2y + z = 9$
+$2x + 5y + 3z = 20$
+$3x + 6y + 4z = 29$
+
+**Schritt 1:** Erweiterte Matrix:
+$\left(\begin{array}{ccc|c} 1 & 2 & 1 & 9 \\ 2 & 5 & 3 & 20 \\ 3 & 6 & 4 & 29 \end{array}\right)$
+
+**Schritt 2:** $Z_2 - 2Z_1$, $Z_3 - 3Z_1$:
+$\left(\begin{array}{ccc|c} 1 & 2 & 1 & 9 \\ 0 & 1 & 1 & 2 \\ 0 & 0 & 1 & 2 \end{array}\right)$
+
+**Schritt 3:** Ruecksubstitution:
+$z = 2$
+$y + 2 = 2$ -> $y = 0$
+$x + 0 + 2 = 9$ -> $x = 7$
+
+**Probe:** $7 + 0 + 2 = 9$, $14 + 0 + 6 = 20$, $21 + 0 + 8 = 29$
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Loese mit Gauss: $x + y = 5$, $3x - y = 1$
+
+**Loesung:** $Z_2 - 3Z_1$: $-4y = -14$ -> $y = 3{,}5$. Dann $x = 1{,}5$.
+
+**Aufgabe 2:** Hat das System $x + y = 2$, $2x + 2y = 5$ eine Loesung?
+
+**Loesung:** $Z_2 - 2Z_1$: $0 = 1$ -> Widerspruch, keine Loesung!
+[PRACTICE_END]
 
 [PRACTICE_START]
 **Aufgabe:** Löse mit Gauß: $x + y = 3$, $2x - y = 0$
@@ -4873,7 +5150,113 @@ $\\cos(x) \\approx 1 - \\frac{x^2}{2}$
 
 $e^x \\approx 1 + x + \\frac{x^2}{2}$
 
-> **Merke:** Taylor-Reihen sind das Werkzeug, mit dem Computer trigonometrische Funktionen berechnen!`,
+> **Merke:** Taylor-Reihen sind das Werkzeug, mit dem Computer trigonometrische Funktionen berechnen!
+
+---
+
+## Schritt-fuer-Schritt Beispiele
+
+### Beispiel 1: Geometrische Reihe berechnen
+
+Berechne $\sum_{n=0}^{5} \left(\frac{1}{2}\right)^n$
+
+Schritt 1: Erkenne $|r| = \frac{1}{2} < 1$ -> konvergent
+
+Schritt 2: Partialsumme: $S_6 = \frac{1 - (\frac{1}{2})^6}{1 - \frac{1}{2}} = \frac{1 - \frac{1}{64}}{\frac{1}{2}} = \frac{63}{32} = 1{,}969$
+
+Schritt 3: Limes: $S_\infty = \frac{1}{1-\frac{1}{2}} = 2$
+
+### Beispiel 2: Sinus approximieren
+
+Approximiere $\sin(0{,}1)$ mit der Taylor-Reihe:
+
+$\sin(0{,}1) \approx 0{,}1 - \frac{0{,}1^3}{6} + \frac{0{,}1^5}{120} = 0{,}1 - 0{,}000167 + 0{,}000000083 \approx 0{,}09983$
+
+Taschenrechner: $\sin(0{,}1) = 0{,}09983...$ -- stimmt auf 5 Stellen!
+
+### Beispiel 3: Eulersche Zahl
+
+Berechne $e$ mit $n = 5$ Termen:
+
+$e \approx 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \frac{1}{120} = 2{,}7167$
+
+Exakter Wert: $e = 2{,}71828...$ -- nur 0,06% Fehler!
+
+> **Merke:** Mehr Terme = genauere Approximation. Schon 5-6 Terme reichen fuer viele praktische Anwendungen.
+
+
+
+---
+
+## Weitere Beispiele
+
+### Beispiel 2: Taylor-Reihe von $\sin(x)$
+
+$f(x) = \sin(x)$, $a = 0$:
+
+| $n$ | $f^{(n)}(0)$ | Term |
+|-----|-------------|------|
+| 0 | $\sin(0) = 0$ | $0$ |
+| 1 | $\cos(0) = 1$ | $x$ |
+| 2 | $-\sin(0) = 0$ | $0$ |
+| 3 | $-\cos(0) = -1$ | $-\frac{x^3}{6}$ |
+| 4 | $\sin(0) = 0$ | $0$ |
+| 5 | $\cos(0) = 1$ | $\frac{x^5}{120}$ |
+
+$$\sin(x) = x - \frac{x^3}{6} + \frac{x^5}{120} - \ldots = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}$$
+
+> **Merke:** Bei $\sin(x)$ fallen die geraden Potenzen weg.
+
+### Beispiel 3: Taylor-Polynom 3. Grades von $\ln(1+x)$
+
+$f(0) = 0$, $f^{\prime}(0) = 1$, $f^{\prime\prime}(0) = -1$, $f^{\prime\prime\prime}(0) = 2$
+
+$$T_3(x) = x - \frac{x^2}{2} + \frac{x^3}{3}$$
+
+Probe: $\ln(1{,}1) \approx 0{,}1 - 0{,}005 + 0{,}000333 = 0{,}09533$
+Taschenrechner: $0{,}09531$ -- sehr genau!
+
+[GUIDED_START]
+**Schritt-fuer-Schritt:** Taylor-Polynom 2. Grades von $f(x) = \sqrt{1+x}$ um $a=0$
+
+**Schritt 1:** $f(0) = 1$
+
+**Schritt 2:** $f^{\prime}(x) = \frac{1}{2\sqrt{1+x}}$ -> $f^{\prime}(0) = \frac{1}{2}$
+
+**Schritt 3:** $f^{\prime\prime}(x) = -\frac{1}{4(1+x)^{3/2}}$ -> $f^{\prime\prime}(0) = -\frac{1}{4}$
+
+**Schritt 4:** Einsetzen: $T_2(x) = 1 + \frac{1}{2}x - \frac{1}{8}x^2$
+
+**Probe:** $\sqrt{1{,}1} \approx 1 + 0{,}05 - 0{,}00125 = 1{,}04875$
+Taschenrechner: $1{,}04881$
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Taylor-Polynom 2. Grades von $f(x) = \cos(x)$ um $a=0$
+
+**Loesung:** $f(0)=1$, $f^{\prime}(0)=0$, $f^{\prime\prime}(0)=-1$
+$T_2(x) = 1 - \frac{x^2}{2}$
+
+**Aufgabe 2:** Berechne $e^{0{,}2}$ mit $T_3(x)$ der Exponentialfunktion
+
+**Loesung:** $T_3(0{,}2) = 1 + 0{,}2 + \frac{0{,}04}{2} + \frac{0{,}008}{6} = 1{,}2213$
+(Taschenrechner: $1{,}2214$)
+[PRACTICE_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Berechne $\sum_{n=0}^{3} 3 \cdot \left(\frac{1}{3}\right)^n$
+
+**Loesung:** $3 + 1 + \frac{1}{3} + \frac{1}{9} = \frac{40}{9} \approx 4{,}44$
+
+**Aufgabe 2:** Approximiere $e^{0{,}5}$ mit 4 Termen
+
+**Loesung:** $1 + 0{,}5 + \frac{0{,}25}{2} + \frac{0{,}125}{6} = 1{,}6458$
+(Taschenrechner: $1{,}6487$)
+
+**Aufgabe 3:** Konvergiert $\sum \frac{1}{n!}$? Wenn ja, gegen was?
+
+**Loesung:** Ja! $\sum_{n=0}^{\infty} \frac{1}{n!} = e \approx 2{,}718$
+[PRACTICE_END]`,
       },
       {
         id: "m-tw-3",
