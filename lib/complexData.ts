@@ -266,7 +266,7 @@ Schritt 3: Quadranten-Korrektur!
 
 ## Umrechnung: Exponentialform zur Normalform
 
-$x = r \\cdot \\cos\\varphi$, $y = r \\cdot \\sin\\varphi$
+$$x = r \\cdot \\cos\\varphi \\qquad y = r \\cdot \\sin\\varphi$$
 
 ---
 
@@ -444,7 +444,7 @@ Schritt 4: Zusammen: $1 + 2j - 1 = 2j$
 
 Ergebnis: $2j$ ✅
 
-> **Merke:** $(1+j)^2 = 2j$ — eine rein imaginäre Zahl! Das überrascht viele.
+> **Merke:** $$(1+j)^2 = 2j$$ — eine rein imaginäre Zahl! Das überrascht viele.
 
 ---
 
@@ -824,6 +824,8 @@ $16 = 16e^{j0°}$, Radius $= 16^{1/4} = 2$
 ---
 
 > **Merke:** Die $n$-ten Wurzeln von $z \\neq 0$ bilden immer ein regelmäßiges $n$-Eck auf dem Kreis mit Radius $r^{1/n}$.
+>
+> $$w_k = r^{1/n} \\cdot e^{j\\frac{\\varphi + 2k\\pi}{n}}$$
 
 ---
 
