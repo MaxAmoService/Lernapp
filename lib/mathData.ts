@@ -520,12 +520,38 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
         type: "quiz",
         content: "Teste dein Wissen über Mengenlehre und Logik!",
       },
-      {
+            {
         id: "m-grundlagen-mengen-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Mengen als {1,2,3}, Zahlen als Zahl
+
+**Aufgabe 1:** A = {1,2,3,4}, B = {3,4,5,6}. A geschnitten B = ?
+**Antwort:** {3, 4}
+
+**Aufgabe 2:** U = {1,...,10}, A = {2,4,6,8}. A-Komplement = ?
+**Antwort:** {1, 3, 5, 7, 9, 10}
+
+**Aufgabe 3:** |A| = 12, |B| = 8, |A geschnitten B| = 3. |A vereinigt B| = ?
+**Antwort:** 17
+
+**Aufgabe 4:** Ist {1,2} Teilmenge von {1,2,3}?
+**Antwort:** ja
+
+**Aufgabe 5:** Negiere: Fuer alle x gilt x^2 > 0
+**Antwort:** Es gibt ein x mit x^2 <= 0
+
+**Aufgabe 6:** P -> Q mit P=wahr, Q=falsch?
+**Antwort:** falsch
+
+**Aufgabe 7:** De Morgan: Komplement(A vereinigt B) = ?
+**Antwort:** A-Komplement geschnitten B-Komplement
+
+**Aufgabe 8:** Wie viele Teilmengen hat {1,2,3}?
+**Antwort:** 8
+`,
       },
     ],
   },
@@ -618,12 +644,38 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
         type: "quiz",
         content: "Teste dein Wissen über Funktionen!",
       },
-      {
+            {
         id: "m-grundlagen-funktionen-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Definitionsbereich als x!=0 oder x>=0, Werte als Zahl
+
+**Aufgabe 1:** Definitionsbereich von f(x) = Wurzel(x-2)?
+**Antwort:** x>=2
+
+**Aufgabe 2:** Definitionsbereich von f(x) = 1/(x+3)?
+**Antwort:** x!=-3
+
+**Aufgabe 3:** Ist f(x) = x^3 gerade oder ungerade?
+**Antwort:** ungerade
+
+**Aufgabe 4:** f(x) = 2x + 1. Was ist f(3)?
+**Antwort:** 7
+
+**Aufgabe 5:** Umkehrfunktion von f(x) = 3x - 6?
+**Antwort:** f^-1(x) = (x+6)/3
+
+**Aufgabe 6:** f(x) = x^2 - 4. Nullstellen?
+**Antwort:** x1=2, x2=-2
+
+**Aufgabe 7:** Ist f(x) = |x| stetig?
+**Antwort:** ja
+
+**Aufgabe 8:** Grenzwert von 1/x fuer x gegen unendlich?
+**Antwort:** 0
+`,
       },
     ],
   },
@@ -737,12 +789,38 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
         type: "quiz",
         content: "Teste dein Wissen über Grenzwerte!",
       },
-      {
+            {
         id: "m1-grenzwerte-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Grenzwerte als Zahl oder "unendlich"
+
+**Aufgabe 1:** lim(2x+1) fuer x gegen 3?
+**Antwort:** 7
+
+**Aufgabe 2:** lim(sin(x)/x) fuer x gegen 0?
+**Antwort:** 1
+
+**Aufgabe 3:** lim(1/x) fuer x gegen unendlich?
+**Antwort:** 0
+
+**Aufgabe 4:** lim((e^x-1)/x) fuer x gegen 0?
+**Antwort:** 1
+
+**Aufgabe 5:** lim((x^2-1)/(x-1)) fuer x gegen 1?
+**Antwort:** 2
+
+**Aufgabe 6:** lim((1+1/x)^x) fuer x gegen unendlich?
+**Antwort:** e
+
+**Aufgabe 7:** L'Hopital bei lim(sin(x)/x). Ergebnis?
+**Antwort:** 1
+
+**Aufgabe 8:** lim(1/x) fuer x gegen 0+?
+**Antwort:** +unendlich
+`,
       },
     ],
   },
@@ -836,12 +914,38 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
         type: "quiz",
         content: "Teste dein Wissen über Ableitungen!",
       },
-      {
+            {
         id: "m1-ableitungen-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Ableitungen als Term, z.B. 2x+3 oder cos(x)
+
+**Aufgabe 1:** f(x) = x^5. f'(x) = ?
+**Antwort:** 5x^4
+
+**Aufgabe 2:** f(x) = sin(x). f'(x) = ?
+**Antwort:** cos(x)
+
+**Aufgabe 3:** f(x) = e^x. f'(x) = ?
+**Antwort:** e^x
+
+**Aufgabe 4:** f(x) = ln(x). f'(x) = ?
+**Antwort:** 1/x
+
+**Aufgabe 5:** f(x) = (2x+1)^3. Kettenregel!
+**Antwort:** 6(2x+1)^2
+
+**Aufgabe 6:** f(x) = x^2 * sin(x). Produktregel!
+**Antwort:** 2x*sin(x) + x^2*cos(x)
+
+**Aufgabe 7:** f(x) = x/(x+1). Quotientenregel!
+**Antwort:** 1/(x+1)^2
+
+**Aufgabe 8:** Steigung der Tangente von f(x)=x^2 bei x=3?
+**Antwort:** 6
+`,
       },
     ],
   },
@@ -931,12 +1035,38 @@ $F(2) - F(0) = (8 + 2) - 0 = 10$
         type: "quiz",
         content: "Teste dein Wissen über Integration!",
       },
-      {
+            {
         id: "m1-integration-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Stammfunktionen als Term, bestimmte Integrale als Zahl
+
+**Aufgabe 1:** Integral von x^3 dx?
+**Antwort:** x^4/4 + C
+
+**Aufgabe 2:** Integral von cos(x) dx?
+**Antwort:** sin(x) + C
+
+**Aufgabe 3:** Integral von e^x dx?
+**Antwort:** e^x + C
+
+**Aufgabe 4:** Integral von 0 bis 1 von 2x dx?
+**Antwort:** 1
+
+**Aufgabe 5:** Integral von 0 bis pi von sin(x) dx?
+**Antwort:** 2
+
+**Aufgabe 6:** Substitution: Integral von 2x*e^(x^2) dx?
+**Antwort:** e^(x^2) + C
+
+**Aufgabe 7:** Integral von 1/x dx?
+**Antwort:** ln|x| + C
+
+**Aufgabe 8:** Flaeche unter f(x)=x^2 von 0 bis 2?
+**Antwort:** 8/3
+`,
       },
     ],
   },
@@ -1066,12 +1196,38 @@ Also: $\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$ fuer alle $x \in \mathbb{R}$ ($
         type: "quiz",
         content: "Teste dein Wissen über Reihen!",
       },
-      {
+            {
         id: "m1-reihen-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Konvergenz als "konvergent/divergent", Summen als Zahl
+
+**Aufgabe 1:** Konvergiert Summe(1/n^2)?
+**Antwort:** konvergent
+
+**Aufgabe 2:** Konvergiert Summe(1/n)?
+**Antwort:** divergent
+
+**Aufgabe 3:** Summe von n=0 bis 4 von (1/2)^n?
+**Antwort:** 31/16
+
+**Aufgabe 4:** Konvergenzradius von Summe(x^n/n!)?
+**Antwort:** unendlich
+
+**Aufgabe 5:** Summe von n=0 bis unendlich von x^n, |x|<1?
+**Antwort:** 1/(1-x)
+
+**Aufgabe 6:** Ist Summe((-1)^n/n) konvergent?
+**Antwort:** ja
+
+**Aufgabe 7:** Taylor-Reihe von e^x, 4 Terme?
+**Antwort:** 1+x+x^2/2+x^3/6
+
+**Aufgabe 8:** Konvergenzradius von Summe(x^n/n)?
+**Antwort:** R=1
+`,
       },
     ],
   },
@@ -1157,12 +1313,38 @@ $A \\cdot A^{-1} = I$
         type: "quiz",
         content: "Teste dein Wissen über Vektoren und Matrizen!",
       },
-      {
+            {
         id: "m2-vektoren-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Vektoren als (1,2,3), Betrag als Zahl
+
+**Aufgabe 1:** a=(1,2), b=(3,1). a+b=?
+**Antwort:** (4,3)
+
+**Aufgabe 2:** Betrag von v=(3,4)?
+**Antwort:** 5
+
+**Aufgabe 3:** Skalarprodukt von (1,0) und (0,1)?
+**Antwort:** 0
+
+**Aufgabe 4:** 3 * (1,2,3) = ?
+**Antwort:** (3,6,9)
+
+**Aufgabe 5:** Sind (1,2) und (2,4) parallel?
+**Antwort:** ja
+
+**Aufgabe 6:** Kreuzprodukt von (1,0,0) und (0,1,0)?
+**Antwort:** (0,0,1)
+
+**Aufgabe 7:** a=(2,3), b=(4,1). a * b = ?
+**Antwort:** 11
+
+**Aufgabe 8:** Einheitsvektor in Richtung (3,4)?
+**Antwort:** (3/5, 4/5)
+`,
       },
     ],
   },
@@ -1308,12 +1490,38 @@ $y'(0) = 3C_1 + 2C_2 = 0$
         type: "quiz",
         content: "Teste dein Wissen über Differentialgleichungen!",
       },
-      {
+            {
         id: "m2-dgl-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Loesungen als y=C*e^(2x) oder y=3*e^(2x)+1
+
+**Aufgabe 1:** Loese y' = 2y
+**Antwort:** y=C*e^(2x)
+
+**Aufgabe 2:** Loese y' = 3, y(0) = 1
+**Antwort:** y=3x+1
+
+**Aufgabe 3:** Typ von y' + 2y = 4?
+**Antwort:** linear, 1. Ordnung
+
+**Aufgabe 4:** Charakteristische Gleichung von y'' - 3y' + 2y = 0?
+**Antwort:** r^2-3r+2=0
+
+**Aufgabe 5:** Loese y'' + y = 0
+**Antwort:** y=C1*cos(x)+C2*sin(x)
+
+**Aufgabe 6:** Integrationsfaktor von y' + 3y = 6?
+**Antwort:** e^(3x)
+
+**Aufgabe 7:** Ist y = e^(2x) Loesung von y' = 2y?
+**Antwort:** ja
+
+**Aufgabe 8:** Allgemeine Loesung von y' = 0?
+**Antwort:** y=C
+`,
       },
     ],
   },
@@ -1496,12 +1704,38 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
         type: "quiz",
         content: "Teste dein Wissen über Wahrscheinlichkeitsrechnung!",
       },
-      {
+            {
         id: "m-stochastik-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Wahrscheinlichkeiten als Dezimalzahl 0.25 oder Bruch 1/4
+
+**Aufgabe 1:** Fairer Wuerfel. P(6)?
+**Antwort:** 1/6
+
+**Aufgabe 2:** P(A) = 0.3. P(nicht A) = ?
+**Antwort:** 0.7
+
+**Aufgabe 3:** P(A)=0.4, P(B)=0.3, P(A und B)=0.1. P(A oder B)?
+**Antwort:** 0.6
+
+**Aufgabe 4:** Urne: 3 rot, 2 blau. P(rot)?
+**Antwort:** 3/5
+
+**Aufgabe 5:** 2 Wuerfel. P(Summe = 7)?
+**Antwort:** 1/6
+
+**Aufgabe 6:** P(A|B) wenn P(A und B)=0.1, P(B)=0.4?
+**Antwort:** 0.25
+
+**Aufgabe 7:** Unabhaengig: P(A und B) wenn P(A)=0.5, P(B)=0.2?
+**Antwort:** 0.1
+
+**Aufgabe 8:** Erwartungswert bei fairem Wuerfel?
+**Antwort:** 3.5
+`,
       },
     ],
   },
@@ -1699,12 +1933,38 @@ Nach nur 3 Schritten: $\\sqrt{2} \\approx 1{,}4142$ (4 Dezimalstellen!)
         type: "quiz",
         content: "Teste dein Wissen über numerische Verfahren!",
       },
-      {
+            {
         id: "m-numerik-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Fehler als Dezimalzahl, Verfahren als Name
+
+**Aufgabe 1:** Absoluter Fehler: pi annaehernd 3.14?
+**Antwort:** 0.00159
+
+**Aufgabe 2:** Relativer Fehler: pi annaehernd 3.14?
+**Antwort:** 0.05%
+
+**Aufgabe 3:** Bisektion: f(x)=x^2-2, [1,2]. Mitte?
+**Antwort:** 1.5
+
+**Aufgabe 4:** Newton: f(x)=x^2-2, x0=2. x1=?
+**Antwort:** 1.5
+
+**Aufgabe 5:** Konvergenzordnung Bisektion?
+**Antwort:** linear
+
+**Aufgabe 6:** Konvergenzordnung Newton?
+**Antwort:** quadratisch
+
+**Aufgabe 7:** 0.1 + 0.2 in Gleitkomma exakt?
+**Antwort:** 0.30000000000000004
+
+**Aufgabe 8:** f(x)=1/x bei x annaehernd 0: konditioniert?
+**Antwort:** schlecht
+`,
       },
     ],
   },
@@ -1883,12 +2143,38 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
         type: "quiz",
         content: "Teste dein Wissen über Geometrie!",
       },
-      {
+            {
         id: "m-geometrie-flaechen-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Flaechen als Zahl, Pi als pi
+
+**Aufgabe 1:** Flaeche Rechteck a=8, b=5?
+**Antwort:** 40
+
+**Aufgabe 2:** Flaeche Dreieck g=6, h=4?
+**Antwort:** 12
+
+**Aufgabe 3:** Flaeche Kreis r=3?
+**Antwort:** 9*pi
+
+**Aufgabe 4:** Flaeche Trapez a=5, b=3, h=4?
+**Antwort:** 16
+
+**Aufgabe 5:** Umfang Kreis r=7?
+**Antwort:** 14*pi
+
+**Aufgabe 6:** Quadrat mit Flaeche 49. Seitenlaenge?
+**Antwort:** 7
+
+**Aufgabe 7:** Kreis mit Flaeche 16*pi. Radius?
+**Antwort:** 4
+
+**Aufgabe 8:** Diagonale Rechteck 3x4?
+**Antwort:** 5
+`,
       },
     ],
   },
@@ -2075,12 +2361,38 @@ $b = \frac{6 \cdot \sin 45°}{\sin 30°} = \frac{6 \cdot 0{,}707}{0{,}5} = 8{,}4
         type: "quiz",
         content: "Teste dein Wissen über Trigonometrie!",
       },
-      {
+            {
         id: "m-trigonometrie-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Werte als Bruch 1/2, Winkel als 30
+
+**Aufgabe 1:** sin(30) = ?
+**Antwort:** 1/2
+
+**Aufgabe 2:** cos(60) = ?
+**Antwort:** 1/2
+
+**Aufgabe 3:** tan(45) = ?
+**Antwort:** 1
+
+**Aufgabe 4:** sin^2(30) + cos^2(30) = ?
+**Antwort:** 1
+
+**Aufgabe 5:** Gegenkathete=4, Hypotenuse=5. sin(alpha) = ?
+**Antwort:** 4/5
+
+**Aufgabe 6:** In welchem Quadrant ist sin+ und cos-?
+**Antwort:** Quadrant II
+
+**Aufgabe 7:** sin(-x) = ?
+**Antwort:** -sin(x)
+
+**Aufgabe 8:** Hypotenuse=10, Ankathete=6. cos(alpha) = ?
+**Antwort:** 3/5
+`,
       },
     ],
   },
@@ -2318,12 +2630,38 @@ $t = \frac{\ln(2)}{0{,}05} = \frac{0{,}693}{0{,}05} = 13{,}86$ Jahre
         type: "quiz",
         content: "Teste dein Wissen über Potenzen und Logarithmen!",
       },
-      {
+            {
         id: "m-potenzen-log-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Potenzen als Zahl, Logarithmen als Zahl
+
+**Aufgabe 1:** 2^3 * 2^4 = ?
+**Antwort:** 128
+
+**Aufgabe 2:** 5^6 / 5^4 = ?
+**Antwort:** 25
+
+**Aufgabe 3:** (3^2)^3 = ?
+**Antwort:** 729
+
+**Aufgabe 4:** log2(16) = ?
+**Antwort:** 4
+
+**Aufgabe 5:** ln(e^3) = ?
+**Antwort:** 3
+
+**Aufgabe 6:** log10(1000) = ?
+**Antwort:** 3
+
+**Aufgabe 7:** 2^(-3) = ?
+**Antwort:** 1/8
+
+**Aufgabe 8:** Loese: 3^x = 27
+**Antwort:** x=3
+`,
       },
     ],
   },
@@ -2523,12 +2861,38 @@ Ein Boxplot zeigt:
         type: "quiz",
         content: "Teste dein Wissen über Statistik!",
       },
-      {
+            {
         id: "m-statistik-aufgaben",
-        title: "📝 Aufgaben",
+        title: "\u{1F4DD} Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
+        content: `
+> **Antwortformat:** Werte als Dezimalzahl
+
+**Aufgabe 1:** Daten: 2, 4, 6, 8. Mittelwert?
+**Antwort:** 5
+
+**Aufgabe 2:** Daten: 3, 5, 7, 7, 8. Modus?
+**Antwort:** 7
+
+**Aufgabe 3:** Daten: 1, 3, 5, 7, 9. Median?
+**Antwort:** 5
+
+**Aufgabe 4:** Daten: 2, 4, 4, 4, 5, 5, 7, 9. Varianz?
+**Antwort:** 4
+
+**Aufgabe 5:** Standardabweichung bei Varianz 9?
+**Antwort:** 3
+
+**Aufgabe 6:** Daten: 1, 2, 3, 4, 5. Spannweite?
+**Antwort:** 4
+
+**Aufgabe 7:** Q1 von 1, 2, 3, 4, 5, 6, 7, 8?
+**Antwort:** 2.5
+
+**Aufgabe 8:** 68% bei Normalverteilung liegen in?
+**Antwort:** mu +/- sigma
+`,
       },
     ],
   },
