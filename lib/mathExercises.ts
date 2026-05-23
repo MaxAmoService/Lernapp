@@ -1375,13 +1375,13 @@ export const gleichungssystemeExercises: Exercise[] = [
 export const matrizenExercises: Exercise[] = [
   {
     id: "ma-1", lessonId: "m-matrizen", difficulty: 1, type: "input",
-    question: "$\det\begin{pmatrix}2&3\\1&4\end{pmatrix} = ?$",
+    question: "$\\det\\begin{pmatrix}2&3\\1&4\\end{pmatrix} = ?$",
     expectedAnswer: "5", format: "Ganze Zahl",
     solution: "$2 \\cdot 4 - 3 \\cdot 1 = 5$",
   },
   {
     id: "ma-2", lessonId: "m-matrizen", difficulty: 1, type: "input",
-    question: "$\det\begin{pmatrix}1&2\\3&6\end{pmatrix} = ?$",
+    question: "$\\det\\begin{pmatrix}1&2\\3&6\\end{pmatrix} = ?$",
     expectedAnswer: "0", format: "Ganze Zahl",
     solution: "$1 \\cdot 6 - 2 \\cdot 3 = 0$",
   },
@@ -1395,23 +1395,23 @@ export const matrizenExercises: Exercise[] = [
       { label: "Wenn sie symmetrisch ist", value: "d" },
     ],
     correctOption: "a",
-    solution: "Nur invertierbar wenn $\det A \\neq 0$",
+    solution: "Nur invertierbar wenn $\\det A \\neq 0$",
   },
   {
     id: "ma-4", lessonId: "m-matrizen", difficulty: 2, type: "input",
-    question: "$\begin{pmatrix}1&2\\3&4\end{pmatrix} + \begin{pmatrix}5&6\\7&8\end{pmatrix}$. Element (1,1)?",
+    question: "$\\begin{pmatrix}1&2\\3&4\\end{pmatrix} + \\begin{pmatrix}5&6\\7&8\\end{pmatrix}$. Element (1,1)?",
     expectedAnswer: "6", format: "Ganze Zahl",
     solution: "$1 + 5 = 6$",
   },
   {
     id: "ma-5", lessonId: "m-matrizen", difficulty: 3, type: "input",
-    question: "$\begin{pmatrix}2&0\\0&3\end{pmatrix} \\cdot \begin{pmatrix}1&1\\1&1\end{pmatrix}$. Element (2,1)?",
+    question: "$\\begin{pmatrix}2&0\\0&3\\end{pmatrix} \\cdot \\begin{pmatrix}1&1\\1&1\\end{pmatrix}$. Element (2,1)?",
     expectedAnswer: "3", format: "Ganze Zahl",
     solution: "$0 \\cdot 1 + 3 \\cdot 1 = 3$",
   },
   {
     id: "ma-6", lessonId: "m-matrizen", difficulty: 2, type: "input",
-    question: "$A = \begin{pmatrix}3&1\\2&4\end{pmatrix}$. det(A)?",
+    question: "$A = \\begin{pmatrix}3&1\\2&4\\end{pmatrix}$. det(A)?",
     expectedAnswer: "10", format: "Ganze Zahl",
     solution: "$3 \\cdot 4 - 1 \\cdot 2 = 10$",
   },
@@ -1452,7 +1452,7 @@ export const verteilungenExercises: Exercise[] = [
     id: "vt-5", lessonId: "m-verteilungen", difficulty: 1, type: "input",
     question: "Poisson: $\\lambda = 4$. $P(X=0) = ?$",
     expectedAnswer: "0.0183", format: "Dezimalzahl",
-    solution: "$e^{-4} \approx 0{,}0183$",
+    solution: "$e^{-4} \\approx 0{,}0183$",
   },
   {
     id: "vt-6", lessonId: "m-verteilungen", difficulty: 3, type: "input",
@@ -1606,11 +1606,11 @@ export const dreisatzExercises: Exercise[] = [
 
 export const taylorExercises: Exercise[] = [
   { id: "tw-1", lessonId: "m-taylor", difficulty: 1, type: "multiple", question: "Taylor bei a=0?", options: [{label: "Fourier", value: "a"}, {label: "Maclaurin", value: "b"}, {label: "Laurent", value: "c"}], correctOption: "b", solution: "Maclaurin-Reihe" },
-  { id: "tw-2", lessonId: "m-taylor", difficulty: 1, type: "input", question: "$e^x \approx ?$ (1. Ord.)", expectedAnswer: "1+x", format: "Term", solution: "$e^x \approx 1+x$" },
-  { id: "tw-3", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\sin(x) \approx ?$ (1. Ord.)", expectedAnswer: "x", format: "Term", solution: "$\\sin(x) \approx x$" },
+  { id: "tw-2", lessonId: "m-taylor", difficulty: 1, type: "input", question: "$e^x \\approx ?$ (1. Ord.)", expectedAnswer: "1+x", format: "Term", solution: "$e^x \\approx 1+x$" },
+  { id: "tw-3", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\sin(x) \\approx ?$ (1. Ord.)", expectedAnswer: "x", format: "Term", solution: "$\\sin(x) \\approx x$" },
   { id: "tw-4", lessonId: "m-taylor", difficulty: 2, type: "multiple", question: "Konvergenzradius 1/(1-x)?", options: [{label: "R=0", value: "a"}, {label: "R=1", value: "b"}, {label: "R=inf", value: "c"}], correctOption: "b", solution: "|x|<1, R=1" },
-  { id: "tw-5", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\cos(x) \approx ?$ (2. Ord.)", expectedAnswer: "1-x^2/2", format: "Term", solution: "$\\cos(x) \approx 1 - x^2/2$" },
-  { id: "tw-6", lessonId: "m-taylor", difficulty: 3, type: "input", question: "Glieder fuer $e \approx 2.7$?", expectedAnswer: "8", format: "Ganze Zahl", solution: "Ca. 8 Glieder" },
+  { id: "tw-5", lessonId: "m-taylor", difficulty: 2, type: "input", question: "$\\cos(x) \\approx ?$ (2. Ord.)", expectedAnswer: "1-x^2/2", format: "Term", solution: "$\\cos(x) \\approx 1 - x^2/2$" },
+  { id: "tw-6", lessonId: "m-taylor", difficulty: 3, type: "input", question: "Glieder fuer $e \\approx 2.7$?", expectedAnswer: "8", format: "Ganze Zahl", solution: "Ca. 8 Glieder" },
 ];
 
 

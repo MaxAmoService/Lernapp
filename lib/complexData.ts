@@ -101,32 +101,30 @@ Merke: $j^n = j^{n \\bmod 4}$ — einfach den Rest bei Division durch 4 berechne
 
 ---
 
-[GUIDED_START]
-TITLE:Berechne $j^6$
-[STEP]
-$j^6 = j^4 \\cdot j^2$
-[STEP]
-$j^4 = (j^2)^2 = (-1)^2 = 1$
-[STEP]
-$j^6 = 1 \\cdot (-1) = -1$
-[RESULT]
-$j^6 = -1$
-[GUIDED_END]
+### Beispiel: $j^6$ berechnen
 
-[GUIDED_START]
-TITLE:Berechne $2j \\cdot 3j$
-[STEP]
-$2j \\cdot 3j = 6j^2$
-[STEP]
-$j^2 = -1$
-[STEP]
-$6 \\cdot (-1) = -6$
-[RESULT]
-$2j \\cdot 3j = -6$
-[GUIDED_END]
+$j^6 = j^4 \\cdot j^2 = 1 \\cdot (-1) = -1$
+
+Denn $j^4 = (j^2)^2 = (-1)^2 = 1$ und $j^2 = -1$.
+
+### Beispiel: $2j \\cdot 3j$ berechnen
+
+$2j \\cdot 3j = 6j^2 = 6 \\cdot (-1) = -6$
+
+Denn $j^2 = -1$ — das ist die wichtigste Regel!
+
+---
 
 [PRACTICE_START]
-TITLE:Potenzen von j
+TITLE:Potenzen & Grundlagen von $j$
+[Q]
+$j^6 = ?$
+[A]
+$-1$ — $j^6 = j^4 \\cdot j^2 = 1 \\cdot (-1) = -1$
+[Q]
+$2j \\cdot 3j = ?$
+[A]
+$-6$ — $6j^2 = 6 \\cdot (-1) = -6$
 [Q]
 $j^8 = ?$
 [A]

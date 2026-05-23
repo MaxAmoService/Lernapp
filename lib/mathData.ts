@@ -966,19 +966,19 @@ $P(A|B)$ = "Wahrscheinlichkeit von A, gegeben B"
 
 ### Formel
 
-$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$
+$$P(A|B) = \\frac{P(A \\cap B)}{P(B)}$$
 
 ### Beispiel 1: Ziehen ohne Zurücklegen
 
 Eine Urne mit 3 roten und 2 blauen Kugeln. Ziehe 2 Kugeln ohne Zurücklegen.
 
-$P(\text{2. rot} | \text{1. rot}) = \frac{2}{4} = 0{,}5$
+$P(\\text{2. rot} | \\text{1. rot}) = \\frac{2}{4} = 0{,}5$
 
 Nachdem die erste rote Kugel gezogen wurde, sind nur noch 2 von 4 übrig.
 
 ### Beispiel 2: Würfeln
 
-$P(\text{6} | \text{ungerade}) = ?$
+$P(\\text{6} | \\text{ungerade}) = ?$
 
 Ungerade Zahlen: {1, 3, 5}. Keine davon ist 6. Also $P = 0$.
 
@@ -988,7 +988,7 @@ Ungerade Zahlen: {1, 3, 5}. Keine davon ist 6. Also $P = 0$.
 - Test: 95% Sensitivität (richtig positiv)
 - Test: 5% Falsch-Positiv-Rate
 
-$P(\text{krank} | \text{positiv}) = \frac{0{,}95 \cdot 0{,}01}{0{,}95 \cdot 0{,}01 + 0{,}05 \cdot 0{,}99} \approx 16{,}1\%$
+$P(\\text{krank} | \\text{positiv}) = \\frac{0{,}95 \\cdot 0{,}01}{0{,}95 \\cdot 0{,}01 + 0{,}05 \\cdot 0{,}99} \\approx 16{,}1\%$
 
 Überraschend niedrig! Das liegt an der niedrigen Grundrate.
 
@@ -1129,52 +1129,52 @@ Komplexe Zahlen können nicht nur als $a + bi$, sondern auch als **Polarkoordina
 
 ### Betrag
 
-$|z| = \sqrt{a^2 + b^2}$
+$|z| = \\sqrt{a^2 + b^2}$
 
 ### Beispiel 1
 
 $z = 3 + 4i$
 
-$|z| = \sqrt{9 + 16} = \sqrt{25} = 5$
+$|z| = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 
 ### Polarform
 
-$z = r \cdot (\cos \varphi + i \sin \varphi) = r \cdot e^{i\varphi}$
+$z = r \\cdot (\\cos \\varphi + i \\sin \\varphi) = r \\cdot e^{i\\varphi}$
 
 - $r = |z|$ (Betrag)
-- $\varphi = \arctan\frac{b}{a}$ (Winkel)
+- $\\varphi = \\arctan\\frac{b}{a}$ (Winkel)
 
 ### Beispiel 2
 
 $z = 1 + i$
 
-$r = \sqrt{2}$, $\varphi = \frac{\pi}{4}$ (45°)
+$r = \\sqrt{2}$, $\\varphi = \\frac{\\pi}{4}$ (45°)
 
-$z = \sqrt{2} \cdot e^{i\pi/4}$
+$z = \\sqrt{2} \\cdot e^{i\\pi/4}$
 
 ### Euler-Formel
 
-$$e^{ix} = \cos x + i \sin x$$
+$$e^{ix} = \\cos x + i \\sin x$$
 
-Das ist eine der berühmtesten Formeln der Mathematik! Sie verbindet $e$, $i$, $\pi$, $1$ und $0$.
+Das ist eine der berühmtesten Formeln der Mathematik! Sie verbindet $e$, $i$, $\\pi$, $1$ und $0$.
 
 ### Multiplikation in Polarform
 
-$z_1 \cdot z_2 = r_1 \cdot r_2 \cdot e^{i(\varphi_1 + \varphi_2)}$
+$z_1 \\cdot z_2 = r_1 \\cdot r_2 \\cdot e^{i(\\varphi_1 + \\varphi_2)}$
 
 **Betrag multiplizieren, Winkel addieren!**
 
 ### Beispiel 3
 
-$z_1 = 2e^{i\pi/6}$, $z_2 = 3e^{i\pi/3}$
+$z_1 = 2e^{i\\pi/6}$, $z_2 = 3e^{i\\pi/3}$
 
-$z_1 \cdot z_2 = 6e^{i\pi/2} = 6i$
+$z_1 \\cdot z_2 = 6e^{i\\pi/2} = 6i$
 
 ### De Moivre's Formel
 
-$z^n = r^n \cdot e^{in\varphi}$
+$z^n = r^n \\cdot e^{in\\varphi}$
 
-$|z^n| = r^n$, $\arg(z^n) = n \cdot \varphi$
+$|z^n| = r^n$, $\arg(z^n) = n \\cdot \\varphi$
 
 > **Merke:** Polarform = Betrag × Euler. Multiplikation = Beträge multiplizieren, Winkel addieren!`,
       },
@@ -1235,23 +1235,23 @@ In der Numerik sind **Fehler** unvermeidlich. Wir unterscheiden verschiedene Art
 
 ### Absoluter Fehler
 
-$e = |x_{\text{approx}} - x_{\text{exact}}|$
+$e = |x_{\\text{approx}} - x_{\\text{exact}}|$
 
-**Beispiel:** $\pi \approx 3{,}14$
+**Beispiel:** $\\pi \\approx 3{,}14$
 
 $e = |3{,}14 - 3{,}14159...| = 0{,}00159...$
 
 ### Relativer Fehler
 
-$e_{\text{rel}} = \frac{|x_{\text{approx}} - x_{\text{exact}}|}{|x_{\text{exact}}|}$
+$e_{\\text{rel}} = \\frac{|x_{\\text{approx}} - x_{\\text{exact}}|}{|x_{\\text{exact}}|}$
 
-**Beispiel:** $\pi \approx 3{,}14$
+**Beispiel:** $\\pi \\approx 3{,}14$
 
-$e_{\text{rel}} = \frac{0{,}00159}{3{,}14159} \approx 0{,}0005 = 0{,}05\%$
+$e_{\\text{rel}} = \\frac{0{,}00159}{3{,}14159} \\approx 0{,}0005 = 0{,}05\%$
 
 ### Rundungsfehler
 
-Computer haben endliche Genauigkeit. $0{,}1 + 0{,}2 \neq 0{,}3$ in Gleitkomma!
+Computer haben endliche Genauigkeit. $0{,}1 + 0{,}2 \\neq 0{,}3$ in Gleitkomma!
 
 $0{,}1 + 0{,}2 = 0{,}30000000000000004$
 
@@ -1260,11 +1260,11 @@ $0{,}1 + 0{,}2 = 0{,}30000000000000004$
 Wie stark ändert sich das Ergebnis bei kleinen Änderungen der Eingabe?
 
 - **Gut konditioniert:** $f(x) = x + 1$ (kleine Änderung → kleiner Effekt)
-- **Schlecht konditioniert:** $f(x) = \frac{1}{x}$ bei $x \approx 0$ (kleine Änderung → großer Effekt)
+- **Schlecht konditioniert:** $f(x) = \\frac{1}{x}$ bei $x \\approx 0$ (kleine Änderung → großer Effekt)
 
 ### Konvergenzordnung
 
-Wenn $|e_{n+1}| \leq C \cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
+Wenn $|e_{n+1}| \\leq C \\cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
 
 - **Linear (p=1):** Jeder Schritt halbiert den Fehler
 - **Quadratisch (p=2):** Jeder Schritt quadriert den Fehler (viel schneller!)
@@ -1286,15 +1286,15 @@ Wenn $f(a)$ und $f(b)$ verschiedene Vorzeichen haben, liegt dazwischen eine Null
 
 ### Algorithmus
 
-1. Startintervall $[a, b]$ mit $f(a) \cdot f(b) < 0$
-2. Mitte: $c = \frac{a+b}{2}$
+1. Startintervall $[a, b]$ mit $f(a) \\cdot f(b) < 0$
+2. Mitte: $c = \\frac{a+b}{2}$
 3. Wenn $f(c) = 0$: fertig!
 4. Sonst: Welches Teilintervall hat Vorzeichenwechsel? → neues Intervall
 5. Wiederhole bis gewünschte Genauigkeit
 
 ### Beispiel
 
-$f(x) = x^2 - 2$ (Nullstelle bei $\sqrt{2} \approx 1{,}414$)
+$f(x) = x^2 - 2$ (Nullstelle bei $\\sqrt{2} \\approx 1{,}414$)
 
 | Schritt | $a$ | $b$ | $c$ | $f(c)$ |
 |---------|-----|-----|-----|--------|
@@ -1303,12 +1303,12 @@ $f(x) = x^2 - 2$ (Nullstelle bei $\sqrt{2} \approx 1{,}414$)
 | 3 | 1,25 | 1,5 | 1,375 | -0,1094 |
 | 4 | 1,375 | 1,5 | 1,4375 | 0,0664 |
 
-Nach 4 Schritten: $\sqrt{2} \approx 1{,}4375$
+Nach 4 Schritten: $\\sqrt{2} \\approx 1{,}4375$
 
 ### Konvergenz
 
 - **Linear** (Ordnung 1): Jeder Schritt halbiert das Intervall
-- Nach $n$ Schritten: Intervallbreite $\frac{b-a}{2^n}$
+- Nach $n$ Schritten: Intervallbreite $\\frac{b-a}{2^n}$
 - Für 10 Dezimalstellen: ca. 34 Schritte ($2^{34} > 10^{10}$)
 
 ### Vor- und Nachteile
@@ -1338,11 +1338,11 @@ Starte mit einem Schätzwert $x_0$ und verbessere ihn iterativ mit der **Tangent
 
 ### Formel
 
-$$x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}$$
+$$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$$
 
 ### Beispiel
 
-$f(x) = x^2 - 2$ (Nullstelle bei $\sqrt{2}$)
+$f(x) = x^2 - 2$ (Nullstelle bei $\\sqrt{2}$)
 
 $f'(x) = 2x$, Start: $x_0 = 2$
 
@@ -1352,7 +1352,7 @@ $f'(x) = 2x$, Start: $x_0 = 2$
 | 1 | 1,5 | 0,25 | 3 | 1,4167 |
 | 2 | 1,4167 | 0,0069 | 2,833 | 1,4142 |
 
-Nach nur 3 Schritten: $\sqrt{2} \approx 1{,}4142$ (4 Dezimalstellen!)
+Nach nur 3 Schritten: $\\sqrt{2} \\approx 1{,}4142$ (4 Dezimalstellen!)
 
 ### Konvergenz
 
@@ -1550,13 +1550,13 @@ Wenn $a^2 + b^2 = c^2$, dann ist das Dreieck rechtwinklig.
 
 Abstand zwischen $(x_1, y_1)$ und $(x_2, y_2)$:
 
-$d = \sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
+$d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$
 
 ### Beispiel 4
 
 Abstand $(1, 2)$ und $(4, 6)$:
 
-$d = \sqrt{9 + 16} = \sqrt{25} = 5$
+$d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 
 > **Merke:** Pythagoras gilt NUR bei rechten Winkeln!`,
       },
@@ -1648,25 +1648,25 @@ Der Einheitskreis (Radius 1) ist das zentrale Werkzeug der Trigonometrie.
 
 Im Einheitskreis mit Radius $r = 1$:
 
-- $\cos \varphi = x$-Koordinate
-- $\sin \varphi = y$-Koordinate
-- $\tan \varphi = \frac{\sin \varphi}{\cos \varphi}$
+- $\\cos \\varphi = x$-Koordinate
+- $\\sin \\varphi = y$-Koordinate
+- $\\tan \\varphi = \\frac{\\sin \\varphi}{\\cos \\varphi}$
 
 ### Wichtige Werte
 
-| Winkel | $\sin$ | $\cos$ | $\tan$ |
+| Winkel | $\\sin$ | $\\cos$ | $\\tan$ |
 |--------|--------|--------|--------|
 | 0° | 0 | 1 | 0 |
-| 30° | $\frac{1}{2}$ | $\frac{\sqrt{3}}{2}$ | $\frac{1}{\sqrt{3}}$ |
-| 45° | $\frac{\sqrt{2}}{2}$ | $\frac{\sqrt{2}}{2}$ | 1 |
-| 60° | $\frac{\sqrt{3}}{2}$ | $\frac{1}{2}$ | $\sqrt{3}$ |
+| 30° | $\\frac{1}{2}$ | $\\frac{\\sqrt{3}}{2}$ | $\\frac{1}{\\sqrt{3}}$ |
+| 45° | $\\frac{\\sqrt{2}}{2}$ | $\\frac{\\sqrt{2}}{2}$ | 1 |
+| 60° | $\\frac{\\sqrt{3}}{2}$ | $\\frac{1}{2}$ | $\\sqrt{3}$ |
 | 90° | 1 | 0 | undefiniert |
 
 ### Merkhilfe für 30° und 60°
 
-$\sin(30°) = \frac{1}{2}$, $\cos(30°) = \frac{\sqrt{3}}{2}$
+$\\sin(30°) = \\frac{1}{2}$, $\\cos(30°) = \\frac{\\sqrt{3}}{2}$
 
-$\sin(60°) = \frac{\sqrt{3}}{2}$, $\cos(60°) = \frac{1}{2}$
+$\\sin(60°) = \\frac{\\sqrt{3}}{2}$, $\\cos(60°) = \\frac{1}{2}$
 
 ### Quadranten-Vorzeichen
 
@@ -1681,9 +1681,9 @@ $\sin(60°) = \frac{\sqrt{3}}{2}$, $\cos(60°) = \frac{1}{2}$
 
 ### Symmetrien
 
-$\sin(-x) = -\sin(x)$ (ungerade Funktion)
+$\\sin(-x) = -\\sin(x)$ (ungerade Funktion)
 
-$\cos(-x) = \cos(x)$ (gerade Funktion)
+$\\cos(-x) = \\cos(x)$ (gerade Funktion)
 
 > **Merke:** Einheitskreis = Radius 1. cos = x, sin = y. Die Werte bei 30°, 45°, 60° auswendig lernen!`,
       },
@@ -1700,37 +1700,37 @@ Diese beiden Sätze erweitern die Trigonometrie über rechtwinklige Dreiecke hin
 
 Für beliebige Dreiecke:
 
-$$\frac{a}{\sin \alpha} = \frac{b}{\sin \beta} = \frac{c}{\sin \gamma} = 2R$$
+$$\\frac{a}{\\sin \\alpha} = \\frac{b}{\\sin \\beta} = \\frac{c}{\\sin \\gamma} = 2R$$
 
 wobei $R$ der Umkreisradius ist.
 
 ### Beispiel 1
 
-$a = 5$, $\alpha = 30°$, $\beta = 45°$, $b = ?$
+$a = 5$, $\\alpha = 30°$, $\\beta = 45°$, $b = ?$
 
-$\frac{5}{\sin 30°} = \frac{b}{\sin 45°}$
+$\\frac{5}{\\sin 30°} = \\frac{b}{\\sin 45°}$
 
-$b = \frac{5 \cdot \sin 45°}{\sin 30°} = \frac{5 \cdot 0{,}707}{0{,}5} = 7{,}07$
+$b = \\frac{5 \\cdot \\sin 45°}{\\sin 30°} = \\frac{5 \\cdot 0{,}707}{0{,}5} = 7{,}07$
 
 ## Kosinussatz
 
 Verallgemeinerung des Pythagoras:
 
-$$c^2 = a^2 + b^2 - 2ab \cos \gamma$$
+$$c^2 = a^2 + b^2 - 2ab \\cos \\gamma$$
 
 ### Beispiel 2: Pythagoras als Spezialfall
 
-Wenn $\gamma = 90°$: $\cos 90° = 0$
+Wenn $\\gamma = 90°$: $\\cos 90° = 0$
 
 $c^2 = a^2 + b^2$ — das ist Pythagoras!
 
 ### Beispiel 3
 
-$a = 3$, $b = 4$, $\gamma = 60°$
+$a = 3$, $b = 4$, $\\gamma = 60°$
 
-$c^2 = 9 + 16 - 2 \cdot 3 \cdot 4 \cdot 0{,}5 = 25 - 12 = 13$
+$c^2 = 9 + 16 - 2 \\cdot 3 \\cdot 4 \\cdot 0{,}5 = 25 - 12 = 13$
 
-$c = \sqrt{13} \approx 3{,}61$
+$c = \\sqrt{13} \\approx 3{,}61$
 
 ## Wann was verwenden?
 
@@ -1803,7 +1803,7 @@ $$\\log_a(x) = y \\Leftrightarrow a^y = x$$
 Potenzen sind die Grundlage für viele mathematische Konzepte. Hier die wichtigsten Regeln:
 
 ### Grundbegriffe
-$a^n = a \cdot a \cdot a \cdots$ (n-mal)
+$a^n = a \\cdot a \\cdot a \\cdots$ (n-mal)
 
 - $a$: Basis
 - $n$: Exponent
@@ -1812,34 +1812,34 @@ $a^n = a \cdot a \cdot a \cdots$ (n-mal)
 
 ### Regeln
 
-**Multiplikation:** $a^m \cdot a^n = a^{m+n}$
+**Multiplikation:** $a^m \\cdot a^n = a^{m+n}$
 
-$2^3 \cdot 2^4 = 2^7 = 128$
+$2^3 \\cdot 2^4 = 2^7 = 128$
 
-**Division:** $\frac{a^m}{a^n} = a^{m-n}$
+**Division:** $\\frac{a^m}{a^n} = a^{m-n}$
 
-$\frac{2^5}{2^3} = 2^2 = 4$
+$\\frac{2^5}{2^3} = 2^2 = 4$
 
-**Potenz von Potenz:** $(a^m)^n = a^{m \cdot n}$
+**Potenz von Potenz:** $(a^m)^n = a^{m \\cdot n}$
 
 $(2^3)^2 = 2^6 = 64$
 
-**Produkt:** $(ab)^n = a^n \cdot b^n$
+**Produkt:** $(ab)^n = a^n \\cdot b^n$
 
-$(2 \cdot 3)^2 = 4 \cdot 9 = 36$
+$(2 \\cdot 3)^2 = 4 \\cdot 9 = 36$
 
-**Quotient:** $(\frac{a}{b})^n = \frac{a^n}{b^n}$
+**Quotient:** $(\\frac{a}{b})^n = \\frac{a^n}{b^n}$
 
-$(\frac{2}{3})^2 = \frac{4}{9}$
+$(\\frac{2}{3})^2 = \\frac{4}{9}$
 
 ### Besondere Werte
-$a^0 = 1$ (für $a \neq 0$)
+$a^0 = 1$ (für $a \\neq 0$)
 
 $a^1 = a$
 
-$a^{-n} = \frac{1}{a^n}$
+$a^{-n} = \\frac{1}{a^n}$
 
-$2^{-3} = \frac{1}{8} = 0{,}125$
+$2^{-3} = \\frac{1}{8} = 0{,}125$
 
 > **Merke:** Bei Multiplikation gleicher Basen werden die Exponenten addiert, bei Division subtrahiert!`,
       },
@@ -1850,42 +1850,42 @@ $2^{-3} = \frac{1}{8} = 0{,}125$
         type: "text",
         content: `## Logarithmen
 
-Der Logarithmus ist die **Umkehrung** der Potenzierung. Wenn $a^x = b$, dann ist $\log_a(b) = x$.
+Der Logarithmus ist die **Umkehrung** der Potenzierung. Wenn $a^x = b$, dann ist $\\log_a(b) = x$.
 
 ### Definition
-$\log_a(b) = x \Leftrightarrow a^x = b$
+$\\log_a(b) = x \\Leftrightarrow a^x = b$
 
 ### Beispiel 1
-$\log_2(8) = 3$, denn $2^3 = 8$
+$\\log_2(8) = 3$, denn $2^3 = 8$
 
-$\log_{10}(100) = 2$, denn $10^2 = 100$
+$\\log_{10}(100) = 2$, denn $10^2 = 100$
 
-$\log_5(25) = 2$, denn $5^2 = 25$
+$\\log_5(25) = 2$, denn $5^2 = 25$
 
 ### Logarithmusgesetze
 
-**Produkt:** $\log(a \cdot b) = \log(a) + \log(b)$
+**Produkt:** $\\log(a \\cdot b) = \\log(a) + \\log(b)$
 
-$\log(6) = \log(2) + \log(3)$
+$\\log(6) = \\log(2) + \\log(3)$
 
-**Quotient:** $\log(\frac{a}{b}) = \log(a) - \log(b)$
+**Quotient:** $\\log(\\frac{a}{b}) = \\log(a) - \\log(b)$
 
-$\log(\frac{100}{10}) = \log(100) - \log(10) = 2 - 1 = 1$
+$\\log(\\frac{100}{10}) = \\log(100) - \\log(10) = 2 - 1 = 1$
 
-**Potenz:** $\log(a^n) = n \cdot \log(a)$
+**Potenz:** $\\log(a^n) = n \\cdot \\log(a)$
 
-$\log(8) = \log(2^3) = 3 \cdot \log(2)$
+$\\log(8) = \\log(2^3) = 3 \\cdot \\log(2)$
 
 ### Wichtige Logarithmen
 
-- **Natürlicher Logarithmus:** $\ln(x) = \log_e(x)$ mit $e \approx 2{,}718$
-- **Dezimallogarithmus:** $\lg(x) = \log_{10}(x)$
-- **Binärlogarithmus:** $\log_2(x)$ (in der Informatik)
+- **Natürlicher Logarithmus:** $\\ln(x) = \\log_e(x)$ mit $e \\approx 2{,}718$
+- **Dezimallogarithmus:** $\lg(x) = \\log_{10}(x)$
+- **Binärlogarithmus:** $\\log_2(x)$ (in der Informatik)
 
 ### Beispiel 2: Gleichung lösen
 $2^x = 16$
 
-$x = \log_2(16) = \log_2(2^4) = 4$
+$x = \\log_2(16) = \\log_2(2^4) = 4$
 
 > **Merke:** Logarithmen wandeln Potenzen in Produkte um — das macht Rechnungen einfacher!`,
       },
@@ -1900,19 +1900,19 @@ Eine Exponentialfunktion hat die Form $f(x) = a^x$, wobei die Variable im **Expo
 
 ### Die wichtigste: $e^x$
 
-$e \approx 2{,}71828$ ist die **Euler-Zahl**.
+$e \\approx 2{,}71828$ ist die **Euler-Zahl**.
 
-$e^x$ hat eine besondere Eigenschaft: $\frac{d}{dx}e^x = e^x$ — die Ableitung ist die Funktion selbst!
+$e^x$ hat eine besondere Eigenschaft: $\\frac{d}{dx}e^x = e^x$ — die Ableitung ist die Funktion selbst!
 
 ### Wachstum & Zerfall
 
-**Exponentielles Wachstum:** $f(t) = N_0 \cdot e^{kt}$ (k > 0)
+**Exponentielles Wachstum:** $f(t) = N_0 \\cdot e^{kt}$ (k > 0)
 
 - Bakterienwachstum
 - Bevölkerungsentwicklung
 - Zinseszins
 
-**Exponentieller Zerfall:** $f(t) = N_0 \cdot e^{-kt}$ (k > 0)
+**Exponentieller Zerfall:** $f(t) = N_0 \\cdot e^{-kt}$ (k > 0)
 
 - Radioaktiver Zerfall
 - Abkühlung
@@ -1922,13 +1922,13 @@ $e^x$ hat eine besondere Eigenschaft: $\frac{d}{dx}e^x = e^x$ — die Ableitung 
 
 Die Zeit, bis die Hälfte zerfallen ist:
 
-$T_{1/2} = \frac{\ln(2)}{k}$
+$T_{1/2} = \\frac{\\ln(2)}{k}$
 
 ### Beispiel: Radioaktiver Zerfall
 
 1000 Atome, Halbwertszeit 5 Jahre. Nach 15 Jahren?
 
-$N(15) = 1000 \cdot (\frac{1}{2})^{15/5} = 1000 \cdot \frac{1}{8} = 125$
+$N(15) = 1000 \\cdot (\\frac{1}{2})^{15/5} = 1000 \\cdot \\frac{1}{8} = 125$
 
 > **Merke:** $e^x$ ist DIE Exponentialfunktion — sie beschreibt natürliches Wachstum überall in der Natur!`,
       },
@@ -1992,12 +1992,12 @@ Diese drei Maße beschreiben die **Lage** einer Datenverteilung.
 
 ### Mittelwert (Durchschnitt)
 
-$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i = \frac{x_1 + x_2 + \cdots + x_n}{n}$
+$\\bar{x} = \\frac{1}{n}\\sum_{i=1}^{n} x_i = \\frac{x_1 + x_2 + \\cdots + x_n}{n}$
 
 ### Beispiel 1
 Noten: 2, 3, 2, 1, 2, 4, 3
 
-$\bar{x} = \frac{2+3+2+1+2+4+3}{7} = \frac{17}{7} \approx 2{,}43$
+$\\bar{x} = \\frac{2+3+2+1+2+4+3}{7} = \\frac{17}{7} \\approx 2{,}43$
 
 ### Median (Zentralwert)
 
@@ -2008,7 +2008,7 @@ Sortiert: 1, 2, 2, **2**, 3, 3, 4 → Median = 2
 ### Beispiel 2: Ausreißer
 Gehälter: 3000, 3200, 3500, 3800, **50000**
 
-Mittelwert: $\frac{63500}{5} = 12700$ (verzerrt!)
+Mittelwert: $\\frac{63500}{5} = 12700$ (verzerrt!)
 
 Median: 3500 (realistischer)
 
@@ -2031,39 +2031,39 @@ Diese Maße beschreiben die **Streuung** einer Datenverteilung.
 
 ### Varianz
 
-$\sigma^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar{x})^2$
+$\\sigma^2 = \\frac{1}{n}\\sum_{i=1}^{n}(x_i - \\bar{x})^2$
 
 ### Beispiel 1
 Daten: 2, 4, 4, 4, 5, 5, 7, 9
 
-Mittelwert: $\bar{x} = \frac{40}{8} = 5$
+Mittelwert: $\\bar{x} = \\frac{40}{8} = 5$
 
 Abweichungen: $-3, -1, -1, -1, 0, 0, 2, 4$
 
 Quadrate: $9, 1, 1, 1, 0, 0, 4, 16$
 
-$\sigma^2 = \frac{32}{8} = 4$
+$\\sigma^2 = \\frac{32}{8} = 4$
 
 ### Standardabweichung
 
-$\sigma = \sqrt{\sigma^2}$
+$\\sigma = \\sqrt{\\sigma^2}$
 
-$\sigma = \sqrt{4} = 2$
+$\\sigma = \\sqrt{4} = 2$
 
 Die Standardabweichung hat die **gleiche Einheit** wie die Daten!
 
 ### Beispiel 2: Noten
-Klasse A: Noten 3, 3, 3, 3, 3 → $\sigma = 0$ (alle gleich)
+Klasse A: Noten 3, 3, 3, 3, 3 → $\\sigma = 0$ (alle gleich)
 
-Klasse B: Noten 1, 2, 3, 4, 5 → $\sigma \approx 1{,}41$ (große Streuung)
+Klasse B: Noten 1, 2, 3, 4, 5 → $\\sigma \\approx 1{,}41$ (große Streuung)
 
 ### Empirische Regel (Normalverteilung)
 
-- 68% der Daten liegen in $\bar{x} \pm \sigma$
-- 95% in $\bar{x} \pm 2\sigma$
-- 99,7% in $\bar{x} \pm 3\sigma$
+- 68% der Daten liegen in $\\bar{x} \\pm \\sigma$
+- 95% in $\\bar{x} \\pm 2\\sigma$
+- 99,7% in $\\bar{x} \\pm 3\\sigma$
 
-> **Merke:** Varianz in Quadrat-Einheiten, Standardabweichung in Original-Einheiten. $\sigma$ zeigt, wie stark die Daten um den Mittelwert streuen!`,
+> **Merke:** Varianz in Quadrat-Einheiten, Standardabweichung in Original-Einheiten. $\\sigma$ zeigt, wie stark die Daten um den Mittelwert streuen!`,
       },
       {
         id: "m-stat-3",
@@ -2082,7 +2082,7 @@ Quartile teilen eine sortierte Datenreihe in **vier gleiche Teile**.
 
 ### Berechnung
 
-Sortierte Daten: $x_1, x_2, \cdots, x_n$
+Sortierte Daten: $x_1, x_2, \\cdots, x_n$
 
 $Q_1$ = Median der unteren Hälfte
 
@@ -2113,8 +2113,8 @@ Ein Boxplot zeigt:
 
 ### Ausreißer erkennen
 
-- Unterhalb: $Q_1 - 1{,}5 \cdot IQR$
-- Oberhalb: $Q_3 + 1{,}5 \cdot IQR$
+- Unterhalb: $Q_1 - 1{,}5 \\cdot IQR$
+- Oberhalb: $Q_3 + 1{,}5 \\cdot IQR$
 
 > **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!`,
       },
@@ -2201,13 +2201,13 @@ Um Brüche zu addieren oder subtrahieren, braucht man einen **gemeinsamen Nenner
 
 Wenn der Nenner gleich ist, einfach die Zähler addieren/subtrahieren:
 
-$$\frac{a}{c} + \frac{b}{c} = \frac{a+b}{c}$$
+$$\\frac{a}{c} + \\frac{b}{c} = \\frac{a+b}{c}$$
 
 ### Beispiel 1
 
-$\frac{3}{7} + \frac{2}{7} = \frac{5}{7}$
+$\\frac{3}{7} + \\frac{2}{7} = \\frac{5}{7}$
 
-$\frac{5}{8} - \frac{3}{8} = \frac{2}{8} = \frac{1}{4}$ (kürzen!)
+$\\frac{5}{8} - \\frac{3}{8} = \\frac{2}{8} = \\frac{1}{4}$ (kürzen!)
 
 ## Verschiedene Nenner
 
@@ -2215,19 +2215,19 @@ Man braucht das **kleinste gemeinsame Vielfache (kgV)** der Nenner.
 
 ### Beispiel 2
 
-$\frac{1}{3} + \frac{1}{4}$
+$\\frac{1}{3} + \\frac{1}{4}$
 
 kgV(3, 4) = 12
 
-$= \frac{4}{12} + \frac{3}{12} = \frac{7}{12}$
+$= \\frac{4}{12} + \\frac{3}{12} = \\frac{7}{12}$
 
 ### Beispiel 3
 
-$\frac{2}{5} + \frac{1}{3}$
+$\\frac{2}{5} + \\frac{1}{3}$
 
 kgV(5, 3) = 15
 
-$= \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$
+$= \\frac{6}{15} + \\frac{5}{15} = \\frac{11}{15}$
 
 ## Schritt für Schritt
 
@@ -2238,19 +2238,19 @@ $= \frac{6}{15} + \frac{5}{15} = \frac{11}{15}$
 
 ### Beispiel 4
 
-$\frac{3}{4} - \frac{1}{6}$
+$\\frac{3}{4} - \\frac{1}{6}$
 
 kgV(4, 6) = 12
 
-$= \frac{9}{12} - \frac{2}{12} = \frac{7}{12}$
+$= \\frac{9}{12} - \\frac{2}{12} = \\frac{7}{12}$
 
 ### Beispiel 5: Drei Brüche
 
-$\frac{1}{2} + \frac{1}{3} + \frac{1}{4}$
+$\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{4}$
 
 kgV(2, 3, 4) = 12
 
-$= \frac{6}{12} + \frac{4}{12} + \frac{3}{12} = \frac{13}{12} = 1\frac{1}{12}$
+$= \\frac{6}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{13}{12} = 1\\frac{1}{12}$
 
 > **Merke:** Gleicher Nenner = direkt addieren. Verschiedene Nenner = erst kgV suchen und erweitern!`,
       },
@@ -2267,39 +2267,39 @@ Brüche zu multiplizieren ist einfacher als zu addieren — man braucht keinen g
 
 **Regel:** Zähler mal Zähler, Nenner mal Nenner.
 
-$$\frac{a}{b} \cdot \frac{c}{d} = \frac{a \cdot c}{b \cdot d}$$
+$$\\frac{a}{b} \\cdot \\frac{c}{d} = \\frac{a \\cdot c}{b \\cdot d}$$
 
 ### Beispiel 1
 
-$\frac{2}{3} \cdot \frac{4}{5} = \frac{8}{15}$
+$\\frac{2}{3} \\cdot \\frac{4}{5} = \\frac{8}{15}$
 
 ### Beispiel 2: Vereinfachen vor dem Multiplizieren
 
-$\frac{3}{4} \cdot \frac{8}{9}$
+$\\frac{3}{4} \\cdot \\frac{8}{9}$
 
 Kreußlich kürzen: 3 und 9 teilen sich durch 3, 4 und 8 teilen sich durch 4:
 
-$= \frac{1}{1} \cdot \frac{2}{3} = \frac{2}{3}$
+$= \\frac{1}{1} \\cdot \\frac{2}{3} = \\frac{2}{3}$
 
 **Tipp:** Immer vor dem Multiplizieren kürzen — das macht das Ergebnis einfacher!
 
 ## Division
 
-**Regel:** Kehrtausch! Dividieren durch $\frac{a}{b}$ = Multiplizieren mit $\frac{b}{a}$.
+**Regel:** Kehrtausch! Dividieren durch $\\frac{a}{b}$ = Multiplizieren mit $\\frac{b}{a}$.
 
-$$\frac{a}{b} : \frac{c}{d} = \frac{a}{b} \cdot \frac{d}{c}$$
+$$\\frac{a}{b} : \\frac{c}{d} = \\frac{a}{b} \\cdot \\frac{d}{c}$$
 
 ### Beispiel 3
 
-$\frac{2}{3} : \frac{4}{5} = \frac{2}{3} \cdot \frac{5}{4} = \frac{10}{12} = \frac{5}{6}$
+$\\frac{2}{3} : \\frac{4}{5} = \\frac{2}{3} \\cdot \\frac{5}{4} = \\frac{10}{12} = \\frac{5}{6}$
 
 ### Beispiel 4: Gemischte Zahlen
 
-$2\frac{1}{2} : 1\frac{1}{4}$
+$2\\frac{1}{2} : 1\\frac{1}{4}$
 
 Erst in unechte Brüche umwandeln:
 
-$\frac{5}{2} : \frac{5}{4} = \frac{5}{2} \cdot \frac{4}{5} = \frac{20}{10} = 2$
+$\\frac{5}{2} : \\frac{5}{4} = \\frac{5}{2} \\cdot \\frac{4}{5} = \\frac{20}{10} = 2$
 
 > **Merke:** Multiplizieren = Zähler×Zähler, Nenner×Nenner. Dividieren = Kehren und multiplizieren!`,
       },
@@ -2367,7 +2367,7 @@ $2x = 14 - 6 = 8$
 
 $x = 4$
 
-**Probe:** $2 \cdot 4 + 6 = 14$ ✓
+**Probe:** $2 \\cdot 4 + 6 = 14$ ✓
 
 ### Beispiel 2: Variable auf beiden Seiten
 
@@ -2391,7 +2391,7 @@ $x = 8$
 
 ### Beispiel 4: Brüche
 
-$\frac{x}{3} + \frac{x}{4} = 7$
+$\\frac{x}{3} + \\frac{x}{4} = 7$
 
 Mit 12 erweitern (kgV von 3 und 4):
 
@@ -2498,15 +2498,15 @@ Das Distributivgesetz ist das wichtigste Werkzeug beim Vereinfachen von Termen.
 
 ### Distributivgesetz
 
-$a \cdot (b + c) = a \cdot b + a \cdot c$
+$a \\cdot (b + c) = a \\cdot b + a \\cdot c$
 
 ### Beispiel 1: Einfach
 
-$3(x + 4) = 3 \cdot x + 3 \cdot 4 = 3x + 12$
+$3(x + 4) = 3 \\cdot x + 3 \\cdot 4 = 3x + 12$
 
 ### Beispiel 2: Negatives Vorzeichen
 
-$-2(5 - x) = -2 \cdot 5 + (-2) \cdot (-x) = -10 + 2x$
+$-2(5 - x) = -2 \\cdot 5 + (-2) \\cdot (-x) = -10 + 2x$
 
 **Vorsicht:** Minus mal Minus gibt Plus!
 
@@ -2528,7 +2528,7 @@ $(x + 2)(x - 3)$
 
 Jedes Element der ersten Klammer mit jedem der zweiten multiplizieren:
 
-$= x \cdot x + x \cdot (-3) + 2 \cdot x + 2 \cdot (-3)$
+$= x \\cdot x + x \\cdot (-3) + 2 \\cdot x + 2 \\cdot (-3)$
 
 $= x^2 - 3x + 2x - 6 = x^2 - x - 6$
 
@@ -2645,8 +2645,8 @@ Ungleichungen funktionieren wie Gleichungen — mit einer wichtigen Ausnahme bei
 
 - $<$ : kleiner als
 - $>$ : größer als
-- $\leq$ : kleiner oder gleich
-- $\geq$ : größer oder gleich
+- $\\leq$ : kleiner oder gleich
+- $\\geq$ : größer oder gleich
 
 ### Grundregeln
 
@@ -2662,15 +2662,15 @@ $2x > 4$
 
 $x > 2$
 
-Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 2\} = (2, \infty)$
+Lösungsmenge: $L = \{x \\in \\mathbb{R} \mid x > 2\} = (2, \\infty)$
 
 ### Beispiel 2: Negativer Koeffizient
 
-$-3x + 6 \leq 12$
+$-3x + 6 \\leq 12$
 
-$-3x \leq 6$
+$-3x \\leq 6$
 
-$x \geq -2$ ← Vorzeichenwechsel!
+$x \\geq -2$ ← Vorzeichenwechsel!
 
 ### Beispiel 3: Klammern
 
@@ -2685,15 +2685,15 @@ $-8 > x$ → $x < -8$
 ### Intervallschreibweise
 
 - $(a, b)$ = offenes Intervall: $a < x < b$
-- $[a, b]$ = abgeschlossenes Intervall: $a \leq x \leq b$
-- $(a, b]$ = halboffen: $a < x \leq b$
-- $(-\infty, a)$ = nach links offen
+- $[a, b]$ = abgeschlossenes Intervall: $a \\leq x \\leq b$
+- $(a, b]$ = halboffen: $a < x \\leq b$
+- $(-\\infty, a)$ = nach links offen
 
 ### Darstellung auf dem Zahlenstrahl
 
 $x > 2$: Offener Kreis bei 2, Pfeil nach rechts.
 
-$x \geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
+$x \\geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
 
 > **Merke:** Bei Division durch negative Zahlen: Vorzeichen umkehren!`,
       },
@@ -2704,7 +2704,7 @@ $x \geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
         type: "text",
         content: `## Quadratische Ungleichungen
 
-Quadratische Ungleichungen haben die Form $ax^2 + bx + c > 0$ (oder $< 0$, $\leq$, $\geq$).
+Quadratische Ungleichungen haben die Form $ax^2 + bx + c > 0$ (oder $< 0$, $\\leq$, $\\geq$).
 
 ## Lösungsweg
 
@@ -2731,13 +2731,13 @@ Nullstellen: $x_1 = 2$, $x_2 = 3$
 
 **Schritt 3:** Lösung: $x < 2$ oder $x > 3$
 
-$L = (-\infty, 2) \cup (3, \infty)$
+$L = (-\\infty, 2) \\cup (3, \\infty)$
 
 ### Beispiel 2
 
-$x^2 - 4 \leq 0$
+$x^2 - 4 \\leq 0$
 
-$(x-2)(x+2) \leq 0$
+$(x-2)(x+2) \\leq 0$
 
 | Intervall | $(x+2)$ | $(x-2)$ | Produkt |
 |-----------|---------|---------|---------|
@@ -2745,7 +2745,7 @@ $(x-2)(x+2) \leq 0$
 | $-2 < x < 2$ | $+$ | $-$ | $-$ ✓ |
 | $x > 2$ | $+$ | $+$ | $+$ |
 
-Lösung: $-2 \leq x \leq 2$ → $L = [-2, 2]$
+Lösung: $-2 \\leq x \\leq 2$ → $L = [-2, 2]$
 
 ### Tafel-Test (Vorzeichen)
 
@@ -2811,25 +2811,25 @@ Der Definitionsbereich ist die Menge aller x-Werte, für die $f(x)$ definiert is
 
 ### Einschränkungen
 
-- **Nenner:** Darf nicht 0 sein → $q(x) \neq 0$
-- **Wurzel:** Argument muss $\geq 0$ sein → $\sqrt{g(x)}$ mit $g(x) \geq 0$
-- **Logarithmus:** Argument muss $> 0$ sein → $\ln(g(x))$ mit $g(x) > 0$
+- **Nenner:** Darf nicht 0 sein → $q(x) \\neq 0$
+- **Wurzel:** Argument muss $\\geq 0$ sein → $\\sqrt{g(x)}$ mit $g(x) \\geq 0$
+- **Logarithmus:** Argument muss $> 0$ sein → $\\ln(g(x))$ mit $g(x) > 0$
 
 ### Beispiel 1
 
-$f(x) = \frac{1}{x-2}$
+$f(x) = \\frac{1}{x-2}$
 
-Nenner $\neq 0$: $x - 2 \neq 0 \Rightarrow x \neq 2$
+Nenner $\\neq 0$: $x - 2 \\neq 0 \\Rightarrow x \\neq 2$
 
-$D_f = \mathbb{R} \setminus \{2\} = (-\infty, 2) \cup (2, \infty)$
+$D_f = \\mathbb{R} \\setminus \{2\} = (-\\infty, 2) \\cup (2, \\infty)$
 
 ### Beispiel 2
 
-$f(x) = \sqrt{x-3}$
+$f(x) = \\sqrt{x-3}$
 
-$x - 3 \geq 0 \Rightarrow x \geq 3$
+$x - 3 \\geq 0 \\Rightarrow x \\geq 3$
 
-$D_f = [3, \infty)$
+$D_f = [3, \\infty)$
 
 ## Nullstellen
 
@@ -2839,7 +2839,7 @@ Nullstellen sind die x-Werte, für die $f(x) = 0$.
 
 $f(x) = x^2 - 4$
 
-$x^2 - 4 = 0 \Rightarrow x^2 = 4 \Rightarrow x = \pm 2$
+$x^2 - 4 = 0 \\Rightarrow x^2 = 4 \\Rightarrow x = \\pm 2$
 
 Nullstellen: $x_1 = -2$, $x_2 = 2$
 
@@ -2878,7 +2878,7 @@ $f(x) = x^3 - 3x + 2$
 
 **Schritt 1:** $f'(x) = 3x^2 - 3 = 0$
 
-$x^2 = 1 \Rightarrow x = \pm 1$
+$x^2 = 1 \\Rightarrow x = \\pm 1$
 
 **Schritt 2:** $f''(x) = 6x$
 
@@ -2904,7 +2904,7 @@ Auf einem abgeschlossenen Intervall $[a, b]$:
 
 $f(x) = x^2$ auf $[-2, 3]$
 
-$f'(x) = 2x = 0 \Rightarrow x = 0$
+$f'(x) = 2x = 0 \\Rightarrow x = 0$
 
 $f(0) = 0$, $f(-2) = 4$, $f(3) = 9$
 
@@ -2929,7 +2929,7 @@ Ein Wendepunkt ist ein Punkt, an dem die Funktion von **linksgekrümmt** nach **
 
 ### Bedingung
 
-$f''(x_0) = 0$ und $f'''(x_0) \neq 0$
+$f''(x_0) = 0$ und $f'''(x_0) \\neq 0$
 
 ### Beispiel
 
@@ -2937,9 +2937,9 @@ $f(x) = x^3 - 3x + 2$
 
 $f'(x) = 3x^2 - 3$
 
-$f''(x) = 6x = 0 \Rightarrow x = 0$
+$f''(x) = 6x = 0 \\Rightarrow x = 0$
 
-$f'''(0) = 6 \neq 0$ → Wendepunkt!
+$f'''(0) = 6 \\neq 0$ → Wendepunkt!
 
 $f(0) = 2$ → Wendepunkt bei $(0, 2)$
 
@@ -2957,9 +2957,9 @@ $f(x) = x^2 - 4x + 3$
 
 $f'(x) = 2x - 4$
 
-$f'(x) > 0 \Rightarrow x > 2$ → $f$ steigt für $x > 2$
+$f'(x) > 0 \\Rightarrow x > 2$ → $f$ steigt für $x > 2$
 
-$f'(x) < 0 \Rightarrow x < 2$ → $f$ fällt für $x < 2$
+$f'(x) < 0 \\Rightarrow x < 2$ → $f$ fällt für $x < 2$
 
 ## Krümmung
 
@@ -3036,7 +3036,7 @@ Das Einsetzungsverfahren ist eine Methode, um lineare Gleichungssysteme (LGS) zu
 
 ### Beispiel 1
 
-$\begin{cases} 2x + y = 7 \\ x - y = 1 \end{cases}$
+$\\begin{cases} 2x + y = 7 \\ x - y = 1 \\end{cases}$
 
 **Schritt 1:** Aus Gleichung 2: $x = y + 1$
 
@@ -3048,17 +3048,17 @@ $2y + 2 + y = 7$
 
 $3y = 5$
 
-$y = \frac{5}{3}$
+$y = \\frac{5}{3}$
 
 **Schritt 3:** Rückeinsetzen:
 
-$x = \frac{5}{3} + 1 = \frac{8}{3}$
+$x = \\frac{5}{3} + 1 = \\frac{8}{3}$
 
-**Probe:** $2 \cdot \frac{8}{3} + \frac{5}{3} = \frac{21}{3} = 7$ ✓
+**Probe:** $2 \\cdot \\frac{8}{3} + \\frac{5}{3} = \\frac{21}{3} = 7$ ✓
 
 ### Beispiel 2
 
-$\begin{cases} 3x + 2y = 12 \\ x - y = 1 \end{cases}$
+$\\begin{cases} 3x + 2y = 12 \\ x - y = 1 \\end{cases}$
 
 Aus Gleichung 2: $x = y + 1$
 
@@ -3068,7 +3068,7 @@ $3y + 3 + 2y = 12$
 
 $5y = 9$
 
-$y = \frac{9}{5} = 1{,}8$
+$y = \\frac{9}{5} = 1{,}8$
 
 $x = 1{,}8 + 1 = 2{,}8$
 
@@ -3133,10 +3133,10 @@ $\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\\frac{7}{3}z = -7 \\end{cases
 - **Transponiert:** $(A^T)_{ij} = a_{ji}$
 
 ### Determinante (2×2)
-$\det\\begin{pmatrix}a&b\\c&d\\end{pmatrix} = ad - bc$
+$\\det\\begin{pmatrix}a&b\\c&d\\end{pmatrix} = ad - bc$
 
 ### Inverse (2×2)
-$A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
+$A^{-1} = \\frac{1}{\\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
     lessons: [
       {
         id: "m-ma-1",
@@ -3148,45 +3148,45 @@ $A^{-1} = \\frac{1}{\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
 Eine Matrix ist ein rechteckiges Zahlenfeld in Zeilen und Spalten.
 
 ### Notation
-$A = \begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{pmatrix}$
+$A = \\begin{pmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \\end{pmatrix}$
 
-Die Matrix hat 2 Zeilen und 2 Spalten → $2 \times 2$-Matrix.
+Die Matrix hat 2 Zeilen und 2 Spalten → $2 \\times 2$-Matrix.
 
 ### Addition
 
 Matrizen gleicher Dimension werden elementweise addiert:
 
-$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} + \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix} = \begin{pmatrix} 6 & 8 \\ 10 & 12 \end{pmatrix}$
+$\\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix} + \\begin{pmatrix} 5 & 6 \\ 7 & 8 \\end{pmatrix} = \\begin{pmatrix} 6 & 8 \\ 10 & 12 \\end{pmatrix}$
 
 ### Skalarmultiplikation
 
-$2 \cdot \begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} = \begin{pmatrix} 2 & 4 \\ 6 & 8 \end{pmatrix}$
+$2 \\cdot \\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix} = \\begin{pmatrix} 2 & 4 \\ 6 & 8 \\end{pmatrix}$
 
 ### Matrixmultiplikation
 
-$(AB)_{ij} = \sum_{k=1}^{n} a_{ik} \cdot b_{kj}$
+$(AB)_{ij} = \\sum_{k=1}^{n} a_{ik} \\cdot b_{kj}$
 
 **Beispiel:**
 
-$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} \cdot \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$
+$\\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix} \\cdot \\begin{pmatrix} 5 & 6 \\ 7 & 8 \\end{pmatrix}$
 
-$(AB)_{11} = 1 \cdot 5 + 2 \cdot 7 = 19$
+$(AB)_{11} = 1 \\cdot 5 + 2 \\cdot 7 = 19$
 
-$(AB)_{12} = 1 \cdot 6 + 2 \cdot 8 = 22$
+$(AB)_{12} = 1 \\cdot 6 + 2 \\cdot 8 = 22$
 
-$(AB)_{21} = 3 \cdot 5 + 4 \cdot 7 = 43$
+$(AB)_{21} = 3 \\cdot 5 + 4 \\cdot 7 = 43$
 
-$(AB)_{22} = 3 \cdot 6 + 4 \cdot 8 = 50$
+$(AB)_{22} = 3 \\cdot 6 + 4 \\cdot 8 = 50$
 
-**Ergebnis:** $\begin{pmatrix} 19 & 22 \\ 43 & 50 \end{pmatrix}$
+**Ergebnis:** $\\begin{pmatrix} 19 & 22 \\ 43 & 50 \\end{pmatrix}$
 
 ### Transposition
 
 $A^T$: Zeilen werden zu Spalten
 
-$\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix}^T = \begin{pmatrix} 1 & 3 \\ 2 & 4 \end{pmatrix}$
+$\\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix}^T = \\begin{pmatrix} 1 & 3 \\ 2 & 4 \\end{pmatrix}$
 
-> **Merke:** Matrixmultiplikation ist NICHT kommutativ: $AB \neq BA$ im Allgemeinen!`,
+> **Merke:** Matrixmultiplikation ist NICHT kommutativ: $AB \\neq BA$ im Allgemeinen!`,
       },
       {
         id: "m-ma-2",
@@ -3199,37 +3199,37 @@ Die Determinante ist eine Zahl, die aus einer quadratischen Matrix berechnet wir
 
 ### Determinante (2×2)
 
-$\det(A) = \det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc$
+$\\det(A) = \\det\\begin{pmatrix} a & b \\ c & d \\end{pmatrix} = ad - bc$
 
 ### Beispiel 1
 
-$\det\begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix} = 3 \cdot 4 - 1 \cdot 2 = 12 - 2 = 10$
+$\\det\\begin{pmatrix} 3 & 1 \\ 2 & 4 \\end{pmatrix} = 3 \\cdot 4 - 1 \\cdot 2 = 12 - 2 = 10$
 
 ### Determinante (3×3)
 
-Für eine $3 \times 3$-Matrix wird nach der **Sarrus-Regel** oder **Laplace-Entwicklung** berechnet.
+Für eine $3 \\times 3$-Matrix wird nach der **Sarrus-Regel** oder **Laplace-Entwicklung** berechnet.
 
 ### Inverse Matrix
 
-$A \cdot A^{-1} = I$ (Einheitsmatrix)
+$A \\cdot A^{-1} = I$ (Einheitsmatrix)
 
-Für $2 \times 2$:
+Für $2 \\times 2$:
 
-$A^{-1} = \frac{1}{\det(A)} \begin{pmatrix} d & -b \\ -c & a \end{pmatrix}$
+$A^{-1} = \\frac{1}{\\det(A)} \\begin{pmatrix} d & -b \\ -c & a \\end{pmatrix}$
 
 ### Beispiel 2
 
-$A = \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}$, $\det(A) = 10$
+$A = \\begin{pmatrix} 3 & 1 \\ 2 & 4 \\end{pmatrix}$, $\\det(A) = 10$
 
-$A^{-1} = \frac{1}{10} \begin{pmatrix} 4 & -1 \\ -2 & 3 \end{pmatrix} = \begin{pmatrix} 0{,}4 & -0{,}1 \\ -0{,}2 & 0{,}3 \end{pmatrix}$
+$A^{-1} = \\frac{1}{10} \\begin{pmatrix} 4 & -1 \\ -2 & 3 \\end{pmatrix} = \\begin{pmatrix} 0{,}4 & -0{,}1 \\ -0{,}2 & 0{,}3 \\end{pmatrix}$
 
 ### Wann existiert die Inverse?
 
-Nur wenn $\det(A) \neq 0$! Ist $\det(A) = 0$, heißt die Matrix **singulär**.
+Nur wenn $\\det(A) \\neq 0$! Ist $\\det(A) = 0$, heißt die Matrix **singulär**.
 
 ### Anwendung: LGS lösen
 
-$A \vec{x} = \vec{b} \Rightarrow \vec{x} = A^{-1} \vec{b}$
+$A \\vec{x} = \\vec{b} \\Rightarrow \\vec{x} = A^{-1} \\vec{b}$
 
 > **Merke:** det = 0 → keine Inverse → LGS hat keine oder unendlich viele Lösungen!`,
       },
@@ -3289,13 +3289,13 @@ Die Binomialverteilung modelliert die Anzahl **erfolgreicher** Versuche bei $n$ 
 
 ### Formel
 
-$$P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}$$
+$$P(X=k) = \\binom{n}{k} p^k (1-p)^{n-k}$$
 
 ### Beispiel 1: Münzwurf
 
 Münze 5-mal werfen. Wie wahrscheinlich sind genau 3 Köpfe?
 
-$P(X=3) = \binom{5}{3} (0{,}5)^3 (0{,}5)^2 = 10 \cdot 0{,}125 \cdot 0{,}25 = 0{,}3125$
+$P(X=3) = \\binom{5}{3} (0{,}5)^3 (0{,}5)^2 = 10 \\cdot 0{,}125 \\cdot 0{,}25 = 0{,}3125$
 
 Also ca. 31%.
 
@@ -3303,9 +3303,9 @@ Also ca. 31%.
 
 Würfel 10-mal. Wie wahrscheinlich sind genau 2 Sechsen?
 
-$P(X=2) = \binom{10}{2} \left(\frac{1}{6}\right)^2 \left(\frac{5}{6}\right)^8$
+$P(X=2) = \\binom{10}{2} \\left(\\frac{1}{6}\\right)^2 \\left(\\frac{5}{6}\\right)^8$
 
-$= 45 \cdot 0{,}0278 \cdot 0{,}2326 \approx 0{,}2907$
+$= 45 \\cdot 0{,}0278 \\cdot 0{,}2326 \\approx 0{,}2907$
 
 ### Erwartungswert & Varianz
 
@@ -3315,15 +3315,15 @@ $Var(X) = np(1-p)$
 
 ### Beispiel 3
 
-Münze 100-mal: $E(X) = 100 \cdot 0{,}5 = 50$ Köpfe
+Münze 100-mal: $E(X) = 100 \\cdot 0{,}5 = 50$ Köpfe
 
-$Var(X) = 100 \cdot 0{,}5 \cdot 0{,}5 = 25$, $\sigma = 5$
+$Var(X) = 100 \\cdot 0{,}5 \\cdot 0{,}5 = 25$, $\\sigma = 5$
 
 ### Binomialkoeffizient
 
-$\binom{n}{k} = \frac{n!}{k!(n-k)!}$
+$\\binom{n}{k} = \\frac{n!}{k!(n-k)!}$
 
-$\binom{5}{3} = \frac{5!}{3! \cdot 2!} = \frac{120}{6 \cdot 2} = 10$
+$\\binom{5}{3} = \\frac{5!}{3! \\cdot 2!} = \\frac{120}{6 \\cdot 2} = 10$
 
 > **Merke:** Binomialverteilung zählt Erfolge bei n Versuchen. $E(X) = np$ ist der erwartete Mittelwert!`,
       },
@@ -3340,22 +3340,22 @@ Die Normalverteilung ist die wichtigste **stetige** Verteilung. Sie beschreibt v
 
 Die Dichtefunktion ist eine symmetrische Glocke:
 
-$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$$
+$$f(x) = \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x-\\mu)^2}{2\\sigma^2}}$$
 
 ### Parameter
 
-- $\mu$: Mittelwert (Verschiebung)
-- $\sigma$: Standardabweichung (Breite)
+- $\\mu$: Mittelwert (Verschiebung)
+- $\\sigma$: Standardabweichung (Breite)
 
 ### 68-95-99,7-Regel
 
-- **68%** der Werte liegen in $\mu \pm \sigma$
-- **95%** in $\mu \pm 2\sigma$
-- **99,7%** in $\mu \pm 3\sigma$
+- **68%** der Werte liegen in $\\mu \\pm \\sigma$
+- **95%** in $\\mu \\pm 2\\sigma$
+- **99,7%** in $\\mu \\pm 3\\sigma$
 
 ### Beispiel
 
-Körpergröße: $\mu = 175$ cm, $\sigma = 7$ cm
+Körpergröße: $\\mu = 175$ cm, $\\sigma = 7$ cm
 
 - 68% sind zwischen 168 und 182 cm groß
 - 95% sind zwischen 161 und 189 cm
@@ -3363,13 +3363,13 @@ Körpergröße: $\mu = 175$ cm, $\sigma = 7$ cm
 
 ### Standardnormalverteilung
 
-$Z = \frac{X - \mu}{\sigma}$ → $\mu = 0$, $\sigma = 1$
+$Z = \\frac{X - \\mu}{\\sigma}$ → $\\mu = 0$, $\\sigma = 1$
 
 ### Beispiel 2
 
-IQ: $\mu = 100$, $\sigma = 15$
+IQ: $\\mu = 100$, $\\sigma = 15$
 
-$P(X > 130) = P\left(Z > \frac{130-100}{15}\right) = P(Z > 2) \approx 2{,}5\%$
+$P(X > 130) = P\\left(Z > \\frac{130-100}{15}\\right) = P(Z > 2) \\approx 2{,}5\%$
 
 ### Warum so wichtig?
 
@@ -3426,37 +3426,37 @@ Eine arithmetische Folge hat einen **konstanten Abstand** $d$ zwischen aufeinand
 
 ### Formel
 
-$$a_n = a_1 + (n-1) \cdot d$$
+$$a_n = a_1 + (n-1) \\cdot d$$
 
 ### Beispiel 1
 
 $3, 7, 11, 15, 19, ...$ → $a_1 = 3$, $d = 4$
 
-$a_5 = 3 + (5-1) \cdot 4 = 3 + 16 = 19$
+$a_5 = 3 + (5-1) \\cdot 4 = 3 + 16 = 19$
 
 ### Beispiel 2
 
 Gerade Zahlen: $2, 4, 6, 8, ...$ → $a_1 = 2$, $d = 2$
 
-$a_{10} = 2 + 9 \cdot 2 = 20$
+$a_{10} = 2 + 9 \\cdot 2 = 20$
 
 ## Partialsumme
 
 Die Summe der ersten $n$ Glieder:
 
-$$S_n = \frac{n}{2}(a_1 + a_n) = \frac{n}{2}(2a_1 + (n-1)d)$$
+$$S_n = \\frac{n}{2}(a_1 + a_n) = \\frac{n}{2}(2a_1 + (n-1)d)$$
 
 ### Beispiel 3: Gauß'sche Summenformel
 
 $1 + 2 + 3 + ... + 100 = ?$
 
-$S_{100} = \frac{100}{2}(1 + 100) = 50 \cdot 101 = 5050$
+$S_{100} = \\frac{100}{2}(1 + 100) = 50 \\cdot 101 = 5050$
 
 ### Beispiel 4
 
 $5 + 8 + 11 + 14 + 17 = ?$
 
-$S_5 = \frac{5}{2}(5 + 17) = \frac{5}{2} \cdot 22 = 55$
+$S_5 = \\frac{5}{2}(5 + 17) = \\frac{5}{2} \\cdot 22 = 55$
 
 ## Wichtige Eigenschaften
 
@@ -3477,47 +3477,47 @@ Eine geometrische Folge hat einen **konstanten Faktor** $q$ zwischen aufeinander
 
 ### Formel
 
-$$a_n = a_1 \cdot q^{n-1}$$
+$$a_n = a_1 \\cdot q^{n-1}$$
 
 ### Beispiel 1
 
 $2, 6, 18, 54, ...$ → $a_1 = 2$, $q = 3$
 
-$a_4 = 2 \cdot 3^3 = 2 \cdot 27 = 54$
+$a_4 = 2 \\cdot 3^3 = 2 \\cdot 27 = 54$
 
 ### Beispiel 2: Halbwertszeit
 
 1000g einer Substanz, Halbwertszeit = 5 Jahre:
 
-$a_n = 1000 \cdot \left(\frac{1}{2}\right)^{n/5}$
+$a_n = 1000 \\cdot \\left(\\frac{1}{2}\\right)^{n/5}$
 
-Nach 15 Jahren: $a_3 = 1000 \cdot \frac{1}{8} = 125g$
+Nach 15 Jahren: $a_3 = 1000 \\cdot \\frac{1}{8} = 125g$
 
 ## Geometrische Reihe (endlich)
 
-$$S_n = a_1 \cdot \frac{1-q^n}{1-q}$$ (für $q \neq 1$)
+$$S_n = a_1 \\cdot \\frac{1-q^n}{1-q}$$ (für $q \\neq 1$)
 
 ### Beispiel 3
 
 $1 + 2 + 4 + 8 + 16 = ?$
 
-$S_5 = 1 \cdot \frac{1-2^5}{1-2} = \frac{1-32}{-1} = 31$
+$S_5 = 1 \\cdot \\frac{1-2^5}{1-2} = \\frac{1-32}{-1} = 31$
 
 ## Unendliche geometrische Reihe
 
 Wenn $|q| < 1$, dann konvergiert die Reihe:
 
-$$S_\infty = \frac{a_1}{1-q}$$
+$$S_\\infty = \\frac{a_1}{1-q}$$
 
 ### Beispiel 4
 
-$1 + \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + \cdots$
+$1 + \\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\cdots$
 
-$S_\infty = \frac{1}{1-\frac{1}{2}} = 2$
+$S_\\infty = \\frac{1}{1-\\frac{1}{2}} = 2$
 
 ### Beispiel 5: Periodische Dezimalzahlen
 
-$0{,}333... = \frac{3}{10} + \frac{3}{100} + \frac{3}{1000} + \cdots = \frac{\frac{3}{10}}{1-\frac{1}{10}} = \frac{3}{9} = \frac{1}{3}$
+$0{,}333... = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots = \\frac{\\frac{3}{10}}{1-\\frac{1}{10}} = \\frac{3}{9} = \\frac{1}{3}$
 
 > **Merke:** Geometrische Folge = gleicher Faktor. Unendliche Reihe konvergiert nur wenn $|q| < 1$!`,
       },
@@ -3571,15 +3571,15 @@ Im dreidimensionalen Raum werden Geraden durch einen **Stützvektor** und einen 
 
 ### Parameterform
 
-$$\vec{x} = \vec{p} + t \cdot \vec{v}$$
+$$\\vec{x} = \\vec{p} + t \\cdot \\vec{v}$$
 
-- $\vec{p}$: Stützvektor (Punkt auf der Geraden)
-- $\vec{v}$: Richtungsvektor (Richtung der Geraden)
+- $\\vec{p}$: Stützvektor (Punkt auf der Geraden)
+- $\\vec{v}$: Richtungsvektor (Richtung der Geraden)
 - $t$: Parameter (reelle Zahl)
 
 ### Beispiel 1
 
-$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + t \cdot \begin{pmatrix}2\\-1\\1\end{pmatrix}$
+$\\vec{x} = \\begin{pmatrix}1\\2\\3\\end{pmatrix} + t \\cdot \\begin{pmatrix}2\\-1\\1\\end{pmatrix}$
 
 Für $t = 0$: Punkt $(1, 2, 3)$
 
@@ -3597,13 +3597,13 @@ $x = 1 + 2t$, $y = 2 - t$, $z = 3 + t$
 
 Gleichsetzen und $t_1$, $t_2$ lösen:
 
-$\vec{p}_1 + t_1 \vec{v}_1 = \vec{p}_2 + t_2 \vec{v}_2$
+$\\vec{p}_1 + t_1 \\vec{v}_1 = \\vec{p}_2 + t_2 \\vec{v}_2$
 
 ### Beispiel 2
 
-$g_1: \vec{x} = \begin{pmatrix}0\\0\\0\end{pmatrix} + t \begin{pmatrix}1\\1\\0\end{pmatrix}$
+$g_1: \\vec{x} = \\begin{pmatrix}0\\0\\0\\end{pmatrix} + t \\begin{pmatrix}1\\1\\0\\end{pmatrix}$
 
-$g_2: \vec{x} = \begin{pmatrix}1\\0\\0\end{pmatrix} + s \begin{pmatrix}0\\1\\0\end{pmatrix}$
+$g_2: \\vec{x} = \\begin{pmatrix}1\\0\\0\\end{pmatrix} + s \\begin{pmatrix}0\\1\\0\\end{pmatrix}$
 
 Gleichsetzen: $t = 1$, $t + 0 = 0 + s$ → $s = 1$
 
@@ -3612,7 +3612,7 @@ Schnittpunkt: $(1, 1, 0)$
 ### Lagebeziehungen
 
 - **Schnitt:** Genau ein Punkt (Gleichungssystem lösbar)
-- **Parallel:** $\vec{v}_1 = k \cdot \vec{v}_2$ (Richtungsvektoren proportional)
+- **Parallel:** $\\vec{v}_1 = k \\cdot \\vec{v}_2$ (Richtungsvektoren proportional)
 - **Windschief:** Weder parallel noch sich schneidend
 
 > **Merke:** Gerade im Raum = Punkt + Richtung × Parameter. Schnitt = Gleichungssystem lösen!`,
@@ -3628,15 +3628,15 @@ Eine Ebene im dreidimensionalen Raum wird durch einen Punkt und zwei Richtungsve
 
 ### Parameterform
 
-$$\vec{x} = \vec{p} + r \cdot \vec{u} + s \cdot \vec{v}$$
+$$\\vec{x} = \\vec{p} + r \\cdot \\vec{u} + s \\cdot \\vec{v}$$
 
-- $\vec{p}$: Stützvektor (Punkt auf der Ebene)
-- $\vec{u}$, $\vec{v}$: Richtungsvektoren (linear unabhängig)
+- $\\vec{p}$: Stützvektor (Punkt auf der Ebene)
+- $\\vec{u}$, $\\vec{v}$: Richtungsvektoren (linear unabhängig)
 - $r$, $s$: Parameter
 
 ### Beispiel 1
 
-$\vec{x} = \begin{pmatrix}1\\2\\3\end{pmatrix} + r \begin{pmatrix}1\\0\\0\end{pmatrix} + s \begin{pmatrix}0\\1\\0\end{pmatrix}$
+$\\vec{x} = \\begin{pmatrix}1\\2\\3\\end{pmatrix} + r \\begin{pmatrix}1\\0\\0\\end{pmatrix} + s \\begin{pmatrix}0\\1\\0\\end{pmatrix}$
 
 Das ist die Ebene $z = 3$ (parallel zur xy-Ebene).
 
@@ -3644,31 +3644,31 @@ Das ist die Ebene $z = 3$ (parallel zur xy-Ebene).
 
 $$ax + by + cz = d$$
 
-$\vec{n} = \begin{pmatrix}a\\b\\c\end{pmatrix}$ ist der **Normalenvektor** (senkrecht zur Ebene).
+$\\vec{n} = \\begin{pmatrix}a\\b\\c\\end{pmatrix}$ ist der **Normalenvektor** (senkrecht zur Ebene).
 
 ### Beispiel 2
 
 $2x - y + 3z = 6$
 
-Normalenvektor: $\vec{n} = (2, -1, 3)$
+Normalenvektor: $\\vec{n} = (2, -1, 3)$
 
 Punkt auf der Ebene: $x=3, y=0, z=0$ → $6 = 6$ ✓
 
 ### Umrechnung
 
-**Parameter → Koordinaten:** Normalenvektor = Kreuzprodukt $\vec{u} \times \vec{v}$
+**Parameter → Koordinaten:** Normalenvektor = Kreuzprodukt $\\vec{u} \\times \\vec{v}$
 
-**Koordinaten → Parameter:** Zwei linear unabhängige Vektoren senkrecht zu $\vec{n}$ finden.
+**Koordinaten → Parameter:** Zwei linear unabhängige Vektoren senkrecht zu $\\vec{n}$ finden.
 
 ### Abstand Punkt-Ebene
 
-$$d = \frac{|ax_0 + by_0 + cz_0 - d|}{\sqrt{a^2 + b^2 + c^2}}$$
+$$d = \\frac{|ax_0 + by_0 + cz_0 - d|}{\\sqrt{a^2 + b^2 + c^2}}$$
 
 ### Beispiel 3
 
 Abstand $(1, 2, 3)$ zur Ebene $2x - y + 3z = 6$:
 
-$d = \frac{|2 - 2 + 9 - 6|}{\sqrt{4+1+9}} = \frac{3}{\sqrt{14}} \approx 0{,}80$
+$d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}} \\approx 0{,}80$
 
 > **Merke:** Ebene = Punkt + 2 Richtungen. Normalenvektor steht senkrecht drauf!`,
       },
@@ -3726,41 +3726,41 @@ Prozente begegnen uns überall: Rabatte, Steuern, Zinsen. Die Grundformel ist ei
 
 ### Grundformel
 
-$$W = G \cdot \frac{p}{100}$$
+$$W = G \\cdot \\frac{p}{100}$$
 
 ### Beispiel 1: Prozentwert berechnen
 
 20% von 150€?
 
-$W = 150 \cdot \frac{20}{100} = 150 \cdot 0{,}2 = 30€$
+$W = 150 \\cdot \\frac{20}{100} = 150 \\cdot 0{,}2 = 30€$
 
 ### Beispiel 2: Prozentualer Anteil
 
 30 von 200 — wie viel Prozent?
 
-$p = \frac{W}{G} \cdot 100 = \frac{30}{200} \cdot 100 = 15\%$
+$p = \\frac{W}{G} \\cdot 100 = \\frac{30}{200} \\cdot 100 = 15\%$
 
 ### Beispiel 3: Grundwert berechnen
 
 40 sind 25% von was?
 
-$G = \frac{W \cdot 100}{p} = \frac{40 \cdot 100}{25} = 160$
+$G = \\frac{W \\cdot 100}{p} = \\frac{40 \\cdot 100}{25} = 160$
 
 ## Prozentuale Änderung
 
-$\text{Änderung} = \frac{\text{Neu} - \text{Alt}}{\text{Alt}} \cdot 100\%$
+$\\text{Änderung} = \\frac{\\text{Neu} - \\text{Alt}}{\\text{Alt}} \\cdot 100\%$
 
 ### Beispiel 4: Preissteigerung
 
 Preis steigt von 80€ auf 100€:
 
-$\frac{100 - 80}{80} \cdot 100\% = \frac{20}{80} \cdot 100\% = 25\%$
+$\\frac{100 - 80}{80} \\cdot 100\% = \\frac{20}{80} \\cdot 100\% = 25\%$
 
 ### Beispiel 5: Rabatt
 
 20% Rabatt auf 120€:
 
-$120 \cdot 0{,}2 = 24€$ Rabatt
+$120 \\cdot 0{,}2 = 24€$ Rabatt
 
 $120 - 24 = 96€$ Endpreis
 
@@ -3777,7 +3777,7 @@ Zinsen sind der "Preis" für geliehenes Geld. Bei Zinseszinsen wächst das Geld 
 
 ## Einfache Zinsen
 
-$$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$$
+$$Z = K \\cdot \\frac{p}{100} \\cdot \\frac{n}{12}$$
 
 - $K$: Kapital
 - $p$: Zinssatz (pro Jahr)
@@ -3787,33 +3787,33 @@ $$Z = K \cdot \frac{p}{100} \cdot \frac{n}{12}$$
 
 5000€ zu 4% für 6 Monate:
 
-$Z = 5000 \cdot \frac{4}{100} \cdot \frac{6}{12} = 5000 \cdot 0{,}04 \cdot 0{,}5 = 100€$
+$Z = 5000 \\cdot \\frac{4}{100} \\cdot \\frac{6}{12} = 5000 \\cdot 0{,}04 \\cdot 0{,}5 = 100€$
 
 ## Zinseszins
 
 Bei Zinseszinsen werden die Zinsen **mitverzinst** — das Geld wächst exponentiell!
 
-$$K_n = K_0 \cdot \left(1 + \frac{p}{100}\right)^n$$
+$$K_n = K_0 \\cdot \\left(1 + \\frac{p}{100}\\right)^n$$
 
 ### Beispiel 2
 
 1000€ zu 5% über 3 Jahre:
 
-$K_3 = 1000 \cdot 1{,}05^3 = 1000 \cdot 1{,}157625 = 1157{,}63€$
+$K_3 = 1000 \\cdot 1{,}05^3 = 1000 \\cdot 1{,}157625 = 1157{,}63€$
 
 Ohne Zinseszins wären es nur $1000 + 150 = 1150€$ — die 7,63€ Unterschied kommen von den Zinsen auf die Zinsen!
 
 ## Verdopplungszeit (72er-Regel)
 
-$t \approx \frac{72}{p}$
+$t \\approx \\frac{72}{p}$
 
-Bei 6% Zinsen: $t \approx \frac{72}{6} = 12$ Jahre bis zur Verdopplung.
+Bei 6% Zinsen: $t \\approx \\frac{72}{6} = 12$ Jahre bis zur Verdopplung.
 
 ### Beispiel 3
 
 10.000€ zu 8% — wann verdoppelt?
 
-$t \approx \frac{72}{8} = 9$ Jahre → $K_9 \approx 10000 \cdot 1{,}08^9 \approx 19{,}990€$
+$t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\approx 19{,}990€$
 
 > **Merke:** Einfache Zinsen = linear, Zinseszins = exponentiell. Die 72er-Regel ist eine schnelle Faustregel!`,
       },
@@ -3862,36 +3862,36 @@ $t \approx \frac{72}{8} = 9$ Jahre → $K_9 \approx 10000 \cdot 1{,}08^9 \approx
 Ein Quader hat 3 verschiedene Kantenlängen: a, b, c.
 
 ### Volumen
-$V = a \cdot b \cdot c$
+$V = a \\cdot b \\cdot c$
 
 ### Oberfläche
 $O = 2(ab + bc + ac)$
 
 ### Raumdiagonale
-$d = \sqrt{a^2 + b^2 + c^2}$
+$d = \\sqrt{a^2 + b^2 + c^2}$
 
 ### Beispiel 1
 $a=3$, $b=4$, $c=5$:
 
-$V = 3 \cdot 4 \cdot 5 = 60$
+$V = 3 \\cdot 4 \\cdot 5 = 60$
 
-$O = 2(12 + 20 + 15) = 2 \cdot 47 = 94$
+$O = 2(12 + 20 + 15) = 2 \\cdot 47 = 94$
 
-$d = \sqrt{9 + 16 + 25} = \sqrt{50} \approx 7{,}07$
+$d = \\sqrt{9 + 16 + 25} = \\sqrt{50} \\approx 7{,}07$
 
 ### Beispiel 2: Karton
 Ein Karton ist 40cm × 30cm × 20cm. Wie viele Liter fasst er?
 
-$V = 40 \cdot 30 \cdot 20 = 24.000$ cm³ $= 24$ Liter
+$V = 40 \\cdot 30 \\cdot 20 = 24.000$ cm³ $= 24$ Liter
 
 ## Würfel
 
 Sonderfall des Quaders: alle Kanten gleich lang ($a = b = c$).
 
-$V = a^3$, $O = 6a^2$, $d = a\sqrt{3}$
+$V = a^3$, $O = 6a^2$, $d = a\\sqrt{3}$
 
 ### Beispiel
-$a = 4$: $V = 64$, $O = 96$, $d = 4\sqrt{3} \approx 6{,}93$`,
+$a = 4$: $V = 64$, $O = 96$, $d = 4\\sqrt{3} \\approx 6{,}93$`,
       },
       {
         id: "m-ko-2",
@@ -3903,54 +3903,54 @@ $a = 4$: $V = 64$, $O = 96$, $d = 4\sqrt{3} \approx 6{,}93$`,
 Ein Zylinder hat einen kreisförmigen Querschnitt mit Radius r und Höhe h.
 
 ### Volumen
-$V = \pi r^2 h$
+$V = \\pi r^2 h$
 
 ### Oberfläche
-$O = 2\pi r^2 + 2\pi r h = 2\pi r(r + h)$
+$O = 2\\pi r^2 + 2\\pi r h = 2\\pi r(r + h)$
 
 ### Beispiel
 $r = 3$, $h = 10$:
 
-$V = \pi \cdot 9 \cdot 10 = 90\pi \approx 282{,}7$
+$V = \\pi \\cdot 9 \\cdot 10 = 90\\pi \\approx 282{,}7$
 
-$O = 2\pi \cdot 3(3 + 10) = 78\pi \approx 245$
+$O = 2\\pi \\cdot 3(3 + 10) = 78\\pi \\approx 245$
 
 ## Kegel
 
 Ein Kegel hat eine Spitze. Radius r, Höhe h, Mantellinie s.
 
 ### Volumen
-$V = \frac{1}{3}\pi r^2 h$
+$V = \\frac{1}{3}\\pi r^2 h$
 
 ### Mantellinie
-$s = \sqrt{r^2 + h^2}$
+$s = \\sqrt{r^2 + h^2}$
 
 ### Oberfläche
-$O = \pi r^2 + \pi r s = \pi r(r + s)$
+$O = \\pi r^2 + \\pi r s = \\pi r(r + s)$
 
 ### Beispiel
 $r = 4$, $h = 6$:
 
-$V = \frac{1}{3}\pi \cdot 16 \cdot 6 = 32\pi \approx 100{,}5$
+$V = \\frac{1}{3}\\pi \\cdot 16 \\cdot 6 = 32\\pi \\approx 100{,}5$
 
-$s = \sqrt{16 + 36} = \sqrt{52} \approx 7{,}21$
+$s = \\sqrt{16 + 36} = \\sqrt{52} \\approx 7{,}21$
 
-> **Merke:** Kegel = $\frac{1}{3}$ des Zylinders mit gleicher Grundfläche und Höhe!
+> **Merke:** Kegel = $\\frac{1}{3}$ des Zylinders mit gleicher Grundfläche und Höhe!
 
 ## Kugel
 
 ### Volumen
-$V = \frac{4}{3}\pi r^3$
+$V = \\frac{4}{3}\\pi r^3$
 
 ### Oberfläche
-$O = 4\pi r^2$
+$O = 4\\pi r^2$
 
 ### Beispiel
 $r = 5$:
 
-$V = \frac{4}{3}\pi \cdot 125 = \frac{500}{3}\pi \approx 523{,}6$
+$V = \\frac{4}{3}\\pi \\cdot 125 = \\frac{500}{3}\\pi \\approx 523{,}6$
 
-$O = 4\pi \cdot 25 = 100\pi \approx 314{,}2$`,
+$O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
       },
       {
         id: "m-ko-3",
@@ -3997,7 +3997,7 @@ Eine Permutation ist eine **Anordnung** von n Elementen. Die Reihenfolge ist wic
 ### Formel
 $P(n) = n!$ (n-Fakultät)
 
-$5! = 5 \cdot 4 \cdot 3 \cdot 2 \cdot 1 = 120$
+$5! = 5 \\cdot 4 \\cdot 3 \\cdot 2 \\cdot 1 = 120$
 
 ### Beispiel 1: Bücherregal
 3 Bücher (A, B, C) auf einem Regal anordnen:
@@ -4013,15 +4013,15 @@ Hier handelt es sich um eine **Variation mit Wiederholung**: $10^4 = 10.000$ Mö
 
 **k** aus **n** Elementen auswählen, **Reihenfolge wichtig**:
 
-$V(n,k) = \frac{n!}{(n-k)!}$
+$V(n,k) = \\frac{n!}{(n-k)!}$
 
 ### Beispiel 1: Top 3
 Die besten 3 aus 5 Schülern auswählen:
-$V(5,3) = \frac{5!}{(5-3)!} = \frac{120}{2} = 60$ Möglichkeiten
+$V(5,3) = \\frac{5!}{(5-3)!} = \\frac{120}{2} = 60$ Möglichkeiten
 
 ### Beispiel 2: Medaillen
 Gold, Silber, Bronze unter 8 Athleten:
-$V(8,3) = \frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336$
+$V(8,3) = \\frac{8!}{5!} = 8 \\cdot 7 \\cdot 6 = 336$
 
 > **Merke:** Permutation = alle Elemente, Variation = Auswahl. Bei beiden ist die Reihenfolge wichtig!`,
       },
@@ -4035,21 +4035,21 @@ $V(8,3) = \frac{8!}{5!} = 8 \cdot 7 \cdot 6 = 336$
 Eine Kombination ist eine **Auswahl** von k aus n Elementen, bei der die **Reihenfolge egal** ist.
 
 ### Formel
-$C(n,k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}$
+$C(n,k) = \\binom{n}{k} = \\frac{n!}{k!(n-k)!}$
 
 ### Beispiel 1: Lotto
 6 aus 49 Zahlen — Reihenfolge egal:
-$\binom{49}{6} = \frac{49!}{6! \cdot 43!} = 13.983.816$
+$\\binom{49}{6} = \\frac{49!}{6! \\cdot 43!} = 13.983.816$
 
 Die Chance auf den Jackpot ist also etwa 1 zu 14 Millionen!
 
 ### Beispiel 2: Eiscreme
 3 Eissorten aus 8 wählen:
-$\binom{8}{3} = \frac{8!}{3! \cdot 5!} = \frac{8 \cdot 7 \cdot 6}{3 \cdot 2 \cdot 1} = 56$
+$\\binom{8}{3} = \\frac{8!}{3! \\cdot 5!} = \\frac{8 \\cdot 7 \\cdot 6}{3 \\cdot 2 \\cdot 1} = 56$
 
 ### Beispiel 3: Hände schütteln
 In einer Runde mit 10 Personen schütteln alle einander die Hände. Wie viele Handshakes?
-$\binom{10}{2} = \frac{10!}{2! \cdot 8!} = 45$
+$\\binom{10}{2} = \\frac{10!}{2! \\cdot 8!} = 45$
 
 > **Merke:** Kombination = Auswahl ohne Reihenfolge. Variation = Auswahl mit Reihenfolge.`,
       },
@@ -4109,18 +4109,18 @@ Eine Aussage ist ein Satz, der entweder **wahr (w)** oder **falsch (f)** ist —
 
 ### Logische Verknüpfungen
 
-**UND ($\land$):** $p \land q$ ist nur wahr, wenn **beide** wahr sind.
+**UND ($\\land$):** $p \\land q$ ist nur wahr, wenn **beide** wahr sind.
 
-| $p$ | $q$ | $p \land q$ |
+| $p$ | $q$ | $p \\land q$ |
 |-----|-----|-------------|
 | w | w | **w** |
 | w | f | f |
 | f | w | f |
 | f | f | f |
 
-**ODER ($\lor$):** $p \lor q$ ist wahr, wenn **mindestens eine** wahr ist.
+**ODER ($\\lor$):** $p \\lor q$ ist wahr, wenn **mindestens eine** wahr ist.
 
-| $p$ | $q$ | $p \lor q$ |
+| $p$ | $q$ | $p \\lor q$ |
 |-----|-----|------------|
 | w | w | w |
 | w | f | **w** |
@@ -4131,11 +4131,11 @@ Eine Aussage ist ein Satz, der entweder **wahr (w)** oder **falsch (f)** ist —
 
 $\lnot w = f$, $\lnot f = w$
 
-### Implikation ($\Rightarrow$)
+### Implikation ($\\Rightarrow$)
 
-$p \Rightarrow q$ bedeutet: "Wenn p, dann q."
+$p \\Rightarrow q$ bedeutet: "Wenn p, dann q."
 
-| $p$ | $q$ | $p \Rightarrow q$ |
+| $p$ | $q$ | $p \\Rightarrow q$ |
 |-----|-----|-------------------|
 | w | w | **w** |
 | w | f | **f** |
@@ -4154,9 +4154,9 @@ $p \Rightarrow q$ bedeutet: "Wenn p, dann q."
 
 ### De Morgan'sche Regeln
 
-$\lnot(p \land q) = \lnot p \lor \lnot q$
+$\lnot(p \\land q) = \lnot p \\lor \lnot q$
 
-$\lnot(p \lor q) = \lnot p \land \lnot q$
+$\lnot(p \\lor q) = \lnot p \\land \lnot q$
 
 "Nicht beide" = "Mindestens einer nicht" — das ist intuitiv!`,
       },
@@ -4181,9 +4181,9 @@ $n = 2k$ (Definition von gerade) → $n^2 = 4k^2 = 2(2k^2)$ → gerade ✓
 
 Annahme des **Gegenteils**, dann einen Widerspruch herleiten.
 
-**Beispiel:** $\sqrt{2}$ ist irrational.
+**Beispiel:** $\\sqrt{2}$ ist irrational.
 
-Annahme: $\sqrt{2} = \frac{p}{q}$ (ggT(p,q)=1)
+Annahme: $\\sqrt{2} = \\frac{p}{q}$ (ggT(p,q)=1)
 
 $2q^2 = p^2$ → $p^2$ gerade → $p$ gerade → $p = 2k$
 
@@ -4199,17 +4199,17 @@ Für Aussagen über **alle natürlichen Zahlen**.
 
 **Schritt 2 — Induktionsschritt:** Annahme für $n$, zeige für $n + 1$
 
-**Beispiel:** $\sum_{k=1}^{n} k = \frac{n(n+1)}{2}$
+**Beispiel:** $\\sum_{k=1}^{n} k = \\frac{n(n+1)}{2}$
 
-**Anfang ($n=1$):** $1 = \frac{1 \cdot 2}{2} = 1$ ✓
+**Anfang ($n=1$):** $1 = \\frac{1 \\cdot 2}{2} = 1$ ✓
 
 **Schritt:** Angenommen für $n$. Dann:
 
-$\sum_{k=1}^{n+1} k = \frac{n(n+1)}{2} + (n+1) = \frac{n(n+1) + 2(n+1)}{2} = \frac{(n+1)(n+2)}{2}$ ✓
+$\\sum_{k=1}^{n+1} k = \\frac{n(n+1)}{2} + (n+1) = \\frac{n(n+1) + 2(n+1)}{2} = \\frac{(n+1)(n+2)}{2}$ ✓
 
 ### Kontraposition
 
-Statt $p \Rightarrow q$ beweisen wir $\lnot q \Rightarrow \lnot p$.
+Statt $p \\Rightarrow q$ beweisen wir $\lnot q \\Rightarrow \lnot p$.
 
 **Beispiel:** Wenn $n^2$ ungerade, dann $n$ ungerade.
 
@@ -4260,28 +4260,28 @@ $a_1 : a_2 = b_2 : b_1$`,
 Wenn eine Größe steigt, steigt die andere **im gleichen Verhältnis**. Das Verhältnis bleibt konstant.
 
 ### Schema
-$a_1 \rightarrow b_1$
-$a_2 \rightarrow b_2$
+$a_1 \\rightarrow b_1$
+$a_2 \\rightarrow b_2$
 
-$b_2 = \frac{a_2 \cdot b_1}{a_1}$
+$b_2 = \\frac{a_2 \\cdot b_1}{a_1}$
 
 ### Beispiel 1: Äpfel
 3 Äpfel kosten 2€. Was kosten 8 Äpfel?
 
-$b_2 = \frac{8 \cdot 2}{3} = \frac{16}{3} = 5{,}33€$
+$b_2 = \\frac{8 \\cdot 2}{3} = \\frac{16}{3} = 5{,}33€$
 
 ### Beispiel 2: Benzin
 5 Liter Benzin kosten 8,50€. Was kosten 12 Liter?
 
-$b_2 = \frac{12 \cdot 8{,}50}{5} = \frac{102}{5} = 20{,}40€$
+$b_2 = \\frac{12 \\cdot 8{,}50}{5} = \\frac{102}{5} = 20{,}40€$
 
 ### Beispiel 3: Geschwindigkeit
 Ein Auto fährt 60 km in 45 Minuten. Wie weit in 2 Stunden?
 
 Erst umrechnen: 2 Stunden = 120 Minuten
-$b_2 = \frac{120 \cdot 60}{45} = 160$ km
+$b_2 = \\frac{120 \\cdot 60}{45} = 160$ km
 
-> **Merke:** Direkt proportional = $\frac{a_1}{b_1} = \frac{a_2}{b_2}$ (Verhältnis gleich)`,
+> **Merke:** Direkt proportional = $\\frac{a_1}{b_1} = \\frac{a_2}{b_2}$ (Verhältnis gleich)`,
       },
       {
         id: "m-ds-2",
@@ -4293,31 +4293,31 @@ $b_2 = \frac{120 \cdot 60}{45} = 160$ km
 Wenn eine Größe steigt, sinkt die andere. Das **Produkt** bleibt konstant.
 
 ### Schema
-$a_1 \rightarrow b_1$
-$a_2 \rightarrow b_2$
+$a_1 \\rightarrow b_1$
+$a_2 \\rightarrow b_2$
 
-$b_2 = \frac{a_1 \cdot b_1}{a_2}$
+$b_2 = \\frac{a_1 \\cdot b_1}{a_2}$
 
 ### Beispiel 1: Arbeiter
 3 Arbeiter brauchen 10 Tage für eine Aufgabe. Wie lange brauchen 5 Arbeiter?
 
-$b_2 = \frac{3 \cdot 10}{5} = 6$ Tage
+$b_2 = \\frac{3 \\cdot 10}{5} = 6$ Tage
 
 Mehr Arbeiter = weniger Tage. Logisch!
 
 ### Beispiel 2: Geschwindigkeit
 Wenn man 120 km mit 60 km/h in 2 Stunden schafft — wie lange braucht man mit 40 km/h?
 
-$b_2 = \frac{60 \cdot 2}{40} = 3$ Stunden
+$b_2 = \\frac{60 \\cdot 2}{40} = 3$ Stunden
 
 Langsamer = mehr Zeit.
 
 ### Beispiel 3: Rohrleitung
 Eine Rohrleitung füllt einen Tank in 8 Stunden. Eine zweite (doppelt so schnell) braucht...
 
-$b_2 = \frac{8 \cdot 1}{2} = 4$ Stunden
+$b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
 
-> **Merke:** Indirekt proportional = $a_1 \cdot b_1 = a_2 \cdot b_2$ (Produkt gleich)`,
+> **Merke:** Indirekt proportional = $a_1 \\cdot b_1 = a_2 \\cdot b_2$ (Produkt gleich)`,
       },
       {
         id: "m-ds-3",
@@ -4364,7 +4364,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
 Die Taylor-Reihe ermöglicht es, eine Funktion durch ein **Polynom** (unendliche Summe) anzunähern. Das ist extrem nützlich für Berechnungen!
 
 ### Formel
-$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!}(x-a)^n$
+$f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
 
 Für $a = 0$ heißt sie **Maclaurin-Reihe**.
 
@@ -4372,13 +4372,13 @@ Für $a = 0$ heißt sie **Maclaurin-Reihe**.
 
 Alle Ableitungen von $e^x$ sind $e^x$. Also: $f^{(n)}(0) = 1$ für alle n.
 
-$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots$
+$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\frac{x^4}{4!} + \\cdots$
 
 ### Näherung von $e$
 
-$e = e^1 \approx 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \frac{1}{120} = 2{,}7167...$
+$e = e^1 \\approx 1 + 1 + \\frac{1}{2} + \\frac{1}{6} + \\frac{1}{24} + \\frac{1}{120} = 2{,}7167...$
 
-Das wahre $e \approx 2{,}71828$ — schon nach 5 Gliedern ziemlich genau!
+Das wahre $e \\approx 2{,}71828$ — schon nach 5 Gliedern ziemlich genau!
 
 ### Warum ist das nützlich?
 
@@ -4396,35 +4396,35 @@ Computer können nicht $e^x$ direkt berechnen. Sie verwenden stattdessen die Tay
 Diese Reihen kommen überall in der Mathematik und Physik vor. Sie lohnt es sich, sie zu kennen!
 
 ### Exponentialfunktion
-$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \frac{x^n}{n!}$
+$e^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$
 
-Konvergenzradius: $R = \infty$ (konvergiert für alle x)
+Konvergenzradius: $R = \\infty$ (konvergiert für alle x)
 
 ### Sinus
-$\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots$
+$\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\cdots$
 
 Nur ungerade Potenzen, Vorzeichen wechseln.
 
 ### Kosinus
-$\cos(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots$
+$\\cos(x) = 1 - \\frac{x^2}{2!} + \\frac{x^4}{4!} - \\frac{x^6}{6!} + \\cdots$
 
 Nur gerade Potenzen, Vorzeichen wechseln.
 
 ### Geometrische Reihe
-$\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots$ für $|x| < 1$
+$\\frac{1}{1-x} = 1 + x + x^2 + x^3 + \\cdots$ für $|x| < 1$
 
 ### Natürlicher Logarithmus
-$\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \cdots$ für $|x| < 1$
+$\\ln(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} - \\frac{x^4}{4} + \\cdots$ für $|x| < 1$
 
 ## Näherungen (kleines x)
 
 Für kleine x-Werte reichen die ersten Glieder:
 
-$\sin(x) \approx x - \frac{x^3}{6}$
+$\\sin(x) \\approx x - \\frac{x^3}{6}$
 
-$\cos(x) \approx 1 - \frac{x^2}{2}$
+$\\cos(x) \\approx 1 - \\frac{x^2}{2}$
 
-$e^x \approx 1 + x + \frac{x^2}{2}$
+$e^x \\approx 1 + x + \\frac{x^2}{2}$
 
 > **Merke:** Taylor-Reihen sind das Werkzeug, mit dem Computer trigonometrische Funktionen berechnen!`,
       },
@@ -5127,11 +5127,11 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       explanation: "Einheitsmatrix $I$: Diagonale = 1, Rest = 0",
     },
     {
-      question: "$\det(A) = 0$ bedeutet...",
+      question: "$\\det(A) = 0$ bedeutet...",
       type: "multiple",
       options: ["A ist invertierbar", "A ist nicht invertierbar", "A = 0", "A ist symmetrisch"],
       correct: 1,
-      explanation: "$\det(A) = 0$ → singulär → keine Inverse",
+      explanation: "$\\det(A) = 0$ → singulär → keine Inverse",
     },
     {
       question: "$(AB)^T = ?$",
@@ -5297,8 +5297,8 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
   ],
   "mathe-taylorreihen": [
     { question: "Taylor bei a=0?", type: "multiple", options: ["Taylor", "Maclaurin", "Fourier", "Laurent"], correct: 1, explanation: "Maclaurin-Reihe" },
-    { question: "$e^x \approx ?$ (1. Ord.)", type: "multiple", options: ["$1+x$", "$x$", "$1+x^2$", "$1-x$"], correct: 0, explanation: "$e^x \approx 1+x$" },
-    { question: "$\\sin(x) \approx ?$ (1. Ord.)", type: "multiple", options: ["$x$", "$1$", "$x^2$", "$1-x$"], correct: 0, explanation: "$\\sin(x) \approx x$" },
+    { question: "$e^x \\approx ?$ (1. Ord.)", type: "multiple", options: ["$1+x$", "$x$", "$1+x^2$", "$1-x$"], correct: 0, explanation: "$e^x \\approx 1+x$" },
+    { question: "$\\sin(x) \\approx ?$ (1. Ord.)", type: "multiple", options: ["$x$", "$1$", "$x^2$", "$1-x$"], correct: 0, explanation: "$\\sin(x) \\approx x$" },
     { question: "Konvergenzradius 1/(1-x)?", type: "multiple", options: ["R=0", "R=1", "R=inf", "R=2"], correct: 1, explanation: "|x| < 1, R=1" },
     { question: "$\\cos(0) = ?$", type: "multiple", options: ["0", "1", "-1", "pi"], correct: 1, explanation: "$\\cos(0) = 1$" },
   ],
