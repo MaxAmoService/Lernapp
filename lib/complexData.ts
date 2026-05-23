@@ -115,37 +115,7 @@ Denn $j^2 = -1$ — das ist die wichtigste Regel!
 
 ---
 
-[PRACTICE_START]
-TITLE:Potenzen & Grundlagen von $j$
-[Q]
-$j^6 = ?$
-[A]
-$-1$ — $j^6 = j^4 \\cdot j^2 = 1 \\cdot (-1) = -1$
-[Q]
-$2j \\cdot 3j = ?$
-[A]
-$-6$ — $6j^2 = 6 \\cdot (-1) = -6$
-[Q]
-$j^8 = ?$
-[A]
-$1$ — denn $8 \\bmod 4 = 0$, also $j^8 = (j^4)^2 = 1$
-[Q]
-$j^{15} = ?$
-[A]
-$-j$ — denn $15 \\bmod 4 = 3$, also $j^{15} = j^3 = -j$
-[Q]
-$(1+j) + (3-2j) = ?$
-[A]
-$4 - j$ — Real: $1+3=4$, Imag: $1-2=-1$
-[Q]
-$(2j)^2 = ?$
-[A]
-$-4$ — $(2j)^2 = 4j^2 = 4(-1) = -4$
-[Q]
-$j^3 + j^4 + j^5 = ?$
-[A]
-$1$ — $-j + 1 + j = 1$
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -195,43 +165,7 @@ Das ist der Abstand des Punktes $(x, y)$ vom Ursprung — nach dem Satz des Pyth
 
 ---
 
-[GUIDED_START]
-TITLE:Zeichne $z = -3 + 2j$ ein
-[STEP]
-Realteil ablesen: $x = -3$ — gehe 3 nach links
-[STEP]
-Imaginärteil ablesen: $y = 2$ — gehe 2 nach oben
-[STEP]
-Punkt markieren bei $(-3, 2)$
-[STEP]
-Abstand: $r = \\sqrt{(-3)^2 + 2^2} = \\sqrt{13} \\approx 3.6$
-[RESULT]
-$z = -3 + 2j$ liegt bei $(-3, 2)$ mit Betrag $r = \\sqrt{13}$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Gaußsche Ebene — Zahlen einzeichnen
-[Q]
-$z_1 = 2 + 3j$ — wo liegt der Punkt?
-[A]
-$(2, 3)$ — Re=2, Im=3, also 2 rechts, 3 oben
-[Q]
-$z_2 = -4 + j$ — wo liegt der Punkt?
-[A]
-$(-4, 1)$ — Re=-4, Im=1, also 4 links, 1 oben
-[Q]
-$z_3 = -3 - 2j$ — wo liegt der Punkt?
-[A]
-$(-3, -2)$ — Re=-3, Im=-2, also 3 links, 2 unten
-[Q]
-$z_4 = 5j$ — wo liegt der Punkt?
-[A]
-$(0, 5)$ — rein imaginär, auf der Im-Achse
-[Q]
-$z_5 = -4$ — wo liegt der Punkt?
-[A]
-$(-4, 0)$ — reell, auf der Re-Achse
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -305,55 +239,7 @@ $x = r \\cdot \\cos\\varphi$, $y = r \\cdot \\sin\\varphi$
 
 ---
 
-[GUIDED_START]
-TITLE:Wandle $z = 3 + 4j$ in Exponentialform um
-[STEP]
-Betrag: $r = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$
-[STEP]
-Winkel: $\\tan\\varphi = 4/3 = 1.333$ — $\\varphi = 53.13°$
-[STEP]
-Quadrant: $x > 0, y > 0$ — Quadrant I — keine Korrektur!
-[RESULT]
-$z = 5 e^{j53.13°}$
-[GUIDED_END]
-
-[GUIDED_START]
-TITLE:Wandle $z = -3 - 3j$ um (Quadrant III!)
-[STEP]
-$r = \\sqrt{(-3)^2 + (-3)^2} = \\sqrt{18} = 3\\sqrt{2} \\approx 4.24$
-[STEP]
-$\\arctan((-3)/(-3)) = \\arctan(1) = 45°$
-[STEP]
-$x < 0, y < 0$ — Quadrant III — Korrektur: $+180°$
-[STEP]
-$\\varphi = 45° + 180° = 225°$
-[RESULT]
-$z = 3\\sqrt{2} \\cdot e^{j225°}$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Darstellungsformen umrechnen
-[Q]
-$1 + j$ in Exponentialform?
-[A]
-$\\sqrt{2} e^{j45°}$ — $r=\\sqrt{2}$, $\\varphi=45°$ (Quadrant I)
-[Q]
-$2e^{j60°}$ in Normalform?
-[A]
-$1 + 1.732j$ — $x=2\\cos60°=1$, $y=2\\sin60°=1.732$
-[Q]
-$-4 + 4j$ in Exponentialform?
-[A]
-$4\\sqrt{2} e^{j135°}$ — $r=4\\sqrt{2}$, Quadrant II: $\\varphi=135°$
-[Q]
-$3e^{j270°}$ in Normalform?
-[A]
-$-3j$ — $x=3\\cos270°=0$, $y=3\\sin270°=-3$
-[Q]
-$-5$ in Exponentialform?
-[A]
-$5e^{j180°}$ — $r=5$, $\\varphi=180°$ (reell, negativ)
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -386,59 +272,7 @@ In der Gaußschen Ebene ist Addition wie Vektoraddition: Man legt die Pfeile ane
 
 ---
 
-[GUIDED_START]
-TITLE:$(3 + 2j) + (1 - 4j)$
-[STEP]
-Realteile: $3 + 1 = 4$
-[STEP]
-Imaginärteile: $2 + (-4) = -2$
-[RESULT]
-$4 - 2j$
-[GUIDED_END]
-
-[GUIDED_START]
-TITLE:$(-1 + 4j) - (3 + 2j)$
-[STEP]
-Realteile: $-1 - 3 = -4$
-[STEP]
-Imaginärteile: $4 - 2 = 2$
-[RESULT]
-$-4 + 2j$
-[GUIDED_END]
-
-[GUIDED_START]
-TITLE:$(6 + j) - (-2 + 3j)$
-[STEP]
-Realteile: $6 - (-2) = 8$
-[STEP]
-Imaginärteile: $1 - 3 = -2$
-[RESULT]
-$8 - 2j$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Addition & Subtraktion
-[Q]
-$(5 + 3j) + (2 - 7j) = ?$
-[A]
-$7 - 4j$ — Real: $5+2=7$, Imag: $3-7=-4$
-[Q]
-$(2j) + (3 - 5j) = ?$
-[A]
-$3 - 3j$ — Real: $0+3=3$, Imag: $2-5=-3$
-[Q]
-$(1 + 2j) + (3 + 4j) + (-5 - j) = ?$
-[A]
-$-1 + 5j$ — Real: $1+3-5=-1$, Imag: $2+4-1=5$
-[Q]
-$(4 - 2j) - (4 - 2j) = ?$
-[A]
-$0$ — gleiche Zahlen, Differenz ist 0
-[Q]
-$10 - (3 + 7j) = ?$
-[A]
-$7 - 7j$ — Real: $10-3=7$, Imag: $0-7=-7$
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -484,53 +318,7 @@ Beträge multiplizieren, Winkel addieren! Das ist der große Vorteil der Exponen
 
 ---
 
-[GUIDED_START]
-TITLE:$(2 + 3j) \\cdot (1 - 2j)$ (FOIL)
-[STEP]
-Erste Terme: $2 \\cdot 1 = 2$
-[STEP]
-$j^2$-Term: $3j \\cdot (-2j) = -6j^2 = +6$
-[STEP]
-Kreuzterme: $2 \\cdot (-2j) + 3j \\cdot 1 = -4j + 3j = -j$
-[STEP]
-Zusammen: $(2+6) + j(-1) = 8 - j$
-[RESULT]
-$(2+3j)(1-2j) = 8 - j$
-[GUIDED_END]
-
-[GUIDED_START]
-TITLE:$4e^{j20°} \\cdot 3e^{j30°}$ (Exponentialform)
-[STEP]
-Beträge: $4 \\cdot 3 = 12$
-[STEP]
-Winkel: $20° + 30° = 50°$
-[RESULT]
-$12e^{j50°}$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Multiplikation
-[Q]
-$(1+j)(1-j) = ?$
-[A]
-$2$ — FOIL: $1 - j + j - j^2 = 1 + 1 = 2$
-[Q]
-$(3+2j)(1+4j) = ?$
-[A]
-$-5+14j$ — $3+12j+2j+8j^2 = 3+14j-8 = -5+14j$
-[Q]
-$2e^{j15°} \\cdot 5e^{j45°} = ?$
-[A]
-$10e^{j60°}$ — Beträge: $2\\cdot5=10$, Winkel: $15°+45°=60°$
-[Q]
-$(1+j)^2 = ?$
-[A]
-$2j$ — $(1+j)(1+j) = 1+2j+j^2 = 1+2j-1 = 2j$
-[Q]
-$(2e^{j90°})^3 = ?$
-[A]
-$-8j$ — $8e^{j270°} = 8(\\cos270° + j\\sin270°) = -8j$
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -586,53 +374,7 @@ Beträge dividieren, Winkel subtrahieren!
 
 ---
 
-[GUIDED_START]
-TITLE:$\\frac{3+4j}{1-2j}$
-[STEP]
-Konjugierten bilden: $\\overline{1-2j} = 1+2j$
-[STEP]
-Nenner: $(1-2j)(1+2j) = 1+4 = 5$ — reell!
-[STEP]
-Zähler: $(3+4j)(1+2j) = 3+6j+4j+8j^2 = -5+10j$
-[STEP]
-Teilen: $\\frac{-5+10j}{5} = -1+2j$
-[RESULT]
-$\\frac{3+4j}{1-2j} = -1 + 2j$
-[GUIDED_END]
-
-[GUIDED_START]
-TITLE:$\\frac{12e^{j80°}}{4e^{j30°}}$ (Exponentialform)
-[STEP]
-Beträge: $12/4 = 3$
-[STEP]
-Winkel: $80° - 30° = 50°$
-[RESULT]
-$3e^{j50°}$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Division komplexer Zahlen
-[Q]
-$\\frac{1+j}{1-j} = ?$
-[A]
-$j$ — Erweiterung mit $(1+j)$: Nenner $= 2$, Zähler $= 2j$
-[Q]
-$\\frac{4+2j}{2+j} = ?$
-[A]
-$2$ (reell!) — Erweiterung mit $(2-j)$: Nenner $= 5$, Zähler $= 10$
-[Q]
-$\\frac{10e^{j90°}}{2e^{j30°}} = ?$
-[A]
-$5e^{j60°}$ — Beträge: $10/2=5$, Winkel: $90°-30°=60°$
-[Q]
-$\\frac{j}{1+j} = ?$
-[A]
-$\\frac{1}{2} + \\frac{1}{2}j$ — Erweiterung mit $(1-j)$
-[Q]
-$z \\cdot \\bar{z}$ für $z = 3+4j$?
-[A]
-$25$ — $|z|^2 = 9 + 16 = 25$
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -678,41 +420,7 @@ Formel: $j^n = j^{n \\bmod 4}$
 
 ---
 
-[GUIDED_START]
-TITLE:$(1+j)^4$
-[STEP]
-Umrechnen: $r = \\sqrt{2}$, $\\varphi = 45°$
-[STEP]
-De Moivre: $z^4 = (\\sqrt{2})^4 \\cdot e^{j(4 \\cdot 45°)} = 4e^{j180°}$
-[STEP]
-Zurück: $4e^{j180°} = 4(-1) = -4$
-[RESULT]
-$(1+j)^4 = -4$
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Potenzieren nach De Moivre
-[Q]
-$(2e^{j15°})^3 = ?$
-[A]
-$8e^{j45°}$ — $2^3=8$, Winkel: $3\\cdot15°=45°$
-[Q]
-$j^{17} = ?$
-[A]
-$j$ — $17 \\bmod 4 = 1$, also $j^{17} = j^1 = j$
-[Q]
-$(1+j)^6 = ?$
-[A]
-$-8j$ — $z=\\sqrt{2}e^{j45°}$, $z^6=8e^{j270°}=-8j$
-[Q]
-$(\\sqrt{3}+j)^3 = ?$
-[A]
-$8j$ — $r=2$, $\\varphi=30°$, $z^3=8e^{j90°}=8j$
-[Q]
-$(-1)^5 = ?$
-[A]
-$-1$ — $(-1)^5 = -1$ (ungerade Potenz)
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -762,39 +470,7 @@ Gleichseitiges Dreieck auf dem Kreis!
 
 ---
 
-[GUIDED_START]
-TITLE:Alle Kubikwurzeln von $-8$
-[STEP]
-$-8 = 8e^{j180°}$, Radius $= 2$
-[STEP]
-$w_0 = 2e^{j60°} = 1 + 1.732j$
-[STEP]
-$w_1 = 2e^{j180°} = -2$
-[STEP]
-$w_2 = 2e^{j300°} = 1 - 1.732j$
-[RESULT]
-Drei Wurzeln: $1+1.732j$, $-2$, $1-1.732j$ — gleichseitiges Dreieck
-[GUIDED_END]
-
-[PRACTICE_START]
-TITLE:Radizieren — Wurzeln berechnen
-[Q]
-$\\sqrt[4]{16}$ — alle 4 Wurzeln?
-[A]
-$2, 2j, -2, -2j$ — Radius $= 2$, Quadrat auf Kreis
-[Q]
-$\\sqrt{-1}$ — beide Wurzeln?
-[A]
-$j, -j$ — $e^{j90°}$ und $e^{j270°}$
-[Q]
-Warum hat $z = 0$ nur eine Wurzel?
-[A]
-$0^{1/n} = 0$ für alle $n$ — kein Kreis, nur Ursprung
-[Q]
-$n$-te Wurzeln von $z \\neq 0$?
-[A]
-Genau $n$ Stück — Fundamentalsatz der Algebra
-[PRACTICE_END]`,
+`,
     },
 
     // ══════════════════════════════════════════════════════════════
@@ -806,6 +482,14 @@ Genau $n$ Stück — Fundamentalsatz der Algebra
       duration: "15 min",
       type: "quiz",
       content: "Beantworte die 10 Fragen. Du brauchst mindestens 80% zum Bestehen.",
+    },
+
+    {
+      id: "kz-aufgaben",
+      title: "📝 Aufgaben",
+      duration: "20 min",
+      type: "exercises",
+      content: "Übe das Gelernte mit interaktiven Aufgaben!",
     },
   ],
 };
