@@ -2785,7 +2785,39 @@ $\\frac{5}{2} : \\frac{5}{4} = \\frac{5}{2} \\cdot \\frac{4}{5} = \\frac{20}{10}
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Brueche als "3/4", gemischte Zahlen als "1 2/3", Dezimalzahlen mit Komma
+
+**Aufgabe 1:** Kuerze $\frac{12}{18}$
+
+**Antwort:** 2/3
+
+**Aufgabe 2:** Addiere $\frac{2}{5} + \frac{1}{3}$
+
+**Antwort:** 11/15
+
+**Aufgabe 3:** Multipliziere $\frac{3}{4} \cdot \frac{2}{7}$
+
+**Antwort:** 6/28 (oder 3/14)
+
+**Aufgabe 4:** Wandle $\frac{17}{5}$ in eine gemischte Zahl um
+
+**Antwort:** 3 2/5
+
+**Aufgabe 5:** Wandle $2\frac{1}{4}$ in einen unechten Bruch um
+
+**Antwort:** 9/4
+
+**Aufgabe 6:** Ordne aufsteigend: $\frac{3}{4}$, $\frac{5}{6}$, $\frac{2}{3}$
+
+**Antwort:** 2/3, 3/4, 5/6
+
+**Aufgabe 7:** Berechne $\frac{3}{5} : \frac{2}{3}$
+
+**Antwort:** 9/10
+
+**Aufgabe 8:** Welcher Bruch ist groesser: $\frac{7}{9}$ oder $\frac{3}{4}$?
+
+**Antwort:** 7/9`,
       },
     ],
   },
@@ -2997,7 +3029,39 @@ $x_1 = 3$, $x_2 = 2$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Loesungen als "x=3" oder "x1=2, x2=-1" bei quadratischen. Brueche erlaubt.
+
+**Aufgabe 1:** Löse $5x - 3 = 12$
+
+**Antwort:** x=3
+
+**Aufgabe 2:** Löse $2(x + 4) = 3x - 1$
+
+**Antwort:** x=9
+
+**Aufgabe 3:** Löse $\frac{x}{3} + 2 = 5$
+
+**Antwort:** x=9
+
+**Aufgabe 4:** Löse $x^2 - 9 = 0$
+
+**Antwort:** x1=3, x2=-3
+
+**Aufgabe 5:** Löse $x^2 + 2x - 8 = 0$ (pq-Formel)
+
+**Antwort:** x1=2, x2=-4
+
+**Aufgabe 6:** Löse $2x^2 - 5x + 3 = 0$ (abc-Formel)
+
+**Antwort:** x1=3/2, x2=1
+
+**Aufgabe 7:** Berechne die Diskriminante von $x^2 + 4x + 4$
+
+**Antwort:** D=0
+
+**Aufgabe 8:** Hat $3x^2 + x + 1 = 0$ reelle Loesungen?
+
+**Antwort:** Nein (D=-11<0)`,
       },
     ],
   },
@@ -3151,7 +3215,39 @@ $4x^2 - 12x + 9 = (2x-3)^2$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Terme ohne Leerzeichen, Potenzen als "x^2", Brueche als "(a+b)/c"
+
+**Aufgabe 1:** Multipliziere aus: $3(x + 4)$
+
+**Antwort:** 3x+12
+
+**Aufgabe 2:** Multipliziere aus: $(2x - 1)(x + 3)$
+
+**Antwort:** 2x^2+5x-3
+
+**Aufgabe 3:** Wende die 1. binomische Formel an: $(x + 5)^2$
+
+**Antwort:** x^2+10x+25
+
+**Aufgabe 4:** Wende die 3. binomische Formel an: $(x + 4)(x - 4)$
+
+**Antwort:** x^2-16
+
+**Aufgabe 5:** Faktorisiere: $x^2 - 6x + 9$
+
+**Antwort:** (x-3)^2
+
+**Aufgabe 6:** Vereinfache: $\frac{x^2 - 4}{x - 2}$
+
+**Antwort:** x+2
+
+**Aufgabe 7:** Erweitere $\frac{3}{x}$ mit $(x+1)$
+
+**Antwort:** (3x+3)/(x(x+1)) oder (3x+3)/(x^2+x)
+
+**Aufgabe 8:** Kuerze $\frac{6x^2}{9x}$
+
+**Antwort:** 2x/3`,
       },
     ],
   },
@@ -3319,7 +3415,39 @@ Der Tafel-Test funktioniert immer:
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Intervallschreibweise "(2,5)" oder "x>3" oder "x>=-1"
+
+**Aufgabe 1:** Löse $3x + 2 > 11$
+
+**Antwort:** x>3
+
+**Aufgabe 2:** Löse $-2x + 5 \leq 1$
+
+**Antwort:** x>=2
+
+**Aufgabe 3:** Löse $x^2 - 4 > 0$
+
+**Antwort:** x<-2 oder x>2
+
+**Aufgabe 4:** Löse $x^2 + 2x - 3 \leq 0$
+
+**Antwort:** -3<=x<=1
+
+**Aufgabe 5:** Löse $|x - 2| < 3$
+
+**Antwort:** -1<x<5
+
+**Aufgabe 6:** Löse $\frac{x+1}{x-2} > 0$
+
+**Antwort:** x<-1 oder x>2
+
+**Aufgabe 7:** Für welche x gilt $\sqrt{x-1}$ ist definiert?
+
+**Antwort:** x>=1
+
+**Aufgabe 8:** Löse $2 < 3x - 1 \leq 8$
+
+**Antwort:** 1<x<=3`,
       },
     ],
   },
@@ -3601,7 +3729,39 @@ Pruefe Vorzeichenwechsel -> Wendepunkte bei $(0, 0)$ und $(2, -16)$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Nullstellen als "x1=2, x2=-1", Extrema als "Max(-1,4)", Wendepunkte als "WP(0,2)"
+
+**Aufgabe 1:** Bestimme die Nullstellen von $f(x) = x^2 - 5x + 6$
+
+**Antwort:** x1=3, x2=2
+
+**Aufgabe 2:** Bestimme den Definitionsbereich von $f(x) = \frac{1}{x-3}$
+
+**Antwort:** x!=3 (oder R\{3})
+
+**Aufgabe 3:** Finde die Extrema von $f(x) = x^3 - 3x$
+
+**Antwort:** Max(-1,2), Min(1,-2)
+
+**Aufgabe 4:** Finde den Wendepunkt von $f(x) = x^3 - 3x + 2$
+
+**Antwort:** WP(0,2)
+
+**Aufgabe 5:** Ist $f(x) = x^4$ gerade, ungerade oder keins?
+
+**Antwort:** gerade
+
+**Aufgabe 6:** Bestimme $\lim_{x \to \infty} \frac{2x^2+1}{x^2-1}$
+
+**Antwort:** 2
+
+**Aufgabe 7:** Skizziere den Verlauf von $f(x) = -x^2 + 4x - 3$. Scheitel?
+
+**Antwort:** Scheitel(2,1), nach unten geoeffnet
+
+**Aufgabe 8:** Welche Ableitung hat $f(x) = 3x^4 - 2x^2 + x$?
+
+**Antwort:** f'(x)=12x^3-4x+1`,
       },
     ],
   },
@@ -3796,7 +3956,39 @@ Probe: $1+2=3$ ✓, $2-2=0$ ✓
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** "x=2, y=3" oder "keine Loesung" oder "x=3-t, y=t"
+
+**Aufgabe 1:** Löse: $x + y = 5$, $x - y = 1$
+
+**Antwort:** x=3, y=2
+
+**Aufgabe 2:** Löse: $2x + 3y = 12$, $x - y = 1$
+
+**Antwort:** x=3, y=2
+
+**Aufgabe 3:** Löse mit Gauß: $x + y + z = 6$, $2x - y + z = 3$, $x + 2y - z = 2$
+
+**Antwort:** x=1, y=2, z=3
+
+**Aufgabe 4:** Hat dieses System eine Loesung? $x + y = 3$, $2x + 2y = 7$
+
+**Antwort:** keine Loesung
+
+**Aufgabe 5:** Loesung des Systems: $x + y = 4$, $2x + 2y = 8$
+
+**Antwort:** x=4-t, y=t (unendlich viele)
+
+**Aufgabe 6:** Löse: $3x - 2y = 7$, $x + 4y = -5$
+
+**Antwort:** x=1, y=-2
+
+**Aufgabe 7:** Wann hat ein 2x2-System keine Loesung?
+
+**Antwort:** Wenn die Geraden parallel sind (gleiche Steigung, verschiedenes y-Abschnitt)
+
+**Aufgabe 8:** Wie viele Loesungen hat: $x + y = 1$, $x - y = 3$, $2x = 4$?
+
+**Antwort:** x=2, y=-1 (eindeutig)`,
       },
     ],
   },
@@ -3929,7 +4121,39 @@ $A \\vec{x} = \\vec{b} \\Rightarrow \\vec{x} = A^{-1} \\vec{b}$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Matrizen als "((1,2),(3,4))", Determinanten als Zahl, Vektoren als "(1,2,3)"
+
+**Aufgabe 1:** Berechne $\begin{pmatrix} 1 & 2 \\ 3 & 4 \end{pmatrix} + \begin{pmatrix} 5 & 6 \\ 7 & 8 \end{pmatrix}$
+
+**Antwort:** ((6,8),(10,12))
+
+**Aufgabe 2:** Berechne $\det \begin{pmatrix} 3 & 1 \\ 2 & 4 \end{pmatrix}$
+
+**Antwort:** 10
+
+**Aufgabe 3:** Transponiere $\begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}$
+
+**Antwort:** ((1,4),(2,5),(3,6))
+
+**Aufgabe 4:** Berechne $\begin{pmatrix} 2 & 0 \\ 0 & 3 \end{pmatrix} \cdot \begin{pmatrix} 1 & 1 \\ 1 & 1 \end{pmatrix}$
+
+**Antwort:** ((2,2),(3,3))
+
+**Aufgabe 5:** Ist $\begin{pmatrix} 1 & 2 \\ 2 & 4 \end{pmatrix}$ invertierbar?
+
+**Antwort:** Nein (det=0)
+
+**Aufgabe 6:** Berechne $\det \begin{pmatrix} 1 & 0 & 2 \\ 0 & 1 & 0 \\ 2 & 0 & 1 \end{pmatrix}$
+
+**Antwort:** -3
+
+**Aufgabe 7:** Was ist $I_2 \cdot A$ wenn $A = \begin{pmatrix} 5 & 7 \\ 2 & 3 \end{pmatrix}$?
+
+**Antwort:** ((5,7),(2,3)) (=A)
+
+**Aufgabe 8:** Skalarprodukt von $\vec{a}=(1,2)$ und $\vec{b}=(3,4)$?
+
+**Antwort:** 11`,
       },
     ],
   },
@@ -4073,7 +4297,39 @@ Nach dem **Zentralen Grenzwertsatz** nähert sich die Summe vieler unabhängiger
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Wahrscheinlichkeiten als Dezimalzahl "0.25" oder Bruch "1/4". Binomialkoeffizienten als Zahl.
+
+**Aufgabe 1:** $P(X=2)$ bei $n=4$, $p=0{,}5$ (Binomial)
+
+**Antwort:** 0.375 (oder 3/8)
+
+**Aufgabe 2:** Berechne $\binom{6}{2}$
+
+**Antwort:** 15
+
+**Aufgabe 3:** Erwartungswert bei $n=10$, $p=0{,}3$?
+
+**Antwort:** 3
+
+**Aufgabe 4:** Standardabweichung bei $n=100$, $p=0{,}5$?
+
+**Antwort:** 5
+
+**Aufgabe 5:** $P(X \leq 1)$ bei $n=3$, $p=0{,}4$?
+
+**Antwort:** 0.648
+
+**Aufgabe 6:** Wann ist die Normalverteilung eine gute Naeherung fuer die Binomialverteilung?
+
+**Antwort:** Wenn n gross und p nicht zu nahe an 0 oder 1 (Faustregel: np>5 und n(1-p)>5)
+
+**Aufgabe 7:** Welcher Anteil liegt bei $\mu \pm 2\sigma$?
+
+**Antwort:** 95.4% (oder 0.954)
+
+**Aufgabe 8:** $P(X=0)$ bei $n=5$, $p=0{,}2$?
+
+**Antwort:** 0.32768 (oder 0.8^5)`,
       },
     ],
   },
@@ -4233,7 +4489,39 @@ $S_5 = 2 \cdot \frac{3^5 - 1}{3 - 1} = 2 \cdot \frac{242}{2} = 242$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Folgenglieder als Zahl, Summen als Zahl, Formeln mit "n"
+
+**Aufgabe 1:** $a_1=3$, $d=5$. Was ist $a_{10}$?
+
+**Antwort:** 48
+
+**Aufgabe 2:** $a_1=2$, $q=3$. Was ist $a_5$?
+
+**Antwort:** 162
+
+**Aufgabe 3:** Arithmetische Folge: $a_1=1$, $d=4$. Summe $S_5$?
+
+**Antwort:** 35
+
+**Aufgabe 4:** Geometrische Folge: $a_1=1$, $q=2$. Summe $S_4$?
+
+**Antwort:** 15
+
+**Aufgabe 5:** Welche Folge ist das? 2, 6, 18, 54, ...
+
+**Antwort:** geometrisch mit q=3
+
+**Aufgabe 6:** $a_n = 3n - 2$. Was ist $a_1$, $a_2$, $a_3$?
+
+**Antwort:** 1, 4, 7
+
+**Aufgabe 7:** Grenzwert von $a_n = \frac{1}{n}$?
+
+**Antwort:** 0
+
+**Aufgabe 8:** Konvergiert $a_n = (-1)^n$?
+
+**Antwort:** Nein (oszilliert zwischen -1 und 1)`,
       },
     ],
   },
@@ -4384,7 +4672,39 @@ $d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}} \\approx 0{,
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Geraden als "x=(1,2,3)+t*(4,5,6)", Abstand als Zahl, Vektoren als "(1,2,3)"
+
+**Aufgabe 1:** Abstand zwischen $(1, 2)$ und $(4, 6)$?
+
+**Antwort:** 5
+
+**Aufgabe 2:** Mittelpunkt der Strecke $A(2, 4)$, $B(8, 12)$?
+
+**Antwort:** (5, 8)
+
+**Aufgabe 3:** Skalarprodukt von $\vec{a}=(1,0,2)$ und $\vec{b}=(3,1,4)$?
+
+**Antwort:** 11
+
+**Aufgabe 4:** Sind $\vec{a}=(1,2)$ und $\vec{b}=(-2,1)$ orthogonal?
+
+**Antwort:** Ja (Skalarprodukt = 0)
+
+**Aufgabe 5:** Betrag von $\vec{v}=(3, 4, 0)$?
+
+**Antwort:** 5
+
+**Aufgabe 6:** Kreuzprodukt von $(1,0,0)$ und $(0,1,0)$?
+
+**Antwort:** (0,0,1)
+
+**Aufgabe 7:** Gleichung der Ebene durch $(0,0,0)$ mit Normalen $\vec{n}=(0,0,1)$?
+
+**Antwort:** z=0
+
+**Aufgabe 8:** Abstand des Punktes $(3, 4)$ vom Ursprung?
+
+**Antwort:** 5`,
       },
     ],
   },
@@ -4541,7 +4861,39 @@ $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\a
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Geldbeträge mit Euro-Zeichen "123.45 Euro", Prozent als "15%"
+
+**Aufgabe 1:** 200 Euro mit 10% Rabatt. Preis?
+
+**Antwort:** 180 Euro
+
+**Aufgabe 2:** 80 Euro + 19% MwSt?
+
+**Antwort:** 95.20 Euro
+
+**Aufgabe 3:** 500 Euro zu 4% einfach, nach 3 Jahren?
+
+**Antwort:** 560 Euro
+
+**Aufgabe 4:** 1000 Euro zu 5% Zinseszins, nach 2 Jahren?
+
+**Antwort:** 1102.50 Euro
+
+**Aufgabe 5:** Ein Artikel kostet 120 Euro nach 20% Rabatt. Originalpreis?
+
+**Antwort:** 150 Euro
+
+**Aufgabe 6:** 15% von 800?
+
+**Antwort:** 120
+
+**Aufgabe 7:** 250 Euro auf 400 Euro erhoeht. Prozentuale Steigerung?
+
+**Antwort:** 60%
+
+**Aufgabe 8:** 2000 Euro zu 3% Zinseszins, nach 10 Jahren?
+
+**Antwort:** 2687.83 Euro`,
       },
     ],
   },
@@ -4676,7 +5028,39 @@ $O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Volumen/Oberflaeche als Zahl mit Einheit "cm^3" oder "cm^2", Pi als "pi"
+
+**Aufgabe 1:** Volumen eines Quaders $3 \times 4 \times 5$ cm?
+
+**Antwort:** 60 cm^3
+
+**Aufgabe 2:** Oberflaeche eines Wuerfels mit Kante 6 cm?
+
+**Antwort:** 216 cm^2
+
+**Aufgabe 3:** Volumen einer Kugel mit $r = 3$ cm?
+
+**Antwort:** 36*pi cm^3 (ca. 113.1 cm^3)
+
+**Aufgabe 4:** Volumen eines Zylinders mit $r = 2$, $h = 5$ cm?
+
+**Antwort:** 20*pi cm^3 (ca. 62.8 cm^3)
+
+**Aufgabe 5:** Volumen eines Kegels mit $r = 3$, $h = 4$ cm?
+
+**Antwort:** 12*pi cm^3 (ca. 37.7 cm^3)
+
+**Aufgabe 6:** Oberflaeche einer Kugel mit $r = 5$ cm?
+
+**Antwort:** 100*pi cm^2 (ca. 314.2 cm^2)
+
+**Aufgabe 7:** Mantelflaeche eines Zylinders mit $r = 2$, $h = 10$?
+
+**Antwort:** 40*pi cm^2
+
+**Aufgabe 8:** Diagonale eines Quaders $2 \times 3 \times 6$?
+
+**Antwort:** 7 cm`,
       },
     ],
   },
@@ -4777,7 +5161,39 @@ $\\binom{10}{2} = \\frac{10!}{2! \\cdot 8!} = 45$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Ergebnisse als ganze Zahlen
+
+**Aufgabe 1:** $5! = ?$
+
+**Antwort:** 120
+
+**Aufgabe 2:** $\binom{8}{3} = ?$
+
+**Antwort:** 56
+
+**Aufgabe 3:** $P(5, 3) = \frac{5!}{2!} = ?$
+
+**Antwort:** 60
+
+**Aufgabe 4:** Wie viele 3-stellige PINs (0-9, mit Wiederholung)?
+
+**Antwort:** 1000
+
+**Aufgabe 5:** Wie viele Moeglichkeiten, 2 aus 10 zu waehlen (ohne Reihenfolge)?
+
+**Antwort:** 45
+
+**Aufgabe 6:** $(a+b)^3 = ?$ (Binomialkoeffizienten)
+
+**Antwort:** a^3+3a^2b+3ab^2+b^3
+
+**Aufgabe 7:** Wie viele Anordnungen von 4 verschiedenen Buechern?
+
+**Antwort:** 24
+
+**Aufgabe 8:** $\binom{10}{0} + \binom{10}{1} + ... + \binom{10}{10} = ?$
+
+**Antwort:** 1024 (2^10)`,
       },
     ],
   },
@@ -4941,7 +5357,39 @@ Kontraposition: Wenn $n$ gerade, dann $n^2$ gerade. (Einfacher zu beweisen!)
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** "wahr" oder "falsch", Formeln als "P und Q", Negation als "nicht P"
+
+**Aufgabe 1:** $P \land Q$ mit P=wahr, Q=wahr?
+
+**Antwort:** wahr
+
+**Aufgabe 2:** $P \lor Q$ mit P=falsch, Q=falsch?
+
+**Antwort:** falsch
+
+**Aufgabe 3:** $P \rightarrow Q$ mit P=wahr, Q=falsch?
+
+**Antwort:** falsch
+
+**Aufgabe 4:** Negation von "Alle Schwaene sind weiss"?
+
+**Antwort:** "Es gibt einen Schwan der nicht weiss ist"
+
+**Aufgabe 5:** $\neg(P \land Q) \equiv ?$ (De Morgan)
+
+**Antwort:** nicht P oder nicht Q
+
+**Aufgabe 6:** Ist $(P \rightarrow Q) \rightarrow (Q \rightarrow P)$ eine Tautologie?
+
+**Antwort:** nein
+
+**Aufgabe 7:** $\forall x: x^2 \geq 0$ -- wahr oder falsch?
+
+**Antwort:** wahr
+
+**Aufgabe 8:** Negation von $\exists x: x^2 = -1$ (reelle Zahlen)?
+
+**Antwort:** fuer alle x gilt x^2 != -1 (oder: fuer alle x gilt x^2 >= 0)`,
       },
     ],
   },
@@ -5055,7 +5503,39 @@ $b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Ergebnisse als Zahl, ggf. mit Einheit
+
+**Aufgabe 1:** 3 kg kosten 9 Euro. Was kosten 7 kg?
+
+**Antwort:** 21 Euro
+
+**Aufgabe 2:** 5 Arbeiter brauchen 12 Tage. Wie lange 10 Arbeiter?
+
+**Antwort:** 6 Tage
+
+**Aufgabe 3:** 200 km in 4 Stunden. Geschwindigkeit?
+
+**Antwort:** 50 km/h
+
+**Aufgabe 4:** Ein Auto verbraucht 8L auf 100km. Verbrauch auf 250km?
+
+**Antwort:** 20 L
+
+**Aufgabe 5:** 150 Euro geteilt im Verhaeltnis 2:3. Anteile?
+
+**Antwort:** 60 Euro und 90 Euro
+
+**Aufgabe 6:** Eine Karte im Massstab 1:50000. 4 cm auf der Karte = ? km in echt?
+
+**Antwort:** 2 km
+
+**Aufgabe 7:** 12 Eier kosten 3.60 Euro. Was kosten 30 Eier?
+
+**Antwort:** 9 Euro
+
+**Aufgabe 8:** 8 Maschinen produzieren in 5 Tagen. Wie lange brauchen 10 Maschinen?
+
+**Antwort:** 4 Tage`,
       },
     ],
   },
@@ -5270,7 +5750,39 @@ $T_2(x) = 1 - \frac{x^2}{2}$
         title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Übe das Gelernte!`,
+        content: `> **Antwortformat:** Reihen-Summen als Dezimalzahl, Taylor-Polynome als Term, Konvergenzradius als Zahl
+
+**Aufgabe 1:** Approximiere $e^{0{,}1}$ mit 3 Termen der Taylor-Reihe
+
+**Antwort:** 1.105
+
+**Aufgabe 2:** Taylor-Polynom 2. Grades von $\cos(x)$ um $a=0$
+
+**Antwort:** 1-x^2/2
+
+**Aufgabe 3:** Konvergenzradius von $\sum \frac{x^n}{n}$?
+
+**Antwort:** R=1
+
+**Aufgabe 4:** $\sum_{n=0}^{3} (\frac{1}{2})^n = ?$
+
+**Antwort:** 1.875 (oder 15/8)
+
+**Aufgabe 5:** Welche Funktion hat die Reihe $\sum_{n=0}^{\infty} x^n$?
+
+**Antwort:** 1/(1-x)
+
+**Aufgabe 6:** Approximiere $\sin(0{,}5)$ mit 2 Termen
+
+**Antwort:** 0.479
+
+**Aufgabe 7:** Konvergenzradius von $\sum n! \cdot x^n$?
+
+**Antwort:** R=0
+
+**Aufgabe 8:** Entwickle $e^{x}$ als Reihe. Erste 4 Terme?
+
+**Antwort:** 1+x+x^2/2+x^3/6`,
       },
     ],
   },
