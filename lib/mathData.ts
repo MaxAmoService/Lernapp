@@ -145,66 +145,133 @@ export const mathModules: Module[] = [
       {
         id: "mg1",
         title: "Mengen & Mengenoperationen",
-        duration: "15 min",
+        duration: "20 min",
         interactive: "vennDiagramExplorer" as const,
         type: "interactive",
-        content: `# Mengen & Mengenoperationen
+        content: `## Was ist eine Menge?
+
+Eine **Menge** ist eine klar definierte Sammlung von Objekten. In der Mathematik gelten zwei Regeln:
+
+1. **Eindeutig:** Man weiß genau, ob ein Element zur Menge gehört oder nicht
+2. **Unterscheidbar:** Jedes Element kommt nur einmal vor
+
+Die **Reihenfolge** spielt keine Rolle: $\\{1, 2, 3\\} = \\{3, 1, 2\\}$
 
 ---
 
-
-## Definition einer Menge
-
-Eine Menge ist eine Zusammenfassung bestimmter, unterscheidbarer Objekte zu einem Ganzen.
-
 ## Mengenschreibweisen
 
-- **Aufzählung**: $A = \\{1, 2, 3, 4, 5\\}$
-- **Eigenschaft**: $B = \\{x \\in \\mathbb{N} \\mid x < 10\\}$
-- **Intervalle**: $[a, b] = \\{x \\in \\mathbb{R} \\mid a \\leq x \\leq b\\}$
+Es gibt drei Schreibweisen, je nach Situation:
+
+### Aufzählung (Listing)
+$$A = \\{1, 2, 3, 4, 5\\}$$
+Elemente werden in geschweiften Klammern aufgezählt. Gut für kleine, endliche Mengen.
+
+### Eigenschaft (Prädikat)
+$$B = \\{x \\in \\mathbb{N} \\mid x < 10\\}$$
+"Alle natürlichen Zahlen x, die kleiner als 10 sind." Gut für große Mengen.
+
+### Intervalle
+$$[a, b] = \\{x \\in \\mathbb{R} \\mid a \\leq x \\leq b\\}$$
+- $[a, b]$ = abgeschlossen (Grenzen enthalten)
+- $(a, b)$ = offen (Grenzen nicht enthalten)
+- $[a, b)$ = halboffen
+
+---
 
 ## Wichtige Mengen
 
-| Symbol | Menge |
-|--------|-------|
-| $\\mathbb{N}$ | Natürliche Zahlen |
-| $\\mathbb{Z}$ | Ganze Zahlen |
-| $\\mathbb{Q}$ | Rationale Zahlen |
-| $\\mathbb{R}$ | Reelle Zahlen |
-| $\\mathbb{C}$ | Komplexe Zahlen |
+| Symbol | Name | Beispiel |
+|--------|------|----------|
+| $\\mathbb{N}$ | Natürliche Zahlen | $1, 2, 3, ...$ |
+| $\\mathbb{Z}$ | Ganze Zahlen | $...-2, -1, 0, 1, 2...$ |
+| $\\mathbb{Q}$ | Rationale Zahlen | $\\frac{1}{2}, 0{,}75, -3$ |
+| $\\mathbb{R}$ | Reelle Zahlen | $\\pi, \\sqrt{2}, e$ |
+| $\\mathbb{C}$ | Komplexe Zahlen | $3 + 2j$ |
 
-## Mengenoperationen
+> **Merke:** $\\mathbb{N} \\subset \\mathbb{Z} \\subset \\mathbb{Q} \\subset \\mathbb{R} \\subset \\mathbb{C}$ — jede Menge enthält die vorherige!
 
-- **Vereinigung**: $A \\cup B = \\{x \\mid x \\in A \\text{ oder } x \\in B\\}$
-- **Schnittmenge**: $A \\cap B = \\{x \\mid x \\in A \\text{ und } x \\in B\\}$
-- **Differenz**: $A \\setminus B = \\{x \\mid x \\in A \\text{ und } x \\notin B\\}$
-- **Komplement**: $\\bar{A} = U \\setminus A$
+---
 
-> **Merke:** Vereinigung = "oder" (∪), Schnitt = "und" (∩), Differenz = "aber nicht" (∖)
+## Die vier Mengenoperationen
+
+### Vereinigung ($\\cup$) — "ODER"
+$$A \\cup B = \\{x \\mid x \\in A \\text{ oder } x \\in B\\}$$
+Alles, was in A **oder** in B (oder in beiden) liegt.
+
+### Schnittmenge ($\\cap$) — "UND"
+$$A \\cap B = \\{x \\mid x \\in A \\text{ und } x \\in B\\}$$
+Nur, was in A **und** gleichzeitig in B liegt.
+
+### Differenz ($\\setminus$) — "ABER NICHT"
+$$A \\setminus B = \\{x \\mid x \\in A \\text{ und } x \\notin B\\}$$
+Alles aus A, aber ohne die Elemente aus B.
+
+### Komplement ($\\bar{A}$) — "ALLES AUSSER"
+$$\\bar{A} = U \\setminus A$$
+Alles aus der Grundmenge U, was nicht in A liegt.
+
+---
+
+## Schritt-für-Schritt Beispiel
+
+Gegeben: $A = \\{1, 2, 3, 4\\}$, $B = \\{3, 4, 5, 6\\}$, $U = \\{1, ..., 10\\}$
+
+**Schritt 1:** Vereinigung — alle Elemente sammeln:
+$$A \\cup B = \\{1, 2, 3, 4, 5, 6\\}$$
+
+**Schritt 2:** Schnitt — nur die gemeinsamen:
+$$A \\cap B = \\{3, 4\\}$$
+
+**Schritt 3:** Differenz $A \\setminus B$ — aus A die B-Elemente entfernen:
+$$A \\setminus B = \\{1, 2\\}$$
+
+**Schritt 4:** Komplement — alles aus U was nicht in A ist:
+$$\\bar{A} = \\{5, 6, 7, 8, 9, 10\\}$$
+
+---
 
 ## Wichtige Gesetze
 
-- **Satz von Bernoulli:** $|A \\cup B| = |A| + |B| - |A \\cap B|$
-- **De Morgan:** $\\overline{A \\cup B} = \\bar{A} \\cap \\bar{B}$ und $\\overline{A \\cap B} = \\bar{A} \\cup \\bar{B}$
+### Satz von Bernoulli (Additionsregel)
+$$|A \\cup B| = |A| + |B| - |A \\cap B|$$
+Das $|A \\cap B|$ wird abgezogen, weil es sonst doppelt gezählt wird!
 
-### Beispiel
+**Beispiel:** $|A| = 4$, $|B| = 4$, $|A \\cap B| = 2$
+$$|A \\cup B| = 4 + 4 - 2 = 6$$
 
-$A = \\{1, 2, 3, 4\\}$, $B = \\{3, 4, 5, 6\\}$
+### De Morgan'sche Gesetze
+$$\\overline{A \\cup B} = \\bar{A} \\cap \\bar{B}$$
+$$\\overline{A \\cap B} = \\bar{A} \\cup \\bar{B}$$
 
-- $A \\cup B = \\{1, 2, 3, 4, 5, 6\\}$
-- $A \\cap B = \\{3, 4\\}$
-- $A \\setminus B = \\{1, 2\\}$
-- $|A \\cup B| = 4 + 4 - 2 = 6$ (Bernoulli)
+> **Merke:** Bei De Morgan wird $\\cup$ zu $\\cap$ und umgekehrt — das Komplement "dreht" die Verknüpfung um!
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Prüfe De Morgan für $A = \\{1, 2, 3\\}$, $B = \\{2, 3, 4\\}$, $U = \\{1, 2, 3, 4, 5\\}$
+
+**Schritt 1:** $A \\cup B = \\{1, 2, 3, 4\\}$
+
+**Schritt 2:** $\\overline{A \\cup B} = \\{5\\}$
+
+**Schritt 3:** $\\bar{A} = \\{4, 5\\}$, $\\bar{B} = \\{1, 5\\}$
+
+**Schritt 4:** $\\bar{A} \\cap \\bar{B} = \\{5\\}$
+
+**Ergebnis:** $\\overline{A \\cup B} = \\{5\\} = \\bar{A} \\cap \\bar{B}$ ✓ De Morgan bestätigt!
+[GUIDED_END]
 
 [PRACTICE_START]
-**Aufgabe:** Gegeben $A = \\{1, 2, 3, 4, 5\\}$, $B = \\{4, 5, 6, 7\\}$, $U = \\{1, ..., 10\\}$
-
-Berechne: $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
+**Aufgabe 1:** $A = \\{1, 2, 3, 4, 5\\}$, $B = \\{4, 5, 6, 7\\}$, $U = \\{1, ..., 10\\}$
+Berechne $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
 
 **Lösung:**
 - $A \\cap B = \\{4, 5\\}$
 - $\\bar{A} = \\{6, 7, 8, 9, 10\\}$
 - $|A \\cup B| = 5 + 4 - 2 = 7$
+
+**Aufgabe 2:** Gegeben $|A| = 20$, $|B| = 15$, $|A \\cap B| = 8$. Berechne $|A \\cup B|$.
+
+**Lösung:** $|A \\cup B| = 20 + 15 - 8 = 27$
 [PRACTICE_END]
 
 [INTERACTIVE]`,
@@ -212,35 +279,110 @@ Berechne: $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
       {
         id: "mg2",
         title: "Logische Aussagen",
-        duration: "12 min",
+        duration: "18 min",
         interactive: "truthTableExplorer" as const,
         type: "interactive",
-        content: `# Logische Aussagen
+        content: `## Logische Verknüpfungen
 
-## Wahrheitstafeln
+In der Logik verknüpfen wir **Aussagen** (P, Q, R...) miteinander. Jede Aussage ist entweder **wahr (W)** oder **falsch (F)**.
 
-### UND ($\\land$)
-$P \\land Q$ ist wahr, wenn beide wahr sind.
+---
 
-### ODER ($\\lor$)
-$P \\lor Q$ ist wahr, wenn mindestens eine wahr ist.
+## Die vier Grundverknüpfungen
 
-### NICHT ($\\neg$)
-$\\neg P$ invertiert den Wahrheitswert.
+### UND ($\\land$) — "beide müssen stimmen"
+$$P \\land Q$$
+Nur wahr, wenn **beide** wahr sind. Sonst falsch.
 
-### IMPLIKATION ($\\rightarrow$)
-$P \\rightarrow Q$ ist nur falsch, wenn P wahr und Q falsch.
+**Beispiel:** "Es regnet UND es ist kalt" — nur wahr wenn beides zutrifft.
 
-## Äquivalenzen
+### ODER ($\\lor$) — "mindestens eine stimmt"
+$$P \\lor Q$$
+Falsch nur, wenn **beide** falsch sind. Sonst wahr.
 
-- **Kontraposition**: $(P \\rightarrow Q) \\equiv (\\neg Q \\rightarrow \\neg P)$
-- **De Morgan**: $\\neg(P \\land Q) \\equiv (\\neg P \\lor \\neg Q)$
-- **Distributiv**: $P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$
+**Beispiel:** "Ich nehpe Kaffee ODER Tee" — wahr wenn eins von beidem (oder beides).
+
+### NICHT ($\\neg$) — "Umdrehen"
+$$\\neg P$$
+Aus wahr wird falsch, aus falsch wird wahr.
+
+### IMPLIKATION ($\\rightarrow$) — "wenn...dann..."
+$$P \\rightarrow Q$$
+Nur falsch, wenn P wahr und Q falsch ist. Sonst immer wahr.
+
+**Beispiel:** "Wenn es regnet, dann ist die Straße nass." Nur falsch wenn es regnet aber die Straße trocken ist.
+
+---
+
+## Wahrheitstafel — alle 4 Verknüpfungen
+
+| P | Q | $P \\land Q$ | $P \\lor Q$ | $\\neg P$ | $P \\rightarrow Q$ |
+|---|---|:---:|:---:|:---:|:---:|
+| W | W | W | W | F | W |
+| W | F | F | W | F | F |
+| F | W | F | W | W | W |
+| F | F | F | F | W | W |
+
+> **Merke:** $P \\rightarrow Q$ ist nur falsch bei W → F. Das merkt man sich am besten: "Eine wahre Aussage darf nichts Falsches implizieren."
+
+---
+
+## Wichtige Äquivalenzen
+
+### Kontraposition
+$$(P \\rightarrow Q) \\equiv (\\neg Q \\rightarrow \\neg P)$$
+"Wenn es regnet, ist die Straße nass" = "Wenn die Straße nicht nass ist, hat es nicht geregnet."
+
+### De Morgan'sche Gesetze (für Logik!)
+$$\\neg(P \\land Q) \\equiv (\\neg P \\lor \\neg Q)$$
+$$\\neg(P \\lor Q) \\equiv (\\neg P \\land \\neg Q)$$
+
+> **Merke:** Bei De Morgan wird $\\land$ zu $\\lor$ und umgekehrt — genau wie bei Mengen!
+
+### Distributivgesetz
+$$P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$$
+
+---
+
+## Schritt-für-Schritt Beispiel
+
+**Aufgabe:** Vereinfache $\\neg(\\neg P \\lor Q)$
+
+**Schritt 1:** De Morgan anwenden: $\\neg(\\neg P \\lor Q) \\equiv \\neg(\\neg P) \\land \\neg Q$
+
+**Schritt 2:** Doppelte Negation: $\\neg(\\neg P) = P$
+
+**Ergebnis:** $\\neg(\\neg P \\lor Q) \\equiv P \\land \\neg Q$
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Ist $(P \\rightarrow Q) \\rightarrow (Q \\rightarrow P)$ eine Tautologie?
+
+**Schritt 1:** Wahrheitstafel aufstellen:
+
+| P | Q | $P \\rightarrow Q$ | $Q \\rightarrow P$ | $(P \\rightarrow Q) \\rightarrow (Q \\rightarrow P)$ |
+|---|---|:---:|:---:|:---:|
+| W | W | W | W | W |
+| W | F | F | W | W |
+| F | W | W | F | **F** |
+| F | F | W | W | W |
+
+**Schritt 2:** In Zeile 3 (P=F, Q=W) ist die gesamte Aussage falsch.
+
+**Ergebnis:** Keine Tautologie! Die Implikation ist nicht symmetrisch.
+[GUIDED_END]
 
 [PRACTICE_START]
-**Aufgabe:** Bestimme den Wahrheitswert von $\neg(P \land Q)$, wenn P = wahr und Q = falsch.
+**Aufgabe 1:** Bestimme $\\neg(P \\land Q)$ für P = W, Q = F
 
-**Lösung:** $\neg(\text{wahr} \land \text{falsch}) = \neg(\text{falsch}) = \text{wahr}$
+**Lösung:** $\\neg(W \\land F) = \\neg(F) = W$
+
+**Aufgabe 2:** Vereinfache $\\neg(P \\rightarrow Q)$
+
+**Lösung:** $P \\rightarrow Q \\equiv \\neg P \\lor Q$, also $\\neg(P \\rightarrow Q) \\equiv P \\land \\neg Q$
+
+**Aufgabe 3:** Ist $P \\lor \\neg P$ eine Tautologie?
+
+**Lösung:** Ja! Für jedes P gilt: entweder P oder ¬P ist wahr. (Satz vom ausgeschlossenen Dritten)
 [PRACTICE_END]
 
 [INTERACTIVE]`,
@@ -248,39 +390,127 @@ $P \\rightarrow Q$ ist nur falsch, wenn P wahr und Q falsch.
       {
         id: "mg3",
         title: "Quantoren",
-        duration: "10 min",
+        duration: "18 min",
         type: "text",
-        content: `# Quantoren
+        content: `## Was sind Quantoren?
+
+Quantoren drücken aus, **für wie viele Elemente** eine Aussage gilt. Es gibt drei Typen.
 
 ---
 
-## Allquantor ($\\forall$)
+## Allquantor ($\\forall$) — "für alle"
 
-"Ausgesagt für alle x gilt..."
+$$\\forall x \\in M: P(x)$$
+"Für **alle** x aus M gilt die Aussage P(x)."
 
-$\\forall x \\in \\mathbb{R}: x^2 \\geq 0$
+**Beispiele:**
+- $\\forall x \\in \\mathbb{R}: x^2 \\geq 0$ — wahr! (jede reelle Zahl quadriert ist $\\geq 0$)
+- $\\forall x \\in \\mathbb{R}: x^2 > 0$ — falsch! (Gegenbeispiel: $x = 0$)
 
-## Existenzquantor ($\\exists$)
+> **Merke:** Um einen Allquantor zu **widerlegen**, reicht **ein einziges Gegenbeispiel**!
 
-"Es existiert mindestens ein x, sodass..."
+---
 
-$\\exists x \\in \\mathbb{R}: x^2 = 4$
+## Existenzquantor ($\\exists$) — "es gibt mindestens eins"
 
-## Eindeutigkeitsquantor ($\\exists!$)
+$$\\exists x \\in M: P(x)$$
+"Es existiert **mindestens ein** x aus M, für das P(x) gilt."
 
-"Es existiert genau ein x, sodass..."
+**Beispiele:**
+- $\\exists x \\in \\mathbb{R}: x^2 = 4$ — wahr! ($x = 2$ oder $x = -2$)
+- $\\exists x \\in \\mathbb{R}: x^2 = -1$ — falsch! (keine reelle Zahl)
 
-$\\exists! x \\in \\mathbb{R}: x + 2 = 5$
+---
 
-## Negation von Quantoren
+## Eindeutigkeitsquantor ($\\exists!$) — "es gibt genau eins"
 
-- $\\neg(\\forall x: P(x)) \\equiv \\exists x: \\neg P(x)$
-- $\\neg(\\exists x: P(x)) \\equiv \\forall x: \\neg P(x)$
+$$\\exists! x \\in M: P(x)$$
+"Es existiert **genau ein** x aus M, für das P(x) gilt."
+
+**Beispiele:**
+- $\\exists! x \\in \\mathbb{R}: x + 2 = 5$ — wahr! ($x = 3$, eindeutig)
+- $\\exists! x \\in \\mathbb{R}: x^2 = 4$ — falsch! ($x = 2$ und $x = -2$)
+
+---
+
+## Quantoren negieren — die wichtigste Regel!
+
+Die Negation von Quantoren folgt einem einfachen Muster: $\\forall$ wird zu $\\exists$ und umgekehrt.
+
+$$\\neg(\\forall x: P(x)) \\equiv \\exists x: \\neg P(x)$$
+$$\\neg(\\exists x: P(x)) \\equiv \\forall x: \\neg P(x)$$
+
+> **Merke:** "Nicht alle" = "Es gibt einen, der nicht" und "Es gibt keinen" = "Alle sind nicht"
+
+---
+
+## Schritt-für-Schritt Beispiele
+
+### Beispiel 1: Allquantor negieren
+
+**Aussage:** "Alle Studenten bestehen die Prüfung."
+$$\\forall s: \\text{besteht}(s)$$
+
+**Negation:** "Es gibt einen Studenten, der nicht besteht."
+$$\\exists s: \\neg\\text{besteht}(s)$$
+
+### Beispiel 2: Existenzquantor negieren
+
+**Aussage:** "Es gibt eine Primzahl, die gerade ist."
+$$\\exists p: \\text{prim}(p) \\land \\text{gerade}(p)$$
+
+**Negation:** "Alle Primzahlen sind ungerade."
+$$\\forall p: \\text{prim}(p) \\rightarrow \\text{ungerade}(p)$$
+
+### Beispiel 3: Verschachtelte Quantoren
+
+$$\\forall x \\exists y: x + y = 0$$
+"Zu jeder Zahl x gibt es eine Zahl y, sodass x + y = 0."
+Das ist wahr: $y = -x$.
+
+**Negation:**
+$$\\exists x \\forall y: x + y \\neq 0$$
+"Es gibt eine Zahl x, zu der keine Zahl y die Summe 0 ergibt." Das ist falsch.
+
+---
+
+## Häufige Fehler
+
+| Aussage | Bedeutung | Wahr? |
+|---------|-----------|-------|
+| $\\forall x: x^2 > 0$ | "Jedes Quadrat ist positiv" | Falsch ($x=0$) |
+| $\\exists x: x^2 < 0$ | "Es gibt negatives Quadrat" | Falsch |
+| $\\forall x \\exists y: x < y$ | "Zu jedem x gibt es größeres y" | Wahr |
+| $\\exists y \\forall x: x < y$ | "Es gibt größtes y über alle x" | Falsch |
+
+> **Achtung:** $\\forall x \\exists y$ und $\\exists y \\forall x$ sind **nicht** dasselbe! Die Reihenfolge der Quantoren matters.
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Negiere $\\forall x \\in \\mathbb{R}: x^2 + 1 > 0$
+
+**Schritt 1:** Allquantor negieren → Existenzquantor: $\\exists x \\in \\mathbb{R}: ...$
+
+**Schritt 2:** Aussage negieren: $x^2 + 1 > 0$ wird zu $x^2 + 1 \\leq 0$
+
+**Schritt 3:** Zusammen: $\\exists x \\in \\mathbb{R}: x^2 + 1 \\leq 0$
+
+**Schritt 4:** Prüfen: Ist das wahr oder falsch?
+$x^2 \\geq 0$ für alle x, also $x^2 + 1 \\geq 1 > 0$.
+Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
+[GUIDED_END]
 
 [PRACTICE_START]
-**Aufgabe:** Formuliere die Negation von $\forall x \in \mathbb{R}: x^2 > 0$.
+**Aufgabe 1:** Formuliere die Negation von $\\forall x \\in \\mathbb{N}: x > 0$
 
-**Lösung:** $\exists x \in \mathbb{R}: x^2 \leq 0$ (z.B. x = 0)
+**Lösung:** $\\exists x \\in \\mathbb{N}: x \\leq 0$ (z.B. $x = 0$)
+
+**Aufgabe 2:** Ist $\\exists! x \\in \\mathbb{R}: x^3 = 0$ wahr?
+
+**Lösung:** Ja! $x = 0$ ist die einzige Lösung, da $x^3 = 0 \\Leftrightarrow x = 0$.
+
+**Aufgabe 3:** Negiere $\\exists x \\in \\mathbb{R}: x^2 = 2$
+
+**Lösung:** $\\forall x \\in \\mathbb{R}: x^2 \\neq 2$ (falsch, da $\\sqrt{2}$ existiert)
 [PRACTICE_END]`,
       },
       {
@@ -4690,6 +4920,69 @@ export const mathQuizzes: Record<string, QuizQuestion[]> = {
       ],
       correct: 1,
       explanation: "$\\forall$ ist der Allquantor und bedeutet 'für alle'.",
+    },
+    {
+      question: "Was ist $A \\cup B$ wenn $A = \\{1, 2\\}$ und $B = \\{3, 4\\}$?",
+      type: "input",
+      correct: "{1, 2, 3, 4}",
+      explanation: "Die Vereinigung enthält alle Elemente aus beiden Mengen.",
+      hint: "Sammle alle Elemente aus A und B zusammen.",
+    },
+    {
+      question: "Was ist $\\overline{A}$ wenn $A = \\{1, 2, 3\\}$ und $U = \\{1, 2, 3, 4, 5\\}$?",
+      type: "input",
+      correct: "{4, 5}",
+      explanation: "Das Komplement enthält alles aus U, was nicht in A ist.",
+    },
+    {
+      question: "Wann ist $P \\rightarrow Q$ falsch?",
+      type: "multiple",
+      options: [
+        "P wahr, Q wahr",
+        "P wahr, Q falsch",
+        "P falsch, Q wahr",
+        "P falsch, Q falsch",
+      ],
+      correct: 1,
+      explanation: "Die Implikation ist nur falsch, wenn die Voraussetzung wahr, aber die Folge falsch ist.",
+    },
+    {
+      question: "Was ist die Negation von $\\exists x: P(x)$?",
+      type: "multiple",
+      options: [
+        "$\\exists x: \\neg P(x)$",
+        "$\\forall x: P(x)$",
+        "$\\forall x: \\neg P(x)$",
+        "$\\neg \\forall x: P(x)$",
+      ],
+      correct: 2,
+      explanation: "Bei der Negation wird $\\exists$ zu $\\forall$ und die Aussage wird negiert.",
+    },
+    {
+      question: "Gilt De Morgan: $\\overline{A \\cup B} = ?$",
+      type: "multiple",
+      options: [
+        "$\\bar{A} \\cup \\bar{B}$",
+        "$\\bar{A} \\cap \\bar{B}$",
+        "$A \\cap B$",
+        "$A \\cup B$",
+      ],
+      correct: 1,
+      explanation: "De Morgan: Das Komplement der Vereinigung ist der Schnitt der Komplemente.",
+    },
+    {
+      question: "Ist $\\forall x \\in \\mathbb{R}: x^2 > 0$ wahr oder falsch?",
+      type: "multiple",
+      options: ["Wahr", "Falsch"],
+      correct: 1,
+      explanation: "Falsch! Gegenbeispiel: $x = 0$ → $0^2 = 0$, nicht $> 0$.",
+    },
+    {
+      question: "$|A| = 10$, $|B| = 8$, $|A \\cap B| = 3$. Was ist $|A \\cup B|$?",
+      type: "input",
+      correct: "15",
+      explanation: "Bernoulli: $|A \\cup B| = |A| + |B| - |A \\cap B| = 10 + 8 - 3 = 15$",
+      hint: "Verwende die Additionsregel (Satz von Bernoulli).",
     },
   ],
   "mathe-funktionen": [
