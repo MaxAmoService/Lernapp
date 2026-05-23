@@ -151,9 +151,7 @@ $1$ — $-j + 1 + j = 1$
       duration: "15 min",
       type: "interactive",
       interactive: "complexPlaneViewer",
-      content: `# Die Gaußsche Zahlenebene
-
-Reelle Zahlen leben auf einer Zahlengerade (1D). Komplexe Zahlen brauchen eine **Ebene** (2D).
+      content: `Reelle Zahlen leben auf einer Zahlengerade (1D). Komplexe Zahlen brauchen eine **Ebene** (2D).
 
 ---
 

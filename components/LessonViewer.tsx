@@ -262,7 +262,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
             mathContent = rest + "\n";
           }
         }
-        return;
+        continue;
       }
 
       if (inMathBlock) {
@@ -274,7 +274,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         } else {
           mathContent += line + "\n";
         }
-        return;
+        continue;
       }
 
       // Code block
@@ -288,12 +288,12 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           codeLang = line.slice(3).trim();
           inCodeBlock = true;
         }
-        return;
+        continue;
       }
 
       if (inCodeBlock) {
         codeContent += line + "\n";
-        return;
+        continue;
       }
 
       // Table row
@@ -312,7 +312,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
             </tr>
           );
         }
-        return;
+        continue;
       } else if (inTable) {
         flushTable();
       }
