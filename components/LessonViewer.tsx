@@ -60,6 +60,12 @@ import { ComplexFormConverter } from "./interactive/ComplexFormConverter";
 import { ComplexOperationsCalculator } from "./interactive/ComplexOperationsCalculator";
 import { ComplexPowerCalculator } from "./interactive/ComplexPowerCalculator";
 import { ComplexRootCalculator } from "./interactive/ComplexRootCalculator";
+import { TruthTableExplorer } from "./interactive/TruthTableExplorer";
+import { VennDiagramExplorer } from "./interactive/VennDiagramExplorer";
+import { ProbabilitySimulator } from "./interactive/ProbabilitySimulator";
+import { MatrixCalculator } from "./interactive/MatrixCalculator";
+import { BoxplotBuilder } from "./interactive/BoxplotBuilder";
+import { SeriesVisualizer } from "./interactive/SeriesVisualizer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -141,6 +147,12 @@ function renderInteractive(type: string, codeExample?: string) {
     complexOperationsCalculator: "Operations-Rechner",
     complexPowerCalculator: "Potenz-Rechner",
     complexRootCalculator: "Wurzel-Rechner",
+    truthTableExplorer: "Wahrheitstafel-Explorer",
+    vennDiagramExplorer: "Venn-Diagramm",
+    probabilitySimulator: "Wahrscheinlichkeits-Simulator",
+    matrixCalculator: "Matrix-Rechner",
+    boxplotBuilder: "Boxplot-Builder",
+    seriesVisualizer: "Reihen-Visualisierung",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -187,6 +199,12 @@ function renderInteractive(type: string, codeExample?: string) {
     complexOperationsCalculator: <ComplexOperationsCalculator />,
     complexPowerCalculator: <ComplexPowerCalculator />,
     complexRootCalculator: <ComplexRootCalculator />,
+    truthTableExplorer: <TruthTableExplorer />,
+    vennDiagramExplorer: <VennDiagramExplorer />,
+    probabilitySimulator: <ProbabilitySimulator />,
+    matrixCalculator: <MatrixCalculator />,
+    boxplotBuilder: <BoxplotBuilder />,
+    seriesVisualizer: <SeriesVisualizer />,
   };
 
   const name = interactiveNames[type] || type;

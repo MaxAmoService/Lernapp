@@ -4,10 +4,11 @@ import { netzwerkModule } from "./netzwerkData";
 import { reactModule } from "./reactData";
 import { typescriptModule } from "./typescriptData";
 import { nextjsModule } from "./nextjsData";
-import { javascriptModule } from "./javascriptData";
+
 import { datenbankModule } from "./datenbankData";
 import { complexModule } from "./complexData";
 import { Category } from "./types";
+import { contentModules } from "./content/registry";
 
 // Re-export types for backward compatibility
 export type { Lesson, Module, Category, QuizQuestion } from "./types";
@@ -27,11 +28,18 @@ export const modules = [
   reactModule,
   typescriptModule,
   nextjsModule,
-  javascriptModule,
 ];
 
 // Combine all modules
-export const allModules = [...modules, ...mathModules.filter(m => m.id !== "m-komplexe-zahlen"), ihkModule, netzwerkModule, datenbankModule, complexModule];
+export const allModules = [
+  ...modules,
+  ...mathModules.filter(m => m.id !== "m-komplexe-zahlen"),
+  ihkModule,
+  netzwerkModule,
+  datenbankModule,
+  complexModule,
+  ...contentModules,
+];
 
 export function getModule(slug: string) {
   return allModules.find((m) => m.slug === slug);

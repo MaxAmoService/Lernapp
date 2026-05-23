@@ -15,7 +15,6 @@ FILES=(
   "lib/ihkData.ts"
   "lib/netzwerkData.ts"
   "lib/datenbankData.ts"
-  "lib/javascriptData.ts"
   "lib/reactData.ts"
   "lib/typescriptData.ts"
   "lib/nextjsData.ts"

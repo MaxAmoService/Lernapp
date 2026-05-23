@@ -9,7 +9,13 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "complexFormConverter"
   | "complexOperationsCalculator"
   | "complexPowerCalculator"
-  | "complexRootCalculator";
+  | "complexRootCalculator"
+  | "truthTableExplorer"
+  | "vennDiagramExplorer"
+  | "probabilitySimulator"
+  | "matrixCalculator"
+  | "boxplotBuilder"
+  | "seriesVisualizer";
 
 export interface Lesson {
   id: string;

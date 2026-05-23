@@ -146,6 +146,7 @@ export const mathModules: Module[] = [
         id: "mg1",
         title: "Mengen & Mengenoperationen",
         duration: "15 min",
+        interactive: "vennDiagramExplorer" as const,
         type: "interactive",
         content: `# Mengen & Mengenoperationen
 
@@ -177,12 +178,42 @@ Eine Menge ist eine Zusammenfassung bestimmter, unterscheidbarer Objekte zu eine
 - **Vereinigung**: $A \\cup B = \\{x \\mid x \\in A \\text{ oder } x \\in B\\}$
 - **Schnittmenge**: $A \\cap B = \\{x \\mid x \\in A \\text{ und } x \\in B\\}$
 - **Differenz**: $A \\setminus B = \\{x \\mid x \\in A \\text{ und } x \\notin B\\}$
-- **Komplement**: $\\bar{A} = U \\setminus A$`,
+- **Komplement**: $\\bar{A} = U \\setminus A$
+
+> **Merke:** Vereinigung = "oder" (∪), Schnitt = "und" (∩), Differenz = "aber nicht" (∖)
+
+## Wichtige Gesetze
+
+- **Satz von Bernoulli:** $|A \\cup B| = |A| + |B| - |A \\cap B|$
+- **De Morgan:** $\\overline{A \\cup B} = \\bar{A} \\cap \\bar{B}$ und $\\overline{A \\cap B} = \\bar{A} \\cup \\bar{B}$
+
+### Beispiel
+
+$A = \\{1, 2, 3, 4\\}$, $B = \\{3, 4, 5, 6\\}$
+
+- $A \\cup B = \\{1, 2, 3, 4, 5, 6\\}$
+- $A \\cap B = \\{3, 4\\}$
+- $A \\setminus B = \\{1, 2\\}$
+- $|A \\cup B| = 4 + 4 - 2 = 6$ (Bernoulli)
+
+[PRACTICE_START]
+**Aufgabe:** Gegeben $A = \\{1, 2, 3, 4, 5\\}$, $B = \\{4, 5, 6, 7\\}$, $U = \\{1, ..., 10\\}$
+
+Berechne: $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
+
+**Lösung:**
+- $A \\cap B = \\{4, 5\\}$
+- $\\bar{A} = \\{6, 7, 8, 9, 10\\}$
+- $|A \\cup B| = 5 + 4 - 2 = 7$
+[PRACTICE_END]
+
+[INTERACTIVE]`,
       },
       {
         id: "mg2",
         title: "Logische Aussagen",
         duration: "12 min",
+        interactive: "truthTableExplorer" as const,
         type: "interactive",
         content: `# Logische Aussagen
 
@@ -204,13 +235,21 @@ $P \\rightarrow Q$ ist nur falsch, wenn P wahr und Q falsch.
 
 - **Kontraposition**: $(P \\rightarrow Q) \\equiv (\\neg Q \\rightarrow \\neg P)$
 - **De Morgan**: $\\neg(P \\land Q) \\equiv (\\neg P \\lor \\neg Q)$
-- **Distributiv**: $P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$`,
+- **Distributiv**: $P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$
+
+[PRACTICE_START]
+**Aufgabe:** Bestimme den Wahrheitswert von $\neg(P \land Q)$, wenn P = wahr und Q = falsch.
+
+**Lösung:** $\neg(\text{wahr} \land \text{falsch}) = \neg(\text{falsch}) = \text{wahr}$
+[PRACTICE_END]
+
+[INTERACTIVE]`,
       },
       {
         id: "mg3",
         title: "Quantoren",
         duration: "10 min",
-        type: "interactive",
+        type: "text",
         content: `# Quantoren
 
 ---
@@ -236,7 +275,13 @@ $\\exists! x \\in \\mathbb{R}: x + 2 = 5$
 ## Negation von Quantoren
 
 - $\\neg(\\forall x: P(x)) \\equiv \\exists x: \\neg P(x)$
-- $\\neg(\\exists x: P(x)) \\equiv \\forall x: \\neg P(x)$`,
+- $\\neg(\\exists x: P(x)) \\equiv \\forall x: \\neg P(x)$
+
+[PRACTICE_START]
+**Aufgabe:** Formuliere die Negation von $\forall x \in \mathbb{R}: x^2 > 0$.
+
+**Lösung:** $\exists x \in \mathbb{R}: x^2 \leq 0$ (z.B. x = 0)
+[PRACTICE_END]`,
       },
       {
         id: "mg4",
@@ -306,6 +351,7 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
         id: "mf2",
         title: "Funktionseigenschaften",
         duration: "18 min",
+        interactive: "functionExplorer" as const,
         type: "interactive",
         content: `# Funktionseigenschaften
 
@@ -329,7 +375,9 @@ $\\lim_{x \\to a} f(x) = f(a)$
 ## Umkehrfunktion
 
 $f$ ist umkehrbar, wenn $f$ bijektiv ist.
-Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$`,
+Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
+
+[INTERACTIVE]`,
       },
       {
         id: "mf3",
@@ -362,6 +410,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$`,
         id: "m1g1",
         title: "Grenzwerte von Funktionen",
         duration: "20 min",
+        interactive: "functionExplorer" as const,
         type: "interactive",
         visuals: [
           { type: "functionGraph" as const, props: { fn: (x: number) => x === 0 ? 1 : Math.sin(x) / x, xRange: [-6, 6], yRange: [-0.5, 1.5], label: "sin(x)/x", points: [{ x: 0, y: 1, label: "lim = 1" }] } },
@@ -388,13 +437,15 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
 
 - $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$
 - $\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$
-- $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$`,
+- $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$
+
+[INTERACTIVE]`,
       },
       {
         id: "m1g2",
         title: "L'Hôpital's Regel",
         duration: "15 min",
-        type: "interactive",
+        type: "text",
         content: `# L'Hôpital's Regel
 
 ## Anwendung
@@ -411,7 +462,41 @@ $\\lim_{x \\to a} \\frac{f(x)}{g(x)} = \\lim_{x \\to a} \\frac{f'(x)}{g'(x)}$
 
 ## Beispiel
 
-$\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$`,
+$\\lim_{x \\to 0} \\frac{\\sin x}{x} = \\lim_{x \\to 0} \\frac{\\cos x}{1} = 1$
+
+## Weitere Beispiele
+
+### Beispiel 2: Wiederholte Anwendung
+$\\lim_{x \\to 0} \\frac{1 - \\cos x}{x^2}$
+
+Erste Anwendung: $\\frac{0}{0}$ → $\\lim_{x \\to 0} \\frac{\\sin x}{2x}$
+
+Zweite Anwendung: $\\frac{0}{0}$ → $\\lim_{x \\to 0} \\frac{\\cos x}{2} = \\frac{1}{2}$
+
+### Beispiel 3: $\\frac{\\infty}{\\infty}$
+$\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x} = \\lim_{x \\to \\infty} \\frac{2}{e^x} = 0$
+
+## Wann L'Hôpital NICHT anwenden
+
+- Wenn kein unbestimmter Ausdruck vorliegt (z.B. $\\frac{2}{3}$)
+- Bei $0 \\cdot \\infty$: erst umformen zu $\\frac{0}{0}$ oder $\\frac{\\infty}{\\infty}$
+- Bei $\\infty - \\infty$: erst zusammenfassen
+
+> **Merke:** L'Hôpital funktioniert NUR bei $\\frac{0}{0}$ und $\\frac{\\infty}{\\infty}$!
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne $\\lim_{x \\to 1} \\frac{x^3 - 1}{x - 1}$
+
+**Schritt 1:** Prüfe den Typ: $\\frac{1-1}{1-1} = \\frac{0}{0}$ → L'Hôpital anwendbar!
+
+**Schritt 2:** Leite Zähler und Nenner einzeln ab:
+- Zähler: $(x^3 - 1)' = 3x^2$
+- Nenner: $(x - 1)' = 1$
+
+**Schritt 3:** Setze ein: $\\lim_{x \\to 1} \\frac{3x^2}{1} = 3$
+
+**Ergebnis:** $\\lim_{x \\to 1} \\frac{x^3 - 1}{x - 1} = 3$
+[GUIDED_END]`,
       },
       {
         id: "m1g3",
@@ -468,12 +553,15 @@ $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$
 
 ## Geometrische Bedeutung
 
-Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.`,
+Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
+
+[INTERACTIVE]`,
       },
       {
         id: "m1a2",
         title: "Ableitungsregeln",
         duration: "20 min",
+        interactive: "functionExplorer" as const,
         type: "interactive",
         content: `# Ableitungsregeln
 
@@ -498,7 +586,16 @@ $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$
 
 ## Quotientenregel
 
-$\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$`,
+$\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$
+
+[PRACTICE_START]
+**Aufgabe:** Berechne die Ableitung von $f(x) = x^3 \cdot \sin(x)$.
+
+**Lösung (Produktregel):**
+$f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
+[PRACTICE_END]
+
+[INTERACTIVE]`,
       },
       {
         id: "m1a3",
@@ -558,13 +655,15 @@ $\\int f(x) \\, dx = F(x) + C$
 
 ## Substitutionsregel
 
-$\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$`,
+$\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
+
+[INTERACTIVE]`,
       },
       {
         id: "m1i2",
         title: "Bestimmtes Integral",
         duration: "20 min",
-        type: "interactive",
+        type: "text",
         content: `# Bestimmtes Integral
 
 ## Hauptsatz der Analysis
@@ -583,7 +682,15 @@ Das bestimmte Integral gibt die **Fläche** unter der Kurve (mit Vorzeichen).
 
 ## Teilungsregel
 
-$\\int u \\, dv = uv - \\int v \\, du$`,
+$\\int u \\, dv = uv - \\int v \\, du$
+
+[PRACTICE_START]
+**Aufgabe:** Berechne $\int_0^2 (3x^2 + 1) \, dx$.
+
+**Lösung:**
+$F(x) = x^3 + x$
+$F(2) - F(0) = (8 + 2) - 0 = 10$
+[PRACTICE_END]`,
       },
       {
         id: "m1i3",
@@ -616,6 +723,7 @@ $\\int u \\, dv = uv - \\int v \\, du$`,
         id: "m1r1",
         title: "Reihen & Konvergenz",
         duration: "18 min",
+        interactive: "seriesVisualizer" as const,
         type: "interactive",
         content: `# Reihen & Konvergenz
 
@@ -636,13 +744,21 @@ Wenn $0 \\leq a_n \\leq b_n$ und $\\sum b_n$ konvergiert, dann konvergiert auch 
 $\\lim_{n \\to \\infty} \\left|\\frac{a_{n+1}}{a_n}\\right| = q$
 - $q < 1$: konvergent
 - $q > 1$: divergent
-- $q = 1$: kein Ergebnis`,
+- $q = 1$: kein Ergebnis
+
+[PRACTICE_START]
+**Aufgabe:** Konvergiert $\sum_{n=1}^{\infty} \frac{1}{n^2}$? Begründe mit dem p-Test.
+
+**Lösung:** Ja, denn $p = 2 > 1$. Nach dem p-Test konvergiert $\sum \frac{1}{n^p}$ genau dann, wenn $p > 1$.
+[PRACTICE_END]
+
+[INTERACTIVE]`,
       },
       {
         id: "m1r2",
         title: "Potenzreihen",
         duration: "15 min",
-        type: "interactive",
+        type: "text",
         content: `# Potenzreihen
 
 ## Definition
@@ -718,12 +834,15 @@ $\\lambda \\vec{v} = \\begin{pmatrix} \\lambda v_1 \\\\ \\lambda v_2 \\\\ \\lamb
 $\\vec{u} \\cdot \\vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = |\\vec{u}| |\\vec{v}| \\cos \\alpha$
 
 ### Kreuzprodukt
-$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} u_2 v_3 - u_3 v_2 \\\\ u_3 v_1 - u_1 v_3 \\\\ u_1 v_2 - u_2 v_1 \\end{pmatrix}$`,
+$\\vec{u} \\times \\vec{v} = \\begin{pmatrix} u_2 v_3 - u_3 v_2 \\\\ u_3 v_1 - u_1 v_3 \\\\ u_1 v_2 - u_2 v_1 \\end{pmatrix}$
+
+[INTERACTIVE]`,
       },
       {
         id: "m2v2",
         title: "Matrizen",
         duration: "20 min",
+        interactive: "matrixCalculator" as const,
         type: "interactive",
         content: `# Matrizen
 
@@ -747,7 +866,9 @@ $\\det(A) = a_{11} a_{22} - a_{12} a_{21}$
 
 ## Inverse Matrix
 
-$A \\cdot A^{-1} = I$`,
+$A \\cdot A^{-1} = I$
+
+[INTERACTIVE]`,
       },
       {
         id: "m2v3",
@@ -780,7 +901,7 @@ $A \\cdot A^{-1} = I$`,
         id: "m2d1",
         title: "DGln 1. Ordnung",
         duration: "20 min",
-        type: "interactive",
+        type: "text",
         content: `# Differentialgleichungen 1. Ordnung
 
 ## Typen
@@ -798,13 +919,45 @@ Lösung mit Integrationsfaktor: $\\mu(x) = e^{\\int p(x) \\, dx}$
 1. **Trennung der Variablen**
 2. **Integrationsfaktor**
 3. **Substitution**
-4. **Variation der Konstanten**`,
+4. **Variation der Konstanten**
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Löse $y' = 2xy$ mit $y(0) = 3$
+
+**Schritt 1:** Typ erkennen — trennbare Variablen: $\\frac{dy}{dx} = 2xy$
+
+**Schritt 2:** Trennen: $\\frac{dy}{y} = 2x \\, dx$
+
+**Schritt 3:** Integrieren: $\\int \\frac{dy}{y} = \\int 2x \\, dx$
+$\\ln|y| = x^2 + C$
+
+**Schritt 4:** Auflösen nach y: $y = e^{x^2 + C} = A \\cdot e^{x^2}$
+
+**Schritt 5:** Anfangsbedingung: $y(0) = 3 = A \\cdot e^0 = A$ → $A = 3$
+
+**Lösung:** $y = 3e^{x^2}$
+[GUIDED_END]
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Löse $y' + 2y = 4$ (lineare DGL)
+
+**Schritt 1:** Integrationsfaktor: $\\mu(x) = e^{\\int 2 \\, dx} = e^{2x}$
+
+**Schritt 2:** Multipliziere: $e^{2x} y' + 2e^{2x} y = 4e^{2x}$
+Linke Seite ist $(e^{2x} y)'$
+
+**Schritt 3:** Integrieren: $e^{2x} y = \\int 4e^{2x} \\, dx = 2e^{2x} + C$
+
+**Schritt 4:** Auflösen: $y = 2 + Ce^{-2x}$
+
+**Probe:** $y' = -2Ce^{-2x}$, $y' + 2y = -2Ce^{-2x} + 4 + 2Ce^{-2x} = 4$ ✓
+[GUIDED_END]`,
       },
       {
         id: "m2d2",
         title: "DGln 2. Ordnung",
         duration: "22 min",
-        type: "interactive",
+        type: "text",
         content: `# Differentialgleichungen 2. Ordnung
 
 ## Homogene lineare DGln
@@ -823,7 +976,50 @@ $ar^2 + br + c = 0$
 
 $ay'' + by' + cy = f(x)$
 
-Lösung: $y = y_h + y_p$ (homogene + partikuläre Lösung)`,
+Lösung: $y = y_h + y_p$ (homogene + partikuläre Lösung)
+
+### Beispiel 1: Zwei reelle Wurzeln
+
+$y'' - 3y' + 2y = 0$
+
+Charakteristisch: $r^2 - 3r + 2 = 0$ → $(r-1)(r-2) = 0$ → $r_1 = 1$, $r_2 = 2$
+
+Lösung: $y = C_1 e^x + C_2 e^{2x}$
+
+### Beispiel 2: Doppelte Wurzel
+
+$y'' - 4y' + 4y = 0$
+
+$r^2 - 4r + 4 = 0$ → $(r-2)^2 = 0$ → $r = 2$ (doppelt)
+
+Lösung: $y = (C_1 + C_2 x) e^{2x}$
+
+### Beispiel 3: Komplexe Wurzeln
+
+$y'' + y = 0$
+
+$r^2 + 1 = 0$ → $r = \\pm i$ ($\\alpha = 0$, $\\beta = 1$)
+
+Lösung: $y = C_1 \\cos x + C_2 \\sin x$
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Löse $y'' - 5y' + 6y = 0$ mit $y(0) = 1$, $y'(0) = 0$
+
+**Schritt 1:** Charakteristische Gleichung: $r^2 - 5r + 6 = 0$
+
+**Schritt 2:** Mitternachtsformel: $r = \\frac{5 \\pm \\sqrt{25-24}}{2} = \\frac{5 \\pm 1}{2}$
+$r_1 = 3$, $r_2 = 2$
+
+**Schritt 3:** Allgemeine Lösung: $y = C_1 e^{3x} + C_2 e^{2x}$
+
+**Schritt 4:** Anfangsbedingungen:
+$y(0) = C_1 + C_2 = 1$
+$y'(0) = 3C_1 + 2C_2 = 0$
+
+**Schritt 5:** LGS lösen: $C_1 = -2$, $C_2 = 3$
+
+**Lösung:** $y = -2e^{3x} + 3e^{2x}$
+[GUIDED_END]`,
       },
       {
         id: "m2d3",
@@ -878,7 +1074,8 @@ $$P(A) = \\frac{|A|}{|\\Omega|}$$
         id: "m-sto-1",
         title: "Grundbegriffe der Wahrscheinlichkeit",
         duration: "20 min",
-        type: "text",
+        interactive: "probabilitySimulator" as const,
+        type: "interactive",
         content: `## Zufallsexperimente
 
 Ein **Zufallsexperiment** ist ein Experiment, dessen Ausgang nicht vorhersehbar ist.
@@ -913,7 +1110,9 @@ $$P(\\text{keine 6}) = 1 - P(6) = 1 - \\frac{1}{6} = \\frac{5}{6}$$
 
 Gegeben: $P(A) = 0.4$, $P(B) = 0.3$, $P(A \\cap B) = 0.1$
 
-Berechne $P(A \\cup B)$!`,
+Berechne $P(A \\cup B)$!
+
+[INTERACTIVE]`,
       },
       {
         id: "m-sto-2",
@@ -1790,7 +1989,7 @@ $$\\log_a(x) = y \\Leftrightarrow a^y = x$$
 
 ### 💡 Spezielle Logarithmen
 - $\\ln(x) = \\log_e(x)$ (natürlich)
-- $\lg(x) = \\log_{10}(x)$ (dezimal)
+- $\\lg(x) = \\log_{10}(x)$ (dezimal)
 - $\\log_2(x)$ (binär)`,
     lessons: [
       {
@@ -1879,7 +2078,7 @@ $\\log(8) = \\log(2^3) = 3 \\cdot \\log(2)$
 ### Wichtige Logarithmen
 
 - **Natürlicher Logarithmus:** $\\ln(x) = \\log_e(x)$ mit $e \\approx 2{,}718$
-- **Dezimallogarithmus:** $\lg(x) = \\log_{10}(x)$
+- **Dezimallogarithmus:** $\\lg(x) = \\log_{10}(x)$
 - **Binärlogarithmus:** $\\log_2(x)$ (in der Informatik)
 
 ### Beispiel 2: Gleichung lösen
@@ -2069,7 +2268,8 @@ Klasse B: Noten 1, 2, 3, 4, 5 → $\\sigma \\approx 1{,}41$ (große Streuung)
         id: "m-stat-3",
         title: "Quartile & Boxplot",
         duration: "20 min",
-        type: "text",
+        interactive: "boxplotBuilder" as const,
+        type: "interactive",
         content: `## Quartile & Boxplot
 
 Quartile teilen eine sortierte Datenreihe in **vier gleiche Teile**.
@@ -2116,7 +2316,9 @@ Ein Boxplot zeigt:
 - Unterhalb: $Q_1 - 1{,}5 \\cdot IQR$
 - Oberhalb: $Q_3 + 1{,}5 \\cdot IQR$
 
-> **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!`,
+> **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!
+
+[INTERACTIVE]`,
       },
       {
         id: "m-stat-quiz",
