@@ -990,7 +990,7 @@ export const komplexeExercises: Exercise[] = [
     type: "input",
     question: "$j^8 = ?$",
     expectedAnswer: "1",
-    solution: "$j^8 = (j^4)^2 = 1$, denn $8 \\bmod 4 = 0$",
+    solution: "$j^8 = (j^4)^2 = 1$, denn $8 \\text{ mod } 4 = 0$",
   },
   {
     id: "kz-g-4",
@@ -999,7 +999,7 @@ export const komplexeExercises: Exercise[] = [
     type: "input",
     question: "$j^{15} = ?$",
     expectedAnswer: "-j",
-    solution: "$j^{15} = j^3 = -j$, denn $15 \\bmod 4 = 3$",
+    solution: "$j^{15} = j^3 = -j$, denn $15 \\text{ mod } 4 = 3$",
   },
   {
     id: "kz-g-5",
@@ -1313,7 +1313,7 @@ export const komplexeExercises: Exercise[] = [
     type: "input",
     question: "$j^{17} = ?$",
     expectedAnswer: "j",
-    solution: "$17 \\bmod 4 = 1$, also $j^{17} = j^1 = j$",
+    solution: "$17 \\text{ mod } 4 = 1$, also $j^{17} = j^1 = j$",
   },
   {
     id: "kz-p-3",

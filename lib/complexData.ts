@@ -97,7 +97,7 @@ Die Potenzen von $j$ wiederholen sich alle 4 Schritte:
 
 $$j^1 = j \\rightarrow j^2 = -1 \\rightarrow j^3 = -j \\rightarrow j^4 = 1 \\rightarrow j^5 = j \\rightarrow \\ldots$$
 
-Merke: $j^n = j^{n \\bmod 4}$ — einfach den Rest bei Division durch 4 berechnen!
+Merke: $j^n = j^{(n \\text{ mod } 4)}$ — einfach den Rest bei Division durch 4 berechnen!
 
 ---
 
@@ -266,9 +266,53 @@ Realteile zusammen, Imaginärteile zusammen! Mehr ist es nicht.
 
 ---
 
+## Schritt für Schritt
+
+### Beispiel 1: $(3 + 2j) + (1 - 4j)$
+
+Schritt 1: Realteile addieren: $3 + 1 = 4$
+
+Schritt 2: Imaginärteile addieren: $2 + (-4) = -2$
+
+Ergebnis: $4 - 2j$ ✅
+
+---
+
+### Beispiel 2: $(-1 + 4j) - (3 + 2j)$
+
+Schritt 1: Realteile subtrahieren: $-1 - 3 = -4$
+
+Schritt 2: Imaginärteile subtrahieren: $4 - 2 = 2$
+
+Ergebnis: $-4 + 2j$ ✅
+
+---
+
+### Beispiel 3: $(6 + j) - (-2 + 3j)$
+
+Schritt 1: Realteile: $6 - (-2) = 8$
+
+Schritt 2: Imaginärteile: $1 - 3 = -2$
+
+Ergebnis: $8 - 2j$ ✅
+
+> **Vorsicht bei Vorzeichen!** Bei Subtraktion wird das Vorzeichen des zweiten Terms umgedreht: $-(-2) = +2$.
+
+---
+
 ## Geometrische Bedeutung
 
 In der Gaußschen Ebene ist Addition wie Vektoraddition: Man legt die Pfeile aneinander.
+
+$(3 + 2j) + (1 - 4j)$: Starte bei $(3, 2)$, gehe um $(1, -4)$ — landest bei $(4, -2)$.
+
+---
+
+## Merke
+
+- Addition/Subtraktion geht **nur in Normalform**
+- Realteile und Imaginärteile **getrennt** berechnen
+- Vorsicht bei Vorzeichen bei Subtraktion!
 
 ---
 
@@ -412,7 +456,7 @@ $z^n = (r \\cdot e^{j\\varphi})^n = r^n \\cdot (e^{j\\varphi})^n = r^n \\cdot e^
 | 4 | $1$ | $(j^2)^2$ |
 | 5 | $j$ | Zyklus! |
 
-Formel: $j^n = j^{n \\bmod 4}$
+Formel: $j^n = j^{(n \\text{ mod } 4)}$
 
 ---
 
