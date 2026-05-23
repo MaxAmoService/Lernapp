@@ -45,7 +45,8 @@ $j^1 = j$, $j^2 = -1$, $j^3 = -j$, $j^4 = 1$ (zyklisch!)`,
       id: "kz-1",
       title: "Warum komplexe Zahlen?",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "complexPowersTrainer" as const,
       content: `## Das Problem
 
 Stell dir vor, du sollst $x^2 + 1 = 0$ lösen.
@@ -112,6 +113,40 @@ Denn $j^4 = (j^2)^2 = (-1)^2 = 1$ und $j^2 = -1$.
 $2j \\cdot 3j = 6j^2 = 6 \\cdot (-1) = -6$
 
 Denn $j^2 = -1$ — das ist die wichtigste Regel!
+
+---
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne $j^{23}$
+
+**Schritt 1:** Teile den Exponenten durch 4: $23 \div 4 = 5$ Rest $3$
+
+**Schritt 2:** Der Rest bestimmt das Ergebnis: Rest $= 3$ → $j^3$
+
+**Schritt 3:** $j^3 = j^2 \cdot j = (-1) \cdot j = -j$
+
+**Ergebnis:** $j^{23} = -j$ ✅
+
+**Probe:** $j^{23} = j^{20} \cdot j^3 = (j^4)^5 \cdot j^3 = 1^5 \cdot (-j) = -j$ ✓
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Berechne $j^{15}$
+
+**Lösung:** $15 \text{ mod } 4 = 3$ → $j^{15} = j^3 = -j$
+
+**Aufgabe 2:** Berechne $j^{50}$
+
+**Lösung:** $50 \text{ mod } 4 = 2$ → $j^{50} = j^2 = -1$
+
+**Aufgabe 3:** Berechne $(2j)^3$
+
+**Lösung:** $(2j)^3 = 8j^3 = 8(-j) = -8j$
+[PRACTICE_END]
+
+---
+
+[INTERACTIVE]
 
 ---
 
@@ -316,6 +351,35 @@ $(3 + 2j) + (1 - 4j)$: Starte bei $(3, 2)$, gehe um $(1, -4)$ — landest bei $(
 
 ---
 
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne $(4 - 3j) - (-2 + 5j) + (1 + j)$
+
+**Schritt 1:** Klammern auflösen (Vorzeichen beachten!):
+$4 - 3j + 2 - 5j + 1 + j$
+
+**Schritt 2:** Realteile gruppieren: $4 + 2 + 1 = 7$
+
+**Schritt 3:** Imaginärteile gruppieren: $-3 - 5 + 1 = -7$
+
+**Ergebnis:** $7 - 7j$ ✅
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** $(5 + 2j) + (-3 - 7j) = ?$
+
+**Lösung:** Real: $5-3=2$, Imag: $2-7=-5$ → $2 - 5j$
+
+**Aufgabe 2:** $(1 + j) - (1 - j) = ?$
+
+**Lösung:** Real: $1-1=0$, Imag: $1-(-1)=2$ → $2j$
+
+**Aufgabe 3:** Summe aller Eckpunkte des Einheitsquadrats: $1 + j + (-1+j) + (-1-j) + (1-j) = ?$
+
+**Lösung:** Real: $1+(-1)+(-1)+1=0$, Imag: $1+1+(-1)+(-1)=0$ → $0$
+[PRACTICE_END]
+
+---
+
 `,
     },
 
@@ -411,6 +475,41 @@ Schritt 2: Winkel: $90° + 90° = 180°$
 Ergebnis: $6e^{j180°} = -6$ ✅
 
 > **Wann welchen Weg?** Exponentialform ist schneller, aber man muss erst umrechnen. Für schnelle Kopfrechnung: Normalform + FOIL.
+
+---
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne $(2 + j) \cdot (3 - 2j)$ in Normalform
+
+**Schritt 1:** First: $2 \cdot 3 = 6$
+
+**Schritt 2:** Outer: $2 \cdot (-2j) = -4j$
+
+**Schritt 3:** Inner: $j \cdot 3 = 3j$
+
+**Schritt 4:** Last: $j \cdot (-2j) = -2j^2 = +2$
+
+**Schritt 5:** Zusammen: $(6 + 2) + j(-4 + 3) = 8 - j$
+
+**Probe in Exponentialform:**
+$2+j = \sqrt{5} \cdot e^{j26{,}6°}$
+$3-2j = \sqrt{13} \cdot e^{j(-33{,}7°)}$
+Produkt: $\sqrt{65} \cdot e^{j(-7{,}1°)} \approx 8 - j$ ✓
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** $(1 + 2j)(1 - 2j) = ?$
+
+**Lösung:** $1 - 4j^2 = 1 + 4 = 5$ (reell!)
+
+**Aufgabe 2:** $(j)^{10} = ?$
+
+**Lösung:** $j^{10} = j^{8} \cdot j^2 = 1 \cdot (-1) = -1$
+
+**Aufgabe 3:** $2e^{j45°} \cdot 3e^{j45°} = ?$
+
+**Lösung:** $6e^{j90°} = 6j$
+[PRACTICE_END]
 
 ---
 
@@ -517,6 +616,36 @@ Schritt 2: Winkel: $80° - 30° = 50°$
 Ergebnis: $3e^{j50°}$ ✅
 
 > **Merke:** Division in Exponentialform ist fast trivial — Beträge dividieren, Winkel subtrahieren.
+
+---
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne $\frac{4+2j}{1+j}$
+
+**Schritt 1:** Konjugiertes des Nenners: $\overline{1+j} = 1-j$
+
+**Schritt 2:** Nenner: $(1+j)(1-j) = 1 + 1 = 2$
+
+**Schritt 3:** Zähler: $(4+2j)(1-j) = 4 - 4j + 2j - 2j^2 = 6 - 2j$
+
+**Schritt 4:** Teilen: $\frac{6-2j}{2} = 3 - j$
+
+**Probe:** $(3-j)(1+j) = 3 + 3j - j - j^2 = 4 + 2j$ ✓
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** $\frac{10}{1+j} = ?$
+
+**Lösung:** $\frac{10(1-j)}{2} = 5 - 5j$
+
+**Aufgabe 2:** $\frac{6e^{j60°}}{2e^{j150°}} = ?$
+
+**Lösung:** $3e^{j(60°-150°)} = 3e^{-j90°} = -3j$
+
+**Aufgabe 3:** $\frac{j}{1-j} = ?$
+
+**Lösung:** $\frac{j(1+j)}{2} = \frac{j+j^2}{2} = \frac{-1+j}{2} = -0{,}5 + 0{,}5j$
+[PRACTICE_END]
 
 ---
 
@@ -695,6 +824,39 @@ $16 = 16e^{j0°}$, Radius $= 16^{1/4} = 2$
 ---
 
 > **Merke:** Die $n$-ten Wurzeln von $z \\neq 0$ bilden immer ein regelmäßiges $n$-Eck auf dem Kreis mit Radius $r^{1/n}$.
+
+---
+
+[GUIDED_START]
+**Schritt-für-Schritt:** Berechne alle Quadratwurzeln von $-4$
+
+**Schritt 1:** Polarform: $-4 = 4 \cdot e^{j180°}$
+
+**Schritt 2:** Formel: $w_k = 4^{1/2} \cdot e^{j\frac{180° + k \cdot 360°}{2}}$
+
+**Schritt 3:** $w_0 = 2 \cdot e^{j90°} = 2j$
+
+**Schritt 4:** $w_1 = 2 \cdot e^{j270°} = -2j$
+
+**Probe:** $(2j)^2 = 4j^2 = -4$ ✓ und $(-2j)^2 = 4j^2 = -4$ ✓
+
+**Ergebnis:** $\sqrt{-4} = \pm 2j$
+[GUIDED_END]
+
+[PRACTICE_START]
+**Aufgabe 1:** Berechne $\sqrt[3]{-8}$ (alle 3 Wurzeln)
+
+**Lösung:** $-8 = 8e^{j180°}$, Radius $= 2$
+- $w_0 = 2e^{j60°} = 1 + \sqrt{3}j$
+- $w_1 = 2e^{j180°} = -2$
+- $w_2 = 2e^{j300°} = 1 - \sqrt{3}j$
+
+**Aufgabe 2:** Berechne $\sqrt{j}$ (beide Wurzeln)
+
+**Lösung:** $j = 1 \cdot e^{j90°}$, Radius $= 1$
+- $w_0 = e^{j45°} = \frac{\sqrt{2}}{2} + j\frac{\sqrt{2}}{2}$
+- $w_1 = e^{j225°} = -\frac{\sqrt{2}}{2} - j\frac{\sqrt{2}}{2}$
+[PRACTICE_END]
 
 ---
 

@@ -45,3 +45,4 @@ export { ProbabilitySimulator } from "./ProbabilitySimulator";
 export { MatrixCalculator } from "./MatrixCalculator";
 export { BoxplotBuilder } from "./BoxplotBuilder";
 export { SeriesVisualizer } from "./SeriesVisualizer";
+export { ComplexPowersTrainer } from "./ComplexPowersTrainer";

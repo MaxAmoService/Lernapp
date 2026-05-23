@@ -15,7 +15,8 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "probabilitySimulator"
   | "matrixCalculator"
   | "boxplotBuilder"
-  | "seriesVisualizer";
+  | "seriesVisualizer"
+  | "complexPowersTrainer";
 
 export interface Lesson {
   id: string;

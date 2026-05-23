@@ -66,6 +66,7 @@ import { ProbabilitySimulator } from "./interactive/ProbabilitySimulator";
 import { MatrixCalculator } from "./interactive/MatrixCalculator";
 import { BoxplotBuilder } from "./interactive/BoxplotBuilder";
 import { SeriesVisualizer } from "./interactive/SeriesVisualizer";
+import { ComplexPowersTrainer } from "./interactive/ComplexPowersTrainer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -153,6 +154,7 @@ function renderInteractive(type: string, codeExample?: string) {
     matrixCalculator: "Matrix-Rechner",
     boxplotBuilder: "Boxplot-Builder",
     seriesVisualizer: "Reihen-Visualisierung",
+    complexPowersTrainer: "j-Potenzen-Trainer",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -205,6 +207,7 @@ function renderInteractive(type: string, codeExample?: string) {
     matrixCalculator: <MatrixCalculator />,
     boxplotBuilder: <BoxplotBuilder />,
     seriesVisualizer: <SeriesVisualizer />,
+    complexPowersTrainer: <ComplexPowersTrainer />,
   };
 
   const name = interactiveNames[type] || type;
