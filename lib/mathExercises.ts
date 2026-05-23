@@ -2007,6 +2007,12 @@ export const allExercises: Exercise[] = [
   ...verteilungenExercises,
   ...folgenExercises,
   ...analytischeGeometrieExercises,
+  ...prozentExercises,
+  ...koerperExercises,
+  ...kombinatorikExercises,
+  ...logikExercises,
+  ...dreisatzExercises,
+  ...taylorExercises,
 ];
 
 export function getExercisesForLesson(moduleId: string): Exercise[] {
