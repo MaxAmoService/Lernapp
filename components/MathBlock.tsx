@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import katex from "katex";
 
 interface MathBlockProps {
   math: string;
@@ -8,34 +8,24 @@ interface MathBlockProps {
 }
 
 export function MathBlock({ math, display = false }: MathBlockProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  let html: string;
+  try {
+    html = katex.renderToString(math, {
+      displayMode: display,
+      throwOnError: false,
+      trust: true,
+      strict: false,
+    });
+  } catch {
+    html = `<span class="text-red-400">${math}</span>`;
+  }
 
-  useEffect(() => {
-    const render = async () => {
-      if (!containerRef.current) return;
-      
-      try {
-        const katex = await import("katex");
-        katex.default.render(math, containerRef.current, {
-          displayMode: display,
-          throwOnError: false,
-          trust: true,
-          strict: false,
-        });
-      } catch (e) {
-        if (containerRef.current) {
-          containerRef.current.textContent = math;
-        }
-      }
-    };
-
-    render();
-  }, [math, display]);
-
-  return (
+  return display ? (
     <div
-      ref={containerRef}
-      className={display ? "block my-4 overflow-x-auto text-center" : "inline"}
+      className="block my-4 overflow-x-auto text-center"
+      dangerouslySetInnerHTML={{ __html: html }}
     />
+  ) : (
+    <span dangerouslySetInnerHTML={{ __html: html }} />
   );
 }
