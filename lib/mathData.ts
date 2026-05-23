@@ -345,7 +345,9 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
 
 - **Nenner**: $\\neq 0$
 - **Wurzel**: Argument $\\geq 0$ (bei geradem Index)
-- **Logarithmus**: Argument $> 0$`,
+- **Logarithmus**: Argument $> 0$
+
+[INTERACTIVE]`,
       },
       {
         id: "mf2",
@@ -777,7 +779,17 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!} (x-a)^n$
 ### Maclaurin-Reihen (a=0)
 - $e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$
 - $\\sin x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$
-- $\\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}$`,
+- $\\cos x = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n}}{(2n)!}$
+
+[PRACTICE_START]
+**Aufgabe 1:** Bestimme den Konvergenzradius von $\sum_{n=0}^{\infty} \frac{x^n}{2^n}$
+
+**Lösung:** $a_n = \frac{1}{2^n}$, also $R = \lim_{n\to\infty} \frac{a_n}{a_{n+1}} = \lim \frac{2^{n+1}}{2^n} = 2$
+
+**Aufgabe 2:** Entwickle $\cos(x)$ bis zum 4. Grad um $a=0$
+
+**Lösung:** $\cos(x) \approx 1 - \frac{x^2}{2} + \frac{x^4}{24}$ (nur gerade Potenzen!)
+[PRACTICE_END]`,
       },
       {
         id: "m1r3",
@@ -1148,7 +1160,13 @@ $$(a + b)^n = \\sum_{k=0}^{n} \\binom{n}{k} a^k b^{n-k}$$
 
 ## Übung
 
-Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wiederholung)?`,
+Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wiederholung)?
+
+[PRACTICE_START]
+**Aufgabe:** Wie viele 4-stellige PINs kann man aus 0-9 bilden (mit Wiederholung)?
+
+**Lösung:** $10^4 = 10000$ verschiedene PINs
+[PRACTICE_END]`,
       },
       {
         id: "m-sto-3",
@@ -1195,7 +1213,13 @@ $P(\\text{krank} | \\text{positiv}) = \\frac{0{,}95 \\cdot 0{,}01}{0{,}95 \\cdot
 
 A und B sind unabhängig, wenn $P(A|B) = P(A)$.
 
-> **Merke:** Bedingte Wahrscheinlichkeit = "Wissen ändert die Wahrscheinlichkeit"!`,
+> **Merke:** Bedingte Wahrscheinlichkeit = "Wissen ändert die Wahrscheinlichkeit"!
+
+[PRACTICE_START]
+**Aufgabe:** Urne: 3 rot, 2 blau. Ziehe 2 ohne Zurücklegen. P(beide rot)?
+
+**Lösung:** $P = \frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = 0{,}3 = 30\%$
+[PRACTICE_END]`,
       },
       {
         id: "m-sto-quiz",
@@ -1213,187 +1237,6 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
       },
     ],
   },
-
-  // =============== KOMPLEXE ZAHLEN (moved to complexData.ts) ===============
-  // Old module removed - replaced by comprehensive version in complexData.ts
-
-  /*
-  // =============== KOMPLEXE ZAHLEN (OLD - REMOVED) ===============
-  {
-    id: "m-komplexe-zahlen-OLD",
-    slug: "mathe-komplexe-zahlen-OLD",
-    title: "Komplexe Zahlen OLD",
-    description: "OLD - moved to complexData.ts",
-    icon: "🌀",
-    color: "#8b5cf6",
-    category: "komplexe-numerik",
-    progress: 0,
-    merkblatt: `## 📋 Merkblatt: Komplexe Zahlen
-
-### 🎯 Definition
-$$z = a + bi$$
-- $a$: Realteil, $b$: Imaginärteil
-- $i^2 = -1$
-
-### 📐 Rechenregeln
-| Operation | Formel |
-|-----------|--------|
-| Addition | $(a+bi) + (c+di) = (a+c) + (b+d)i$ |
-| Multiplikation | $(a+bi)(c+di) = (ac-bd) + (ad+bc)i$ |
-| Konjugiertes | $\\overline{a+bi} = a-bi$ |
-| Betrag | $|z| = \\sqrt{a^2 + b^2}$ |
-
-### 💡 Polardarstellung
-$$z = r \\cdot e^{i\\varphi} = r(\\cos\\varphi + i\\sin\\varphi)$$
-
-**Euler-Formel:** $e^{i\\varphi} = \\cos\\varphi + i\\sin\\varphi$`,
-    lessons: [
-      {
-        id: "m-kz-1",
-        title: "Grundlagen komplexer Zahlen",
-        duration: "20 min",
-        type: "text",
-        content: `## Die imaginäre Einheit
-
-$$i^2 = -1$$
-
-Die **imaginäre Einheit** $i$ ist definiert als:
-$$i = \\sqrt{-1}$$
-
-## Komplexe Zahlen
-
-Eine komplexe Zahl hat die Form:
-$$z = a + bi$$
-
-- $a$ = **Realteil** = $\\text{Re}(z)$
-- $b$ = **Imaginärteil** = $\\text{Im}(z)$
-
-**Beispiele:**
-- $z = 3 + 2i$ → Re = 3, Im = 2
-- $z = -1 + i$ → Re = -1, Im = 1
-- $z = 5$ → Re = 5, Im = 0 (reelle Zahl)
-- $z = -2i$ → Re = 0, Im = -2 (reine Imaginärzahl)
-
-## Rechenregeln
-
-**Addition:**
-$$(a + bi) + (c + di) = (a + c) + (b + d)i$$
-
-**Beispiel:** $(2 + 3i) + (1 - i) = 3 + 2i$
-
-**Subtraktion:**
-$$(a + bi) - (c + di) = (a - c) + (b - d)i$$
-
-## Übung
-
-Berechne $(4 + 2i) + (3 - 5i)$!`,
-      },
-      {
-        id: "m-kz-2",
-        title: "Multiplikation und Division",
-        duration: "25 min",
-        type: "text",
-        content: `## Multiplikation
-
-$$(a + bi)(c + di) = (ac - bd) + (ad + bc)i$$
-
-**Beispiel:**
-$$(2 + 3i)(1 + 4i) = 2 + 8i + 3i + 12i^2 = 2 + 11i - 12 = -10 + 11i$$
-
-## Konjugierte
-
-$$\\overline{a + bi} = a - bi$$
-
-**Eigenschaft:** $z \\cdot \\bar{z} = |z|^2 = a^2 + b^2$
-
-## Division
-
-$$\\frac{a + bi}{c + di} = \\frac{(a + bi)(c - di)}{(c + di)(c - di)} = \\frac{(a + bi)(c - di)}{c^2 + d^2}$$
-
-**Beispiel:**
-$$\\frac{3 + 2i}{1 + i} = \\frac{(3 + 2i)(1 - i)}{1 + 1} = \\frac{3 - 3i + 2i - 2i^2}{2} = \\frac{5 - i}{2} = 2.5 - 0.5i$$
-
-## Übung
-
-Berechne $\\frac{2 + 3i}{1 - i}$!`,
-      },
-      {
-        id: "m-kz-3",
-        title: "Polardarstellung & Euler",
-        duration: "20 min",
-        type: "text",
-        content: `## Polardarstellung & Euler
-
-Komplexe Zahlen können nicht nur als $a + bi$, sondern auch als **Polarkoordinaten** dargestellt werden.
-
-### Betrag
-
-$|z| = \\sqrt{a^2 + b^2}$
-
-### Beispiel 1
-
-$z = 3 + 4i$
-
-$|z| = \\sqrt{9 + 16} = \\sqrt{25} = 5$
-
-### Polarform
-
-$z = r \\cdot (\\cos \\varphi + i \\sin \\varphi) = r \\cdot e^{i\\varphi}$
-
-- $r = |z|$ (Betrag)
-- $\\varphi = \\arctan\\frac{b}{a}$ (Winkel)
-
-### Beispiel 2
-
-$z = 1 + i$
-
-$r = \\sqrt{2}$, $\\varphi = \\frac{\\pi}{4}$ (45°)
-
-$z = \\sqrt{2} \\cdot e^{i\\pi/4}$
-
-### Euler-Formel
-
-$$e^{ix} = \\cos x + i \\sin x$$
-
-Das ist eine der berühmtesten Formeln der Mathematik! Sie verbindet $e$, $i$, $\\pi$, $1$ und $0$.
-
-### Multiplikation in Polarform
-
-$z_1 \\cdot z_2 = r_1 \\cdot r_2 \\cdot e^{i(\\varphi_1 + \\varphi_2)}$
-
-**Betrag multiplizieren, Winkel addieren!**
-
-### Beispiel 3
-
-$z_1 = 2e^{i\\pi/6}$, $z_2 = 3e^{i\\pi/3}$
-
-$z_1 \\cdot z_2 = 6e^{i\\pi/2} = 6i$
-
-### De Moivre's Formel
-
-$z^n = r^n \\cdot e^{in\\varphi}$
-
-$|z^n| = r^n$, $\arg(z^n) = n \\cdot \\varphi$
-
-> **Merke:** Polarform = Betrag × Euler. Multiplikation = Beträge multiplizieren, Winkel addieren!`,
-      },
-      {
-        id: "m-kz-quiz",
-        title: "Quiz: Komplexe Zahlen",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über komplexe Zahlen!",
-      },
-      {
-        id: "m-komplexe-zahlen-aufgaben",
-        title: "📝 Aufgaben",
-        duration: "15 min",
-        type: "exercises",
-        content: "Übe das Gelernte mit interaktiven Aufgaben!",
-      },
-    ],
-  },
-  */
 
   // =============== NUMERIK ===============
   {
@@ -1757,7 +1600,13 @@ Abstand $(1, 2)$ und $(4, 6)$:
 
 $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 
-> **Merke:** Pythagoras gilt NUR bei rechten Winkeln!`,
+> **Merke:** Pythagoras gilt NUR bei rechten Winkeln!
+
+[PRACTICE_START]
+**Aufgabe:** Ist das Dreieck mit Seiten 5, 12, 13 rechtwinklig?
+
+**Lösung:** $5^2 + 12^2 = 25 + 144 = 169 = 13^2$ ✓ Ja, rechtwinklig!
+[PRACTICE_END]`,
       },
       {
         id: "m-geo-quiz",
@@ -1810,7 +1659,7 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
         id: "m-trig-1",
         title: "Grundlagen der Trigonometrie",
         duration: "25 min",
-        type: "text",
+        type: "interactive",
         interactive: "unitCircleInteractive" as const,
         visuals: [
           { type: "triangle" as const },
@@ -1832,7 +1681,9 @@ $$\\sin^2 \\alpha + \\cos^2 \\alpha = 1$$
 
 ## Übung
 
-Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\alpha$!`,
+Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\alpha$!
+
+[INTERACTIVE]`,
       },
       {
         id: "m-trig-2",
@@ -1940,7 +1791,14 @@ $c = \\sqrt{13} \\approx 3{,}61$
 | 2 Seiten + eingeschlossener Winkel | Kosinussatz |
 | 3 Seiten | Kosinussatz (nach Winkel auflösen) |
 
-> **Merke:** Sinussatz = Verhältnis, Kosinussatz = Verallgemeinerung von Pythagoras!`,
+> **Merke:** Sinussatz = Verhältnis, Kosinussatz = Verallgemeinerung von Pythagoras!
+
+[PRACTICE_START]
+**Aufgabe:** $a = 6$, $\alpha = 30°$, $\beta = 45°$. Berechne $b$.
+
+**Lösung:** $\frac{6}{\sin 30°} = \frac{b}{\sin 45°}$
+$b = \frac{6 \cdot \sin 45°}{\sin 30°} = \frac{6 \cdot 0{,}707}{0{,}5} = 8{,}49$
+[PRACTICE_END]`,
       },
       {
         id: "m-trig-quiz",
@@ -2040,7 +1898,17 @@ $a^{-n} = \\frac{1}{a^n}$
 
 $2^{-3} = \\frac{1}{8} = 0{,}125$
 
-> **Merke:** Bei Multiplikation gleicher Basen werden die Exponenten addiert, bei Division subtrahiert!`,
+> **Merke:** Bei Multiplikation gleicher Basen werden die Exponenten addiert, bei Division subtrahiert!
+
+[PRACTICE_START]
+**Aufgabe 1:** Vereinfache $\frac{2^5 \cdot 2^3}{2^6}$
+
+**Lösung:** $2^{5+3-6} = 2^2 = 4$
+
+**Aufgabe 2:** Vereinfache $(3^2)^4$
+
+**Lösung:** $3^{2 \cdot 4} = 3^8 = 6561$
+[PRACTICE_END]`,
       },
       {
         id: "m-pot-2",
@@ -2086,7 +1954,17 @@ $2^x = 16$
 
 $x = \\log_2(16) = \\log_2(2^4) = 4$
 
-> **Merke:** Logarithmen wandeln Potenzen in Produkte um — das macht Rechnungen einfacher!`,
+> **Merke:** Logarithmen wandeln Potenzen in Produkte um — das macht Rechnungen einfacher!
+
+[PRACTICE_START]
+**Aufgabe 1:** Vereinfache $\log_2(8) + \log_2(4)$
+
+**Lösung:** $\log_2(8) + \log_2(4) = 3 + 2 = 5$
+
+**Aufgabe 2:** Löse $2^x = 32$
+
+**Lösung:** $x = \log_2(32) = 5$
+[PRACTICE_END]`,
       },
       {
         id: "m-pot-3",
@@ -2129,7 +2007,13 @@ $T_{1/2} = \\frac{\\ln(2)}{k}$
 
 $N(15) = 1000 \\cdot (\\frac{1}{2})^{15/5} = 1000 \\cdot \\frac{1}{8} = 125$
 
-> **Merke:** $e^x$ ist DIE Exponentialfunktion — sie beschreibt natürliches Wachstum überall in der Natur!`,
+> **Merke:** $e^x$ ist DIE Exponentialfunktion — sie beschreibt natürliches Wachstum überall in der Natur!
+
+[PRACTICE_START]
+**Aufgabe:** Eine Bakterienkultur verdoppelt sich alle 3 Stunden. Start: 100. Nach 12 Stunden?
+
+**Lösung:** $N(12) = 100 \cdot 2^{12/3} = 100 \cdot 2^4 = 1600$
+[PRACTICE_END]`,
       },
       {
         id: "m-pot-quiz",
@@ -2217,7 +2101,15 @@ Der Wert, der **am häufigsten** vorkommt.
 
 Daten: 2, 3, 2, 1, 2, 4, 3 → Modus = 2 (kommt 3-mal vor)
 
-> **Merke:** Mittelwert rechnet, Median sortiert, Modus zählt. Bei schiefen Verteiligungen ist der Median oft aussagekräftiger!`,
+> **Merke:** Mittelwert rechnet, Median sortiert, Modus zählt. Bei schiefen Verteiligungen ist der Median oft aussagekräftiger!
+
+[PRACTICE_START]
+**Aufgabe:** Daten: 3, 7, 5, 3, 8. Berechne Mittelwert und Median.
+
+**Lösung:**
+Mittelwert: $\bar{x} = \frac{3+7+5+3+8}{5} = \frac{26}{5} = 5{,}2$
+Sortiert: 3, 3, 5, 7, 8 → Median = 5
+[PRACTICE_END]`,
       },
       {
         id: "m-stat-2",
@@ -2262,7 +2154,15 @@ Klasse B: Noten 1, 2, 3, 4, 5 → $\\sigma \\approx 1{,}41$ (große Streuung)
 - 95% in $\\bar{x} \\pm 2\\sigma$
 - 99,7% in $\\bar{x} \\pm 3\\sigma$
 
-> **Merke:** Varianz in Quadrat-Einheiten, Standardabweichung in Original-Einheiten. $\\sigma$ zeigt, wie stark die Daten um den Mittelwert streuen!`,
+> **Merke:** Varianz in Quadrat-Einheiten, Standardabweichung in Original-Einheiten. $\\sigma$ zeigt, wie stark die Daten um den Mittelwert streuen!
+
+[PRACTICE_START]
+**Aufgabe:** Daten: 2, 4, 4, 4, 5, 5, 7, 9. Berechne Varianz und Standardabweichung.
+
+**Lösung:** $\bar{x} = 5$. Abweichungen: $-3, -1, -1, -1, 0, 0, 2, 4$
+$\sigma^2 = \frac{9+1+1+1+0+0+4+16}{8} = 4$
+$\sigma = 2$
+[PRACTICE_END]`,
       },
       {
         id: "m-stat-3",
@@ -2454,7 +2354,13 @@ kgV(2, 3, 4) = 12
 
 $= \\frac{6}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{13}{12} = 1\\frac{1}{12}$
 
-> **Merke:** Gleicher Nenner = direkt addieren. Verschiedene Nenner = erst kgV suchen und erweitern!`,
+> **Merke:** Gleicher Nenner = direkt addieren. Verschiedene Nenner = erst kgV suchen und erweitern!
+
+[PRACTICE_START]
+**Aufgabe:** $\frac{2}{3} + \frac{1}{4} = ?$
+
+**Lösung:** KGV = 12. $\frac{8}{12} + \frac{3}{12} = \frac{11}{12}$
+[PRACTICE_END]`,
       },
       {
         id: "m-br-3",
@@ -2503,7 +2409,13 @@ Erst in unechte Brüche umwandeln:
 
 $\\frac{5}{2} : \\frac{5}{4} = \\frac{5}{2} \\cdot \\frac{4}{5} = \\frac{20}{10} = 2$
 
-> **Merke:** Multiplizieren = Zähler×Zähler, Nenner×Nenner. Dividieren = Kehren und multiplizieren!`,
+> **Merke:** Multiplizieren = Zähler×Zähler, Nenner×Nenner. Dividieren = Kehren und multiplizieren!
+
+[PRACTICE_START]
+**Aufgabe:** $\frac{3}{5} \cdot \frac{2}{7} = ?$
+
+**Lösung:** $\frac{3 \cdot 2}{5 \cdot 7} = \frac{6}{35}$
+[PRACTICE_END]`,
       },
       {
         id: "m-br-4",
@@ -2612,7 +2524,14 @@ $x = 12$
 5. **Dividieren** durch den Koeffizienten
 6. **Probe** machen!
 
-> **Merke:** Das Ziel ist immer, $x = ...$ zu bekommen. Schritt für Schritt umformen!`,
+> **Merke:** Das Ziel ist immer, $x = ...$ zu bekommen. Schritt für Schritt umformen!
+
+[PRACTICE_START]
+**Aufgabe:** Löse $3x + 7 = 22$
+
+**Lösung:** $3x = 15$ → $x = 5$
+Probe: $3 \cdot 5 + 7 = 22$ ✓
+[PRACTICE_END]`,
       },
       {
         id: "m-gl-2",
@@ -2647,7 +2566,18 @@ $$x_{1,2} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
 $D = b^2 - 4ac$ bestimmt die Anzahl der Lösungen:
 - $D > 0$: Zwei Lösungen
 - $D = 0$: Eine Lösung (doppelt)
-- $D < 0$: Keine reelle Lösung`,
+- $D < 0$: Keine reelle Lösung
+
+[PRACTICE_START]
+**Aufgabe 1:** Löse $x^2 - 5x + 6 = 0$ mit der pq-Formel
+
+**Lösung:** $p=-5$, $q=6$. $x = \frac{5}{2} \pm \sqrt{\frac{25}{4}-6} = \frac{5}{2} \pm \frac{1}{2}$
+$x_1 = 3$, $x_2 = 2$
+
+**Aufgabe 2:** Berechne die Diskriminante von $2x^2 + 3x + 5$
+
+**Lösung:** $D = 9 - 40 = -31 < 0$ → keine reellen Lösungen
+[PRACTICE_END]`,
       },
       {
         id: "m-gl-3",
@@ -2795,7 +2725,13 @@ $4x^2 - 12x + 9 = (2x-3)^2$
 - Terme vereinfachen
 - Kurvendiskussion (Scheitelpunktform)
 
-> **Merke:** Erste = Quadrieren, doppelt, quadrieren. Zweite = wie erste mit Minus. Dritte = Plus mal Minus = Differenz der Quadrate!`,
+> **Merke:** Erste = Quadrieren, doppelt, quadrieren. Zweite = wie erste mit Minus. Dritte = Plus mal Minus = Differenz der Quadrate!
+
+[PRACTICE_START]
+**Aufgabe:** Wende die 2. binomische Formel an: $(x + 3)^2$
+
+**Lösung:** $x^2 + 2 \cdot 3x + 9 = x^2 + 6x + 9$
+[PRACTICE_END]`,
       },
       {
         id: "m-tu-3",
@@ -2897,7 +2833,14 @@ $x > 2$: Offener Kreis bei 2, Pfeil nach rechts.
 
 $x \\geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
 
-> **Merke:** Bei Division durch negative Zahlen: Vorzeichen umkehren!`,
+> **Merke:** Bei Division durch negative Zahlen: Vorzeichen umkehren!
+
+[PRACTICE_START]
+**Aufgabe:** Löse $2x - 5 > 3$
+
+**Lösung:** $2x > 8$ → $x > 4$
+Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
+[PRACTICE_END]`,
       },
       {
         id: "m-ug-2",
@@ -3002,6 +2945,10 @@ Der Tafel-Test funktioniert immer:
         id: "m-kd-1",
         title: "Definitionsbereich & Nullstellen",
         duration: "18 min",
+
+        visuals: [
+          { type: "functionGraph" as const, props: { fn: (x: number) => x * x - 4 * x + 3, xRange: [-1, 5], yRange: [-2, 5], label: "f(x) = x² - 4x + 3", points: [{ x: 1, y: 0, label: "(1,0)" }, { x: 3, y: 0, label: "(3,0)" }] } },
+        ],
         type: "text",
         content: `## Definitionsbereich & Nullstellen
 
@@ -3051,12 +2998,23 @@ $f(x) = x^3 - x = x(x^2 - 1) = x(x+1)(x-1)$
 
 Nullstellen: $x_1 = -1$, $x_2 = 0$, $x_3 = 1$
 
-> **Merke:** Erst Definitionsbereich prüfen, dann Nullstellen berechnen!`,
+> **Merke:** Erst Definitionsbereich prüfen, dann Nullstellen berechnen!
+
+[PRACTICE_START]
+**Aufgabe:** Bestimme Nullstellen von $f(x) = x^2 - 4x + 3$
+
+**Lösung:** $x^2 - 4x + 3 = (x-1)(x-3) = 0$
+$x_1 = 1$, $x_2 = 3$
+[PRACTICE_END]`,
       },
       {
         id: "m-kd-2",
         title: "Extrema",
         duration: "20 min",
+
+        visuals: [
+          { type: "functionGraph" as const, props: { fn: (x: number) => x * x * x - 3 * x, xRange: [-2, 2], yRange: [-3, 3], label: "f(x) = x³ - 3x", points: [{ x: -1, y: 2, label: "Max(-1,2)" }, { x: 1, y: -2, label: "Min(1,-2)" }] } },
+        ],
         type: "text",
         content: `## Extrema
 
@@ -3114,7 +3072,15 @@ Absolutes Maximum: $f(3) = 9$
 
 Absolutes Minimum: $f(0) = 0$
 
-> **Merke:** $f'(x_0) = 0$ ist nur die **notwendige** Bedingung. Immer mit $f''$ prüfen!`,
+> **Merke:** $f'(x_0) = 0$ ist nur die **notwendige** Bedingung. Immer mit $f''$ prüfen!
+
+[PRACTICE_START]
+**Aufgabe:** Finde die Extrema von $f(x) = x^3 - 3x$
+
+**Lösung:** $f'(x) = 3x^2 - 3 = 0$ → $x = \pm 1$
+$f''(x) = 6x$. $f''(-1) = -6 < 0$ → Max bei $(-1, 2)$
+$f''(1) = 6 > 0$ → Min bei $(1, -2)$
+[PRACTICE_END]`,
       },
       {
         id: "m-kd-3",
@@ -3300,7 +3266,16 @@ $\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ y - 2z = -4 \\end{cases}$
 
 $\\begin{cases} x + y + z = 6 \\ -3y - z = -9 \\ -\\frac{7}{3}z = -7 \\end{cases}$
 
-**Rückwärts:** $z = 3$, $y = 2$, $x = 1$`,
+**Rückwärts:** $z = 3$, $y = 2$, $x = 1$
+
+[PRACTICE_START]
+**Aufgabe:** Löse mit Gauß: $x + y = 3$, $2x - y = 0$
+
+**Lösung:**
+Zeile 2 - 2×Zeile 1: $0x - 3y = -6$ → $y = 2$
+Einsetzen: $x + 2 = 3$ → $x = 1$
+Probe: $1+2=3$ ✓, $2-2=0$ ✓
+[PRACTICE_END]`,
       },
       {
         id: "m-lgs-3",
@@ -3666,7 +3641,15 @@ $S_5 = \\frac{5}{2}(5 + 17) = \\frac{5}{2} \\cdot 22 = 55$
 - **Graphisch:** Punkte liegen auf einer Geraden
 - **Summe:** Wächst quadratisch mit $n$
 
-> **Merke:** Arithmetische Folge = gleicher Abstand, Partialsumme = Durchschnitt × Anzahl!`,
+> **Merke:** Arithmetische Folge = gleicher Abstand, Partialsumme = Durchschnitt × Anzahl!
+
+[PRACTICE_START]
+**Aufgabe:** $a_1 = 3$, $d = 4$. Berechne $a_{10}$ und $S_{10}$.
+
+**Lösung:**
+$a_{10} = 3 + 9 \cdot 4 = 39$
+$S_{10} = \frac{10}{2}(3 + 39) = 5 \cdot 42 = 210$
+[PRACTICE_END]`,
       },
       {
         id: "m-fr-2",
@@ -3721,7 +3704,15 @@ $S_\\infty = \\frac{1}{1-\\frac{1}{2}} = 2$
 
 $0{,}333... = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots = \\frac{\\frac{3}{10}}{1-\\frac{1}{10}} = \\frac{3}{9} = \\frac{1}{3}$
 
-> **Merke:** Geometrische Folge = gleicher Faktor. Unendliche Reihe konvergiert nur wenn $|q| < 1$!`,
+> **Merke:** Geometrische Folge = gleicher Faktor. Unendliche Reihe konvergiert nur wenn $|q| < 1$!
+
+[PRACTICE_START]
+**Aufgabe:** $a_1 = 2$, $q = 3$. Berechne $a_5$ und $S_5$.
+
+**Lösung:**
+$a_5 = 2 \cdot 3^4 = 162$
+$S_5 = 2 \cdot \frac{3^5 - 1}{3 - 1} = 2 \cdot \frac{242}{2} = 242$
+[PRACTICE_END]`,
       },
       {
         id: "m-fr-3",
@@ -3966,7 +3957,13 @@ $120 \\cdot 0{,}2 = 24€$ Rabatt
 
 $120 - 24 = 96€$ Endpreis
 
-> **Merke:** Prozentwert = Grundwert × Prozentsatz / 100. Die drei Formeln kann man alle aus der Grundformel ableiten!`,
+> **Merke:** Prozentwert = Grundwert × Prozentsatz / 100. Die drei Formeln kann man alle aus der Grundformel ableiten!
+
+[PRACTICE_START]
+**Aufgabe:** 80€ + 19% MwSt = ?
+
+**Lösung:** $80 \cdot 1{,}19 = 95{,}20€$
+[PRACTICE_END]`,
       },
       {
         id: "m-pz-2",
@@ -4017,7 +4014,13 @@ Bei 6% Zinsen: $t \\approx \\frac{72}{6} = 12$ Jahre bis zur Verdopplung.
 
 $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\approx 19{,}990€$
 
-> **Merke:** Einfache Zinsen = linear, Zinseszins = exponentiell. Die 72er-Regel ist eine schnelle Faustregel!`,
+> **Merke:** Einfache Zinsen = linear, Zinseszins = exponentiell. Die 72er-Regel ist eine schnelle Faustregel!
+
+[PRACTICE_START]
+**Aufgabe:** 1000€ zu 5% Zinsen nach 3 Jahren (einfach)?
+
+**Lösung:** $K_3 = 1000 \cdot (1 + 3 \cdot 0{,}05) = 1000 \cdot 1{,}15 = 1150€$
+[PRACTICE_END]`,
       },
       {
         id: "m-pz-3",
@@ -4028,10 +4031,10 @@ $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\a
       },
       {
         id: "m-pz-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
@@ -4163,10 +4166,10 @@ $O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
       },
       {
         id: "m-ko-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
@@ -4264,10 +4267,10 @@ $\\binom{10}{2} = \\frac{10!}{2! \\cdot 8!} = 45$
       },
       {
         id: "m-kb-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
@@ -4428,10 +4431,10 @@ Kontraposition: Wenn $n$ gerade, dann $n^2$ gerade. (Einfacher zu beweisen!)
       },
       {
         id: "m-lg-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
@@ -4483,7 +4486,13 @@ Ein Auto fährt 60 km in 45 Minuten. Wie weit in 2 Stunden?
 Erst umrechnen: 2 Stunden = 120 Minuten
 $b_2 = \\frac{120 \\cdot 60}{45} = 160$ km
 
-> **Merke:** Direkt proportional = $\\frac{a_1}{b_1} = \\frac{a_2}{b_2}$ (Verhältnis gleich)`,
+> **Merke:** Direkt proportional = $\\frac{a_1}{b_1} = \\frac{a_2}{b_2}$ (Verhältnis gleich)
+
+[PRACTICE_START]
+**Aufgabe:** 5 kg Äpfel kosten 7,50€. Was kosten 8 kg?
+
+**Lösung:** $\frac{7{,}50}{5} \cdot 8 = 1{,}50 \cdot 8 = 12€$
+[PRACTICE_END]`,
       },
       {
         id: "m-ds-2",
@@ -4519,7 +4528,13 @@ Eine Rohrleitung füllt einen Tank in 8 Stunden. Eine zweite (doppelt so schnell
 
 $b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
 
-> **Merke:** Indirekt proportional = $a_1 \\cdot b_1 = a_2 \\cdot b_2$ (Produkt gleich)`,
+> **Merke:** Indirekt proportional = $a_1 \\cdot b_1 = a_2 \\cdot b_2$ (Produkt gleich)
+
+[PRACTICE_START]
+**Aufgabe:** 6 Arbeiter brauchen 10 Tage. Wie lange brauchen 15 Arbeiter?
+
+**Lösung:** $\frac{6 \cdot 10}{15} = 4$ Tage
+[PRACTICE_END]`,
       },
       {
         id: "m-ds-3",
@@ -4530,10 +4545,10 @@ $b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
       },
       {
         id: "m-ds-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
@@ -4639,10 +4654,10 @@ $e^x \\approx 1 + x + \\frac{x^2}{2}$
       },
       {
         id: "m-tw-aufgaben",
-        title: "Aufgaben",
+        title: "📝 Aufgaben",
         duration: "15 min",
         type: "exercises",
-        content: `Uebe das Gelernte!`,
+        content: `Übe das Gelernte!`,
       },
     ],
   },
