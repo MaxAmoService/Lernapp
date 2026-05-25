@@ -284,12 +284,9 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
             Wiederholen
           </button>
           {passed && (
-            <button
-              onClick={onComplete}
-              className="px-6 py-2.5 bg-green-500 hover:bg-green-600 rounded-lg font-medium transition-colors"
-            >
-              Modul abschließen
-            </button>
+            <p className="text-sm text-slate-400 mt-2">
+              Das Quiz ist bestanden. Die Übungen warten in der Seitenleiste auf dich.
+            </p>
           )}
         </div>
       </div>
