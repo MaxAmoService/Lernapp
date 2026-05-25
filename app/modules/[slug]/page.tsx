@@ -376,6 +376,9 @@ export default function ModulePage() {
               <InteractiveExercise
                 exercises={getExercisesForLesson(module.id)}
                 moduleTitle={module.title}
+                onComplete={() => markComplete(selectedLesson.id)}
+                difficulty={selectedLesson.exerciseDifficulty}
+                examMode={selectedLesson.examMode}
               />
             ) : (
               <LessonViewer

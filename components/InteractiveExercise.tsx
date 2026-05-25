@@ -1,17 +1,33 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Exercise } from "@/lib/mathExercises";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineMath";
-import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, Star, HelpCircle } from "lucide-react";
+import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, Star, HelpCircle, Award, Medal } from "lucide-react";
 
 interface Props {
   exercises: Exercise[];
   moduleTitle: string;
+  onComplete?: () => void;
+  difficulty?: 1 | 2 | 3;
+  examMode?: boolean;
 }
 
-export function InteractiveExercise({ exercises, moduleTitle }: Props) {
+interface ExamAnswer {
+  exercise: Exercise;
+  userAnswer: string;
+  selectedOption: string | null;
+  correct: boolean;
+}
+
+export function InteractiveExercise({ exercises, moduleTitle, onComplete, difficulty, examMode }: Props) {
+  // Filter by difficulty if specified
+  const filtered = useMemo(() => {
+    if (difficulty !== undefined) return exercises.filter(e => e.difficulty === difficulty);
+    return exercises;
+  }, [exercises, difficulty]);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -21,11 +37,11 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
   const [isCorrect, setIsCorrect] = useState(false);
   const [stats, setStats] = useState({ correct: 0, wrong: 0 });
   const [completed, setCompleted] = useState(false);
-  const [showAllExercises, setShowAllExercises] = useState(false);
+  const [examAnswers, setExamAnswers] = useState<ExamAnswer[]>([]);
 
-  const current = exercises[currentIndex];
-  const total = exercises.length;
-  const progress = ((currentIndex + 1) / total) * 100;
+  const total = filtered.length;
+  const current = filtered[currentIndex];
+  const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
 
   // Reset bei Aufgabenwechsel
   useEffect(() => {
@@ -37,6 +53,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
   }, [currentIndex]);
 
   const checkAnswer = () => {
+    if (!current) return;
     let correct = false;
 
     if (current.type === "multiple" && current.correctOption) {
@@ -44,7 +61,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
     } else if (current.type === "input" && current.expectedAnswer) {
       const normalizedUser = userAnswer.trim().toLowerCase().replace(/\s+/g, "");
       const normalizedExpected = current.expectedAnswer.toLowerCase().replace(/\s+/g, "");
-      
+
       if (current.tolerance) {
         const userNum = parseFloat(normalizedUser);
         const expectedNum = parseFloat(normalizedExpected);
@@ -56,12 +73,35 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
       }
     }
 
-    setIsCorrect(correct);
-    setShowResult(true);
-    setStats(prev => ({
-      correct: prev.correct + (correct ? 1 : 0),
-      wrong: prev.wrong + (correct ? 0 : 1),
-    }));
+    if (examMode) {
+      // Exam mode: record answer, no immediate feedback, auto-advance
+      setExamAnswers(prev => [...prev, {
+        exercise: current,
+        userAnswer,
+        selectedOption,
+        correct,
+      }]);
+      setIsCorrect(correct);
+      setStats(prev => ({
+        correct: prev.correct + (correct ? 1 : 0),
+        wrong: prev.wrong + (correct ? 0 : 1),
+      }));
+
+      if (currentIndex < total - 1) {
+        setCurrentIndex(prev => prev + 1);
+      } else {
+        setCompleted(true);
+        onComplete?.();
+      }
+    } else {
+      // Normal mode: show immediate feedback
+      setIsCorrect(correct);
+      setShowResult(true);
+      setStats(prev => ({
+        correct: prev.correct + (correct ? 1 : 0),
+        wrong: prev.wrong + (correct ? 0 : 1),
+      }));
+    }
   };
 
   const nextExercise = () => {
@@ -69,6 +109,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
       setCurrentIndex(prev => prev + 1);
     } else {
       setCompleted(true);
+      onComplete?.();
     }
   };
 
@@ -84,10 +125,11 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
     setCurrentIndex(0);
     setStats({ correct: 0, wrong: 0 });
     setCompleted(false);
+    setExamAnswers([]);
     resetExercise();
   };
 
-  const getScorePercentage = () => Math.round((stats.correct / total) * 100);
+  const getScorePercentage = () => total > 0 ? Math.round((stats.correct / total) * 100) : 0;
   const getScoreEmoji = () => {
     const pct = getScorePercentage();
     if (pct >= 90) return "🏆";
@@ -102,24 +144,103 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
     3: { text: "Schwer", bg: "bg-red-500/20", color: "text-red-400" },
   }[current?.difficulty || 1];
 
-  if (exercises.length === 0) {
+  const examPassed = examMode && getScorePercentage() >= 70;
+
+  if (filtered.length === 0) {
     return (
       <div className="glass rounded-xl p-8 text-center">
         <Target className="w-12 h-12 text-slate-500 mx-auto mb-4" />
         <h3 className="text-xl font-bold text-white mb-2">Keine Aufgaben verfügbar</h3>
-        <p className="text-slate-400">Für dieses Modul gibt es noch keine interaktiven Aufgaben.</p>
+        <p className="text-slate-400">Für diesen Bereich gibt es noch keine Aufgaben.</p>
       </div>
     );
   }
 
-  // Abschluss-Bildschirm
+  // Prüfung Abschluss-Bildschirm
+  if (completed && examMode) {
+    return (
+      <div className="glass rounded-2xl p-8 max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="text-6xl mb-4">{examPassed ? "🏆" : "📚"}</div>
+          <h2 className="text-2xl font-bold text-white mb-2">
+            {examPassed ? "Prüfung bestanden!" : "Prüfung nicht bestanden"}
+          </h2>
+          <p className="text-slate-400">{moduleTitle}</p>
+        </div>
+
+        <div className={`rounded-xl p-6 mb-6 ${examPassed ? "bg-emerald-500/10 border border-emerald-500/30" : "bg-amber-500/10 border border-amber-500/30"}`}>
+          <div className="text-center mb-4">
+            <div className="text-5xl font-bold text-white mb-2">{getScorePercentage()}%</div>
+            <div className="flex justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                <span className="text-green-400">{stats.correct} Richtig</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <XCircle className="w-5 h-5 text-red-400" />
+                <span className="text-red-400">{stats.wrong} Falsch</span>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-sm text-slate-400">
+            {examPassed
+              ? "Hervorragend! Du hast die Prüfung mit mindestens 70% bestanden."
+              : `Du brauchst mindestens 70%. Versuch's nochmal!`}
+          </p>
+        </div>
+
+        {/* Detailed results */}
+        <div className="space-y-3 mb-6">
+          <h3 className="text-lg font-semibold text-white">Ergebnisse im Detail</h3>
+          {examAnswers.map((ans, i) => (
+            <div key={i} className={`p-4 rounded-lg border ${ans.correct ? "bg-green-500/10 border-green-500/30" : "bg-red-500/10 border-red-500/30"}`}>
+              <div className="flex items-start gap-3">
+                {ans.correct
+                  ? <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                  : <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                }
+                <div className="flex-1 min-w-0">
+                  <p className="text-white text-sm mb-1"><InlineText text={ans.exercise.question} /></p>
+                  {!ans.correct && (
+                    <p className="text-xs text-slate-400">
+                      Deine Antwort: <span className="text-red-300">{ans.exercise.type === "multiple" ? ans.exercise.options?.find(o => o.value === ans.selectedOption)?.label || "—" : ans.userAnswer || "—"}</span>
+                      {" → "}
+                      Richtig: <span className="text-green-300">{ans.exercise.type === "multiple" ? ans.exercise.options?.find(o => o.value === ans.exercise.correctOption)?.label : ans.exercise.expectedAnswer}</span>
+                    </p>
+                  )}
+                  {!ans.correct && (
+                    <details className="mt-1">
+                      <summary className="text-xs text-blue-400 cursor-pointer hover:text-blue-300">Lösung anzeigen</summary>
+                      <p className="text-xs text-slate-400 mt-1"><InlineText text={ans.exercise.solution} /></p>
+                    </details>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex gap-3 justify-center">
+          <button
+            onClick={restartAll}
+            className="flex items-center gap-2 px-6 py-3 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors"
+          >
+            <RotateCcw className="w-5 h-5" />
+            Nochmal versuchen
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Normaler Abschluss-Bildschirm
   if (completed) {
     return (
       <div className="glass rounded-2xl p-8 text-center max-w-lg mx-auto">
         <div className="text-6xl mb-4">{getScoreEmoji()}</div>
         <h2 className="text-2xl font-bold text-white mb-2">Aufgaben abgeschlossen!</h2>
         <p className="text-slate-400 mb-6">{moduleTitle}</p>
-        
+
         <div className="bg-slate-800/50 rounded-xl p-6 mb-6">
           <div className="text-5xl font-bold text-white mb-2">{getScorePercentage()}%</div>
           <div className="flex justify-center gap-6 text-sm">
@@ -153,8 +274,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
       <div className="glass rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-xl font-bold text-white flex items-center gap-2">
-            <Target className="w-6 h-6 text-blue-400" />
-            Aufgaben
+            {examMode ? <Medal className="w-6 h-6 text-amber-400" /> : <Target className="w-6 h-6 text-blue-400" />}
+            {examMode ? "Prüfung" : "Aufgaben"}
           </h2>
           <div className="text-sm text-slate-400">
             {currentIndex + 1} / {total}
@@ -164,22 +285,29 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
         {/* Fortschrittsbalken */}
         <div className="h-2 bg-slate-700 rounded-full overflow-hidden mb-4">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300"
+            className={`h-full transition-all duration-300 ${examMode ? "bg-gradient-to-r from-amber-500 to-orange-500" : "bg-gradient-to-r from-blue-500 to-purple-500"}`}
             style={{ width: `${progress}%` }}
           />
         </div>
 
         {/* Statistiken */}
-        <div className="flex gap-4 text-sm">
-          <div className="flex items-center gap-1.5">
-            <CheckCircle2 className="w-4 h-4 text-green-400" />
-            <span className="text-green-400">{stats.correct}</span>
+        {!examMode && (
+          <div className="flex gap-4 text-sm">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4 text-green-400" />
+              <span className="text-green-400">{stats.correct}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <XCircle className="w-4 h-4 text-red-400" />
+              <span className="text-red-400">{stats.wrong}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1.5">
-            <XCircle className="w-4 h-4 text-red-400" />
-            <span className="text-red-400">{stats.wrong}</span>
-          </div>
-        </div>
+        )}
+        {examMode && (
+          <p className="text-xs text-slate-500">
+            Bearbeite alle Fragen. Keine Hinweise — Ergebnis erst am Ende.
+          </p>
+        )}
       </div>
 
       {/* Aufgaben-Karte */}
@@ -189,13 +317,15 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
           <div className={`px-3 py-1 rounded-full text-xs font-medium ${diffLabel.bg} ${diffLabel.color}`}>
             {"★".repeat(current.difficulty)} {diffLabel.text}
           </div>
-          <button
-            onClick={resetExercise}
-            className="p-2 text-slate-400 hover:text-white transition-colors"
-            title="Zurücksetzen"
-          >
-            <RotateCcw className="w-4 h-4" />
-          </button>
+          {!examMode && (
+            <button
+              onClick={resetExercise}
+              className="p-2 text-slate-400 hover:text-white transition-colors"
+              title="Zurücksetzen"
+            >
+              <RotateCcw className="w-4 h-4" />
+            </button>
+          )}
         </div>
 
         {/* Frage */}
@@ -204,8 +334,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
             <InlineText text={current.question} />
           </div>
 
-          {/* Hinweis */}
-          {current.hint && (
+          {/* Hinweis — nur im normalen Modus */}
+          {!examMode && current.hint && (
             <div className="mb-6">
               {!showHint ? (
                 <button
@@ -276,8 +406,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
             </div>
           )}
 
-          {/* Ergebnis */}
-          {showResult && (
+          {/* Ergebnis — nur im normalen Modus */}
+          {showResult && !examMode && (
             <div className={`rounded-xl p-5 mb-4 ${
               isCorrect ? "bg-green-500/10 border border-green-500/30" : "bg-red-500/10 border border-red-500/30"
             }`}>
@@ -296,7 +426,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
                       <p className="mb-1">
                         <span className="text-slate-500">Richtige Antwort:</span>{" "}
                         <span className="text-white font-medium">
-                          <InlineText text={current.type === "multiple" 
+                          <InlineText text={current.type === "multiple"
                             ? current.options?.find(o => o.value === current.correctOption)?.label || ""
                             : current.expectedAnswer || ""} />
                         </span>
@@ -308,8 +438,8 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
             </div>
           )}
 
-          {/* Lösung & Erklärung */}
-          {showResult && !showSolution && (
+          {/* Lösung & Erklärung — nur im normalen Modus */}
+          {showResult && !examMode && !showSolution && (
             <button
               onClick={() => setShowSolution(true)}
               className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors text-sm"
@@ -319,7 +449,7 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
             </button>
           )}
 
-          {showSolution && (
+          {showSolution && !examMode && (
             <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-5 mt-4">
               <h4 className="text-blue-400 font-semibold mb-2 flex items-center gap-2">
                 <HelpCircle className="w-5 h-5" />
@@ -338,9 +468,13 @@ export function InteractiveExercise({ exercises, moduleTitle }: Props) {
             <button
               onClick={checkAnswer}
               disabled={current.type === "input" ? !userAnswer : !selectedOption}
-              className="w-full py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:text-slate-500 rounded-lg font-medium transition-colors"
+              className={`w-full py-3 rounded-lg font-medium transition-colors disabled:bg-slate-700 disabled:text-slate-500 ${
+                examMode
+                  ? "bg-amber-500 hover:bg-amber-600 text-slate-900"
+                  : "bg-blue-500 hover:bg-blue-600 text-white"
+              }`}
             >
-              Antwort prüfen
+              {examMode ? "Antwort abgeben" : "Antwort prüfen"}
             </button>
           ) : (
             <button

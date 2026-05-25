@@ -27,6 +27,8 @@ export interface Lesson {
   codeExample?: string;
   visuals?: LessonVisual[];
   interactive?: InteractiveType;
+  exerciseDifficulty?: 1 | 2 | 3;
+  examMode?: boolean;
 }
 
 export interface Module {
