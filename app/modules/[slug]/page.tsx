@@ -121,6 +121,11 @@ export default function ModulePage() {
   const lessonIds = new Set(module.lessons.map(l => l.id));
   const completedLessons = new Set(allCompleted.filter(id => lessonIds.has(id)));
 
+  // Index der ersten Übungslektion (für Trennung Lerninhalte / Übungen)
+  const firstExerciseIndex = module.lessons.findIndex(l => l.type === "exercises");
+  const regularLessons = module.lessons.filter(l => l.type !== "exercises");
+  const exerciseLessons = module.lessons.filter(l => l.type === "exercises");
+
   const getLessonIcon = (type: Lesson["type"]) => {
     switch (type) {
       case "video": return <Play className="w-4 h-4" />;
@@ -238,11 +243,20 @@ export default function ModulePage() {
               className="w-full bg-slate-800 text-white rounded-lg px-4 py-3 text-sm border border-slate-600"
             >
               <option value="">📖 Lektion wählen...</option>
-              {module.lessons.map((lesson, index) => (
+              {regularLessons.map((lesson, index) => (
                 <option key={lesson.id} value={lesson.id}>
                   {completedLessons.has(lesson.id) ? "✅" : "⬜"} {index + 1}. {lesson.title} ({lesson.duration})
                 </option>
               ))}
+              {exerciseLessons.length > 0 && (
+                <optgroup label="── Übungen ──">
+                  {exerciseLessons.map((lesson) => (
+                    <option key={lesson.id} value={lesson.id}>
+                      {completedLessons.has(lesson.id) ? "✅" : "⬜"} {lesson.title} ({lesson.duration})
+                    </option>
+                  ))}
+                </optgroup>
+              )}
             </select>
             {/* Merkblatt Mobile */}
             {module.merkblatt && (
@@ -306,7 +320,7 @@ export default function ModulePage() {
               </button>
             )}
             <nav className="space-y-2">
-              {module.lessons.map((lesson, index) => {
+              {regularLessons.map((lesson, index) => {
                 const isCompleted = completedLessons.has(lesson.id);
                 const isSelected = selectedLesson?.id === lesson.id;
 
@@ -337,6 +351,47 @@ export default function ModulePage() {
                   </button>
                 );
               })}
+
+              {exerciseLessons.length > 0 && (
+                <>
+                  <div className="pt-4 mt-2 border-t border-slate-700/50">
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-1 pb-2">
+                      Übungen
+                    </p>
+                  </div>
+                  {exerciseLessons.map((lesson) => {
+                    const isCompleted = completedLessons.has(lesson.id);
+                    const isSelected = selectedLesson?.id === lesson.id;
+
+                    return (
+                      <button
+                        key={lesson.id}
+                        onClick={() => { setSelectedLesson(lesson); setShowFlashcards(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors ${
+                          isSelected
+                            ? "bg-emerald-500/20 border border-emerald-500/50"
+                            : "hover:bg-slate-800/50"
+                        }`}
+                      >
+                        {isCompleted ? (
+                          <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
+                        ) : (
+                          <Circle className="w-5 h-5 text-slate-500 flex-shrink-0" />
+                        )}
+                        <div className="flex-1 min-w-0">
+                          <p className={`font-medium truncate ${isCompleted ? "text-slate-400" : "text-white"}`}>
+                            {lesson.title}
+                          </p>
+                          <p className="text-xs text-slate-500">{lesson.duration}</p>
+                        </div>
+                        <div className={`p-1.5 rounded ${isSelected ? "bg-emerald-500/30" : "bg-slate-700"}`}>
+                          {getLessonIcon(lesson.type)}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </>
+              )}
             </nav>
           </div>
         </aside>
