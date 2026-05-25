@@ -369,7 +369,7 @@ export default function ModulePage() {
                         onClick={() => { setSelectedLesson(lesson); setShowFlashcards(false); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                         className={`w-full text-left p-3 rounded-lg flex items-center gap-3 transition-colors ${
                           isSelected
-                            ? "bg-emerald-500/20 border border-emerald-500/50"
+                            ? "bg-blue-500/20 border border-blue-500/50"
                             : "hover:bg-slate-800/50"
                         }`}
                       >
@@ -384,7 +384,7 @@ export default function ModulePage() {
                           </p>
                           <p className="text-xs text-slate-500">{lesson.duration}</p>
                         </div>
-                        <div className={`p-1.5 rounded ${isSelected ? "bg-emerald-500/30" : "bg-slate-700"}`}>
+                        <div className={`p-1.5 rounded ${isSelected ? "bg-blue-500/30" : "bg-slate-700"}`}>
                           {getLessonIcon(lesson.type)}
                         </div>
                       </button>
@@ -429,6 +429,7 @@ export default function ModulePage() {
               />
             ) : selectedLesson.type === "exercises" ? (
               <InteractiveExercise
+                key={selectedLesson.id}
                 exercises={getExercisesForLesson(module.id)}
                 moduleTitle={module.title}
                 onComplete={() => markComplete(selectedLesson.id)}

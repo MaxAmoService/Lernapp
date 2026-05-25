@@ -249,44 +249,63 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
     const passed = percentage >= 80;
 
     return (
-      <div className="glass rounded-xl p-8 text-center animate-slide-up">
-        <div className="mb-6">
-          {passed ? (
-            <Trophy className="w-16 h-16 text-yellow-400 mx-auto" />
-          ) : (
-            <span className="text-6xl">💪</span>
-          )}
-        </div>
-        <h2 className="text-2xl font-bold mb-2">
-          {passed ? "Glückwunsch!" : "Weitere Übung nötig!"}
-        </h2>
-        <p className="text-slate-400 mb-6">
-          Du hast {finalScore} von {questions.length} Fragen richtig beantwortet ({percentage}%).
-        </p>
-
-        <div className="w-full max-w-xs mx-auto mb-6">
-          <div className="h-4 bg-slate-700 rounded-full overflow-hidden">
-            <div
-              className={`h-full rounded-full transition-all duration-500 ${
-                passed ? "bg-green-500" : "bg-orange-500"
-              }`}
-              style={{ width: `${percentage}%` }}
-            />
+      <div className="glass rounded-2xl overflow-hidden animate-slide-up">
+        {/* Header-Balken */}
+        <div className={`px-6 py-8 text-center ${passed ? "bg-gradient-to-b from-emerald-500/20 to-transparent" : "bg-gradient-to-b from-amber-500/20 to-transparent"}`}>
+          <div className="text-5xl mb-4">
+            {passed ? "🎉" : "💪"}
           </div>
+          <h2 className="text-2xl font-bold text-white mb-2">
+            {passed ? "Quiz bestanden!" : "Noch nicht bestanden"}
+          </h2>
+          <p className="text-slate-400">
+            {passed
+              ? "Super, du hast das Quiz gemeistert."
+              : "Du brauchst 80% zum Bestehen. Nicht aufgeben!"}
+          </p>
         </div>
 
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={restart}
-            className="flex items-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors"
-          >
-            <RotateCcw className="w-4 h-4" />
-            Wiederholen
-          </button>
+        {/* Score-Karte */}
+        <div className="px-6 pb-6">
+          <div className={`rounded-xl p-6 text-center border ${passed ? "bg-emerald-500/10 border-emerald-500/30" : "bg-amber-500/10 border-amber-500/30"}`}>
+            <div className="text-4xl font-bold text-white mb-3">{percentage}%</div>
+            <div className="flex justify-center gap-6 text-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-green-400" />
+                <span className="text-green-400">{finalScore} Richtig</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <XCircle className="w-5 h-5 text-red-400" />
+                <span className="text-red-400">{questions.length - finalScore} Falsch</span>
+              </div>
+            </div>
+
+            {/* Fortschrittsbalken */}
+            <div className="mt-4 h-2 bg-slate-700/50 rounded-full overflow-hidden">
+              <div
+                className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-emerald-500" : "bg-amber-500"}`}
+                style={{ width: `${percentage}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Aktionen */}
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={restart}
+              className="flex items-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-sm"
+            >
+              <RotateCcw className="w-4 h-4" />
+              Quiz wiederholen
+            </button>
+          </div>
+
           {passed && (
-            <p className="text-sm text-slate-400 mt-2">
-              Das Quiz ist bestanden. Die Übungen warten in der Seitenleiste auf dich.
-            </p>
+            <div className="mt-4 p-4 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+              <p className="text-sm text-blue-300 text-center">
+                In der Seitenleiste warten jetzt die Übungen auf dich — vom leichten Einstieg bis zur Abschlussprüfung.
+              </p>
+            </div>
           )}
         </div>
       </div>
