@@ -22,7 +22,7 @@ Merksatz: **A**lle **P**riester **E**ssen **T**afelschokolade **A**m **P**almson
 - Schicht 6: Präsentation (SSL/TLS, ASCII)
 - Schicht 5: Sitzung (Session-Management)
 - Schicht 4: Transport (TCP, UDP)
-- Schicht 3: Netzwerk (IP, ICMP, ARP)
+- Schicht 3: Netzwerk (IP, ICMP)
 - Schicht 2: Sicherung (Ethernet, MAC)
 - Schicht 1: Physikalisch (Kabel, Bits)
 
@@ -575,13 +575,13 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 |-----------|-------------|------|-----------|
 | **Bus** | Alle an einem Kabel | Einfach, billig | Kollisionen, Kabelbruch = alles down |
 | **Ring** | Jeder mit 2 Nachbarn | Gleichmäßige Last | Ein Ausfall = alles down |
-| **Stern** | Alle an zentralen Switch | Einzelausfall无关, einfach | Switch = SPoF |
+| **Stern** | Alle an zentralen Switch | Einzelausfall kein Problem, einfach | Switch = SPoF |
 | **Mesh** | Jeder mit jedem | Sehr redundant | Teuer, komplex |
 | **Baum** | Hierarchische Sterne | Skalierbar | Abhängig von oberem Switch |
 
 ## Der heutige Standard: Stern-Topologie
 - Alle Geräte an einem **Switch** angeschlossen
-- Einzelner Geräteausfall不影响 das Netzwerk
+- Einzelner Geräteausfall beeinflusst nicht das Netzwerk
 - Einfach zu erweitern (neuen Port nutzen)
 
 ## Single Point of Failure (SPoF)
@@ -667,7 +667,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 | 802.11a | 1999 | 54 Mbit/s | 5 GHz | Kurz danach |
 | 802.11g | 2003 | 54 Mbit/s | 2,4 GHz | Kompatibel mit b |
 | 802.11n (Wi-Fi 4) | 2009 | 600 Mbit/s | 2,4+5 GHz | MIMO |
-| 802.11ac (Wi-Fi 5) | 2013 | 6,9 Gbit/s | 5 GHz | MU-MIMO |
+| 802.11ac (Wi-Fi 5) | 2013 | 1 Gbit/s | 5 GHz | MU-MIMO |
 | 802.11ax (Wi-Fi 6) | 2019 | 9,6 Gbit/s | 2,4+5 GHz | OFDMA |
 
 ## 2,4 GHz vs. 5 GHz
@@ -851,6 +851,216 @@ netstat -an  → Alle Verbindungen mit Portnummern
 - Analyse: Protokoll-Details
 
 > ❗ **IHK-Tipp:** Wireshark als Diagnosewerkzeug nennen können!`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 16: MAC-Adressen & ARP
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "netz-16",
+      title: "MAC-Adressen & ARP",
+      duration: "15 min",
+      type: "interactive",
+      interactive: "arpExplorer",
+      content: `# MAC-Adressen & ARP
+
+## Was ist eine MAC-Adresse?
+
+Die MAC-Adresse (Media Access Control) ist die **hardwarenahe Adresse** eines Netzwerkgeräts. Sie ist weltweit eindeutig und fest in die Netzwerkkarte eingebrannt.
+
+### Aufbau
+- **48 Bit** (6 Bytes), dargestellt als 12 Hexadezimalziffern
+- Beispiel: AA:BB:CC:11:22:33
+- Erste 3 Bytes: **OUI** (Herstellerkennung, z.B. Intel, Cisco)
+- Letzte 3 Bytes: **Gerätenummer** (vom Hersteller vergeben)
+
+> Merksatz: MAC = **M**edia **A**ccess **C**ontrol — steuert den Zugriff auf das Medium (Kabel/WLAN).
+
+### MAC vs. IP
+| Merkmal | MAC-Adresse | IP-Adresse |
+|---------|-------------|------------|
+| **Schicht** | Schicht 2 (Sicherung) | Schicht 3 (Netzwerk) |
+| **Vergeben von** | Hersteller (fest) | Netzwerk (dynamisch) |
+| **Änderbar** | Hardware-seitig fest | DHCP oder manuell |
+| **Reichweite** | Lokales Netz (LAN) | Weltweit (Internet) |
+| **Format** | AA:BB:CC:11:22:33 | 192.168.1.1 |
+
+## ARP — Address Resolution Protocol
+
+Wenn ein Gerät ein Paket im lokalen Netzwerk senden will, kennt es nur die **IP-Adresse** des Ziels. Aber Ethernet braucht die **MAC-Adresse**. Hier kommt ARP ins Spiel:
+
+### ARP-Ablauf
+1. **Broadcast**: "Wer hat die IP 192.168.1.20? Sagt mir eure MAC!"
+2. **Reply**: Das Gerät mit dieser IP antwortet: "Ich bin AA:BB:CC:11:22:33"
+3. **ARP-Tabelle**: Die Zuordnung wird zwischengespeichert (Cache)
+
+> IHK-Prüfung: "Erklären Sie den ARP-Prozess" — Broadcast → Reply → Tabelle!
+
+### ARP im OSI-Modell
+ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen (Schicht 3) in MAC-Adressen (Schicht 2).
+
+> Praxis: Mit dem Befehl \`arp -a\` (Windows/Linux) kannst du die ARP-Tabelle anzeigen. Sie zeigt alle bekannten IP-MAC-Zuordnungen.
+
+### ARP-Sicherheitsproblem: ARP-Spoofing
+- Angreifer sendet gefälschte ARP-Replies
+- Opfer denkt, der Angreifer sei der Router
+- **Man-in-the-Middle-Angriff** möglich
+- **Gegenmaßnahme**: Dynamic ARP Inspection (DAI) auf Managed Switches
+
+> IHK-Prüfung: ARP-Spoofing als Sicherheitsrisiko kennen!
+
+[INTERACTIVE]
+`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 17: Zugriffsverfahren (CSMA/CD & CSMA/CA)
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "netz-17",
+      title: "Zugriffsverfahren: CSMA/CD & CSMA/CA",
+      duration: "12 min",
+      type: "text",
+      content: `# Zugriffsverfahren: CSMA/CD & CSMA/CA
+
+## Warum Zugriffsverfahren?
+
+Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, wer wann senden darf. Sonst gibt es Kollisionen.
+
+## CSMA/CD — Ethernet (Kabel)
+
+**Carrier Sense Multiple Access with Collision Detection** — das klassische Ethernet-Verfahren:
+
+### Ablauf
+1. **Carrier Sense**: Hört das Medium frei?
+2. **Multiple Access**: Mehrere Geräte dürfen senden
+3. **Senden**: Wenn frei → senden
+4. **Collision Detection**: Gleichzeitig gesendet? → **Kollision erkannt!**
+5. **Jam Signal**: Alle Geräte benachrichtigen
+6. **Zufällige Wartezeit**: Beide warten zufällig lang, dann erneut versuchen
+
+> Merksatz: **Hören → Senden → Kollision? → Jam → Warten → Erneut**
+
+### Kollisionsdomäne
+- Alle Geräte, die eine Kollision miteinander haben können
+- **Hub**: Vergrößert Kollisionsdomäne (alle Ports)
+- **Switch**: Trennt Kollisionsdomäne (jeder Port eigene Domäne)
+
+> IHK-Prüfung: "Was trennt Kollisionsdomänen?" → Switch!
+
+## CSMA/CA — WLAN (Funk)
+
+**Carrier Sense Multiple Access with Collision Avoidance** — das WLAN-Verfahren:
+
+### Warum nicht CSMA/CD bei WLAN?
+- WLAN kann nicht gleichzeitig senden und hören (Halbduplex)
+- Kollisionen sind nicht erkennbar → müssen **vermieden** werden
+
+### Ablauf
+1. **Carrier Sense**: Hört das Medium frei?
+2. **IFS** (Interframe Space): Kurze Wartezeit
+3. **RTS** (Request to Send): "Ich möchte senden"
+4. **CTS** (Clear to Send): "OK, du darfst senden"
+5. **Senden**: Datenübertragung
+6. **ACK** (Acknowledge): "Empfangen!"
+
+> Merksatz: **Hören → Warten → RTS → CTS → Senden → ACK**
+
+### CSMA/CD vs. CSMA/CA
+| Merkmal | CSMA/CD | CSMA/CA |
+|---------|---------|---------|
+| **Medium** | Kabel (Ethernet) | Funk (WLAN) |
+| **Kollision** | Erkennen + lösen | Vermeiden |
+| **Duplex** | Vollduplex möglich | Halbduplex |
+| **Verfahren** | Jam Signal + Backoff | RTS/CTS + ACK |
+| **Standard** | IEEE 802.3 | IEEE 802.11 |
+
+> IHK-Prüfung: "Warum verwendet WLAN CSMA/CA statt CSMA/CD?" — Weil WLAN nicht gleichzeitig senden und hören kann!
+
+## Switch vs. Hub — Kollisionsdomänen
+
+| Gerät | Schicht | Kollisionsdomäne | Broadcast-Domäne |
+|-------|---------|-----------------|-----------------|
+| **Hub** | 1 (Physisch) | 1 für alle Ports | 1 für alle Ports |
+| **Switch** | 2 (Sicherung) | Pro Port 1 | 1 für alle Ports |
+| **Router** | 3 (Netzwerk) | Pro Port 1 | Pro Port 1 |
+
+> Praxis: Ein 24-Port-Switch hat 24 Kollisionsdomänen (je 1 pro Port) aber nur 1 Broadcast-Domäne. Ein Router trennt auch Broadcast-Domänen.
+
+> Häufige Fehler: "Ein Switch trennt Broadcast-Domänen" — Falsch! Ein Switch trennt nur Kollisionsdomänen. Broadcast-Domänen trennt nur ein Router (oder VLAN).
+`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 18: Internetzugang: DSL & Mobilfunk
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "netz-18",
+      title: "Internetzugang: DSL & Mobilfunk",
+      duration: "15 min",
+      type: "text",
+      content: `# Internetzugang: DSL & Mobilfunk
+
+## DSL — Digital Subscriber Line
+
+DSL nutzt die bestehende Telefonleitung für schnelles Internet.
+
+### DSL-Typen
+| Typ | Geschwindigkeit | Richtung | Leitung |
+|-----|----------------|----------|---------|
+| **ADSL** | Down: 16 Mbit/s, Up: 1 Mbit/s | Asymmetrisch | Kupfer |
+| **ADSL2+** | Down: 25 Mbit/s, Up: 3,5 Mbit/s | Asymmetrisch | Kupfer |
+| **VDSL** | Down: 50 Mbit/s, Up: 10 Mbit/s | Asymmetrisch | Kupfer |
+| **VDSL2** | Down: 100-250 Mbit/s, Up: 40-100 Mbit/s | Asymmetrisch | Kupfer + Glasfaser |
+| **SDSL** | 2 Mbit/s (symmetrisch) | Symmetrisch | Kupfer |
+
+### DSL-Aufbau
+1. **TAE-Dose**: Telefonanschluss in der Wohnung
+2. **Splitter**: Trennt Sprache (Telefon) und Daten (Internet)
+3. **DSL-Modem/Router**: Wandelt DSL-Signal in Ethernet um
+4. **DSLAM** (im Keller/Vermittlungsstelle): Sammelt alle DSL-Verbindungen
+
+### PPPoE — Point-to-Point Protocol over Ethernet
+- Authentifizierung gegenüber dem Provider
+- Username + Passwort werden übertragen
+- IP-Adresse wird vom Provider zugewiesen
+
+> IHK-Prüfung: "Was macht ein Splitter?" — Trennt Sprache und Daten auf der Telefonleitung!
+
+## Mobilfunkstandards
+
+| Generation | Standard | Geschwindigkeit | Technologie |
+|-----------|---------|----------------|------------|
+| **2G** | GSM | 9,6 Kbit/s | Sprache + SMS |
+| **2,5G** | GPRS | 114 Kbit/s | Paketvermittlung |
+| **2,75G** | EDGE | 384 Kbit/s | Verbessertes GPRS |
+| **3G** | UMTS | 2 Mbit/s | Breitband mobil |
+| **3,5G** | HSPA | 14,4 Mbit/s | Hochgeschwindigkeit |
+| **4G** | LTE | 150 Mbit/s | All-IP |
+| **4G+** | LTE-Advanced | 1 Gbit/s | Carrier Aggregation |
+| **5G** | NR | 10 Gbit/s | Ultra-low-latency |
+
+> Merksatz: **2G** = SMS, **3G** = Internet, **4G** = Streaming, **5G** = Echtzeit
+
+### Tethering
+- Handy als WLAN-Hotspot für andere Geräte
+- Internetverbindung wird über USB, WLAN oder Bluetooth geteilt
+- Praktisch unterwegs, aber Akku-Verbrauch!
+
+## Glasfaser — Die Zukunft
+
+| Typ | Geschwindigkeit | Distanz | Einsatz |
+|-----|----------------|---------|---------|
+| **FTTH** (Fiber to the Home) | Bis 10 Gbit/s | Bis 20 km | Direkt ins Haus |
+| **FTTB** (Fiber to the Building) | Bis 1 Gbit/s | Bis 20 km | Bis zum Gebäude |
+| **FTTC** (Fiber to the Curb) | Bis 100 Mbit/s | Letzte Meile Kupfer | Bis zum Verteiler |
+
+> Praxis: Glasfaser nutzt Licht statt Strom → kein Signalverlust über große Distanzen, extrem hohe Bandbreite, aber teurer in der Installation.
+
+> IHK-Prüfung: "Was ist der Unterschied zwischen FTTH und FTTB?" — FTTH: Glasfaser bis ins Haus. FTTB: Glasfaser bis zum Gebäude, dann Kupfer.
+
+> Häufige Fehler: "ADSL ist schneller als VDSL" — Falsch! VDSL ist schneller als ADSL, braucht aber kürzere Leitungen.
+`,
     },
   ],
 };

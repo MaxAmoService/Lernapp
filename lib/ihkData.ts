@@ -228,7 +228,7 @@ Der Builder oben zeigt dir alle vier Elemente in Aktion:
 | Element | Darstellung | Zweck |
 |---------|-------------|-------|
 | 🟦 **Sequenz** | Einfaches Rechteck | Anweisungen nacheinander |
-| 🔶 **Auswahl** | Block mit diagonaler Linie | if/else — JA links, NEIN rechts |
+| 🔶 **Auswahl** | Block mit diagonaler Linie | if/else — NEIN links, JA rechts |
 | 🔁 **Schleife** | Block mit Bogen links | for/while — Bedingung im Kopf |
 | 🟪 **Ein-/Ausgabe** | Parallelogramm | input() oder print() |
 
@@ -263,7 +263,7 @@ Der Builder oben zeigt dir alle vier Elemente in Aktion:
 - ✏️ Struktogramme **auf Papier** zeichnen — sauber und lesbar
 - 📏 Blöcke **bündig** ausrichten — Verschachtelung muss sichtbar sein
 - 🔁 Schleifen **immer** mit Bedingung oben und Rumpf darunter
-- 🔶 Auswahl **immer** mit JA/Links und NEIN/Rechts
+- 🔶 Auswahl **immer** mit NEIN/Links und JA/Rechts
 - 🧪 **Schreibtischtest** durchführen — Variablenwerte protokollieren
 
 > 📝 **Merke:** Das Struktogramm erzwingt strukturierte Programmierung. In der Prüfung immer prüfen: Kann der Algorithmus strukturiert dargestellt werden? Wenn ja → Struktogramm. Wenn Sprünge nötig sind → PAP.`
@@ -771,6 +771,164 @@ Das Pflichtenheft stammt vom **Auftragnehmer** und beschreibt die **Lösung**:
 - 📝 **Lastenheft vs. Pflichtenheft:** Wer schreibt was? — Das wird oft gefragt!
 - 🧪 Immer prüfen: Wurden alle Beziehungen und Kardinalitäten korrekt modelliert?`,
     },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 10: Bäume
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "ihk-10",
+      title: "Baumstrukturen",
+      duration: "18 min",
+      type: "interactive",
+      interactive: "treeExplorer",
+      content: `# Baumstrukturen
+
+## Was ist ein Baum?
+
+Ein Baum ist eine **hierarchische Datenstruktur** aus Knoten und Kanten — ohne Schleifen (Zyklen).
+
+> Der Baum ist wie eine Firmenhierarchie: Der Chef (Wurzel) hat Abteilungsleiter (Kinder), die wiederum Mitarbeiter haben.
+
+### Grundbegriffe
+| Begriff | Bedeutung |
+|---------|-----------|
+| **Wurzel** (Root) | Oberster Knoten, kein Elternknoten |
+| **Knoten** (Node) | Element mit Wert und Verbindungen |
+| **Kante** (Edge) | Verbindung zwischen zwei Knoten |
+| **Blatt** (Leaf) | Knoten ohne Kinder |
+| **Tiefe** (Depth) | Abstand zur Wurzel |
+| **Höhe** (Height) | Längster Weg von Wurzel zu Blatt |
+
+## Binärer Baum
+
+Jeder Knoten hat **maximal 2 Kinder** (links und rechts).
+
+### Binärer Suchbaum (BST)
+Die wichtigste Baumstruktur in der Praxis:
+- **Regel**: Kleinerer Wert → links, größerer Wert → rechts
+- **Vorteil**: Suche in O(log n) bei ausgeglichenem Baum
+- **Nachteil**: Bei schlechter Balance → O(n) wie eine Liste
+
+### Traversierung — Baum ablaufen
+
+Es gibt 3 Grundreihenfolgen, einen Baum zu durchlaufen:
+
+| Methode | Reihenfolge | Merkhilfe |
+|---------|------------|-----------|
+| **In-Order** | Links → Wurzel → Rechts | Gibt sortierte Reihenfolge bei BST |
+| **Pre-Order** | Wurzel → Links → Rechts | Wurzel zuerst |
+| **Post-Order** | Links → Rechts → Wurzel | Wurzel zuletzt |
+
+**Beispiel-Baum:**
+\`\`\`
+        50
+       /  \\
+      25   75
+     / \\
+    12  37
+\`\`\`
+
+- **In-Order**: 12, 25, 37, 50, 75 (sortiert!)
+- **Pre-Order**: 50, 25, 12, 37, 75
+- **Post-Order**: 12, 37, 25, 75, 50
+
+> IHK-Prüfung: "Geben Sie die In-Order-Traversierung des Baums an!" — Links, Wurzel, Rechts!
+
+### Anwendungen von Bäumen
+- **Dateisysteme**: Verzeichnisse als Baumstruktur
+- **DOM** (Document Object Model): HTML als Baum
+- **Datenbanken**: B-Trees für Indexierung
+- **Entscheidungsbäume**: KI/Machine Learning
+
+> Praxis: Wenn du einen Ordner in Windows aufklappst, traversierst du einen Baum!
+
+[INTERACTIVE]
+`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 11: Graphen
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "ihk-11",
+      title: "Graphen",
+      duration: "18 min",
+      type: "interactive",
+      interactive: "graphExplorer",
+      content: `# Graphen
+
+## Was ist ein Graph?
+
+Ein Graph ist eine Datenstruktur aus **Knoten** (Nodes) und **Kanten** (Edges) — im Gegensatz zum Baum können Schleifen existieren.
+
+> Der Graph ist wie ein Straßennetz: Städte (Knoten) sind durch Straßen (Kanten) verbunden. Manche Straßen sind Einbahnstraßen.
+
+### Grundbegriffe
+| Begriff | Bedeutung |
+|---------|-----------|
+| **Knoten** (Vertex) | Element des Graphen |
+| **Kante** (Edge) | Verbindung zwischen Knoten |
+| **Gerichtet** | Kanten haben eine Richtung (Pfeil) |
+| **Ungerichtet** | Kanten sind bidirektional |
+| **Gewichtet** | Kanten haben einen Wert (z.B. Distanz) |
+| **Nachbar** | Knoten, der über Kante erreichbar ist |
+
+### Baum vs. Graph
+| Merkmal | Baum | Graph |
+|---------|------|-------|
+| **Zyklen** | Keine | Möglich |
+| **Wurzel** | Genau eine | Keine/Optional |
+| **Pfade** | Genau 1 Pfad zwischen 2 Knoten | Mehrere Pfade möglich |
+| **Beispiel** | Dateisystem | Soziales Netzwerk |
+
+## Graphen durchsuchen
+
+### BFS — Breitensuche (Breadth-First Search)
+- Nutzt eine **Warteschlange** (Queue)
+- Besucht erst alle Nachbarn, dann deren Nachbarn
+- **Garantie**: Findet den **kürzesten Weg** (bei gleichen Kantengewichten)
+
+**Ablauf:**
+1. Startknoten in Queue
+2. Knoten aus Queue nehmen und besuchen
+3. Alle unbesuchten Nachbarn in Queue
+4. Wiederhole bis Queue leer
+
+### DFS — Tiefensuche (Depth-First Search)
+- Nutzt einen **Stapel** (Stack)
+- Geht einen Weg so **tief wie möglich**, dann zurück
+- Gut für: Pfadsuche, Zykluserkennung
+
+**Ablauf:**
+1. Startknoten auf Stapel
+2. Knoten vom Stapel nehmen und besuchen
+3. Einen unbesuchten Nachbarn auf Stapel
+4. Wenn keine unbesuchten Nachbarn → zurück
+
+### BFS vs. DFS
+| Merkmal | BFS | DFS |
+|---------|-----|-----|
+| **Datenstruktur** | Queue (FIFO) | Stack (LIFO) |
+| **Reihenfolge** | Breit zuerst | Tief zuerst |
+| **Kürzester Weg** | Ja | Nein |
+| **Speicher** | Mehr (alle Nachbarn) | Weniger (Pfad) |
+
+> IHK-Prüfung: "Was ist der Unterschied zwischen BFS und DFS?" — BFS=Warteschlange=kürzester Weg, DFS=Stapel=tief zuerst!
+
+## Anwendungen von Graphen
+- **Navigation**: Kürzester Weg (Dijkstra, A*)
+- **Soziale Netzwerke**: Freundschaftsverbindungen
+- **Internet**: Webseiten als Knoten, Links als Kanten
+- **Netzwerk-Topologien**: Geräte als Knoten, Kabel als Kanten
+- **Abhängigkeiten**: Software-Pakete, Compiler
+
+> Praxis: Google Maps nutzt Graphen mit gewichteten Kanten (Distanz/Zeit), um den schnellsten Weg zu finden.
+
+> Häufige Fehler: "BFS und DFS sind dasselbe" — Falsch! BFS nutzt Queue (breit), DFS nutzt Stack (tief). Die Ergebnisse können完全不同 sein.
+
+[INTERACTIVE]
+`,
+    },
   ],
 };
 
@@ -783,6 +941,8 @@ export const ihkCategories = [
     subCategories: [
       { id: "diagramme", name: "Diagramme & Darstellungen", description: "UML, PAP, Struktogramme, EPK, Algorithmen, Netzplantechnik, ER-Modell" },
       { id: "netzwerk", name: "Netzwerktechnik", description: "OSI, TCP/IP, IPv4/IPv6, Subnetting, WLAN, Sicherheit, Protokolle" },
+      { id: "datenbanken", name: "Datenbanken", description: "ER-Modelle, Normalisierung, SQL, JOINs, ACID, Backups" },
+      { id: "computersysteme", name: "Computersysteme & Hardware", description: "CPU, RAM, Speichermedien, RAID, Busse, E/A-Geräte, OS, Virtualisierung, Cloud, Green IT" },
     ],
   },
 ];

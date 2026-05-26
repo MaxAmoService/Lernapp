@@ -7,3 +7,10 @@ out/
 .env.test.local
 .env.production.local
 vercel.env
+
+# Build artifacts
+tsconfig.tsbuildinfo
+
+# Temporary / source files
+*.pdf
+*.txt

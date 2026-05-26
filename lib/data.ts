@@ -6,6 +6,7 @@ import { typescriptModule } from "./typescriptData";
 import { nextjsModule } from "./nextjsData";
 
 import { datenbankModule } from "./datenbankData";
+import { computersystemeModule } from "./computersystemeData";
 import { complexModule } from "./complexData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
@@ -37,6 +38,7 @@ export const allModules = [
   ihkModule,
   netzwerkModule,
   datenbankModule,
+  computersystemeModule,
   complexModule,
   ...contentModules,
 ];

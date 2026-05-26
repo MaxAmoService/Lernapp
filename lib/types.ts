@@ -16,7 +16,18 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "matrixCalculator"
   | "boxplotBuilder"
   | "seriesVisualizer"
-  | "complexPowersTrainer";
+  | "complexPowersTrainer"
+  | "cpuArchitectureExplorer"
+  | "memoryHierarchyExplorer"
+  | "raidConfigurator"
+  | "storageComparator"
+  | "addressingCalculator"
+  | "virtualizationExplorer"
+  | "bootSequenceBuilder"
+  | "dataTransmissionVisualizer"
+  | "arpExplorer"
+  | "treeExplorer"
+  | "graphExplorer";
 
 export interface Lesson {
   id: string;

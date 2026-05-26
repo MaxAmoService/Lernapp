@@ -67,6 +67,17 @@ import { MatrixCalculator } from "./interactive/MatrixCalculator";
 import { BoxplotBuilder } from "./interactive/BoxplotBuilder";
 import { SeriesVisualizer } from "./interactive/SeriesVisualizer";
 import { ComplexPowersTrainer } from "./interactive/ComplexPowersTrainer";
+import CPUArchitectureExplorer from "./interactive/CPUArchitectureExplorer";
+import MemoryHierarchyExplorer from "./interactive/MemoryHierarchyExplorer";
+import RAIDConfigurator from "./interactive/RAIDConfigurator";
+import StorageComparator from "./interactive/StorageComparator";
+import AddressingCalculator from "./interactive/AddressingCalculator";
+import VirtualizationExplorer from "./interactive/VirtualizationExplorer";
+import BootSequenceBuilder from "./interactive/BootSequenceBuilder";
+import DataTransmissionVisualizer from "./interactive/DataTransmissionVisualizer";
+import ARPExplorer from "./interactive/ARPExplorer";
+import TreeExplorer from "./interactive/TreeExplorer";
+import GraphExplorer from "./interactive/GraphExplorer";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -155,6 +166,17 @@ function renderInteractive(type: string, codeExample?: string) {
     boxplotBuilder: "Boxplot-Builder",
     seriesVisualizer: "Reihen-Visualisierung",
     complexPowersTrainer: "j-Potenzen-Trainer",
+    cpuArchitectureExplorer: "CPU-Architektur",
+    memoryHierarchyExplorer: "Speicherhierarchie",
+    raidConfigurator: "RAID-Konfigurator",
+    storageComparator: "Speichermedien-Vergleich",
+    addressingCalculator: "Adressierungs-Rechner",
+    virtualizationExplorer: "Virtualisierung",
+    bootSequenceBuilder: "Boot-Sequenz",
+    dataTransmissionVisualizer: "Datenübertragung",
+    arpExplorer: "ARP-Explorer",
+    treeExplorer: "Baum-Explorer",
+    graphExplorer: "Graph-Explorer",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -208,6 +230,17 @@ function renderInteractive(type: string, codeExample?: string) {
     boxplotBuilder: <BoxplotBuilder />,
     seriesVisualizer: <SeriesVisualizer />,
     complexPowersTrainer: <ComplexPowersTrainer />,
+    cpuArchitectureExplorer: <CPUArchitectureExplorer />,
+    memoryHierarchyExplorer: <MemoryHierarchyExplorer />,
+    raidConfigurator: <RAIDConfigurator />,
+    storageComparator: <StorageComparator />,
+    addressingCalculator: <AddressingCalculator />,
+    virtualizationExplorer: <VirtualizationExplorer />,
+    bootSequenceBuilder: <BootSequenceBuilder />,
+    dataTransmissionVisualizer: <DataTransmissionVisualizer />,
+    arpExplorer: <ARPExplorer />,
+    treeExplorer: <TreeExplorer />,
+    graphExplorer: <GraphExplorer />,
   };
 
   const name = interactiveNames[type] || type;

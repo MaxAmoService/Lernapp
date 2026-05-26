@@ -1,6 +1,8 @@
 // Interaktive Mathe-Aufgaben für alle 31 Module
 // Groups A (Grundlagen), B (Analysis), C (Lineare Algebra, Geometrie, Stochastik)
 
+import { computersystemePractice, computersystemeExam } from "./computersystemeExercises";
+
 export interface Exercise {
   id: string;
   lessonId: string;
@@ -4993,6 +4995,7 @@ export const allExercises: Exercise[] = [
   ...kombinatorikPractice,
   ...statistikPractice,
   ...verteilungenPractice,
+  ...computersystemePractice,
 ];
 
 export function getExercisesForLesson(moduleId: string): Exercise[] {
@@ -5036,6 +5039,7 @@ export const examExercises: Record<string, Exercise[]> = {
   "m-kombinatorik": kombinatorikExam,
   "m-statistik": statistikExam,
   "m-verteilungen": verteilungenExam,
+  "ihk-computersysteme": computersystemeExam,
 };
 
 export function getExamExercises(moduleId: string): Exercise[] {

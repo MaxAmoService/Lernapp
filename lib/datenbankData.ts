@@ -86,8 +86,8 @@ DROP TABLE Tabelle;                -- entfernt Tabelle komplett
 
 ### Backups
 - **Full Backup**: Komplette Sicherung (regelmäßig)
-- **Transaktions-Backup**: Nur Änderungen seit letztem Backup
-- **Wiederherstellung**: Full + Transaktions-Backups zusammen einspielen`,
+- **Inkrementelles Backup**: Nur Änderungen seit letztem Backup
+- **Wiederherstellung**: Full + inkrementelle Backups zusammen einspielen`,
 
   lessons: [
     // =====================================================================
@@ -308,7 +308,7 @@ Ziel der Normalisierung:
 - ✅ **Datenintegrität** sicherstellen
 - ⚖️ Balance zwischen Redundanz, Performance und Flexibilität
 
-> 💡 Wir normalisieren bis zur **3NF** — das ist der IHK-Standard. Höhere Formen (BCNF, 4NF, 5NF) sind für die Prüfung irrelevant.
+> 💡 Wir normalisieren bis zur **3NF** — das ist der IHK-Standard. Die **BCNF** (Boyce-Codd-Normalform) wird im IT-Handbuch als nächste Stufe behandelt und kann in Prüfungen vorkommen. 4NF/5NF sind selten relevant.
 
 ## Erste Normalform (1NF)
 
@@ -908,7 +908,7 @@ Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vo
 - **Nachteil:** Braucht viel Speicher und Zeit
 - **Empfehlung:** Regelmäßig (z.B. täglich nachts)
 
-### Transaktions-Backup (Inkrementelle Sicherung)
+### Inkrementelles Backup
 - Speichert nur die **Änderungen** seit dem letzten Backup
 - **Vorteil:** Schnell, wenig Speicher
 - **Nachteil:** Wiederherstellung braucht alle vorherigen Backups
@@ -918,10 +918,10 @@ Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vo
 
 Die Reihenfolge beim Einspielen:
 1. Letztes **Full Backup** einspielen
-2. Alle **Transaktions-Backups** der Reihe nach einspielen
-3. Datenbank ist wieder auf dem Stand des letzten Transaktions-Backups
+2. Alle **inkrementellen Backups** der Reihe nach einspielen
+3. Datenbank ist wieder auf dem Stand des letzten inkrementellen Backups
 
-> 💡 Ohne Full Backup sind die Transaktions-Backups nutzlos — sie bauen aufeinander auf!
+> 💡 Ohne Full Backup sind die inkrementellen Backups nutzlos — sie bauen aufeinander auf!
 
 ## Backup-Strategie-Beispiel
 
@@ -953,7 +953,213 @@ psql -U benutzer datenbank < backup.sql
 - ✅ **Wiederherstellungszeit** dokumentieren
 - ❌ Backups auf **derselben Festplatte** wie die Datenbank!
 
-> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. Transaktions-Backup unterscheiden können!`,
+> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. inkrementelles Backup unterscheiden können!`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 9: Datenbanktypen
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "db-9",
+      title: "Datenbanktypen im Überblick",
+      duration: "12 min",
+      type: "text",
+      content: `# Datenbanktypen im Überblick
+
+## Warum verschiedene Datenbanktypen?
+
+Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderungen brauchen verschiedene Lösungen.
+
+## Die wichtigsten Datenbanktypen
+
+### Relationale Datenbanken (RDBMS)
+- **Struktur**: Tabellen mit Zeilen und Spalten
+- **Sprache**: SQL
+- **Vorteile**: ACID, ausgereift, viele Werkzeuge
+- **Nachteile**: Starre Schema, JOINs können langsam sein
+- **Beispiele**: MySQL, PostgreSQL, Oracle, SQL Server, SQLite
+
+### Dokumentenbasierte Datenbanken (NoSQL)
+- **Struktur**: JSON/XML-Dokumente
+- **Vorteile**: Flexibles Schema, gut für unstrukturierte Daten
+- **Nachteile**: Keine JOINs, weniger konsistent
+- **Beispiele**: MongoDB, CouchDB, Firebase Firestore
+
+### Schlüssel-Wert-Datenbanken
+- **Struktur**: Einfache Key-Value-Paare (wie eine riesige HashMap)
+- **Vorteile**: Extrem schnell, einfach
+- **Nachteile**: Keine komplexen Abfragen
+- **Beispiele**: Redis, Amazon DynamoDB
+
+### Spaltenorientierte Datenbanken
+- **Struktur**: Daten spaltenweise statt zeilenweise
+- **Vorteile**: Schnell bei analytischen Abfragen (Aggregationen)
+- **Nachteile**: Langsam bei Zeilen-Inserts
+- **Beispiele**: Apache Cassandra, HBase
+
+### Graphdatenbanken
+- **Struktur**: Knoten + Kanten (wie unser Graph-Modul!)
+- **Vorteile**: Perfekt für Beziehungen (soziale Netzwerke, Empfehlungen)
+- **Nachteile**: Nicht für Massendaten
+- **Beispiele**: Neo4j, Amazon Neptune
+
+## Vergleichstabelle
+
+| Typ | Schema | JOINs | Skalierung | Einsatz |
+|-----|--------|-------|------------|---------|
+| **Relational** | Starre Schema | Ja (SQL) | Vertikal | Standard-Anwendungen |
+| **Dokument** | Flexibel | Nein | Horizontal | CMS, Mobile Apps |
+| **Key-Value** | Keins | Nein | Horizontal | Caching, Sessions |
+| **Spalten** | Flexibel | Nein | Horizontal | Analytics, Big Data |
+| **Graph** | Flexibel | Traversierung | Vertikal | Beziehungen, KI |
+
+> IHK-Prüfung: "Welche Datenbank eignet sich für...?" — Kenne die Stärken der einzelnen Typen!
+
+## SQL vs. NoSQL
+
+| Merkmal | SQL | NoSQL |
+|---------|-----|-------|
+| **Schema** | Vordefiniert (CREATE TABLE) | Flexibel (dynamisch) |
+| **Skalierung** | Vertikal (stärkerer Server) | Horizontal (mehr Server) |
+| **Konsistenz** | Stark (ACID) | Eventual Consistency |
+| **Abfragen** | SQL | Herstellerspezifisch |
+| **Beziehung** | JOINs | Denormalisiert |
+
+> Praxis: Viele Unternehmen nutzen beide: Relationale DB für Bestellungen, NoSQL für Logs/Sessions. Das nennt sich **Polyglot Persistence**.
+
+> Häufige Fehler: "NoSQL ist besser als SQL" — Falsch! Es kommt auf den Anwendungsfall an. Für strukturierte Daten mit Beziehungen ist SQL oft besser.
+`,
+    },
+
+    // ══════════════════════════════════════════════════════════════════════════
+    // LEKTION 10: CREATE TABLE im Detail
+    // ══════════════════════════════════════════════════════════════════════════
+    {
+      id: "db-10",
+      title: "CREATE TABLE im Detail",
+      duration: "15 min",
+      type: "text",
+      content: `# CREATE TABLE im Detail
+
+## Tabellen erstellen
+
+Das CREATE TABLE-Statement definiert die Struktur einer Tabelle. In der IHK-Prüfung musst du solche Statements schreiben oder interpretieren können.
+
+## Grundsyntax
+
+\`\`\`sql
+CREATE TABLE tabelle_name (
+    spalte1 DATENTYP [CONSTRAINTS],
+    spalte2 DATENTYP [CONSTRAINTS],
+    ...
+);
+\`\`\`
+
+## Wichtige Datentypen (MySQL)
+
+### Text
+| Typ | Beschreibung | Max. Länge |
+|-----|-------------|-----------|
+| **CHAR(n)** | Feste Länge | 255 Zeichen |
+| **VARCHAR(n)** | Variable Länge | 65.535 Zeichen |
+| **TEXT** | Langer Text | 65.535 Zeichen |
+| **LONGTEXT** | Sehr langer Text | 4 GB |
+
+### Zahlen
+| Typ | Beschreibung | Bereich |
+|-----|-------------|---------|
+| **TINYINT** | Kleine Ganzzahl | -128 bis 127 |
+| **INT** | Ganzzahl | -2 Mrd. bis 2 Mrd. |
+| **BIGINT** | Große Ganzzahl | -9×10¹⁸ bis 9×10¹⁸ |
+| **FLOAT** | Gleitkomma (ungenau) | 4 Bytes |
+| **DOUBLE** | Gleitkomma (genauer) | 8 Bytes |
+| **DECIMAL(p,s)** | Festkomma (exakt) | z.B. DECIMAL(10,2) |
+
+### Datum/Zeit
+| Typ | Beschreibung | Format |
+|-----|-------------|--------|
+| **DATE** | Datum | YYYY-MM-DD |
+| **TIME** | Uhrzeit | HH:MM:SS |
+| **DATETIME** | Datum + Uhrzeit | YYYY-MM-DD HH:MM:SS |
+| **TIMESTAMP** | Zeitstempel | Automatisch aktualisierbar |
+
+### Sonstige
+| Typ | Beschreibung |
+|-----|-------------|
+| **ENUM('a','b')** | Einer aus fester Liste |
+| **BLOB** | Binäre Daten (Bilder, Dateien) |
+| **BOOLEAN** | TRUE/FALSE (alias für TINYINT(1)) |
+
+## Constraints (Einschränkungen)
+
+| Constraint | Bedeutung | Beispiel |
+|-----------|-----------|---------|
+| **PRIMARY KEY** | Eindeutiger Identifikator | \`id INT PRIMARY KEY\` |
+| **AUTO_INCREMENT** | Automatisch hochzählen | \`id INT AUTO_INCREMENT\` |
+| **NOT NULL** | Darf nicht leer sein | \`name VARCHAR(100) NOT NULL\` |
+| **UNIQUE** | Muss eindeutig sein | \`email VARCHAR(255) UNIQUE\` |
+| **DEFAULT** | Standardwert | \`status VARCHAR(20) DEFAULT 'aktiv'\` |
+| **FOREIGN KEY** | Verweis auf andere Tabelle | \`kunde_id INT REFERENCES kunden(id)\` |
+| **CHECK** | Bedingung prüfen | \`preis DECIMAL CHECK (preis > 0)\` |
+
+## Praxisbeispiel
+
+\`\`\`sql
+CREATE TABLE kunden (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    geburtsdatum DATE,
+    stadt VARCHAR(100) DEFAULT 'unbekannt',
+    erstellt_am TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE bestellungen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    kunde_id INT NOT NULL,
+    produkt VARCHAR(200) NOT NULL,
+    preis DECIMAL(10,2) NOT NULL CHECK (preis > 0),
+    bestelldatum DATE DEFAULT (CURRENT_DATE),
+    FOREIGN KEY (kunde_id) REFERENCES kunden(id)
+);
+\`\`\`
+
+## ALTER TABLE — Tabelle ändern
+
+\`\`\`sql
+-- Spalte hinzufügen
+ALTER TABLE kunden ADD telefon VARCHAR(20);
+
+-- Spalte ändern
+ALTER TABLE kunden MODIFY name VARCHAR(150) NOT NULL;
+
+-- Spalte löschen
+ALTER TABLE kunden DROP COLUMN telefon;
+
+-- Index erstellen
+CREATE INDEX idx_name ON kunden(name);
+\`\`\`
+
+## GRANT/REVOKE — Zugriffsrechte
+
+\`\`\`sql
+-- Benutzer erstellen
+CREATE USER 'lehrer'@'localhost' IDENTIFIED BY 'passwort123';
+
+-- Rechte vergeben
+GRANT SELECT, INSERT ON schule.noten TO 'lehrer'@'localhost';
+
+-- Rechte entziehen
+REVOKE INSERT ON schule.noten FROM 'lehrer'@'localhost';
+
+-- Alle Rechte
+GRANT ALL PRIVILEGES ON schule.* TO 'admin'@'localhost';
+\`\`\`
+
+> IHK-Prüfung: "Erstellen Sie eine Tabelle für..." — Datentypen und Constraints können!
+
+> Häufige Fehler: "VARCHAR und CHAR sind gleich" — Falsch! CHAR füllt mit Leerzeichen auf (feste Länge), VARCHAR speichert nur die tatsächlich eingegebenen Zeichen.
+`,
     },
   ],
 };
