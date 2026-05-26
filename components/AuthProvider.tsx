@@ -60,33 +60,59 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Firebase Auth State Listener
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(getAuthInstance(), async (firebaseUser) => {
-      if (firebaseUser) {
-        try {
-          let profile = await getUserProfile(firebaseUser.uid);
-          if (profile) {
-            if (profile.emailVerified !== firebaseUser.emailVerified) {
-              await updateUserProfile(firebaseUser.uid, { emailVerified: firebaseUser.emailVerified });
-              profile.emailVerified = firebaseUser.emailVerified;
-            }
-            setUser(profile);
+    let settled = false;
 
-            // Presence: Heartbeat + Page-Unload Detection
-            setOnline(firebaseUser.uid).catch(() => {});
-          } else {
+    // Safety timeout: ensure loading stops even if Firebase never responds
+    const timeout = setTimeout(() => {
+      if (!settled) {
+        settled = true;
+        setIsLoading(false);
+      }
+    }, 8000);
+
+    try {
+      const unsubscribe = onAuthStateChanged(getAuthInstance(), async (firebaseUser) => {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timeout);
+
+        if (firebaseUser) {
+          try {
+            let profile = await getUserProfile(firebaseUser.uid);
+            if (profile) {
+              if (profile.emailVerified !== firebaseUser.emailVerified) {
+                await updateUserProfile(firebaseUser.uid, { emailVerified: firebaseUser.emailVerified });
+                profile.emailVerified = firebaseUser.emailVerified;
+              }
+              setUser(profile);
+
+              // Presence: Heartbeat + Page-Unload Detection
+              setOnline(firebaseUser.uid).catch(() => {});
+            } else {
+              setUser(null);
+            }
+          } catch (err) {
+            console.error("Auth state error:", err);
             setUser(null);
           }
-        } catch (err) {
-          console.error("Auth state error:", err);
+        } else {
           setUser(null);
         }
-      } else {
-        setUser(null);
-      }
-      setIsLoading(false);
-    });
+        setIsLoading(false);
+      });
 
-    return () => unsubscribe();
+      return () => {
+        clearTimeout(timeout);
+        unsubscribe();
+      };
+    } catch (err) {
+      console.error("Firebase init error:", err);
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        setIsLoading(false);
+      }
+    }
   }, []);
 
   const login = async (email: string, password: string): Promise<void> => {

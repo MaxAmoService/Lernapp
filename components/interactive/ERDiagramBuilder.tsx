@@ -5,6 +5,7 @@ import { useState, useCallback } from "react";
 interface ERAttribute {
   name: string;
   isPK: boolean;
+  type?: string;
 }
 
 interface EREntity {
@@ -32,6 +33,7 @@ export function ERDiagramBuilder() {
   const [newEntityName, setNewEntityName] = useState("");
   const [newAttrName, setNewAttrName] = useState("");
   const [newAttrIsPK, setNewAttrIsPK] = useState(false);
+  const [newAttrType, setNewAttrType] = useState("VARCHAR(100)");
   const [selectedEntity, setSelectedEntity] = useState<string | null>(null);
   const [relFrom, setRelFrom] = useState("");
   const [relTo, setRelTo] = useState("");
@@ -59,13 +61,13 @@ export function ERDiagramBuilder() {
     setEntities((prev) =>
       prev.map((e) =>
         e.id === selectedEntity
-          ? { ...e, attributes: [...e.attributes, { name: newAttrName.trim(), isPK: newAttrIsPK }] }
+          ? { ...e, attributes: [...e.attributes, { name: newAttrName.trim(), isPK: newAttrIsPK, type: newAttrType }] }
           : e
       )
     );
     setNewAttrName("");
     setNewAttrIsPK(false);
-  }, [selectedEntity, newAttrName, newAttrIsPK]);
+  }, [selectedEntity, newAttrName, newAttrIsPK, newAttrType]);
 
   const removeEntity = useCallback((id: string) => {
     setEntities((prev) => prev.filter((e) => e.id !== id));
@@ -95,10 +97,10 @@ export function ERDiagramBuilder() {
 
   const loadExample = useCallback(() => {
     setEntities([
-      { id: "e1", name: "Kunde", x: 50, y: 60, attributes: [{ name: "KundenID", isPK: true }, { name: "Name", isPK: false }, { name: "Email", isPK: false }], color: "#3B82F6" },
-      { id: "e2", name: "Bestellung", x: 320, y: 60, attributes: [{ name: "BestellID", isPK: true }, { name: "Datum", isPK: false }, { name: "Betrag", isPK: false }], color: "#22C55E" },
-      { id: "e3", name: "Produkt", x: 590, y: 60, attributes: [{ name: "ProduktID", isPK: true }, { name: "Name", isPK: false }, { name: "Preis", isPK: false }], color: "#F59E0B" },
-      { id: "e4", name: "Bestellposition", x: 450, y: 260, attributes: [{ name: "BestellID", isPK: true }, { name: "ProduktID", isPK: true }, { name: "Menge", isPK: false }], color: "#EC4899" },
+      { id: "e1", name: "Kunde", x: 50, y: 60, attributes: [{ name: "KundenID", isPK: true, type: "INT" }, { name: "Name", isPK: false, type: "VARCHAR(100)" }, { name: "Email", isPK: false, type: "VARCHAR(255)" }], color: "#3B82F6" },
+      { id: "e2", name: "Bestellung", x: 320, y: 60, attributes: [{ name: "BestellID", isPK: true, type: "INT" }, { name: "Datum", isPK: false, type: "DATE" }, { name: "Betrag", isPK: false, type: "DECIMAL(10,2)" }], color: "#22C55E" },
+      { id: "e3", name: "Produkt", x: 590, y: 60, attributes: [{ name: "ProduktID", isPK: true, type: "INT" }, { name: "Name", isPK: false, type: "VARCHAR(100)" }, { name: "Preis", isPK: false, type: "DECIMAL(10,2)" }], color: "#F59E0B" },
+      { id: "e4", name: "Bestellposition", x: 450, y: 260, attributes: [{ name: "BestellID", isPK: true, type: "INT" }, { name: "ProduktID", isPK: true, type: "INT" }, { name: "Menge", isPK: false, type: "INT" }], color: "#EC4899" },
     ]);
     setRelationships([
       { id: "r1", from: "e1", to: "e2", label: "hat", cardinality: "1:n" },
@@ -188,6 +190,23 @@ export function ERDiagramBuilder() {
                 placeholder="Attributname"
                 className="flex-1 min-w-[150px] bg-slate-700 border border-slate-600 rounded px-2 py-1.5 text-sm text-white placeholder-slate-400 focus:border-purple-500 focus:outline-none"
               />
+              <select
+                value={newAttrType}
+                onChange={(e) => setNewAttrType(e.target.value)}
+                className="bg-slate-700 text-white text-sm rounded px-2 py-1.5 border border-slate-600"
+              >
+                <option value="INT">INT</option>
+                <option value="VARCHAR(50)">VARCHAR(50)</option>
+                <option value="VARCHAR(100)">VARCHAR(100)</option>
+                <option value="VARCHAR(255)">VARCHAR(255)</option>
+                <option value="TEXT">TEXT</option>
+                <option value="DECIMAL(10,2)">DECIMAL(10,2)</option>
+                <option value="FLOAT">FLOAT</option>
+                <option value="BOOLEAN">BOOLEAN</option>
+                <option value="DATE">DATE</option>
+                <option value="TIMESTAMP">TIMESTAMP</option>
+                <option value="SERIAL">SERIAL</option>
+              </select>
               <label className="flex items-center gap-1 text-xs text-slate-300">
                 <input type="checkbox" checked={newAttrIsPK} onChange={(e) => setNewAttrIsPK(e.target.checked)} className="rounded" />
                 PK
@@ -198,6 +217,7 @@ export function ERDiagramBuilder() {
               <div key={i} className="flex items-center gap-2 text-xs mb-1 group">
                 {attr.isPK && <span className="text-yellow-400">🔑</span>}
                 <span className={attr.isPK ? "text-yellow-300 font-semibold" : "text-slate-300"}>{attr.name}</span>
+                {attr.type && <span className="text-purple-400/70 font-mono text-[10px]">{attr.type}</span>}
                 <button onClick={() => removeAttribute(selectedEnt.id, i)} className="text-red-400 opacity-0 group-hover:opacity-100 transition-opacity ml-auto text-xs">×</button>
               </div>
             ))}
@@ -245,6 +265,7 @@ export function ERDiagramBuilder() {
                           ) : (
                             <span className="text-slate-300 pl-4">{attr.name}</span>
                           )}
+                          {attr.type && <span className="text-purple-400/60 font-mono text-[10px] ml-1">{attr.type}</span>}
                         </div>
                       ))
                     )}

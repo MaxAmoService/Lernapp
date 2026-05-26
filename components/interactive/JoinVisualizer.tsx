@@ -65,7 +65,7 @@ function getJoinResult(type: JoinType): { rows: ResultRow[]; description: string
       return {
         rows: resultRows,
         description: `Nur Zeilen mit Match in BEIDEN Tabellen. ${aRows.length - matchedAIds.size} Kunden ohne Bestellung und ${bRows.length - matchedBIds.size} Bestellungen ohne Kunden werden ausgeblendet.`,
-        sql: `SELECT k.*, b.*\nFROM kunde k\nINNER JOIN bestellung b ON k.id = b.kunde_id`,
+        sql: `SELECT k.*, b.*\nFROM Kunde k\nINNER JOIN Bestellung b ON k.id = b.kunde_id`,
       };
     }
     case "left": {
@@ -88,7 +88,7 @@ function getJoinResult(type: JoinType): { rows: ResultRow[]; description: string
       return {
         rows: resultRows,
         description: "Alle Kunden — auch die ohne Bestellung (Bestell-Spalten = NULL).",
-        sql: `SELECT k.*, b.*\nFROM kunde k\nLEFT JOIN bestellung b ON k.id = b.kunde_id`,
+        sql: `SELECT k.*, b.*\nFROM Kunde k\nLEFT JOIN Bestellung b ON k.id = b.kunde_id`,
       };
     }
     case "right": {
@@ -111,7 +111,7 @@ function getJoinResult(type: JoinType): { rows: ResultRow[]; description: string
       return {
         rows: resultRows,
         description: "Alle Bestellungen — auch die ohne Kunden (Kunden-Spalten = NULL).",
-        sql: `SELECT k.*, b.*\nFROM kunde k\nRIGHT JOIN bestellung b ON k.id = b.kunde_id`,
+        sql: `SELECT k.*, b.*\nFROM Kunde k\nRIGHT JOIN Bestellung b ON k.id = b.kunde_id`,
       };
     }
     case "cross": {
@@ -123,7 +123,7 @@ function getJoinResult(type: JoinType): { rows: ResultRow[]; description: string
       return {
         rows: resultRows,
         description: `Kartesisches Produkt: ${aRows.length} × ${bRows.length} = ${resultRows.length} Zeilen. Jede Kombination!`,
-        sql: `SELECT k.*, b.*\nFROM kunde k\nCROSS JOIN bestellung b`,
+        sql: `SELECT k.*, b.*\nFROM Kunde k\nCROSS JOIN Bestellung b`,
       };
     }
   }

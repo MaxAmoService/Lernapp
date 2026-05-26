@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Exercise } from "@/lib/mathExercises";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineMath";
@@ -21,12 +21,26 @@ interface ExamAnswer {
   correct: boolean;
 }
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export function InteractiveExercise({ exercises, moduleTitle, onComplete, difficulty, examMode }: Props) {
   // Filter by difficulty if specified
   const filtered = useMemo(() => {
     if (difficulty !== undefined) return exercises.filter(e => e.difficulty === difficulty);
     return exercises;
   }, [exercises, difficulty]);
+
+  const [shuffledExercises, setShuffledExercises] = useState<Exercise[]>([]);
+  useEffect(() => {
+    setShuffledExercises(shuffleArray(filtered));
+  }, [filtered]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
@@ -39,8 +53,8 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
   const [completed, setCompleted] = useState(false);
   const [examAnswers, setExamAnswers] = useState<ExamAnswer[]>([]);
 
-  const total = filtered.length;
-  const current = filtered[currentIndex];
+  const total = shuffledExercises.length;
+  const current = shuffledExercises[currentIndex];
   const progress = total > 0 ? ((currentIndex + 1) / total) * 100 : 0;
 
   // Reset bei Aufgabenwechsel
@@ -113,6 +127,19 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
     }
   };
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.repeat) {
+      e.preventDefault();
+      if (examMode) {
+        checkAnswer();
+      } else if (showResult) {
+        nextExercise();
+      } else {
+        checkAnswer();
+      }
+    }
+  }, [examMode, showResult, checkAnswer, nextExercise]);
+
   const resetExercise = () => {
     setUserAnswer("");
     setSelectedOption(null);
@@ -126,6 +153,7 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
     setStats({ correct: 0, wrong: 0 });
     setCompleted(false);
     setExamAnswers([]);
+    setShuffledExercises(shuffleArray(filtered));
     resetExercise();
   };
 
@@ -146,7 +174,7 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
 
   const examPassed = examMode && getScorePercentage() >= 70;
 
-  if (filtered.length === 0) {
+  if (shuffledExercises.length === 0) {
     return (
       <div className="glass rounded-xl p-8 text-center">
         <Target className="w-12 h-12 text-slate-500 mx-auto mb-4" />
@@ -269,7 +297,7 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6" tabIndex={0} onKeyDown={handleKeyDown}>
       {/* Header */}
       <div className="glass rounded-2xl p-6">
         <div className="flex items-center justify-between mb-4">
@@ -365,7 +393,6 @@ export function InteractiveExercise({ exercises, moduleTitle, onComplete, diffic
                 type="text"
                 value={userAnswer}
                 onChange={(e) => setUserAnswer(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && checkAnswer()}
                 placeholder={current.format || "Deine Antwort..."}
                 className="w-full px-4 py-3 bg-slate-800/50 border border-slate-600 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
                 autoFocus

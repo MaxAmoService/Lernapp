@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 import { mathQuizzes } from "@/lib/mathData";
 import { complexQuizzes } from "@/lib/complexData";
@@ -158,6 +158,15 @@ const allQuizData: Record<string, QuizQuestion[]> = {
 };
 
 // Component to render questions with math
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 function QuestionWithMath({ text }: { text: string }) {
   const parts = text.split(/(\$[^$]+\$)/g);
   return (
@@ -174,7 +183,8 @@ function QuestionWithMath({ text }: { text: string }) {
 
 export function Quiz({ moduleSlug, onComplete }: QuizProps) {
   const { completeLesson } = useAuth();
-  const questions = allQuizData[moduleSlug] || [];
+  const rawQuestions = allQuizData[moduleSlug] || [];
+  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [inputAnswer, setInputAnswer] = useState("");
@@ -182,6 +192,10 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+
+  useEffect(() => {
+    setQuestions(shuffleArray(rawQuestions));
+  }, [moduleSlug]);
 
   if (questions.length === 0) {
     return (
@@ -233,6 +247,7 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
   };
 
   const restart = () => {
+    setQuestions(shuffleArray(rawQuestions));
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setInputAnswer("");

@@ -45,16 +45,16 @@ const SAMPLE_TABLES: Record<string, { columns: string[]; rows: string[][] }> = {
 };
 
 const EXAMPLE_QUERIES = [
-  { label: "Alle Kunden", sql: "SELECT * FROM kunde" },
-  { label: "Kunden aus Berlin", sql: "SELECT Name, Email FROM kunde WHERE Stadt = 'Berlin'" },
-  { label: "Bestellungen sortiert", sql: "SELECT * FROM bestellung ORDER BY Betrag DESC" },
-  { label: "Anzahl Bestellungen", sql: "SELECT COUNT(*) AS Anzahl FROM bestellung" },
-  { label: "Durchschnitt Betrag", sql: "SELECT AVG(Betrag) AS Durchschnitt FROM bestellung" },
-  { label: "JOIN: Kunde + Bestellung", sql: "SELECT k.Name, b.Datum, b.Betrag FROM kunde k JOIN bestellung b ON k.KundenID = b.KundenID" },
-  { label: "Produkte > 100€", sql: "SELECT Name, Preis FROM produkt WHERE Preis > 100 ORDER BY Preis" },
-  { label: "Bestellungen pro Kunde", sql: "SELECT k.Name, COUNT(b.BestellID) AS Anzahl FROM kunde k JOIN bestellung b ON k.KundenID = b.KundenID GROUP BY k.Name" },
-  { label: "Offene Bestellungen", sql: "SELECT * FROM bestellung WHERE Status = 'offen'" },
-  { label: "Produkte unter 50 Stk", sql: "SELECT Name, Lagerbestand FROM produkt WHERE Lagerbestand < 50" },
+  { label: "Alle Kunden", sql: "SELECT * FROM Kunde" },
+  { label: "Kunden aus Berlin", sql: "SELECT Name, Email FROM Kunde WHERE Stadt = 'Berlin'" },
+  { label: "Bestellungen sortiert", sql: "SELECT * FROM Bestellung ORDER BY Betrag DESC" },
+  { label: "Anzahl Bestellungen", sql: "SELECT COUNT(*) AS Anzahl FROM Bestellung" },
+  { label: "Durchschnitt Betrag", sql: "SELECT AVG(Betrag) AS Durchschnitt FROM Bestellung" },
+  { label: "JOIN: Kunde + Bestellung", sql: "SELECT k.Name, b.Datum, b.Betrag FROM Kunde k JOIN Bestellung b ON k.KundenID = b.KundenID" },
+  { label: "Produkte > 100€", sql: "SELECT Name, Preis FROM Produkt WHERE Preis > 100 ORDER BY Preis" },
+  { label: "Bestellungen pro Kunde", sql: "SELECT k.Name, COUNT(b.BestellID) AS Anzahl FROM Kunde k JOIN Bestellung b ON k.KundenID = b.KundenID GROUP BY k.Name" },
+  { label: "Offene Bestellungen", sql: "SELECT * FROM Bestellung WHERE Status = 'offen'" },
+  { label: "Produkte unter 50 Stk", sql: "SELECT Name, Lagerbestand FROM Produkt WHERE Lagerbestand < 50" },
 ];
 
 function executeQuery(sql: string): QueryResult {
@@ -80,7 +80,7 @@ function executeQuery(sql: string): QueryResult {
       }
     }
     if (!tableName) {
-      return { columns: [], rows: [], error: "❌ Tabelle nicht gefunden. Verfügbar: kunde, bestellung, produkt" };
+      return { columns: [], rows: [], error: "❌ Tabelle nicht gefunden. Verfügbar: Kunde, Bestellung, Produkt" };
     }
 
     const table = SAMPLE_TABLES[tableName];
@@ -249,7 +249,7 @@ function executeQuery(sql: string): QueryResult {
 }
 
 export function SQLPlayground() {
-  const [sql, setSql] = useState("SELECT * FROM kunde");
+  const [sql, setSql] = useState("SELECT * FROM Kunde");
   const [result, setResult] = useState<QueryResult | null>(null);
   const [showTables, setShowTables] = useState(false);
 
@@ -280,7 +280,7 @@ export function SQLPlayground() {
             {Object.entries(SAMPLE_TABLES).map(([name, table]) => (
               <div key={name} className="bg-slate-800/60 rounded-lg border border-slate-700 overflow-hidden">
                 <div className="bg-slate-700/50 px-3 py-1.5">
-                  <span className="text-xs font-bold text-purple-300">📋 {name}</span>
+                  <span className="text-xs font-bold text-purple-300">📋 {name.charAt(0).toUpperCase() + name.slice(1)}</span>
                 </div>
                 <div className="px-3 py-2">
                   {table.columns.map((col, i) => (
@@ -317,7 +317,7 @@ export function SQLPlayground() {
             onChange={(e) => setSql(e.target.value)}
             rows={3}
             className="w-full bg-slate-900 border border-slate-600 rounded-lg p-3 pr-20 font-mono text-sm text-green-300 placeholder-slate-500 focus:border-purple-500 focus:outline-none resize-none"
-            placeholder="SELECT * FROM kunde WHERE Stadt = 'Berlin'"
+            placeholder="SELECT * FROM Kunde WHERE Stadt = 'Berlin'"
             spellCheck={false}
           />
           <button

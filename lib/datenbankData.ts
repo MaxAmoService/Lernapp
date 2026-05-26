@@ -64,24 +64,24 @@ export const datenbankModule: Module = {
 ### Wichtige Befehle
 \`\`\`sql
 -- Tabelle erstellen
-CREATE TABLE kunde (
+CREATE TABLE Kunde (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(255) UNIQUE
 );
 
 -- Daten einfügen
-INSERT INTO kunde (name, email) VALUES ('Max', 'max@b.de');
+INSERT INTO Kunde (name, email) VALUES ('Max', 'max@b.de');
 
 -- Abfrage mit JOIN
 SELECT b.id, k.name, b.datum
-FROM bestellung b
-JOIN kunde k ON b.kunde_id = k.id;
+FROM Bestellung b
+JOIN Kunde k ON b.kunde_id = k.id;
 
 -- Löschen vs. Kürzen
-DELETE FROM tabelle WHERE id = 1;  -- löscht Zeile(n)
-TRUNCATE TABLE tabelle;            -- leert ganze Tabelle
-DROP TABLE tabelle;                -- entfernt Tabelle komplett
+DELETE FROM Tabelle WHERE id = 1;  -- löscht Zeile(n)
+TRUNCATE TABLE Tabelle;            -- leert ganze Tabelle
+DROP TABLE Tabelle;                -- entfernt Tabelle komplett
 \`\`\`
 
 ### Backups
@@ -428,7 +428,7 @@ Strukturen erstellen, ändern, löschen:
 
 \`\`\`sql
 -- Tabelle erstellen
-CREATE TABLE kunde (
+CREATE TABLE Kunde (
   id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   email VARCHAR(255) UNIQUE,
@@ -436,13 +436,13 @@ CREATE TABLE kunde (
 );
 
 -- Spalte hinzufügen
-ALTER TABLE kunde ADD COLUMN telefon VARCHAR(20);
+ALTER TABLE Kunde ADD COLUMN telefon VARCHAR(20);
 
 -- Tabelle leeren (Struktur bleibt)
-TRUNCATE TABLE kunde;
+TRUNCATE TABLE Kunde;
 
 -- Tabelle komplett entfernen
-DROP TABLE kunde;
+DROP TABLE Kunde;
 \`\`\`
 
 | Befehl | Was es macht |
@@ -458,16 +458,16 @@ Daten einfügen, ändern, löschen:
 
 \`\`\`sql
 -- Daten einfügen
-INSERT INTO kunde (name, email) VALUES ('Max', 'max@b.de');
+INSERT INTO Kunde (name, email) VALUES ('Max', 'max@b.de');
 
 -- Daten ändern
-UPDATE kunde SET email = 'neu@b.de' WHERE id = 1;
+UPDATE Kunde SET email = 'neu@b.de' WHERE id = 1;
 
 -- Daten löschen
-DELETE FROM kunde WHERE id = 1;
+DELETE FROM Kunde WHERE id = 1;
 \`\`\`
 
-> ⚠️ **ACHTUNG:** \`DELETE FROM kunde\` ohne WHERE löscht ALLE Zeilen!
+> ⚠️ **ACHTUNG:** \`DELETE FROM Kunde\` ohne WHERE löscht ALLE Zeilen!
 
 ### DQL — Data Query Language
 
@@ -475,17 +475,17 @@ Daten abfragen:
 
 \`\`\`sql
 -- Alle Kunden
-SELECT * FROM kunde;
+SELECT * FROM Kunde;
 
 -- Bestimmte Spalten mit Filter
-SELECT name, email FROM kunde WHERE plz = '10115';
+SELECT name, email FROM Kunde WHERE plz = '10115';
 
 -- Sortierung und Limit
-SELECT * FROM kunde ORDER BY name ASC LIMIT 10;
+SELECT * FROM Kunde ORDER BY name ASC LIMIT 10;
 
 -- Aggregationen
-SELECT COUNT(*) AS anzahl FROM kunde;
-SELECT AVG(preis) AS durchschnitt FROM produkt;
+SELECT COUNT(*) AS anzahl FROM Kunde;
+SELECT AVG(preis) AS durchschnitt FROM Produkt;
 \`\`\`
 
 ### DCL — Data Control Language
@@ -493,8 +493,8 @@ SELECT AVG(preis) AS durchschnitt FROM produkt;
 Rechte verwalten:
 
 \`\`\`sql
-GRANT SELECT ON kunde TO benutzer;
-REVOKE INSERT ON kunde FROM benutzer;
+GRANT SELECT ON Kunde TO benutzer;
+REVOKE INSERT ON Kunde FROM benutzer;
 \`\`\`
 
 ### TCL — Transaction Control Language
@@ -503,8 +503,8 @@ Transaktionen steuern:
 
 \`\`\`sql
 BEGIN;
-UPDATE konto SET saldo = saldo - 100 WHERE id = 1;
-UPDATE konto SET saldo = saldo + 100 WHERE id = 2;
+UPDATE Konto SET saldo = saldo - 100 WHERE id = 1;
+UPDATE Konto SET saldo = saldo + 100 WHERE id = 2;
 COMMIT;  -- oder ROLLBACK;
 \`\`\`
 
@@ -540,8 +540,8 @@ Nur Zeilen, die in **beiden** Tabellen einen Match haben.
 
 \`\`\`sql
 SELECT k.name, b.datum, b.betrag
-FROM kunde k
-INNER JOIN bestellung b ON k.id = b.kunde_id;
+FROM Kunde k
+INNER JOIN Bestellung b ON k.id = b.kunde_id;
 \`\`\`
 
 > 💡 INNER JOIN = "Nur Kunden, die auch bestellt haben"
@@ -552,8 +552,8 @@ INNER JOIN bestellung b ON k.id = b.kunde_id;
 
 \`\`\`sql
 SELECT k.name, b.datum
-FROM kunde k
-LEFT JOIN bestellung b ON k.id = b.kunde_id;
+FROM Kunde k
+LEFT JOIN Bestellung b ON k.id = b.kunde_id;
 \`\`\`
 
 > 💡 LEFT JOIN = "Alle Kunden, auch die ohne Bestellung"
@@ -564,8 +564,8 @@ LEFT JOIN bestellung b ON k.id = b.kunde_id;
 
 \`\`\`sql
 SELECT k.name, b.datum
-FROM kunde k
-RIGHT JOIN bestellung b ON k.id = b.kunde_id;
+FROM Kunde k
+RIGHT JOIN Bestellung b ON k.id = b.kunde_id;
 \`\`\`
 
 ## CROSS JOIN
@@ -573,7 +573,7 @@ RIGHT JOIN bestellung b ON k.id = b.kunde_id;
 **Jede** Kombination — kartesisches Produkt. Vorsicht: Sehr viele Zeilen!
 
 \`\`\`sql
-SELECT * FROM farbe CROSS JOIN größe;
+SELECT * FROM Farbe CROSS JOIN Größe;
 -- 3 Farben × 4 Größen = 12 Zeilen
 \`\`\`
 
@@ -592,8 +592,8 @@ Theoretisch kann man auch mit SELECT verknüpfen:
 
 \`\`\`sql
 -- Das gleiche wie INNER JOIN:
-SELECT * FROM kunde, bestellung
-WHERE kunde.id = bestellung.kunde_id;
+SELECT * FROM Kunde, Bestellung
+WHERE Kunde.id = Bestellung.kunde_id;
 \`\`\`
 
 Aber: **JOIN ist schneller** (besserer Query-Plan) und **lesbarer**!
@@ -634,8 +634,8 @@ Eine Transaktion wird entweder **vollständig** ausgeführt oder **gar nicht**.
 **Beispiel — Banküberweisung:**
 \`\`\`sql
 BEGIN;
-UPDATE konto SET saldo = saldo - 100 WHERE id = 1;  -- Abheben
-UPDATE konto SET saldo = saldo + 100 WHERE id = 2;  -- Einzahlen
+UPDATE Konto SET saldo = saldo - 100 WHERE id = 1;  -- Abheben
+UPDATE Konto SET saldo = saldo + 100 WHERE id = 2;  -- Einzahlen
 COMMIT;
 \`\`\`
 
@@ -870,7 +870,7 @@ Eine Datenbank wird in **4 Phasen** geplant:
 
 ### Physisch:
 \`\`\`sql
-CREATE TABLE mitarbeiter (
+CREATE TABLE Mitarbeiter (
   mitarbeiter_id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   abteilung VARCHAR(50)
