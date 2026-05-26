@@ -112,7 +112,9 @@ Register → L1 (~64KB, ~1ns) → L2 (~256KB-1MB, ~4ns) → L3 (~4-32MB, ~10ns) 
       duration: "20 min",
       type: "interactive",
       interactive: "cpuArchitectureExplorer",
-      content: `## Grundlagen: Was ist eine CPU?
+      content: `# CPU-Architektur & Von-Neumann 🧠
+
+## Grundlagen: Was ist eine CPU?
 
 Die CPU (Central Processing Unit) ist das "Gehirn" des Computers. Sie führt Befehle aus, die im Speicher abgelegt sind. Die meisten modernen Computer folgen der **Von-Neumann-Architektur** — ein Konzept aus dem Jahr 1945, das bis heute die Grundlage bildet.
 
@@ -209,7 +211,9 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
       title: "Busse, Taktfrequenz & Befehlssatz",
       duration: "15 min",
       type: "text",
-      content: `## Die drei Busse
+      content: `# Busse, Taktfrequenz & Befehlssatz 🚌
+
+## Die drei Busse
 
 Verbindung zwischen CPU, Speicher und Peripherie — wie Autobahnen für Daten:
 
@@ -283,7 +287,9 @@ Jede CPU versteht einen bestimmten Befehlssatz — die Maschinensprache:
       title: "Eingabegeräte",
       duration: "15 min",
       type: "text",
-      content: `## Übersicht
+      content: `# Eingabegeräte ⌨️
+
+## Übersicht
 
 Eingabegeräte ermöglichen es dem Menschen, Daten in das Computersystem zu übertragen. Sie sind das Bindeglied zwischen Mensch und Maschine.
 
@@ -364,7 +370,9 @@ Biometrische Verfahren nutzen einzigartige körperliche Merkmale:
       title: "Ausgabegeräte",
       duration: "15 min",
       type: "text",
-      content: `## Übersicht
+      content: `# Ausgabegeräte 🖥️
+
+## Übersicht
 
 Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell, akustisch oder physisch.
 
@@ -447,7 +455,9 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
       duration: "20 min",
       type: "interactive",
       interactive: "raidConfigurator",
-      content: `## Speichertypen im Überblick
+      content: `# Speichermedien & RAID 💾
+
+## Speichertypen im Überblick
 
 Speichermedien werden nach ihrer Technologie in drei Kategorien eingeteilt:
 
@@ -543,7 +553,9 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
       duration: "20 min",
       type: "interactive",
       interactive: "memoryHierarchyExplorer",
-      content: `## Die Speicherhierarchie
+      content: `# Speicherverwaltung & Adressierung 📊
+
+## Die Speicherhierarchie
 
 Der Computer nutzt verschiedene Speichertypen — je schneller, desto teurer und kleiner:
 
@@ -655,7 +667,9 @@ Formel: **Adressraum = 2^n** (n = Anzahl Adressleitungen)
       title: "Betriebssysteme & Systemsoftware",
       duration: "20 min",
       type: "text",
-      content: `## Was macht ein Betriebssystem?
+      content: `# Betriebssysteme & Systemsoftware ⚙️
+
+## Was macht ein Betriebssystem?
 
 Das Betriebssystem (OS) ist die Vermittlerschicht zwischen Hardware und Anwendungssoftware:
 
@@ -779,7 +793,9 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
       duration: "20 min",
       type: "interactive",
       interactive: "virtualizationExplorer",
-      content: `## Was ist Virtualisierung?
+      content: `# Virtualisierung & Cloud Computing ☁️
+
+## Was ist Virtualisierung?
 
 Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle Maschinen" (VMs) laufen auf einer einzigen physischen Maschine — jede mit eigenem OS.
 
@@ -875,7 +891,9 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
       duration: "15 min",
       type: "interactive",
       interactive: "addressingCalculator",
-      content: `## Benchmarks
+      content: `# Leistungsbewertung & Optimierung ⚡
+
+## Benchmarks
 
 Benchmarks sind standardisierte Tests zur Messung der Computerleistung:
 
@@ -961,7 +979,9 @@ Das OS verwaltet Ressourcen effizient:
       title: "Nachhaltigkeit & Green IT",
       duration: "12 min",
       type: "text",
-      content: `## Warum Green IT?
+      content: `# Nachhaltigkeit & Green IT 🌱
+
+## Warum Green IT?
 
 Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Green IT zielt darauf ab, den ökologischen Fußabdruck der IT zu reduzieren.
 
@@ -1052,7 +1072,9 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
       duration: "15 min",
       type: "interactive",
       interactive: "storageComparator",
-      content: `## Die vier Generationen
+      content: `# Historische Entwicklung 📜
+
+## Die vier Generationen
 
 > Merksatz: "**R**olf **T**rinkt **I**mmer **M**ilch" — **R**öhren, **T**ransistoren, **I**ntegrierte Schaltungen, **M**ikroprozessoren
 
@@ -1145,7 +1167,9 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
       duration: "20 min",
       type: "interactive",
       interactive: "bootSequenceBuilder",
-      content: `## Grundlagen: Was passiert beim Einschalten?
+      content: `# BIOS/UEFI & Bootvorgang 🔌
+
+## Grundlagen: Was passiert beim Einschalten?
 
 Wenn du den Power-Button drückst, passiert eine ganze Kette von Ereignissen, bevor das Betriebssystem startet. Diese Kette ist standardisiert und bei jedem PC gleich.
 
@@ -1239,7 +1263,9 @@ Der Bootloader lädt den Kernel des Betriebssystems in den RAM und übergibt die
       duration: "15 min",
       type: "interactive",
       interactive: "dataTransmissionVisualizer",
-      content: `## Seriell vs. Parallel
+      content: `# Serielle Datenübertragung 🔗
+
+## Seriell vs. Parallel
 
 Es gibt zwei grundlegende Arten, Daten zu übertragen:
 

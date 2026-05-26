@@ -781,7 +781,9 @@ Das Pflichtenheft stammt vom **Auftragnehmer** und beschreibt die **Lösung**:
       duration: "18 min",
       type: "interactive",
       interactive: "treeExplorer",
-      content: `## Was ist ein Baum?
+      content: `# Baumstrukturen 🌳
+
+## Was ist ein Baum?
 
 Ein Baum ist eine **hierarchische Datenstruktur** aus Knoten und Kanten — ohne Schleifen (Zyklen).
 
@@ -853,7 +855,9 @@ Es gibt 3 Grundreihenfolgen, einen Baum zu durchlaufen:
       duration: "18 min",
       type: "interactive",
       interactive: "graphExplorer",
-      content: `## Was ist ein Graph?
+      content: `# Graphen 🔗
+
+## Was ist ein Graph?
 
 Ein Graph ist eine Datenstruktur aus **Knoten** (Nodes) und **Kanten** (Edges) — im Gegensatz zum Baum können Schleifen existieren.
 

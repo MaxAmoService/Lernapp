@@ -862,7 +862,9 @@ netstat -an  → Alle Verbindungen mit Portnummern
       duration: "15 min",
       type: "interactive",
       interactive: "arpExplorer",
-      content: `## Was ist eine MAC-Adresse?
+      content: `# MAC-Adressen & ARP 📡
+
+## Was ist eine MAC-Adresse?
 
 Die MAC-Adresse (Media Access Control) ist die **hardwarenahe Adresse** eines Netzwerkgeräts. Sie ist weltweit eindeutig und fest in die Netzwerkkarte eingebrannt.
 
@@ -919,7 +921,9 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
       title: "Zugriffsverfahren: CSMA/CD & CSMA/CA",
       duration: "12 min",
       type: "text",
-      content: `## Warum Zugriffsverfahren?
+      content: `# Zugriffsverfahren: CSMA/CD & CSMA/CA 🔄
+
+## Warum Zugriffsverfahren?
 
 Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, wer wann senden darf. Sonst gibt es Kollisionen.
 
@@ -995,7 +999,9 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
       title: "Internetzugang: DSL & Mobilfunk",
       duration: "15 min",
       type: "text",
-      content: `## DSL — Digital Subscriber Line
+      content: `# Internetzugang: DSL & Mobilfunk 🌍
+
+## DSL — Digital Subscriber Line
 
 DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 
