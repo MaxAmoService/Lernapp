@@ -98,9 +98,7 @@ DROP TABLE Tabelle;                -- entfernt Tabelle komplett
       title: "Grundbegriffe & Vokabeln",
       duration: "12 min",
       type: "text",
-      content: `# Grundbegriffe & Vokabeln 📖
-
-## Was ist eine Datenbank?
+      content: `## Was ist eine Datenbank?
 
 Eine **Datenbank** ist eine strukturierte Sammlung von Daten, die effizient gespeichert, verwaltet und abgerufen werden können. In der IHK arbeiten wir hauptsächlich mit **relationalen Datenbanken**.
 
@@ -162,9 +160,7 @@ Durch fehlende Normalisierung können drei Probleme auftreten:
       duration: "15 min",
       type: "interactive",
       interactive: "relationalModelExplorer",
-      content: `# Relationale Datenbanken & Kardinalitäten 🔗
-
-## Was bedeutet "relational"?
+      content: `## Was bedeutet "relational"?
 
 **Relational** bedeutet: Die Tabellen stehen in **Relation** zueinander — sie hängen über Schlüssel zusammen.
 
@@ -236,9 +232,7 @@ Probiere verschiedene Beziehungstypen aus und sieh dir die resultierenden Tabell
       duration: "18 min",
       type: "interactive",
       interactive: "erDiagramBuilder",
-      content: `# Entity-Relationship-Modell (ERM) 🏗️
-
-## Was ist das ER-Modell?
+      content: `## Was ist das ER-Modell?
 
 Das **ER-Modell** (Entity-Relationship-Modell) ist ein Hilfsmittel zur **Datenbankplanung**. Es entsteht in der **konzeptionellen Phase** und stellt dar:
 - Welche **Entitäten** (Tabellen) es gibt
@@ -298,9 +292,7 @@ Baue dein eigenes ER-Diagramm — füge Entitäten, Attribute und Beziehungen hi
       duration: "20 min",
       type: "interactive",
       interactive: "normalisationTrainer",
-      content: `# Normalisierung — 1NF, 2NF, 3NF 📊
-
-## Warum normalisieren?
+      content: `## Warum normalisieren?
 
 Ziel der Normalisierung:
 - ✅ **Redundanzen** vermeiden
@@ -392,9 +384,7 @@ Bringe Schritt für Schritt eine denormalisierte Tabelle in die 3NF — mit Erkl
       duration: "20 min",
       type: "interactive",
       interactive: "sqlPlayground",
-      content: `# SQL — Die Sprache der Datenbanken 💾
-
-## Was ist SQL?
+      content: `## Was ist SQL?
 
 **SQL** (Structured Query Language) ist eine **deklarative Sprache** für relationale Datenbanken.
 - Keine Programmiersprache (keine Schleifen!)
@@ -526,9 +516,7 @@ Schreibe eigene SQL-Befehle und sieh die Ergebnisse live!
       duration: "18 min",
       type: "interactive",
       interactive: "joinVisualizer",
-      content: `# JOINs — Tabellen verknüpfen 🔀
-
-## Was ist ein JOIN?
+      content: `## Was ist ein JOIN?
 
 Ein **JOIN** kombiniert Daten aus **zwei oder mehr Tabellen** basierend auf einem gemeinsamen Attribut (meist PK/FK).
 
@@ -615,9 +603,7 @@ Sieh visuell, welche Zeilen bei welchem JOIN-Typ übrig bleiben!
       title: "Das ACID-Prinzip",
       duration: "10 min",
       type: "text",
-      content: `# Das ACID-Prinzip 🧪
-
-## Was ist ACID?
+      content: `## Was ist ACID?
 
 **ACID** beschreibt die vier Eigenschaften, die eine Transaktion in einer relationalen Datenbank garantieren muss.
 
@@ -692,9 +678,7 @@ Sobald eine Transaktion erfolgreich abgeschlossen (COMMIT) ist, bleiben die Date
       duration: "25 min",
       type: "interactive",
       interactive: "sqlPlayground",
-      content: `# IHK Übungsaufgaben — SQL 📝
-
-Hier übst du typische IHK-Prüfungsaufgaben zu SQL. Die Aufgaben basieren auf realen AP1/AP2-Prüfungen.
+      content: `Hier übst du typische IHK-Prüfungsaufgaben zu SQL. Die Aufgaben basieren auf realen AP1/AP2-Prüfungen.
 
 ## Aufgabe 1: Produktionsdaten
 
@@ -783,9 +767,7 @@ Nutze den Playground unten, um eigene Queries zu schreiben und zu testen!
       duration: "15 min",
       type: "interactive",
       interactive: "dbPlanningPhases",
-      content: `# Datenbank planen — Die 4 Phasen 📋
-
-## Übersicht
+      content: `## Übersicht
 
 Eine Datenbank wird in **4 Phasen** geplant:
 
@@ -894,9 +876,7 @@ Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vo
       title: "Backups & Datenwiederherstellung",
       duration: "10 min",
       type: "text",
-      content: `# Backups & Datenwiederherstellung 💾
-
-## Warum Backups?
+      content: `## Warum Backups?
 
 > 💡 **Kein Backup = Keine Mitleid.** Datenverlust kann durch Hardwareausfall, menschliche Fehler oder Cyberangriffe passieren.
 
@@ -964,9 +944,7 @@ psql -U benutzer datenbank < backup.sql
       title: "Datenbanktypen im Überblick",
       duration: "12 min",
       type: "text",
-      content: `# Datenbanktypen im Überblick 🗂️
-
-## Warum verschiedene Datenbanktypen?
+      content: `## Warum verschiedene Datenbanktypen?
 
 Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderungen brauchen verschiedene Lösungen.
 
@@ -1039,9 +1017,7 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
       title: "CREATE TABLE im Detail",
       duration: "15 min",
       type: "text",
-      content: `# CREATE TABLE im Detail 📝
-
-## Tabellen erstellen
+      content: `## Tabellen erstellen
 
 Das CREATE TABLE-Statement definiert die Struktur einer Tabelle. In der IHK-Prüfung musst du solche Statements schreiben oder interpretieren können.
 

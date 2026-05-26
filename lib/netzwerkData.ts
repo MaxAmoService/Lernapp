@@ -96,9 +96,7 @@ Anwendung | Transport | Internet | Netzwerkzugang
       duration: "15 min",
       type: "interactive",
       interactive: "osiCapsuleViewer",
-      content: `# OSI-Referenzmodell — Die 7 Schichten 🧅
-
-## Was ist das OSI-Modell?
+      content: `## Was ist das OSI-Modell?
 
 Das **OSI-Referenzmodell** (Open Systems Interconnection) wurde von der **ISO** entwickelt und beschreibt die Kommunikation in Netzwerken in **7 Schichten**. Jede Schicht hat eine klar definierte Aufgabe.
 
@@ -152,9 +150,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
       duration: "15 min",
       type: "interactive",
       interactive: "tcpHandshakeSimulator",
-      content: `# TCP/IP-Modell & Protokolle 🌐
-
-## Die 4 Schichten des TCP/IP-Modells
+      content: `## Die 4 Schichten des TCP/IP-Modells
 
 1. **Anwendung** (Application): HTTP, FTP, SMTP, DNS, SSH
 2. **Transport** (Transport): TCP, UDP
@@ -210,9 +206,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
       duration: "18 min",
       type: "interactive",
       interactive: "macConverter",
-      content: `# IPv4-Adressierung 🔢
-
-## Aufbau einer IPv4-Adresse
+      content: `## Aufbau einer IPv4-Adresse
 - **32 Bit**, in **4 Oktetten** à 8 Bit
 - Dezimal mit Punkten: \`192.168.1.1\`
 - Binär: \`11000000.10101000.00000001.00000001\`
@@ -253,9 +247,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
       title: "Subnetting Grundlagen — CIDR & Subnetzmaske",
       duration: "10 min",
       type: "text",
-      content: `# Subnetting Grundlagen — CIDR & Subnetzmaske 🧮
-
-## Was ist Subnetting?
+      content: `## Was ist Subnetting?
 
 Subnetting bedeutet, ein großes Netzwerk in **kleinere Teilnetze (Subnetze)** aufzuteilen. Das bringt drei Vorteile:
 
@@ -324,9 +316,7 @@ $$255 . 255 . 255 . 192$$
       title: "Subnetting Formeln",
       duration: "10 min",
       type: "text",
-      content: `# Subnetting Formeln 📐
-
-## Anzahl der nutzbaren Hosts
+      content: `## Anzahl der nutzbaren Hosts
 
 $$\\text{Nutzbare Hosts} = 2^h - 2$$
 
@@ -371,9 +361,7 @@ $$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbare
       duration: "12 min",
       type: "interactive",
       interactive: "subnetCalculator",
-      content: `# AND-Verknüpfung & Netzwerkadresse 🔍
-
-## Die UND-Verknüpfung (AND-Operation)
+      content: `## Die UND-Verknüpfung (AND-Operation)
 
 Um die **Netzwerkadresse** zu finden, wendet man die **UND-Verknüpfung** (AND) auf IP-Adresse und Subnetzmaske an:
 
@@ -435,9 +423,7 @@ Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere v
       duration: "12 min",
       type: "interactive",
       interactive: "subnettingTrainer",
-      content: `# VLSM — Variable Length Subnet Mask 📊
-
-## Was ist VLSM?
+      content: `## Was ist VLSM?
 
 **VLSM** erlaubt es, verschiedene Subnetze mit **verschiedenen Präfixlängen** zu erstellen. Das spart IP-Adressen!
 
@@ -489,9 +475,7 @@ Hier kannst du gezielt für die IHK-Prüfung üben — mit VLSM-Szenarien, gefü
       title: "IPv6",
       duration: "12 min",
       type: "text",
-      content: `# IPv6 — Die nächste Generation 🔮
-
-## Warum IPv6?
+      content: `## Warum IPv6?
 IPv4 hat nur ~4,3 Mrd. Adressen (2^32) — **zu wenig!**
 IPv6: 2^128 ≈ 3,4 × 10^38 Adressen — genug für jedes Gerät.
 
@@ -527,9 +511,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
       duration: "12 min",
       type: "interactive",
       interactive: "networkBuilder",
-      content: `# Netzwerkgeräte — Wer macht was? 🔧
-
-## Die wichtigsten Geräte
+      content: `## Die wichtigsten Geräte
 
 | Gerät | Schicht | Aufgabe |
 |-------|---------|---------|
@@ -567,9 +549,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
       title: "Netzwerktopologien",
       duration: "10 min",
       type: "text",
-      content: `# Netzwerktopologien — Strukturen im Netz 🕸️
-
-## Die 5 Grundtopologien
+      content: `## Die 5 Grundtopologien
 
 | Topologie | Beschreibung | Vor- | Nachteile |
 |-----------|-------------|------|-----------|
@@ -600,9 +580,7 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
       duration: "18 min",
       type: "interactive",
       interactive: "dnsLookup",
-      content: `# Wichtige Netzwerkprotokolle 📡
-
-## DNS — Domain Name System
+      content: `## DNS — Domain Name System
 Übersetzt **Domainnamen → IP-Adressen**.
 Ablauf: Client → Resolver → Root → TLD → Autoritativer Server
 
@@ -657,9 +635,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
       duration: "12 min",
       type: "interactive",
       interactive: "wlanConfigurator",
-      content: `# WLAN — Drahtlose Netzwerke 📶
-
-## IEEE 802.11 Standards
+      content: `## IEEE 802.11 Standards
 
 | Standard | Jahr | Max. Speed | Frequenz | Besonderheit |
 |----------|------|------------|----------|--------------|
@@ -705,9 +681,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
       duration: "15 min",
       type: "interactive",
       interactive: "firewallRuleBuilder",
-      content: `# Netzwerksicherheit — Schutzmaßnahmen 🔒
-
-## VLAN — Virtual Local Area Network
+      content: `## VLAN — Virtual Local Area Network
 Logische Trennung eines physischen Switches in separate **Broadcast-Domänen**.
 - Sicherheit: Abteilungen getrennt
 - Performance: Weniger Broadcast-Traffic
@@ -755,9 +729,7 @@ Schützt gegen: MAC-Flooding, unautorisierte Geräte.
       duration: "10 min",
       type: "interactive",
       interactive: "cableComparer",
-      content: `# Kabel & Übertragungsmedien 🔌
-
-## Kupfer: Twisted Pair
+      content: `## Kupfer: Twisted Pair
 
 | Kategorie | Speed | Reichweite | Einsatz |
 |-----------|-------|------------|---------|
@@ -803,9 +775,7 @@ Vorteile: Keine EMI, hohe Bandbreite, lange Strecken
       title: "Netzwerk-Tools & Befehle",
       duration: "12 min",
       type: "text",
-      content: `# Netzwerk-Tools & Befehle 🛠️
-
-## ping (ICMP)
+      content: `## ping (ICMP)
 Prüft **Erreichbarkeit** eines Hosts.
 \`\`\`
 ping 192.168.1.1
@@ -862,9 +832,7 @@ netstat -an  → Alle Verbindungen mit Portnummern
       duration: "15 min",
       type: "interactive",
       interactive: "arpExplorer",
-      content: `# MAC-Adressen & ARP 📡
-
-## Was ist eine MAC-Adresse?
+      content: `## Was ist eine MAC-Adresse?
 
 Die MAC-Adresse (Media Access Control) ist die **hardwarenahe Adresse** eines Netzwerkgeräts. Sie ist weltweit eindeutig und fest in die Netzwerkkarte eingebrannt.
 
@@ -921,9 +889,7 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
       title: "Zugriffsverfahren: CSMA/CD & CSMA/CA",
       duration: "12 min",
       type: "text",
-      content: `# Zugriffsverfahren: CSMA/CD & CSMA/CA 🔄
-
-## Warum Zugriffsverfahren?
+      content: `## Warum Zugriffsverfahren?
 
 Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, wer wann senden darf. Sonst gibt es Kollisionen.
 
@@ -999,9 +965,7 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
       title: "Internetzugang: DSL & Mobilfunk",
       duration: "15 min",
       type: "text",
-      content: `# Internetzugang: DSL & Mobilfunk 🌍
-
-## DSL — Digital Subscriber Line
+      content: `## DSL — Digital Subscriber Line
 
 DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 

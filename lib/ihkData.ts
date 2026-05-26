@@ -66,9 +66,7 @@ export const ihkModule: Module = {
       duration: "15 min",
       type: "interactive",
       interactive: "pseudocodeRunner",
-      content: `# Pseudocode — Algorithmen in codenaher Sprache 🟦
-
-## Was ist Pseudocode?
+      content: `## Was ist Pseudocode?
 
 **Pseudocode** ist eine **sprachunabhängige, formale Sprache**, um Algorithmen zu beschreiben. Er sieht aus wie echter Code, ist aber an keine Programmiersprache gebunden.
 
@@ -126,9 +124,7 @@ export const ihkModule: Module = {
         { type: "papExample", position: "bottom" },
       ],
       interactive: "papBuilder",
-      content: `# Programmablaufplan (PAP) 📊
-
-## Was ist ein PAP?
+      content: `## Was ist ein PAP?
 
 Ein Programmablaufplan (PAP) ist eine **grafische Darstellung** eines Algorithmus nach der Norm **DIN 66001**. Er zeigt den Ablauf eines Programms mit standardisierten Symbolen — unabhängig von einer Programmiersprache.
 
@@ -204,9 +200,7 @@ Beide dienen der Algorithmus-Darstellung, aber sie haben unterschiedliche Stärk
       visuals: [
         { type: "struktBubbleSort", position: "bottom" },
       ],
-      content: `# Struktogramm — Nassi-Shneiderman 📐
-
-## Was ist ein Struktogramm?
+      content: `## Was ist ein Struktogramm?
 
 Ein Struktogramm nach **Nassi und Shneiderman** ist eine grafische Darstellung von Algorithmen, die **keine Sprünge (goto)** erlaubt. Es erzwingt **strukturierte Programmierung** — du kannst nur Blöcke stapeln, nicht springen.
 
@@ -276,9 +270,7 @@ Der Builder oben zeigt dir alle vier Elemente in Aktion:
       duration: "20 min",
       type: "interactive",
       interactive: "sortVisualizer",
-      content: `# Sortieralgorithmen — Bubblesort, Selectionsort, Insertionsort 📊
-
-## Warum Sortieren?
+      content: `## Warum Sortieren?
 
 Sortieren ist eine der **grundlegendsten Aufgaben** in der Informatik. Viele Algorithmen (z.B. binäre Suche) benötigen sortierte Daten als Eingabe. Die IHK verlangt das Verständnis und die Implementierung der wichtigsten Sortierverfahren.
 
@@ -369,9 +361,7 @@ print(insertion_sort(liste))  # [1, 2, 3, 4, 5, 8]`
       duration: "10 min",
       type: "interactive",
       interactive: "searchVisualizer",
-      content: `# Suchalgorithmen — Lineare und Binäre Suche 🔍
-
-## Warum Suchen?
+      content: `## Warum Suchen?
 
 Daten suchen ist eine der **häufigsten Operationen** in der Softwareentwicklung — ob in einer Datenbank, einer Datei oder einer Liste. Die Art der Suche bestimmt, wie schnell du dein Ziel findest.
 
@@ -446,9 +436,7 @@ print(binary_search(sortiert, 6))  # -1`
       duration: "15 min",
       type: "interactive",
       interactive: "epkBuilder",
-      content: `# Ereignisgesteuerte Prozesskette (EPK) 🔗
-
-## Was ist eine EPK?
+      content: `## Was ist eine EPK?
 
 Eine **EPK** (Ereignisgesteuerte Prozesskette) ist ein Diagramm zur Darstellung von **Geschäftsprozessen**. Sie zeigt die logische und chronologische Abfolge von **Ereignissen** und **Funktionen** — häufig verwendet in der Prozessoptimierung und Dokumentation.
 
@@ -519,9 +507,7 @@ Ereignisse und Funktionen **wechseln sich immer ab**. Zwei Funktionen oder zwei 
       duration: "18 min",
       type: "interactive",
       interactive: "umlClassDiagram",
-      content: `# UML Klassendiagramme 📐
-
-## Was ist ein Klassendiagramm?
+      content: `## Was ist ein Klassendiagramm?
 
 Das Klassendiagramm ist das **wichtigste Strukturdiagramm** in UML. Es zeigt Klassen, Interfaces, deren Attribute, Methoden und die **Beziehungen** zwischen ihnen. Es ist die Blaupause deiner Software-Architektur.
 
@@ -590,9 +576,7 @@ Das Klassendiagramm ist das **wichtigste Strukturdiagramm** in UML. Es zeigt Kla
       duration: "15 min",
       type: "interactive",
       interactive: "sequenceDiagram",
-      content: `# UML Sequenz- und Zustandsdiagramme 📊
-
-## 📨 Sequenzdiagramm
+      content: `## 📨 Sequenzdiagramm
 
 Ein Sequenzdiagramm zeigt die **zeitliche Abfolge** von Nachrichten zwischen Objekten — wie ein Protokoll eines Gesprächs.
 
@@ -650,9 +634,7 @@ Ein Zustandsdiagramm beschreibt die **Zustände** eines Objekts und die **Überg
       duration: "20 min",
       type: "interactive",
       interactive: "netzplanBuilder",
-      content: `# Netzplantechnik, ER-Modell & Lasten-/Pflichtenheft 📋
-
-## 🗓️ Netzplantechnik
+      content: `## 🗓️ Netzplantechnik
 
 Netzplantechnik ist eine Methode aus dem **Projektmanagement** zur Darstellung von Arbeitsabläufen und deren Abhängigkeiten.
 
@@ -781,9 +763,7 @@ Das Pflichtenheft stammt vom **Auftragnehmer** und beschreibt die **Lösung**:
       duration: "18 min",
       type: "interactive",
       interactive: "treeExplorer",
-      content: `# Baumstrukturen 🌳
-
-## Was ist ein Baum?
+      content: `## Was ist ein Baum?
 
 Ein Baum ist eine **hierarchische Datenstruktur** aus Knoten und Kanten — ohne Schleifen (Zyklen).
 
@@ -855,9 +835,7 @@ Es gibt 3 Grundreihenfolgen, einen Baum zu durchlaufen:
       duration: "18 min",
       type: "interactive",
       interactive: "graphExplorer",
-      content: `# Graphen 🔗
-
-## Was ist ein Graph?
+      content: `## Was ist ein Graph?
 
 Ein Graph ist eine Datenstruktur aus **Knoten** (Nodes) und **Kanten** (Edges) — im Gegensatz zum Baum können Schleifen existieren.
 
