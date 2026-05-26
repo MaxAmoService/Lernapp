@@ -3,15 +3,17 @@
 // ============================================================================
 
 import { doc, updateDoc, getFirestore, onSnapshot } from "firebase/firestore";
-import { app } from "./firebase";
-
-const db = getFirestore(app);
+import { getApp } from "./firebase";
 
 const HEARTBEAT_INTERVAL = 20_000; // 20 Sekunden
 const ONLINE_THRESHOLD = 60_000;   // 60 Sekunden = als online betrachtet
 
 let heartbeatTimer: NodeJS.Timeout | null = null;
 let unloadHandler: (() => void) | null = null;
+
+function getDb() {
+  return getFirestore(getApp());
+}
 
 /**
  * Startet Presence-System: Heartbeat + Page-Unload Detection.
@@ -56,7 +58,7 @@ export function isUserOnline(lastHeartbeat: string | undefined): boolean {
 // ─── Intern ─────────────────────────────────────────────────────────────────
 
 async function writeStatus(uid: string, state: "online" | "offline"): Promise<void> {
-  await updateDoc(doc(db, "users", uid), {
+  await updateDoc(doc(getDb(), "users", uid), {
     "status.state": state,
     "status.lastChanged": new Date().toISOString(),
     lastActive: new Date().toISOString(),

@@ -3,7 +3,7 @@
 // ============================================================================
 
 import { doc, setDoc, getDoc, onSnapshot } from "firebase/firestore";
-import { db } from "./firebase";
+import { getDb } from "./firebase";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -33,7 +33,7 @@ export interface UserFlashcardData {
 
 export async function saveProgress(userId: string, progress: UserProgress): Promise<void> {
   try {
-    await setDoc(doc(db, "users", userId, "data", "progress"), {
+    await setDoc(doc(getDb(), "users", userId, "data", "progress"), {
       ...progress,
       lastUpdated: Date.now(),
     });
@@ -44,7 +44,7 @@ export async function saveProgress(userId: string, progress: UserProgress): Prom
 
 export async function loadProgress(userId: string): Promise<UserProgress | null> {
   try {
-    const snap = await getDoc(doc(db, "users", userId, "data", "progress"));
+    const snap = await getDoc(doc(getDb(), "users", userId, "data", "progress"));
     if (snap.exists()) {
       return snap.data() as UserProgress;
     }
@@ -59,7 +59,7 @@ export async function loadProgress(userId: string): Promise<UserProgress | null>
 
 export async function saveFlashcardData(userId: string, data: UserFlashcardData): Promise<void> {
   try {
-    await setDoc(doc(db, "users", userId, "data", "flashcards"), {
+    await setDoc(doc(getDb(), "users", userId, "data", "flashcards"), {
       ...data,
       lastUpdated: Date.now(),
     });
@@ -70,7 +70,7 @@ export async function saveFlashcardData(userId: string, data: UserFlashcardData)
 
 export async function loadFlashcardData(userId: string): Promise<UserFlashcardData | null> {
   try {
-    const snap = await getDoc(doc(db, "users", userId, "data", "flashcards"));
+    const snap = await getDoc(doc(getDb(), "users", userId, "data", "flashcards"));
     if (snap.exists()) {
       return snap.data() as UserFlashcardData;
     }
@@ -88,7 +88,7 @@ export function subscribeToProgress(
   callback: (progress: UserProgress) => void
 ): () => void {
   return onSnapshot(
-    doc(db, "users", userId, "data", "progress"),
+    doc(getDb(), "users", userId, "data", "progress"),
     (snap) => {
       if (snap.exists()) {
         callback(snap.data() as UserProgress);
@@ -105,7 +105,7 @@ export function subscribeToFlashcards(
   callback: (data: UserFlashcardData) => void
 ): () => void {
   return onSnapshot(
-    doc(db, "users", userId, "data", "flashcards"),
+    doc(getDb(), "users", userId, "data", "flashcards"),
     (snap) => {
       if (snap.exists()) {
         callback(snap.data() as UserFlashcardData);

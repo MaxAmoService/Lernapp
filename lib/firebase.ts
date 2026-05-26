@@ -1,4 +1,4 @@
-// Firebase Configuration
+// Firebase Configuration — Lazy init (no module-scope Firebase calls)
 import { initializeApp, getApps, type FirebaseApp } from "firebase/app";
 import { getAuth, type Auth } from "firebase/auth";
 import { getFirestore, type Firestore } from "firebase/firestore";
@@ -13,19 +13,34 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-7GQD24BRCR",
 };
 
-let app: FirebaseApp;
-let auth: Auth;
-let db: Firestore;
+let _app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
+let _db: Firestore | null = null;
+let _initAttempted = false;
 
-try {
-  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-  auth = getAuth(app);
-  db = getFirestore(app);
-} catch (e) {
-  console.warn("[Firebase] Init failed (missing API key?):", (e as Error).message);
-  app = {} as FirebaseApp;
-  auth = {} as Auth;
-  db = {} as Firestore;
+function tryInit() {
+  if (_initAttempted) return;
+  _initAttempted = true;
+  try {
+    _app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+    _auth = getAuth(_app);
+    _db = getFirestore(_app);
+  } catch (e) {
+    console.warn("[Firebase] Init failed (missing API key?):", (e as Error).message);
+  }
 }
 
-export { app, auth, db };
+export function getApp(): FirebaseApp {
+  tryInit();
+  return _app!;
+}
+
+export function getAuthInstance(): Auth {
+  tryInit();
+  return _auth!;
+}
+
+export function getDb(): Firestore {
+  tryInit();
+  return _db!;
+}

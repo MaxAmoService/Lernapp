@@ -23,7 +23,7 @@ import {
   deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, db } from "./firebase";
+import { getAuthInstance, getDb } from "./firebase";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -96,20 +96,20 @@ export async function registerUser(
   username: string
 ): Promise<{ needsVerification: boolean }> {
   // Prüfen ob Username bereits vergeben
-  const usernameSnap = await getDoc(doc(db, "usernames", username));
+  const usernameSnap = await getDoc(doc(getDb(), "usernames", username));
   if (usernameSnap.exists()) {
     throw new Error("Benutzername ist bereits vergeben");
   }
 
   // Firebase Auth User erstellen
-  const credential = await createUserWithEmailAndPassword(auth, email, password);
+  const credential = await createUserWithEmailAndPassword(getAuthInstance(), email, password);
   const firebaseUser = credential.user;
 
   // Display Name setzen
   await updateProfile(firebaseUser, { displayName: username });
 
   // Username reservieren
-  await setDoc(doc(db, "usernames", username), {
+  await setDoc(doc(getDb(), "usernames", username), {
     uid: firebaseUser.uid,
     createdAt: serverTimestamp(),
   });
@@ -136,7 +136,7 @@ export async function registerUser(
     equippedFrame: "none",
     statusHidden: false,
   };
-  await setDoc(doc(db, "users", firebaseUser.uid), {
+  await setDoc(doc(getDb(), "users", firebaseUser.uid), {
     ...profile,
     createdAt: serverTimestamp(),
   });
@@ -145,7 +145,7 @@ export async function registerUser(
   await sendEmailVerification(firebaseUser);
 
   // User ausloggen bis E-Mail bestätigt
-  await signOut(auth);
+  await signOut(getAuthInstance());
 
   return { needsVerification: true };
 }
@@ -153,12 +153,12 @@ export async function registerUser(
 // ─── Login ──────────────────────────────────────────────────────────────────
 
 export async function loginUser(email: string, password: string): Promise<UserProfile> {
-  const credential = await signInWithEmailAndPassword(auth, email, password);
+  const credential = await signInWithEmailAndPassword(getAuthInstance(), email, password);
   const firebaseUser = credential.user;
 
   // Prüfen ob E-Mail bestätigt
   if (!firebaseUser.emailVerified) {
-    await signOut(auth);
+    await signOut(getAuthInstance());
     throw new Error("Bitte bestätige zuerst deine E-Mail. Schau in deinen Posteingang.");
   }
 
@@ -188,7 +188,7 @@ export async function loginUser(email: string, password: string): Promise<UserPr
     equippedFrame: "none",
     statusHidden: false,
     };
-    await setDoc(doc(db, "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
+    await setDoc(doc(getDb(), "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
   } else if (!profile.emailVerified) {
     // E-Mail wurde gerade bestätigt → Profil updaten
     await updateUserProfile(firebaseUser.uid, { emailVerified: true });
@@ -205,7 +205,7 @@ export async function loginUser(email: string, password: string): Promise<UserPr
 // ─── E-Mail erneut senden ───────────────────────────────────────────────────
 
 export async function resendVerificationEmail(): Promise<void> {
-  const user = auth.currentUser;
+  const user = getAuthInstance().currentUser;
   if (!user) throw new Error("Nicht eingeloggt");
   await sendEmailVerification(user);
 }
@@ -213,14 +213,14 @@ export async function resendVerificationEmail(): Promise<void> {
 // ─── Logout ─────────────────────────────────────────────────────────────────
 
 export async function logoutUser(): Promise<void> {
-  await signOut(auth);
+  await signOut(getAuthInstance());
 }
 
 // ─── Profile CRUD ───────────────────────────────────────────────────────────
 
 export async function getUserProfile(uid: string): Promise<UserProfile | null> {
   try {
-    const snap = await getDoc(doc(db, "users", uid));
+    const snap = await getDoc(doc(getDb(), "users", uid));
     if (snap.exists()) return snap.data() as UserProfile;
     return null;
   } catch (err) {
@@ -231,7 +231,7 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
 
 export async function updateUserProfile(uid: string, updates: Partial<UserProfile>): Promise<void> {
   try {
-    await updateDoc(doc(db, "users", uid), {
+    await updateDoc(doc(getDb(), "users", uid), {
       ...updates,
       lastActive: new Date().toISOString(),
     });
@@ -244,21 +244,21 @@ export async function updateUserProfile(uid: string, updates: Partial<UserProfil
 // ─── Passwort / E-Mail ändern ───────────────────────────────────────────────
 
 async function reauthenticate(password: string): Promise<void> {
-  const user = auth.currentUser;
+  const user = getAuthInstance().currentUser;
   if (!user || !user.email) throw new Error("Nicht eingeloggt");
   const credential = EmailAuthProvider.credential(user.email, password);
   await reauthenticateWithCredential(user, credential);
 }
 
 export async function changePassword(currentPw: string, newPw: string): Promise<void> {
-  const user = auth.currentUser;
+  const user = getAuthInstance().currentUser;
   if (!user) throw new Error("Nicht eingeloggt");
   await reauthenticate(currentPw);
   await fbUpdatePassword(user, newPw);
 }
 
 export async function changeEmail(currentPw: string, newEmail: string): Promise<void> {
-  const user = auth.currentUser;
+  const user = getAuthInstance().currentUser;
   if (!user) throw new Error("Nicht eingeloggt");
   await reauthenticate(currentPw);
   await fbUpdateEmail(user, newEmail);
@@ -269,12 +269,12 @@ export async function changeEmail(currentPw: string, newEmail: string): Promise<
 // ─── DSGVO: Account löschen ─────────────────────────────────────────────────
 
 export async function deleteAccount(password: string): Promise<void> {
-  const user = auth.currentUser;
+  const user = getAuthInstance().currentUser;
   if (!user) throw new Error("Nicht eingeloggt");
   await reauthenticate(password);
   const username = user.displayName;
-  if (username) await deleteDoc(doc(db, "usernames", username)).catch(() => {});
-  await deleteDoc(doc(db, "users", user.uid)).catch(() => {});
+  if (username) await deleteDoc(doc(getDb(), "usernames", username)).catch(() => {});
+  await deleteDoc(doc(getDb(), "users", user.uid)).catch(() => {});
   await deleteUser(user);
 }
 
@@ -355,7 +355,7 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
     const { collection, getDocs } = await import("firebase/firestore");
 
     // Alle Users laden (Firestore Free Tier: keine Composite-Index-Probleme)
-    const snap = await getDocs(collection(db, "users"));
+    const snap = await getDocs(collection(getDb(), "users"));
 
     const entries: LeaderboardEntry[] = [];
 
@@ -396,7 +396,7 @@ export async function getLeaderboard(limit: number = 50): Promise<LeaderboardEnt
 export async function toggleLeaderboardOptIn(uid: string, optIn: boolean): Promise<void> {
   try {
     // setDoc mit merge: erstellt das Feld falls es noch nicht existiert
-    await setDoc(doc(db, "users", uid), {
+    await setDoc(doc(getDb(), "users", uid), {
       leaderboardOptIn: optIn,
       lastActive: new Date().toISOString(),
     }, { merge: true });

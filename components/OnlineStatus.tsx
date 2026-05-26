@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { doc, onSnapshot, getFirestore } from "firebase/firestore";
-import { app } from "@/lib/firebase";
+import { getApp } from "@/lib/firebase";
 
-const db = getFirestore(app);
 const ONLINE_THRESHOLD = 60_000; // 60 Sekunden
+
+function getDb() {
+  return getFirestore(getApp());
+}
 
 interface OnlineStatusProps {
   uid: string;
@@ -78,7 +81,7 @@ export function useOnlineStatus(uid: string, hidden?: boolean): boolean {
   useEffect(() => {
     if (hidden || !uid) { setIsOnline(false); return; }
 
-    const userRef = doc(db, "users", uid);
+    const userRef = doc(getDb(), "users", uid);
     const unsubscribe = onSnapshot(userRef, (snap) => {
       if (snap.exists()) {
         const data = snap.data();
