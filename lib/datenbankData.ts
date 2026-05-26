@@ -964,9 +964,7 @@ psql -U benutzer datenbank < backup.sql
       title: "Datenbanktypen im Überblick",
       duration: "12 min",
       type: "text",
-      content: `# Datenbanktypen im Überblick
-
-## Warum verschiedene Datenbanktypen?
+      content: `## Warum verschiedene Datenbanktypen?
 
 Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderungen brauchen verschiedene Lösungen.
 
@@ -1039,9 +1037,7 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
       title: "CREATE TABLE im Detail",
       duration: "15 min",
       type: "text",
-      content: `# CREATE TABLE im Detail
-
-## Tabellen erstellen
+      content: `## Tabellen erstellen
 
 Das CREATE TABLE-Statement definiert die Struktur einer Tabelle. In der IHK-Prüfung musst du solche Statements schreiben oder interpretieren können.
 
