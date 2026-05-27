@@ -329,7 +329,28 @@ Der Angreifer lässt den Browser des Opfers eine Aktion auf einer anderen Websei
 - Debug-Modus im Produktionssystem
 - Offene Ports, unnötige Dienste
 
-[INTERACTIVE:securityChallengeArena]
+### 🧃 OWASP Juice Shop — Selber ausprobieren!
+
+Der **OWASP Juice Shop** ist die weltweit modernste absichtlich unsichere Web-App. Du kannst dort ALLE Angriffe aus dieser Lektion in einer echten Web-App üben!
+
+**Öffentliche Demo:** https://juice-shop.herokuapp.com
+**GitHub:** https://github.com/juice-shop/juice-shop
+
+**Lokale Installation (Docker):**
+\`\`\`bash
+docker pull bkimminich/juice-shop
+docker run -d -p 3000:3000 bkimminich/juice-shop
+# Öffne http://localhost:3000
+\`\`\`\n
+**Challenges die du lösen solltest:**
+1. ⭐ Scoreboard finden (versteckte Seite)
+2. ⭐ Login Bypass (SQL Injection)
+3. ⭐⭐ Admin Login
+4. ⭐⭐⭐ UNION Injection (Daten auslesen)
+5. ⭐⭐⭐ XSS in Kommentaren
+6. ⭐⭐⭐⭐ JWT Manipulation
+
+> Die Challenges sind Schwierigkeitsgrad 1-6 ⭐. Starte mit Level 1 und steigere dich!
 
 > **IHK-Tipp:** SQL-Injection und XSS sind DIE Klassiker in der Prüfung. Erkläre den Angriff + Schutzmaßnahme!
 `,
