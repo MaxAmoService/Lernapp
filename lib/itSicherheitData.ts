@@ -117,7 +117,7 @@ Ein **Angriffsvektor** ist der Weg, den ein Angreifer nutzt, um in ein System ei
 | **Spyware** | Späht Daten heimlich aus | Virenscanner |
 | **Keylogger** | Protokolliert Tastatureingaben | Virtuelle Tastatur |
 
-[INTERACTIVE]
+[INTERACTIVE:securityThreatExplorer]
 
 ### Schutzmaßnahmen — Defense in Depth
 
@@ -180,7 +180,7 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
 → SHA-256("Hallo123x7Kp9"): a3f8c2... (anderer Hash!)
 \`\`\`
 
-[INTERACTIVE]
+[INTERACTIVE:passwordStrengthChecker]
 
 ### Passwort-Manager
 
@@ -214,7 +214,7 @@ Eine **Firewall** filtert den Netzwerkverkehr anhand definierter Regeln:
 | 2 | Extern | Webserver | 22 | Blockieren |
 | 3 | Alle | Alle | Sonst | Blockieren |
 
-[INTERACTIVE]
+[INTERACTIVE:firewallRuleBuilder]
 
 ### IDS vs. IPS
 
@@ -289,7 +289,7 @@ stmt = conn.prepareStatement("SELECT * FROM users WHERE name=?");
 stmt.setString(1, input);
 \`\`\`
 
-[INTERACTIVE]
+[INTERACTIVE:sqlInjectionSimulator]
 
 ### 2. Cross-Site Scripting (XSS)
 
@@ -324,6 +324,8 @@ Der Angreifer lässt den Browser des Opfers eine Aktion auf einer anderen Websei
 - Default-Passwörter (admin/admin)
 - Debug-Modus im Produktionssystem
 - Offene Ports, unnötige Dienste
+
+[INTERACTIVE:securityChallengeArena]
 
 > **IHK-Tipp:** SQL-Injection und XSS sind DIE Klassiker in der Prüfung. Erkläre den Angriff + Schutzmaßnahme!
 `,
@@ -369,7 +371,7 @@ Beweist **Authentizität** und **Integrität**:
 2. Hash wird mit dem **Private Key** verschlüsselt = Signatur
 3. Empfänger entschlüsselt mit **Public Key** und vergleicht Hashes
 
-[INTERACTIVE]
+[INTERACTIVE:encryptionDemo]
 
 ### PKI (Public Key Infrastructure)
 
@@ -431,7 +433,7 @@ Social Engineering nutzt die **menschliche Psyche** als Angriffsvektor — keine
 5. **Anhänge:** .exe, .scr, .zip — nie ungeprüft öffnen!
 6. **Persönliche Daten:** Banken fragen NIE per E-Mail nach Passwörtern
 
-[INTERACTIVE]
+[INTERACTIVE:phishingDetector]
 
 ### Schutzmaßnahmen
 

@@ -82,6 +82,9 @@ import { SecurityThreatExplorer } from "./interactive/SecurityThreatExplorer";
 import { PasswordStrengthChecker } from "./interactive/PasswordStrengthChecker";
 import { SQLInjectionSimulator } from "./interactive/SQLInjectionSimulator";
 import { PhishingDetector } from "./interactive/PhishingDetector";
+import { XSSChallengeSimulator } from "./interactive/XSSChallengeSimulator";
+import { AuthBypassChallenge } from "./interactive/AuthBypassChallenge";
+import { SecurityChallengeArena } from "./interactive/SecurityChallengeArena";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -253,6 +256,9 @@ function renderInteractive(type: string, codeExample?: string) {
     passwordStrengthChecker: <PasswordStrengthChecker />,
     sqlInjectionSimulator: <SQLInjectionSimulator />,
     phishingDetector: <PhishingDetector />,
+    xssChallengeSimulator: <XSSChallengeSimulator />,
+    authBypassChallenge: <AuthBypassChallenge />,
+    securityChallengeArena: <SecurityChallengeArena />,
   };
 
   const name = interactiveNames[type] || type;
