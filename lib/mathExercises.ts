@@ -2,6 +2,7 @@
 // Groups A (Grundlagen), B (Analysis), C (Lineare Algebra, Geometrie, Stochastik)
 
 import { computersystemePractice, computersystemeExam } from "./computersystemeExercises";
+import { itSicherheitPractice, itSicherheitExam } from "./itSicherheitExercises";
 
 export interface Exercise {
   id: string;
@@ -12748,6 +12749,7 @@ export const allExercises: Exercise[] = [
   ...statistikPractice,
   ...verteilungenPractice,
   ...computersystemePractice,
+  ...itSicherheitPractice,
 ];
 
 export function getExercisesForLesson(moduleId: string): Exercise[] {
@@ -12792,6 +12794,7 @@ export const examExercises: Record<string, Exercise[]> = {
   "m-statistik": statistikExam,
   "m-verteilungen": verteilungenExam,
   "ihk-computersysteme": computersystemeExam,
+  "ihk-it-sicherheit": itSicherheitExam,
 };
 
 export function getExamExercises(moduleId: string): Exercise[] {

@@ -7,6 +7,7 @@ import { nextjsModule } from "./nextjsData";
 
 import { datenbankModule } from "./datenbankData";
 import { computersystemeModule } from "./computersystemeData";
+import { itSicherheitModule } from "./itSicherheitData";
 import { complexModule } from "./complexData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
@@ -39,6 +40,7 @@ export const allModules = [
   netzwerkModule,
   datenbankModule,
   computersystemeModule,
+  itSicherheitModule,
   complexModule,
   ...contentModules,
 ];

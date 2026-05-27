@@ -78,6 +78,10 @@ import DataTransmissionVisualizer from "./interactive/DataTransmissionVisualizer
 import ARPExplorer from "./interactive/ARPExplorer";
 import TreeExplorer from "./interactive/TreeExplorer";
 import GraphExplorer from "./interactive/GraphExplorer";
+import { SecurityThreatExplorer } from "./interactive/SecurityThreatExplorer";
+import { PasswordStrengthChecker } from "./interactive/PasswordStrengthChecker";
+import { SQLInjectionSimulator } from "./interactive/SQLInjectionSimulator";
+import { PhishingDetector } from "./interactive/PhishingDetector";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -177,6 +181,10 @@ function renderInteractive(type: string, codeExample?: string) {
     arpExplorer: "ARP-Explorer",
     treeExplorer: "Baum-Explorer",
     graphExplorer: "Graph-Explorer",
+    securityThreatExplorer: "Bedrohungs-Explorer",
+    passwordStrengthChecker: "Passwort-Checker",
+    sqlInjectionSimulator: "SQL Injection Simulator",
+    phishingDetector: "Phishing Detector",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -241,6 +249,10 @@ function renderInteractive(type: string, codeExample?: string) {
     arpExplorer: <ARPExplorer />,
     treeExplorer: <TreeExplorer />,
     graphExplorer: <GraphExplorer />,
+    securityThreatExplorer: <SecurityThreatExplorer />,
+    passwordStrengthChecker: <PasswordStrengthChecker />,
+    sqlInjectionSimulator: <SQLInjectionSimulator />,
+    phishingDetector: <PhishingDetector />,
   };
 
   const name = interactiveNames[type] || type;

@@ -27,7 +27,11 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "dataTransmissionVisualizer"
   | "arpExplorer"
   | "treeExplorer"
-  | "graphExplorer";
+  | "graphExplorer"
+  | "securityThreatExplorer"
+  | "passwordStrengthChecker"
+  | "sqlInjectionSimulator"
+  | "phishingDetector";
 
 export interface Lesson {
   id: string;
