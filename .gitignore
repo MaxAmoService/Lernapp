@@ -15,3 +15,4 @@ tsconfig.tsbuildinfo
 *.pdf
 *.txt
 tmp/
+graphify-out/
