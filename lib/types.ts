@@ -31,7 +31,10 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "securityThreatExplorer"
   | "passwordStrengthChecker"
   | "sqlInjectionSimulator"
-  | "phishingDetector";
+  | "phishingDetector"
+  | "xssChallengeSimulator"
+  | "authBypassChallenge"
+  | "securityChallengeArena";
 
 export interface Lesson {
   id: string;

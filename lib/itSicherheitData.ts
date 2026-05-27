@@ -86,6 +86,7 @@ export const itSicherheitModule: Module = {
       title: "Sicherheitsgrundlagen",
       duration: "15 min",
       type: "text",
+      interactive: "securityThreatExplorer" as const,
       content: `## Sicherheitsgrundlagen
 
 ### Die CIA-Triade
@@ -138,6 +139,7 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
       title: "Authentifizierung & Passwörter",
       duration: "15 min",
       type: "text",
+      interactive: "passwordStrengthChecker" as const,
       content: `## Authentifizierung & Passwörter
 
 ### Authentifizierung vs. Autorisierung
@@ -197,6 +199,7 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
       title: "Netzwerksicherheit",
       duration: "15 min",
       type: "text",
+      interactive: "firewallRuleBuilder" as const,
       content: `## Netzwerksicherheit
 
 ### Firewall
@@ -261,6 +264,7 @@ Die DMZ ist ein Pufferbereich — öffentliche Server stehen hier, das interne N
       title: "Web-Security (OWASP Top 10)",
       duration: "20 min",
       type: "text",
+      interactive: "sqlInjectionSimulator" as const,
       content: `## Web-Security — OWASP Top 10
 
 Die **OWASP Top 10** sind die kritischsten Web-Sicherheitsrisiken. In der IHK-Prüfung werden oft Szenarien zu SQL-Injection und XSS abgefragt.
@@ -335,6 +339,7 @@ Der Angreifer lässt den Browser des Opfers eine Aktion auf einer anderen Websei
       title: "Verschlüsselung & PKI",
       duration: "15 min",
       type: "text",
+      interactive: "encryptionDemo" as const,
       content: `## Verschlüsselung & PKI
 
 ### Symmetrische Verschlüsselung
@@ -401,6 +406,7 @@ Root CA → Intermediate CA → Server-Zertifikat
       title: "Social Engineering & Phishing",
       duration: "15 min",
       type: "text",
+      interactive: "phishingDetector" as const,
       content: `## Social Engineering & Phishing
 
 ### Was ist Social Engineering?
