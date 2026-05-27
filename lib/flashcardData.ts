@@ -284,6 +284,51 @@ export const computersystemeFlashcards: Flashcard[] = [
   { id: "hw-ges-3", moduleId: "ihk-computersysteme", front: "Wer hat die Z3 gebaut und wann?", back: "Konrad Zuse, 1941 — erster programmierbarer Computer der Welt (relaisbasiert)", category: "Geschichte" },
 ];
 
+// ─── IT-Sicherheit ──────────────────────────────────────────────────────────
+
+export const itSicherheitFlashcards: Flashcard[] = [
+  // CIA-Triade
+  { id: "is-cia-1", moduleId: "ihk-it-sicherheit", front: "Was beschreibt die CIA-Triade?", back: "Confidentiality (Vertraulichkeit), Integrity (Integrität), Availability (Verfügbarkeit)", hint: "Die drei Grundpfeiler der IT-Sicherheit", category: "Grundlagen" },
+  { id: "is-cia-2", moduleId: "ihk-it-sicherheit", front: "Was bedeutet Confidentiality?", back: "Nur autorisierte Personen haben Zugriff auf Daten", hint: "Vertraulichkeit", category: "Grundlagen" },
+  { id: "is-cia-3", moduleId: "ihk-it-sicherheit", front: "Was bedeutet Integrity?", back: "Daten sind korrekt und unverändert — keine Manipulation", hint: "Unversehrtheit", category: "Grundlagen" },
+  { id: "is-cia-4", moduleId: "ihk-it-sicherheit", front: "Was bedeutet Availability?", back: "Systeme und Daten sind zugänglich wenn sie gebraucht werden", hint: "DDoS-Angriffe zielen dagegen", category: "Grundlagen" },
+
+  // Authentifizierung
+  { id: "is-auth-1", moduleId: "ihk-it-sicherheit", front: "Unterschied: Authentifizierung vs. Autorisierung?", back: "Auth = Wer bist du? (Identität). Autorisierung = Was darfst du? (Berechtigung)", category: "Auth" },
+  { id: "is-auth-2", moduleId: "ihk-it-sicherheit", front: "Was sind die 3 Faktoren der Authentifizierung?", back: "Wissen (Passwort), Besitz (Token), Biometrie (Fingerabdruck)", hint: "MFA kombiniert mindestens 2", category: "Auth" },
+  { id: "is-auth-3", moduleId: "ihk-it-sicherheit", front: "Was ist Salting beim Passwort-Hashing?", back: "Zufälliger Wert wird vor dem Hash angehängt → gleiche Passwörter erzeugen unterschiedliche Hashes", hint: "Schutz gegen Rainbow Tables", category: "Auth" },
+
+  // Verschlüsselung
+  { id: "is-crypto-1", moduleId: "ihk-it-sicherheit", front: "Symmetrisch vs. asymmetrisch — was ist der Unterschied?", back: "Symmetrisch: 1 Key (AES). Asymmetrisch: 2 Keys — Public + Private (RSA)", category: "Krypto" },
+  { id: "is-crypto-2", moduleId: "ihk-it-sicherheit", front: "Was ist Hashing? Umkehrbar?", back: "Einweg-Algorithmus → erzeugt Festwert fester Länge (SHA-256 = 256 Bit). NICHT umkehrbar!", hint: "Gegenstück: Verschlüsselung IST umkehrbar", category: "Krypto" },
+  { id: "is-crypto-3", moduleId: "ihk-it-sicherheit", front: "Was beweist eine digitale Signatur?", back: "Authentizität (wer hat unterschrieben) + Integrität (Dokument nicht verändert)", hint: "Hash wird mit Private Key verschlüsselt", category: "Krypto" },
+  { id: "is-crypto-4", moduleId: "ihk-it-sicherheit", front: "Was macht eine CA (Certificate Authority)?", back: "Stellt digitale Zertifikate aus → bindet Public Key an Identität (z.B. google.com)", category: "Krypto" },
+
+  // OWASP
+  { id: "is-owasp-1", moduleId: "ihk-it-sicherheit", front: "Was ist SQL-Injection?", back: "SQL-Code über Eingabefelder einschleusen → DB zeigt alle Daten, Login umgehen", hint: "Schutz: Prepared Statements", category: "OWASP" },
+  { id: "is-owasp-2", moduleId: "ihk-it-sicherheit", front: "Was ist XSS (Cross-Site Scripting)?", back: "JavaScript-Code in Webseiten einschleusen → wird im Browser des Opfers ausgeführt", hint: "Schutz: Output Encoding, CSP", category: "OWASP" },
+  { id: "is-owasp-3", moduleId: "ihk-it-sicherheit", front: "Was ist CSRF?", back: "Cross-Site Request Forgery: Browser führt unbemerkt Aktionen auf anderer Webseite aus", hint: "Schutz: CSRF Tokens", category: "OWASP" },
+  { id: "is-owasp-4", moduleId: "ihk-it-sicherheit", front: "Wie schützt man sich vor SQL-Injection?", back: "Prepared Statements (Platzhalter statt String-Konkatenation) + Input Validation", category: "OWASP" },
+  { id: "is-owasp-5", moduleId: "ihk-it-sicherheit", front: "Was ist ein Man-in-the-Middle-Angriff?", back: "Angreifer schaltet sich zwischen Sender und Empfänger → kann Daten mitlesen/manipulieren", hint: "Schutz: TLS/SSL, VPN", category: "OWASP" },
+
+  // Netzwerksicherheit
+  { id: "is-net-1", moduleId: "ihk-it-sicherheit", front: "IDS vs. IPS — Unterschied?", back: "IDS = erkennt + warnt. IPS = erkennt UND blockiert automatisch", category: "Netzwerk" },
+  { id: "is-net-2", moduleId: "ihk-it-sicherheit", front: "Was ist eine DMZ?", back: "Demilitarisierte Zone: Puffer zwischen Internet und internem Netz — öffentliche Server stehen hier", category: "Netzwerk" },
+  { id: "is-net-3", moduleId: "ihk-it-sicherheit", front: "Welchen Port nutzt HTTPS? SSH? HTTP?", back: "HTTPS = 443, SSH = 22, HTTP = 80", hint: "Merke: 443 = S wie SSL", category: "Netzwerk" },
+  { id: "is-net-4", moduleId: "ihk-it-sicherheit", front: "Was macht eine Firewall?", back: "Filtert Netzwerkverkehr nach Regeln (Ports, IPs, Protokolle)", category: "Netzwerk" },
+
+  // Social Engineering
+  { id: "is-se-1", moduleId: "ihk-it-sicherheit", front: "Phishing vs. Spear-Phishing?", back: "Phishing = Massen-E-Mails. Spear-Phishing = zielgerichtet auf bestimmte Person", category: "Social Eng" },
+  { id: "is-se-2", moduleId: "ihk-it-sicherheit", front: "Was ist Pretexting?", back: "Fake-Identität/Vorwand um an Infos zu kommen (z.B. Anruf als IT-Support)", category: "Social Eng" },
+  { id: "is-se-3", moduleId: "ihk-it-sicherheit", front: "Was ist Baiting?", back: "Lockmittel auslegen (z.B. USB-Stick mit Malware) — nutzt Neugier aus", category: "Social Eng" },
+  { id: "is-se-4", moduleId: "ihk-it-sicherheit", front: "Was besagt die 3-2-1-Backup-Regel?", back: "3 Kopien, auf 2 verschiedenen Medien, 1 davon extern (offsite)", category: "Backup" },
+
+  // Schutzkonzepte
+  { id: "is-prot-1", moduleId: "ihk-it-sicherheit", front: "Was ist Defense in Depth?", back: "Mehrere Sicherheitsschichten — wenn eine scheitert, greift die nächste", category: "Konzepte" },
+  { id: "is-prot-2", moduleId: "ihk-it-sicherheit", front: "Was ist das Least-Privilege-Prinzip?", back: "Jeder Benutzer bekommt nur die minimal nötigen Berechtigungen", category: "Konzepte" },
+  { id: "is-prot-3", moduleId: "ihk-it-sicherheit", front: "Was ist Ransomware?", back: "Malware die Daten verschlüsselt und Lösegeld fordert (meist Krypto)", hint: "Schutz: Backups, Schulung", category: "Malware" },
+];
+
 // ─── Alle Flashcards zusammen ───────────────────────────────────────────────
 
 export const allFlashcards: Flashcard[] = [
@@ -293,6 +338,7 @@ export const allFlashcards: Flashcard[] = [
   ...ihkFlashcards,
   ...datenbankFlashcards,
   ...computersystemeFlashcards,
+  ...itSicherheitFlashcards,
 ];
 
 export function getFlashcardsForModule(moduleId: string): Flashcard[] {
