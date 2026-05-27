@@ -513,13 +513,6 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
 **Lösung:** $\\forall x \\in \\mathbb{R}: x^2 \\neq 2$ (falsch, da $\\sqrt{2}$ existiert)
 [PRACTICE_END]`,
       },
-      {
-        id: "mg4",
-        title: "Quiz: Mengenlehre",
-        duration: "8 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Mengenlehre und Logik!",
-      },
             {
               id: "m-grundlagen-mengen-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -635,13 +628,6 @@ $f$ ist umkehrbar, wenn $f$ bijektiv ist.
 Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
 
 [INTERACTIVE]`,
-      },
-      {
-        id: "mf3",
-        title: "Quiz: Funktionen",
-        duration: "8 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Funktionen!",
       },
             {
               id: "m-grundlagen-funktionen-aufgaben-leicht",
@@ -780,13 +766,6 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
 **Ergebnis:** $\\lim_{x \\to 1} \\frac{x^3 - 1}{x - 1} = 3$
 [GUIDED_END]`,
       },
-      {
-        id: "m1g3",
-        title: "Quiz: Grenzwerte",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Grenzwerte!",
-      },
             {
               id: "m1-grenzwerte-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -904,13 +883,6 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
 
 [INTERACTIVE]`,
       },
-      {
-        id: "m1a3",
-        title: "Quiz: Ableitungen",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Ableitungen!",
-      },
             {
               id: "m1-ableitungen-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -1023,13 +995,6 @@ $\\int u \\, dv = uv - \\int v \\, du$
 $F(x) = x^3 + x$
 $F(2) - F(0) = (8 + 2) - 0 = 10$
 [PRACTICE_END]`,
-      },
-      {
-        id: "m1i3",
-        title: "Quiz: Integration",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Integration!",
       },
             {
               id: "m1-integration-aufgaben-leicht",
@@ -1184,13 +1149,6 @@ Also: $\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$ fuer alle $x \in \mathbb{R}$ ($
 **Lösung:** $\cos(x) \approx 1 - \frac{x^2}{2} + \frac{x^4}{24}$ (nur gerade Potenzen!)
 [PRACTICE_END]`,
       },
-      {
-        id: "m1r3",
-        title: "Quiz: Reihen",
-        duration: "8 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Reihen!",
-      },
             {
               id: "m1-reihen-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -1299,13 +1257,6 @@ $\\det(A) = a_{11} a_{22} - a_{12} a_{21}$
 $A \\cdot A^{-1} = I$
 
 [INTERACTIVE]`,
-      },
-      {
-        id: "m2v3",
-        title: "Quiz: Vektoren & Matrizen",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Vektoren und Matrizen!",
       },
             {
               id: "m2-vektoren-aufgaben-leicht",
@@ -1475,13 +1426,6 @@ $y'(0) = 3C_1 + 2C_2 = 0$
 
 **Lösung:** $y = -2e^{3x} + 3e^{2x}$
 [GUIDED_END]`,
-      },
-      {
-        id: "m2d3",
-        title: "Quiz: Differentialgleichungen",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Differentialgleichungen!",
       },
             {
               id: "m2-dgl-aufgaben-leicht",
@@ -1688,13 +1632,6 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
 
 **Lösung:** $P = \frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = 0{,}3 = 30\%$
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-sto-quiz",
-        title: "Quiz: Stochastik",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Wahrscheinlichkeitsrechnung!",
       },
             {
               id: "m-stochastik-aufgaben-leicht",
@@ -1917,13 +1854,6 @@ Nach nur 3 Schritten: $\\sqrt{2} \\approx 1{,}4142$ (4 Dezimalstellen!)
 
 > **Merke:** Newton = schnell aber heikel, Bisektion = langsam aber sicher!`,
       },
-      {
-        id: "m-num-quiz",
-        title: "Quiz: Numerik",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über numerische Verfahren!",
-      },
             {
               id: "m-numerik-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -2125,13 +2055,6 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 
 **Lösung:** $5^2 + 12^2 = 25 + 144 = 169 = 13^2$ ✓ Ja, rechtwinklig!
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-geo-quiz",
-        title: "Quiz: Geometrie",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Geometrie!",
       },
             {
               id: "m-geometrie-flaechen-aufgaben-leicht",
@@ -2342,13 +2265,6 @@ $c = \\sqrt{13} \\approx 3{,}61$
 **Lösung:** $\frac{6}{\sin 30°} = \frac{b}{\sin 45°}$
 $b = \frac{6 \cdot \sin 45°}{\sin 30°} = \frac{6 \cdot 0{,}707}{0{,}5} = 8{,}49$
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-trig-quiz",
-        title: "Quiz: Trigonometrie",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Trigonometrie!",
       },
             {
               id: "m-trigonometrie-aufgaben-leicht",
@@ -2611,13 +2527,6 @@ $t = \frac{\ln(2)}{0{,}05} = \frac{0{,}693}{0{,}05} = 13{,}86$ Jahre
 **Lösung:** $N(12) = 100 \cdot 2^{12/3} = 100 \cdot 2^4 = 1600$
 [PRACTICE_END]`,
       },
-      {
-        id: "m-pot-quiz",
-        title: "Quiz: Potenzen & Log",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Potenzen und Logarithmen!",
-      },
             {
               id: "m-potenzen-log-aufgaben-leicht",
               title: "📝 Aufgaben (Leicht)",
@@ -2840,13 +2749,6 @@ Ein Boxplot zeigt:
 > **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!
 
 [INTERACTIVE]`,
-      },
-      {
-        id: "m-stat-quiz",
-        title: "Quiz: Statistik",
-        duration: "10 min",
-        type: "quiz",
-        content: "Teste dein Wissen über Statistik!",
       },
             {
               id: "m-statistik-aufgaben-leicht",
@@ -3124,13 +3026,6 @@ $\\frac{5}{2} : \\frac{5}{4} = \\frac{5}{2} \\cdot \\frac{4}{5} = \\frac{20}{10}
 [PRACTICE_END]`,
       },
       {
-        id: "m-br-4",
-        title: "Quiz: Bruchrechnen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen über Bruchrechnen!`,
-      },
-      {
         id: "m-br-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -3361,13 +3256,6 @@ $x_1 = 3$, $x_2 = 2$
 [PRACTICE_END]`,
       },
       {
-        id: "m-gl-3",
-        title: "Quiz: Gleichungen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-gl-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -3538,13 +3426,6 @@ $4x^2 - 12x + 9 = (2x-3)^2$
 
 **Lösung:** $x^2 + 2 \cdot 3x + 9 = x^2 + 6x + 9$
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-tu-3",
-        title: "Quiz: Termumformung",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-tu-aufgaben-leicht",
@@ -3731,13 +3612,6 @@ Der Tafel-Test funktioniert immer:
 3. Produkt-Vorzeichen ablesen
 
 > **Merke:** Nullstellen finden → Intervalle testen → Lösung ablesen!`,
-      },
-      {
-        id: "m-ug-3",
-        title: "Quiz: Ungleichungen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-ug-aufgaben-leicht",
@@ -4040,13 +3914,6 @@ Pruefe Vorzeichenwechsel -> Wendepunkte bei $(0, 0)$ und $(2, -16)$
 [PRACTICE_END]`,
       },
       {
-        id: "m-kd-4",
-        title: "Quiz: Kurvendiskussion",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-kd-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -4260,13 +4127,6 @@ Probe: $1+2=3$ ✓, $2-2=0$ ✓
 [PRACTICE_END]`,
       },
       {
-        id: "m-lgs-3",
-        title: "Quiz: Gleichungssysteme",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-lgs-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -4416,13 +4276,6 @@ Nur wenn $\\det(A) \\neq 0$! Ist $\\det(A) = 0$, heißt die Matrix **singulär**
 $A \\vec{x} = \\vec{b} \\Rightarrow \\vec{x} = A^{-1} \\vec{b}$
 
 > **Merke:** det = 0 → keine Inverse → LGS hat keine oder unendlich viele Lösungen!`,
-      },
-      {
-        id: "m-ma-3",
-        title: "Quiz: Matrizen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-ma-aufgaben-leicht",
@@ -4585,13 +4438,6 @@ $P(X > 130) = P\\left(Z > \\frac{130-100}{15}\\right) = P(Z > 2) \\approx 2{,}5\
 Nach dem **Zentralen Grenzwertsatz** nähert sich die Summe vieler unabhängiger Zufallsvariablen der Normalverteilung an — egal, welche Verteilung die einzelnen haben!
 
 > **Merke:** Normalverteilung = Glockenkurve. 68-95-99,7 ist die wichtigste Faustregel!`,
-      },
-      {
-        id: "m-vt-3",
-        title: "Quiz: Verteilungen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-vt-aufgaben-leicht",
@@ -4772,13 +4618,6 @@ $S_5 = 2 \cdot \frac{3^5 - 1}{3 - 1} = 2 \cdot \frac{242}{2} = 242$
 [PRACTICE_END]`,
       },
       {
-        id: "m-fr-3",
-        title: "Quiz: Folgen & Reihen",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-fr-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -4946,13 +4785,6 @@ Abstand $(1, 2, 3)$ zur Ebene $2x - y + 3z = 6$:
 $d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}} \\approx 0{,}80$
 
 > **Merke:** Ebene = Punkt + 2 Richtungen. Normalenvektor steht senkrecht drauf!`,
-      },
-      {
-        id: "m-ag-3",
-        title: "Quiz: Analytische Geometrie",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-ag-aufgaben-leicht",
@@ -5130,13 +4962,6 @@ $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\a
 [PRACTICE_END]`,
       },
       {
-        id: "m-pz-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-pz-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -5290,13 +5115,6 @@ $V = \\frac{4}{3}\\pi \\cdot 125 = \\frac{500}{3}\\pi \\approx 523{,}6$
 $O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
       },
       {
-        id: "m-ko-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-ko-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -5414,13 +5232,6 @@ In einer Runde mit 10 Personen schütteln alle einander die Hände. Wie viele Ha
 $\\binom{10}{2} = \\frac{10!}{2! \\cdot 8!} = 45$
 
 > **Merke:** Kombination = Auswahl ohne Reihenfolge. Variation = Auswahl mit Reihenfolge.`,
-      },
-      {
-        id: "m-kb-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-kb-aufgaben-leicht",
@@ -5605,13 +5416,6 @@ Kontraposition: Wenn $n$ gerade, dann $n^2$ gerade. (Einfacher zu beweisen!)
 > **Merke:** VI funktioniert wie eine Kartenreihe — wenn jede Karte die nächste umstößt, fallen alle um!`,
       },
       {
-        id: "m-lg-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
-      },
-      {
         id: "m-lg-aufgaben-leicht",
         title: "📝 Aufgaben (Leicht)",
         duration: "10 min",
@@ -5742,13 +5546,6 @@ $b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
 
 **Lösung:** $\frac{6 \cdot 10}{15} = 4$ Tage
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-ds-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-ds-aufgaben-leicht",
@@ -5982,13 +5779,6 @@ $T_2(x) = 1 - \frac{x^2}{2}$
 
 **Loesung:** Ja! $\sum_{n=0}^{\infty} \frac{1}{n!} = e \approx 2{,}718$
 [PRACTICE_END]`,
-      },
-      {
-        id: "m-tw-3",
-        title: "Quiz",
-        duration: "8 min",
-        type: "quiz",
-        content: `Teste dein Wissen!`,
       },
       {
         id: "m-tw-aufgaben-leicht",
