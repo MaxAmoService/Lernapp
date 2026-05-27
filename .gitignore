@@ -14,3 +14,4 @@ tsconfig.tsbuildinfo
 # Temporary / source files
 *.pdf
 *.txt
+tmp/
