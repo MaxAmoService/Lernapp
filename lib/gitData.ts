@@ -386,6 +386,12 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
 
 ---
 
+## 🔨 Branching ausprobieren
+
+[INTERACTIVE]
+
+---
+
 ## 🎯 IHK-Tipp
 
 > ❗ **Prüfungsfrage:** "Erklären Sie die Gitflow-Strategie!" — Benenne die Branches (main, dev, feature, release, hotfix) und deren Zweck. Erkläre den Ablauf eines Feature-Branches.`

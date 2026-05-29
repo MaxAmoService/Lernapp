@@ -281,7 +281,8 @@ docker compose logs -f
       id: "dk-3",
       title: "Docker Compose — Multi-Container orchestrieren",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "dockerComposeBuilder",
       content: `## Docker Compose — Mehrere Container verwalten
 
 **Docker Compose** ist ein Tool zur Definition und Ausführung von **Multi-Container-Docker-Anwendungen** mit einer einzigen YAML-Datei.
@@ -407,6 +408,12 @@ volumes:
 \`\`\`
 
 > ⚠️ **Wichtig:** Ohne Volume gehen Daten beim Neustart des Containers **verloren**!
+
+---
+
+## 🔨 Docker Compose ausprobieren
+
+[INTERACTIVE]
 
 ---
 

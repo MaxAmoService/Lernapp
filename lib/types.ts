@@ -40,7 +40,11 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "patternExplorer"
   | "scrumBoard"
   | "dockerfileBuilder"
-  | "solidChecker";
+  | "solidChecker"
+  | "evaCalculator"
+  | "testRunner"
+  | "smartGoalBuilder"
+  | "dockerComposeBuilder";
 
 export interface Lesson {
   id: string;

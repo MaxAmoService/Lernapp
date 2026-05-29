@@ -63,3 +63,7 @@ export { default as PatternExplorer } from "./PatternExplorer";
 export { default as ScrumBoard } from "./ScrumBoard";
 export { default as DockerfileBuilder } from "./DockerfileBuilder";
 export { SOLIDChecker } from "./SOLIDChecker";
+export { TestRunner } from "./TestRunner";
+export { default as EVACalculator } from "./EVACalculator";
+export { default as SMARTGoalBuilder } from "./SMARTGoalBuilder";
+export { default as DockerComposeBuilder } from "./DockerComposeBuilder";

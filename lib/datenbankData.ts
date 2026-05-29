@@ -940,7 +940,7 @@ psql -U benutzer datenbank < backup.sql
     // LEKTION 9: Datenbanktypen
     // ══════════════════════════════════════════════════════════════════════════
     {
-      id: "db-9",
+      id: "db-11",
       title: "Datenbanktypen im Überblick",
       duration: "12 min",
       type: "text",
@@ -1013,7 +1013,7 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
     // LEKTION 10: CREATE TABLE im Detail
     // ══════════════════════════════════════════════════════════════════════════
     {
-      id: "db-10",
+      id: "db-12",
       title: "CREATE TABLE im Detail",
       duration: "15 min",
       type: "text",

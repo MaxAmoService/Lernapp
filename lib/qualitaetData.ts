@@ -384,6 +384,12 @@ class EventEmitter:
 
 ---
 
+## 🔨 Patterns erkunden
+
+[INTERACTIVE]
+
+---
+
 ## 🎯 IHK-Tipp
 
 > ❗ **Prüfungsfrage:** "Erklären Sie das Strategy-Pattern!" — Definiert eine Familie von Algorithmen, kapselt sie in separate Klassen und macht sie austauschbar. Beispiel: Verschiedene Sortierverfahren zur Laufzeit wechseln.`

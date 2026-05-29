@@ -85,7 +85,7 @@ export const itSicherheitModule: Module = {
       id: "sec-1",
       title: "Sicherheitsgrundlagen",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
       interactive: "securityThreatExplorer" as const,
       content: `## Sicherheitsgrundlagen
 
@@ -138,7 +138,7 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
       id: "sec-2",
       title: "Authentifizierung & Passwörter",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
       interactive: "passwordStrengthChecker" as const,
       content: `## Authentifizierung & Passwörter
 
@@ -198,7 +198,7 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
       id: "sec-3",
       title: "Netzwerksicherheit",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
       interactive: "firewallRuleBuilder" as const,
       content: `## Netzwerksicherheit
 
@@ -263,7 +263,7 @@ Die DMZ ist ein Pufferbereich — öffentliche Server stehen hier, das interne N
       id: "sec-4",
       title: "Web-Security (OWASP Top 10)",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
       interactive: "sqlInjectionSimulator" as const,
       content: `## Web-Security — OWASP Top 10
 
@@ -359,7 +359,7 @@ docker run -d -p 3000:3000 bkimminich/juice-shop
       id: "sec-5",
       title: "Verschlüsselung & PKI",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
       interactive: "encryptionDemo" as const,
       content: `## Verschlüsselung & PKI
 
@@ -426,7 +426,7 @@ Root CA → Intermediate CA → Server-Zertifikat
       id: "sec-6",
       title: "Social Engineering & Phishing",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
       interactive: "phishingDetector" as const,
       content: `## Social Engineering & Phishing
 

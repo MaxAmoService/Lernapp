@@ -503,7 +503,8 @@ public class UserService
       id: "ep-4",
       title: "Unit Tests — Code testen",
       duration: "18 min",
-      type: "text",
+      type: "interactive",
+      interactive: "testRunner",
       content: `## Unit Tests — Qualität durch automatisierte Tests
 
 **Unit-Tests** testen **einzelne Funktionen oder Klassen** isoliert. Sie sind die Grundlage für sicheren Code.
@@ -649,6 +650,12 @@ public class CalculatorTests
 | **Path Coverage** | Jeder mögliche Pfad wurde getestet |
 
 > ⚠️ **100% Coverage ≠ fehlerfrei!** Es zeigt nur, dass der Code ausgeführt wurde.
+
+---
+
+## 🔨 Tests ausprobieren
+
+[INTERACTIVE]
 
 ---
 

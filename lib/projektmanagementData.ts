@@ -205,7 +205,8 @@ Das **Magische Dreieck** beschreibt das Spannungsfeld, in dem sich jedes Projekt
       id: "pm-3",
       title: "SMART-Ziele",
       duration: "10 min",
-      type: "text",
+      type: "interactive",
+      interactive: "smartGoalBuilder",
       content: `## SMART-Ziele — Ziele richtig formulieren
 
 Das **SMART-Modell** hilft, Ziele so zu formulieren, dass sie **messbar, realistisch und terminiert** sind.
@@ -241,6 +242,12 @@ Das **SMART-Modell** hilft, Ziele so zu formulieren, dass sie **messbar, realist
 
 ---
 
+## 🔨 Ausprobieren
+
+[INTERACTIVE]
+
+---
+
 ## 🎯 IHK-Tipp
 
 > ❗ **Prüfungsfrage:** "Was bedeutet SMART?" — Spezifisch, Messbar, Anspruchsvoll/Akzeptiert, Realistisch, Terminiert. Formuliere ein Beispiel-Ziel!`
@@ -251,7 +258,8 @@ Das **SMART-Modell** hilft, Ziele so zu formulieren, dass sie **messbar, realist
       id: "pm-4",
       title: "Klassisches Projektmanagement",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "evaCalculator",
       content: `## Klassisches Projektmanagement
 
 Das klassische PM ist **phasenbasiert** und **dokumentengetrieben**. Es eignet sich für Projekte mit **festen Anforderungen**.
@@ -333,6 +341,12 @@ Tatsächliche Kosten (AC): 90.000€
 CV = 80.000 - 90.000 = -10.000 (über Budget!)
 CPI = 80.000 / 90.000 = 0,89 (ineffizient!)
 \`\`\`
+
+---
+
+## 🔨 EVA ausprobieren
+
+[INTERACTIVE]
 
 ---
 

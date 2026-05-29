@@ -222,6 +222,12 @@ Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interfa
 
 ---
 
+## 🔨 Heuristiken anwenden
+
+[INTERACTIVE]
+
+---
+
 ## 🎯 IHK-Tipp
 
 > ❗ **Prüfungsfrage:** "Nennen Sie 5 von Nielsens 10 Heuristiken mit Beispiel!" — Die Heuristiken müssen nicht in dieser Reihenfolge genannt werden, aber mit konkreten Beispielen.`
