@@ -61,6 +61,10 @@ export const erwProgModule: Module = {
       interactive: "solidChecker",
       content: `## SOLID — Die 5 Prinzipien sauberer OOP
 
+> 📚 **Modulübersicht:** In diesem Modul lernst du die wichtigsten Prinzipien für sauberen, wartbaren Code kennen — von SOLID über Clean Code bis zu Unit Tests. Diese Prinzipien sind nicht nur für die IHK prüfungsrelevant, sondern entscheiden über die Qualität deiner Software!
+
+> 🔗 **Verwandtes Thema:** Design Patterns im Modul "Software-Qualitätsstandards" ergänzen diese Prinzipien perfekt.
+
 Die **SOLID-Prinzipien** sind Richtlinien für saubere, wartbare objektorientierte Programmierung.
 
 ---
@@ -227,6 +231,8 @@ service = UserService(PostgreSQLDatabase())
       type: "text",
       content: `## Clean Code — Code, den Menschen verstehen
 
+> 💡 **Roter Faden:** In der letzten Lektion haben wir die SOLID-Prinzipien kennengelernt — die großen Entwurfsprinzipien. Jetzt schauen wir uns konkretere Regeln an: Was macht Code lesbar und wartbar?
+
 **Clean Code** ist Code, der **lesbar, wartbar und verständlich** ist. Er folgt bewährten Prinzipien.
 
 ---
@@ -343,6 +349,8 @@ class User:
       duration: "15 min",
       type: "text",
       content: `## Interfaces — WAS, nicht WIE
+
+> 💡 **Roter Faden:** SOLID und Clean Code sind die Prinzipien. Jetzt kommt ein konkreteres Werkzeug: Interfaces. Sie sind der Schlüssel zu loser Kopplung und Testbarkeit — und ein zentrales Konzept in moderner Software.
 
 Ein **Interface** definiert, **was eine Klasse können muss** — nicht wie sie es implementiert. Es ist ein **Vertrag**.
 
@@ -506,6 +514,10 @@ public class UserService
       type: "interactive",
       interactive: "testRunner",
       content: `## Unit Tests — Qualität durch automatisierte Tests
+
+> 💡 **Roter Faden:** Wir kennen jetzt Interfaces — sie machen unseren Code testbar. Jetzt nutzen wir das: Unit Tests sind die wichtigste Methode, um sicherzustellen, dass unser Code funktioniert. Ohne Tests ist Code nur eine Vermutung!
+
+> 🔗 **Verwandtes Thema:** Testverfahren behandeln wir auch im Modul "Software-Qualitätsstandards" — dort mit Fokus auf die Testpyramide.
 
 **Unit-Tests** testen **einzelne Funktionen oder Klassen** isoliert. Sie sind die Grundlage für sicheren Code.
 
@@ -672,6 +684,8 @@ public class CalculatorTests
       type: "text",
       content: `## Coupling & Cohesion — Qualitätsmerkmale von Code
 
+> 💡 **Roter Faden:** Nach den Unit Tests fragen wir uns: Warum ist mancher Code schwer zu testen? Oft liegt es an starker Kopplung. Lose Kopplung und starke Kohäsion sind die Grundlagen für wartbaren Code.
+
 **Coupling** (Kopplung) und **Cohesion** (Kohäsion) sind die wichtigsten Qualitätsmerkmale für die Struktur deines Codes.
 
 ---
@@ -764,6 +778,10 @@ class ReportGenerator:
       duration: "12 min",
       type: "text",
       content: `## Code Smells — Warnsignale im Code
+
+> 💡 **Roter Faden:** Wir kennen jetzt die Prinzipien (SOLID, Clean Code) und Werkzeuge (Interfaces, Tests, Coupling/Cohesion). Jetzt lernen wir, schlechten Code zu erkennen — und wie wir ihn verbessern. Code Smells sind wie Warnsignale: Sie zeigen, wo etwas nicht stimmt.
+
+> 🔗 **Verwandtes Thema:** Code Smells behandeln wir auch im Modul "Software-Qualitätsstandards" — dort mit Fokus auf ISO 9126.
 
 **Code Smells** sind Hinweise auf schlechte Code-Struktur. Sie sind keine Fehler, aber **Risiken für zukünftige Probleme**.
 

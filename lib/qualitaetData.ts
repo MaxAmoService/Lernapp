@@ -68,6 +68,10 @@ export const qualitaetModule: Module = {
       type: "text",
       content: `## Softwarequalität — Was bedeutet das?
 
+> 📚 **Modulübersicht:** In diesem Modul lernst du die wichtigsten Qualitätsstandards, Design Patterns und Testverfahren kennen — alles prüfungsrelevant für die IHK! Wir starten mit der Definition von Qualität und arbeiten uns zu konkreten Werkzeugen vor.
+
+---
+
 Nach der **ISO/IEC/IEEE 24765:2017** ist Softwarequalität:
 
 > "The capability of a software product to satisfy stated and implied needs when used under specified conditions."
@@ -122,6 +126,8 @@ Einfach gesagt: **Tut das Programm, was es soll — und tut es gut?**
       duration: "15 min",
       type: "text",
       content: `## ISO 9126 — Die 6 Qualitätsmerkmale
+
+> 💡 **Roter Faden:** In der letzten Lektion haben wir gelernt, WAS Softwarequalität ist und WARUM sie wichtig ist. Jetzt schauen wir uns ein konkreteres Framework an: Die ISO 9126 definiert 6 messbare Qualitätsmerkmale.
 
 Die **ISO 9126** definiert 6 Hauptmerkmale für Softwarequalität. Diese Struktur hilft, Qualität **systematisch** zu bewerten.
 
@@ -218,6 +224,10 @@ Die **ISO 9126** definiert 6 Hauptmerkmale für Softwarequalität. Diese Struktu
       type: "interactive",
       interactive: "patternExplorer",
       content: `## Design Patterns — Lösungen für bekannte Probleme
+
+> 💡 **Roter Faden:** Nachdem wir die Qualitätsmerkmale kennengelernt haben, widmen wir uns jetzt konkreten Lösungsmustern. Design Patterns sind wie **Bauanleitungen für bewährte Probleme** — sie helfen dir, sauberen Code zu schreiben.
+
+> 🔗 **Verwandtes Thema:** Die SOLID-Prinzipien im Modul "Erweiterte Programmierung" ergänzen diese Patterns perfekt.
 
 **Design Patterns** sind bewährte Lösungen für häufig auftretende Probleme in der Softwareentwicklung. Sie sind kein konkreter Code, sondern **allgemeine Konzepte**.
 
@@ -403,6 +413,8 @@ class EventEmitter:
       type: "text",
       content: `## Architekturstile — Wie strukturiere ich Software?
 
+> 💡 **Roter Faden:** Nach den Design Patterns (kleine Lösungsmuster) schauen wir uns jetzt das große Ganze an: Wie strukturiere ich eine gesamte Anwendung? Die Wahl des Architekturstils entscheidet über Wartbarkeit und Skalierbarkeit.
+
 Ein **Architekturstil** definiert, wie die Komponenten einer Anwendung organisiert und miteinander verbunden sind.
 
 ---
@@ -514,6 +526,10 @@ Bei Microservices werden Aufgaben in **unabhängige Services** gekapselt:
       duration: "15 min",
       type: "text",
       content: `## Testverfahren — Qualität sicherstellen
+
+> 💡 **Roter Faden:** Wir kennen jetzt Qualitätsmerkmale, Patterns und Architekturen. Aber wie stellen wir sicher, dass unser Code auch wirklich funktioniert? Durch Tests! Verschiedene Testarten decken verschiedene Aspekte ab.
+
+> 🔗 **Verwandtes Thema:** Unit Tests behandeln wir auch im Modul "Erweiterte Programmierung" — dort mit Fokus auf das Schreiben von Tests.
 
 Tests sind **essenziell** für Softwarequalität. Es gibt verschiedene Testarten, die unterschiedliche Aspekte prüfen.
 
@@ -632,6 +648,10 @@ def test_login_flow():
       type: "text",
       content: `## Vorgehensmodelle — Wie organisiere ich ein Projekt?
 
+> 💡 **Roter Faden:** Nach den Testverfahren wissen wir, WIE wir Qualität prüfen. Jetzt fragen wir uns: WANN im Entwicklungsprozess testen wir? Die Vorgehensmodelle bestimmen den gesamten Ablauf — von der Planung bis zum Deployment.
+
+> 🔗 **Verwandtes Thema:** Scrum behandeln wir auch im Modul "Projektmanagement" — dort mit Fokus auf Rollen und Events.
+
 Verschiedene Projekte brauchen verschiedene Vorgehensweisen. Die IHK prüft, ob du die Modelle **unterscheiden und bewerten** kannst.
 
 ---
@@ -736,6 +756,10 @@ Anforderung ───────────────────── Akze
       duration: "15 min",
       type: "text",
       content: `## Code Smells — Warnsignale im Code
+
+> 💡 **Roter Faden:** Wir kennen jetzt die großen Konzepte: Qualitätsmerkmale, Patterns, Architekturen, Tests und Vorgehensmodelle. Jetzt zoomen wir auf die Code-Ebene: Was macht Code schlecht — und wie verbessern wir ihn?
+
+> 🔗 **Verwandtes Thema:** Code Smells behandeln wir auch im Modul "Erweiterte Programmierung" — dort mit Fokus auf Refactoring-Techniken.
 
 **Code Smells** ("Code-Gerüche") sind Hinweise darauf, dass im Code etwas nicht stimmt — nicht sofort ein Fehler, aber ein Risiko für zukünftige Probleme.
 

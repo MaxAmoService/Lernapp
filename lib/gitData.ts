@@ -72,6 +72,8 @@ export const gitModule: Module = {
       type: "text",
       content: `## Wozu Versionsmanagement?
 
+> 💡 **Roter Faden — Einstieg:** Willkommen zum Modul "Versionsmanagement mit Git"! In der IHK-Prüfung wird Versionsverwaltung regelmäßig abgefragt — sowohl theoretisch (zentral vs. dezentral) als auch praktisch (Befehle, Workflows). Dieses Modul baut sich systematisch auf: Von den Grundlagen über die Befehle bis zu professionellen Workflows mit Gitflow.
+
 Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Versionsmanagement chaos:
 
 - 📧 Dateien per E-Mail tauschen — wer hat die neueste Version?
@@ -111,7 +113,11 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
 - Parallele Entwicklung ermöglichen
 - Rückfallmöglichkeit (Backup)
 - Teamzusammenarbeit verbessern
-- Konflikte erkennen und lösen`
+- Konflikte erkennen und lösen
+
+---
+
+> 💡 **Nächste Lektion:** Jetzt wo du weißt, WARUM Versionsmanagement wichtig ist, schauen wir uns die zwei grundlegenden Ansätze an: zentrale vs. dezentrale Versionsverwaltung — und warum Git sich durchgesetzt hat.`
     },
 
     // --- Lektion 2: Zentrale vs. Dezentrale VV ---
@@ -121,6 +127,8 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
       duration: "12 min",
       type: "text",
       content: `## Zentrale vs. Dezentrale Versionsverwaltung
+
+> 💡 **Roter Faden:** In der letzten Lektion haben wir gelernt, WARUM Versionsmanagement wichtig ist. Jetzt schauen wir uns die zwei grundlegenden Ansätze an — und warum Git (dezentral) sich gegen SVN (zentral) durchgesetzt hat.
 
 Es gibt zwei grundlegende Ansätze — und der Unterschied ist **prüfungsrelevant**!
 
@@ -190,7 +198,11 @@ Diese Strategien bestimmen, **wie mit parallelem Zugriff** umgegangen wird:
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Typische Frage:** "Erklären Sie den Unterschied zwischen zentraler und dezentraler Versionsverwaltung!" — Nenne Vor- und Nachteile beider Ansätze.`
+> ❗ **Typische Frage:** "Erklären Sie den Unterschied zwischen zentraler und dezentraler Versionsverwaltung!" — Nenne Vor- und Nachteile beider Ansätze.
+
+---
+
+> 💡 **Nächste Lektion:** Jetzt kennst du den Unterschied zwischen zentral und dezentral. In der nächsten Lektion lernst du die konkreten Git-Befehle kennen, die du im Alltag brauchst — von git clone bis git merge.`
     },
 
     // --- Lektion 3: Git Grundlagen ---
@@ -200,6 +212,8 @@ Diese Strategien bestimmen, **wie mit parallelem Zugriff** umgegangen wird:
       duration: "20 min",
       type: "text",
       content: `## Git — Die wichtigsten Befehle
+
+> 💡 **Roter Faden:** In der letzten Lektion haben wir zentrale und dezentrale VV verglichen. Jetzt wird es praktisch: Du lernst die wichtigsten Git-Befehle kennen, mit denen du im Alltag arbeitest.
 
 Git ist der **Industriestandard** für Versionsverwaltung. Hier sind die Befehle, die du kennen musst.
 
@@ -293,7 +307,11 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Erklären Sie den Unterschied zwischen git pull und git fetch!" — pull = fetch + merge. fetch lädt nur herunter, ohne lokale Branches zu verändern.`
+> ❗ **Prüfungsfrage:** "Erklären Sie den Unterschied zwischen git pull und git fetch!" — pull = fetch + merge. fetch lädt nur herunter, ohne lokale Branches zu verändern.
+
+---
+
+> 💡 **Nächste Lektion:** Du kennst jetzt die einzelnen Befehle. Aber wie organisiert man ein ganzes Team-Projekt mit Branches? In der nächsten Lektion lernst du Gitflow kennen — die wichtigste Branching-Strategie.`
     },
 
     // --- Lektion 4: Branching-Strategien ---
@@ -304,6 +322,10 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
       type: "interactive",
       interactive: "gitBranchVisualizer",
       content: `## Gitflow — Ordnung im Branch-Chaos
+
+> 💡 **Roter Faden:** In der letzten Lektion hast du die einzelnen Git-Befehle kennengelernt. Jetzt schauen wir uns an, wie man mit einer **Branching-Strategie** wie Gitflow Ordnung ins Chaos bringt — denn ohne klare Regeln wird es bei mehreren Entwicklern schnell unübersichtlich.
+
+> 🔗 **Verwandtes Thema:** Gitflow mit seinen definierten Phasen (Feature, Release, Hotfix) erinnert an die DIN 69901-Phasen im Modul "Projektmanagement" — auch dort geht es um strukturierte Abläufe.
 
 Gitflow definiert **klare Regeln**, wann welcher Branch verwendet wird. Es ist eine der wichtigsten Strategien für Teams.
 
@@ -394,7 +416,11 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Erklären Sie die Gitflow-Strategie!" — Benenne die Branches (main, dev, feature, release, hotfix) und deren Zweck. Erkläre den Ablauf eines Feature-Branches.`
+> ❗ **Prüfungsfrage:** "Erklären Sie die Gitflow-Strategie!" — Benenne die Branches (main, dev, feature, release, hotfix) und deren Zweck. Erkläre den Ablauf eines Feature-Branches.
+
+---
+
+> 💡 **Nächste Lektion:** Gitflow bringt Ordnung — aber was passiert, wenn zwei Entwickler dieselbe Datei ändern? In der nächsten Lektion lösen wir Merge-Konflikte Schritt für Schritt.`
     },
 
     // --- Lektion 5: Merge-Konflikte ---
@@ -404,6 +430,8 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
       duration: "12 min",
       type: "text",
       content: `## Merge-Konflikte — Wenn Git nicht mehr weiterweiß
+
+> 💡 **Roter Faden:** In der letzten Lektion hast du gelernt, wie man mit Gitflow Branches strategisch einsetzt. Aber was passiert, wenn zwei Entwickler dieselbe Zeile ändern? Jetzt lernst du, wie Merge-Konflikte entstehen und wie du sie löst.
 
 Merge-Konflikte entstehen, wenn **zwei Entwickler dieselbe Zeile** in derselben Datei geändert haben. Git kann dann nicht automatisch entscheiden, welche Version die richtige ist.
 
@@ -488,7 +516,11 @@ git rebase dev
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Wie löst man einen Merge-Konflikt?" — Schritt für Schritt erklären: Konfliktmarker finden, Code manuell anpassen, als gelöst markieren, committen.`
+> ❗ **Prüfungsfrage:** "Wie löst man einen Merge-Konflikt?" — Schritt für Schritt erklären: Konfliktmarker finden, Code manuell anpassen, als gelöst markieren, committen.
+
+---
+
+> 💡 **Nächste Lektion:** Konflikte lösen ist wichtig — aber noch besser ist es, sie zu vermeiden. In der nächsten Lektion lernst du, wie gute Commit-Nachrichten und Conventional Commits die Zusammenarbeit verbessern.`
     },
 
     // --- Lektion 6: Commit-Conventionen ---
@@ -498,6 +530,10 @@ git rebase dev
       duration: "12 min",
       type: "text",
       content: `## Richtig committen
+
+> 💡 **Roter Faden:** In der letzten Lektion hast du Merge-Konflikte kennengelernt. Jetzt schauen wir uns an, wie du durch **saubere Commits** die Zusammenarbeit im Team verbessern kannst — denn gute Commit-Nachrichten sind die Basis für eine nachvollziehbare Historie.
+
+> 🔗 **Verwandtes Thema:** Saubere Commits und Versionsnummern spielen auch im Modul "Projektmanagement" eine Rolle — dort bei der Release-Planung und Dokumentation.
 
 Ein Commit dokumentiert eine **abgeschlossene, sinnvolle Änderung**. Die Commit-Nachricht erklärt, WARUM die Änderung gemacht wurde — nicht nur WAS.
 
@@ -572,7 +608,11 @@ refactor(product): Komponentenstruktur verbessern
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Was macht einen guten Commit aus?" — Eine logische Änderung, aussagekräftige Nachricht im Imperativ, Warum erklären, max. 50 Zeichen erste Zeile.`
+> ❗ **Prüfungsfrage:** "Was macht einen guten Commit aus?" — Eine logische Änderung, aussagekräftige Nachricht im Imperativ, Warum erklären, max. 50 Zeichen erste Zeile.
+
+---
+
+> 💡 **Nächste Lektion:** Jetzt weißt du, wie man richtig committet. Aber was gehört NICHT in ein Repository? In der nächsten Lektion lernst du gitignore und Git LFS kennen.`
     },
 
     // --- Lektion 7: .gitignore & LFS ---
@@ -582,6 +622,10 @@ refactor(product): Komponentenstruktur verbessern
       duration: "10 min",
       type: "text",
       content: `## .gitignore — Dateien ausschließen
+
+> 💡 **Roter Faden:** In der letzten Lektion hast du gelernt, wie man sauber committet. Jetzt schauen wir uns die andere Seite an: Was sollte man **nicht** ins Repository packen? \`.gitignore\` und Git LFS helfen dir dabei.
+
+> 🔗 **Verwandtes Thema:** Geheimnisse wie API-Keys und Passwörter dürfen nie im Repository landen — das Thema Sicherheit behandeln wir auch im Modul "IT-Sicherheit".
 
 Nicht alles gehört in ein Git-Repository! Automatisch generierte Dateien, Abhängigkeiten und Geheimnisse sollten **ignoriert** werden.
 
@@ -679,7 +723,11 @@ git commit -m "chore: Git LFS für Bilder konfiguriert"
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Was ist der Zweck von .gitignore?" — Dateien vom Tracking ausschließen, die nicht im Repository sein sollten (Build-Artefakte, Abhängigkeiten, Geheimnisse).`
+> ❗ **Prüfungsfrage:** "Was ist der Zweck von .gitignore?" — Dateien vom Tracking ausschließen, die nicht im Repository sein sollten (Build-Artefakte, Abhängigkeiten, Geheimnisse).
+
+---
+
+> 💡 **Nächste Lektion:** Du weißt jetzt, was ins Repository gehört und was nicht. In der nächsten Lektion lernst du git stash und git restore kennen — zwei Befehle für den Notfall.`
     },
 
     // --- Lektion 8: Git Stash & Restore ---
@@ -689,6 +737,10 @@ git commit -m "chore: Git LFS für Bilder konfiguriert"
       duration: "10 min",
       type: "text",
       content: `## Git Stash — Änderungen zwischenspeichern
+
+> 💡 **Roter Faden:** In der letzten Lektion hast du gitignore und Git LFS kennengelernt. Jetzt lernst du zwei praktische Befehle für den Alltag: git stash zum Zwischenspeichern und git restore zum Rückgängig machen.
+
+> 🔗 **Verwandtes Thema:** Der Stash-Workflow (Feature unterbrechen, Hotfix machen, weiterarbeiten) zeigt, wie wichtig gute Branching-Strategien sind — das haben wir in der Gitflow-Lektion besprochen.
 
 Du arbeitest an einem Feature, aber musst **dringend** einen Bugfix auf einem anderen Branch machen? Git Stash speichert deine Änderungen temporär.
 
@@ -777,7 +829,11 @@ git restore --source=HEAD~2 dateiname.txt  # Version von 2 Commits zurück
 
 ## 🎯 IHK-Tipp
 
-> ❗ **Prüfungsfrage:** "Wann verwendet man git stash?" — Wenn man unvollständige Änderungen zwischenspeichern muss, um auf einem anderen Branch zu arbeiten.`
+> ❗ **Prüfungsfrage:** "Wann verwendet man git stash?" — Wenn man unvollständige Änderungen zwischenspeichern muss, um auf einem anderen Branch zu arbeiten.
+
+---
+
+> 💡 **Nächste Lektion:** Das war die letzte inhaltliche Lektion zu Git! In der nächsten Lektion kannst du dein Wissen im Quiz testen — von den Grundlagen bis zu den fortgeschrittenen Workflows.`
     },
 
     // --- Lektion 9: Quiz ---
@@ -787,6 +843,8 @@ git restore --source=HEAD~2 dateiname.txt  # Version von 2 Commits zurück
       duration: "15 min",
       type: "quiz",
       content: `## 🎯 Quiz: Versionsmanagement mit Git
+
+> 💡 **Roter Faden:** Du hast alle Lektionen zu Git durchgearbeitet — von den Grundlagen über die Befehle bis zu professionellen Workflows. Jetzt ist es Zeit, dein Wissen zu testen!
 
 Teste dein Wissen über Git und Versionsmanagement!`,
     },

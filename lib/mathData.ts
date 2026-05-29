@@ -569,6 +569,8 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
         ],
         content: `# Funktionen & Definitionsbereiche
 
+> 💡 **Roter Faden:** Du kennst bereits Mengenoperationen und Logik aus dem Grundlagen-Modul. Jetzt lernst du das wichtigste Werkzeug der Mathematik kennen: die **Funktion** — eine Regel, die jedem x genau ein y zuordnet!
+
 ## Definition
 
 Eine Funktion $f: D \\rightarrow Y$ ordnet jedem Element aus dem Definitionsbereich $D$ genau ein Element aus dem Zielbereich $Y$ zu.
@@ -595,6 +597,8 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
 - **Wurzel**: Argument $\\geq 0$ (bei geradem Index)
 - **Logarithmus**: Argument $> 0$
 
+> 🔗 **Weiter:** Im nächsten Kapitel untersuchst du die **Eigenschaften** von Funktionen — Monotonie, Stetigkeit und Umkehrfunktionen. Danach geht es in die Analysis mit Grenzwerten!
+
 [INTERACTIVE]`,
       },
       {
@@ -604,6 +608,8 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
         interactive: "functionExplorer" as const,
         type: "interactive",
         content: `# Funktionseigenschaften
+
+> 💡 **Roter Faden:** Jetzt, wo du Funktionen und ihre Definitionsbereiche kennst, schauen wir uns an, **wie** sich Funktionen verhalten — steigend oder fallend, stetig oder sprungartig, symmetrisch oder nicht?
 
 ## Monotonie
 
@@ -626,6 +632,8 @@ $\\lim_{x \\to a} f(x) = f(a)$
 
 $f$ ist umkehrbar, wenn $f$ bijektiv ist.
 Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
+
+> 🔗 **Weiter zur Analysis:** Du kennst jetzt die Grundlagen der Funktionen! Damit bist du bereit für die **Analysis** — startend mit Grenzwerten: Was passiert, wenn sich x einem bestimmten Wert nähert? Und danach: Ableitungen und Integration!
 
 [INTERACTIVE]`,
       },
@@ -685,6 +693,8 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
         ],
         content: `# Grenzwerte von Funktionen
 
+> 💡 **Roter Faden:** Du kennst bereits Funktionen und ihre Eigenschaften aus dem Grundlagen-Modul. Jetzt fragen wir: Was passiert, wenn sich x immer weiter einem bestimmten Wert nähert? Diese Frage ist der Einstieg in die gesamte **Analysis**!
+
 ## Definition
 
 $\\lim_{x \\to a} f(x) = L$ bedeutet:
@@ -707,6 +717,8 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
 - $\\lim_{x \\to \\infty} \\left(1 + \\frac{1}{x}\\right)^x = e$
 - $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$
 
+> 🔗 **Weiter:** Im nächsten Kapitel lernst du **L'Hôpitals Regel** kennen — ein mächtiges Werkzeug, um unbestimmte Ausdrücke wie $\\frac{0}{0}$ zu lösen. Und danach folgt die Ableitung, die auf dem Grenzwertbegriff aufbaut!
+
 [INTERACTIVE]`,
       },
       {
@@ -715,6 +727,8 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
         duration: "15 min",
         type: "text",
         content: `# L'Hôpital's Regel
+
+> 💡 **Roter Faden:** Du hast bereits gelernt, Grenzwerte mit Rechenregeln zu bestimmen. Aber was, wenn du einen unbestimmten Ausdruck wie $\\frac{0}{0}$ erhältst? Genafür gibt es **L'Hôpitals Regel** — und sie nutzt bereits die **Ableitung**, die im nächsten Kapitel kommt!
 
 ## Anwendung
 
@@ -764,7 +778,9 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
 **Schritt 3:** Setze ein: $\\lim_{x \\to 1} \\frac{3x^2}{1} = 3$
 
 **Ergebnis:** $\\lim_{x \\to 1} \\frac{x^3 - 1}{x - 1} = 3$
-[GUIDED_END]`,
+[GUIDED_END]
+
+> 🔗 **Weiter:** Du hast L'Hôpital mit Ableitungen angewendet — jetzt lernst du die **Ableitung** offiziell kennen! Die Ableitung ist nichts anderes als ein spezieller Grenzwert: den Differenzenquotienten.`,
       },
             {
               id: "m1-grenzwerte-aufgaben-leicht",
@@ -822,6 +838,8 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
         ],
         content: `# Definition der Ableitung
 
+> 💡 **Roter Faden:** Du hast Grenzwerte kennengelernt und weißt, wie man mit L'Hôpital arbeitet. Jetzt wenden wir den Grenzwertbegriff auf eine der wichtigsten Fragen der Mathematik an: Wie schnell ändert sich eine Funktion? Die Antwort ist die **Ableitung**!
+
 ## Differenzenquotient
 
 $\\frac{f(x+h) - f(x)}{h}$
@@ -841,6 +859,8 @@ $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$
 
 Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
 
+> 🔗 **Weiter:** Jetzt kennst du die Definition — im nächsten Kapitel lernst du die **Ableitungsregeln** (Potenz-, Ketten-, Produktregel), damit du nicht immer den Grenzwert berechnen musst!
+
 [INTERACTIVE]`,
       },
       {
@@ -850,6 +870,8 @@ Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
         interactive: "functionExplorer" as const,
         type: "interactive",
         content: `# Ableitungsregeln
+
+> 💡 **Roter Faden:** Du weißt, dass die Ableitung den Grenzwert des Differenzenquotienten darstellt. Jetzt lernst du praktische **Regeln** kennen, mit denen du Funktionen schnell ableiten kannst — ohne jedes Mal den Grenzwert zu berechnen!
 
 ## Grundregeln
 
@@ -880,6 +902,8 @@ $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$
 **Lösung (Produktregel):**
 $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
 [PRACTICE_END]
+
+> 🔗 **Anwendungen & Weiter:** Mit Ableitungsregeln kannst du jetzt Funktionen effizient ableiten! Damit stehen dir **Extremstellen** (Min/Max), **Tangenten** und die **Kurvendiskussion** offen. Als Nächstes kommt die **Integralrechnung** — die Umkehrung der Ableitung!
 
 [INTERACTIVE]`,
       },
@@ -939,6 +963,8 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
         ],
         content: `# Stammfunktionen
 
+> 💡 **Roter Faden:** Du hast gelernt, Funktionen abzuleiten. Aber was, wenn du die Ableitung gegeben hast und die ursprüngliche Funktion suchst? Das ist die **Integration** — die Umkehrung der Differentiation!
+
 ## Definition
 
 $F$ ist Stammfunktion von $f$, wenn $F'(x) = f(x)$.
@@ -961,6 +987,8 @@ $\\int f(x) \\, dx = F(x) + C$
 
 $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
 
+> 🔗 **Weiter:** Stammfunktionen sind die "Rückwärts-Ableitung". Im nächsten Kapitel lernst du das **bestimmte Integral** kennen — damit kannst du Flächen unter Kurven berechnen! Das verbindet Ableitung und Integration über den **Hauptsatz der Analysis**.
+
 [INTERACTIVE]`,
       },
       {
@@ -969,6 +997,8 @@ $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
         duration: "20 min",
         type: "text",
         content: `# Bestimmtes Integral
+
+> 💡 **Roter Faden:** Du kennst bereits Stammfunktionen — die Umkehrung der Ableitung. Jetzt verbinden wir Differentiation und Integration über den **Hauptsatz der Analysis** und berechnen konkrete Flächen unter Kurven!
 
 ## Hauptsatz der Analysis
 
@@ -994,7 +1024,11 @@ $\\int u \\, dv = uv - \\int v \\, du$
 **Lösung:**
 $F(x) = x^3 + x$
 $F(2) - F(0) = (8 + 2) - 0 = 10$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Zusammenfassung Analysis:** Damit hast du die drei großen Säulen der Analysis kennengelernt: **Grenzwerte** als Fundament, **Ableitungen** für Änderungsraten und **Integration** für Flächenberechnung. Diese Konzepte stehen in engem Zusammenhang — Ableitung und Integration sind inverse Operationen!
+
+> 🔗 **Verwandt:** Die Integralrechnung wird auch in der **Stochastik** (Wahrscheinlichkeitsdichten) und bei **Differentialgleichungen** benötigt.`,
       },
             {
               id: "m1-integration-aufgaben-leicht",
@@ -1502,6 +1536,10 @@ $$P(A) = \\frac{|A|}{|\\Omega|}$$
         type: "interactive",
         content: `## Zufallsexperimente
 
+> 💡 **Roter Faden:** Du kennst bereits Mengenoperationen (Vereinigung, Schnitt, Komplement) aus dem Grundlagen-Modul. In der **Stochastik** wenden wir genau diese Konzepte auf Zufallsexperimente an — Ereignisse sind einfach Mengen von Ergebnissen!
+
+> 🔗 **Verwandt:** Mengenlehre (Vereinigung, Schnitt), Logik (UND/ODER)
+
 Ein **Zufallsexperiment** ist ein Experiment, dessen Ausgang nicht vorhersehbar ist.
 
 **Beispiele:**
@@ -1536,6 +1574,8 @@ Gegeben: $P(A) = 0.4$, $P(B) = 0.3$, $P(A \\cap B) = 0.1$
 
 Berechne $P(A \\cup B)$!
 
+> 🔗 **Weiter:** Die Grundbegriffe sitzen! Als Nächstes kommt die **Kombinatorik** — damit kannst du zählen, wie viele Möglichkeiten es gibt (Permutationen, Variationen, Kombinationen). Das ist die Basis für die Berechnung von Wahrscheinlichkeiten!
+
 [INTERACTIVE]`,
       },
       {
@@ -1544,6 +1584,8 @@ Berechne $P(A \\cup B)$!
         duration: "25 min",
         type: "text",
         content: `## Permutationen
+
+> 💡 **Roter Faden:** Du kennst bereits die Grundbegriffe der Wahrscheinlichkeit — Zufallsexperimente, Ereignisse und die Laplace-Formel. Jetzt lernst du das Werkzeug kennen, um die Anzahl der Möglichkeiten systematisch zu zählen: die **Kombinatorik**!
 
 Anordnung von n verschiedenen Objekten:
 $$P_n = n! = n \\cdot (n-1) \\cdot ... \\cdot 1$$
@@ -1578,7 +1620,9 @@ Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wied
 **Aufgabe:** Wie viele 4-stellige PINs kann man aus 0-9 bilden (mit Wiederholung)?
 
 **Lösung:** $10^4 = 10000$ verschiedene PINs
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Kombinatorik hilft dir, Möglichkeiten zu zählen. Im nächsten Kapitel lernst du die **bedingte Wahrscheinlichkeit** kennen — was passiert, wenn du bereits weißt, dass ein Ereignis eingetreten ist? Das führt zum Satz von Bayes!`,
       },
       {
         id: "m-sto-3",
@@ -1586,6 +1630,10 @@ Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wied
         duration: "20 min",
         type: "text",
         content: `## Bedingte Wahrscheinlichkeit
+
+> 💡 **Roter Faden:** Du kennst die Grundwahrscheinlichkeit und die Kombinatorik. Jetzt wird es spannend: Was passiert, wenn sich die Wahrscheinlichkeit ändert, weil du **zusätzliche Informationen** hast? Die bedingte Wahrscheinlichkeit ist der Schlüssel zum **Satz von Bayes** — eines der mächtigsten Werkzeuge der Stochastik!
+
+> 🔗 **Verwandt:** Mengenlehre (Schnittmenge), Analysis (Integration für stetige Verteilungen)
 
 Die bedingte Wahrscheinlichkeit gibt an, wie wahrscheinlich ein Ereignis ist, **wenn ein anderes bereits eingetreten ist**.
 
@@ -1631,7 +1679,9 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
 **Aufgabe:** Urne: 3 rot, 2 blau. Ziehe 2 ohne Zurücklegen. P(beide rot)?
 
 **Lösung:** $P = \frac{3}{5} \cdot \frac{2}{4} = \frac{6}{20} = 0{,}3 = 30\%$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Zusammenfassung Stochastik:** Du hast die drei Grundpfeiler der Wahrscheinlichkeitsrechnung kennengelernt: **Grundbegriffe** (Ereignisse, Laplace), **Kombinatorik** (Zählen) und **bedingte Wahrscheinlichkeit** (Bayes). Diese Konzepte bauen direkt auf der **Mengenlehre** auf — Vereinigung, Schnitt und Komplement sind hier überall!`,
       },
             {
               id: "m-stochastik-aufgaben-leicht",

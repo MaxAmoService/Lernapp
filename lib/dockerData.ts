@@ -52,6 +52,10 @@ export const dockerModule: Module = {
       type: "text",
       content: `## Docker — Container für die moderne Welt
 
+> 📚 **Modulübersicht:** Docker ist der Industriestandard für Container-Virtualisierung. In diesem Modul lernst du die Grundlagen, Befehle, Docker Compose und Deployment-Strategien kennen — alles prüfungsrelevant für die IHK!
+
+> 🔗 **Verwandtes Thema:** Virtualisierung behandeln wir auch im Modul "Computersysteme & Hardware" — dort mit Fokus auf VMs vs. Container.
+
 **Docker** ist eine Plattform zur Erstellung, Verteilung und Ausführung von Anwendungen in **Containern**.
 
 ---
@@ -125,6 +129,8 @@ Ein Container ist eine **leichtgewichtige, isolierte Laufzeitumgebung**, die ein
       type: "interactive",
       interactive: "dockerfileBuilder",
       content: `## Docker-Befehle — Das musst du kennen
+
+> 💡 **Roter Faden:** In der letzten Lektion haben wir gelernt, WAS Docker ist. Jetzt wird es praktisch: Die wichtigsten Befehle für den Alltag. Du wirst sie ständig brauchen!
 
 Die wichtigsten Befehle für den Alltag mit Docker.
 
@@ -285,6 +291,8 @@ docker compose logs -f
       interactive: "dockerComposeBuilder",
       content: `## Docker Compose — Mehrere Container verwalten
 
+> 💡 **Roter Faden:** Jetzt kennst du die einzelnen Docker-Befehle. Aber was, wenn du mehrere Container gleichzeitig starten willst — z.B. eine App UND eine Datenbank? Docker Compose löst genau dieses Problem!
+
 **Docker Compose** ist ein Tool zur Definition und Ausführung von **Multi-Container-Docker-Anwendungen** mit einer einzigen YAML-Datei.
 
 ---
@@ -429,6 +437,8 @@ volumes:
       duration: "12 min",
       type: "text",
       content: `## Deployment — Von der Entwicklung zur Produktion
+
+> 💡 **Roter Faden:** Wir können jetzt Container bauen und mit Compose verwalten. Der letzte Schritt: Wie bringen wir unsere Anwendung in die Produktion? Verschiedene Strategien haben verschiedene Vor- und Nachteile.
 
 **Deployment** bezeichnet den Prozess, eine Anwendung auf einer Infrastruktur bereitzustellen.
 
