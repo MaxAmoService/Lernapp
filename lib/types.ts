@@ -34,7 +34,13 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "phishingDetector"
   | "xssChallengeSimulator"
   | "authBypassChallenge"
-  | "securityChallengeArena";
+  | "securityChallengeArena"
+  | "gitBranchVisualizer"
+  | "heuristicEvaluator"
+  | "patternExplorer"
+  | "scrumBoard"
+  | "dockerfileBuilder"
+  | "solidChecker";
 
 export interface Lesson {
   id: string;

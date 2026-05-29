@@ -215,7 +215,8 @@ Die **ISO 9126** definiert 6 Hauptmerkmale für Softwarequalität. Diese Struktu
       id: "sq-3",
       title: "Design Patterns — Die wichtigsten Muster",
       duration: "25 min",
-      type: "text",
+      type: "interactive",
+      interactive: "patternExplorer",
       content: `## Design Patterns — Lösungen für bekannte Probleme
 
 **Design Patterns** sind bewährte Lösungen für häufig auftretende Probleme in der Softwareentwicklung. Sie sind kein konkreter Code, sondern **allgemeine Konzepte**.

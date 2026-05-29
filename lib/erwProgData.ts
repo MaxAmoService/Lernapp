@@ -57,7 +57,8 @@ export const erwProgModule: Module = {
       id: "ep-1",
       title: "SOLID-Prinzipien",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "solidChecker",
       content: `## SOLID — Die 5 Prinzipien sauberer OOP
 
 Die **SOLID-Prinzipien** sind Richtlinien für saubere, wartbare objektorientierte Programmierung.

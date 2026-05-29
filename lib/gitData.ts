@@ -301,7 +301,8 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
       id: "git-4",
       title: "Gitflow & Branching-Strategien",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "gitBranchVisualizer",
       content: `## Gitflow — Ordnung im Branch-Chaos
 
 Gitflow definiert **klare Regeln**, wann welcher Branch verwendet wird. Es ist eine der wichtigsten Strategien für Teams.

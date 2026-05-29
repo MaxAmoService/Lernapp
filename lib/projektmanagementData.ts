@@ -346,7 +346,8 @@ CPI = 80.000 / 90.000 = 0,89 (ineffizient!)
       id: "pm-5",
       title: "Agiles Projektmanagement & Scrum",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "scrumBoard",
       content: `## Agiles Projektmanagement
 
 Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefern, wird in kurzen Zyklen (Sprints) gearbeitet.

@@ -124,7 +124,8 @@ Kleine, subtile Interaktionen, die das Erlebnis verbessern:
       id: "ux-2",
       title: "Nielsens Usability-Heuristiken",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "heuristicEvaluator",
       content: `## Nielsens 10 Usability-Heuristiken
 
 Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interface-Design. Sie sind **prüfungsrelevant** und sollten beim Programmierprojekt angewendet werden!

@@ -57,3 +57,9 @@ export { default as DataTransmissionVisualizer } from "./DataTransmissionVisuali
 export { default as ARPExplorer } from "./ARPExplorer";
 export { default as TreeExplorer } from "./TreeExplorer";
 export { default as GraphExplorer } from "./GraphExplorer";
+export { default as GitBranchVisualizer } from "./GitBranchVisualizer";
+export { default as HeuristicEvaluator } from "./HeuristicEvaluator";
+export { default as PatternExplorer } from "./PatternExplorer";
+export { default as ScrumBoard } from "./ScrumBoard";
+export { default as DockerfileBuilder } from "./DockerfileBuilder";
+export { SOLIDChecker } from "./SOLIDChecker";

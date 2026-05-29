@@ -122,7 +122,8 @@ Ein Container ist eine **leichtgewichtige, isolierte Laufzeitumgebung**, die ein
       id: "dk-2",
       title: "Die wichtigsten Docker-Befehle",
       duration: "15 min",
-      type: "text",
+      type: "interactive",
+      interactive: "dockerfileBuilder",
       content: `## Docker-Befehle — Das musst du kennen
 
 Die wichtigsten Befehle für den Alltag mit Docker.
