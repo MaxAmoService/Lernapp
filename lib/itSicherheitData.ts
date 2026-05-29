@@ -13,7 +13,7 @@ export const itSicherheitModule: Module = {
     "IHK AP1/AP2: Netzwerksicherheit, Web-Security, Verschlüsselung, Social Engineering, OWASP Top 10",
   icon: "🔒",
   color: "#EF4444",
-  category: "programmieren",
+  category: "ihk",
   progress: 0,
 
   merkblatt: `## 📋 Merkblatt: IT-Sicherheit (IHK)

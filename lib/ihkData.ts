@@ -14,7 +14,7 @@ export const ihkModule: Module = {
   description: "IHK IT-Handbuch: UML, PAP, Struktogramme, EPK, Sortier-/Suchalgorithmen, Netzplantechnik, ER-Modell, Lasten-/Pflichtenheft",
   icon: "📊",
   color: "#8B5CF6",
-  category: "programmieren",
+  category: "ihk",
   progress: 0,
   merkblatt: `## 📋 Merkblatt: Diagramme & Darstellungen (IHK)
 
@@ -921,6 +921,7 @@ export const ihkCategories = [
       { id: "netzwerk", name: "Netzwerktechnik", description: "OSI, TCP/IP, IPv4/IPv6, Subnetting, WLAN, Sicherheit, Protokolle" },
       { id: "datenbanken", name: "Datenbanken", description: "ER-Modelle, Normalisierung, SQL, JOINs, ACID, Backups" },
       { id: "computersysteme", name: "Computersysteme & Hardware", description: "CPU, RAM, Speichermedien, RAID, Busse, E/A-Geräte, OS, Virtualisierung, Cloud, Green IT" },
+      { id: "it-sicherheit", name: "IT-Sicherheit", description: "Netzwerksicherheit, Web-Security, Verschlüsselung, Social Engineering, OWASP" },
       { id: "git", name: "Versionsmanagement", description: "Git, Branching, Merging, Gitflow, Semantic Versioning" },
       { id: "ux", name: "UX & Interaction Design", description: "Nielsen-Heuristiken, Personas, User Stories, Design Sprint, Prototyping" },
       { id: "qualitaet", name: "Software-Qualitätsstandards", description: "ISO 9126, Design Patterns, Architekturstile, Testverfahren, Clean Code" },

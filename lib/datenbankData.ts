@@ -12,7 +12,7 @@ export const datenbankModule: Module = {
   description: "IHK AP1/AP2: ER-Modelle, Normalisierung, SQL (DDL/DML/DQL/DCL/TCL), JOINs, ACID, Referenzielle Integrität, Backups",
   icon: "🗄️",
   color: "#8B5CF6",
-  category: "programmieren",
+  category: "ihk",
   progress: 0,
   merkblatt: `## 📋 Merkblatt: Datenbanken (IHK)
 

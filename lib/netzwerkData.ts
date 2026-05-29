@@ -12,7 +12,7 @@ export const netzwerkModule: Module = {
   description: "IHK AP1/AP2: OSI-Modell, TCP/IP, IPv4/IPv6, Subnetting, Netzwerkgeräte, Topologien, Protokolle, WLAN, Sicherheit, Kabel, Tools",
   icon: "🌐",
   color: "#3B82F6",
-  category: "programmieren",
+  category: "ihk",
   progress: 0,
   merkblatt: `## 📋 Merkblatt: Netzwerktechnik (IHK)
 

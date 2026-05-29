@@ -13,7 +13,7 @@ export const computersystemeModule: Module = {
     "IHK AP1/AP2: CPU-Architektur, Speicherhierarchie, Ein-/Ausgabegeräte, RAID, Betriebssysteme, Virtualisierung, Cloud, Green IT",
   icon: "🖥️",
   color: "#F59E0B",
-  category: "programmieren",
+  category: "ihk",
   progress: 0,
 
   merkblatt: `## Merkblatt: Computersysteme & Hardware (IHK)
