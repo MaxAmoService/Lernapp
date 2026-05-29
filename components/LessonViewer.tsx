@@ -85,6 +85,16 @@ import { PhishingDetector } from "./interactive/PhishingDetector";
 import { XSSChallengeSimulator } from "./interactive/XSSChallengeSimulator";
 import { AuthBypassChallenge } from "./interactive/AuthBypassChallenge";
 import { SecurityChallengeArena } from "./interactive/SecurityChallengeArena";
+import GitBranchVisualizer from "./interactive/GitBranchVisualizer";
+import HeuristicEvaluator from "./interactive/HeuristicEvaluator";
+import PatternExplorer from "./interactive/PatternExplorer";
+import ScrumBoard from "./interactive/ScrumBoard";
+import DockerfileBuilder from "./interactive/DockerfileBuilder";
+import { SOLIDChecker } from "./interactive/SOLIDChecker";
+import { TestRunner } from "./interactive/TestRunner";
+import EVACalculator from "./interactive/EVACalculator";
+import SMARTGoalBuilder from "./interactive/SMARTGoalBuilder";
+import DockerComposeBuilder from "./interactive/DockerComposeBuilder";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -188,6 +198,16 @@ function renderInteractive(type: string, codeExample?: string) {
     passwordStrengthChecker: "Passwort-Checker",
     sqlInjectionSimulator: "SQL Injection Simulator",
     phishingDetector: "Phishing Detector",
+    gitBranchVisualizer: "Git Branch Visualizer",
+    heuristicEvaluator: "Heuristik-Evaluator",
+    patternExplorer: "Design Pattern Explorer",
+    scrumBoard: "Scrum Board",
+    dockerfileBuilder: "Dockerfile Builder",
+    solidChecker: "SOLID Checker",
+    testRunner: "Test Runner",
+    evaCalculator: "EVA-Rechner",
+    smartGoalBuilder: "SMART-Ziel Builder",
+    dockerComposeBuilder: "Docker Compose Builder",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -259,6 +279,16 @@ function renderInteractive(type: string, codeExample?: string) {
     xssChallengeSimulator: <XSSChallengeSimulator />,
     authBypassChallenge: <AuthBypassChallenge />,
     securityChallengeArena: <SecurityChallengeArena />,
+    gitBranchVisualizer: <GitBranchVisualizer />,
+    heuristicEvaluator: <HeuristicEvaluator />,
+    patternExplorer: <PatternExplorer />,
+    scrumBoard: <ScrumBoard />,
+    dockerfileBuilder: <DockerfileBuilder />,
+    solidChecker: <SOLIDChecker />,
+    testRunner: <TestRunner />,
+    evaCalculator: <EVACalculator />,
+    smartGoalBuilder: <SMARTGoalBuilder />,
+    dockerComposeBuilder: <DockerComposeBuilder />,
   };
 
   const name = interactiveNames[type] || type;

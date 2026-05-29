@@ -346,6 +346,11 @@ export const gitFlashcards: Flashcard[] = [
   { id: "git-13", moduleId: "ihk-git", front: "Was ist ein Merge Request / Pull Request?", back: "Anfrage, einen Branch in einen anderen zu mergen — mit Review und Diskussion", category: "Gitflow" },
   { id: "git-14", moduleId: "ihk-git", front: "Was zeigt git status?", back: "Zeigt den aktuellen Stand: geänderte, gestagte und ungetrackte Dateien", category: "Befehle" },
   { id: "git-15", moduleId: "ihk-git", front: "Was ist ein Remote Repository?", back: "Externe Version des Repos auf einem Server (GitHub, GitLab). Synchronisation via push/pull", category: "Grundlagen" },
+  { id: "git-16", moduleId: "ihk-git", front: "Was macht git clone?", back: "Kopiert ein Remote-Repo lokal — einmalig am Anfang. Inkl. aller Branches und Historie", category: "Befehle" },
+  { id: "git-17", moduleId: "ihk-git", front: "Was macht git commit?", back: "Speichert Änderungen lokal mit Nachricht. Bekommt Hash. Pointer auf vorherigen Commit", category: "Befehle" },
+  { id: "git-18", moduleId: "ihk-git", front: "Was macht git push?", back: "Lädt lokale Commits zum Remote hoch — andere können sie dann sehen", category: "Befehle" },
+  { id: "git-19", moduleId: "ihk-git", front: "Feature-Branch Workflow?", back: "1. Von dev Branch erstellen. 2. Arbeiten. 3. Merge Request. 4. In dev mergen. 5. Branch löschen", category: "Gitflow" },
+  { id: "git-20", moduleId: "ihk-git", front: "Was ist ein Branch?", back: "Parallele Entwicklungslinie — ermöglicht unabhängiges Arbeiten ohne den Hauptzweig zu stören", category: "Grundlagen" },
 ];
 
 // ─── UX & Interaction Design ────────────────────────────────────────────────
@@ -361,6 +366,11 @@ export const uxFlashcards: Flashcard[] = [
   { id: "ux-8", moduleId: "ihk-ux", front: "Heuristik: Wiedererkennen statt Erinnern?", back: "Optionen sichtbar machen — Nutzer soll nicht raten müssen", category: "Heuristiken" },
   { id: "ux-9", moduleId: "ihk-ux", front: "Low-Fidelity vs. High-Fidelity Prototyp?", back: "Lo-Fi: Papier, schnell, billig. Hi-Fi: Figma, klickbar, aufwendig", category: "Prototyping" },
   { id: "ux-10", moduleId: "ihk-ux", front: "Was ist ein Usability-Test?", back: "Nutzer führt Aufgaben aus, Beobachtung + Feedback. 5 Nutzer reichen für 80% der Probleme", category: "Evaluation" },
+  { id: "ux-11", moduleId: "ihk-ux", front: "Was ist ein Szenario?", back: "Konkrete Situation in der eine Persona das Produkt nutzt — Kontext, Ziel, Schritte", category: "Methoden" },
+  { id: "ux-12", moduleId: "ihk-ux", front: "Wie evaluieren?", back: "Usability-Tests, Interviews, A/B-Tests, Prototyping. Repräsentative Nutzer, klare Ziele", category: "Evaluation" },
+  { id: "ux-13", moduleId: "ihk-ux", front: "Heuristik: Fehlervermeidung?", back: "Fehler verhindern bevor sie passieren — nicht nur Fehlermeldungen zeigen", category: "Heuristiken" },
+  { id: "ux-14", moduleId: "ihk-ux", front: "Heuristik: Konsistenz?", back: "Gleiches sollte gleich aussehen und funktionieren — Standards einhalten", category: "Heuristiken" },
+  { id: "ux-15", moduleId: "ihk-ux", front: "Micro-Interactions?", back: "Kleine subtile Interaktionen die Feedback geben: Hover-Effekte, Vibration, Töne", category: "Grundlagen" },
 ];
 
 // ─── Software-Qualitätsstandards ────────────────────────────────────────────
@@ -443,6 +453,12 @@ export const erwProgFlashcards: Flashcard[] = [
   { id: "ep-10", moduleId: "ihk-erw-prog", front: "Was besagt Interface Segregation?", back: "Kleine, spezifische Interfaces statt großer, allgemeiner", category: "SOLID" },
   { id: "ep-11", moduleId: "ihk-erw-prog", front: "Was besagt Dependency Inversion?", back: "Abstraktionen sollten nicht von Konkretionen abhängen — Interfaces nutzen", category: "SOLID" },
   { id: "ep-12", moduleId: "ihk-erw-prog", front: "Code Smells Beispiele?", back: "Lange Methoden (>20 Zeilen), Error Hiding, Reinvent the Wheel, Duplikate", category: "Clean Code" },
+  { id: "ep-13", moduleId: "ihk-erw-prog", front: "Was besagt KISS?", back: "Keep It Simple, Stupid — Einfach ist besser als komplex", category: "Clean Code" },
+  { id: "ep-14", moduleId: "ihk-erw-prog", front: "Was besagt YAGNI?", back: "You Ain't Gonna Need It — Baue nur was JETZT gebraucht wird", category: "Clean Code" },
+  { id: "ep-15", moduleId: "ihk-erw-prog", front: "Was ist Liskov Substitution?", back: "Untertypen müssen durch ihren Basistyp ersetzbar sein — Square/Rectangle Problem", category: "SOLID" },
+  { id: "ep-16", moduleId: "ihk-erw-prog", front: "Statische vs. dynamische Analyse?", back: "Statisch: Code ohne Ausführung prüfen. Dynamisch: Code während Ausführung testen", category: "Testing" },
+  { id: "ep-17", moduleId: "ihk-erw-prog", front: "Was ist Dependency Injection?", back: "Abhängigkeiten über Konstruktor/Setter injizieren statt direkt zu instanziieren", category: "SOLID" },
+  { id: "ep-18", moduleId: "ihk-erw-prog", front: "Unit vs. Integration vs. Systemtest?", back: "Unit=isoliert, Integration=Zusammenspiel, System=ganzes System. Testpyramide!", category: "Testing" },
 ];
 
 // ─── Alle Flashcards zusammen ───────────────────────────────────────────────
