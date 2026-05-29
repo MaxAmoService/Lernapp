@@ -122,7 +122,7 @@ Kleine, subtile Interaktionen, die das Erlebnis verbessern:
 
 ---
 
-> 💡 **Nächste Lektion:** Jetzt weißt du, was UX ist. In der nächsten Lektion lernst du Nielsens 10 Usability-Heuristiken kennen — die wichtigsten Regeln für gutes Interface-Design.`
+> Jetzt weißt du, was UX ist. In der nächsten Lektion lernst du Nielsens 10 Usability-Heuristiken kennen — die wichtigsten Regeln für gutes Interface-Design.`
     },
 
     // --- Lektion 2: Nielsens Heuristiken ---
@@ -134,7 +134,7 @@ Kleine, subtile Interaktionen, die das Erlebnis verbessern:
       interactive: "heuristicEvaluator",
       content: `## Nielsens 10 Usability-Heuristiken
 
-> 💡 **Roter Faden:** In der letzten Lektion hast du gelernt, was UX ist und warum sie wichtig ist. Jetzt kommen die **konkreten Regeln**, an denen du jedes Interface messen kannst: Nielsens 10 Usability-Heuristiken. Merke sie dir gut — sie kommen in der Prüfung garantiert dran!
+> In der letzten Lektion hast du gelernt, was UX ist und warum sie wichtig ist. Jetzt kommen die **konkreten Regeln**, an denen du jedes Interface messen kannst: Nielsens 10 Usability-Heuristiken. Merke sie dir gut — sie kommen in der Prüfung garantiert dran!
 
 Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interface-Design. Sie sind **prüfungsrelevant** und sollten beim Programmierprojekt angewendet werden!
 
@@ -242,7 +242,7 @@ Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interfa
 
 ---
 
-> 💡 **Nächste Lektion:** Die Heuristiken sagen uns, WIE ein gutes Interface aussieht. Aber für WEN bauen wir es? In der nächsten Lektion lernst du Personas, Szenarien und User Stories kennen.`
+> Die Heuristiken sagen uns, WIE ein gutes Interface aussieht. Aber für WEN bauen wir es? In der nächsten Lektion lernst du Personas, Szenarien und User Stories kennen.`
     },
 
     // --- Lektion 3: Personas & Szenarien ---
@@ -253,9 +253,9 @@ Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interfa
       type: "text",
       content: `## Personas — Den Nutzer verstehen
 
-> 💡 **Roter Faden:** In der letzten Lektion hast du Nielsens 10 Heuristiken kennengelernt — die Regeln für gutes Design. Jetzt geht es um die Menschen dahinter: **Personas** helfen uns, uns in den Nutzer hineinzuversetzen, und **User Stories** beschreiben, was er will.
+> In der letzten Lektion hast du Nielsens 10 Heuristiken kennengelernt — die Regeln für gutes Design. Jetzt geht es um die Menschen dahinter: **Personas** helfen uns, uns in den Nutzer hineinzuversetzen, und **User Stories** beschreiben, was er will.
 
-> 🔗 **Verwandtes Thema:** User Stories ("Als [Rolle] möchte ich [Ziel]") sind auch im Modul "Projektmanagement" zentral — dort werden sie im Scrum-Product-Backlog gesammelt und priorisiert.
+> User Stories ("Als [Rolle] möchte ich [Ziel]") sind auch im Modul "Projektmanagement" zentral — dort werden sie im Scrum-Product-Backlog gesammelt und priorisiert.
 
 Eine **Persona** ist ein fiktiver Nutzer, der **repräsentativ** für eine Zielgruppe steht. Sie hilft uns, uns in den Nutzer hineinzuversetzen.
 
@@ -339,7 +339,7 @@ um die Sicherheit zu gewährleisten.
 
 ---
 
-> 💡 **Nächste Lektion:** Du weißt jetzt, für wen du entwickelst. Aber wie kommt man von der Idee zum Prototyp? In der nächsten Lektion lernst du den **Design Sprint** von Google kennen — in 5 Tagen vom Problem zum getesteten Prototyp.`
+> Du weißt jetzt, für wen du entwickelst. Aber wie kommt man von der Idee zum Prototyp? In der nächsten Lektion lernst du den **Design Sprint** von Google kennen — in 5 Tagen vom Problem zum getesteten Prototyp.`
     },
 
     // --- Lektion 4: Design Sprint ---
@@ -350,9 +350,9 @@ um die Sicherheit zu gewährleisten.
       type: "text",
       content: `## Der Design Sprint — Von der Idee zum Prototyp in 5 Tagen
 
-> 💡 **Roter Faden:** In der letzten Lektion hast du Personas und User Stories kennengelernt — du weißt also, für wen und was du entwickelst. Jetzt lernst du eine strukturierte Methode kennen, um schnell von der Idee zum Prototyp zu kommen: den **Design Sprint**.
+> In der letzten Lektion hast du Personas und User Stories kennengelernt — du weißt also, für wen und was du entwickelst. Jetzt lernst du eine strukturierte Methode kennen, um schnell von der Idee zum Prototyp zu kommen: den **Design Sprint**.
 
-> 🔗 **Verwandtes Thema:** Der Design Sprint mit seinen iterativen Phasen (Understand, Diverge, Converge, Prototype, Test) folgt ähnlichen Prinzipien wie agiles Projektmanagement im Modul "Projektmanagement" — dort heißen die Zyklen "Sprints".
+> Der Design Sprint mit seinen iterativen Phasen (Understand, Diverge, Converge, Prototype, Test) folgt ähnlichen Prinzipien wie agiles Projektmanagement im Modul "Projektmanagement" — dort heißen die Zyklen "Sprints".
 
 Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in **5 Tagen** von einem Problem zu einem getesteten Prototyp zu kommen.
 
@@ -454,7 +454,7 @@ Schnelle, billige Prototypen auf Papier:
 
 ---
 
-> 💡 **Nächste Lektion:** Im Design Sprint sammeln wir Anforderungen. Aber welche **Arten** von Anforderungen gibt es überhaupt? In der nächsten Lektion lernst du die 5 Anforderungsarten kennen, die die IHK unterscheiden will.`
+> Im Design Sprint sammeln wir Anforderungen. Aber welche **Arten** von Anforderungen gibt es überhaupt? In der nächsten Lektion lernst du die 5 Anforderungsarten kennen, die die IHK unterscheiden will.`
     },
 
     // --- Lektion 5: Anforderungsarten ---
@@ -465,9 +465,9 @@ Schnelle, billige Prototypen auf Papier:
       type: "text",
       content: `## Anforderungsarten — Was braucht das System?
 
-> 💡 **Roter Faden:** In der letzten Lektion hast du den Design Sprint kennengelernt, in dem Anforderungen gesammelt und priorisiert werden. Jetzt schauen wir uns genauer an, welche **Arten von Anforderungen** es gibt — ein Klassiker in der IHK-Prüfung!
+> In der letzten Lektion hast du den Design Sprint kennengelernt, in dem Anforderungen gesammelt und priorisiert werden. Jetzt schauen wir uns genauer an, welche **Arten von Anforderungen** es gibt — ein Klassiker in der IHK-Prüfung!
 
-> 🔗 **Verwandtes Thema:** Anforderungen sind auch im Modul "Projektmanagement" zentral — dort werden sie im Lastenheft (WAS) und Pflichtenheft (WIE) dokumentiert. Im agilen Umfeld heißen sie "User Stories".
+> Anforderungen sind auch im Modul "Projektmanagement" zentral — dort werden sie im Lastenheft (WAS) und Pflichtenheft (WIE) dokumentiert. Im agilen Umfeld heißen sie "User Stories".
 
 In der Softwareentwicklung gibt es **verschiedene Arten von Anforderungen**. Die IHK prüft, ob du sie unterscheiden kannst!
 
@@ -551,7 +551,7 @@ Der Prozess der Anforderungserhebung:
 
 ---
 
-> 💡 **Nächste Lektion:** Du kennst jetzt die Anforderungen. Aber wie prüft man, ob ein Produkt diese auch erfüllt? In der letzten inhaltlichen Lektion lernst du **Usability-Evaluation** kennen — Safety, Learnability und Memorability.`
+> Du kennst jetzt die Anforderungen. Aber wie prüft man, ob ein Produkt diese auch erfüllt? In der letzten inhaltlichen Lektion lernst du **Usability-Evaluation** kennen — Safety, Learnability und Memorability.`
     },
 
     // --- Lektion 6: Evaluation ---
@@ -562,9 +562,9 @@ Der Prozess der Anforderungserhebung:
       type: "text",
       content: `## Usability-Evaluation — Ist das Produkt gut?
 
-> 💡 **Roter Faden:** In der letzten Lektion hast du die verschiedenen Anforderungsarten kennengelernt. Jetzt geht es um die **Bewertung**: Wie prüft man, ob ein Produkt gut ist? Die drei Evaluationsziele Safety, Learnability und Memorability geben dir die Antwort.
+> In der letzten Lektion hast du die verschiedenen Anforderungsarten kennengelernt. Jetzt geht es um die **Bewertung**: Wie prüft man, ob ein Produkt gut ist? Die drei Evaluationsziele Safety, Learnability und Memorability geben dir die Antwort.
 
-> 🔗 **Verwandtes Thema:** Bei der heuristischen Evaluation prüfst du ein Produkt direkt gegen Nielsens 10 Heuristiken aus Lektion 2 — beide Konzepte greifen ineinander.
+> Bei der heuristischen Evaluation prüfst du ein Produkt direkt gegen Nielsens 10 Heuristiken aus Lektion 2 — beide Konzepte greifen ineinander.
 
 **Evaluation** bedeutet die **systematische Bewertung** eines Produkts. Ziel ist herauszufinden, ob das Produkt die Nutzerbedürfnisse erfüllt.
 
@@ -656,7 +656,7 @@ Der Prozess der Anforderungserhebung:
 
 ---
 
-> 💡 **Nächste Lektion:** Das war die letzte inhaltliche Lektion zu UX! Du hast von den Grundlagen über Nielsen, Personas und Design Sprint bis zur Evaluation alles kennengelernt. Jetzt kannst du dein Wissen im Quiz testen!`
+> Das war die letzte inhaltliche Lektion zu UX! Du hast von den Grundlagen über Nielsen, Personas und Design Sprint bis zur Evaluation alles kennengelernt. Jetzt kannst du dein Wissen im Quiz testen!`
     },
 
     // --- Lektion 7: Quiz ---
@@ -667,7 +667,7 @@ Der Prozess der Anforderungserhebung:
       type: "quiz",
       content: `## 🎯 Quiz: UX & Interaction Design
 
-> 💡 **Roter Faden:** Du hast alle Lektionen zu UX durchgearbeitet — von UX vs. UI über Nielsen und Personas bis zur Usability-Evaluation. Jetzt ist es Zeit, dein Wissen zu testen!
+> Du hast alle Lektionen zu UX durchgearbeitet — von UX vs. UI über Nielsen und Personas bis zur Usability-Evaluation. Jetzt ist es Zeit, dein Wissen zu testen!
 
 Teste dein Wissen über UX und Interaction Design!`,
     },
