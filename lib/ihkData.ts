@@ -921,6 +921,12 @@ export const ihkCategories = [
       { id: "netzwerk", name: "Netzwerktechnik", description: "OSI, TCP/IP, IPv4/IPv6, Subnetting, WLAN, Sicherheit, Protokolle" },
       { id: "datenbanken", name: "Datenbanken", description: "ER-Modelle, Normalisierung, SQL, JOINs, ACID, Backups" },
       { id: "computersysteme", name: "Computersysteme & Hardware", description: "CPU, RAM, Speichermedien, RAID, Busse, E/A-Geräte, OS, Virtualisierung, Cloud, Green IT" },
+      { id: "git", name: "Versionsmanagement", description: "Git, Branching, Merging, Gitflow, Semantic Versioning" },
+      { id: "ux", name: "UX & Interaction Design", description: "Nielsen-Heuristiken, Personas, User Stories, Design Sprint, Prototyping" },
+      { id: "qualitaet", name: "Software-Qualitätsstandards", description: "ISO 9126, Design Patterns, Architekturstile, Testverfahren, Clean Code" },
+      { id: "projektmanagement", name: "Projektmanagement", description: "Klassisch & Agil, Scrum, DIN 69901, Magisches Dreieck, EVA" },
+      { id: "docker", name: "Docker & Container", description: "Container, Images, Dockerfile, Compose, Deployment, Kubernetes" },
+      { id: "erw-prog", name: "Erweiterte Programmierung", description: "SOLID, Clean Code, Interfaces, Unit-Tests, Refactoring, C#/.NET" },
     ],
   },
 ];

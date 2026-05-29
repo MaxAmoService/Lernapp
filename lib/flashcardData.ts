@@ -1,6 +1,4 @@
-// ============================================================================
 // Flashcard-Daten — Generiert aus Lektionsinhalten
-// ============================================================================
 
 import { Flashcard } from "./flashcards";
 
@@ -284,6 +282,7 @@ export const computersystemeFlashcards: Flashcard[] = [
   { id: "hw-ges-3", moduleId: "ihk-computersysteme", front: "Wer hat die Z3 gebaut und wann?", back: "Konrad Zuse, 1941 — erster programmierbarer Computer der Welt (relaisbasiert)", category: "Geschichte" },
 ];
 
+
 // ─── IT-Sicherheit ──────────────────────────────────────────────────────────
 
 export const itSicherheitFlashcards: Flashcard[] = [
@@ -327,6 +326,123 @@ export const itSicherheitFlashcards: Flashcard[] = [
   { id: "is-prot-1", moduleId: "ihk-it-sicherheit", front: "Was ist Defense in Depth?", back: "Mehrere Sicherheitsschichten — wenn eine scheitert, greift die nächste", category: "Konzepte" },
   { id: "is-prot-2", moduleId: "ihk-it-sicherheit", front: "Was ist das Least-Privilege-Prinzip?", back: "Jeder Benutzer bekommt nur die minimal nötigen Berechtigungen", category: "Konzepte" },
   { id: "is-prot-3", moduleId: "ihk-it-sicherheit", front: "Was ist Ransomware?", back: "Malware die Daten verschlüsselt und Lösegeld fordert (meist Krypto)", hint: "Schutz: Backups, Schulung", category: "Malware" },
+
+];
+// ─── Git ────────────────────────────────────────────────────────────────────
+
+export const gitFlashcards: Flashcard[] = [
+  { id: "git-1", moduleId: "ihk-git", front: "Zentrale vs. dezentrale VV?", back: "Zentral: ein Server (SVN). Dezentral: jeder hat alles lokal (Git). Offline nur mit dezentraler möglich", category: "Grundlagen" },
+  { id: "git-2", moduleId: "ihk-git", front: "Was macht git fetch?", back: "Lädt Änderungen vom Remote herunter, ohne sie zu mergen. git pull = fetch + merge", category: "Befehle" },
+  { id: "git-3", moduleId: "ihk-git", front: "Merge vs. Rebase?", back: "Merge: Merge-Commit, verschachtelte Historie. Rebase: lineare Historie, pro Commit Konflikte lösen", category: "Befehle" },
+  { id: "git-4", moduleId: "ihk-git", front: "Was ist Gitflow?", back: "Branching-Strategie: main (Releases), dev (Entwicklung), feature/*, release/*, hotfix/*", category: "Gitflow" },
+  { id: "git-5", moduleId: "ihk-git", front: "Semantic Versioning MAJOR.MINOR.PATCH?", back: "PATCH=Bugfix, MINOR=Feature, MAJOR=Breaking Change. z.B. 2.3.1", category: "Versioning" },
+  { id: "git-6", moduleId: "ihk-git", front: "Was ist ein Merge-Konflikt?", back: "Git kann nicht automatisch mergen — gleiche Zeile in gleicher Datei geändert. Manuell lösen!", category: "Konflikte" },
+  { id: "git-7", moduleId: "ihk-git", front: "Was macht .gitignore?", back: "Schließt Dateien vom Tracking aus — Build, node_modules, .env, IDE-Dateien", category: "Tools" },
+  { id: "git-8", moduleId: "ihk-git", front: "Was macht Git LFS?", back: "Large File Storage — speichert große Dateien effizient mit Pointern statt Inhalt", category: "Tools" },
+  { id: "git-9", moduleId: "ihk-git", front: "Was ist git stash?", back: "Speichert Änderungen temporär — für schnellen Branch-Wechsel. stash pop = wiederherstellen", category: "Befehle" },
+  { id: "git-10", moduleId: "ihk-git", front: "Conventional Commits Format?", back: "type(scope): beschreibung. Typen: feat, fix, refactor, style, test, docs, chore", category: "Commits" },
+  { id: "git-11", moduleId: "ihk-git", front: "Optimistisches vs. pessimistisches Locking?", back: "Optimistisch (Git): Konflikte beim Merge. Pessimistisch (SVN): Datei wird gesperrt", category: "Grundlagen" },
+  { id: "git-12", moduleId: "ihk-git", front: "Was ist ein Fork?", back: "Kopie eines Repositorys auf dem eigenen Account — für unabhängige Entwicklung", category: "Gitflow" },
+  { id: "git-13", moduleId: "ihk-git", front: "Was ist ein Merge Request / Pull Request?", back: "Anfrage, einen Branch in einen anderen zu mergen — mit Review und Diskussion", category: "Gitflow" },
+  { id: "git-14", moduleId: "ihk-git", front: "Was zeigt git status?", back: "Zeigt den aktuellen Stand: geänderte, gestagte und ungetrackte Dateien", category: "Befehle" },
+  { id: "git-15", moduleId: "ihk-git", front: "Was ist ein Remote Repository?", back: "Externe Version des Repos auf einem Server (GitHub, GitLab). Synchronisation via push/pull", category: "Grundlagen" },
+];
+
+// ─── UX & Interaction Design ────────────────────────────────────────────────
+
+export const uxFlashcards: Flashcard[] = [
+  { id: "ux-1", moduleId: "ihk-ux", front: "UX vs. UI?", back: "UX = gesamtes Erlebnis (nützlich, intuitiv). UI = visuelles Design (schön, konsistent). UX ist das Dach", category: "Grundlagen" },
+  { id: "ux-2", moduleId: "ihk-ux", front: "Was sind Nielsens Heuristiken?", back: "10 Usability-Regeln: Sichtbarkeit, Real World, Kontrolle, Konsistenz, Fehlervermeidung, etc.", category: "Heuristiken" },
+  { id: "ux-3", moduleId: "ihk-ux", front: "Was ist eine Persona?", back: "Fiktiver Nutzer, repräsentativ für Zielgruppe. Hilft bei der Produktgestaltung", category: "Methoden" },
+  { id: "ux-4", moduleId: "ihk-ux", front: "User Story Format?", back: "Als [Rolle] möchte ich [Ziel], um [Nutzen]", category: "Methoden" },
+  { id: "ux-5", moduleId: "ihk-ux", front: "5 Phasen des Design Sprints?", back: "Understand, Diverge, Converge, Prototype, Test — in 5 Tagen vom Problem zum Prototyp", category: "Design Sprint" },
+  { id: "ux-6", moduleId: "ihk-ux", front: "5 Anforderungsarten?", back: "Funktional, nicht-funktional, technisch, regulatorisch, Benutzeranforderungen", category: "Anforderungen" },
+  { id: "ux-7", moduleId: "ihk-ux", front: "Safety vs. Learnability vs. Memorability?", back: "Safety=Schutz vor Fehlern. Learnability=einfach erlernen. Memorability=gut wiedererkennen", category: "Evaluation" },
+  { id: "ux-8", moduleId: "ihk-ux", front: "Heuristik: Wiedererkennen statt Erinnern?", back: "Optionen sichtbar machen — Nutzer soll nicht raten müssen", category: "Heuristiken" },
+  { id: "ux-9", moduleId: "ihk-ux", front: "Low-Fidelity vs. High-Fidelity Prototyp?", back: "Lo-Fi: Papier, schnell, billig. Hi-Fi: Figma, klickbar, aufwendig", category: "Prototyping" },
+  { id: "ux-10", moduleId: "ihk-ux", front: "Was ist ein Usability-Test?", back: "Nutzer führt Aufgaben aus, Beobachtung + Feedback. 5 Nutzer reichen für 80% der Probleme", category: "Evaluation" },
+];
+
+// ─── Software-Qualitätsstandards ────────────────────────────────────────────
+
+export const qualitaetFlashcards: Flashcard[] = [
+  { id: "sq-1", moduleId: "ihk-qualitaet", front: "6 Qualitätsmerkmale ISO 9126?", back: "Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit, Portabilität", category: "ISO 9126" },
+  { id: "sq-2", moduleId: "ihk-qualitaet", front: "Was ist das Singleton-Pattern?", back: "Creational Pattern — stellt sicher, dass eine Klasse nur eine Instanz hat", category: "Design Patterns" },
+  { id: "sq-3", moduleId: "ihk-qualitaet", front: "Was macht das Strategy-Pattern?", back: "Definiert Familie von Algorithmen, kapselt sie, macht sie austauschbar", category: "Design Patterns" },
+  { id: "sq-4", moduleId: "ihk-qualitaet", front: "Was macht das Observer-Pattern?", back: "Benachrichtigt abhängige Objekte bei Zustandsänderungen (Event-System)", category: "Design Patterns" },
+  { id: "sq-5", moduleId: "ihk-qualitaet", front: "Schichtenarchitektur?", back: "Präsentation → Anwendung → Datenhaltung. Kommunikation nur zwischen Nachbarn", category: "Architektur" },
+  { id: "sq-6", moduleId: "ihk-qualitaet", front: "MVC — Model, View, Controller?", back: "Model=Daten, View=Darstellung, Controller=Logik. User→View→Controller→Model", category: "Architektur" },
+  { id: "sq-7", moduleId: "ihk-qualitaet", front: "Unit vs. Integration vs. Systemtest?", back: "Unit=isoliert, Integration=Zusammenspiel, System=ganzes System", category: "Testen" },
+  { id: "sq-8", moduleId: "ihk-qualitaet", front: "Black-Box vs. White-Box?", back: "Black-Box: ohne Kenntnis der Implementierung. White-Box: mit Kenntnis des Codes", category: "Testen" },
+  { id: "sq-9", moduleId: "ihk-qualitaet", front: "Was sind Code Smells?", back: "Warnsignale: lange Methoden, Error Hiding, Reinvent the Wheel, Duplikate", category: "Clean Code" },
+  { id: "sq-10", moduleId: "ihk-qualitaet", front: "Was besagt DRY?", back: "Don't Repeat Yourself — Vermeide Duplikate im Code", category: "Clean Code" },
+  { id: "sq-11", moduleId: "ihk-qualitaet", front: "3 Creational Patterns?", back: "Singleton, Factory Method, Abstract Factory, Builder, Prototype", category: "Design Patterns" },
+  { id: "sq-12", moduleId: "ihk-qualitaet", front: "Microservices Eigenschaften?", back: "Unabhängige Services, eigene DB, Kommunikation über APIs, eigenständig skalierbar", category: "Architektur" },
+  { id: "sq-13", moduleId: "ihk-qualitaet", front: "Was ist der Decorator?", back: "Structural Pattern — fügt Objekten dynamisch Funktionen hinzu ohne Klasse zu ändern", category: "Design Patterns" },
+  { id: "sq-14", moduleId: "ihk-qualitaet", front: "Was ist der Adapter?", back: "Structural Pattern — passt inkompatible Schnittstellen an", category: "Design Patterns" },
+  { id: "sq-15", moduleId: "ihk-qualitaet", front: "Was ist der Factory Method?", back: "Creational Pattern — Unterklassen entscheiden welches Objekt erstellt wird", category: "Design Patterns" },
+  { id: "sq-16", moduleId: "ihk-qualitaet", front: "Statische vs. dynamische Analyse?", back: "Statisch: Code ohne Ausführung prüfen (Syntax, Style). Dynamisch: Code während Ausführung testen", category: "Testen" },
+  { id: "sq-17", moduleId: "ihk-qualitaet", front: "Was ist ein Code Review?", back: "Systematische Überprüfung des Codes durch andere Entwickler — findet Fehler und verbessert Qualität", category: "Testen" },
+];
+
+// ─── Projektmanagement ──────────────────────────────────────────────────────
+
+export const projektmanagementFlashcards: Flashcard[] = [
+  { id: "pm-1", moduleId: "ihk-projektmanagement", front: "Magisches Dreieck?", back: "Qualität, Budget, Zeit — Spannungsfeld. Wenn ein Punkt schwächelt, muss ein anderer ausgleichen", category: "Grundlagen" },
+  { id: "pm-2", moduleId: "ihk-projektmanagement", front: "SMART-Ziele?", back: "Spezifisch, Messbar, Anspruchsvoll, Realistisch, Terminiert", category: "Grundlagen" },
+  { id: "pm-3", moduleId: "ihk-projektmanagement", front: "Lastenheft vs. Pflichtenheft?", back: "Lastenheft=WAS (Auftraggeber). Pflichtenheft=WIE (Auftragnehmer)", category: "Dokumente" },
+  { id: "pm-4", moduleId: "ihk-projektmanagement", front: "5 Phasen DIN 69901?", back: "Initiierung, Definition, Planung, Steuerung, Abschluss", category: "DIN 69901" },
+  { id: "pm-5", moduleId: "ihk-projektmanagement", front: "3 Scrum-Rollen?", back: "Product Owner (Kunde), Scrum Master (Berater), Cross-functional Team (5-9)", category: "Scrum" },
+  { id: "pm-6", moduleId: "ihk-projektmanagement", front: "4 Scrum-Events?", back: "Sprint Planning, Daily (15min), Sprint Review, Retrospektive", category: "Scrum" },
+  { id: "pm-7", moduleId: "ihk-projektmanagement", front: "Was ist EVA?", back: "Earned Value Analysis: PV/AC/EV vergleichen. CV=EV-AC, CPI=EV/AC", category: "Controlling" },
+  { id: "pm-8", moduleId: "ihk-projektmanagement", front: "SWOT-Analyse?", back: "Stärken/Schwächen (intern), Chancen/Risiken (extern)", category: "Methoden" },
+  { id: "pm-9", moduleId: "ihk-projektmanagement", front: "Was ist ein kritischer Pfad?", back: "Längster Pfad im Netzplan — Pufferzeit=0, bestimmt Mindestdauer", category: "Netzplan" },
+  { id: "pm-10", moduleId: "ihk-projektmanagement", front: "Agiles Manifest — 4 Werte?", back: "Individuen>Prozesse, Software>Doku, Zusammenarbeit>Verträge, Reagieren>Befolgen", category: "Agil" },
+  { id: "pm-11", moduleId: "ihk-projektmanagement", front: "Was ist Definition of Done?", back: "Kriterien wann ein Arbeitspaket fertig ist: Code, Tests, Doku, Review", category: "Scrum" },
+  { id: "pm-12", moduleId: "ihk-projektmanagement", front: "Ishikawa-Diagramm?", back: "Ursache-Wirkungs-Diagramm (Fischgräte). 6M: Mensch, Maschine, Material, Methode, Messung, Milieu", category: "Methoden" },
+  { id: "pm-13", moduleId: "ihk-projektmanagement", front: "Was ist ein Stakeholder?", back: "Alle Personen/Gruppen mit Interesse am Projekt — positiv oder negativ betroffen", category: "Grundlagen" },
+  { id: "pm-14", moduleId: "ihk-projektmanagement", front: "Was ist ein Meilenstein?", back: "Erreichter Zwischenstand — markiert Etappenziele im Projektverlauf", category: "Grundlagen" },
+  { id: "pm-15", moduleId: "ihk-projektmanagement", front: "Was ist ein Quality Gate?", back: "Kompetente Überprüfung bei Meilensteinen — entscheidet ob Phase abgeschlossen ist", category: "Grundlagen" },
+  { id: "pm-16", moduleId: "ihk-projektmanagement", front: "Was ist ein Product Backlog?", back: "Priorisierte Liste aller Anforderungen (User Stories) — wird vom Product Owner gepflegt", category: "Scrum" },
+  { id: "pm-17", moduleId: "ihk-projektmanagement", front: "Was ist ein Sprint?", back: "Fixer Zeitraum (2-4 Wochen) mit festem Ziel — endet mit funktionierendem Inkrement", category: "Scrum" },
+  { id: "pm-18", moduleId: "ihk-projektmanagement", front: "Was ist Multiprojektmanagement?", back: "Verwaltung mehrerer gleichzeitiger Projekte — PMO koordiniert Ressourcen", category: "Grundlagen" },
+];
+
+// ─── Docker ─────────────────────────────────────────────────────────────────
+
+export const dockerFlashcards: Flashcard[] = [
+  { id: "dk-1", moduleId: "ihk-docker", front: "Container vs. VM?", back: "Container: teilt OS, leicht, schnell. VM: eigenes OS, schwerer, isolierter", category: "Grundlagen" },
+  { id: "dk-2", moduleId: "ihk-docker", front: "Was ist ein Docker Image?", back: "Read-only Schablone für Container. Wird aus Dockerfile gebaut", category: "Grundlagen" },
+  { id: "dk-3", moduleId: "ihk-docker", front: "FROM im Dockerfile?", back: "Definiert das Basis-Image — z.B. python:3.11, node:18", category: "Dockerfile" },
+  { id: "dk-4", moduleId: "ihk-docker", front: "docker run -d -p 8080:80 nginx?", back: "-d=Hintergrund, -p=Port-Weiterleitung (Host:Container). Container über 8080 erreichbar", category: "Befehle" },
+  { id: "dk-5", moduleId: "ihk-docker", front: "Was macht Docker Compose?", back: "Multi-Container-Anwendungen mit YAML definieren und starten", category: "Compose" },
+  { id: "dk-6", moduleId: "ihk-docker", front: "Was ist ein Volume?", back: "Persistenter Speicher außerhalb des Containers — überlebt Neustarts", category: "Daten" },
+  { id: "dk-7", moduleId: "ihk-docker", front: "Was kann Kubernetes?", back: "Automatische Skalierung, Self-Healing, Load-Balancing auf vielen Nodes", category: "Kubernetes" },
+  { id: "dk-8", moduleId: "ihk-docker", front: "Blue-Green vs. Rolling Update?", back: "Blue-Green: zwei Umgebungen, Umschaltung. Rolling: Server nacheinander aktualisieren", category: "Deployment" },
+  { id: "dk-9", moduleId: "ihk-docker", front: "Was macht EXPOSE im Dockerfile?", back: "Dokumentiert den Port — öffnet ihn NICHT automatisch. -p beim run macht das", category: "Dockerfile" },
+  { id: "dk-10", moduleId: "ihk-docker", front: "docker compose up --build?", back: "Baut Images neu und startet alle Services aus docker-compose.yml", category: "Compose" },
+  { id: "dk-11", moduleId: "ihk-docker", front: "Was macht COPY im Dockerfile?", back: "Kopiert Dateien vom Host in den Container", category: "Dockerfile" },
+  { id: "dk-12", moduleId: "ihk-docker", front: "Was macht RUN im Dockerfile?", back: "Führt einen Befehl beim Bauen des Images aus — z.B. pip install", category: "Dockerfile" },
+  { id: "dk-13", moduleId: "ihk-docker", front: "Was ist eine Docker Registry?", back: "Speicher für Images — z.B. Docker Hub. Images können geteilt werden", category: "Grundlagen" },
+  { id: "dk-14", moduleId: "ihk-docker", front: "Was ist ein Pod in Kubernetes?", back: "Kleinste Einheit in K8s — ein oder mehrere Container, die sich Ressourcen teilen", category: "Kubernetes" },
+  { id: "dk-15", moduleId: "ihk-docker", front: "Was ist ein Node in Kubernetes?", back: "Eine VM oder ein physischer Server im K8s-Cluster — hostet Pods", category: "Kubernetes" },
+];
+
+// ─── Erweiterte Programmierung ──────────────────────────────────────────────
+
+export const erwProgFlashcards: Flashcard[] = [
+  { id: "ep-1", moduleId: "ihk-erw-prog", front: "SOLID — die 5 Prinzipien?", back: "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion", category: "SOLID" },
+  { id: "ep-2", moduleId: "ihk-erw-prog", front: "Was besagt SRP?", back: "Single Responsibility — Eine Klasse = eine Aufgabe", category: "SOLID" },
+  { id: "ep-3", moduleId: "ihk-erw-prog", front: "Was besagt OCP?", back: "Open/Closed — Offen für Erweiterung, geschlossen für Änderung", category: "SOLID" },
+  { id: "ep-4", moduleId: "ihk-erw-prog", front: "Was ist ein Interface?", back: "Vertrag: definiert WAS eine Klasse kann, nicht WIE. Ermöglicht Austauschbarkeit", category: "Interfaces" },
+  { id: "ep-5", moduleId: "ihk-erw-prog", front: "Was ist ein Mock-Objekt?", back: "Test-Double, das echte Abhängigkeit ersetzt — macht Tests schnell und unabhängig", category: "Testing" },
+  { id: "ep-6", moduleId: "ihk-erw-prog", front: "AAA-Pattern bei Tests?", back: "Arrange (vorbereiten), Act (ausführen), Assert (prüfen)", category: "Testing" },
+  { id: "ep-7", moduleId: "ihk-erw-prog", front: "Coupling vs. Cohesion?", back: "Coupling=Abhängigkeit zwischen Klassen (niedrig=gut). Cohesion=Zusammengehörigkeit (hoch=gut)", category: "Qualität" },
+  { id: "ep-8", moduleId: "ihk-erw-prog", front: "Was besagt DRY?", back: "Don't Repeat Yourself — Vermeide Duplikate im Code", category: "Clean Code" },
+  { id: "ep-9", moduleId: "ihk-erw-prog", front: "Was ist Refactoring?", back: "Code verbessern ohne Verhalten zu ändern. Pfadfinder-Regel: besser hinterlassen", category: "Clean Code" },
+  { id: "ep-10", moduleId: "ihk-erw-prog", front: "Was besagt Interface Segregation?", back: "Kleine, spezifische Interfaces statt großer, allgemeiner", category: "SOLID" },
+  { id: "ep-11", moduleId: "ihk-erw-prog", front: "Was besagt Dependency Inversion?", back: "Abstraktionen sollten nicht von Konkretionen abhängen — Interfaces nutzen", category: "SOLID" },
+  { id: "ep-12", moduleId: "ihk-erw-prog", front: "Code Smells Beispiele?", back: "Lange Methoden (>20 Zeilen), Error Hiding, Reinvent the Wheel, Duplikate", category: "Clean Code" },
 ];
 
 // ─── Alle Flashcards zusammen ───────────────────────────────────────────────
@@ -339,6 +455,13 @@ export const allFlashcards: Flashcard[] = [
   ...datenbankFlashcards,
   ...computersystemeFlashcards,
   ...itSicherheitFlashcards,
+
+  ...gitFlashcards,
+  ...uxFlashcards,
+  ...qualitaetFlashcards,
+  ...projektmanagementFlashcards,
+  ...dockerFlashcards,
+  ...erwProgFlashcards,
 ];
 
 export function getFlashcardsForModule(moduleId: string): Flashcard[] {

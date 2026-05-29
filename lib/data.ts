@@ -9,6 +9,12 @@ import { datenbankModule } from "./datenbankData";
 import { computersystemeModule } from "./computersystemeData";
 import { itSicherheitModule } from "./itSicherheitData";
 import { complexModule } from "./complexData";
+import { gitModule } from "./gitData";
+import { uxModule } from "./uxData";
+import { qualitaetModule } from "./qualitaetData";
+import { projektmanagementModule } from "./projektmanagementData";
+import { dockerModule } from "./dockerData";
+import { erwProgModule } from "./erwProgData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
 
@@ -24,6 +30,18 @@ export const categories: Category[] = [
   },
   ...mathCategories,
   ...ihkCategories,
+  {
+    id: "projektmanagement",
+    name: "Projektmanagement",
+    icon: "📋",
+    description: "Klassisch & Agil, Scrum, DIN 69901, Magisches Dreieck",
+  },
+  {
+    id: "qualitaet",
+    name: "Software-Qualität",
+    icon: "✅",
+    description: "ISO 9126, Design Patterns, Architekturstile, Testverfahren",
+  },
 ];
 
 export const modules = [
@@ -42,6 +60,12 @@ export const allModules = [
   computersystemeModule,
   itSicherheitModule,
   complexModule,
+  gitModule,
+  uxModule,
+  qualitaetModule,
+  projektmanagementModule,
+  dockerModule,
+  erwProgModule,
   ...contentModules,
 ];
 
