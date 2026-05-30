@@ -36,7 +36,6 @@ const FRAME_COLORS: Record<string, string> = {
 
 // ─── Hilfsfunktionen ────────────────────────────────────────────────────────
 
-/** Alle transitiven Voraussetzungen (nach oben, was ich brauche) */
 function getAllPrerequisites(nodeId: string, nodes: SkillTreeNode[]): string[] {
   const result: string[] = [];
   const visited = new Set<string>();
@@ -54,12 +53,10 @@ function getAllPrerequisites(nodeId: string, nodes: SkillTreeNode[]): string[] {
   return [...new Set(result)];
 }
 
-/** Alle Module die von diesem Modul abhängen (nach unten, was mich braucht) */
 function getDependents(nodeId: string, nodes: SkillTreeNode[]): string[] {
   return nodes.filter(n => n.prerequisites.includes(nodeId)).map(n => n.id);
 }
 
-/** Alle transitiven Abhänglinge (alles was downstream liegt) */
 function getAllDependents(nodeId: string, nodes: SkillTreeNode[]): string[] {
   const result: string[] = [];
   const visited = new Set<string>();
@@ -76,6 +73,23 @@ function getAllDependents(nodeId: string, nodes: SkillTreeNode[]): string[] {
   return [...new Set(result)];
 }
 
+// ─── Touch-Hilfe ────────────────────────────────────────────────────────────
+
+function getTouchDist(t: React.TouchList): number {
+  if (t.length < 2) return 0;
+  const dx = t[0].clientX - t[1].clientX;
+  const dy = t[0].clientY - t[1].clientY;
+  return Math.sqrt(dx * dx + dy * dy);
+}
+
+function getTouchCenter(t: React.TouchList): { x: number; y: number } {
+  if (t.length < 2) return { x: t[0].clientX, y: t[0].clientY };
+  return {
+    x: (t[0].clientX + t[1].clientX) / 2,
+    y: (t[0].clientY + t[1].clientY) / 2,
+  };
+}
+
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export function SkillTreeGraph() {
@@ -84,10 +98,20 @@ export function SkillTreeGraph() {
   const svgRef = useRef<SVGSVGElement>(null);
   const [cat, setCat] = useState("mathe");
   const [hovered, setHovered] = useState<SkillTreeNode | null>(null);
+  const [selected, setSelected] = useState<SkillTreeNode | null>(null);  // Mobile: Tap-Auswahl
   const [tip, setTip] = useState({ x: 0, y: 0 });
   const [vb, setVb] = useState({ x: -200, y: -100, w: 1800, h: 700 });
-  const [panning, setPanning] = useState(false);
-  const [pan0, setPan0] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Touch-State (Ref für Performance)
+  const touchRef = useRef({
+    panning: false,
+    pinchDist: 0,
+    lastCenter: { x: 0, y: 0 },
+    lastSingle: { x: 0, y: 0 },
+    startTime: 0,
+    startPos: { x: 0, y: 0 },
+  });
 
   const doneModules = user?.completedModules || [];
   const doneLessons = user?.completedLessons || {};
@@ -99,19 +123,28 @@ export function SkillTreeGraph() {
     return getEdges(nodes).filter(e => ids.has(e.from) && ids.has(e.to));
   }, [nodes]);
 
-  // Knoten die mit dem Hovered verbunden sind (für Highlight)
-  const highlightedIds = useMemo(() => {
-    if (!hovered) return new Set<string>();
-    const ids = new Set<string>();
-    ids.add(hovered.id);
-    // Direkte + transitive Voraussetzungen
-    for (const p of getAllPrerequisites(hovered.id, nodes)) ids.add(p);
-    // Direkte + transitive Abhänglinge
-    for (const d of getAllDependents(hovered.id, nodes)) ids.add(d);
-    return ids;
-  }, [hovered, nodes]);
+  // Mobile Detection
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
-  // ─── Zoom ───────────────────────────────────────────────────────────────
+  // Active node = auf Mobile: selected, auf Desktop: hovered
+  const activeNode = isMobile ? selected : hovered;
+
+  const highlightedIds = useMemo(() => {
+    const active = activeNode;
+    if (!active) return new Set<string>();
+    const ids = new Set<string>();
+    ids.add(active.id);
+    for (const p of getAllPrerequisites(active.id, nodes)) ids.add(p);
+    for (const d of getAllDependents(active.id, nodes)) ids.add(d);
+    return ids;
+  }, [activeNode, nodes]);
+
+  // ─── Zoom (Desktop: Wheel) ─────────────────────────────────────────────
 
   useEffect(() => {
     const el = containerRef.current;
@@ -134,25 +167,123 @@ export function SkillTreeGraph() {
     return () => el.removeEventListener("wheel", onWheel);
   }, [vb]);
 
-  const onDown = useCallback((e: React.MouseEvent) => {
+  // ─── Desktop Maus-Pan ──────────────────────────────────────────────────
+
+  const [mousePanning, setMousePanning] = useState(false);
+  const [mousePan0, setMousePan0] = useState({ x: 0, y: 0 });
+
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    // Shift+Drag, Mittel-Button, oder Rechtsklick = Pan
     if (e.button === 1 || e.button === 2 || (e.button === 0 && e.shiftKey)) {
-      setPanning(true);
-      setPan0({ x: e.clientX, y: e.clientY });
+      setMousePanning(true);
+      setMousePan0({ x: e.clientX, y: e.clientY });
     }
   }, []);
 
-  const onMove = useCallback((e: React.MouseEvent) => {
-    if (!panning) return;
+  const onMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!mousePanning) return;
     const svg = svgRef.current;
     if (!svg) return;
     const r = svg.getBoundingClientRect();
-    const dx = (e.clientX - pan0.x) * (vb.w / r.width);
-    const dy = (e.clientY - pan0.y) * (vb.h / r.height);
+    const dx = (e.clientX - mousePan0.x) * (vb.w / r.width);
+    const dy = (e.clientY - mousePan0.y) * (vb.h / r.height);
     setVb(v => ({ ...v, x: v.x - dx, y: v.y - dy }));
-    setPan0({ x: e.clientX, y: e.clientY });
-  }, [panning, pan0, vb]);
+    setMousePan0({ x: e.clientX, y: e.clientY });
+  }, [mousePanning, mousePan0, vb]);
 
-  const onUp = useCallback(() => setPanning(false), []);
+  const onMouseUp = useCallback(() => setMousePanning(false), []);
+
+  // ─── Touch-Events (Mobile: 1-Finger=Pan, 2-Finger=Zoom) ───────────────
+
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    const t = touchRef.current;
+    t.startTime = Date.now();
+
+    if (e.touches.length === 2) {
+      // Pinch start
+      e.preventDefault();
+      t.pinchDist = getTouchDist(e.touches);
+      t.lastCenter = getTouchCenter(e.touches);
+      t.panning = false;
+    } else if (e.touches.length === 1) {
+      t.lastSingle = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      t.startPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      t.panning = true;
+    }
+  }, []);
+
+  const onTouchMove = useCallback((e: React.TouchEvent) => {
+    const t = touchRef.current;
+
+    if (e.touches.length === 2) {
+      // Pinch zoom
+      e.preventDefault();
+      const newDist = getTouchDist(e.touches);
+      const center = getTouchCenter(e.touches);
+      const svg = svgRef.current;
+      if (!svg) return;
+      const r = svg.getBoundingClientRect();
+
+      if (t.pinchDist > 0) {
+        const scale = t.pinchDist / newDist;
+        const cx = vb.x + ((center.x - r.left) / r.width) * vb.w;
+        const cy = vb.y + ((center.y - r.top) / r.height) * vb.h;
+        const nw = vb.w * scale;
+        const nh = vb.h * scale;
+        setVb({
+          x: cx - ((center.x - r.left) / r.width) * nw,
+          y: cy - ((center.y - r.top) / r.height) * nh,
+          w: nw, h: nh,
+        });
+      }
+
+      // Pan bei Pinch
+      if (t.lastCenter.x !== 0) {
+        const svg2 = svgRef.current;
+        if (!svg2) return;
+        const r2 = svg2.getBoundingClientRect();
+        const dx = (center.x - t.lastCenter.x) * (vb.w / r2.width);
+        const dy = (center.y - t.lastCenter.y) * (vb.h / r2.height);
+        setVb(v => ({ ...v, x: v.x - dx, y: v.y - dy }));
+      }
+
+      t.pinchDist = newDist;
+      t.lastCenter = center;
+      t.panning = false;
+    } else if (e.touches.length === 1 && t.panning) {
+      // Single-finger pan
+      const svg = svgRef.current;
+      if (!svg) return;
+      const r = svg.getBoundingClientRect();
+      const dx = (e.touches[0].clientX - t.lastSingle.x) * (vb.w / r.width);
+      const dy = (e.touches[0].clientY - t.lastSingle.y) * (vb.h / r.height);
+      setVb(v => ({ ...v, x: v.x - dx, y: v.y - dy }));
+      t.lastSingle = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  }, [vb]);
+
+  const onTouchEnd = useCallback((e: React.TouchEvent) => {
+    const t = touchRef.current;
+
+    // Tap-Erkennung: kurzer Tap ohne viel Bewegung
+    if (e.touches.length === 0 && e.changedTouches.length === 1) {
+      const elapsed = Date.now() - t.startTime;
+      const dx = Math.abs(e.changedTouches[0].clientX - t.startPos.x);
+      const dy = Math.abs(e.changedTouches[0].clientY - t.startPos.y);
+      const isTap = elapsed < 300 && dx < 15 && dy < 15;
+
+      if (isTap) {
+        // Tap auf Hintergrund = Deselekt
+        setSelected(null);
+      }
+    }
+
+    if (e.touches.length === 0) {
+      t.panning = false;
+      t.pinchDist = 0;
+      t.lastCenter = { x: 0, y: 0 };
+    }
+  }, []);
 
   // ─── Kategorie ──────────────────────────────────────────────────────────
 
@@ -169,6 +300,7 @@ export function SkillTreeGraph() {
 
   const switchCat = (id: string) => {
     setCat(id);
+    setSelected(null);
     const n = skillTreeNodes.filter(x => x.category === id);
     if (n.length === 0) return;
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
@@ -184,7 +316,23 @@ export function SkillTreeGraph() {
     setVb({ x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2 + NODE_W, h: maxY - minY + pad * 2 + NODE_H });
   };
 
-  // ─── Gekrümmte Kante (Cubic Bezier) ────────────────────────────────────
+  // ─── Klick auf Node ────────────────────────────────────────────────────
+
+  const handleNodeClick = useCallback((node: SkillTreeNode) => {
+    const isAvailable = AVAILABLE_MODULES.has(node.id);
+    if (isMobile) {
+      // Mobile: 1. Tap = Select/Tooltip, 2. Tap = Navigate
+      if (selected?.id === node.id && isAvailable) {
+        window.location.href = `/modules/${node.id}`;
+      } else {
+        setSelected(node);
+      }
+    } else {
+      if (isAvailable) window.location.href = `/modules/${node.id}`;
+    }
+  }, [isMobile, selected]);
+
+  // ─── Gekrümmte Kante ───────────────────────────────────────────────────
 
   const renderEdge = (from: string, to: string, i: number) => {
     const fp = positions.get(from);
@@ -199,36 +347,27 @@ export function SkillTreeGraph() {
     const bothDone = fs === "completed" && ts === "completed";
     const isActive = fs === "completed" && ts !== "completed";
 
-    const isHighlighted = hovered && (highlightedIds.has(from) && highlightedIds.has(to));
-    const isDimmed = hovered && !isHighlighted;
+    const isHighlighted = activeNode && (highlightedIds.has(from) && highlightedIds.has(to));
+    const isDimmed = activeNode && !isHighlighted;
 
-    // Von unten Mitte von from → oben Mitte von to
     const x1 = fp.x + NODE_W / 2;
     const y1 = fp.y + NODE_H;
     const x2 = tp.x + NODE_W / 2;
     const y2 = tp.y;
 
-    // Krümmung: Kontrollpunkte für sanfte Kurve
     const midY = (y1 + y2) / 2;
-    const cp1x = x1;
-    const cp1y = midY;
-    const cp2x = x2;
-    const cp2y = midY;
-    const d = `M ${x1} ${y1} C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${x2} ${y2}`;
+    const d = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
 
-    // Farbe
     let color: string, w: number, op: number;
     if (bothDone) { color = "#00ff88"; w = 3; op = 0.9; }
     else if (isActive) { color = "#00aaff"; w = 2.5; op = 0.7; }
     else { color = "#ffffff"; w = 2; op = 0.4; }
 
-    // Hover-Modulation
     if (isDimmed) { op = 0.08; w = 1.5; }
-    if (isHighlighted && hovered) { op = Math.min(op + 0.3, 1); w += 1; }
+    if (isHighlighted && activeNode) { op = Math.min(op + 0.3, 1); w += 1; }
 
-    // Pfeilspitze berechnen (Richtung am Endpunkt)
     const arrowSize = 7;
-    const angle = Math.atan2(y2 - cp2y, x2 - cp2x);
+    const angle = Math.atan2(y2 - midY, x2 - x2);
     const ax = x2 - arrowSize * Math.cos(angle - Math.PI / 6);
     const ay = y2 - arrowSize * Math.sin(angle - Math.PI / 6);
     const bx = x2 - arrowSize * Math.cos(angle + Math.PI / 6);
@@ -236,11 +375,8 @@ export function SkillTreeGraph() {
 
     return (
       <g key={`e-${i}`} style={{ transition: "opacity 0.2s" }}>
-        {/* Glow */}
         <path d={d} fill="none" stroke={color} strokeWidth={w + 10} opacity={op * 0.12} strokeLinecap="round" />
-        {/* Linie */}
         <path d={d} fill="none" stroke={color} strokeWidth={w} opacity={op} strokeLinecap="round" />
-        {/* Pfeil */}
         <polygon points={`${x2},${y2} ${ax},${ay} ${bx},${by}`} fill={color} opacity={op} />
       </g>
     );
@@ -253,22 +389,24 @@ export function SkillTreeGraph() {
     if (!pos) return null;
     const status = getNodeStatus(node, doneModules, doneLessons);
     const c = COLORS[status];
-    const isH = hovered?.id === node.id;
+    const isH = activeNode?.id === node.id;
     const prog = (doneLessons[node.id] || []).length;
 
-    const isDimmed = hovered && !highlightedIds.has(node.id) && !isH;
+    const isDimmed = activeNode && !highlightedIds.has(node.id) && !isH;
     const isAvailable = AVAILABLE_MODULES.has(node.id);
 
     return (
       <g key={node.id} transform={`translate(${pos.x}, ${pos.y})`}
-        style={{ transition: "opacity 0.2s", opacity: isDimmed ? 0.2 : 1 }}
+        style={{ transition: "opacity 0.2s", opacity: isDimmed ? 0.15 : 1 }}
         onMouseEnter={e => {
+          if (isMobile) return;
           setHovered(node);
           const r = svgRef.current?.getBoundingClientRect();
           if (r) setTip({ x: e.clientX - r.left, y: e.clientY - r.top });
         }}
-        onMouseLeave={() => setHovered(null)}
-        onClick={() => { if (isAvailable) window.location.href = `/modules/${node.id}`; }}
+        onMouseLeave={() => { if (!isMobile) setHovered(null); }}
+        onClick={(e) => { e.stopPropagation(); handleNodeClick(node); }}
+        onTouchEnd={(e) => { e.stopPropagation(); handleNodeClick(node); }}
         className={isAvailable ? "cursor-pointer" : "cursor-default"}>
 
         {/* Glow-Ring */}
@@ -280,8 +418,8 @@ export function SkillTreeGraph() {
 
         {/* Karte */}
         <rect width={NODE_W} height={NODE_H} rx={12} fill={c.bg}
-          stroke={isH ? c.border : c.border}
-          strokeWidth={isH ? 2.5 : 1.5}
+          stroke={isH ? "#a855f7" : c.border}
+          strokeWidth={isH ? 3 : 1.5}
           style={{ transition: "stroke-width 0.15s" }} />
 
         {/* Icon */}
@@ -316,29 +454,135 @@ export function SkillTreeGraph() {
   const firstNodeY = nodes.length > 0 ? (positions.get(nodes[0]?.id)?.y ?? 0) : 0;
   const frameColor = FRAME_COLORS[user?.equippedFrame || "none"] || "#a855f7";
 
+  // ─── Tooltip Content (shared between desktop hover & mobile tap) ───────
+
+  const tooltipContent = (() => {
+    const node = activeNode;
+    if (!node) return null;
+
+    const allPrereqs = getAllPrerequisites(node.id, nodes);
+    const directDeps = getDependents(node.id, nodes);
+    const allDeps = getAllDependents(node.id, nodes);
+
+    type TreeNode = { id: string; children: TreeNode[] };
+    const buildPrereqTree = (nodeId: string, depth: number = 0, visited: Set<string> = new Set()): TreeNode => {
+      if (visited.has(nodeId) || depth > 5) return { id: nodeId, children: [] };
+      visited.add(nodeId);
+      const nd = nodes.find(n => n.id === nodeId);
+      return {
+        id: nodeId,
+        children: (nd?.prerequisites || [])
+          .filter(p => nodes.some(n => n.id === p))
+          .map(p => buildPrereqTree(p, depth + 1, visited)),
+      };
+    };
+
+    const renderTreeNode = (tree: TreeNode, depth: number = 0): React.ReactNode => {
+      const pn = nodes.find(n => n.id === tree.id);
+      if (!pn) return null;
+      const ok = doneModules.includes(tree.id);
+      const inProg = (doneLessons[tree.id]?.length || 0) > 0;
+      const isCurrent = tree.id === node.id;
+      return (
+        <div key={tree.id}>
+          <div className="flex items-center gap-1.5" style={{ paddingLeft: `${depth * 14}px` }}>
+            {depth > 0 && <span className="text-slate-600 text-[10px] mr-0.5">{"└─"}</span>}
+            <span className={ok ? "text-green-400" : inProg ? "text-blue-400" : "text-slate-500"}>
+              {ok ? "✅" : inProg ? "📖" : "⬜"}
+            </span>
+            <span className={`${isCurrent ? "text-violet-300 font-semibold" : ok ? "text-green-300" : inProg ? "text-blue-300" : "text-slate-400"}`}>
+              {pn.icon} {pn.label}
+            </span>
+            {isCurrent && <span className="text-[10px] text-violet-400 ml-auto font-medium">← hier</span>}
+          </div>
+          {tree.children.map(child => renderTreeNode(child, depth + 1))}
+        </div>
+      );
+    };
+
+    const tree = buildPrereqTree(node.id);
+
+    return (
+      <>
+        {/* Header */}
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-xl">{node.icon}</span>
+          <span className="font-semibold text-slate-200">{node.label}</span>
+        </div>
+        <div className="text-xs text-slate-400 capitalize mb-3">
+          {cats.find(c => c.id === node.category)?.label}
+          {!AVAILABLE_MODULES.has(node.id) && (
+            <span className="ml-2 text-amber-400">🔜 Bald verfügbar</span>
+          )}
+          {isMobile && AVAILABLE_MODULES.has(node.id) && (
+            <span className="ml-2 text-violet-400">↩ Nochmal tippen = Öffnen</span>
+          )}
+        </div>
+
+        {/* Voraussetzungen als Baum */}
+        {allPrereqs.length > 0 ? (
+          <div className="text-xs mb-3">
+            <div className="text-slate-400 font-medium mb-2">📋 Voraussetzungen ({allPrereqs.length}):</div>
+            <div className="space-y-0.5 max-h-[200px] overflow-y-auto pr-1">
+              {renderTreeNode(tree)}
+            </div>
+          </div>
+        ) : (
+          <div className="text-xs text-green-400 mb-3">✅ Grundlagen-Modul — keine Voraussetzungen</div>
+        )}
+
+        {/* Wird gebraucht von */}
+        {directDeps.length > 0 && (
+          <div className="text-xs border-t border-slate-700/50 pt-2">
+            <div className="text-slate-400 font-medium mb-1.5">🔓 Öffnet den Weg zu:</div>
+            <div className="flex flex-wrap gap-1.5">
+              {directDeps.map(depId => {
+                const dn = nodes.find(n => n.id === depId);
+                if (!dn) return null;
+                const ok = doneModules.includes(depId);
+                return (
+                  <span key={depId} className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md ${ok ? "bg-green-500/10 text-green-300" : "bg-slate-800 text-slate-400"}`}>
+                    {dn.icon} {dn.label}
+                  </span>
+                );
+              })}
+            </div>
+            {allDeps.length > directDeps.length && (
+              <div className="text-slate-500 mt-1.5">+{allDeps.length - directDeps.length} weitere downstream…</div>
+            )}
+          </div>
+        )}
+      </>
+    );
+  })();
+
   // ─── Render ─────────────────────────────────────────────────────────────
 
   return (
     <div ref={containerRef} className="relative w-full h-full select-none overflow-hidden">
 
-      {/* Tabs */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 z-10 flex gap-1.5 bg-slate-900/90 backdrop-blur-sm rounded-2xl p-1.5 border border-slate-700/50 shadow-xl">
-        {cats.map(c => {
-          const a = cat === c.id;
-          const { done: d, total: t } = catCount(c.id);
-          return (
-            <button key={c.id} onClick={() => switchCat(c.id)}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all ${a ? "bg-slate-800 text-white shadow-lg" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"}`}
-              style={a ? { boxShadow: `0 0 15px ${c.color}30` } : undefined}>
-              <span>{c.icon}</span><span>{c.label}</span>
-              <span className={`text-xs px-1.5 py-0.5 rounded-full ${a ? "bg-white/10" : "bg-slate-800"}`}>{d}/{t}</span>
-            </button>
-          );
-        })}
+      {/* Tabs — auf Mobile scrollbar */}
+      <div className="absolute top-2 left-0 right-0 z-10 flex justify-center px-2">
+        <div className="flex gap-1 bg-slate-900/90 backdrop-blur-sm rounded-2xl p-1.5 border border-slate-700/50 shadow-xl overflow-x-auto max-w-full">
+          {cats.map(c => {
+            const a = cat === c.id;
+            const { done: d, total: t } = catCount(c.id);
+            return (
+              <button key={c.id} onClick={() => switchCat(c.id)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all whitespace-nowrap ${a ? "bg-slate-800 text-white shadow-lg" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800/50"}`}
+                style={a ? { boxShadow: `0 0 15px ${c.color}30` } : undefined}>
+                <span>{c.icon}</span>
+                <span className="hidden sm:inline">{c.label}</span>
+                <span className="sm:hidden">{c.label.slice(0, 4)}</span>
+                <span className={`text-xs px-1.5 py-0.5 rounded-full ${a ? "bg-white/10" : "bg-slate-800"}`}>{d}/{t}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Legende */}
-      <div className="absolute top-4 right-4 z-10 flex flex-col gap-1.5 bg-slate-900/80 backdrop-blur-sm rounded-xl p-3 border border-slate-700/50 text-xs">
+      {/* Legende — auf Mobile ausblenden */}
+      <div className="absolute top-2 right-2 z-10 hidden md:flex flex-col gap-1.5 bg-slate-900/80 backdrop-blur-sm rounded-xl p-3 border border-slate-700/50 text-xs">
         <div className="text-slate-300 font-medium mb-1">Knoten</div>
         <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-green-400 shadow-[0_0_6px_rgba(0,255,136,0.5)]"></span><span className="text-slate-400">Abgeschlossen</span></div>
         <div className="flex items-center gap-2"><span className="w-3 h-3 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(0,170,255,0.4)]"></span><span className="text-slate-400">In Bearbeitung</span></div>
@@ -352,21 +596,36 @@ export function SkillTreeGraph() {
         <div className="text-slate-500">Hover = Abhängigkeiten</div>
       </div>
 
+      {/* Mobile-Hinweis */}
+      {isMobile && !selected && (
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 bg-slate-900/90 backdrop-blur-sm rounded-xl px-4 py-2 border border-slate-700/50 text-xs text-slate-400 shadow-xl">
+          👆 Tippen = Info &nbsp;|&nbsp; Zweimal = Öffnen &nbsp;|&nbsp; Ziehen = Verschieben &nbsp;|&nbsp; Pinch = Zoom
+        </div>
+      )}
+
       {/* SVG */}
-      <svg ref={svgRef} className="w-full h-full cursor-grab active:cursor-grabbing"
+      <svg ref={svgRef} className="w-full h-full"
         viewBox={`${vb.x} ${vb.y} ${vb.w} ${vb.h}`}
-        onMouseDown={onDown} onMouseMove={onMove} onMouseUp={onUp} onMouseLeave={onUp}
-        onContextMenu={e => e.preventDefault()}>
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onContextMenu={e => e.preventDefault()}
+        style={{ touchAction: "none" }}>
 
         <defs>
           <clipPath id="avatarClip"><circle cx="0" cy="0" r="36" /></clipPath>
         </defs>
 
-        {/* Kanten (unter den Knoten) */}
+        {/* Kanten */}
         {edges.map((e, i) => renderEdge(e.from, e.to, i))}
 
         {/* Profilbild */}
-        <g transform={`translate(-140, ${firstNodeY})`} className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
+        <g transform={`translate(-140, ${firstNodeY})`} className="cursor-pointer"
+          onClick={() => window.location.href = "/profile"}>
           <circle cx={0} cy={0} r={42} fill="none" stroke={frameColor} strokeWidth="3"
             style={{ filter: `drop-shadow(0 0 8px ${frameColor}60)` }} />
           <circle cx={0} cy={0} r={38} fill="none" stroke={frameColor} strokeWidth="1" opacity={0.4} />
@@ -399,104 +658,27 @@ export function SkillTreeGraph() {
         {nodes.map(renderNode)}
       </svg>
 
-      {/* Tooltip */}
-      {hovered && (() => {
-        const allPrereqs = getAllPrerequisites(hovered.id, nodes);
-        const directDeps = getDependents(hovered.id, nodes);
-        const allDeps = getAllDependents(hovered.id, nodes);
+      {/* Desktop Tooltip — Float */}
+      {!isMobile && hovered && (
+        <div className="absolute z-20 pointer-events-none bg-slate-900/95 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 max-w-[320px] shadow-2xl"
+          style={{ left: Math.min(tip.x + 20, window.innerWidth - 340), top: tip.y - 10 }}>
+          {tooltipContent}
+        </div>
+      )}
 
-        // Baum aufbauen: gehoverter Knoten oben, Voraussetzungen als Baum nach unten
-        type TreeNode = { id: string; children: TreeNode[] };
-        const buildPrereqTree = (nodeId: string, depth: number = 0, visited: Set<string> = new Set()): TreeNode => {
-          if (visited.has(nodeId) || depth > 5) return { id: nodeId, children: [] };
-          visited.add(nodeId);
-          const node = nodes.find(n => n.id === nodeId);
-          return {
-            id: nodeId,
-            children: (node?.prerequisites || [])
-              .filter(p => nodes.some(n => n.id === p))
-              .map(p => buildPrereqTree(p, depth + 1, visited)),
-          };
-        };
-
-        const renderTreeNode = (tree: TreeNode, depth: number = 0): React.ReactNode => {
-          const pn = nodes.find(n => n.id === tree.id);
-          if (!pn) return null;
-          const ok = doneModules.includes(tree.id);
-          const inProg = (doneLessons[tree.id]?.length || 0) > 0;
-          const isHovered = tree.id === hovered.id;
-          return (
-            <div key={tree.id}>
-              <div className="flex items-center gap-1.5" style={{ paddingLeft: `${depth * 14}px` }}>
-                {depth > 0 && (
-                  <span className="text-slate-600 text-[10px] mr-0.5">{"└─"}</span>
-                )}
-                <span className={ok ? "text-green-400" : inProg ? "text-blue-400" : "text-slate-500"}>
-                  {ok ? "✅" : inProg ? "📖" : "⬜"}
-                </span>
-                <span className={`${isHovered ? "text-violet-300 font-semibold" : ok ? "text-green-300" : inProg ? "text-blue-300" : "text-slate-400"}`}>
-                  {pn.icon} {pn.label}
-                </span>
-                {isHovered && <span className="text-[10px] text-violet-400 ml-auto font-medium">← hier</span>}
-              </div>
-              {tree.children.map(child => renderTreeNode(child, depth + 1))}
-            </div>
-          );
-        };
-
-        const tree = buildPrereqTree(hovered.id);
-
-        return (
-          <div className="absolute z-20 pointer-events-none bg-slate-900/95 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4 max-w-[320px] shadow-2xl"
-            style={{ left: Math.min(tip.x + 20, window.innerWidth - 340), top: tip.y - 10 }}>
-            {/* Header */}
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-xl">{hovered.icon}</span>
-              <span className="font-semibold text-slate-200">{hovered.label}</span>
-            </div>
-            <div className="text-xs text-slate-400 capitalize mb-3">
-              {cats.find(c => c.id === hovered.category)?.label}
-              {!AVAILABLE_MODULES.has(hovered.id) && (
-                <span className="ml-2 text-amber-400">🔜 Bald verfügbar</span>
-              )}
-            </div>
-
-            {/* Voraussetzungen als Baum */}
-            {allPrereqs.length > 0 ? (
-              <div className="text-xs mb-3">
-                <div className="text-slate-400 font-medium mb-2">📋 Voraussetzungen ({allPrereqs.length}):</div>
-                <div className="space-y-0.5 max-h-[200px] overflow-y-auto pr-1">
-                  {renderTreeNode(tree)}
-                </div>
-              </div>
-            ) : (
-              <div className="text-xs text-green-400 mb-3">✅ Grundlagen-Modul — keine Voraussetzungen</div>
-            )}
-
-            {/* Wird gebraucht von */}
-            {directDeps.length > 0 && (
-              <div className="text-xs border-t border-slate-700/50 pt-2">
-                <div className="text-slate-400 font-medium mb-1.5">🔓 Öffnet den Weg zu:</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {directDeps.map(depId => {
-                    const dn = nodes.find(n => n.id === depId);
-                    if (!dn) return null;
-                    const ok = doneModules.includes(depId);
-                    return (
-                      <span key={depId} className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md ${ok ? "bg-green-500/10 text-green-300" : "bg-slate-800 text-slate-400"}`}>
-                        {dn.icon} {dn.label}
-                      </span>
-                    );
-                  })}
-                </div>
-                {allDeps.length > directDeps.length && (
-                  <div className="text-slate-500 mt-1.5">+{allDeps.length - directDeps.length} weitere downstream…</div>
-                )}
-              </div>
-            )}
-          </div>
-        );
-      })()}
+      {/* Mobile Tooltip — Bottom Sheet */}
+      {isMobile && selected && (
+        <div className="absolute bottom-0 left-0 right-0 z-30 bg-slate-900/98 backdrop-blur-md border-t border-slate-700/50 rounded-t-2xl p-4 pb-6 max-h-[60vh] overflow-y-auto shadow-2xl"
+          onClick={e => e.stopPropagation()}
+          onTouchEnd={e => e.stopPropagation()}>
+          {/* Close-Button */}
+          <button onClick={() => setSelected(null)}
+            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:text-slate-200">
+            ✕
+          </button>
+          {tooltipContent}
+        </div>
+      )}
     </div>
   );
 }
