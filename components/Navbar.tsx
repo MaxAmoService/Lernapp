@@ -63,6 +63,12 @@ export function Navbar() {
                 Module
               </Link>
               <Link
+                href="/skilltree"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-150"
+              >
+                🌳 Skill Tree
+              </Link>
+              <Link
                 href="/leaderboard"
                 className="flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-150"
               >
@@ -115,6 +121,14 @@ export function Navbar() {
                 >
                   <LayoutGrid className="w-4 h-4 text-slate-500" />
                   Module
+                </Link>
+                <Link
+                  href="/skilltree"
+                  onClick={() => setShowMobileMenu(false)}
+                  className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all"
+                >
+                  <span className="text-slate-500">🌳</span>
+                  Skill Tree
                 </Link>
                 <Link
                   href="/leaderboard"
