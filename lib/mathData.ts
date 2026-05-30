@@ -292,7 +292,7 @@ Berechne $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
 
 > In der letzten Lektion hast du Mengen und Mengenoperationen kennengelernt. Jetzt lernst du die **Sprache** kennen, mit der Mathematik arbeitet: Logik! Jede Aussage ist entweder wahr oder falsch — und genau das macht Mathematik so präzise.
 
-> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Abstraction](https://www.youtube.com/watch?v=TgKwz5Ikpc8) — warum Abstraktion (wie Logik) in der Mathematik so wichtig ist.
+> 🎬 **Essence of Linear Algebra — Abstraction** — https://www.youtube.com/watch?v=TgKwz5Ikpc8 — warum Abstraktion (wie Logik) in der Mathematik so wichtig ist.
 
 In der Logik verknüpfen wir **Aussagen** (P, Q, R...) miteinander. Jede Aussage ist entweder **wahr (W)** oder **falsch (F)**.
 
@@ -533,7 +533,7 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
 
 > **Nächstes Modul:** Funktionen & Graphen — jetzt geht's in die Analysis! Funktionen sind das zentrale Werkzeug der Mathematik.
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivative](https://www.youtube.com/watch?v=WUvTyaaNkzM) — ein Vorgeschmack darauf, was mit Funktionen alles möglich ist!
+> 🎬 **Essence of Calculus — Derivative** — https://www.youtube.com/watch?v=WUvTyaaNkzM — ein Vorgeschmack darauf, was mit Funktionen alles möglich ist!
 `,
       },
             {
@@ -596,7 +596,7 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
 
 > 🏠 **Fürs Studium:** Funktionen sind das Herzstück von MA2 (Analysis 1). Wer den Funktionenbegriff hier sicher beherrscht, hat in Grenzwerten, Ableitungen und Integralen einen riesigen Vorsprung!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivatives](https://www.youtube.com/watch?v=WUvTyaaNkzM) — zeigt intuitiv, was Funktionen und ihre Ableitungen bedeuten.
+> 🎬 **Essence of Calculus — Derivatives** — https://www.youtube.com/watch?v=WUvTyaaNkzM — zeigt intuitiv, was Funktionen und ihre Ableitungen bedeuten.
 
 ## Definition
 
@@ -722,7 +722,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
 
 > Du kennst bereits Funktionen und ihre Eigenschaften. Jetzt fragen wir: Was passiert, wenn sich x immer weiter einem bestimmten Wert nähert? Diese Frage ist der Einstieg in die gesamte **Analysis**!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Limits](https://www.youtube.com/watch?v=YNstP04ndTA) — visuelle Erklärung, was ein Grenzwert wirklich bedeutet.
+> 🎬 **Essence of Calculus — Limits** — https://www.youtube.com/watch?v=YNstP04ndTA — visuelle Erklärung, was ein Grenzwert wirklich bedeutet.
 
 > 🏠 **Fürs Studium:** Grenzwerte sind das Fundament von MA2 (Analysis 1). Ohne Grenzwerte keine Ableitungen, keine Integrale!
 
@@ -761,7 +761,7 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
 
 > Du hast bereits gelernt, Grenzwerte mit Rechenregeln zu bestimmen. Aber was, wenn du einen unbestimmten Ausdruck wie $\\frac{0}{0}$ erhältst? Dafür gibt es **L'Hôpitals Regel** — und sie nutzt bereits die **Ableitung**, die im nächsten Kapitel kommt!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — L'Hôpital's Rule](https://www.youtube.com/watch?v=kfF4zMiDyHQ) — warum diese Regel funktioniert und wann man sie anwendet.
+> 🎬 **Essence of Calculus — L'Hôpital's Rule** — https://www.youtube.com/watch?v=kfF4zMiDyHQ — warum diese Regel funktioniert und wann man sie anwendet.
 
 ## Anwendung
 
@@ -873,7 +873,7 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
 
 > Du hast Grenzwerte kennengelernt und weißt, wie man mit L'Hôpital arbeitet. Jetzt wenden wir den Grenzwertbegriff auf eine der wichtigsten Fragen der Mathematik an: Wie schnell ändert sich eine Funktion? Die Antwort ist die **Ableitung**!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivatives](https://www.youtube.com/watch?v=WUvTyaaNkzM) — DIE beste visuelle Erklärung der Ableitung. Pflichtvideo!
+> 🎬 **Essence of Calculus — Derivatives** — https://www.youtube.com/watch?v=WUvTyaaNkzM — DIE beste visuelle Erklärung der Ableitung. Pflichtvideo!
 
 > 🏠 **Fürs Studium:** Ableitungen sind das Kernthema von MA2. Wer sie versteht, kann Extremwertaufgaben, Kurvendiskussion und vieles mehr.
 
@@ -910,7 +910,7 @@ Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
 
 > Du weißt, dass die Ableitung den Grenzwert des Differenzenquotienten darstellt. Jetzt lernst du praktische **Regeln** kennen, mit denen du Funktionen schnell ableiten kannst — ohne jedes Mal den Grenzwert zu berechnen!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Power Rule & Chain Rule](https://www.youtube.com/watch?v=S0_qX4VJhMQ) — warum die Potenzregel funktioniert und die Kettenregel visuell erklärt.
+> 🎬 **Essence of Calculus — Power Rule & Chain Rule** — https://www.youtube.com/watch?v=S0_qX4VJhMQ — warum die Potenzregel funktioniert und die Kettenregel visuell erklärt.
 
 ## Grundregeln
 
@@ -1004,7 +1004,7 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
 
 > Du hast gelernt, Funktionen abzuleiten. Aber was, wenn du die Ableitung gegeben hast und die ursprüngliche Funktion suchst? Das ist die **Integration** — die Umkehrung der Differentiation!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Integration](https://www.youtube.com/watch?v=rfG8ce4nNh0) — was Integration wirklich bedeutet (Fläche unter der Kurve!).
+> 🎬 **Essence of Calculus — Integration** — https://www.youtube.com/watch?v=rfG8ce4nNh0 — was Integration wirklich bedeutet (Fläche unter der Kurve!).
 
 > 🏠 **Fürs Studium:** Integration ist das zweite große Thema von MA2 zusammen mit Differentiation. Zusammen bilden sie den "Fundamentalsatz der Analysis".
 
@@ -1043,7 +1043,7 @@ $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
 
 > Du kennst bereits Stammfunktionen — die Umkehrung der Ableitung. Jetzt verbinden wir Differentiation und Integration über den **Hauptsatz der Analysis** und berechnen konkrete Flächen unter Kurven!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Area & Slope](https://www.youtube.com/watch?v=FnJqaIESC2s) — wie Differentiation und Integration zusammenhängen.
+> 🎬 **Essence of Calculus — Area & Slope** — https://www.youtube.com/watch?v=FnJqaIESC2s — wie Differentiation und Integration zusammenhängen.
 
 ## Hauptsatz der Analysis
 
@@ -2133,7 +2133,7 @@ Berechne die Fläche eines Rechtecks mit $a = 8\\text{cm}$ und $b = 5\\text{cm}$
 
 > Du kennst bereits Flächeninhalte ebener Figuren. Jetzt wird es **räumlich**: Aus Flächen werden Körper mit Volumen und Oberfläche — zentral für Architektur, 3D-Druck und technisches Zeichnen!
 
-> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Cross Products](https://www.youtube.com/watch?v=eu6i7WJeinw) — zeigt, wie Volumenberechnung mit Vektoren zusammenhängt.
+> 🎬 **Essence of Linear Algebra — Cross Products** — https://www.youtube.com/watch?v=eu6i7WJeinw — zeigt, wie Volumenberechnung mit Vektoren zusammenhängt.
 
 ### Quader
 $$V = a \\cdot b \\cdot c$$
@@ -2169,7 +2169,7 @@ Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!
 
 > Du kennst bereits Flächeninhalte und Volumenberechnung. Der Satz des Pythagoras ist die **Brücke zwischen Geometrie und Algebra** — er verbindet Seitenlängen und ist die Grundlage für die gesamte Trigonometrie!
 
-> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Dot Products](https://www.youtube.com/watch?v=LyGKycU2BQQ) — zeigt, wie der Satz des Pythagoras mit dem Skalarprodukt zusammenhängt.
+> 🎬 **Essence of Linear Algebra — Dot Products** — https://www.youtube.com/watch?v=LyGKycU2BQQ — zeigt, wie der Satz des Pythagoras mit dem Skalarprodukt zusammenhängt.
 
 Der Satz des Pythagoras ist einer der wichtigsten Sätze der Geometrie. Er gilt für **rechtwinklige Dreiecke**.
 
@@ -2312,7 +2312,7 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 
 > Der Satz des Pythagoras hat dir gezeigt, dass $a^2 + b^2 = c^2$. Jetzt machen wir den nächsten Schritt: Statt Seitenlängen berechnen wir **Winkel** — mit Sinus, Kosinus und Tangens!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Sine & Cosine](https://www.youtube.com/watch?v=QlB0LpVeI7E) — warum Sinus und Kosinus mehr sind als Dreiecks-Verhältnisse: sie beschreiben Kreisbewegungen!
+> 🎬 **Essence of Calculus — Sine & Cosine** — https://www.youtube.com/watch?v=QlB0LpVeI7E — warum Sinus und Kosinus mehr sind als Dreiecks-Verhältnisse: sie beschreiben Kreisbewegungen!
 
 Im rechtwinkligen Dreieck:
 
@@ -2343,7 +2343,7 @@ Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\a
 
 > Du kennst bereits Sinus, Kosinus und Tangens aus dem rechtwinkligen Dreieck. Der **Einheitskreis** erweitert diese Funktionen auf **alle Winkel** — und macht sie zu periodischen Funktionen, die Wellen, Schwingungen und Kreisbewegungen beschreiben!
 
-> 🎬 **3Blue1Brown:** [Essence of Calculus — Sine & Cosine](https://www.youtube.com/watch?v=QlB0LpVeI7E) — visuelle Erklärung, wie der Einheitskreis Sinus und Kosinus erzeugt.
+> 🎬 **Essence of Calculus — Sine & Cosine** — https://www.youtube.com/watch?v=QlB0LpVeI7E — visuelle Erklärung, wie der Einheitskreis Sinus und Kosinus erzeugt.
 
 Der Einheitskreis (Radius 1) ist das zentrale Werkzeug der Trigonometrie.
 
@@ -2540,7 +2540,7 @@ $$\\log_a(x) = y \\Leftrightarrow a^y = x$$
 
 > Die Trigonometrie ist abgeschlossen. Jetzt folgen **Potenzen und Logarithmen** — die Grundlage für exponentielles Wachstum, Zinseszins, Datenkompression ($\\log_2$) und in der Analysis der Schlüssel zu den Exponentialfunktionen!
 
-> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — warum $e$ die wichtigste Zahl der Mathematik ist und was Potenzen wirklich bedeuten.
+> 🎬 **What's so special about Euler's number e?** — https://www.youtube.com/watch?v=m2MIpBrFgFk — warum $e$ die wichtigste Zahl der Mathematik ist und was Potenzen wirklich bedeuten.
 
 Potenzen sind die Grundlage für viele mathematische Konzepte. Hier die wichtigsten Regeln:
 
@@ -2606,7 +2606,7 @@ $2^{-3} = \\frac{1}{8} = 0{,}125$
 
 > Du kennst bereits Potenzregeln. Jetzt lernst du die **Umkehrung** kennen: den Logarithmus. Wenn du weißt, dass $2^5 = 32$, dann ist $\\log_2(32) = 5$ — der Logarithmus verrät dir den **Exponenten**!
 
-> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — erklärt intuitiv, warum Logarithmen so fundamental sind.
+> 🎬 **What's so special about Euler's number e?** — https://www.youtube.com/watch?v=m2MIpBrFgFk — erklärt intuitiv, warum Logarithmen so fundamental sind.
 
 Der Logarithmus ist die **Umkehrung** der Potenzierung. Wenn $a^x = b$, dann ist $\\log_a(b) = x$.
 
@@ -2668,7 +2668,7 @@ $x = \\log_2(16) = \\log_2(2^4) = 4$
 
 > Du kennst bereits Potenzregeln und Logarithmen. Jetzt verbinden wir beides zur **Exponentialfunktion** — der wichtigsten Funktion der Analysis. Ihre Besonderheit: $\\frac{d}{dx}e^x = e^x$ — sie bleibt unter der Ableitung unverändert!
 
-> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — DIE Erklärung, warum $e^x$ überall in der Natur vorkommt.
+> 🎬 **What's so special about Euler's number e?** — https://www.youtube.com/watch?v=m2MIpBrFgFk — DIE Erklärung, warum $e^x$ überall in der Natur vorkommt.
 
 > 🏠 **Fürs Studium:** Die Exponentialfunktion $e^x$ ist das Herzstück von MA2 (Analysis). Differentialgleichungen wie $f'(x) = f(x)$ haben $e^x$ als Lösung — das macht sie zur wichtigsten Funktion überhaupt!
 
@@ -2875,7 +2875,7 @@ Sortiert: 3, 3, 5, 7, 8 → Median = 5
 
 > Du kennst bereits Mittelwert, Median und Modus. Aber zwei Klassen können den gleichen Mittelwert haben — eine mit gleichen Noten, eine mit extremen Unterschieden. Die **Streuung** zeigt dir, wie sehr die Daten um den Mittelwert schwanken!
 
-> 🎬 **3Blue1Brown:** [But what is a Standard Deviation?](https://www.youtube.com/watch?v=mtbM17e3BwQ) — visuelle Erklärung von Varianz und Standardabweichung.
+> 🎬 **But what is a Standard Deviation?** — https://www.youtube.com/watch?v=mtbM17e3BwQ — visuelle Erklärung von Varianz und Standardabweichung.
 
 Diese Maße beschreiben die **Streuung** einer Datenverteilung.
 
@@ -2935,7 +2935,7 @@ $\sigma = 2$
 
 > Du kennst bereits Mittelwert und Standardabweichung. Jetzt lernst du einen anderen Weg kennen, Daten zu analysieren: **Quartile** teilen die Daten in vier gleiche Teile — und der **Boxplot** zeigt dir auf einen Blick, wo die Daten liegen und wo Ausreißer sind!
 
-> 🎬 **3Blue1Brown:** [But what is a Standard Deviation?](https://www.youtube.com/watch?v=mtbM17e3BwQ) — ergänzend zur Varianz: zeigt, wie man Daten visuell analysiert.
+> 🎬 **But what is a Standard Deviation?** — https://www.youtube.com/watch?v=mtbM17e3BwQ — ergänzend zur Varianz: zeigt, wie man Daten visuell analysiert.
 
 Quartile teilen eine sortierte Datenreihe in **vier gleiche Teile**.
 
@@ -3435,7 +3435,7 @@ Probe: $3 \cdot 5 + 7 = 22$ ✓
 
 > Du kennst bereits lineare Gleichungen. Jetzt wird die Variable **quadratisch**: $x^2$ taucht auf! Das eröffnet ganz neue Möglichkeiten — und ganz neue Lösungsverfahren: pq-Formel und abc-Formel (Mitternachtsformel).
 
-> 🎬 **3Blue1Brown:** [Essence of Algebra — Quadratic Formula](https://www.youtube.com/watch?v=XMx9S35LfgQ) — zeigt geometrisch, warum die pq-Formel funktioniert.
+> 🎬 **Essence of Algebra — Quadratic Formula** — https://www.youtube.com/watch?v=XMx9S35LfgQ — zeigt geometrisch, warum die pq-Formel funktioniert.
 
 $ax^2 + bx + c = 0$ — Die Variable kommt in der **2. Potenz** vor.
 
@@ -3654,7 +3654,7 @@ $(a + b)(c + d) = ac + ad + bc + bd"
 
 > Du kennst bereits das Ausmultiplizieren mit dem Distributivgesetz. Jetzt lernst du drei **Spezialfälle** kennen, die so häufig vorkommen, dass sie eigene Namen haben: die binomischen Formeln! Sie sind der Schlüssel zum Faktorisieren und zur Scheitelpunktform.
 
-> 🎬 **3Blue1Brown:** [Essence of Algebra — Binomial Theorem](https://www.youtube.com/watch?v=YMm0gWxSckQ) — zeigt, wie binomische Formeln zum Binomischen Theorem verallgemeinert werden.
+> 🎬 **Essence of Algebra — Binomial Theorem** — https://www.youtube.com/watch?v=YMm0gWxSckQ — zeigt, wie binomische Formeln zum Binomischen Theorem verallgemeinert werden.
 
 Die drei binomischen Formeln gehören zu den wichtigsten Werkzeugen der Algebra.
 
@@ -3858,7 +3858,7 @@ Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
 
 > Du kennst bereits lineare Ungleichungen. Jetzt wird es komplexer: **Quadratische Ungleichungen** haben die Form $ax^2 + bx + c > 0$. Die Lösung findest du mit dem **Tafel-Test** — erst Nullstellen bestimmen, dann Vorzeichen in den Intervallen prüfen!
 
-> 🎬 **3Blue1Brown:** [Essence of Algebra — Quadratic Formula](https://www.youtube.com/watch?v=XMx9S35LfgQ) — das Verständnis für quadratische Funktionen hilft dir, die Vorzeichen zu verstehen.
+> 🎬 **Essence of Algebra — Quadratic Formula** — https://www.youtube.com/watch?v=XMx9S35LfgQ — das Verständnis für quadratische Funktionen hilft dir, die Vorzeichen zu verstehen.
 
 Quadratische Ungleichungen haben die Form $ax^2 + bx + c > 0$ (oder $< 0$, $\\leq$, $\\geq$).
 
@@ -4566,7 +4566,7 @@ $\\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix}^T = \\begin{pmatrix} 1 & 3 \\ 2 
 
 > **Roter Faden:** Nach den [Matrix-Operationen](/modules/mathe-matrizen) (Addition, Multiplikation) fehlt noch die **Determinante** — eine einzige Zahl, die verrät, ob eine Matrix invertierbar ist. Das ist der Schlüssel zum Lösen von Gleichungssystemen!
 
-> 🎬 **3Blue1Brown:** [The Determinant](https://www.youtube.com/watch?v=Ip3X9LOh2dk) — warum die Determinante die "Stauchung" eines Raumes misst.
+> 🎬 **The Determinant** — https://www.youtube.com/watch?v=Ip3X9LOh2dk — warum die Determinante die "Stauchung" eines Raumes misst.
 
 Die Determinante ist eine Zahl, die aus einer quadratischen Matrix berechnet wird. Sie sagt aus, ob die Matrix invertierbar ist.
 
@@ -5994,7 +5994,7 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
 
 > **Roter Faden:** Du kennst bereits [Reihen](/modules/mathe-reihen) und [Ableitungen](/modules/mathe-ableitungen). Die **Taylor-Reihe** verbindet beides: Jede glatte Funktion lässt sich als unendliche Summe von Potenzen darstellen. Das ist eines der mächtigsten Konzepte der Analysis!
 
-> 🎬 **3Blue1Brown:** [Taylor series](https://www.youtube.com/watch?v=3d6DsjIBzJ4) — eine visuelle Erklärung, wie Taylor-Reihen funktionieren.
+> 🎬 **Taylor series** — https://www.youtube.com/watch?v=3d6DsjIBzJ4 — eine visuelle Erklärung, wie Taylor-Reihen funktionieren.
 
 > 🎓 **Fürs Studium:** Taylor-Reihen sind ein Thema in MA2 (Analysis 1). Wer sie hier versteht, kann im Studium punkten!
 
@@ -6032,7 +6032,7 @@ Computer können nicht $e^x$ direkt berechnen. Sie verwenden stattdessen die Tay
 
 > **Roter Faden:** Nach der [Taylor-Reihe](/modules/mathe-taylorreihen) als allgemeinem Prinzip kommen jetzt die **wichtigen Reihen**: $e^x$, $\\sin$, $\\cos$ und $\\ln$. Diese Reihen sind so zentral, dass sie in fast jedem Mathematik- und Informatikstudium vorkommen.
 
-> 🎬 **3Blue1Brown:** [Exponents & e](https://www.youtube.com/watch?v=m2MIpBrFgFk) — warum $e$ überall auftaucht und was es mit Wachstum zu tun hat.
+> 🎬 **Exponents & e** — https://www.youtube.com/watch?v=m2MIpBrFgFk — warum $e$ überall auftaucht und was es mit Wachstum zu tun hat.
 
 Diese Reihen kommen überall in der Mathematik und Physik vor. Sie lohnt es sich, sie zu kennen!
 

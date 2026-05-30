@@ -453,20 +453,55 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           "[!NOTE]": { bg: "bg-slate-500/10", border: "border-slate-500/40", icon: "📝", label: "Notiz", text: "text-slate-300" },
         };
         let matched = false;
-        for (const [key, style] of Object.entries(calloutTypes)) {
-          if (raw.startsWith(key)) {
-            const content = raw.slice(key.length).trim();
+        // 🎬 Video embed
+        if (raw.startsWith("🎬")) {
+          const videoContent = raw.slice(2).trim();
+          const urlMatch = videoContent.match(/https:\/\/www\.youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
+          const videoId = urlMatch ? urlMatch[1] : null;
+          const titleMatch = videoContent.match(/\*\*(.+?)\*\*/);
+          const title = titleMatch ? titleMatch[1] : "Video";
+          const descMatch = videoContent.match(/—\s*(.+)$/);
+          const description = descMatch ? descMatch[1] : "";
+          if (videoId) {
             elements.push(
-              <div key={`callout-${keyIndex++}`} className={`my-4 p-4 rounded-xl border-l-4 ${style.bg} ${style.border} flex items-start gap-3`}>
-                <span className="text-lg mt-0.5 shrink-0">{style.icon}</span>
-                <div>
-                  <span className={`text-sm font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
-                  <p className={`${style.text} text-base mt-1 leading-relaxed`}><InlineText text={content} /></p>
+              <div key={`video-${keyIndex++}`} className="my-4 rounded-xl overflow-hidden border border-slate-700/50 bg-slate-900/50">
+                <div className="px-4 py-2.5 bg-gradient-to-r from-red-500/10 to-red-600/5 border-b border-slate-700/50 flex items-center gap-2">
+                  <span className="text-lg">🎬</span>
+                  <span className="text-sm font-semibold text-red-300">{title}</span>
+                  <span className="text-xs text-slate-500 ml-auto">3Blue1Brown</span>
+                </div>
+                {description && <p className="px-4 py-1.5 text-xs text-slate-400 bg-slate-900/30">{description}</p>}
+                <div className="relative" style={{ paddingBottom: "56.25%" }}>
+                  <iframe
+                    className="absolute inset-0 w-full h-full"
+                    src={`https://www.youtube.com/embed/${videoId}`}
+                    title={title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
                 </div>
               </div>
             );
             matched = true;
-            break;
+          }
+        }
+        if (!matched) {
+          for (const [key, style] of Object.entries(calloutTypes)) {
+            if (raw.startsWith(key)) {
+              const content = raw.slice(key.length).trim();
+              elements.push(
+                <div key={`callout-${keyIndex++}`} className={`my-4 p-4 rounded-xl border-l-4 ${style.bg} ${style.border} flex items-start gap-3`}>
+                  <span className="text-lg mt-0.5 shrink-0">{style.icon}</span>
+                  <div>
+                    <span className={`text-sm font-bold uppercase tracking-wider ${style.text} opacity-70`}>{style.label}</span>
+                    <p className={`${style.text} text-base mt-1 leading-relaxed`}><InlineText text={content} /></p>
+                  </div>
+                </div>
+              );
+              matched = true;
+              break;
+            }
           }
         }
         if (!matched) {
