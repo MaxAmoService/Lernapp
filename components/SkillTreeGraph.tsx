@@ -142,34 +142,22 @@ export function SkillTreeGraph() {
     const fs = getNodeStatus(fn, doneModules, doneLessons);
     const ts = getNodeStatus(tn, doneModules, doneLessons);
     const bothDone = fs === "completed" && ts === "completed";
-    const isActive = fs === "completed" && ts !== "completed";
 
-    const color = bothDone ? "#00ff88" : isActive ? "#00aaff" : "#334155";
-    const w = bothDone ? 3 : isActive ? 2.5 : 1.5;
-    const op = bothDone ? 0.9 : isActive ? 0.7 : 0.35;
+    // Weiße Linie, heller wenn Pfad abgeschlossen
+    const color = bothDone ? "#ffffff" : "#ffffff";
+    const w = bothDone ? 2.5 : 1.5;
+    const op = bothDone ? 0.5 : 0.15;
 
-    // Start: rechte Kante von from
+    // Rechte Kante von from → linke Kante von to
     const x1 = fp.x + NODE_W / 2;
     const y1 = fp.y + NODE_H / 2;
-    // Ende: linke Kante von to
     const x2 = tp.x - NODE_W / 2;
     const y2 = tp.y + NODE_H / 2;
 
-    // Mittlerer Punkt (waagerecht von from, dann senkrecht zu to)
-    const mx = (x1 + x2) / 2;
-
-    // Orthogonaler Pfad: rechts → runter/rüber → rechts
-    const path = `M ${x1} ${y1} L ${mx} ${y1} L ${mx} ${y2} L ${x2} ${y2}`;
-
+    // Gerade Linie
     return (
       <g key={`e-${i}`}>
-        {/* Glow */}
-        <path d={path} fill="none" stroke={color} strokeWidth={w + 6} opacity={op * 0.12} strokeLinejoin="round" />
-        {/* Linie */}
-        <path d={path} fill="none" stroke={color} strokeWidth={w} opacity={op}
-          strokeDasharray={bothDone ? "none" : "8 5"} strokeLinejoin="round" strokeLinecap="round" />
-        {/* Pfeil am Ende */}
-        <polygon points={`${x2},${y2} ${x2 - 8},${y2 - 4} ${x2 - 8},${y2 + 4}`} fill={color} opacity={op} />
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={w} opacity={op} strokeLinecap="round" />
       </g>
     );
   };
@@ -323,24 +311,20 @@ export function SkillTreeGraph() {
             <span className="font-semibold text-slate-200">{hovered.label}</span>
           </div>
           <div className="text-xs text-slate-400 capitalize mb-3">{cats.find(c => c.id === hovered.category)?.label}</div>
-          {hovered.prerequisites.length > 0 && (
-            <div className="text-xs mb-2">
-              <span className="text-slate-400 font-medium">Baut auf:</span>
-              <div className="mt-1 space-y-1">
-                {hovered.prerequisites.map(p => {
-                  const pn = skillTreeNodes.find(n => n.id === p);
-                  const ok = doneModules.includes(p);
-                  return (
-                    <div key={p} className="flex items-center gap-1.5">
-                      <span className={ok ? "text-green-400" : "text-slate-500"}>{ok ? "✅" : "⬜"}</span>
-                      <span className={ok ? "text-green-300" : "text-slate-400"}>{pn?.icon} {pn?.label}</span>
-                    </div>
-                  );
-                })}
+          {hovered.prerequisite && (() => {
+            const pn = skillTreeNodes.find(n => n.id === hovered.prerequisite);
+            const ok = doneModules.includes(hovered.prerequisite);
+            return (
+              <div className="text-xs mb-2">
+                <span className="text-slate-400 font-medium">Baut auf:</span>
+                <div className="mt-1 flex items-center gap-1.5">
+                  <span className={ok ? "text-green-400" : "text-slate-500"}>{ok ? "✅" : "⬜"}</span>
+                  <span className={ok ? "text-green-300" : "text-slate-400"}>{pn?.icon} {pn?.label}</span>
+                </div>
               </div>
-            </div>
-          )}
-          {hovered.prerequisites.length === 0 && <div className="text-xs text-green-400">✅ Grundlagen-Modul</div>}
+            );
+          })()}
+          {!hovered.prerequisite && <div className="text-xs text-green-400">✅ Grundlagen-Modul</div>}
         </div>
       )}
     </div>
