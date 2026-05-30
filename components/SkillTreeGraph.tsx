@@ -10,6 +10,7 @@ import {
   type NodeStatus,
 } from "@/lib/skillTree";
 import { useAuth } from "./AuthProvider";
+import { getUserLevel } from "@/lib/auth";
 
 // ─── Farben ─────────────────────────────────────────────────────────────────
 
@@ -163,15 +164,39 @@ export function SkillTreeGraph() {
     const ctrlY = midY + (x2 - x1) * 0.2;
 
     return (
-      <path
-        key={`edge-${idx}`}
-        d={`M ${x1} ${y1} Q ${ctrlX} ${ctrlY} ${x2} ${y2}`}
-        fill="none"
-        stroke={isCompletedPath ? "#00ff88" : isActive ? "#00aaff" : "#334155"}
-        strokeWidth={isCompletedPath ? 3 : isActive ? 2 : 1.5}
-        strokeDasharray={isCompletedPath ? "none" : "8 4"}
-        opacity={isCompletedPath ? 0.8 : isActive ? 0.6 : 0.3}
-      />
+      <g key={`edge-${idx}`}>
+        {/* Glow-Linie (dahinter) */}
+        {(isCompletedPath || isActive) && (
+          <path
+            d={`M ${x1} ${y1} Q ${ctrlX} ${ctrlY} ${x2} ${y2}`}
+            fill="none"
+            stroke={isCompletedPath ? "#00ff88" : "#00aaff"}
+            strokeWidth={isCompletedPath ? 8 : 6}
+            opacity={isCompletedPath ? 0.15 : 0.1}
+            style={{ filter: "blur(4px)" }}
+          />
+        )}
+        {/* Haupt-Linie */}
+        <path
+          d={`M ${x1} ${y1} Q ${ctrlX} ${ctrlY} ${x2} ${y2}`}
+          fill="none"
+          stroke={isCompletedPath ? "#00ff88" : isActive ? "#00aaff" : "#475569"}
+          strokeWidth={isCompletedPath ? 3.5 : isActive ? 2.5 : 2}
+          strokeDasharray={isCompletedPath ? "none" : "12 6"}
+          opacity={isCompletedPath ? 1 : isActive ? 0.8 : 0.5}
+          strokeLinecap="round"
+        />
+        {/* Pfeilspitze */}
+        {isActive && (
+          <circle
+            cx={x2}
+            cy={y2}
+            r={4}
+            fill="#00aaff"
+            opacity={0.8}
+          />
+        )}
+      </g>
     );
   };
 
@@ -391,11 +416,66 @@ export function SkillTreeGraph() {
         {/* Kanten (zuerst zeichnen, dann Knoten drauf) */}
         {edges.map((edge, i) => renderEdge(edge.from, edge.to, i))}
 
-        {/* Start-Knoten */}
-        <g transform="translate(0, 0)">
-          <circle r={30} fill="rgba(168,85,247,0.1)" stroke="#a855f7" strokeWidth="2" />
-          <text textAnchor="middle" dominantBaseline="central" fontSize="24" className="select-none pointer-events-none">🎓</text>
-          <text y={44} textAnchor="middle" fontSize="10" fill="#a855f7" fontWeight="600" className="select-none pointer-events-none">Start</text>
+        {/* Start-Knoten: User-Profil */}
+        <g transform="translate(0, 0)" className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
+          {/* Äußerer Glow-Ring */}
+          <circle r={52} fill="none" stroke="#a855f7" strokeWidth="1" opacity={0.2} />
+          <circle r={48} fill="none" stroke="#a855f7" strokeWidth="2" opacity={0.4}
+            style={{ filter: "drop-shadow(0 0 12px rgba(168,85,247,0.5))" }} />
+
+          {/* Avatar (oder Fallback) */}
+          {user?.avatar ? (
+            <image
+              href={user.avatar}
+              x={-40}
+              y={-40}
+              width={80}
+              height={80}
+              clipPath="url(#avatarClip)"
+              className="rounded-full"
+            />
+          ) : (
+            <circle r={40} fill="rgba(168,85,247,0.15)" stroke="#a855f7" strokeWidth="2" />
+          )}
+
+          {/* Clip-Path für runden Avatar */}
+          <defs>
+            <clipPath id="avatarClip">
+              <circle cx="0" cy="0" r="40" />
+            </clipPath>
+          </defs>
+
+          {/* Fallback-Icon wenn kein Avatar */}
+          {!user?.avatar && (
+            <text textAnchor="middle" dominantBaseline="central" fontSize="32" className="select-none pointer-events-none">
+              👤
+            </text>
+          )}
+
+          {/* Name */}
+          <text y={58} textAnchor="middle" fontSize="12" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
+            {user?.displayName || user?.username || "Du"}
+          </text>
+
+          {/* Level */}
+          {user && (
+            <text y={74} textAnchor="middle" fontSize="10" fill="#a855f7" className="select-none pointer-events-none">
+              Lv. {getUserLevel(user.totalXP).level} — {getUserLevel(user.totalXP).title}
+            </text>
+          )}
+
+          {/* Banner-Leiste */}
+          <rect x={-50} y={-58} width={100} height={12} rx={6} fill="url(#bannerGradient)" opacity={0.8} />
+          <defs>
+            <linearGradient id="bannerGradient" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stopColor="#a855f7" />
+              <stop offset="50%" stopColor="#6366f1" />
+              <stop offset="100%" stopColor="#06b6d4" />
+            </linearGradient>
+          </defs>
+          <text y={-49} textAnchor="middle" fontSize="7" fill="white" fontWeight="700" className="select-none pointer-events-none">
+            LEARNHUB
+          </text>
         </g>
 
         {/* Knoten */}
