@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 import { UserProfile } from "./UserProfile";
 import { LoginModal } from "./LoginModal";
-import { BookOpen, Menu, X, Search, Home, LayoutGrid, GraduationCap, Trophy } from "lucide-react";
+import { Menu, X, Home, LayoutGrid, GraduationCap, Trophy } from "lucide-react";
 import Link from "next/link";
 
 export function Navbar() {

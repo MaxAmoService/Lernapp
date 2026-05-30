@@ -19,7 +19,7 @@ import { Category } from "./types";
 import { contentModules } from "./content/registry";
 
 // Re-export types for backward compatibility
-export type { Lesson, Module, Category, QuizQuestion } from "./types";
+export type { Lesson, Module, Category } from "./types";
 
 export const categories: Category[] = [
   {

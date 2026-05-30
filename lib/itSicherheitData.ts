@@ -89,6 +89,10 @@ export const itSicherheitModule: Module = {
       interactive: "securityThreatExplorer" as const,
       content: `## Sicherheitsgrundlagen
 
+> In diesem Modul lernst du die Grundlagen der IT-Sicherheit kennen — von der CIA-Triade über Verschlüsselung bis zu Netzwerksicherheit und Rechteverwaltung. Sicherheit ist in der IHK-Prüfung ein Dauerthema und durchzieht alle anderen Fachgebiete!
+
+> Netzwerk-Protokolle und Ports, die hier immer wieder auftauchen, behandeln wir auch im Modul "Netzwerktechnik" — dort mit Fokus auf das OSI-Modell und die Schichten 1–7.
+
 ### Die CIA-Triade
 
 Alle IT-Sicherheitsmaßnahmen zielen auf drei Grundziele ab:

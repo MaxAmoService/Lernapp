@@ -1,12 +1,12 @@
 import { Module, QuizQuestion, LessonVisual } from "./types";
 
-export interface MathSubCategory {
+interface MathSubCategory {
   id: string;
   name: string;
   description: string;
 }
 
-export interface MathCategory {
+interface MathCategory {
   id: string;
   name: string;
   icon: string;
@@ -569,7 +569,7 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
         ],
         content: `# Funktionen & Definitionsbereiche
 
-> 💡 **Roter Faden:** Du kennst bereits Mengenoperationen und Logik aus dem Grundlagen-Modul. Jetzt lernst du das wichtigste Werkzeug der Mathematik kennen: die **Funktion** — eine Regel, die jedem x genau ein y zuordnet!
+> Du kennst bereits Mengenoperationen und Logik aus dem Grundlagen-Modul. Jetzt lernst du das wichtigste Werkzeug der Mathematik kennen: die **Funktion** — eine Regel, die jedem x genau ein y zuordnet!
 
 ## Definition
 
@@ -609,7 +609,7 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
         type: "interactive",
         content: `# Funktionseigenschaften
 
-> 💡 **Roter Faden:** Jetzt, wo du Funktionen und ihre Definitionsbereiche kennst, schauen wir uns an, **wie** sich Funktionen verhalten — steigend oder fallend, stetig oder sprungartig, symmetrisch oder nicht?
+> Jetzt, wo du Funktionen und ihre Definitionsbereiche kennst, schauen wir uns an, **wie** sich Funktionen verhalten — steigend oder fallend, stetig oder sprungartig, symmetrisch oder nicht?
 
 ## Monotonie
 
@@ -693,7 +693,7 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
         ],
         content: `# Grenzwerte von Funktionen
 
-> 💡 **Roter Faden:** Du kennst bereits Funktionen und ihre Eigenschaften aus dem Grundlagen-Modul. Jetzt fragen wir: Was passiert, wenn sich x immer weiter einem bestimmten Wert nähert? Diese Frage ist der Einstieg in die gesamte **Analysis**!
+> Du kennst bereits Funktionen und ihre Eigenschaften. Jetzt fragen wir: Was passiert, wenn sich x immer weiter einem bestimmten Wert nähert? Diese Frage ist der Einstieg in die gesamte **Analysis**!
 
 ## Definition
 
@@ -728,7 +728,7 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
         type: "text",
         content: `# L'Hôpital's Regel
 
-> 💡 **Roter Faden:** Du hast bereits gelernt, Grenzwerte mit Rechenregeln zu bestimmen. Aber was, wenn du einen unbestimmten Ausdruck wie $\\frac{0}{0}$ erhältst? Genafür gibt es **L'Hôpitals Regel** — und sie nutzt bereits die **Ableitung**, die im nächsten Kapitel kommt!
+> Du hast bereits gelernt, Grenzwerte mit Rechenregeln zu bestimmen. Aber was, wenn du einen unbestimmten Ausdruck wie $\\frac{0}{0}$ erhältst? Dafür gibt es **L'Hôpitals Regel** — und sie nutzt bereits die **Ableitung**, die im nächsten Kapitel kommt!
 
 ## Anwendung
 
@@ -838,7 +838,7 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
         ],
         content: `# Definition der Ableitung
 
-> 💡 **Roter Faden:** Du hast Grenzwerte kennengelernt und weißt, wie man mit L'Hôpital arbeitet. Jetzt wenden wir den Grenzwertbegriff auf eine der wichtigsten Fragen der Mathematik an: Wie schnell ändert sich eine Funktion? Die Antwort ist die **Ableitung**!
+> Du hast Grenzwerte kennengelernt und weißt, wie man mit L'Hôpital arbeitet. Jetzt wenden wir den Grenzwertbegriff auf eine der wichtigsten Fragen der Mathematik an: Wie schnell ändert sich eine Funktion? Die Antwort ist die **Ableitung**!
 
 ## Differenzenquotient
 
@@ -871,7 +871,7 @@ Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
         type: "interactive",
         content: `# Ableitungsregeln
 
-> 💡 **Roter Faden:** Du weißt, dass die Ableitung den Grenzwert des Differenzenquotienten darstellt. Jetzt lernst du praktische **Regeln** kennen, mit denen du Funktionen schnell ableiten kannst — ohne jedes Mal den Grenzwert zu berechnen!
+> Du weißt, dass die Ableitung den Grenzwert des Differenzenquotienten darstellt. Jetzt lernst du praktische **Regeln** kennen, mit denen du Funktionen schnell ableiten kannst — ohne jedes Mal den Grenzwert zu berechnen!
 
 ## Grundregeln
 
@@ -963,7 +963,7 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
         ],
         content: `# Stammfunktionen
 
-> 💡 **Roter Faden:** Du hast gelernt, Funktionen abzuleiten. Aber was, wenn du die Ableitung gegeben hast und die ursprüngliche Funktion suchst? Das ist die **Integration** — die Umkehrung der Differentiation!
+> Du hast gelernt, Funktionen abzuleiten. Aber was, wenn du die Ableitung gegeben hast und die ursprüngliche Funktion suchst? Das ist die **Integration** — die Umkehrung der Differentiation!
 
 ## Definition
 
@@ -998,7 +998,7 @@ $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
         type: "text",
         content: `# Bestimmtes Integral
 
-> 💡 **Roter Faden:** Du kennst bereits Stammfunktionen — die Umkehrung der Ableitung. Jetzt verbinden wir Differentiation und Integration über den **Hauptsatz der Analysis** und berechnen konkrete Flächen unter Kurven!
+> Du kennst bereits Stammfunktionen — die Umkehrung der Ableitung. Jetzt verbinden wir Differentiation und Integration über den **Hauptsatz der Analysis** und berechnen konkrete Flächen unter Kurven!
 
 ## Hauptsatz der Analysis
 
@@ -1536,7 +1536,7 @@ $$P(A) = \\frac{|A|}{|\\Omega|}$$
         type: "interactive",
         content: `## Zufallsexperimente
 
-> 💡 **Roter Faden:** Du kennst bereits Mengenoperationen (Vereinigung, Schnitt, Komplement) aus dem Grundlagen-Modul. In der **Stochastik** wenden wir genau diese Konzepte auf Zufallsexperimente an — Ereignisse sind einfach Mengen von Ergebnissen!
+> Du kennst bereits Mengenoperationen (Vereinigung, Schnitt, Komplement) aus dem Grundlagen-Modul. In der **Stochastik** wenden wir genau diese Konzepte auf Zufallsexperimente an — Ereignisse sind einfach Mengen von Ergebnissen!
 
 > 🔗 **Verwandt:** Mengenlehre (Vereinigung, Schnitt), Logik (UND/ODER)
 
@@ -1585,7 +1585,7 @@ Berechne $P(A \\cup B)$!
         type: "text",
         content: `## Permutationen
 
-> 💡 **Roter Faden:** Du kennst bereits die Grundbegriffe der Wahrscheinlichkeit — Zufallsexperimente, Ereignisse und die Laplace-Formel. Jetzt lernst du das Werkzeug kennen, um die Anzahl der Möglichkeiten systematisch zu zählen: die **Kombinatorik**!
+> Du kennst bereits die Grundbegriffe der Wahrscheinlichkeit — Zufallsexperimente, Ereignisse und die Laplace-Formel. Jetzt lernst du das Werkzeug kennen, um die Anzahl der Möglichkeiten systematisch zu zählen: die **Kombinatorik**!
 
 Anordnung von n verschiedenen Objekten:
 $$P_n = n! = n \\cdot (n-1) \\cdot ... \\cdot 1$$
@@ -1631,7 +1631,7 @@ Wie viele 4-stellige Zahlen kann man aus den Ziffern 1,2,3,4,5 bilden (ohne Wied
         type: "text",
         content: `## Bedingte Wahrscheinlichkeit
 
-> 💡 **Roter Faden:** Du kennst die Grundwahrscheinlichkeit und die Kombinatorik. Jetzt wird es spannend: Was passiert, wenn sich die Wahrscheinlichkeit ändert, weil du **zusätzliche Informationen** hast? Die bedingte Wahrscheinlichkeit ist der Schlüssel zum **Satz von Bayes** — eines der mächtigsten Werkzeuge der Stochastik!
+> Du kennst die Grundwahrscheinlichkeit und die Kombinatorik. Jetzt wird es spannend: Was passiert, wenn sich die Wahrscheinlichkeit ändert, weil du **zusätzliche Informationen** hast? Die bedingte Wahrscheinlichkeit ist der Schlüssel zum **Satz von Bayes** — eines der mächtigsten Werkzeuge der Stochastik!
 
 > 🔗 **Verwandt:** Mengenlehre (Schnittmenge), Analysis (Integration für stetige Verteilungen)
 

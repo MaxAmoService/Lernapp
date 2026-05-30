@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useAuth } from "@/components/AuthProvider";
-import { getModule, modules, Lesson } from "@/lib/data";
+import { getModule, Lesson } from "@/lib/data";
 import { ProgressBar } from "@/components/ProgressBar";
 import { LessonViewer } from "@/components/LessonViewer";
 import { Quiz } from "@/components/Quiz";

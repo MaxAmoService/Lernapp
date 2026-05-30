@@ -2,11 +2,10 @@
 // Presence System — Online/Offline via Firestore (kein RTDB nötig)
 // ============================================================================
 
-import { doc, updateDoc, getFirestore, onSnapshot } from "firebase/firestore";
+import { doc, updateDoc, getFirestore } from "firebase/firestore";
 import { getApp } from "./firebase";
 
 const HEARTBEAT_INTERVAL = 20_000; // 20 Sekunden
-const ONLINE_THRESHOLD = 60_000;   // 60 Sekunden = als online betrachtet
 
 let heartbeatTimer: NodeJS.Timeout | null = null;
 let unloadHandler: (() => void) | null = null;
@@ -45,14 +44,6 @@ export async function setOffline(uid: string): Promise<void> {
   if (heartbeatTimer) { clearInterval(heartbeatTimer); heartbeatTimer = null; }
   if (unloadHandler) { window.removeEventListener("beforeunload", unloadHandler); unloadHandler = null; }
   await writeStatus(uid, "offline");
-}
-
-/**
- * Prüft ob ein User online ist (basierend auf lastHeartbeat).
- */
-export function isUserOnline(lastHeartbeat: string | undefined): boolean {
-  if (!lastHeartbeat) return false;
-  return Date.now() - new Date(lastHeartbeat).getTime() < ONLINE_THRESHOLD;
 }
 
 // ─── Intern ─────────────────────────────────────────────────────────────────

@@ -98,6 +98,10 @@ Anwendung | Transport | Internet | Netzwerkzugang
       interactive: "osiCapsuleViewer",
       content: `## Was ist das OSI-Modell?
 
+> In diesem Modul lernst du Netzwerktechnik von Grund auf kennen — vom OSI-Modell über IP-Adressierung und Subnetting bis zu Routing, DNS und Netzwerksicherheit. Netzwerk-Fragen kommen in jeder IHK-Prüfung vor!
+
+> Sicherheitsthemen wie Firewalls, VPN und IDS/IPS vertiefen wir im Modul "IT-Sicherheit" — dort mit Fokus auf Angriffsvektoren und Schutzkonzepte.
+
 Das **OSI-Referenzmodell** (Open Systems Interconnection) wurde von der **ISO** entwickelt und beschreibt die Kommunikation in Netzwerken in **7 Schichten**. Jede Schicht hat eine klar definierte Aufgabe.
 
 > 💡 Das OSI-Modell ist wie eine **Zwiebel** — jede Schicht ist eine neue Schale um die vorherige.

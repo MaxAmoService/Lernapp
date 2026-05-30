@@ -2,20 +2,9 @@
 // Computersysteme & Hardware — Übungsaufgaben
 // ============================================================================
 
-export interface Exercise {
-  id: string;
-  lessonId: string;
-  difficulty: 1 | 2 | 3;
-  type: 'input' | 'multiple';
-  question: string;
-  hint?: string;
-  expectedAnswer?: string;
-  tolerance?: number;
-  format?: string;
-  options?: { label: string; value: string }[];
-  correctOption?: string;
-  solution: string;
-}
+import { Exercise } from "./mathExercises";
+
+export type { Exercise };
 
 // ==================== PRACTICE (25 Aufgaben) ====================
 

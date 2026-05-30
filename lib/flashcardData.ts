@@ -4,7 +4,7 @@ import { Flashcard } from "./flashcards";
 
 // ─── Netzwerktechnik ────────────────────────────────────────────────────────
 
-export const netzwerkFlashcards: Flashcard[] = [
+const netzwerkFlashcards: Flashcard[] = [
   // OSI-Modell
   { id: "nw-os-1", moduleId: "ihk-netzwerk", front: "Wie viele Schichten hat das OSI-Modell?", back: "7 Schichten", hint: "Merksatz: Alle Priester Essen Tafelschokolade Am Palmsonntag", category: "OSI" },
   { id: "nw-os-2", moduleId: "ihk-netzwerk", front: "Was ist die PDU auf Schicht 4 (Transport)?", back: "Segmente", hint: "TCP/UDP arbeiten hier", category: "OSI" },
@@ -61,7 +61,7 @@ export const netzwerkFlashcards: Flashcard[] = [
 
 // ─── Programmieren (React) ──────────────────────────────────────────────────
 
-export const reactFlashcards: Flashcard[] = [
+const reactFlashcards: Flashcard[] = [
   { id: "re-1", moduleId: "react-grundlagen", front: "Was ist React?", back: "Eine JavaScript-Bibliothek für Benutzeroberflächen von Meta", category: "Grundlagen" },
   { id: "re-2", moduleId: "react-grundlagen", front: "Was sind Props?", back: "Daten die von Eltern-Komponenten an Kinder übergeben werden (read-only)", category: "Grundlagen" },
   { id: "re-3", moduleId: "react-grundlagen", front: "Was ist State?", back: "Interner Zustand einer Komponente, verwaltet mit useState()", category: "Hooks" },
@@ -71,7 +71,7 @@ export const reactFlashcards: Flashcard[] = [
 
 // ─── TypeScript ─────────────────────────────────────────────────────────────
 
-export const typescriptFlashcards: Flashcard[] = [
+const typescriptFlashcards: Flashcard[] = [
   { id: "ts-1", moduleId: "typescript-basics", front: "Was ist der Unterschied zwischen type und interface?", back: "interface: erweiterbar, mergebar. type: Union-Types, mapped types, nicht erweiterbar.", category: "Grundlagen" },
   { id: "ts-2", moduleId: "typescript-basics", front: "Was ist ein Generic?", back: "Ein Typ-Parameter der bei Verwendung festgelegt wird: Array<T>, function id<T>(arg: T): T", category: "Generics" },
   { id: "ts-3", moduleId: "typescript-basics", front: "Was macht 'unknown'?", back: "Type-safe any — muss erst geprüft/gecastet werden bevor Nutzung", category: "Typen" },
@@ -80,7 +80,7 @@ export const typescriptFlashcards: Flashcard[] = [
 
 // ─── IHK Diagramme ─────────────────────────────────────────────────────────
 
-export const ihkFlashcards: Flashcard[] = [
+const ihkFlashcards: Flashcard[] = [
   { id: "ihk-1", moduleId: "ihk-diagramme", front: "Was zeigt ein PAP (Programmablaufplan)?", back: "Die logische Struktur eines Programms mit Start/Ende, Verzweigungen, Schleifen", category: "PAP" },
   { id: "ihk-2", moduleId: "ihk-diagramme", front: "Was ist ein Struktogramm (Nassi-Shneiderman)?", back: "Grafische Darstellung der Programmstruktur mit verschachtelten Blöcken", category: "Struktogramm" },
   { id: "ihk-3", moduleId: "ihk-diagramme", front: "Bubblesort — worst case Komplexität?", back: "O(n²)", category: "Sortierung" },
@@ -122,7 +122,7 @@ export const ihkFlashcards: Flashcard[] = [
 
 // ─── IHK Datenbanken ───────────────────────────────────────────────────────
 
-export const datenbankFlashcards: Flashcard[] = [
+const datenbankFlashcards: Flashcard[] = [
   // Grundbegriffe
   { id: "db-gr-1", moduleId: "ihk-datenbanken", front: "Was ist ein Primärschlüssel (PK)?", back: "Eindeutiger Identifikator einer Zeile — eindeutig, NOT NULL, ändert sich nie. z.B. KundenID", category: "Grundbegriffe" },
   { id: "db-gr-2", moduleId: "ihk-datenbanken", front: "Was ist ein Fremdschlüssel (FK)?", back: "Verweis auf den PK einer anderen Tabelle — stellt die Beziehung her", category: "Grundbegriffe" },
@@ -179,7 +179,7 @@ export const datenbankFlashcards: Flashcard[] = [
 
 // ─── Computersysteme & Hardware ─────────────────────────────────────────────
 
-export const computersystemeFlashcards: Flashcard[] = [
+const computersystemeFlashcards: Flashcard[] = [
   // CPU-Architektur
   { id: "hw-cpu-1", moduleId: "ihk-computersysteme", front: "Was ist die Von-Neumann-Architektur?", back: "Programm und Daten im selben Speicher, sequenzieller Zugriff über gemeinsamen Bus", category: "CPU" },
   { id: "hw-cpu-2", moduleId: "ihk-computersysteme", front: "Was macht die ALU?", back: "Arithmetic Logic Unit — führt arithmetische (+,-,*,/) und logische (UND, ODER, NICHT) Operationen durch", category: "CPU" },
@@ -285,7 +285,7 @@ export const computersystemeFlashcards: Flashcard[] = [
 
 // ─── IT-Sicherheit ──────────────────────────────────────────────────────────
 
-export const itSicherheitFlashcards: Flashcard[] = [
+const itSicherheitFlashcards: Flashcard[] = [
   // CIA-Triade
   { id: "is-cia-1", moduleId: "ihk-it-sicherheit", front: "Was beschreibt die CIA-Triade?", back: "Confidentiality (Vertraulichkeit), Integrity (Integrität), Availability (Verfügbarkeit)", hint: "Die drei Grundpfeiler der IT-Sicherheit", category: "Grundlagen" },
   { id: "is-cia-2", moduleId: "ihk-it-sicherheit", front: "Was bedeutet Confidentiality?", back: "Nur autorisierte Personen haben Zugriff auf Daten", hint: "Vertraulichkeit", category: "Grundlagen" },
@@ -330,7 +330,7 @@ export const itSicherheitFlashcards: Flashcard[] = [
 ];
 // ─── Git ────────────────────────────────────────────────────────────────────
 
-export const gitFlashcards: Flashcard[] = [
+const gitFlashcards: Flashcard[] = [
   { id: "git-1", moduleId: "ihk-git", front: "Zentrale vs. dezentrale VV?", back: "Zentral: ein Server (SVN). Dezentral: jeder hat alles lokal (Git). Offline nur mit dezentraler möglich", category: "Grundlagen" },
   { id: "git-2", moduleId: "ihk-git", front: "Was macht git fetch?", back: "Lädt Änderungen vom Remote herunter, ohne sie zu mergen. git pull = fetch + merge", category: "Befehle" },
   { id: "git-3", moduleId: "ihk-git", front: "Merge vs. Rebase?", back: "Merge: Merge-Commit, verschachtelte Historie. Rebase: lineare Historie, pro Commit Konflikte lösen", category: "Befehle" },
@@ -355,7 +355,7 @@ export const gitFlashcards: Flashcard[] = [
 
 // ─── UX & Interaction Design ────────────────────────────────────────────────
 
-export const uxFlashcards: Flashcard[] = [
+const uxFlashcards: Flashcard[] = [
   { id: "ux-1", moduleId: "ihk-ux", front: "UX vs. UI?", back: "UX = gesamtes Erlebnis (nützlich, intuitiv). UI = visuelles Design (schön, konsistent). UX ist das Dach", category: "Grundlagen" },
   { id: "ux-2", moduleId: "ihk-ux", front: "Was sind Nielsens Heuristiken?", back: "10 Usability-Regeln: Sichtbarkeit, Real World, Kontrolle, Konsistenz, Fehlervermeidung, etc.", category: "Heuristiken" },
   { id: "ux-3", moduleId: "ihk-ux", front: "Was ist eine Persona?", back: "Fiktiver Nutzer, repräsentativ für Zielgruppe. Hilft bei der Produktgestaltung", category: "Methoden" },
@@ -375,7 +375,7 @@ export const uxFlashcards: Flashcard[] = [
 
 // ─── Software-Qualitätsstandards ────────────────────────────────────────────
 
-export const qualitaetFlashcards: Flashcard[] = [
+const qualitaetFlashcards: Flashcard[] = [
   { id: "sq-1", moduleId: "ihk-qualitaet", front: "6 Qualitätsmerkmale ISO 9126?", back: "Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit, Portabilität", category: "ISO 9126" },
   { id: "sq-2", moduleId: "ihk-qualitaet", front: "Was ist das Singleton-Pattern?", back: "Creational Pattern — stellt sicher, dass eine Klasse nur eine Instanz hat", category: "Design Patterns" },
   { id: "sq-3", moduleId: "ihk-qualitaet", front: "Was macht das Strategy-Pattern?", back: "Definiert Familie von Algorithmen, kapselt sie, macht sie austauschbar", category: "Design Patterns" },
@@ -397,7 +397,7 @@ export const qualitaetFlashcards: Flashcard[] = [
 
 // ─── Projektmanagement ──────────────────────────────────────────────────────
 
-export const projektmanagementFlashcards: Flashcard[] = [
+const projektmanagementFlashcards: Flashcard[] = [
   { id: "pm-1", moduleId: "ihk-projektmanagement", front: "Magisches Dreieck?", back: "Qualität, Budget, Zeit — Spannungsfeld. Wenn ein Punkt schwächelt, muss ein anderer ausgleichen", category: "Grundlagen" },
   { id: "pm-2", moduleId: "ihk-projektmanagement", front: "SMART-Ziele?", back: "Spezifisch, Messbar, Anspruchsvoll, Realistisch, Terminiert", category: "Grundlagen" },
   { id: "pm-3", moduleId: "ihk-projektmanagement", front: "Lastenheft vs. Pflichtenheft?", back: "Lastenheft=WAS (Auftraggeber). Pflichtenheft=WIE (Auftragnehmer)", category: "Dokumente" },
@@ -420,7 +420,7 @@ export const projektmanagementFlashcards: Flashcard[] = [
 
 // ─── Docker ─────────────────────────────────────────────────────────────────
 
-export const dockerFlashcards: Flashcard[] = [
+const dockerFlashcards: Flashcard[] = [
   { id: "dk-1", moduleId: "ihk-docker", front: "Container vs. VM?", back: "Container: teilt OS, leicht, schnell. VM: eigenes OS, schwerer, isolierter", category: "Grundlagen" },
   { id: "dk-2", moduleId: "ihk-docker", front: "Was ist ein Docker Image?", back: "Read-only Schablone für Container. Wird aus Dockerfile gebaut", category: "Grundlagen" },
   { id: "dk-3", moduleId: "ihk-docker", front: "FROM im Dockerfile?", back: "Definiert das Basis-Image — z.B. python:3.11, node:18", category: "Dockerfile" },
@@ -440,7 +440,7 @@ export const dockerFlashcards: Flashcard[] = [
 
 // ─── Erweiterte Programmierung ──────────────────────────────────────────────
 
-export const erwProgFlashcards: Flashcard[] = [
+const erwProgFlashcards: Flashcard[] = [
   { id: "ep-1", moduleId: "ihk-erw-prog", front: "SOLID — die 5 Prinzipien?", back: "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion", category: "SOLID" },
   { id: "ep-2", moduleId: "ihk-erw-prog", front: "Was besagt SRP?", back: "Single Responsibility — Eine Klasse = eine Aufgabe", category: "SOLID" },
   { id: "ep-3", moduleId: "ihk-erw-prog", front: "Was besagt OCP?", back: "Open/Closed — Offen für Erweiterung, geschlossen für Änderung", category: "SOLID" },

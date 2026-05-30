@@ -1,4 +1,5 @@
 import { Module, QuizQuestion } from "./types";
+import { createExerciseLessons } from "./lessonHelpers";
 
 export const complexModule: Module = {
   id: "m-komplexe-zahlen",
@@ -880,38 +881,11 @@ $16 = 16e^{j0°}$, Radius $= 16^{1/4} = 2$
       content: "Beantworte die 10 Fragen. Du brauchst mindestens 80% zum Bestehen.",
     },
 
-    {
-      id: "kz-aufgaben-leicht",
-      title: "📝 Aufgaben (Leicht)",
-      duration: "10 min",
-      type: "exercises",
-      exerciseDifficulty: 1,
-      content: `$j^2=-1$ verinnerlichen, Potenzen von $j$ berechnen und komplexe Zahlen in der Gaussschen Ebene zeichnen.`,
-    },
-    {
-      id: "kz-aufgaben-mittel",
-      title: "📝 Aufgaben (Mittel)",
-      duration: "10 min",
-      type: "exercises",
-      exerciseDifficulty: 2,
-      content: `Zwischen kartesischer, Polar- und Exponentialform umrechnen. Addition und Subtraktion in allen Formen.`,
-    },
-    {
-      id: "kz-aufgaben-schwer",
-      title: "📝 Aufgaben (Schwer)",
-      duration: "12 min",
-      type: "exercises",
-      exerciseDifficulty: 3,
-      content: `Multiplikation und Division in Exponentialform, Potenzieren mit Moivre und Wurzeln komplexer Zahlen ziehen.`,
-    },
-    {
-      id: "kz-pruefung",
-      title: "📋 Prüfung",
-      duration: "15 min",
-      type: "exercises",
-      examMode: true,
-      content: `Abschlussprufung: Komplexe Zahlen — Aufgaben aus allen Schwierigkeitsstufen gemischt. Keine Hinweise, Ergebnis erst am Ende. Bestehensgrenze: 70\%.`,
-    },
+    ...createExerciseLessons("kz", "Komplexe Zahlen", {
+      easy: `$j^2=-1$ verinnerlichen, Potenzen von $j$ berechnen und komplexe Zahlen in der Gaussschen Ebene zeichnen.`,
+      medium: `Zwischen kartesischer, Polar- und Exponentialform umrechnen. Addition und Subtraktion in allen Formen.`,
+      hard: `Multiplikation und Division in Exponentialform, Potenzieren mit Moivre und Wurzeln komplexer Zahlen ziehen.`,
+    }),
   ],
 };
 

@@ -406,11 +406,3 @@ export async function toggleLeaderboardOptIn(uid: string, optIn: boolean): Promi
     throw err;
   }
 }
-
-// ─── Legacy Compat ──────────────────────────────────────────────────────────
-
-export function isAccountLocked(): { locked: boolean; remainingSeconds: number } {
-  return { locked: false, remainingSeconds: 0 };
-}
-
-export type User = UserProfile;

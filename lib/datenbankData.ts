@@ -100,6 +100,8 @@ DROP TABLE Tabelle;                -- entfernt Tabelle komplett
       type: "text",
       content: `## Was ist eine Datenbank?
 
+> In diesem Modul lernst du relationale Datenbanken kennen — von Grundbegriffen über SQL bis zu Normalisierung und Transaktionen. Datenbanken sind ein Kernthema der IHK-Prüfung und werden in fast jedem Prüfungsbereich vorausgesetzt!
+
 Eine **Datenbank** ist eine strukturierte Sammlung von Daten, die effizient gespeichert, verwaltet und abgerufen werden können. In der IHK arbeiten wir hauptsächlich mit **relationalen Datenbanken**.
 
 > 💡 **Merke:** Eine Datenbank ist KEIN Excel! Excel kann keine referenzielle Integrität garantieren.

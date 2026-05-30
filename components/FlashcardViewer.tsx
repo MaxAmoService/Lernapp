@@ -11,7 +11,7 @@ import {
   getDeckProgress,
   saveDeckProgress,
 } from "@/lib/flashcards";
-import { RotateCcw, ChevronLeft, ChevronRight, CheckCircle2, XCircle, Brain, Trophy, Flame } from "lucide-react";
+import { RotateCcw, CheckCircle2, XCircle, Brain } from "lucide-react";
 
 interface FlashcardViewerProps {
   moduleId: string;

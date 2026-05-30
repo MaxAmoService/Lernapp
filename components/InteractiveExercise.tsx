@@ -3,8 +3,8 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { Exercise } from "@/lib/mathExercises";
 import { MathBlock } from "./MathBlock";
-import { InlineText } from "./InlineMath";
-import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, Star, HelpCircle, Award, Medal } from "lucide-react";
+import { InlineText } from "./InlineText";
+import { CheckCircle2, XCircle, Lightbulb, ChevronRight, RotateCcw, Trophy, Target, HelpCircle, Medal } from "lucide-react";
 
 interface Props {
   exercises: Exercise[];

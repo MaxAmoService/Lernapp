@@ -5,7 +5,7 @@ import { getUserLevel } from "@/lib/auth";
 import { AvatarFrame } from "./AvatarFrame";
 import { FrameOnlineStatus } from "./OnlineStatus";
 import {
-  LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings, Crown
+  LogOut, Trophy, Flame, Zap, ChevronDown, User, Settings
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";

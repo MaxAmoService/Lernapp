@@ -6,7 +6,7 @@ import { mathQuizzes } from "@/lib/mathData";
 import { complexQuizzes } from "@/lib/complexData";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
-import { CheckCircle2, XCircle, RotateCcw, Trophy, Send } from "lucide-react";
+import { CheckCircle2, XCircle, RotateCcw, Send } from "lucide-react";
 
 interface QuizQuestion {
   question: string;
