@@ -4,7 +4,6 @@ import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import {
   skillTreeNodes,
   getEdges,
-  getPositions,
   getNodeStatus,
   NODE_W,
   NODE_H,
@@ -14,7 +13,6 @@ import {
   type NodeStatus,
 } from "@/lib/skillTree";
 import { useAuth } from "./AuthProvider";
-import { getUserLevel } from "@/lib/auth";
 import { allModules } from "@/lib/data";
 
 // IDs die tatsächlich Modul-Content haben
@@ -26,12 +24,6 @@ const COLORS: Record<NodeStatus, { bg: string; border: string; text: string; bar
   completed:    { bg: "#00ff8818", border: "#00ff88", text: "#00ff88", bar: "#00ff88" },
   "in-progress":{ bg: "#00aaff18", border: "#00aaff", text: "#00aaff", bar: "#00aaff" },
   "not-started":{ bg: "#1e293b",   border: "#475569", text: "#94a3b8", bar: "#475569" },
-};
-
-const FRAME_COLORS: Record<string, string> = {
-  none: "#a855f7", slate: "#64748b", blue: "#3b82f6", emerald: "#10b981",
-  rose: "#f43f5e", violet: "#8b5cf6", amber: "#f59e0b", neon: "#22c55e",
-  ice: "#67e8f9", gold: "#fbbf24",
 };
 
 // ─── Hilfsfunktionen ────────────────────────────────────────────────────────
@@ -117,7 +109,16 @@ export function SkillTreeGraph() {
   const doneLessons = user?.completedLessons || {};
 
   const nodes = useMemo(() => skillTreeNodes.filter(n => n.category === cat), [cat]);
-  const positions = useMemo(() => getPositions(nodes), [nodes]);
+
+  // Positionen: Row 0 = UNTEN (Grundlagen), höhere Rows = weiter OBEN
+  const positions = useMemo(() => {
+    const map = new Map<string, { x: number; y: number }>();
+    const maxRow = Math.max(...nodes.map(n => n.row), 0);
+    for (const n of nodes) {
+      map.set(n.id, { x: n.col * COL_W, y: (maxRow - n.row) * ROW_H });
+    }
+    return map;
+  }, [nodes]);
   const edges = useMemo(() => {
     const ids = new Set(nodes.map(n => n.id));
     return getEdges(nodes).filter(e => ids.has(e.from) && ids.has(e.to));
@@ -303,16 +304,17 @@ export function SkillTreeGraph() {
     setSelected(null);
     const n = skillTreeNodes.filter(x => x.category === id);
     if (n.length === 0) return;
+    const maxRow = Math.max(...n.map(x => x.row), 0);
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
     for (const node of n) {
       const px = node.col * COL_W;
-      const py = node.row * ROW_H;
+      const py = (maxRow - node.row) * ROW_H; // flipped
       minX = Math.min(minX, px);
       maxX = Math.max(maxX, px);
       minY = Math.min(minY, py);
       maxY = Math.max(maxY, py);
     }
-    const pad = 250;
+    const pad = 200;
     setVb({ x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2 + NODE_W, h: maxY - minY + pad * 2 + NODE_H });
   };
 
@@ -350,10 +352,13 @@ export function SkillTreeGraph() {
     const isHighlighted = activeNode && (highlightedIds.has(from) && highlightedIds.has(to));
     const isDimmed = activeNode && !isHighlighted;
 
+    // Von OBEN (Voraussetzung) → UNTEN (Kind), Pfeil zeigt nach oben
+    // "from" = prerequisite (unten auf dem Screen, höhere Y)
+    // "to"   = Kind          (oben auf dem Screen, niedrigere Y)
     const x1 = fp.x + NODE_W / 2;
-    const y1 = fp.y + NODE_H;
+    const y1 = fp.y;            // top of from (prerequisite, unten)
     const x2 = tp.x + NODE_W / 2;
-    const y2 = tp.y;
+    const y2 = tp.y + NODE_H;  // bottom of to (kind, oben)
 
     const midY = (y1 + y2) / 2;
     const d = `M ${x1} ${y1} C ${x1} ${midY}, ${x2} ${midY}, ${x2} ${y2}`;
@@ -366,12 +371,13 @@ export function SkillTreeGraph() {
     if (isDimmed) { op = 0.08; w = 1.5; }
     if (isHighlighted && activeNode) { op = Math.min(op + 0.3, 1); w += 1; }
 
-    const arrowSize = 7;
-    const angle = Math.atan2(y2 - midY, x2 - x2);
-    const ax = x2 - arrowSize * Math.cos(angle - Math.PI / 6);
-    const ay = y2 - arrowSize * Math.sin(angle - Math.PI / 6);
-    const bx = x2 - arrowSize * Math.cos(angle + Math.PI / 6);
-    const by = y2 - arrowSize * Math.sin(angle + Math.PI / 6);
+    // Pfeilspitze zeigt nach OBEN (V-Shape nach oben)
+    const arrowSize = 8;
+    const spread = Math.PI / 5;  // 36° Öffnung
+    const ax = x2 - arrowSize * Math.sin(spread);
+    const ay = y2 + arrowSize * Math.cos(spread);
+    const bx = x2 + arrowSize * Math.sin(spread);
+    const by = y2 + arrowSize * Math.cos(spread);
 
     return (
       <g key={`e-${i}`} style={{ transition: "opacity 0.2s" }}>
@@ -448,11 +454,6 @@ export function SkillTreeGraph() {
       </g>
     );
   };
-
-  // ─── Avatar Position ────────────────────────────────────────────────────
-
-  const firstNodeY = nodes.length > 0 ? (positions.get(nodes[0]?.id)?.y ?? 0) : 0;
-  const frameColor = FRAME_COLORS[user?.equippedFrame || "none"] || "#a855f7";
 
   // ─── Tooltip Content (shared between desktop hover & mobile tap) ───────
 
@@ -616,43 +617,8 @@ export function SkillTreeGraph() {
         onContextMenu={e => e.preventDefault()}
         style={{ touchAction: "none" }}>
 
-        <defs>
-          <clipPath id="avatarClip"><circle cx="0" cy="0" r="36" /></clipPath>
-        </defs>
-
         {/* Kanten */}
         {edges.map((e, i) => renderEdge(e.from, e.to, i))}
-
-        {/* Profilbild */}
-        <g transform={`translate(-140, ${firstNodeY})`} className="cursor-pointer"
-          onClick={() => window.location.href = "/profile"}>
-          <circle cx={0} cy={0} r={42} fill="none" stroke={frameColor} strokeWidth="3"
-            style={{ filter: `drop-shadow(0 0 8px ${frameColor}60)` }} />
-          <circle cx={0} cy={0} r={38} fill="none" stroke={frameColor} strokeWidth="1" opacity={0.4} />
-          {user?.avatar ? (
-            user.avatar.startsWith("http") || user.avatar.startsWith("/") ? (
-              <image href={user.avatar} x={-36} y={-36} width={72} height={72} clipPath="url(#avatarClip)" />
-            ) : (
-              <>
-                <circle cx={0} cy={0} r={36} fill="rgba(168,85,247,0.12)" />
-                <text textAnchor="middle" dominantBaseline="central" fontSize="30" className="select-none pointer-events-none">{user.avatar}</text>
-              </>
-            )
-          ) : (
-            <>
-              <circle cx={0} cy={0} r={36} fill="rgba(168,85,247,0.12)" />
-              <text textAnchor="middle" dominantBaseline="central" fontSize="24" className="select-none pointer-events-none">👤</text>
-            </>
-          )}
-          <text y={54} textAnchor="middle" fontSize="11" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
-            {user?.displayName || user?.username || "Du"}
-          </text>
-          {user && (
-            <text y={68} textAnchor="middle" fontSize="9" fill="#a855f7" className="select-none pointer-events-none">
-              Lv. {getUserLevel(user.totalXP).level} — {getUserLevel(user.totalXP).title}
-            </text>
-          )}
-        </g>
 
         {/* Knoten */}
         {nodes.map(renderNode)}
