@@ -4,9 +4,8 @@ import { useState, useRef, useCallback, useMemo, useEffect } from "react";
 import {
   skillTreeNodes,
   getEdges,
-  calculateLayout,
+  getPositions,
   getNodeStatus,
-  COL_WIDTH,
   NODE_W,
   NODE_H,
   type SkillTreeNode,
@@ -17,10 +16,10 @@ import { getUserLevel } from "@/lib/auth";
 
 // ─── Farben ─────────────────────────────────────────────────────────────────
 
-const COLORS: Record<NodeStatus, { bg: string; border: string; glow: string; text: string }> = {
-  completed: { bg: "rgba(0,255,136,0.1)", border: "#00ff88", glow: "0 0 16px rgba(0,255,136,0.35)", text: "#00ff88" },
-  "in-progress": { bg: "rgba(0,170,255,0.1)", border: "#00aaff", glow: "0 0 12px rgba(0,170,255,0.25)", text: "#00aaff" },
-  "not-started": { bg: "rgba(30,41,59,0.5)", border: "#475569", glow: "none", text: "#94a3b8" },
+const COLORS: Record<NodeStatus, { bg: string; border: string; text: string; bar: string }> = {
+  completed: { bg: "#00ff8818", border: "#00ff88", text: "#00ff88", bar: "#00ff88" },
+  "in-progress": { bg: "#00aaff18", border: "#00aaff", text: "#00aaff", bar: "#00aaff" },
+  "not-started": { bg: "#1e293b", border: "#475569", text: "#94a3b8", bar: "#475569" },
 };
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -32,28 +31,29 @@ export function SkillTreeGraph() {
   const [cat, setCat] = useState("mathe");
   const [hovered, setHovered] = useState<SkillTreeNode | null>(null);
   const [tip, setTip] = useState({ x: 0, y: 0 });
-  const [vb, setVb] = useState({ x: -200, y: -400, w: 1800, h: 800 });
+  const [vb, setVb] = useState({ x: -200, y: -100, w: 1800, h: 700 });
   const [panning, setPanning] = useState(false);
   const [pan0, setPan0] = useState({ x: 0, y: 0 });
 
-  const done = user?.completedModules || [];
-  const lessons = user?.completedLessons || {};
+  const doneModules = user?.completedModules || [];
+  const doneLessons = user?.completedLessons || {};
 
+  // Knoten für aktive Kategorie
   const nodes = useMemo(() => skillTreeNodes.filter(n => n.category === cat), [cat]);
-  const positions = useMemo(() => calculateLayout(skillTreeNodes, cat), [cat]);
+  const positions = useMemo(() => getPositions(nodes), [nodes]);
   const edges = useMemo(() => {
     const ids = new Set(nodes.map(n => n.id));
     return getEdges(nodes).filter(e => ids.has(e.from) && ids.has(e.to));
   }, [nodes]);
 
-  // ─── Zoom ───────────────────────────────────────────────────────────────
+  // ─── Zoom (Mausrad, kein Page-Scroll) ───────────────────────────────────
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
-      const s = e.deltaY > 0 ? 1.08 : 0.92;
+      const s = e.deltaY > 0 ? 1.1 : 0.9;
       const svg = svgRef.current;
       if (!svg) return;
       const r = svg.getBoundingClientRect();
@@ -91,7 +91,7 @@ export function SkillTreeGraph() {
 
   const onUp = useCallback(() => setPanning(false), []);
 
-  // ─── Kategorie ──────────────────────────────────────────────────────────
+  // ─── Kategorie wechseln + auto-zoom ─────────────────────────────────────
 
   const cats = [
     { id: "mathe", label: "Mathematik", icon: "📐", color: "#a855f7" },
@@ -101,22 +101,27 @@ export function SkillTreeGraph() {
 
   const catCount = (id: string) => {
     const n = skillTreeNodes.filter(x => x.category === id);
-    return { done: n.filter(x => done.includes(x.id)).length, total: n.length };
+    return { done: n.filter(x => doneModules.includes(x.id)).length, total: n.length };
   };
 
   const switchCat = (id: string) => {
     setCat(id);
-    // Berechne neue ViewBox basierend auf Layout
-    const pos = calculateLayout(skillTreeNodes, id);
-    let minX = Infinity, maxX = -Infinity, minY2 = Infinity, maxY2 = -Infinity;
-    for (const p of pos.values()) {
-      minX = Math.min(minX, p.x);
-      maxX = Math.max(maxX, p.x);
-      minY2 = Math.min(minY2, p.y);
-      maxY2 = Math.max(maxY2, p.y);
+    const n = skillTreeNodes.filter(x => x.category === id);
+    if (n.length === 0) return;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const node of n) {
+      minX = Math.min(minX, node.x);
+      maxX = Math.max(maxX, node.x);
+      minY = Math.min(minY, node.y);
+      maxY = Math.max(maxY, node.y);
     }
-    const pad = 200;
-    setVb({ x: minX - pad - NODE_W/2, y: minY2 - pad, w: maxX - minX + pad*2 + NODE_W, h: maxY2 - minY2 + pad*2 });
+    const pad = 250;
+    setVb({
+      x: minX - pad,
+      y: minY - pad,
+      w: maxX - minX + pad * 2 + NODE_W,
+      h: maxY - minY + pad * 2 + NODE_H,
+    });
   };
 
   // ─── Kante rendern ──────────────────────────────────────────────────────
@@ -129,40 +134,34 @@ export function SkillTreeGraph() {
     const tn = nodes.find(n => n.id === to);
     if (!fn || !tn) return null;
 
-    const fs = getNodeStatus(fn, done, lessons);
-    const ts = getNodeStatus(tn, done, lessons);
-    const both = fs === "completed" && ts === "completed";
-    const active = fs === "completed" && ts !== "completed";
+    const fs = getNodeStatus(fn, doneModules, doneLessons);
+    const ts = getNodeStatus(tn, doneModules, doneLessons);
+    const bothDone = fs === "completed" && ts === "completed";
+    const isActive = fs === "completed" && ts !== "completed";
 
-    // Kanten: rechte Kante von from → linke Kante von to
+    // Rechte Kante von from → linke Kante von to
     const x1 = fp.x + NODE_W / 2;
     const y1 = fp.y;
     const x2 = tp.x - NODE_W / 2;
     const y2 = tp.y;
 
-    // Bezier mit leichter Kurve
-    const cx1 = x1 + (x2 - x1) * 0.4;
-    const cx2 = x2 - (x2 - x1) * 0.4;
-    const path = `M ${x1} ${y1} C ${cx1} ${y1} ${cx2} ${y2} ${x2} ${y2}`;
+    // Bezier-Kurve
+    const cx = (x1 + x2) / 2;
+    const path = `M ${x1} ${y1} C ${cx} ${y1} ${cx} ${y2} ${x2} ${y2}`;
+
+    const color = bothDone ? "#00ff88" : isActive ? "#00aaff" : "#334155";
+    const width = bothDone ? 4 : isActive ? 3 : 2;
+    const opacity = bothDone ? 1 : isActive ? 0.8 : 0.4;
 
     return (
       <g key={`e-${i}`}>
         {/* Glow */}
-        {(both || active) && (
-          <path d={path} fill="none" stroke={both ? "#00ff88" : "#00aaff"} strokeWidth={8} opacity={0.12} />
-        )}
-        {/* Linie */}
-        <path
-          d={path}
-          fill="none"
-          stroke={both ? "#00ff88" : active ? "#00aaff" : "#475569"}
-          strokeWidth={both ? 2.5 : active ? 2 : 1.5}
-          strokeDasharray={both ? "none" : "8 5"}
-          opacity={both ? 0.9 : active ? 0.6 : 0.35}
-          strokeLinecap="round"
-        />
+        <path d={path} fill="none" stroke={color} strokeWidth={width + 8} opacity={opacity * 0.15} strokeLinecap="round" />
+        {/* Hauptlinie */}
+        <path d={path} fill="none" stroke={color} strokeWidth={width} opacity={opacity}
+          strokeDasharray={bothDone ? "none" : "10 6"} strokeLinecap="round" />
         {/* Pfeil */}
-        <circle cx={x2} cy={y2} r={3} fill={both ? "#00ff88" : active ? "#00aaff" : "#475569"} opacity={both ? 0.9 : 0.5} />
+        <circle cx={x2} cy={y2} r={5} fill={color} opacity={opacity} />
       </g>
     );
   };
@@ -172,15 +171,13 @@ export function SkillTreeGraph() {
   const renderNode = (node: SkillTreeNode) => {
     const pos = positions.get(node.id);
     if (!pos) return null;
-    const status = getNodeStatus(node, done, lessons);
+    const status = getNodeStatus(node, doneModules, doneLessons);
     const c = COLORS[status];
     const isH = hovered?.id === node.id;
-    const prog = (lessons[node.id] || []).length;
+    const prog = (doneLessons[node.id] || []).length;
 
     return (
-      <g
-        key={node.id}
-        transform={`translate(${pos.x}, ${pos.y})`}
+      <g key={node.id} transform={`translate(${pos.x}, ${pos.y})`}
         onMouseEnter={e => {
           setHovered(node);
           const r = svgRef.current?.getBoundingClientRect();
@@ -188,30 +185,34 @@ export function SkillTreeGraph() {
         }}
         onMouseLeave={() => setHovered(null)}
         onClick={() => { window.location.href = `/modules/${node.id}`; }}
-        className="cursor-pointer"
-      >
+        className="cursor-pointer">
+
         {/* Glow */}
         {status !== "not-started" && (
-          <rect x={-NODE_W/2-3} y={-NODE_H/2-3} width={NODE_W+6} height={NODE_H+6} rx={14}
-            fill="none" stroke={c.border} strokeWidth="1" opacity={0.25}
-            style={{ filter: `drop-shadow(${c.glow})` }} />
+          <rect x={-3} y={-3} width={NODE_W + 6} height={NODE_H + 6} rx={14}
+            fill="none" stroke={c.border} strokeWidth="1.5" opacity={0.3} />
         )}
+
         {/* Karte */}
-        <rect x={-NODE_W/2} y={-NODE_H/2} width={NODE_W} height={NODE_H} rx={12}
-          fill={c.bg} stroke={c.border} strokeWidth={isH ? 2 : 1.2} />
+        <rect width={NODE_W} height={NODE_H} rx={12}
+          fill={c.bg} stroke={c.border} strokeWidth={isH ? 2.5 : 1.5} />
+
         {/* Icon */}
-        <text x={-NODE_W/2+14} y={-6} fontSize="18" className="select-none pointer-events-none">{node.icon}</text>
+        <text x={14} y={24} fontSize="18" className="select-none pointer-events-none">{node.icon}</text>
+
         {/* Label */}
-        <text x={-NODE_W/2+38} y={-4} fontSize="11" fontWeight="600" fill={c.text} className="select-none pointer-events-none">
+        <text x={40} y={22} fontSize="11" fontWeight="600" fill={c.text} className="select-none pointer-events-none">
           {node.label.length > 16 ? node.label.slice(0, 16) + "…" : node.label}
         </text>
-        {/* Progress */}
-        <rect x={-NODE_W/2+10} y={10} width={NODE_W-20} height={5} rx={2.5} fill="rgba(255,255,255,0.04)" />
+
+        {/* Progress-Balken */}
+        <rect x={10} y={36} width={NODE_W - 20} height={5} rx={2.5} fill="rgba(255,255,255,0.04)" />
         {prog > 0 && (
-          <rect x={-NODE_W/2+10} y={10} width={Math.max(4, (NODE_W-20) * Math.min(prog, 10) / 10)} height={5} rx={2.5} fill={c.border} opacity={0.7} />
+          <rect x={10} y={36} width={Math.max(4, (NODE_W - 20) * Math.min(prog, 10) / 10)} height={5} rx={2.5} fill={c.bar} opacity={0.8} />
         )}
+
         {/* Status */}
-        <text x={-NODE_W/2+12} y={26} fontSize="8" fill={c.text} opacity={0.6} className="select-none pointer-events-none">
+        <text x={12} y={52} fontSize="8" fill={c.text} opacity={0.6} className="select-none pointer-events-none">
           {status === "completed" ? "✅ Fertig" : status === "in-progress" ? `📖 ${prog} Lektionen` : "⚪ Starten"}
         </text>
       </g>
@@ -260,35 +261,34 @@ export function SkillTreeGraph() {
             <stop offset="50%" stopColor="#6366f1" />
             <stop offset="100%" stopColor="#06b6d4" />
           </linearGradient>
-          <clipPath id="avatarClip"><circle cx="0" cy="0" r="36" /></clipPath>
+          <clipPath id="avatarClip"><circle cx="0" cy="0" r="32" /></clipPath>
         </defs>
 
         {/* Kanten */}
         {edges.map((e, i) => renderEdge(e.from, e.to, i))}
 
         {/* Profil-Start-Knoten */}
-        <g transform="translate(-120, 0)" className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
-          <circle r={48} fill="none" stroke="#a855f7" strokeWidth="1" opacity={0.2} />
-          <circle r={44} fill="none" stroke="#a855f7" strokeWidth="1.5" opacity={0.3}
-            style={{ filter: "drop-shadow(0 0 10px rgba(168,85,247,0.4))" }} />
+        <g transform="translate(-140, ${nodes.length > 0 ? positions.get(nodes[0]?.id)?.y || 0 : 0})" className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
+          <circle cx={0} cy={0} r={44} fill="none" stroke="#a855f7" strokeWidth="1" opacity={0.2} />
+          <circle cx={0} cy={0} r={40} fill="none" stroke="#a855f7" strokeWidth="1.5" opacity={0.3} />
           {user?.avatar ? (
-            <image href={user.avatar} x={-36} y={-36} width={72} height={72} clipPath="url(#avatarClip)" />
+            <image href={user.avatar} x={-32} y={-32} width={64} height={64} clipPath="url(#avatarClip)" />
           ) : (
             <>
-              <circle r={36} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5" />
-              <text textAnchor="middle" dominantBaseline="central" fontSize="28" className="select-none pointer-events-none">👤</text>
+              <circle cx={0} cy={0} r={32} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5" />
+              <text textAnchor="middle" dominantBaseline="central" fontSize="24" className="select-none pointer-events-none">👤</text>
             </>
           )}
-          <text y={54} textAnchor="middle" fontSize="11" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
+          <text y={48} textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
             {user?.displayName || user?.username || "Du"}
           </text>
           {user && (
-            <text y={68} textAnchor="middle" fontSize="9" fill="#a855f7" className="select-none pointer-events-none">
-              Lv. {getUserLevel(user.totalXP).level} — {getUserLevel(user.totalXP).title}
+            <text y={62} textAnchor="middle" fontSize="9" fill="#a855f7" className="select-none pointer-events-none">
+              Lv. {getUserLevel(user.totalXP).level}
             </text>
           )}
-          <rect x={-44} y={-52} width={88} height={10} rx={5} fill="url(#bannerGrad)" opacity={0.7} />
-          <text y={-44} textAnchor="middle" fontSize="6" fill="white" fontWeight="700" className="select-none pointer-events-none">LEARNHUB</text>
+          <rect x={-40} y={-48} width={80} height={10} rx={5} fill="url(#bannerGrad)" opacity={0.7} />
+          <text y={-40} textAnchor="middle" fontSize="6" fill="white" fontWeight="700" className="select-none pointer-events-none">LEARNHUB</text>
         </g>
 
         {/* Knoten */}
@@ -310,7 +310,7 @@ export function SkillTreeGraph() {
               <div className="mt-1 space-y-1">
                 {hovered.prerequisites.map(p => {
                   const pn = skillTreeNodes.find(n => n.id === p);
-                  const ok = done.includes(p);
+                  const ok = doneModules.includes(p);
                   return (
                     <div key={p} className="flex items-center gap-1.5">
                       <span className={ok ? "text-green-400" : "text-slate-500"}>{ok ? "✅" : "⬜"}</span>

@@ -1,5 +1,5 @@
 // ============================================================================
-// Skill Tree — Horizontal Tech-Tree Layout
+// Skill Tree — Manuell positioniertes Layout (keine Überlappung)
 // ============================================================================
 
 export type NodeStatus = "completed" | "in-progress" | "not-started";
@@ -9,7 +9,8 @@ export interface SkillTreeNode {
   label: string;
   icon: string;
   category: "mathe" | "programmierung" | "ihk";
-  tier: number;         // Spalte (1 = links, 2 = daneben, ...)
+  x: number;  // Pixel-Position (manuell)
+  y: number;
   prerequisites: string[];
 }
 
@@ -18,68 +19,80 @@ export interface NodePosition {
   y: number;
 }
 
-// ─── Knoten-Definitionen ────────────────────────────────────────────────────
+// ─── Layout-Konstanten ──────────────────────────────────────────────────────
+
+const C = 200;  // Spalten-Abstand
+const R = 100;  // Zeilen-Abstand
+
+// ─── MATHE: Grid-Layout ─────────────────────────────────────────────────────
+//
+//  Spalte:  0     1       2         3        4         5          6        7       8
+//  Reihe 0: Bruch → Gleich → Ungleich → Grenzw → Ableit → Kurvendis → Taylor
+//  Reihe 1: Term  → Potenzen → Funkt → Trig → Integral → Reihen → DGL
+//  Reihe 2: Meng  → Dreisatz → Geom → Stoch → Statistik → Vert → Numerik
+//  Reihe 3:              Prozent → Komplex
+//  Reihe 4:                              Vektor → LGS → Matrizen → AnGeo
 
 export const skillTreeNodes: SkillTreeNode[] = [
-  // ═══ MATHE ═══
-  { id: "mathe-bruchrechnen", label: "Bruchrechnen", icon: "🔢", category: "mathe", tier: 1, prerequisites: [] },
-  { id: "mathe-termumformung", label: "Termumformung", icon: "📝", category: "mathe", tier: 1, prerequisites: [] },
-  { id: "mathe-mengenlehre", label: "Mengenlehre & Logik", icon: "🧠", category: "mathe", tier: 1, prerequisites: [] },
+  // ═══ MATHE — Reihe 0 (Analysis-Hauptpfad) ═══
+  { id: "mathe-bruchrechnen", label: "Bruchrechnen", icon: "🔢", category: "mathe", x: 0, y: 0, prerequisites: [] },
+  { id: "mathe-gleichungen", label: "Gleichungen", icon: "⚖️", category: "mathe", x: C, y: 0, prerequisites: ["mathe-bruchrechnen"] },
+  { id: "mathe-ungleichungen", label: "Ungleichungen", icon: "≠", category: "mathe", x: 2*C, y: 0, prerequisites: ["mathe-gleichungen", "mathe-termumformung"] },
+  { id: "mathe-grenzwerte", label: "Grenzwerte", icon: "🎯", category: "mathe", x: 3*C, y: 0, prerequisites: ["mathe-funktionen"] },
+  { id: "mathe-ableitungen", label: "Ableitungen", icon: "∂", category: "mathe", x: 4*C, y: 0, prerequisites: ["mathe-grenzwerte"] },
+  { id: "mathe-kurvendiskussion", label: "Kurvendiskussion", icon: "📊", category: "mathe", x: 5*C, y: 0, prerequisites: ["mathe-ableitungen"] },
+  { id: "mathe-taylor", label: "Taylorreihen", icon: "∞", category: "mathe", x: 6*C, y: 0, prerequisites: ["mathe-reihen", "mathe-ableitungen"] },
 
-  { id: "mathe-gleichungen", label: "Gleichungen", icon: "⚖️", category: "mathe", tier: 2, prerequisites: ["mathe-bruchrechnen"] },
-  { id: "mathe-potenzen", label: "Potenzen & Logarithmen", icon: "📈", category: "mathe", tier: 2, prerequisites: ["mathe-termumformung"] },
-  { id: "mathe-dreisatz", label: "Dreisatz", icon: "📐", category: "mathe", tier: 2, prerequisites: ["mathe-bruchrechnen"] },
-  { id: "mathe-prozent", label: "Prozent & Zinsen", icon: "💰", category: "mathe", tier: 2, prerequisites: ["mathe-bruchrechnen"] },
+  // ═══ MATHE — Reihe 1 (Analysis-Nebenpfad) ═══
+  { id: "mathe-termumformung", label: "Termumformung", icon: "📝", category: "mathe", x: 0, y: R, prerequisites: [] },
+  { id: "mathe-potenzen", label: "Potenzen & Log.", icon: "📈", category: "mathe", x: C, y: R, prerequisites: ["mathe-termumformung"] },
+  { id: "mathe-funktionen", label: "Funktionen", icon: "📉", category: "mathe", x: 2*C, y: R, prerequisites: ["mathe-potenzen", "mathe-gleichungen"] },
+  { id: "mathe-trigonometrie", label: "Trigonometrie", icon: "📏", category: "mathe", x: 3*C, y: R, prerequisites: ["mathe-funktionen"] },
+  { id: "mathe-integration", label: "Integration", icon: "∫", category: "mathe", x: 4*C, y: R, prerequisites: ["mathe-grenzwerte", "mathe-potenzen"] },
+  { id: "mathe-reihen", label: "Reihen", icon: "Σ", category: "mathe", x: 5*C, y: R, prerequisites: ["mathe-integration"] },
+  { id: "mathe-dgl", label: "Differentialgl.", icon: "ƒ'", category: "mathe", x: 6*C, y: R, prerequisites: ["mathe-ableitungen", "mathe-integration"] },
 
-  { id: "mathe-ungleichungen", label: "Ungleichungen", icon: "≠", category: "mathe", tier: 3, prerequisites: ["mathe-gleichungen", "mathe-termumformung"] },
-  { id: "mathe-funktionen", label: "Funktionen", icon: "📉", category: "mathe", tier: 3, prerequisites: ["mathe-potenzen", "mathe-gleichungen"] },
-  { id: "mathe-geometrie", label: "Geometrie", icon: "📐", category: "mathe", tier: 3, prerequisites: ["mathe-gleichungen"] },
-  { id: "mathe-komplexe", label: "Komplexe Zahlen", icon: "ℂ", category: "mathe", tier: 3, prerequisites: ["mathe-gleichungen"] },
+  // ═══ MATHE — Reihe 2 (Stochastik + Geometrie) ═══
+  { id: "mathe-mengenlehre", label: "Mengen & Logik", icon: "🧠", category: "mathe", x: 0, y: 2*R, prerequisites: [] },
+  { id: "mathe-dreisatz", label: "Dreisatz", icon: "📐", category: "mathe", x: C, y: 2*R, prerequisites: ["mathe-bruchrechnen"] },
+  { id: "mathe-geometrie", label: "Geometrie", icon: "📐", category: "mathe", x: 2*C, y: 2*R, prerequisites: ["mathe-gleichungen"] },
+  { id: "mathe-stochastik", label: "Wahrscheinlichkeit", icon: "🎲", category: "mathe", x: 3*C, y: 2*R, prerequisites: ["mathe-mengenlehre", "mathe-bruchrechnen"] },
+  { id: "mathe-statistik", label: "Statistik", icon: "📊", category: "mathe", x: 4*C, y: 2*R, prerequisites: ["mathe-stochastik"] },
+  { id: "mathe-verteilungen", label: "Verteilungen", icon: "🔔", category: "mathe", x: 5*C, y: 2*R, prerequisites: ["mathe-statistik"] },
+  { id: "mathe-numerik", label: "Numerik", icon: "🖥️", category: "mathe", x: 6*C, y: 2*R, prerequisites: ["mathe-ableitungen"] },
 
-  { id: "mathe-grenzwerte", label: "Grenzwerte", icon: "🎯", category: "mathe", tier: 4, prerequisites: ["mathe-funktionen"] },
-  { id: "mathe-trigonometrie", label: "Trigonometrie", icon: "📏", category: "mathe", tier: 4, prerequisites: ["mathe-funktionen"] },
-  { id: "mathe-stochastik", label: "Wahrscheinlichkeit", icon: "🎲", category: "mathe", tier: 4, prerequisites: ["mathe-mengenlehre", "mathe-bruchrechnen"] },
+  // ═══ MATHE — Reihe 3 (Ergänzungen) ═══
+  { id: "mathe-prozent", label: "Prozent & Zinsen", icon: "💰", category: "mathe", x: C, y: 3*R, prerequisites: ["mathe-bruchrechnen"] },
+  { id: "mathe-komplexe", label: "Komplexe Zahlen", icon: "ℂ", category: "mathe", x: 2*C, y: 3*R, prerequisites: ["mathe-gleichungen"] },
+  { id: "mathe-folgen", label: "Folgen", icon: "→", category: "mathe", x: 5*C, y: 3*R, prerequisites: ["mathe-reihen"] },
 
-  { id: "mathe-ableitungen", label: "Ableitungen", icon: "∂", category: "mathe", tier: 5, prerequisites: ["mathe-grenzwerte"] },
-  { id: "mathe-integration", label: "Integration", icon: "∫", category: "mathe", tier: 5, prerequisites: ["mathe-grenzwerte", "mathe-potenzen"] },
-  { id: "mathe-statistik", label: "Statistik", icon: "📊", category: "mathe", tier: 5, prerequisites: ["mathe-stochastik"] },
-  { id: "mathe-kombinatorik", label: "Kombinatorik", icon: "🔀", category: "mathe", tier: 5, prerequisites: ["mathe-stochastik"] },
-
-  { id: "mathe-kurvendiskussion", label: "Kurvendiskussion", icon: "📊", category: "mathe", tier: 6, prerequisites: ["mathe-ableitungen"] },
-  { id: "mathe-reihen", label: "Reihen", icon: "Σ", category: "mathe", tier: 6, prerequisites: ["mathe-integration"] },
-  { id: "mathe-verteilungen", label: "Verteilungen", icon: "🔔", category: "mathe", tier: 6, prerequisites: ["mathe-statistik"] },
-  { id: "mathe-numerik", label: "Numerik", icon: "🖥️", category: "mathe", tier: 6, prerequisites: ["mathe-ableitungen"] },
-
-  { id: "mathe-taylor", label: "Taylorreihen", icon: "∞", category: "mathe", tier: 7, prerequisites: ["mathe-reihen", "mathe-ableitungen"] },
-  { id: "mathe-folgen", label: "Folgen", icon: "→", category: "mathe", tier: 7, prerequisites: ["mathe-reihen"] },
-  { id: "mathe-dgl", label: "Differentialgleichungen", icon: "ƒ'", category: "mathe", tier: 7, prerequisites: ["mathe-ableitungen", "mathe-integration"] },
-
-  { id: "mathe-vektoren", label: "Vektoren", icon: "➡️", category: "mathe", tier: 8, prerequisites: [] },
-  { id: "mathe-lgs", label: "LGS", icon: "⊞", category: "mathe", tier: 8, prerequisites: ["mathe-gleichungen", "mathe-vektoren"] },
-
-  { id: "mathe-matrizen", label: "Matrizen", icon: "▦", category: "mathe", tier: 9, prerequisites: ["mathe-lgs", "mathe-vektoren"] },
-  { id: "mathe-anageo", label: "Analytische Geometrie", icon: "📐", category: "mathe", tier: 9, prerequisites: ["mathe-vektoren", "mathe-matrizen"] },
+  // ═══ MATHE — Reihe 4 (Lineare Algebra) ═══
+  { id: "mathe-kombinatorik", label: "Kombinatorik", icon: "🔀", category: "mathe", x: 4*C, y: 3*R, prerequisites: ["mathe-stochastik"] },
+  { id: "mathe-vektoren", label: "Vektoren", icon: "➡️", category: "mathe", x: 4*C, y: 4*R, prerequisites: [] },
+  { id: "mathe-lgs", label: "Lineare Gleichungssysteme", icon: "⊞", category: "mathe", x: 5*C, y: 4*R, prerequisites: ["mathe-gleichungen", "mathe-vektoren"] },
+  { id: "mathe-matrizen", label: "Matrizen", icon: "▦", category: "mathe", x: 6*C, y: 4*R, prerequisites: ["mathe-lgs", "mathe-vektoren"] },
+  { id: "mathe-anageo", label: "Analytische Geometrie", icon: "📐", category: "mathe", x: 7*C, y: 4*R, prerequisites: ["mathe-vektoren", "mathe-matrizen"] },
 
   // ═══ PROGRAMMIERUNG ═══
-  { id: "react", label: "React", icon: "⚛️", category: "programmierung", tier: 1, prerequisites: [] },
-  { id: "typescript", label: "TypeScript", icon: "📘", category: "programmierung", tier: 2, prerequisites: ["react"] },
-  { id: "nextjs", label: "Next.js", icon: "▲", category: "programmierung", tier: 3, prerequisites: ["typescript"] },
+  { id: "react", label: "React", icon: "⚛️", category: "programmierung", x: 0, y: 0, prerequisites: [] },
+  { id: "typescript", label: "TypeScript", icon: "📘", category: "programmierung", x: C, y: 0, prerequisites: ["react"] },
+  { id: "nextjs", label: "Next.js", icon: "▲", category: "programmierung", x: 2*C, y: 0, prerequisites: ["typescript"] },
 
   // ═══ IHK ═══
-  { id: "ihk-diagramme", label: "Diagramme", icon: "📊", category: "ihk", tier: 1, prerequisites: [] },
-  { id: "ihk-netzwerk", label: "Netzwerktechnik", icon: "🌐", category: "ihk", tier: 1, prerequisites: [] },
-  { id: "ihk-datenbanken", label: "Datenbanken", icon: "🗄️", category: "ihk", tier: 1, prerequisites: [] },
-  { id: "ihk-computersysteme", label: "Computersysteme", icon: "🖥️", category: "ihk", tier: 1, prerequisites: [] },
+  { id: "ihk-diagramme", label: "Diagramme", icon: "📊", category: "ihk", x: 0, y: 0, prerequisites: [] },
+  { id: "ihk-netzwerk", label: "Netzwerktechnik", icon: "🌐", category: "ihk", x: 0, y: R, prerequisites: [] },
+  { id: "ihk-datenbanken", label: "Datenbanken", icon: "🗄️", category: "ihk", x: 0, y: 2*R, prerequisites: [] },
+  { id: "ihk-computersysteme", label: "Computersysteme", icon: "🖥️", category: "ihk", x: 0, y: 3*R, prerequisites: [] },
 
-  { id: "ihk-sicherheit", label: "IT-Sicherheit", icon: "🔒", category: "ihk", tier: 2, prerequisites: ["ihk-netzwerk"] },
-  { id: "ihk-git", label: "Git", icon: "🔀", category: "ihk", tier: 2, prerequisites: [] },
-  { id: "ihk-ux", label: "UX Design", icon: "🎨", category: "ihk", tier: 2, prerequisites: [] },
+  { id: "ihk-sicherheit", label: "IT-Sicherheit", icon: "🔒", category: "ihk", x: C, y: 0.5*R, prerequisites: ["ihk-netzwerk"] },
+  { id: "ihk-git", label: "Git", icon: "🔀", category: "ihk", x: C, y: 1.5*R, prerequisites: [] },
+  { id: "ihk-ux", label: "UX Design", icon: "🎨", category: "ihk", x: C, y: 2.5*R, prerequisites: [] },
 
-  { id: "ihk-projektmanagement", label: "Projektmanagement", icon: "📋", category: "ihk", tier: 3, prerequisites: ["ihk-git"] },
-  { id: "ihk-qualitaet", label: "Qualitätsstandards", icon: "✅", category: "ihk", tier: 3, prerequisites: ["ihk-git"] },
-  { id: "ihk-docker", label: "Docker", icon: "🐳", category: "ihk", tier: 3, prerequisites: ["ihk-computersysteme", "ihk-netzwerk"] },
+  { id: "ihk-projektmanagement", label: "Projektmanagement", icon: "📋", category: "ihk", x: 2*C, y: R, prerequisites: ["ihk-git"] },
+  { id: "ihk-qualitaet", label: "Qualitätsstandards", icon: "✅", category: "ihk", x: 2*C, y: 2*R, prerequisites: ["ihk-git"] },
+  { id: "ihk-docker", label: "Docker", icon: "🐳", category: "ihk", x: 2*C, y: 3*R, prerequisites: ["ihk-computersysteme", "ihk-netzwerk"] },
 
-  { id: "ihk-erwprog", label: "Erw. Programmierung", icon: "🔧", category: "ihk", tier: 4, prerequisites: ["ihk-qualitaet"] },
+  { id: "ihk-erwprog", label: "Erw. Programmierung", icon: "🔧", category: "ihk", x: 3*C, y: 1.5*R, prerequisites: ["ihk-qualitaet"] },
 ];
 
 // ─── Status ─────────────────────────────────────────────────────────────────
@@ -90,8 +103,8 @@ export function getNodeStatus(
   completedLessons: Record<string, string[]>
 ): NodeStatus {
   if (completedModules.includes(node.id)) return "completed";
-  const lessons = completedLessons[node.id];
-  if (lessons && lessons.length > 0) return "in-progress";
+  const l = completedLessons[node.id];
+  if (l && l.length > 0) return "in-progress";
   return "not-started";
 }
 
@@ -105,86 +118,29 @@ export interface SkillTreeEdge {
 export function getEdges(nodes: SkillTreeNode[]): SkillTreeEdge[] {
   const edges: SkillTreeEdge[] = [];
   for (const node of nodes) {
-    for (const prereq of node.prerequisites) {
-      edges.push({ from: prereq, to: node.id });
+    for (const p of node.prerequisites) {
+      edges.push({ from: p, to: node.id });
     }
   }
   return edges;
 }
 
-// ─── Horizontal Layout ──────────────────────────────────────────────────────
+// ─── Positionen abrufen ─────────────────────────────────────────────────────
 
-const COL_WIDTH = 200;   // Abstand zwischen Spalten
-const ROW_HEIGHT = 90;   // Abstand zwischen Zeilen
-const NODE_W = 160;
-const NODE_H = 64;
-
-export function calculateLayout(nodes: SkillTreeNode[], category: string): Map<string, NodePosition> {
-  const positions = new Map<string, NodePosition>();
-  const catNodes = nodes.filter(n => n.category === category);
-
-  // Gruppiere nach Tier (Spalte)
-  const tiers = new Map<number, SkillTreeNode[]>();
-  for (const node of catNodes) {
-    if (!tiers.has(node.tier)) tiers.set(node.tier, []);
-    tiers.get(node.tier)!.push(node);
+export function getPositions(nodes: SkillTreeNode[]): Map<string, NodePosition> {
+  const map = new Map<string, NodePosition>();
+  for (const n of nodes) {
+    map.set(n.id, { x: n.x, y: n.y });
   }
-
-  const maxTier = Math.max(...tiers.keys(), 0);
-
-  // Berechne Y-Position basierend auf Abhängigkeiten
-  // Knoten mit gleichen Eltern werden untereinander angeordnet
-  const nodeRow = new Map<string, number>();
-  let currentRow = 0;
-
-  // Topologisch sortieren (einfach: nach Tier)
-  for (let tier = 1; tier <= maxTier; tier++) {
-    const tierNodes = tiers.get(tier) || [];
-
-    // Finde Eltern-Knoten und positioniere Kinder darunter
-    for (const node of tierNodes) {
-      if (node.prerequisites.length === 0) {
-        nodeRow.set(node.id, currentRow);
-        currentRow++;
-      } else {
-        // Positioniere bei durchschnittlicher Y der Eltern
-        const parentRows = node.prerequisites
-          .map(p => nodeRow.get(p))
-          .filter((r): r is number => r !== undefined);
-
-        if (parentRows.length > 0) {
-          const avgRow = parentRows.reduce((a, b) => a + b, 0) / parentRows.length;
-          nodeRow.set(node.id, avgRow);
-        } else {
-          nodeRow.set(node.id, currentRow);
-          currentRow++;
-        }
-      }
-    }
-  }
-
-  // Konvertiere zu Pixel-Positionen
-  for (const node of catNodes) {
-    const row = nodeRow.get(node.id) ?? 0;
-    positions.set(node.id, {
-      x: (node.tier - 1) * COL_WIDTH,
-      y: row * ROW_HEIGHT,
-    });
-  }
-
-  // Zentriere vertikal
-  let minY = Infinity;
-  let maxY = -Infinity;
-  for (const pos of positions.values()) {
-    minY = Math.min(minY, pos.y);
-    maxY = Math.max(maxY, pos.y);
-  }
-  const centerY = (minY + maxY) / 2;
-  for (const [id, pos] of positions) {
-    positions.set(id, { x: pos.x, y: pos.y - centerY });
-  }
-
-  return positions;
+  return map;
 }
 
-export { COL_WIDTH, ROW_HEIGHT, NODE_W, NODE_H };
+// ─── Kategorie-Filter ───────────────────────────────────────────────────────
+
+export function filterByCategory(nodes: SkillTreeNode[], category: string | null): SkillTreeNode[] {
+  if (!category || category === "alle") return nodes;
+  return nodes.filter(n => n.category === category);
+}
+
+export const NODE_W = 160;
+export const NODE_H = 60;
