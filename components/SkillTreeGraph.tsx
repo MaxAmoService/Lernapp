@@ -145,10 +145,7 @@ export function SkillTreeGraph() {
     const x2 = tp.x - NODE_W / 2;
     const y2 = tp.y;
 
-    // Bezier-Kurve
-    const cx = (x1 + x2) / 2;
-    const path = `M ${x1} ${y1} C ${cx} ${y1} ${cx} ${y2} ${x2} ${y2}`;
-
+    // Gerade Linie
     const color = bothDone ? "#00ff88" : isActive ? "#00aaff" : "#334155";
     const width = bothDone ? 4 : isActive ? 3 : 2;
     const opacity = bothDone ? 1 : isActive ? 0.8 : 0.4;
@@ -156,9 +153,9 @@ export function SkillTreeGraph() {
     return (
       <g key={`e-${i}`}>
         {/* Glow */}
-        <path d={path} fill="none" stroke={color} strokeWidth={width + 8} opacity={opacity * 0.15} strokeLinecap="round" />
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={width + 8} opacity={opacity * 0.15} strokeLinecap="round" />
         {/* Hauptlinie */}
-        <path d={path} fill="none" stroke={color} strokeWidth={width} opacity={opacity}
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={width} opacity={opacity}
           strokeDasharray={bothDone ? "none" : "10 6"} strokeLinecap="round" />
         {/* Pfeil */}
         <circle cx={x2} cy={y2} r={5} fill={color} opacity={opacity} />
@@ -256,11 +253,6 @@ export function SkillTreeGraph() {
         onContextMenu={e => e.preventDefault()}>
 
         <defs>
-          <linearGradient id="bannerGrad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#a855f7" />
-            <stop offset="50%" stopColor="#6366f1" />
-            <stop offset="100%" stopColor="#06b6d4" />
-          </linearGradient>
           <clipPath id="avatarClip"><circle cx="0" cy="0" r="32" /></clipPath>
         </defs>
 
@@ -268,27 +260,36 @@ export function SkillTreeGraph() {
         {edges.map((e, i) => renderEdge(e.from, e.to, i))}
 
         {/* Profil-Start-Knoten */}
-        <g transform="translate(-140, ${nodes.length > 0 ? positions.get(nodes[0]?.id)?.y || 0 : 0})" className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
+        <g transform={`translate(-140, ${nodes.length > 0 ? (positions.get(nodes[0]?.id)?.y ?? 0) : 0})`} className="cursor-pointer" onClick={() => window.location.href = "/profile"}>
+          {/* Äußerer Ring */}
           <circle cx={0} cy={0} r={44} fill="none" stroke="#a855f7" strokeWidth="1" opacity={0.2} />
           <circle cx={0} cy={0} r={40} fill="none" stroke="#a855f7" strokeWidth="1.5" opacity={0.3} />
+          {/* Avatar */}
           {user?.avatar ? (
-            <image href={user.avatar} x={-32} y={-32} width={64} height={64} clipPath="url(#avatarClip)" />
+            user.avatar.startsWith("http") || user.avatar.startsWith("/") ? (
+              <image href={user.avatar} x={-36} y={-36} width={72} height={72} clipPath="url(#avatarClip)" />
+            ) : (
+              <>
+                <circle cx={0} cy={0} r={36} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5" />
+                <text textAnchor="middle" dominantBaseline="central" fontSize="30" className="select-none pointer-events-none">{user.avatar}</text>
+              </>
+            )
           ) : (
             <>
-              <circle cx={0} cy={0} r={32} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5" />
+              <circle cx={0} cy={0} r={36} fill="rgba(168,85,247,0.12)" stroke="#a855f7" strokeWidth="1.5" />
               <text textAnchor="middle" dominantBaseline="central" fontSize="24" className="select-none pointer-events-none">👤</text>
             </>
           )}
-          <text y={48} textAnchor="middle" fontSize="10" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
+          {/* Name */}
+          <text y={52} textAnchor="middle" fontSize="11" fontWeight="700" fill="#e2e8f0" className="select-none pointer-events-none">
             {user?.displayName || user?.username || "Du"}
           </text>
+          {/* Level */}
           {user && (
-            <text y={62} textAnchor="middle" fontSize="9" fill="#a855f7" className="select-none pointer-events-none">
-              Lv. {getUserLevel(user.totalXP).level}
+            <text y={66} textAnchor="middle" fontSize="9" fill="#a855f7" className="select-none pointer-events-none">
+              Lv. {getUserLevel(user.totalXP).level} — {getUserLevel(user.totalXP).title}
             </text>
           )}
-          <rect x={-40} y={-48} width={80} height={10} rx={5} fill="url(#bannerGrad)" opacity={0.7} />
-          <text y={-40} textAnchor="middle" fontSize="6" fill="white" fontWeight="700" className="select-none pointer-events-none">LEARNHUB</text>
         </g>
 
         {/* Knoten */}
