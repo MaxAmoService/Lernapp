@@ -626,6 +626,53 @@ $f(x) = \\sqrt[n]{x}$ für $x \\geq 0$ (bei geradem n)
 
 > 🔗 **Weiter:** Im nächsten Kapitel untersuchst du die **Eigenschaften** von Funktionen — Monotonie, Stetigkeit und Umkehrfunktionen. Danach geht es in die Analysis mit Grenzwerten!
 
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Fehler begegnen in Klausuren immer wieder — merke sie dir gut!
+
+**1.** $\\sqrt{x^2} = |x|$ **nicht** $x$!
+- $\\sqrt{(-3)^2} = \\sqrt{9} = 3 = |-3|$ ✓
+- Wer die Betragsstriche vergisst, bekommt bei negativen x das falsche Vorzeichen.
+
+**2.** $0^0$ ist **undefiniert**!
+- $a^0 = 1$ für $a \\neq 0$ und $0^n = 0$ für $n > 0$ — aber $0^0$ ist ein unbestimmter Ausdruck.
+
+**3.** $\\ln(x)$ ist nur für $x > 0$ definiert!
+- $\\ln(0)$ und $\\ln(-5)$ existieren nicht in $\\mathbb{R}$.
+- Im Definitionsbereich immer prüfen: Argument des Logarithmus **strikt positiv**.
+
+---
+
+## Definitionsbereich bestimmen — Schritt für Schritt
+
+### Beispiel 1: $f(x) = \\frac{1}{x-2}$
+
+**Schritt 1:** Finde die Einschränkungen — hier: Nenner darf nicht 0 sein.
+$$x - 2 \\neq 0 \\quad \\Rightarrow \\quad x \\neq 2$$
+
+**Schritt 2:** Schreibe den Definitionsbereich auf:
+$$D = \\mathbb{R} \\setminus \\{2\\} = (-\\infty, 2) \\cup (2, \\infty)$$
+
+**Probe:** $f(2) = \\frac{1}{0}$ → undefiniert ✓
+
+---
+
+### Beispiel 2: $f(x) = \\sqrt{x+3} + \\ln(x)$
+
+**Schritt 1:** Finde **alle** Einschränkungen:
+- Wurzel: $x + 3 \\geq 0$ → $x \\geq -3$
+- Logarithmus: $x > 0$
+
+**Schritt 2:** Schnittmenge bilden — **beide** Bedingungen müssen gelten:
+$$x \\geq -3 \\quad \\text{UND} \\quad x > 0 \\quad \\Rightarrow \\quad x > 0$$
+
+**Schritt 3:** Definitionsbereich:
+$$D = (0, \\infty)$$
+
+> **Merke:** Bei mehreren Einschränkungen gilt immer die **strengste** Bedingung — bilde den Schnitt!
+
 [INTERACTIVE]`,
       },
       {
@@ -661,6 +708,45 @@ $f$ ist umkehrbar, wenn $f$ bijektiv ist.
 Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
 
 > 🔗 **Weiter zur Analysis:** Du kennst jetzt die Grundlagen der Funktionen! Damit bist du bereit für die **Analysis** — startend mit Grenzwerten: Was passiert, wenn sich x einem bestimmten Wert nähert? Und danach: Ableitungen und Integration!
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Verwechslungen kommen in jeder Klausur vor!
+
+**1. Gerade vs. Ungerade — nicht verwechseln!**
+- $f(-x) = f(x)$ → **gerade** Funktion (achsensymmetrisch zur y-Achse)
+- $f(-x) = -f(x)$ → **ungerade** Funktion (punktsymmetrisch zum Ursprung)
+- Beispiel: $f(x) = x^2$ ist **gerade**, $f(x) = x^3$ ist **ungerade**
+
+**2. Monotonie: $\\leq$ vs. $<$**
+- $x_1 < x_2 \\Rightarrow f(x_1) \\leq f(x_2)$ → **monoton steigend** (auch: "nicht fallend")
+- $x_1 < x_2 \\Rightarrow f(x_1) < f(x_2)$ → **streng monoton steigend**
+- Das Wort "streng" macht den Unterschied — in der Klausur genau lesen!
+
+**3. Umkehrfunktion existiert nur bei bijektiven Funktionen!**
+- $f(x) = x^2$ ist **nicht** bijektiv auf $\\mathbb{R}$ (z.B. $f(2) = f(-2) = 4$) → keine Umkehrfunktion auf $\\mathbb{R}$!
+- Erst den Definitionsbereich einschränken (z.B. $x \\geq 0$), dann wird sie bijektiv.
+
+---
+
+## Beispiel: Umkehrfunktion bestimmen
+
+Gegeben: $f(x) = 2x + 3$
+
+**Schritt 1:** Setze $y = f(x)$:
+$$y = 2x + 3$$
+
+**Schritt 2:** Löse nach $x$ auf:
+$$y - 3 = 2x \\quad \\Rightarrow \\quad x = \\frac{y - 3}{2}$$
+
+**Schritt 3:** Tausche $x$ und $y$ (bzw. ersetze $y$ durch $f^{-1}(x)$):
+$$f^{-1}(x) = \\frac{x - 3}{2}$$
+
+**Probe:** $f^{-1}(f(x)) = f^{-1}(2x+3) = \\frac{(2x+3)-3}{2} = \\frac{2x}{2} = x$ ✓
+
+> **Merke:** Umkehrfunktion = "y auflösen und tauschen". Grafisch ist es die Spiegelung an der Geraden $y = x$.
 
 [INTERACTIVE]`,
       },
@@ -749,6 +835,14 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
 - $\\lim_{x \\to 0} \\frac{e^x - 1}{x} = 1$
 
 > 🔗 **Weiter:** Im nächsten Kapitel lernst du **L'Hôpitals Regel** kennen — ein mächtiges Werkzeug, um unbestimmte Ausdrücke wie $\\frac{0}{0}$ zu lösen. Und danach folgt die Ableitung, die auf dem Grenzwertbegriff aufbaut!
+
+---
+
+## Häufige Fehler
+
+- **L'Hôpital nur bei unbestimmten Ausdrücken:** $\\lim \\frac{f(x)}{g(x)} = \\lim \\frac{f'(x)}{g'(x)}$ gilt NUR bei $\\frac{0}{0}$ oder $\\frac{\\infty}{\\infty}$! Bei $\\frac{2}{3}$ direkt einsetzen!
+- **Produktregel für Grenzwerte:** $\\lim(f \\cdot g) = \\lim(f) \\cdot \\lim(g)$ gilt nur, wenn **beide** Grenzwerte existieren und endlich sind.
+- **Einseitige Grenzwerte:** $\\lim_{x \\to 0} \\frac{1}{x}$ existiert NICHT! Links: $\\to -\\infty$, rechts: $\\to +\\infty$. Immer beide Seiten prüfen!
 
 [INTERACTIVE]`,
       },
@@ -896,6 +990,29 @@ $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$
 
 Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
 
+---
+
+## Beispiel: Ableitung aus der Definition
+
+**Aufgabe:** Leite $f(x) = x^2$ aus der Definition ab.
+
+**Schritt 1:** Definition einsetzen:
+$$f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h} = \\lim_{h \\to 0} \\frac{(x+h)^2 - x^2}{h}$$
+
+**Schritt 2:** Ausmultiplizieren:
+$$= \\lim_{h \\to 0} \\frac{x^2 + 2xh + h^2 - x^2}{h}$$
+
+**Schritt 3:** Vereinfachen:
+$$= \\lim_{h \\to 0} \\frac{2xh + h^2}{h}$$
+
+**Schritt 4:** Durch $h$ kürzen ($h \\neq 0$):
+$$= \\lim_{h \\to 0} (2x + h)$$
+
+**Schritt 5:** Grenzwert einsetzen ($h \\to 0$):
+$$= 2x$$
+
+> **Ergebnis:** $f'(x) = 2x$ — genau das, was die Potenzregel ($n \\cdot x^{n-1} = 2 \\cdot x^1$) auch liefert!
+
 > 🔗 **Weiter:** Jetzt kennst du die Definition — im nächsten Kapitel lernst du die **Ableitungsregeln** (Potenz-, Ketten-, Produktregel), damit du nicht immer den Grenzwert berechnen musst!
 
 [INTERACTIVE]`,
@@ -943,6 +1060,27 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
 [PRACTICE_END]
 
 > 🔗 **Anwendungen & Weiter:** Mit Ableitungsregeln kannst du jetzt Funktionen effizient ableiten! Damit stehen dir **Extremstellen** (Min/Max), **Tangenten** und die **Kurvendiskussion** offen. Als Nächstes kommt die **Integralrechnung** — die Umkehrung der Ableitung!
+
+---
+
+## Kettenregel — Beispiel
+
+Schritt-für-Schritt: $f(x) = \\sin(3x)$
+
+**Schritt 1:** Außen- und Innenfunktion erkennen:
+- Außen: $\\sin(u)$ → Ableitung: $\\cos(u)$
+- Innen: $u = 3x$ → Ableitung: $3$
+
+**Schritt 2:** Kettenregel anwenden:
+$$f'(x) = \\cos(3x) \\cdot 3$$
+
+---
+
+## Häufige Fehler
+
+- **Kettenregel vergessen:** $(\\sin(x^2))' = \\cos(x^2) \\cdot 2x$, NICHT nur $\\cos(x^2)$! Die innere Ableitung darf nie fehlen.
+- **Produktregel verwechseln:** $(f \\cdot g)' = f' \\cdot g + f \\cdot g'$, NICHT $f' \\cdot g'$! Es ist eine Summe, kein Produkt.
+- **Quotientenregel Vorzeichen:** $\\left(\\frac{f}{g}\\right)' = \\frac{f' \\cdot g - f \\cdot g'}{g^2}$ — das Minus im Zähler nicht vergessen!
 
 [INTERACTIVE]`,
       },
@@ -1031,6 +1169,33 @@ $\\int f(x) \\, dx = F(x) + C$
 $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
 
 > 🔗 **Weiter:** Stammfunktionen sind die "Rückwärts-Ableitung". Im nächsten Kapitel lernst du das **bestimmte Integral** kennen — damit kannst du Flächen unter Kurven berechnen! Das verbindet Ableitung und Integration über den **Hauptsatz der Analysis**.
+
+---
+
+## Beispiel: Integration
+
+**Beispiel 1:** $\\int 3x^2 \\, dx = 3 \\cdot \\frac{x^3}{3} + C = x^3 + C$
+
+**Beispiel 2:** $\\int e^{2x} \\, dx = \\frac{1}{2} e^{2x} + C$ (Substitution $u = 2x$, $du = 2\\,dx$)
+
+**Beispiel 3:** $\\int \\frac{1}{x} \\, dx = \\ln|x| + C$
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Fehler kosten in Klausuren regelmäßig Punkte!
+
+**1.** $+C$ **nicht vergessen** bei unbestimmten Integralen!
+- Ohne $+C$ ist die Lösung **falsch** — es gibt unendlich viele Stammfunktionen, die sich nur um eine Konstante unterscheiden.
+
+**2.** $\\int \\frac{1}{x} \\, dx = \\ln|x|$, **NICHT** $\\ln(x)$!
+- Der Betrag ist wichtig, weil $\\frac{1}{x}$ auch für negative $x$ definiert ist.
+- $\\ln(x)$ existiert nur für $x > 0$, $\\ln|x|$ für $x \\neq 0$.
+
+**3.** $\\int x^n \\, dx = \\frac{x^{n+1}}{n+1}$ gilt **NICHT** für $n = -1$!
+- Für $n = -1$ gilt Sonderregel: $\\int x^{-1} \\, dx = \\int \\frac{1}{x} \\, dx = \\ln|x| + C$
+- Denn $\\frac{x^0}{0}$ wäre Division durch Null!
 
 [INTERACTIVE]`,
       },
@@ -1325,6 +1490,45 @@ $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} u_2 v_3 - u_3 v_2 \\\\ u_3 v_1 - u
 
 > 🔗 **Weiter:** Vektoren sind die Basis — jetzt kommen **Matrizen**, die Vektoren transformieren! Matrizen können Vektoren drehen, skalieren und verzerren. Das ist der Übergang zur linearen Abbildung.
 
+---
+
+## Rechenbeispiele
+
+### Skalarprodukt berechnen
+
+Gegeben: $\\vec{a} = (1, 2, 3)$, $\\vec{b} = (4, 5, 6)$
+
+$$\\vec{a} \\cdot \\vec{b} = 1 \\cdot 4 + 2 \\cdot 5 + 3 \\cdot 6 = 4 + 10 + 18 = 32$$
+
+### Betrag berechnen
+
+$$|\\vec{a}| = \\sqrt{1^2 + 2^2 + 3^2} = \\sqrt{1 + 4 + 9} = \\sqrt{14} \\approx 3{,}74$$
+
+### Winkel zwischen zwei Vektoren
+
+$$\\cos(\\alpha) = \\frac{\\vec{a} \\cdot \\vec{b}}{|\\vec{a}| \\cdot |\\vec{b}|} = \\frac{32}{\\sqrt{14} \\cdot \\sqrt{77}} = \\frac{32}{\\sqrt{1078}} \\approx 0{,}975$$
+
+$$\\alpha = \\arccos(0{,}975) \\approx 12{,}9°$$
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Fehler sind in der Klausur besonders tückisch!
+
+**1. Skalarprodukt vs. Kreuzprodukt — grundverschieden!**
+- Skalarprodukt $\\vec{a} \\cdot \\vec{b}$ ergibt eine **Zahl** (Skalar)
+- Kreuzprodukt $\\vec{a} \\times \\vec{b}$ ergibt einen **Vektor**
+- Verwechslung führt zu Typ-Fehlern!
+
+**2. Betrag: Wurzel nicht vergessen!**
+- $|\\vec{a}| = \\sqrt{a_1^2 + a_2^2 + a_3^2}$ — die **Wurzel** ist entscheidend!
+- Häufiger Fehler: $a_1^2 + a_2^2 + a_3^2$ ohne Wurzel ist $|\\vec{a}|^2$, nicht $|\\vec{a}|$
+
+**3. Formel für den Winkel gilt nur so:**
+- $\\vec{a} \\cdot \\vec{b} = |\\vec{a}| \\cdot |\\vec{b}| \\cdot \\cos(\\alpha)$ — Reihenfolge beachten!
+- $\\cos(\\alpha)$ allein reicht nicht: Immer erst durch die Beträge dividieren.
+
 [INTERACTIVE]`,
       },
       {
@@ -1362,6 +1566,44 @@ $\\det(A) = a_{11} a_{22} - a_{12} a_{21}$
 $A \\cdot A^{-1} = I$
 
 > 🔗 **Weiter:** Matrizen und Vektoren zusammen bilden das Fundament der **linearen Algebra**. Diese Konzepte brauchst du für lineare Gleichungssysteme (LGS), Eigenwerte und in der **Numerik** (Gauß-Verfahren). In der Physik beschreiben Matrizen Drehungen und Verformungen!
+
+---
+
+## Beispiel: 2x2-Matrixmultiplikation
+
+Gegeben:
+$$A = \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix}, \\quad B = \\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix}$$
+
+**Schritt 1:** Zeile von A mal Spalte von B — Element für Element:
+
+$$C_{11} = 1 \\cdot 5 + 2 \\cdot 7 = 5 + 14 = 19$$
+$$C_{12} = 1 \\cdot 6 + 2 \\cdot 8 = 6 + 16 = 22$$
+$$C_{21} = 3 \\cdot 5 + 4 \\cdot 7 = 15 + 28 = 43$$
+$$C_{22} = 3 \\cdot 6 + 4 \\cdot 8 = 18 + 32 = 50$$
+
+**Schritt 2:** Ergebnis zusammenbauen:
+$$C = A \\cdot B = \\begin{pmatrix} 19 & 22 \\\\ 43 & 50 \\end{pmatrix}$$
+
+> **Merke:** Immer **Zeile von A** mal **Spalte von B** — nicht elementweise multiplizieren!
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Matrixrechnung hat ihre eigenen Fallstricke!
+
+**1. Matrixmultiplikation ist NICHT kommutativ!**
+- $A \\cdot B \\neq B \\cdot A$ im Allgemeinen!
+- Probe: $B \\cdot A = \\begin{pmatrix} 5 & 6 \\\\ 7 & 8 \\end{pmatrix} \\cdot \\begin{pmatrix} 1 & 2 \\\\ 3 & 4 \\end{pmatrix} = \\begin{pmatrix} 23 & 34 \\\\ 31 & 46 \\end{pmatrix}$
+- Das ist etwas anderes als $A \\cdot B$!
+
+**2. $\\det(A) = 0$ bedeutet: Matrix ist singulär!**
+- Wenn die Determinante 0 ist, existiert **keine Inverse** $A^{-1}$.
+- Geometrisch: Die Abbildung "quetscht" den Raum flach (Volumen = 0).
+
+**3. Reihenfolge bei der Multiplikation:**
+- Immer **Zeile von A mal Spalte von B**, nicht elementweise!
+- Die mittleren Dimensionen müssen übereinstimmen: $(m \\times \\underline{n}) \\cdot (\\underline{n} \\times p)$ → Ergebnis ist $(m \\times p)$.
 
 [INTERACTIVE]`,
       },
@@ -2115,6 +2357,30 @@ $$A = \\frac{(a + b) \\cdot h}{2}$$
 ### Übung
 Berechne die Fläche eines Rechtecks mit $a = 8\\text{cm}$ und $b = 5\\text{cm}$!
 
+---
+
+## Rechenbeispiele
+
+### Dreieck
+$a = 5\\text{cm}$, $h = 3\\text{cm}$
+$$A = \\frac{1}{2} \\cdot 5 \\cdot 3 = 7{,}5 \\text{cm}^2$$
+
+### Trapez
+$a = 8\\text{cm}$, $b = 5\\text{cm}$, $h = 4\\text{cm}$
+$$A = \\frac{1}{2} \\cdot (8 + 5) \\cdot 4 = 26 \\text{cm}^2$$
+
+### Kreis
+$r = 3\\text{cm}$
+$$A = \\pi \\cdot 9 \\approx 28{,}27 \\text{cm}^2$$
+
+---
+
+## Häufige Fehler
+
+- **Höhe im Dreieck:** Die Höhe steht IMMER **senkrecht** auf der Grundseite! Nicht die Seitenlänge verwenden.
+- **Radius vs. Durchmesser:** $A = \\pi r^2$, nicht $\\pi d^2$! Wenn der Durchmesser $d = 6$ gegeben ist, dann $r = 3$.
+- **Einheiten:** Fläche ist in $\\text{cm}^2$, nicht $\\text{cm}$! Zweidimensional!
+
 > 🔗 **Weiter:** Du kennst jetzt Flächen in 2D. Im nächsten Schritt werden wir diese Flächen zu **Körpern** erweitern — und Volumen berechnen!`,
       },
       {
@@ -2157,6 +2423,31 @@ $$O = \\pi r(r + l)$$ (l = Mantellänge)
 
 ### Übung
 Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!
+
+---
+
+## Rechenbeispiele
+
+### Quader
+$a = 3$, $b = 4$, $c = 5$
+$$V = 3 \\cdot 4 \\cdot 5 = 60 \\text{cm}^3$$
+$$O = 2(12 + 15 + 20) = 94 \\text{cm}^2$$
+
+### Zylinder
+$r = 2$, $h = 10$
+$$V = \\pi \\cdot 4 \\cdot 10 \\approx 125{,}66 \\text{cm}^3$$
+
+### Kegel
+$r = 3$, $h = 8$
+$$V = \\frac{1}{3} \\cdot \\pi \\cdot 9 \\cdot 8 \\approx 75{,}40 \\text{cm}^3$$
+
+---
+
+## Häufige Fehler
+
+- **Kegel:** NICHT vergessen den Faktor $\\frac{1}{3}$! Ohne ihn wäre es ein Zylinder.
+- **Kugel:** $V = \\frac{4}{3}\\pi r^3$, nicht $4\\pi r^3$! Der Faktor $\\frac{4}{3}$ geht oft verloren.
+- **Oberfläche vs. Volumen:** Unterschiedliche Einheiten! Oberfläche in $\\text{cm}^2$, Volumen in $\\text{cm}^3$.
 
 > 🔗 **Weiter:** Du kennst jetzt Flächen und Körper. Der **Satz des Pythagoras** verbindet Geometrie mit Algebra — und ist der Schlüssel zu vielen technischen Berechnungen!`,
       },
@@ -2329,6 +2620,25 @@ $$\\sin^2 \\alpha + \\cos^2 \\alpha = 1$$
 ## Übung
 
 Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\alpha$!
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Verwechslungen sind in Klausuren extrem häufig!
+
+**1.** Gegenkathete und Ankathete **NICHT verwechseln!**
+- **Gegenkathete** liegt **gegenüber** dem Winkel $\\alpha$
+- **Ankathete** liegt **an** dem Winkel $\\alpha$ (aber nicht die Hypotenuse)
+- Tipp: Wenn du den Winkel markierst, ist die Seite direkt am Winkel die Ankathete.
+
+**2.** $\\tan(\\alpha) = \\frac{\\sin(\\alpha)}{\\cos(\\alpha)}$, **NICHT** $\\frac{\\cos(\\alpha)}{\\sin(\\alpha)}$!
+- $\\tan = \\frac{\\text{Gegenkathete}}{\\text{Ankathete}} = \\frac{a}{b}$
+- $\\frac{\\cos}{\\sin}$ wäre der **Kotangens** ($\\cot$), nicht der Tangens!
+
+**3.** SOHCAHTOA gilt **NUR im rechtwinkligen Dreieck!**
+- $\\sin$, $\\cos$, $\\tan$ in dieser Form funktionieren nur bei einem rechten Winkel ($90°$).
+- Für allgemeine Dreiecke brauchst du den **Sinessatz** oder **Kosinessatz**.
 
 > 🔗 **Weiter:** Jetzt kennst du die Grundfunktionen. Im nächsten Kapitel lernst du die **wichtigen Winkelwerte** und den **Einheitskreis** kennen — das zentrale Werkzeug der Trigonometrie!
 
@@ -2584,6 +2894,24 @@ $a^{-n} = \\frac{1}{a^n}$
 $2^{-3} = \\frac{1}{8} = 0{,}125$
 
 > **Merke:** Bei Multiplikation gleicher Basen werden die Exponenten addiert, bei Division subtrahiert!
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Diese Fehler kommen in Prüfungen ständig vor — sie sind so häufig, dass Prüfer sie gezielt abfragen!
+
+**1.** $a^0 = 1$, **NICHT** $0$! (Für jedes $a \\neq 0$)
+- $5^0 = 1$, $100^0 = 1$, $(-3)^0 = 1$
+- Nur $0^0$ ist undefiniert.
+
+**2.** $a^{-n} = \\frac{1}{a^n}$, **NICHT** $-a^n$!
+- $2^{-3} = \\frac{1}{2^3} = \\frac{1}{8}$, **nicht** $-8$!
+- Das Minus im Exponenten bedeutet Kehrwert, nicht Vorzeichenwechsel.
+
+**3.** $(a^m)^n = a^{m \\cdot n}$ — Exponenten **MULTIPLIZIEREN**, nicht addieren!
+- $(2^3)^4 = 2^{12} = 4096$, **nicht** $2^7$!
+- Addieren wäre $a^m \\cdot a^n = a^{m+n}$ — das ist eine andere Regel.
 
 [PRACTICE_START]
 **Aufgabe 1:** Vereinfache $\frac{2^5 \cdot 2^3}{2^6}$
@@ -3515,6 +3843,24 @@ $x^2 + x + 1 = 0$: $D = 1 - 4 = -3 < 0$ -> keine reellen Loesungen
 **Probe:** $3(1{,}577)^2 - 6(1{,}577) + 2 \approx 0$
 [GUIDED_END]
 
+---
+
+## Häufige Fehler
+
+> **Achtung:** Quadratische Gleichungen sind Prüfungsklassiker — diese Fehler solltest du unbedingt vermeiden!
+
+**1.** Gleichung **MUSS** die Form $ax^2 + bx + c = 0$ haben!
+- Erst umformen, bevor du pq-Formel oder abc-Formel anwendest!
+- Beispiel: $x^2 = 5x - 6$ wird zu $x^2 - 5x + 6 = 0$
+
+**2.** pq-Formel: $x = -\\frac{p}{2} \\pm \\sqrt{\\left(\\frac{p}{2}\\right)^2 - q}$ — **Vorzeichen von $p$ beachten!**
+- Bei $x^2 + 3x + 2 = 0$ ist $p = +3$, also $-\\frac{p}{2} = -\\frac{3}{2}$
+- Häufiger Fehler: Das Minus vor $\\frac{p}{2}$ vergessen!
+
+**3.** Diskriminante $D < 0$ → **keine reellen Lösungen** (aber komplexe!)
+- $D < 0$ bedeutet nicht "keine Lösung", sondern keine Lösung in $\\mathbb{R}$.
+- In $\\mathbb{C}$ gibt es immer zwei Lösungen (Fundamentalsatz der Algebra).
+
 [PRACTICE_START]
 **Aufgabe 1:** Löse $x^2 - 5x + 6 = 0$ mit der pq-Formel
 
@@ -4425,6 +4771,24 @@ $x + 0 + 2 = 9$ -> $x = 7$
 
 **Probe:** $7 + 0 + 2 = 9$, $14 + 0 + 6 = 20$, $21 + 0 + 8 = 29$
 [GUIDED_END]
+
+---
+
+## Häufige Fehler
+
+> **Achtung:** Beim Gauß-Verfahren gibt es typische Fehler, die dir das gesamte Ergebnis verderben können!
+
+**1.** Zeilenoperation auf die **GESAMTE** Zeile anwenden (auch rechts vom Gleichheitszeichen!)
+- Wenn du Zeile 2 minus 2 mal Zeile 1 rechnest, musst du das für **alle** Spalten tun — einschließlich der rechten Seite (nach dem Gleichheitszeichen).
+- Fehlerquelle: Nur die Koeffizienten ändern, aber die Konstante vergessen.
+
+**2.** Pivot = 0 → **Zeilen tauschen**, nicht aufgeben!
+- Wenn das Pivotelement (diagonale Element) 0 ist, tausche die Zeile mit einer Zeile darunter, die ein Nicht-Null-Element hat.
+- Wenn keine Zeile mehr tauschen kann: System ist unterbestimmt oder hat keine eindeutige Lösung.
+
+**3.** $0 = 5$ → **keine Lösung**; $0 = 0$ → **unendlich viele Lösungen**
+- $0 = c$ mit $c \\neq 0$ bedeutet **Widerspruch** — das System ist unlösbar.
+- $0 = 0$ ist immer wahr — es gibt eine freie Variable, also unendlich viele Lösungen.
 
 [PRACTICE_START]
 **Aufgabe 1:** Loese mit Gauss: $x + y = 5$, $3x - y = 1$
@@ -6021,7 +6385,34 @@ Das wahre $e \\approx 2{,}71828$ — schon nach 5 Gliedern ziemlich genau!
 
 Computer können nicht $e^x$ direkt berechnen. Sie verwenden stattdessen die Taylor-Reihe und berechnen eine endliche Anzahl von Gliedern.
 
-> **Merke:** Taylor-Reihe = Funktion als unendliches Polynom. Je mehr Glieder, desto genauer.`,
+> **Merke:** Taylor-Reihe = Funktion als unendliches Polynom. Je mehr Glieder, desto genauer.
+
+---
+
+## Beispiel: $\\sin(x)$
+
+Schritt-für-Schritt die Taylor-Reihe von $f(x) = \\sin(x)$ um $a = 0$:
+
+| $n$ | $f^{(n)}(x)$ | $f^{(n)}(0)$ | Term |
+|-----|-------------|-------------|------|
+| 0 | $\\sin(x)$ | $0$ | $0$ |
+| 1 | $\\cos(x)$ | $1$ | $x$ |
+| 2 | $-\\sin(x)$ | $0$ | $0$ |
+| 3 | $-\\cos(x)$ | $-1$ | $-\\frac{x^3}{6}$ |
+| 4 | $\\sin(x)$ | $0$ | $0$ |
+| 5 | $\\cos(x)$ | $1$ | $\\frac{x^5}{120}$ |
+
+$$\\sin(x) = x - \\frac{x^3}{3!} + \\frac{x^5}{5!} - \\frac{x^7}{7!} + \\cdots = \\sum_{n=0}^{\\infty} \\frac{(-1)^n x^{2n+1}}{(2n+1)!}$$
+
+**Beispiel:** $\\sin(0{,}1) \\approx 0{,}1 - \\frac{0{,}001}{6} + \\frac{0{,}00001}{120} \\approx 0{,}09983$
+
+---
+
+## Häufige Fehler
+
+- **Maclaurin vs. Taylor:** Taylor um $a = 0$ heißt **Maclaurin-Reihe** — das ist ein Spezialfall! Bei $a \\neq 0$ brauchst du $(x-a)^n$.
+- **$n!$ im Nenner:** $\\frac{x^3}{6}$, nicht $\\frac{x^3}{3}$! Man vergisst leicht, dass $3! = 6$.
+- **Gerade/ungerade Potenzen:** $\\sin(x)$ hat nur **ungerade** Potenzen ($x, x^3, x^5, \\ldots$), $\\cos(x)$ nur **gerade** ($1, x^2, x^4, \\ldots$).`,
       },
       {
         id: "m-tw-2",
