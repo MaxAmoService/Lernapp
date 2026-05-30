@@ -114,6 +114,8 @@ Register → L1 (~64KB, ~1ns) → L2 (~256KB-1MB, ~4ns) → L3 (~4-32MB, ~10ns) 
       interactive: "cpuArchitectureExplorer",
       content: `## Grundlagen: Was ist eine CPU?
 
+> In diesem Modul lernst du die Hardware-Grundlagen kennen — von CPU und Speicher über Ein-/Ausgabegeräte bis zu Virtualisierung und Cloud. Diese Themen sind ein Kerngebiet der IHK-Prüfung!
+
 Die CPU (Central Processing Unit) ist das "Gehirn" des Computers. Sie führt Befehle aus, die im Speicher abgelegt sind. Die meisten modernen Computer folgen der **Von-Neumann-Architektur** — ein Konzept aus dem Jahr 1945, das bis heute die Grundlage bildet.
 
 > Von-Neumann ist wie ein Koch, der sein Rezept (Programm) und seine Zutaten (Daten) im selben Regal (Speicher) lagert. Er muss abwechselnd Rezept und Zutaten holen — das ist der berühmte Von-Neumann-Flaschenhals.
@@ -197,6 +199,8 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
 
 > Häufige Fehler: "Mehr Kerne = schneller" — Falsch! Nur wenn die Software parallelisieren kann. Ein Single-Thread-Programm wird von 12 Kernen nicht profitieren.
 
+> **Nächste Lektion:** Busse, Taktfrequenz & Befehlssatz — Wie verbindet sich die CPU mit dem Rest des Systems, und was bestimmt die tatsächliche Geschwindigkeit?
+
 [INTERACTIVE]
 `,
     },
@@ -210,6 +214,8 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
       duration: "15 min",
       type: "text",
       content: `## Die drei Busse
+
+> In der letzten Lektion haben wir die CPU-Architektur mit Von-Neumann, dem Fetch-Decode-Execute-Zyklus und CISC/RISC kennengelernt. Jetzt schauen wir uns an, wie die CPU mit dem Rest des Systems kommuniziert — über Busse und Taktfrequenz.
 
 Verbindung zwischen CPU, Speicher und Peripherie — wie Autobahnen für Daten:
 
@@ -272,6 +278,8 @@ Jede CPU versteht einen bestimmten Befehlssatz — die Maschinensprache:
 > IHK-Prüfung: Kenne den Unterschied zwischen Opcode und Operand. Ein Befehl im Maschinencode besteht immer aus beiden Teilen.
 
 > Häufige Fehler: "Taktfrequenz ist das Einzige was zählt" — Falsch! IPC, Cache-Größe, Pipeline-Tiefe und Architektur sind mindestens genauso wichtig.
+
+> **Nächste Lektion:** Eingabegeräte — Von Tastatur und Maus über Scanner bis hin zu biometrischen Verfahren und NFC.
 `,
     },
 
@@ -284,6 +292,8 @@ Jede CPU versteht einen bestimmten Befehlssatz — die Maschinensprache:
       duration: "15 min",
       type: "text",
       content: `## Übersicht
+
+> In der letzten Lektion haben wir die drei Busse (Adress-, Daten-, Steuerbus), die Taktfrequenz und den Befehlssatz kennengelernt. Jetzt widmen wir uns der Peripherie: Wie gelangen Daten überhaupt in den Computer?
 
 Eingabegeräte ermöglichen es dem Menschen, Daten in das Computersystem zu übertragen. Sie sind das Bindeglied zwischen Mensch und Maschine.
 
@@ -353,6 +363,8 @@ Biometrische Verfahren nutzen einzigartige körperliche Merkmale:
 > Praxis: NFC ist ein Teilbereich von RFID. Jedes NFC-Gerät kann RFID lesen, aber nicht jedes RFID-Gerät kann NFC.
 
 > Häufige Fehler: "RFID und NFC sind das Gleiche" — Falsch! NFC ist eine Teilmenge von RFID mit kürzerer Reichweite und bidirektionaler Kommunikation.
+
+> **Nächste Lektion:** Ausgabegeräte — Monitore, Drucker, 3D-Drucker und barrierefreie Ausgabe: Wie bringen wir Ergebnisse zum Menschen?
 `,
     },
 
@@ -365,6 +377,8 @@ Biometrische Verfahren nutzen einzigartige körperliche Merkmale:
       duration: "15 min",
       type: "text",
       content: `## Übersicht
+
+> In der letzten Lektion haben wir Eingabegeräte kennengelernt — von Tastaturen und Mäusen über Scanner bis zu biometrischen Verfahren und NFC. Jetzt schauen wir uns die andere Seite an: Wie gibt der Computer Ergebnisse aus?
 
 Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell, akustisch oder physisch.
 
@@ -435,6 +449,8 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
 > IHK-Prüfung: Vergleiche Druckverfahren! "Welcher Drucker eignet sich für..." ist eine häufige Aufgabenstellung.
 
 > Häufige Fehler: "Laserdrucker drucken mit Tinte" — Falsch! Laserdrucker nutzen Toner (Pulver), das durch Hitze auf das Papier fixiert wird.
+
+> **Nächste Lektion:** Speichermedien & RAID — HDD, SSD, optische Medien und die verschiedenen RAID-Level für Performance und Ausfallsicherheit.
 `,
     },
 
@@ -448,6 +464,8 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
       type: "interactive",
       interactive: "raidConfigurator",
       content: `## Speichertypen im Überblick
+
+> In der letzten Lektion haben wir Ausgabegeräte kennengelernt — Monitore, Drucker und 3D-Drucker. Jetzt geht es um die persistenten Daten: Welche Speichermedien gibt es, und wie sorgt man mit RAID für Ausfallsicherheit?
 
 Speichermedien werden nach ihrer Technologie in drei Kategorien eingeteilt:
 
@@ -531,6 +549,8 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 [INTERACTIVE]
 
 > Häufige Fehler: "RAID ist ein Backup" — Falsch! RAID schützt vor Hardwareausfall, nicht vor Löschen, Viren oder Brand. Trotzdem Backup machen!
+
+> **Nächste Lektion:** Speicherverwaltung & Adressierung — Die Speicherhierarchie, Caching, Paging und virtueller Speicher: Wie verwaltet das System seinen Arbeitsspeicher?
 `,
     },
 
@@ -544,6 +564,8 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
       type: "interactive",
       interactive: "memoryHierarchyExplorer",
       content: `## Die Speicherhierarchie
+
+> In der letzten Lektion haben wir Speichermedien (HDD, SSD, optisch) und RAID-Level kennengelernt. Jetzt schauen wir uns an, wie der Computer seinen Arbeitsspeicher verwaltet — von der Hierarchie über Caching bis zu virtuellem Speicher.
 
 Der Computer nutzt verschiedene Speichertypen — je schneller, desto teurer und kleiner:
 
@@ -643,6 +665,8 @@ Formel: **Adressraum = 2^n** (n = Anzahl Adressleitungen)
 
 > Häufige Fehler: "L1-Cache ist langsamer als RAM weil er kleiner ist" — Falsch! L1 ist am SCHNELLSTEN, gerade WEIL er klein und nahe am Prozessor ist.
 
+> **Nächste Lektion:** Betriebssysteme & Systemsoftware — Kernel, Prozesse, Threads und Dateisysteme: Was macht das OS zur Vermittlerschicht zwischen Hardware und Software?
+
 [INTERACTIVE]
 `,
     },
@@ -656,6 +680,8 @@ Formel: **Adressraum = 2^n** (n = Anzahl Adressleitungen)
       duration: "20 min",
       type: "text",
       content: `## Was macht ein Betriebssystem?
+
+> In der letzten Lektion haben wir die Speicherhierarchie, Caching, Paging und virtuellen Speicher kennengelernt. Jetzt wird es übergeordnet: Wie verwaltet das Betriebssystem all diese Ressourcen — Prozesse, Speicher, Dateien und Geräte?
 
 Das Betriebssystem (OS) ist die Vermittlerschicht zwischen Hardware und Anwendungssoftware:
 
@@ -767,6 +793,8 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 > Siehe auch: Netzwerkmodul — dort wird auf Netzwerk-Protokolle und -Freigaben eingegangen.
 
 > Häufige Fehler: "Linux ist nur für Experten" — Falsch! Distributionen wie Ubuntu oder Linux Mint sind einsteigerfreundlich. Und: Fast alle Server laufen unter Linux.
+
+> **Nächste Lektion:** Virtualisierung & Cloud Computing — Hypervisor, Container, IaaS/PaaS/SaaS und Cloud-Deployment: Wie löst man sich von der physischen Hardware?
 `,
     },
 
@@ -780,6 +808,8 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
       type: "interactive",
       interactive: "virtualizationExplorer",
       content: `## Was ist Virtualisierung?
+
+> In der letzten Lektion haben wir Betriebssysteme kennengelernt — Kernel, Prozesse, Threads und Dateisysteme. Jetzt geht es einen Schritt weiter: Was, wenn man mehrere Betriebssysteme gleichzeitig auf einer Hardware laufen lassen will?
 
 Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle Maschinen" (VMs) laufen auf einer einzigen physischen Maschine — jede mit eigenem OS.
 
@@ -863,6 +893,8 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
 > Praxis: Viele Unternehmen migrieren von lokalen Servern in die Cloud. Aber: Nicht alles gehört in die Cloud. Sensible Daten oder Echtzeitanwendungen bleiben oft on-premise.
 
 > Häufige Fehler: "Cloud = immer billiger" — Falsch! Bei konstant hoher Last kann ein eigener Server günstiger sein. Cloud lohnt sich bei schwankendem Bedarf.
+
+> **Nächste Lektion:** Leistungsbewertung & Optimierung — Benchmarks, Amdahlsches Gesetz und Engpassanalyse: Wie misst und verbessert man die Performance?
 `,
     },
 
@@ -876,6 +908,8 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
       type: "interactive",
       interactive: "addressingCalculator",
       content: `## Benchmarks
+
+> In der letzten Lektion haben wir Virtualisierung und Cloud Computing kennengelernt — Hypervisor, Container und die Cloud-Modelle IaaS/PaaS/SaaS. Jetzt fragen wir uns: Wie misst man eigentlich die Leistung eines Systems — und wo liegen die Engpässe?
 
 Benchmarks sind standardisierte Tests zur Messung der Computerleistung:
 
@@ -949,6 +983,8 @@ Das OS verwaltet Ressourcen effizient:
 
 > Häufige Fehler: "Mehr GHz = immer schneller" — Falsch! Ein 3-GHz-Prozessor mit hoher IPC kann schneller sein als ein 4-GHz-Prozessor mit niedriger IPC.
 
+> **Nächste Lektion:** Nachhaltigkeit & Green IT — Energieeffizienz, Recycling und der Rebound-Effekt: Wie reduziert man den ökologischen Fußabdruck der IT?
+
 [INTERACTIVE]
 `,
     },
@@ -962,6 +998,8 @@ Das OS verwaltet Ressourcen effizient:
       duration: "12 min",
       type: "text",
       content: `## Warum Green IT?
+
+> In der letzten Lektion haben wir Leistungsbewertung kennengelernt — Benchmarks, das Amdahlsche Gesetz und Engpassanalyse. Jetzt stellen wir sich die Frage: Was kostet all diese Leistung — und wie kann IT nachhaltiger werden?
 
 Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Green IT zielt darauf ab, den ökologischen Fußabdruck der IT zu reduzieren.
 
@@ -1040,6 +1078,8 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
 > IHK-Prüfung: Green IT ist ein häufiges Prüfungsthema! Kenne mindestens 3 konkrete Maßnahmen und den Rebound-Effekt.
 
 > Häufige Fehler: "Cloud ist automatisch grüner" — Kommt darauf an! Wenn das Rechenzentrum Kohlestrom nutzt, kann Cloud sogar schlechter sein.
+
+> **Nächste Lektion:** Historische Entwicklung — Von Röhren über Transistoren zu Mikroprozessoren: Wie hat sich die Computertechnik entwickelt, und was ist Moores Gesetz?
 `,
     },
 
@@ -1053,6 +1093,8 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
       type: "interactive",
       interactive: "storageComparator",
       content: `## Die vier Generationen
+
+> In der letzten Lektion haben wir Green IT kennengelernt — Energieeffizienz, Recycling und den Rebound-Effekt. Jetzt machen wir einen Schritt zurück in die Geschichte: Wie hat sich die Computertechnik von den Anfängen bis heute entwickelt?
 
 > Merksatz: "**R**olf **T**rinkt **I**mmer **M**ilch" — **R**öhren, **T**ransistoren, **I**ntegrierte Schaltungen, **M**ikroprozessoren
 
@@ -1132,6 +1174,8 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
 
 > IHK-Prüfung: Die Computertechnik-Prüfung kombiniert oft mehrere Themen. Beispiel: "Ein Unternehmen braucht einen Server mit RAID, virtueller Speicherverwaltung und Cloud-Anbindung — welche Komponenten und Konzepte sind relevant?"
 
+> **Nächste Lektion:** BIOS/UEFI & Bootvorgang — POST, MBR/GPT und der Bootloader: Was passiert, bevor das Betriebssystem startet?
+
 [INTERACTIVE]
 `,
     },
@@ -1146,6 +1190,8 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
       type: "interactive",
       interactive: "bootSequenceBuilder",
       content: `## Grundlagen: Was passiert beim Einschalten?
+
+> In der letzten Lektion haben wir die historische Entwicklung der IT kennengelernt — von Röhren über Transistoren zu Mikroprozessoren und Moores Gesetz. Jetzt schauen wir uns an, was genau passiert, wenn ein moderner Computer eingeschaltet wird.
 
 Wenn du den Power-Button drückst, passiert eine ganze Kette von Ereignissen, bevor das Betriebssystem startet. Diese Kette ist standardisiert und bei jedem PC gleich.
 
@@ -1226,6 +1272,8 @@ Der Bootloader lädt den Kernel des Betriebssystems in den RAM und übergibt die
 
 > IHK-Prüfung: "Beschreiben Sie den Bootvorgang eines PCs" — die 10 Schritte können als PAP oder Struktogramm verlangt werden.
 
+> **Nächste Lektion:** Serielle Datenübertragung — RS-232, Parität, USB-Versionen und Schnittstellen: Wie werden Daten bitweise übertragen?
+
 [INTERACTIVE]
 `,
     },
@@ -1240,6 +1288,8 @@ Der Bootloader lädt den Kernel des Betriebssystems in den RAM und übergibt die
       type: "interactive",
       interactive: "dataTransmissionVisualizer",
       content: `## Seriell vs. Parallel
+
+> In der letzten Lektion haben wir den Bootvorgang kennengelernt — POST, BIOS/UEFI, MBR/GPT und den Bootloader. Jetzt widmen wir uns der grundlegendsten Frage der Datenverarbeitung: Wie werden Bits eigentlich von A nach B übertragen?
 
 Es gibt zwei grundlegende Arten, Daten zu übertragen:
 

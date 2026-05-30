@@ -150,7 +150,9 @@ Durch fehlende Normalisierung können drei Probleme auftreten:
 - **Änderungsanomalie**: Kundenadresse muss in JEDER Bestellung geändert werden
 - **Löschanomalie**: Löscht man die letzte Bestellung, verschwindet der Kunde
 
-> ❗ **IHK-Tipp:** Diese Begriffe kommen in JEDER Prüfung — sowohl in AP1 als auch AP2!`,
+> ❗ **IHK-Tipp:** Diese Begriffe kommen in JEDER Prüfung — sowohl in AP1 als auch AP2!
+
+> **Nächste Lektion:** Relationale Datenbanken & Kardinalitäten — Wie Tabellen über Schlüssel miteinander verbunden sind und welche Beziehungstypen es gibt.`,
     },
 
     // =====================================================================
@@ -163,6 +165,8 @@ Durch fehlende Normalisierung können drei Probleme auftreten:
       type: "interactive",
       interactive: "relationalModelExplorer",
       content: `## Was bedeutet "relational"?
+
+> In der letzten Lektion haben wir die wichtigsten Datenbank-Grundbegriffe kennengelernt — Primärschlüssel, Fremdschlüssel und Kardinalität. Jetzt schauen wir uns genauer an, wie Tabellen über diese Schlüssel miteinander verbunden sind und welche Beziehungstypen es gibt.
 
 **Relational** bedeutet: Die Tabellen stehen in **Relation** zueinander — sie hängen über Schlüssel zusammen.
 
@@ -222,7 +226,9 @@ Schüler (ID, Name) ↔ Kurs (ID, Fach) → SchülerKurs (Schüler_ID, Kurs_ID, 
 
 Probiere verschiedene Beziehungstypen aus und sieh dir die resultierenden Tabellen an!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** Entity-Relationship-Modell (ERM) — Wie man eine Datenbank als visuellen Bauplan mit Entitäten, Attributen und Beziehungen plant.`,
     },
 
     // =====================================================================
@@ -235,6 +241,8 @@ Probiere verschiedene Beziehungstypen aus und sieh dir die resultierenden Tabell
       type: "interactive",
       interactive: "erDiagramBuilder",
       content: `## Was ist das ER-Modell?
+
+> In der letzten Lektion haben wir die drei Beziehungstypen 1:1, 1:n und n:m kennengelernt und gelernt, wie Verweistabellen n:m-Beziehungen auflösen. Jetzt nutzen wir dieses Wissen, um eine Datenbank systematisch zu planen — mit dem ER-Modell als visuellem Bauplan.
 
 Das **ER-Modell** (Entity-Relationship-Modell) ist ein Hilfsmittel zur **Datenbankplanung**. Es entsteht in der **konzeptionellen Phase** und stellt dar:
 - Welche **Entitäten** (Tabellen) es gibt
@@ -282,7 +290,9 @@ Das **ER-Modell** (Entity-Relationship-Modell) ist ein Hilfsmittel zur **Datenba
 
 Baue dein eigenes ER-Diagramm — füge Entitäten, Attribute und Beziehungen hinzu!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** Normalisierung (1NF, 2NF, 3NF) — Wie man Redundanzen und Anomalien in Tabellen systematisch beseitigt.`,
     },
 
     // =====================================================================
@@ -295,6 +305,8 @@ Baue dein eigenes ER-Diagramm — füge Entitäten, Attribute und Beziehungen hi
       type: "interactive",
       interactive: "normalisationTrainer",
       content: `## Warum normalisieren?
+
+> In der letzten Lektion haben wir das ER-Modell kennengelernt und gelernt, wie man Entitäten, Attribute und Beziehungen in einem visuellen Bauplan festhält. Jetzt geht es einen Schritt weiter: Wir nehmen diese Entitäten und bringen sie in eine saubere, redundanzfreie Tabellenstruktur — die Normalisierung.
 
 Ziel der Normalisierung:
 - ✅ **Redundanzen** vermeiden
@@ -374,7 +386,9 @@ Kunde(KundenID, Name, PLZ, Stadt)
 
 Bringe Schritt für Schritt eine denormalisierte Tabelle in die 3NF — mit Erklärung zu jedem Schritt!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** SQL — DDL, DML, DQL, DCL & TCL — Die Abfragesprache, mit der wir unsere normalisierten Tabellen erstellen, befüllen und abfragen.`,
     },
 
     // =====================================================================
@@ -387,6 +401,8 @@ Bringe Schritt für Schritt eine denormalisierte Tabelle in die 3NF — mit Erkl
       type: "interactive",
       interactive: "sqlPlayground",
       content: `## Was ist SQL?
+
+> In der letzten Lektion haben wir gelernt, wie man Tabellen durch Normalisierung in die 1NF, 2NF und 3NF bringt und so Redundanzen beseitigt. Jetzt kommt die Praxis: Mit SQL lernen wir die Sprache, mit der wir diese Tabellen erstellen, mit Daten befüllen und abfragen.
 
 **SQL** (Structured Query Language) ist eine **deklarative Sprache** für relationale Datenbanken.
 - Keine Programmiersprache (keine Schleifen!)
@@ -506,7 +522,9 @@ COMMIT;  -- oder ROLLBACK;
 
 Schreibe eigene SQL-Befehle und sieh die Ergebnisse live!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** JOINs — Tabellen verknüpfen — Wie man Daten aus mehreren Tabellen mit INNER, LEFT, RIGHT und CROSS JOIN kombiniert.`,
     },
 
     // =====================================================================
@@ -519,6 +537,8 @@ Schreibe eigene SQL-Befehle und sieh die Ergebnisse live!
       type: "interactive",
       interactive: "joinVisualizer",
       content: `## Was ist ein JOIN?
+
+> In der letzten Lektion haben wir die fünf SQL-Kategorien kennengelernt — von DDL für Tabellenstrukturen bis TCL für Transaktionen. Bisher haben wir aber immer nur mit einer Tabelle gearbeitet. Jetzt lernen wir JOINs kennen, mit denen wir Daten aus mehreren verknüpften Tabellen kombinieren können.
 
 Ein **JOIN** kombiniert Daten aus **zwei oder mehr Tabellen** basierend auf einem gemeinsamen Attribut (meist PK/FK).
 
@@ -594,7 +614,9 @@ Aber: **JOIN ist schneller** (besserer Query-Plan) und **lesbarer**!
 
 Sieh visuell, welche Zeilen bei welchem JOIN-Typ übrig bleiben!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** Das ACID-Prinzip — Die vier Eigenschaften, die garantieren, dass Datenbank-Transaktionen sicher und zuverlässig ablaufen.`,
     },
 
     // =====================================================================
@@ -606,6 +628,8 @@ Sieh visuell, welche Zeilen bei welchem JOIN-Typ übrig bleiben!
       duration: "10 min",
       type: "text",
       content: `## Was ist ACID?
+
+> In der letzten Lektion haben wir JOINs kennengelernt, mit denen wir Daten aus mehreren Tabellen kombinieren können. Doch was passiert, wenn bei einer komplexen Operation etwas schiefgeht? Das ACID-Prinzip beschreibt die Sicherheitsgarantien, die eine relationale Datenbank für Transaktionen bietet.
 
 **ACID** beschreibt die vier Eigenschaften, die eine Transaktion in einer relationalen Datenbank garantieren muss.
 
@@ -668,7 +692,9 @@ Sobald eine Transaktion erfolgreich abgeschlossen (COMMIT) ist, bleiben die Date
 
 > **A**lles oder nichts → **C**onsistent → **I**soliert → **D**auerhaft
 
-> ❗ **IHK-Tipp:** ACID kommt als Multiple-Choice-Frage dran — und in AP2 als Erklärungsaufgabe!`,
+> ❗ **IHK-Tipp:** ACID kommt als Multiple-Choice-Frage dran — und in AP2 als Erklärungsaufgabe!
+
+> **Nächste Lektion:** IHK Übungsaufgaben — SQL — Typische Prüfungsaufgaben zu SELECT, WHERE, GROUP BY und Aggregationen aus realen AP1/AP2-Prüfungen.`,
     },
 
     // =====================================================================
@@ -680,7 +706,9 @@ Sobald eine Transaktion erfolgreich abgeschlossen (COMMIT) ist, bleiben die Date
       duration: "25 min",
       type: "interactive",
       interactive: "sqlPlayground",
-      content: `Hier übst du typische IHK-Prüfungsaufgaben zu SQL. Die Aufgaben basieren auf realen AP1/AP2-Prüfungen.
+      content: `> In der letzten Lektion haben wir das ACID-Prinzip kennengelernt und gelernt, welche vier Eigenschaften Transaktionen garantieren müssen. Jetzt wird es praxisnah: Wir üben typische IHK-Prüfungsaufgaben zu SQL — so wie sie in AP1 und AP2 drankommen.
+
+Hier übst du typische IHK-Prüfungsaufgaben zu SQL. Die Aufgaben basieren auf realen AP1/AP2-Prüfungen.
 
 ## Aufgabe 1: Produktionsdaten
 
@@ -757,7 +785,9 @@ AND Vertragsbeginn BETWEEN '2022-05-01' AND '2022-05-31';
 
 Nutze den Playground unten, um eigene Queries zu schreiben und zu testen!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** Datenbank planen — Die 4 Phasen — Von der Anforderungsanalyse über das ER-Modell bis zur fertigen SQL-Implementierung.`,
     },
 
     // =====================================================================
@@ -770,6 +800,8 @@ Nutze den Playground unten, um eigene Queries zu schreiben und zu testen!
       type: "interactive",
       interactive: "dbPlanningPhases",
       content: `## Übersicht
+
+> In der letzten Lektion haben wir typische IHK-Prüfungsaufgaben zu SQL geübt — von SELECT mit WHERE und GROUP BY bis zu Aggregationen. Jetzt zoomen wir raus und schauen uns den gesamten Planungsprozess an: Wie entsteht eine Datenbank vom ersten Anforderungsgespräch bis zum fertigen SQL-Code?
 
 Eine Datenbank wird in **4 Phasen** geplant:
 
@@ -867,7 +899,9 @@ CREATE TABLE Mitarbeiter (
 
 Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vorlagen an!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> **Nächste Lektion:** Backups & Datenwiederherstellung — Strategien zum Schutz vor Datenverlust: Full Backup, inkrementelles Backup und Restore.`,
     },
 
     // =====================================================================
@@ -879,6 +913,8 @@ Klicke durch die 4 Phasen und sieh dir zu jeder Phase Beispiele, Aufgaben und Vo
       duration: "10 min",
       type: "text",
       content: `## Warum Backups?
+
+> In der letzten Lektion haben wir die 4 Phasen der Datenbankplanung kennengelernt — von der Anforderungsanalyse bis zur Implementierung. Doch was passiert, wenn die fertige Datenbank durch einen Crash oder Fehler Daten verliert? Jetzt lernen wir Backup-Strategien kennen, die genau das verhindern.
 
 > 💡 **Kein Backup = Keine Mitleid.** Datenverlust kann durch Hardwareausfall, menschliche Fehler oder Cyberangriffe passieren.
 
@@ -935,7 +971,9 @@ psql -U benutzer datenbank < backup.sql
 - ✅ **Wiederherstellungszeit** dokumentieren
 - ❌ Backups auf **derselben Festplatte** wie die Datenbank!
 
-> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. inkrementelles Backup unterscheiden können!`,
+> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. inkrementelles Backup unterscheiden können!
+
+> **Nächste Lektion:** Datenbanktypen im Überblick — Relationale Datenbanken sind nicht die einzige Wahl: NoSQL, Key-Value, Graph und weitere im Vergleich.`,
     },
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -947,6 +985,8 @@ psql -U benutzer datenbank < backup.sql
       duration: "12 min",
       type: "text",
       content: `## Warum verschiedene Datenbanktypen?
+
+> In der letzten Lektion haben wir Backup-Strategien kennengelernt, die unsere Datenbank vor Datenverlust schützen. Bisher haben wir uns aber ausschließlich mit relationalen Datenbanken beschäftigt. Jetzt schauen wir uns an, welche anderen Datenbanktypen es gibt und wann sie sinnvoll sind.
 
 Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderungen brauchen verschiedene Lösungen.
 
@@ -1008,7 +1048,8 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
 > Praxis: Viele Unternehmen nutzen beide: Relationale DB für Bestellungen, NoSQL für Logs/Sessions. Das nennt sich **Polyglot Persistence**.
 
 > Häufige Fehler: "NoSQL ist besser als SQL" — Falsch! Es kommt auf den Anwendungsfall an. Für strukturierte Daten mit Beziehungen ist SQL oft besser.
-`,
+
+> **Nächste Lektion:** CREATE TABLE im Detail — Datentypen, Constraints und die vollständige Syntax zum Erstellen von Tabellen.`,
     },
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -1020,6 +1061,8 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
       duration: "15 min",
       type: "text",
       content: `## Tabellen erstellen
+
+> In der letzten Lektion haben wir einen Überblick über verschiedene Datenbanktypen bekommen — von relationalen über dokumentenbasierte bis zu Graphdatenbanken. Jetzt kehren wir zu den relationalen Datenbanken zurück und schauen uns das wichtigste DDL-Statement im Detail an: CREATE TABLE — mit allen Datentypen und Constraints, die du für die IHK-Prüfung kennen musst.
 
 Das CREATE TABLE-Statement definiert die Struktur einer Tabelle. In der IHK-Prüfung musst du solche Statements schreiben oder interpretieren können.
 

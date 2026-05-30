@@ -136,6 +136,8 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
 6. **Mensch:** Schulung, Awareness
 
 > **IHK-Tipp:** Fragen zu Sicherheitszielen und Angriffsarten kommen häufig in AP1/AP2 vor!
+
+> **Nächste Lektion:** Authentifizierung & Passwörter — Wir schauen uns an, wie man Identitäten nachweist und Passwörter sicher speichert.
 `,
     },
     {
@@ -145,6 +147,8 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
       type: "interactive",
       interactive: "passwordStrengthChecker" as const,
       content: `## Authentifizierung & Passwörter
+
+> In der letzten Lektion haben wir die CIA-Triade, Bedrohungsvektoren und Malware-Arten kennengelernt. Jetzt widmen wir uns der Frage: Wie weist man nach, wer man ist — und wie schützt man Passwörter richtig?
 
 ### Authentifizierung vs. Autorisierung
 
@@ -196,6 +200,8 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
 - Speichert sie verschlüsselt
 
 > **IHK-Tipp:** Erkläre den Unterschied zwischen Hashing und Verschlüsselung — das kommt oft in Prüfungen!
+
+> **Nächste Lektion:** Netzwerksicherheit — Firewalls, IDS/IPS, VPN und die wichtigsten Ports für die IHK-Prüfung.
 `,
     },
     {
@@ -205,6 +211,8 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
       type: "interactive",
       interactive: "firewallRuleBuilder" as const,
       content: `## Netzwerksicherheit
+
+> In der letzten Lektion haben wir gelernt, wie man Identitäten nachweist und Passwörter sicher mit Hashing und Salting speichert. Jetzt schauen wir uns an, wie man Netzwerke mit Firewalls, VPNs und DMZs schützt.
 
 ### Firewall
 
@@ -261,6 +269,8 @@ Die DMZ ist ein Pufferbereich — öffentliche Server stehen hier, das interne N
 | 3306 | MySQL | ❌ |
 
 > **Merke:** Port 443 = HTTPS, Port 80 = HTTP, Port 22 = SSH — die drei wichtigsten!
+
+> **Nächste Lektion:** Web-Security (OWASP Top 10) — SQL-Injection, XSS und CSRF: Die häufigsten Angriffe auf Webanwendungen.
 `,
     },
     {
@@ -270,6 +280,8 @@ Die DMZ ist ein Pufferbereich — öffentliche Server stehen hier, das interne N
       type: "interactive",
       interactive: "sqlInjectionSimulator" as const,
       content: `## Web-Security — OWASP Top 10
+
+> In der letzten Lektion haben wir Netzwerksicherheit mit Firewalls, IDS/IPS und VPN kennengelernt. Jetzt steigen wir eine Schicht tiefer: Wie werden Webanwendungen angegriffen — und wie schützt man sich?
 
 Die **OWASP Top 10** sind die kritischsten Web-Sicherheitsrisiken. In der IHK-Prüfung werden oft Szenarien zu SQL-Injection und XSS abgefragt.
 
@@ -357,6 +369,8 @@ docker run -d -p 3000:3000 bkimminich/juice-shop
 > Die Challenges sind Schwierigkeitsgrad 1-6 ⭐. Starte mit Level 1 und steigere dich!
 
 > **IHK-Tipp:** SQL-Injection und XSS sind DIE Klassiker in der Prüfung. Erkläre den Angriff + Schutzmaßnahme!
+
+> **Nächste Lektion:** Verschlüsselung & PKI — Symmetrische und asymmetrische Verschlüsselung, digitale Signaturen und Zertifikate.
 `,
     },
     {
@@ -366,6 +380,8 @@ docker run -d -p 3000:3000 bkimminich/juice-shop
       type: "interactive",
       interactive: "encryptionDemo" as const,
       content: `## Verschlüsselung & PKI
+
+> In der letzten Lektion haben wir die OWASP Top 10 kennengelernt — SQL-Injection, XSS und andere Angriffe auf Webanwendungen. Jetzt schauen wir uns das mathematische Fundament der Sicherheit an: Verschlüsselung und Public-Key-Infrastrukturen.
 
 ### Symmetrische Verschlüsselung
 
@@ -424,6 +440,8 @@ Root CA → Intermediate CA → Server-Zertifikat
 | **Beispiel** | SHA-256, bcrypt | AES, RSA |
 
 > **IHK-Tipp:** "Erkläre den Unterschied zwischen Hashing und Verschlüsselung" — fast jede Prüfung!
+
+> **Nächste Lektion:** Social Engineering & Phishing — Der Mensch als schwächstes Glied: Angriffe erkennen und sich schützen.
 `,
     },
     {
@@ -433,6 +451,8 @@ Root CA → Intermediate CA → Server-Zertifikat
       type: "interactive",
       interactive: "phishingDetector" as const,
       content: `## Social Engineering & Phishing
+
+> In der letzten Lektion haben wir Verschlüsselung und PKI kennengelernt — von symmetrischen und asymmetrischen Verfahren bis zu digitalen Signaturen und Zertifikaten. Jetzt widmen wir uns der Schwachstelle, die keine Technik schließen kann: dem Menschen selbst.
 
 ### Was ist Social Engineering?
 

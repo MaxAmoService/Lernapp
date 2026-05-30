@@ -146,7 +146,9 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 
 [INTERACTIVE]
 
-> 💡 Der OSI-Kapselungs-Viewer zeigt dir, wie Daten Schicht für Schicht verpackt werden — klicke durch die Animation!`,
+> 💡 Der OSI-Kapselungs-Viewer zeigt dir, wie Daten Schicht für Schicht verpackt werden — klicke durch die Animation!
+
+> Jetzt kennst du die theoretische Schichten-Architektur. In der nächsten Lektion schauen wir uns das praktische TCP/IP-Modell an — und lernen die wichtigsten Protokolle und Ports kennen.`,
     },
     {
       id: "netz-2",
@@ -154,7 +156,9 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
       duration: "15 min",
       type: "interactive",
       interactive: "tcpHandshakeSimulator",
-      content: `## Die 4 Schichten des TCP/IP-Modells
+      content: `> In der letzten Lektion haben wir das OSI-Referenzmodell mit seinen 7 Schichten kennengelernt. Jetzt schauen wir uns das TCP/IP-Modell an — das Modell, das das Internet tatsächlich verwendet — und lernen die wichtigsten Protokolle und Ports kennen.
+
+## Die 4 Schichten des TCP/IP-Modells
 
 1. **Anwendung** (Application): HTTP, FTP, SMTP, DNS, SSH
 2. **Transport** (Transport): TCP, UDP
@@ -202,7 +206,9 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 
 [INTERACTIVE]
 
-> 💡 Verschlüsselung von Caesar bis TLS — wie schützt HTTPS deine Daten?`,
+> 💡 Verschlüsselung von Caesar bis TLS — wie schützt HTTPS deine Daten?
+
+> Jetzt kennst du die Protokolle und Ports. In der nächsten Lektion widmen wir uns der IPv4-Adressierung — dem Fundament für alles, was mit IP-Netzwerken zu tun hat.`,
     },
     {
       id: "netz-3",
@@ -210,7 +216,9 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
       duration: "18 min",
       type: "interactive",
       interactive: "macConverter",
-      content: `## Aufbau einer IPv4-Adresse
+      content: `> In der letzten Lektion haben wir das TCP/IP-Modell und die wichtigsten Protokolle kennengelernt. Jetzt widmen wir uns der IPv4-Adressierung — der Grundlage, wie Geräte in Netzwerken eindeutig identifiziert werden.
+
+## Aufbau einer IPv4-Adresse
 - **32 Bit**, in **4 Oktetten** à 8 Bit
 - Dezimal mit Punkten: \`192.168.1.1\`
 - Binär: \`11000000.10101000.00000001.00000001\`
@@ -244,14 +252,18 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 
 [INTERACTIVE]
 
-> 💡 Der MAC/IP-Konverter zeigt dir Binär und Dezimal im Wechsel — übe die Umrechnung!`,
+> 💡 Der MAC/IP-Konverter zeigt dir Binär und Dezimal im Wechsel — übe die Umrechnung!
+
+> Jetzt kennst du den Aufbau von IPv4-Adressen und die IP-Klassen. In der nächsten Lektion lernst du Subnetting kennen — wie man große Netzwerke in kleinere, effiziente Teilnetze aufteilt.`,
     },
     {
       id: "netz-4",
       title: "Subnetting Grundlagen — CIDR & Subnetzmaske",
       duration: "10 min",
       type: "text",
-      content: `## Was ist Subnetting?
+      content: `> In der letzten Lektion haben wir den Aufbau von IPv4-Adressen und die IP-Klassen kennengelernt. Jetzt kommt das wichtigste Thema für die IHK-Prüfung: Subnetting — die Kunst, große Netzwerke in kleinere Teilnetze aufzuteilen.
+
+## Was ist Subnetting?
 
 Subnetting bedeutet, ein großes Netzwerk in **kleinere Teilnetze (Subnetze)** aufzuteilen. Das bringt drei Vorteile:
 
@@ -313,14 +325,18 @@ $$255 . 255 . 255 . 192$$
 | /29 | 255.255.255.248 | 11111000 = 248 | $2^3 - 2 = 6$ |
 | /30 | 255.255.255.252 | 11111100 = 252 | $2^2 - 2 = 2$ |
 
-> 💡 Merke dir die Tabelle — in der Prüfung musst du schnell die passende CIDR-Notation erkennen!`,
+> 💡 Merke dir die Tabelle — in der Prüfung musst du schnell die passende CIDR-Notation erkennen!
+
+> Jetzt kennst du CIDR-Notation und Subnetzmasken. In der nächsten Lektion lernst du die Subnetting-Formeln kennen, mit denen du Hosts, Subnetze und die richtige CIDR berechnest.`,
     },
     {
       id: "netz-5",
       title: "Subnetting Formeln",
       duration: "10 min",
       type: "text",
-      content: `## Anzahl der nutzbaren Hosts
+      content: `> In der letzten Lektion haben wir die CIDR-Notation und Subnetzmasken kennengelernt. Jetzt lernst du die konkreten Formeln, mit denen du berechnest, wie viele Hosts und Subnetze ein Netzwerk hat — und welche CIDR für deine Anforderungen passt.
+
+## Anzahl der nutzbaren Hosts
 
 $$\\text{Nutzbare Hosts} = 2^h - 2$$
 
@@ -357,7 +373,9 @@ $$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbare
 
 - **Netzwerkadresse**: Erste im Subnetz (Host-Bits = 0)
 - **Broadcast-Adresse**: Letzte im Subnetz (Host-Bits = 1)
-- **Nutzbare Hosts**: Alles dazwischen`,
+- **Nutzbare Hosts**: Alles dazwischen
+
+> Jetzt kennst du die Subnetting-Formeln. In der nächsten Lektion lernst du die AND-Verknüpfung kennen — damit berechnest du aus IP-Adresse und Maske die konkrete Netzwerkadresse.`,
     },
     {
       id: "netz-6",
@@ -365,7 +383,9 @@ $$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbare
       duration: "12 min",
       type: "interactive",
       interactive: "subnetCalculator",
-      content: `## Die UND-Verknüpfung (AND-Operation)
+      content: `> In der letzten Lektion haben wir die Subnetting-Formeln kennengelernt. Jetzt lernst du die AND-Verknüpfung kennen — damit berechnest du aus einer IP-Adresse und der Subnetzmaske die konkrete Netzwerkadresse, Broadcast-Adresse und den ersten/letzten Host.
+
+## Die UND-Verknüpfung (AND-Operation)
 
 Um die **Netzwerkadresse** zu finden, wendet man die **UND-Verknüpfung** (AND) auf IP-Adresse und Subnetzmaske an:
 
@@ -419,7 +439,9 @@ $$\\text{Anzahl nutzbarer Hosts} = 2^6 - 2 = 62$$
 
 Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere verschiedene Eingaben aus!
 
-[INTERACTIVE:subnetCalculator]`,
+[INTERACTIVE:subnetCalculator]
+
+> Jetzt kennst du die AND-Verknüpfung und kannst Netzwerkadressen berechnen. In der nächsten Lektion lernst du VLSM kennen — damit teilst du ein Netzwerk in verschieden große Subnetze auf und sparst IP-Adressen.`,
     },
     {
       id: "netz-7",
@@ -427,7 +449,9 @@ Der Rechner zeigt dir alle Werte mit Schritt-für-Schritt-Lösung — probiere v
       duration: "12 min",
       type: "interactive",
       interactive: "subnettingTrainer",
-      content: `## Was ist VLSM?
+      content: `> In der letzten Lektion haben wir die AND-Verknüpfung kennengelernt, um Netzwerkadressen zu berechnen. Jetzt geht es einen Schritt weiter: Mit VLSM teilst du ein Netzwerk in verschieden große Subnetze auf — das spart IP-Adressen und ist ein häufiges IHK-Prüfungsthema.
+
+## Was ist VLSM?
 
 **VLSM** erlaubt es, verschiedene Subnetze mit **verschiedenen Präfixlängen** zu erstellen. Das spart IP-Adressen!
 
@@ -472,14 +496,18 @@ Ausgangsnetzwerk: **192.168.1.0/24**
 
 Hier kannst du gezielt für die IHK-Prüfung üben — mit VLSM-Szenarien, geführten Aufgaben und Zeitdruck!
 
-[INTERACTIVE:subnettingTrainer]`,
+[INTERACTIVE:subnettingTrainer]
+
+> Jetzt kennst du VLSM und kannst verschieden große Subnetze aufteilen. In der nächsten Lektion schauen wir uns IPv6 an — das Nachfolgeprotokoll von IPv4 mit 128 Bit Adressraum.`,
     },
     {
       id: "netz-8",
       title: "IPv6",
       duration: "12 min",
       type: "text",
-      content: `## Warum IPv6?
+      content: `> In der letzten Lektion haben wir VLSM kennengelernt und gelernt, wie man IPv4-Netzwerke effizient aufteilt. Jetzt schauen wir uns das Nachfolgeprotokoll an: IPv6 mit 128 Bit Adressraum — genug für jedes Gerät der Welt.
+
+## Warum IPv6?
 IPv4 hat nur ~4,3 Mrd. Adressen (2^32) — **zu wenig!**
 IPv6: 2^128 ≈ 3,4 × 10^38 Adressen — genug für jedes Gerät.
 
@@ -507,7 +535,9 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 - **Tunneling**: IPv6 in IPv4 verpacken (6to4, Teredo)
 - **NAT64**: IPv6 ↔ IPv4 übersetzen
 
-> ❗ **IHK-Tipp:** IPv6-Adressen können lang sein — die Vereinfachungsregeln kennen!`,
+> ❗ **IHK-Tipp:** IPv6-Adressen können lang sein — die Vereinfachungsregeln kennen!
+
+> Jetzt kennst du IPv4 und IPv6. In der nächsten Lektion widmen wir uns den Netzwerkgeräten — von Hubs und Switches bis zu Routern und Firewalls.`,
     },
     {
       id: "netz-9",
@@ -515,7 +545,9 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
       duration: "12 min",
       type: "interactive",
       interactive: "networkBuilder",
-      content: `## Die wichtigsten Geräte
+      content: `> In der letzten Lektion haben wir IPv6 kennengelernt — das Protokoll mit dem riesigen Adressraum. Jetzt schauen wir uns die physischen Geräte an, die ein Netzwerk aufbauen: Hubs, Switches, Router und Firewalls.
+
+## Die wichtigsten Geräte
 
 | Gerät | Schicht | Aufgabe |
 |-------|---------|---------|
@@ -546,14 +578,18 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 
 [INTERACTIVE]
 
-> 💡 Der Netzwerk-Builder zeigt dir, wie Geräte zusammenhängen — baue dein eigenes Netzwerk!`,
+> 💡 Der Netzwerk-Builder zeigt dir, wie Geräte zusammenhängen — baue dein eigenes Netzwerk!
+
+> Jetzt kennst du die Netzwerkgeräte und ihre Schichten. In der nächsten Lektion lernst du die verschiedenen Netzwerktopologien kennen — von Bus über Stern bis Mesh.`,
     },
     {
       id: "netz-10",
       title: "Netzwerktopologien",
       duration: "10 min",
       type: "text",
-      content: `## Die 5 Grundtopologien
+      content: `> In der letzten Lektion haben wir die Netzwerkgeräte kennengelernt — von Switches bis zu Routern. Jetzt schauen wir uns an, wie diese Geräte physisch miteinander verbunden werden: die Netzwerktopologien.
+
+## Die 5 Grundtopologien
 
 | Topologie | Beschreibung | Vor- | Nachteile |
 |-----------|-------------|------|-----------|
@@ -576,7 +612,9 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
 
 **Gegenmaßnahme:** Redundanz — Backup-Geräte, mehrere Pfade.
 
-> ❗ **IHK-Tipp:** In der Prüfung nach SPoFs fragen — immer an Redundanz denken!`,
+> ❗ **IHK-Tipp:** In der Prüfung nach SPoFs fragen — immer an Redundanz denken!
+
+> Jetzt kennst du die Netzwerktopologien und das SPoF-Konzept. In der nächsten Lektion lernst du die wichtigsten Netzwerkprotokolle kennen — DNS, DHCP, ARP, HTTP und E-Mail-Protokolle.`,
     },
     {
       id: "netz-11",
@@ -584,7 +622,9 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
       duration: "18 min",
       type: "interactive",
       interactive: "dnsLookup",
-      content: `## DNS — Domain Name System
+      content: `> In der letzten Lektion haben wir Netzwerktopologien kennengelernt — von Bus über Stern bis Mesh. Jetzt schauen wir uns die Protokolle an, die den Netzwerkverkehr organisieren: DNS, DHCP, ARP, HTTP und E-Mail-Protokolle.
+
+## DNS — Domain Name System
 Übersetzt **Domainnamen → IP-Adressen**.
 Ablauf: Client → Resolver → Root → TLD → Autoritativer Server
 
@@ -631,7 +671,9 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 
 [INTERACTIVE]
 
-> 💡 Der HTTP-Request zeigt dir Headers und Status-Codes live. Die Mail-Reise zeigt den Weg einer E-Mail!`,
+> 💡 Der HTTP-Request zeigt dir Headers und Status-Codes live. Die Mail-Reise zeigt den Weg einer E-Mail!
+
+> Jetzt kennst du die wichtigsten Netzwerkprotokolle. In der nächsten Lektion widmen wir uns WLAN — den IEEE 802.11-Standards, Frequenzen und der WLAN-Sicherheit.`,
     },
     {
       id: "netz-12",
@@ -639,7 +681,9 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
       duration: "12 min",
       type: "interactive",
       interactive: "wlanConfigurator",
-      content: `## IEEE 802.11 Standards
+      content: `> In der letzten Lektion haben wir die wichtigsten Netzwerkprotokolle kennengelernt — von DNS über DHCP bis zu HTTP. Jetzt schauen wir uns WLAN an: die IEEE 802.11-Standards, die Unterschiede zwischen 2,4 GHz und 5 GHz, und warum WEP veraltet ist.
+
+## IEEE 802.11 Standards
 
 | Standard | Jahr | Max. Speed | Frequenz | Besonderheit |
 |----------|------|------------|----------|--------------|
@@ -677,7 +721,9 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 
 [INTERACTIVE]
 
-> 💡 Der WLAN-Konfigurator zeigt dir, welche Einstellungen sicher sind — experimentiere mit Sicherheitsstandards!`,
+> 💡 Der WLAN-Konfigurator zeigt dir, welche Einstellungen sicher sind — experimentiere mit Sicherheitsstandards!
+
+> Jetzt kennst du WLAN-Standards und Sicherheitsprotokolle. In der nächsten Lektion lernst du Netzwerksicherheit kennen — VLANs, VPNs, Firewalls und DMZ.`,
     },
     {
       id: "netz-13",
@@ -685,7 +731,9 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
       duration: "15 min",
       type: "interactive",
       interactive: "firewallRuleBuilder",
-      content: `## VLAN — Virtual Local Area Network
+      content: `> In der letzten Lektion haben wir WLAN kennengelernt — von den 802.11-Standards bis zu WPA2 und WPA3. Jetzt widmen wir uns der Netzwerksicherheit: VLANs, VPNs, Firewalls und DMZ — alles Themen, die in der IHK-Prüfung regelmäßig drankommen.
+
+## VLAN — Virtual Local Area Network
 Logische Trennung eines physischen Switches in separate **Broadcast-Domänen**.
 - Sicherheit: Abteilungen getrennt
 - Performance: Weniger Broadcast-Traffic
@@ -725,7 +773,9 @@ Schützt gegen: MAC-Flooding, unautorisierte Geräte.
 
 [INTERACTIVE]
 
-> 💡 Der VPN-Tunnel-Visualizer zeigt dir, wie ein verschlossener Tunnel aufgebaut wird — mit Site-to-Site und Remote Access!`,
+> 💡 Der VPN-Tunnel-Visualizer zeigt dir, wie ein verschlossener Tunnel aufgebaut wird — mit Site-to-Site und Remote Access!
+
+> Jetzt kennst du die wichtigsten Sicherheitskonzepte. In der nächsten Lektion schauen wir uns die physischen Übertragungsmedien an — Kupferkabel und Glasfaser.`,
     },
     {
       id: "netz-14",
@@ -733,7 +783,9 @@ Schützt gegen: MAC-Flooding, unautorisierte Geräte.
       duration: "10 min",
       type: "interactive",
       interactive: "cableComparer",
-      content: `## Kupfer: Twisted Pair
+      content: `> In der letzten Lektion haben wir Netzwerksicherheit kennengelernt — VLANs, VPNs, Firewalls und DMZ. Jetzt schauen wir uns die physische Seite an: Welche Kabel und Übertragungsmedien verbinden die Geräte miteinander?
+
+## Kupfer: Twisted Pair
 
 | Kategorie | Speed | Reichweite | Einsatz |
 |-----------|-------|------------|---------|
@@ -772,14 +824,18 @@ Vorteile: Keine EMI, hohe Bandbreite, lange Strecken
 
 [INTERACTIVE]
 
-> 💡 Der Kabel-Vergleich zeigt dir alle Eigenschaften auf einen Blick — wähle Kabel zum Vergleich aus!`,
+> 💡 Der Kabel-Vergleich zeigt dir alle Eigenschaften auf einen Blick — wähle Kabel zum Vergleich aus!
+
+> Jetzt kennst du die Übertragungsmedien. In der nächsten Lektion lernst du die wichtigsten Netzwerk-Tools und Befehle kennen — von ping und traceroute bis zu Wireshark.`,
     },
     {
       id: "netz-15",
       title: "Netzwerk-Tools & Befehle",
       duration: "12 min",
       type: "text",
-      content: `## ping (ICMP)
+      content: `> In der letzten Lektion haben wir Kabel und Übertragungsmedien kennengelernt — von Kupfer bis Glasfaser. Jetzt wird es praktisch: Du lernst die wichtigsten Netzwerk-Tools und Befehle kennen, mit denen du Netzwerke testen, analysieren und Fehler finden kannst.
+
+## ping (ICMP)
 Prüft **Erreichbarkeit** eines Hosts.
 \`\`\`
 ping 192.168.1.1
@@ -824,7 +880,9 @@ netstat -an  → Alle Verbindungen mit Portnummern
 - Filter: Nach IP, Protokoll, Port
 - Analyse: Protokoll-Details
 
-> ❗ **IHK-Tipp:** Wireshark als Diagnosewerkzeug nennen können!`,
+> ❗ **IHK-Tipp:** Wireshark als Diagnosewerkzeug nennen können!
+
+> Jetzt kennst du die wichtigsten Netzwerk-Tools. In der nächsten Lektion lernst du MAC-Adressen und das ARP-Protokoll kennen — wie Geräte im lokalen Netzwerk einander finden.`,
     },
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -836,7 +894,9 @@ netstat -an  → Alle Verbindungen mit Portnummern
       duration: "15 min",
       type: "interactive",
       interactive: "arpExplorer",
-      content: `## Was ist eine MAC-Adresse?
+      content: `> In der letzten Lektion haben wir die wichtigsten Netzwerk-Tools kennengelernt — von ping bis Wireshark. Jetzt schauen wir uns die MAC-Adressen und das ARP-Protokoll an — damit findet ein Gerät die MAC-Adresse eines anderen im lokalen Netzwerk.
+
+## Was ist eine MAC-Adresse?
 
 Die MAC-Adresse (Media Access Control) ist die **hardwarenahe Adresse** eines Netzwerkgeräts. Sie ist weltweit eindeutig und fest in die Netzwerkkarte eingebrannt.
 
@@ -882,6 +942,8 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
 > IHK-Prüfung: ARP-Spoofing als Sicherheitsrisiko kennen!
 
 [INTERACTIVE]
+
+> Jetzt kennst du MAC-Adressen und den ARP-Prozess. In der nächsten Lektion lernst du die Zugriffsverfahren kennen — CSMA/CD für Ethernet und CSMA/CA für WLAN.
 `,
     },
 
@@ -893,7 +955,9 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
       title: "Zugriffsverfahren: CSMA/CD & CSMA/CA",
       duration: "12 min",
       type: "text",
-      content: `## Warum Zugriffsverfahren?
+      content: `> In der letzten Lektion haben wir MAC-Adressen und das ARP-Protokoll kennengelernt. Jetzt schauen wir uns die Zugriffsverfahren an — die Regeln, die bestimmen, wer wann auf das Netzwerkmedium senden darf: CSMA/CD für Ethernet und CSMA/CA für WLAN.
+
+## Warum Zugriffsverfahren?
 
 Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, wer wann senden darf. Sonst gibt es Kollisionen.
 
@@ -958,6 +1022,8 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
 > Praxis: Ein 24-Port-Switch hat 24 Kollisionsdomänen (je 1 pro Port) aber nur 1 Broadcast-Domäne. Ein Router trennt auch Broadcast-Domänen.
 
 > Häufige Fehler: "Ein Switch trennt Broadcast-Domänen" — Falsch! Ein Switch trennt nur Kollisionsdomänen. Broadcast-Domänen trennt nur ein Router (oder VLAN).
+
+> Jetzt kennst du CSMA/CD und CSMA/CA. In der letzten Lektion schauen wir uns die verschiedenen Internetzugangstechnologien an — von DSL über Mobilfunk bis hin zu Glasfaser.
 `,
     },
 
@@ -969,7 +1035,9 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
       title: "Internetzugang: DSL & Mobilfunk",
       duration: "15 min",
       type: "text",
-      content: `## DSL — Digital Subscriber Line
+      content: `> In der letzten Lektion haben wir die Zugriffsverfahren CSMA/CD und CSMA/CA kennengelernt. Jetzt schauen wir uns die letzte große Thematik an: die verschiedenen Internetzugangstechnologien — von DSL über Mobilfunk bis hin zu Glasfaser.
+
+## DSL — Digital Subscriber Line
 
 DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 
