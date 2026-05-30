@@ -150,6 +150,10 @@ export const mathModules: Module[] = [
         type: "interactive",
         content: `## Was ist eine Menge?
 
+> In diesem Modul lernst du die Grundlagen der Mathematik kennen — Mengen, Logik und Quantoren. Diese Konzepte sind das Fundament für ALLES, was in Analysis, Linear Algebra und Informatik kommt!
+
+> 🏠 **Fürs Studium:** Mengen und Logik werden in „Mathematik 1 — Grundlagen“ (MA1) drankommen. Wer sie hier versteht, hat im Studium einen riesigen Vorsprung!
+
 Eine **Menge** ist eine klar definierte Sammlung von Objekten. In der Mathematik gelten zwei Regeln:
 
 1. **Eindeutig:** Man weiß genau, ob ein Element zur Menge gehört oder nicht
@@ -274,6 +278,8 @@ Berechne $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
 **Lösung:** $|A \\cup B| = 20 + 15 - 8 = 27$
 [PRACTICE_END]
 
+> **Nächste Lektion:** Logische Aussagen — AND, OR, NOT und Wahrheitstafeln. Das ist die Sprache der Mathematik und Informatik!
+
 [INTERACTIVE]`,
       },
       {
@@ -283,6 +289,10 @@ Berechne $A \\cap B$, $\\bar{A}$, $|A \\cup B|$
         interactive: "truthTableExplorer" as const,
         type: "interactive",
         content: `## Logische Verknüpfungen
+
+> In der letzten Lektion hast du Mengen und Mengenoperationen kennengelernt. Jetzt lernst du die **Sprache** kennen, mit der Mathematik arbeitet: Logik! Jede Aussage ist entweder wahr oder falsch — und genau das macht Mathematik so präzise.
+
+> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Abstraction](https://www.youtube.com/watch?v=TgKwz5Ikpc8) — warum Abstraktion (wie Logik) in der Mathematik so wichtig ist.
 
 In der Logik verknüpfen wir **Aussagen** (P, Q, R...) miteinander. Jede Aussage ist entweder **wahr (W)** oder **falsch (F)**.
 
@@ -385,6 +395,10 @@ $$P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$$
 **Lösung:** Ja! Für jedes P gilt: entweder P oder ¬P ist wahr. (Satz vom ausgeschlossenen Dritten)
 [PRACTICE_END]
 
+> **Nächste Lektion:** Quantoren — "für alle" (∀) und "es existiert" (∃). Damit kannst du Aussagen über ganze Mengen treffen!
+
+> 🔗 **Verwandt:** De Morgan's Regeln gelten auch für Quantoren: $\neg \forall x P(x) \equiv \exists x \neg P(x)$
+
 [INTERACTIVE]`,
       },
       {
@@ -393,6 +407,10 @@ $$P \\land (Q \\lor R) \\equiv (P \\land Q) \\lor (P \\land R)$$
         duration: "18 min",
         type: "text",
         content: `## Was sind Quantoren?
+
+> In der letzten Lektion hast du logische Verknüpfungen kennengelernt (UND, ODER, NICHT). Jetzt wird es mächtiger: Mit **Quantoren** kannst du Aussagen über **ganze Mengen** treffen — "alle x gelten..." oder "es gibt ein x, das...". Das ist ein Kernkonzept der Mathematik!
+
+> 🏠 **Fürs Studium:** Quantoren sind Teil von MA1 (Grundlagen). In der Informatik brauchst du sie für Schleifen-Logik ($\forall$ = for-all-Schleife) und Datenbankabfragen ($\exists$ = SELECT ... WHERE).
 
 Quantoren drücken aus, **für wie viele Elemente** eine Aussage gilt. Es gibt drei Typen.
 
@@ -511,7 +529,12 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
 **Aufgabe 3:** Negiere $\\exists x \\in \\mathbb{R}: x^2 = 2$
 
 **Lösung:** $\\forall x \\in \\mathbb{R}: x^2 \\neq 2$ (falsch, da $\\sqrt{2}$ existiert)
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> **Nächstes Modul:** Funktionen & Graphen — jetzt geht's in die Analysis! Funktionen sind das zentrale Werkzeug der Mathematik.
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivative](https://www.youtube.com/watch?v=WUvTyaaNkzM) — ein Vorgeschmack darauf, was mit Funktionen alles möglich ist!
+`,
       },
             {
               id: "m-grundlagen-mengen-aufgaben-leicht",
@@ -570,6 +593,10 @@ Die negierte Aussage ist **falsch** → die ursprüngliche ist **wahr**!
         content: `# Funktionen & Definitionsbereiche
 
 > Du kennst bereits Mengenoperationen und Logik aus dem Grundlagen-Modul. Jetzt lernst du das wichtigste Werkzeug der Mathematik kennen: die **Funktion** — eine Regel, die jedem x genau ein y zuordnet!
+
+> 🏠 **Fürs Studium:** Funktionen sind das Herzstück von MA2 (Analysis 1). Wer den Funktionenbegriff hier sicher beherrscht, hat in Grenzwerten, Ableitungen und Integralen einen riesigen Vorsprung!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivatives](https://www.youtube.com/watch?v=WUvTyaaNkzM) — zeigt intuitiv, was Funktionen und ihre Ableitungen bedeuten.
 
 ## Definition
 
@@ -695,6 +722,10 @@ Die Umkehrfunktion $f^{-1}$ gilt: $f^{-1}(f(x)) = x$
 
 > Du kennst bereits Funktionen und ihre Eigenschaften. Jetzt fragen wir: Was passiert, wenn sich x immer weiter einem bestimmten Wert nähert? Diese Frage ist der Einstieg in die gesamte **Analysis**!
 
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Limits](https://www.youtube.com/watch?v=YNstP04ndTA) — visuelle Erklärung, was ein Grenzwert wirklich bedeutet.
+
+> 🏠 **Fürs Studium:** Grenzwerte sind das Fundament von MA2 (Analysis 1). Ohne Grenzwerte keine Ableitungen, keine Integrale!
+
 ## Definition
 
 $\\lim_{x \\to a} f(x) = L$ bedeutet:
@@ -729,6 +760,8 @@ Seien $\\lim_{x \\to a} f(x) = L$ und $\\lim_{x \\to a} g(x) = M$, dann:
         content: `# L'Hôpital's Regel
 
 > Du hast bereits gelernt, Grenzwerte mit Rechenregeln zu bestimmen. Aber was, wenn du einen unbestimmten Ausdruck wie $\\frac{0}{0}$ erhältst? Dafür gibt es **L'Hôpitals Regel** — und sie nutzt bereits die **Ableitung**, die im nächsten Kapitel kommt!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — L'Hôpital's Rule](https://www.youtube.com/watch?v=kfF4zMiDyHQ) — warum diese Regel funktioniert und wann man sie anwendet.
 
 ## Anwendung
 
@@ -840,6 +873,10 @@ $\\lim_{x \\to \\infty} \\frac{x^2}{e^x} = \\lim_{x \\to \\infty} \\frac{2x}{e^x
 
 > Du hast Grenzwerte kennengelernt und weißt, wie man mit L'Hôpital arbeitet. Jetzt wenden wir den Grenzwertbegriff auf eine der wichtigsten Fragen der Mathematik an: Wie schnell ändert sich eine Funktion? Die Antwort ist die **Ableitung**!
 
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Derivatives](https://www.youtube.com/watch?v=WUvTyaaNkzM) — DIE beste visuelle Erklärung der Ableitung. Pflichtvideo!
+
+> 🏠 **Fürs Studium:** Ableitungen sind das Kernthema von MA2. Wer sie versteht, kann Extremwertaufgaben, Kurvendiskussion und vieles mehr.
+
 ## Differenzenquotient
 
 $\\frac{f(x+h) - f(x)}{h}$
@@ -872,6 +909,8 @@ Die Ableitung $f'(a)$ gibt die **Steigung der Tangente** an der Stelle $a$.
         content: `# Ableitungsregeln
 
 > Du weißt, dass die Ableitung den Grenzwert des Differenzenquotienten darstellt. Jetzt lernst du praktische **Regeln** kennen, mit denen du Funktionen schnell ableiten kannst — ohne jedes Mal den Grenzwert zu berechnen!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Power Rule & Chain Rule](https://www.youtube.com/watch?v=S0_qX4VJhMQ) — warum die Potenzregel funktioniert und die Kettenregel visuell erklärt.
 
 ## Grundregeln
 
@@ -965,6 +1004,10 @@ $f'(x) = 3x^2 \cdot \sin(x) + x^3 \cdot \cos(x)$
 
 > Du hast gelernt, Funktionen abzuleiten. Aber was, wenn du die Ableitung gegeben hast und die ursprüngliche Funktion suchst? Das ist die **Integration** — die Umkehrung der Differentiation!
 
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Integration](https://www.youtube.com/watch?v=rfG8ce4nNh0) — was Integration wirklich bedeutet (Fläche unter der Kurve!).
+
+> 🏠 **Fürs Studium:** Integration ist das zweite große Thema von MA2 zusammen mit Differentiation. Zusammen bilden sie den "Fundamentalsatz der Analysis".
+
 ## Definition
 
 $F$ ist Stammfunktion von $f$, wenn $F'(x) = f(x)$.
@@ -999,6 +1042,8 @@ $\\int f(g(x)) \\cdot g'(x) \\, dx = \\int f(u) \\, du$ mit $u = g(x)$
         content: `# Bestimmtes Integral
 
 > Du kennst bereits Stammfunktionen — die Umkehrung der Ableitung. Jetzt verbinden wir Differentiation und Integration über den **Hauptsatz der Analysis** und berechnen konkrete Flächen unter Kurven!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Area & Slope](https://www.youtube.com/watch?v=FnJqaIESC2s) — wie Differentiation und Integration zusammenhängen.
 
 ## Hauptsatz der Analysis
 
@@ -1083,6 +1128,10 @@ $F(2) - F(0) = (8 + 2) - 0 = 10$
         type: "interactive",
         content: `# Reihen & Konvergenz
 
+> Du kennst bereits die **Integralrechnung** — Flächen unter Kurven berechnen. Jetzt geht es um eine neue Frage: Was passiert, wenn man **unendlich viele Zahlen** addiert? Konvergiert das Ergebnis gegen einen endlichen Wert? Die Analysis unendlicher Reihen ist das Fundament für Potenzreihen und Taylor-Entwicklungen!
+
+> 🎥 **3Blue1Brown:** Für eine visuelle Einführung in unendliche Reihen und Konvergenz empfehlen wir: [Taylor Series](https://www.youtube.com/watch?v=3d6DsjIBzJ4)
+
 ## Definition
 
 Eine Reihe ist die Summe einer Folge:
@@ -1108,6 +1157,8 @@ $\\lim_{n \\to \\infty} \\left|\\frac{a_{n+1}}{a_n}\\right| = q$
 **Lösung:** Ja, denn $p = 2 > 1$. Nach dem p-Test konvergiert $\sum \frac{1}{n^p}$ genau dann, wenn $p > 1$.
 [PRACTICE_END]
 
+> 🔗 **Weiter:** Jetzt weißt du, ob eine Reihe konvergiert. Im nächsten Kapitel lernst du **Potenzreihen** kennen — Reihen mit Variablen, die Funktionen wie $e^x$ und $\sin x$ darstellen. Das ist der Übergang zur Taylor-Entwicklung!
+
 [INTERACTIVE]`,
       },
       {
@@ -1116,6 +1167,12 @@ $\\lim_{n \\to \\infty} \\left|\\frac{a_{n+1}}{a_n}\\right| = q$
         duration: "15 min",
         type: "text",
         content: `# Potenzreihen
+
+> Du kennst bereits unendliche Reihen und Konvergenzkriterien. Jetzt wird die Reihe zur **Funktion**: Potenzreihen sind Reihen mit Variablen, die Funktionen wie $e^x$, $\sin x$ und $\cos x$ darstellen. Der Konvergenzradius bestimmt, wo die Reihe gültig ist!
+
+> 🎥 **3Blue1Brown:** Die Taylor-Reihe ist eines der schönsten Konzepte der Analysis — hier erklärt: [Taylor Series](https://www.youtube.com/watch?v=3d6DsjIBzJ4)
+
+> 🎓 **Fürs Studium:** In der höheren Analysis und Funktionalanalysis sind Potenzreihen der Einstieg in die Theorie der analytischen Funktionen. Der Konvergenzradius hängt mit der Entfernung zur nächsten Singularität in der komplexen Ebene zusammen!
 
 ## Definition
 
@@ -1181,7 +1238,11 @@ Also: $\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$ fuer alle $x \in \mathbb{R}$ ($
 **Aufgabe 2:** Entwickle $\cos(x)$ bis zum 4. Grad um $a=0$
 
 **Lösung:** $\cos(x) \approx 1 - \frac{x^2}{2} + \frac{x^4}{24}$ (nur gerade Potenzen!)
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Zusammenfassung Analysis:** Damit hast du die großen Themen der Analysis abgeschlossen: Grenzwerte, Ableitungen, Integration und Reihen. Diese Konzepte kehren in den **Differentialgleichungen** wieder — dort lösen wir Gleichungen, die Ableitungen enthalten!
+
+> 🔗 **Verwandt:** Die Taylor-Reihe wird auch in der **Numerik** (Newton-Verfahren) und in der **Stochastik** (Momenterzeugende Funktionen) verwendet.`,
       },
             {
               id: "m1-reihen-aufgaben-leicht",
@@ -1240,6 +1301,10 @@ Also: $\sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$ fuer alle $x \in \mathbb{R}$ ($
         ],
         content: `# Vektoren im Raum
 
+> Willkommen in der **Linearen Algebra**! Vektoren sind die Grundbausteine — sie beschreiben Richtungen und Größen im Raum. Du kennst bereits lineare Gleichungssysteme (LGS). Jetzt lernst du die geometrische Seite kennen: Vektoren als Pfeile im Raum, ihre Addition, Skalarprodukt und Kreuzprodukt!
+
+> 🎥 **3Blue1Brown:** Eine hervorragende visuelle Einführung in Vektoren und lineare Algebra: [Vectors](https://www.youtube.com/watch?v=fNk_zzaMoSs), [Linear Combinations](https://www.youtube.com/watch?v=k7RM-ot2NWY) und [Dot products](https://www.youtube.com/watch?v=LyGKycU2fgc)
+
 ## Definition
 
 $\\vec{v} = \\begin{pmatrix} v_1 \\\\ v_2 \\\\ v_3 \\end{pmatrix} \\in \\mathbb{R}^3$
@@ -1258,6 +1323,8 @@ $\\vec{u} \\cdot \\vec{v} = u_1 v_1 + u_2 v_2 + u_3 v_3 = |\\vec{u}| |\\vec{v}| 
 ### Kreuzprodukt
 $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} u_2 v_3 - u_3 v_2 \\\\ u_3 v_1 - u_1 v_3 \\\\ u_1 v_2 - u_2 v_1 \\end{pmatrix}$
 
+> 🔗 **Weiter:** Vektoren sind die Basis — jetzt kommen **Matrizen**, die Vektoren transformieren! Matrizen können Vektoren drehen, skalieren und verzerren. Das ist der Übergang zur linearen Abbildung.
+
 [INTERACTIVE]`,
       },
       {
@@ -1267,6 +1334,10 @@ $\\vec{u} \\times \\vec{v} = \\begin{pmatrix} u_2 v_3 - u_3 v_2 \\\\ u_3 v_1 - u
         interactive: "matrixCalculator" as const,
         type: "interactive",
         content: `# Matrizen
+
+> Du kennst bereits Vektoren und ihre Operationen. Jetzt lernst du **Matrizen** kennen — sie sind die Werkzeuge, um Vektoren zu transformieren! Eine Matrix kann Vektoren drehen, spiegeln, skalieren und verzerren. Die Matrixmultiplikation ist verkettete Transformation, die Determinante misst die Flächenänderung.
+
+> 🎥 **3Blue1Brown:** Matrizen als lineare Transformationen — absolut sehenswert: [Matrix Multiplication](https://www.youtube.com/watch?v=XkY2DOUCWMU), [Determinants](https://www.youtube.com/watch?v=Ip3X9LOh2dk) und [Inverse matrices](https://www.youtube.com/watch?v=uQhTuRlWMxw)
 
 ## Definition
 
@@ -1289,6 +1360,8 @@ $\\det(A) = a_{11} a_{22} - a_{12} a_{21}$
 ## Inverse Matrix
 
 $A \\cdot A^{-1} = I$
+
+> 🔗 **Weiter:** Matrizen und Vektoren zusammen bilden das Fundament der **linearen Algebra**. Diese Konzepte brauchst du für lineare Gleichungssysteme (LGS), Eigenwerte und in der **Numerik** (Gauß-Verfahren). In der Physik beschreiben Matrizen Drehungen und Verformungen!
 
 [INTERACTIVE]`,
       },
@@ -1344,6 +1417,10 @@ $A \\cdot A^{-1} = I$
         type: "text",
         content: `# Differentialgleichungen 1. Ordnung
 
+> Du kennst bereits **Ableitungen** (Änderungsraten) und **Integration** (Umkehrung der Ableitung). Jetzt verbinden wir beides: **Differentialgleichungen** (DGLen) sind Gleichungen, die eine Funktion und ihre Ableitungen enthalten. Sie beschreiben überall in der Physik und Technik — von Wachstumsprozessen bis zu Schwingungen!
+
+> 🔗 **Verwandt:** Differentialrechnung (Ableitungen), Integralrechnung (Stammfunktionen als Lösungsmethode)
+
 ## Typen
 
 ### Trennbare Variablen
@@ -1391,7 +1468,9 @@ Linke Seite ist $(e^{2x} y)'$
 **Schritt 4:** Auflösen: $y = 2 + Ce^{-2x}$
 
 **Probe:** $y' = -2Ce^{-2x}$, $y' + 2y = -2Ce^{-2x} + 4 + 2Ce^{-2x} = 4$ ✓
-[GUIDED_END]`,
+[GUIDED_END]
+
+> 🔗 **Weiter:** DGLen 1. Ordnung sind der Einstieg. Im nächsten Kapitel kommen **DGLen 2. Ordnung** — dort treten Schwingungen und Resonanz auf, die in der Physik (Federpendel, RLC-Schaltung) und Technik überall vorkommen!`,
       },
       {
         id: "m2d2",
@@ -1399,6 +1478,10 @@ Linke Seite ist $(e^{2x} y)'$
         duration: "22 min",
         type: "text",
         content: `# Differentialgleichungen 2. Ordnung
+
+> Du kennst bereits DGLen 1. Ordnung — Trennung der Variablen und Integrationsfaktor. Jetzt wird die Ordnung erhöht: **DGLen 2. Ordnung** enthalten die zweite Ableitung $y''$. Sie beschreiben Schwingungen, Schwingkreise und mechanische Systeme mit Trägheit. Die charakteristische Gleichung ist der Schlüssel zur Lösung!
+
+> 🎓 **Fürs Studium:** In der Physik und Elektrotechnik sind DGLen 2. Ordnung allgegenwärtig — Feder-Dämpfer-Systeme, RLC-Schwingkreise, Wellengleichungen. Die drei Fälle (reelle, doppelte, komplexe Wurzeln) entsprechen Überkritischer, kritischer und Schwingungsdämpfung!
 
 ## Homogene lineare DGln
 
@@ -1459,7 +1542,11 @@ $y'(0) = 3C_1 + 2C_2 = 0$
 **Schritt 5:** LGS lösen: $C_1 = -2$, $C_2 = 3$
 
 **Lösung:** $y = -2e^{3x} + 3e^{2x}$
-[GUIDED_END]`,
+[GUIDED_END]
+
+> 🔗 **Zusammenfassung DGLen:** Du hast die wichtigsten Typen gewöhnlicher Differentialgleichungen kennengelernt: **Trennbare Variablen**, **lineare DGLen 1. Ordnung** und **DGLen 2. Ordnung** mit charakteristischer Gleichung. Diese Werkzeuge reichen für die meisten Anwendungen in Physik und Technik!
+
+> 🔗 **Verwandt:** Differentialgleichungen tauchen in der **Numerik** (Euler-Verfahren) und in der **Stochastik** (stochastische Prozesse) wieder auf.`,
       },
             {
               id: "m2-dgl-aufgaben-leicht",
@@ -1753,6 +1840,10 @@ A und B sind unabhängig, wenn $P(A|B) = P(A)$.
         type: "text",
         content: `## Fehler und Näherungen
 
+> Willkommen in der **Numerik** — der Kunst, mathematische Probleme mit Algorithmen zu lösen! Du kennst bereits Ableitungen und Integrale aus der Analysis. Jetzt lernst du, wie Computer diese Berechnungen durchführen — und warum dabei immer **Fehler** entkommen. Fehleranalyse ist der Schlüssel zuverlässiger numerischer Verfahren!
+
+> 🔗 **Verwandt:** Differentialrechnung (Ableitungen), Integralrechnung (Numerische Integration)
+
 In der Numerik sind **Fehler** unvermeidlich. Wir unterscheiden verschiedene Arten von Fehlern.
 
 ### Absoluter Fehler
@@ -1791,7 +1882,9 @@ Wenn $|e_{n+1}| \\leq C \\cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
 - **Linear (p=1):** Jeder Schritt halbiert den Fehler
 - **Quadratisch (p=2):** Jeder Schritt quadriert den Fehler (viel schneller!)
 
-> **Merke:** Relativer Fehler ist oft wichtiger als absoluter — 1 cm Fehler bei 1 m ist anders als bei 1 km!`,
+> **Merke:** Relativer Fehler ist oft wichtiger als absoluter — 1 cm Fehler bei 1 m ist anders als bei 1 km!
+
+> 🔗 **Weiter:** Jetzt kennst du die Grundlagen der Fehleranalyse. Als Erstes kommt das **Bisektionsverfahren** — ein einfaches, aber garantiert konvergierendes Verfahren zur Nullstellenbestimmung. Es ist die Basis für das Verständnis komplexerer Verfahren!`,
       },
       {
         id: "m-num-2",
@@ -1799,6 +1892,10 @@ Wenn $|e_{n+1}| \\leq C \\cdot |e_n|^p$, dann ist die Konvergenzordnung $p$.
         duration: "20 min",
         type: "text",
         content: `## Bisektionsverfahren
+
+> Du kennst bereits Fehlerbegriffe und Konvergenzordnung. Jetzt lernst du dein erstes **Nullstellenverfahren** kennen: Die Bisektion ist der einfachste Algorithmus — sie halbiert immer wieder ein Intervall, bis die Nullstelle gefunden ist. Langsam, aber garantiert!
+
+> 🔗 **Verwandt:** Analysis (Zwischenwertsatz als theoretische Grundlage), Fehler und Näherungen (Konvergenzordnung)
 
 Das Bisektionsverfahren findet **Nullstellen** einer Funktion durch halbierende Intervallschritte.
 
@@ -1843,7 +1940,9 @@ Nach 4 Schritten: $\\sqrt{2} \\approx 1{,}4375$
 
 ❌ Braucht Vorzeichenwechsel
 
-> **Merke:** Bisektion = Intervall halbieren. Garantiert, aber langsam!`,
+> **Merke:** Bisektion = Intervall halbieren. Garantiert, aber langsam!
+
+> 🔗 **Weiter:** Bisektion ist sicher, aber langsam. Das **Newton-Verfahren** ist der Turbo unter den Nullstellenverfahren — es nutzt die Ableitung für quadratische Konvergenz!`,
       },
       {
         id: "m-num-3",
@@ -1851,6 +1950,10 @@ Nach 4 Schritten: $\\sqrt{2} \\approx 1{,}4375$
         duration: "25 min",
         type: "text",
         content: `## Newton-Verfahren
+
+> Du kennst bereits die Bisektion — langsam, aber sicher. Das **Newton-Verfahren** ist der Turbo: Es nutzt die **Ableitung** der Funktion, um in jedem Schritt eine Tangente zu legen und den Nullstellen-Schätzwert extrem schnell zu verbessern. Quadratische Konvergenz bedeutet: Anzahl korrekter Stellen verdoppelt sich pro Schritt!
+
+> 🔗 **Verwandt:** Differentialrechnung (Ableitungen als Grundlage), Bisektionsverfahren (Vergleich der Konvergenz)
 
 Das Newton-Verfahren (auch Newton-Raphson) ist ein schnelles Verfahren zur Nullstellenbestimmung.
 
@@ -1902,7 +2005,11 @@ Nach nur 3 Schritten: $\\sqrt{2} \\approx 1{,}4142$ (4 Dezimalstellen!)
 | Garantiert? | Ja | Nein |
 | Schritte für 10 Stellen | ~34 | ~5 |
 
-> **Merke:** Newton = schnell aber heikel, Bisektion = langsam aber sicher!`,
+> **Merke:** Newton = schnell aber heikel, Bisektion = langsam aber sicher!
+
+> 🔗 **Zusammenfassung Numerik:** Du hast die Grundlagen numerischer Verfahren kennengelernt: **Fehleranalyse**, **Bisektion** (garantiert, langsam) und **Newton** (schnell, heikel). Diese Algorithmen sind die Basis für wissenschaftliches Rechnen — von der Ingenieurtechnik bis zur KI!
+
+> 🔗 **Verwandt:** Das Newton-Verfahren zeigt, wie mächtig **Ableitungen** in der Praxis sind. In der Stochastik werden ähnliche Optimierungsverfahren für Maximum-Likelihood-Schätzung verwendet!`,
       },
             {
               id: "m-numerik-aufgaben-leicht",
@@ -1985,6 +2092,10 @@ $$a^2 + b^2 = c^2$$`,
         ],
         content: `## Flächeninhalte ebener Figuren
 
+> Du kennst bereits Potenzen, Logarithmen und Grundlagen der Analysis. Jetzt wenden wir Mathematik auf **räumliche Formen** an — Flächeninhalte sind der Einstieg in die Geometrie, die in der technischen Informatik (z.B. Chip-Layout, CAD) unverzichtbar ist.
+
+> 🏠 **Fürs Studium:** Geometrische Berechnungen kommen in MA1 (Grundlagen) und später in der Linearen Algebra (Vektorräume, Transformationen) vor. Wer Flächen sicher beherrscht, hat bei Integrationsaufgaben (Fläche unter der Kurve) einen Vorteil!
+
 ### Rechteck & Quadrat
 $$A = a \\cdot b$$
 
@@ -2002,7 +2113,9 @@ $$A = \\pi r^2 = \\frac{\\pi d^2}{4}$$
 $$A = \\frac{(a + b) \\cdot h}{2}$$
 
 ### Übung
-Berechne die Fläche eines Rechtecks mit $a = 8\\text{cm}$ und $b = 5\\text{cm}$!`,
+Berechne die Fläche eines Rechtecks mit $a = 8\\text{cm}$ und $b = 5\\text{cm}$!
+
+> 🔗 **Weiter:** Du kennst jetzt Flächen in 2D. Im nächsten Schritt werden wir diese Flächen zu **Körpern** erweitern — und Volumen berechnen!`,
       },
       {
         id: "m-geo-2",
@@ -2017,6 +2130,10 @@ Berechne die Fläche eines Rechtecks mit $a = 8\\text{cm}$ und $b = 5\\text{cm}$
           { type: "cone" as const },
         ],
         content: `## Räumliche Körper
+
+> Du kennst bereits Flächeninhalte ebener Figuren. Jetzt wird es **räumlich**: Aus Flächen werden Körper mit Volumen und Oberfläche — zentral für Architektur, 3D-Druck und technisches Zeichnen!
+
+> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Cross Products](https://www.youtube.com/watch?v=eu6i7WJeinw) — zeigt, wie Volumenberechnung mit Vektoren zusammenhängt.
 
 ### Quader
 $$V = a \\cdot b \\cdot c$$
@@ -2039,7 +2156,9 @@ $$V = \\frac{1}{3}\\pi r^2 h$$
 $$O = \\pi r(r + l)$$ (l = Mantellänge)
 
 ### Übung
-Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!`,
+Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!
+
+> 🔗 **Weiter:** Du kennst jetzt Flächen und Körper. Der **Satz des Pythagoras** verbindet Geometrie mit Algebra — und ist der Schlüssel zu vielen technischen Berechnungen!`,
       },
       {
         id: "m-geo-3",
@@ -2047,6 +2166,10 @@ Berechne das Volumen einer Kugel mit $r = 5\\text{cm}$!`,
         duration: "20 min",
         type: "text",
         content: `## Satz des Pythagoras
+
+> Du kennst bereits Flächeninhalte und Volumenberechnung. Der Satz des Pythagoras ist die **Brücke zwischen Geometrie und Algebra** — er verbindet Seitenlängen und ist die Grundlage für die gesamte Trigonometrie!
+
+> 🎬 **3Blue1Brown:** [Essence of Linear Algebra — Dot Products](https://www.youtube.com/watch?v=LyGKycU2BQQ) — zeigt, wie der Satz des Pythagoras mit dem Skalarprodukt zusammenhängt.
 
 Der Satz des Pythagoras ist einer der wichtigsten Sätze der Geometrie. Er gilt für **rechtwinklige Dreiecke**.
 
@@ -2104,7 +2227,11 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
 **Aufgabe:** Ist das Dreieck mit Seiten 5, 12, 13 rechtwinklig?
 
 **Lösung:** $5^2 + 12^2 = 25 + 144 = 169 = 13^2$ ✓ Ja, rechtwinklig!
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Pythagoras ist die Basis für die **Trigonometrie** — dort lernst du Sinus, Kosinus und Tangens kennen, die Winkel und Seitenlängen verknüpfen!
+
+> 🎓 **Fürs Studium:** Der euklidische Abstand $d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}$ wird in der Linearen Algebra zum Abstandsbegriff in $\\mathbb{R}^n$ verallgemeinert!`,
       },
             {
               id: "m-geometrie-flaechen-aufgaben-leicht",
@@ -2183,6 +2310,10 @@ $d = \\sqrt{9 + 16} = \\sqrt{25} = 5$
         ],
         content: `## Die trigonometrischen Funktionen
 
+> Der Satz des Pythagoras hat dir gezeigt, dass $a^2 + b^2 = c^2$. Jetzt machen wir den nächsten Schritt: Statt Seitenlängen berechnen wir **Winkel** — mit Sinus, Kosinus und Tangens!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Sine & Cosine](https://www.youtube.com/watch?v=QlB0LpVeI7E) — warum Sinus und Kosinus mehr sind als Dreiecks-Verhältnisse: sie beschreiben Kreisbewegungen!
+
 Im rechtwinkligen Dreieck:
 
 $$\\sin \\alpha = \\frac{\\text{Gegenkathete}}{\\text{Hypotenuse}} = \\frac{a}{c}$$
@@ -2199,6 +2330,8 @@ $$\\sin^2 \\alpha + \\cos^2 \\alpha = 1$$
 
 Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\alpha$!
 
+> 🔗 **Weiter:** Jetzt kennst du die Grundfunktionen. Im nächsten Kapitel lernst du die **wichtigen Winkelwerte** und den **Einheitskreis** kennen — das zentrale Werkzeug der Trigonometrie!
+
 [INTERACTIVE]`,
       },
       {
@@ -2207,6 +2340,10 @@ Gegeben: $a = 3$, $c = 5$. Berechne $\\sin \\alpha$, $\\cos \\alpha$, $\\tan \\a
         duration: "20 min",
         type: "text",
         content: `## Wichtige Werte & Einheitskreis
+
+> Du kennst bereits Sinus, Kosinus und Tangens aus dem rechtwinkligen Dreieck. Der **Einheitskreis** erweitert diese Funktionen auf **alle Winkel** — und macht sie zu periodischen Funktionen, die Wellen, Schwingungen und Kreisbewegungen beschreiben!
+
+> 🎬 **3Blue1Brown:** [Essence of Calculus — Sine & Cosine](https://www.youtube.com/watch?v=QlB0LpVeI7E) — visuelle Erklärung, wie der Einheitskreis Sinus und Kosinus erzeugt.
 
 Der Einheitskreis (Radius 1) ist das zentrale Werkzeug der Trigonometrie.
 
@@ -2251,7 +2388,9 @@ $\\sin(-x) = -\\sin(x)$ (ungerade Funktion)
 
 $\\cos(-x) = \\cos(x)$ (gerade Funktion)
 
-> **Merke:** Einheitskreis = Radius 1. cos = x, sin = y. Die Werte bei 30°, 45°, 60° auswendig lernen!`,
+> **Merke:** Einheitskreis = Radius 1. cos = x, sin = y. Die Werte bei 30°, 45°, 60° auswendig lernen!
+
+> 🔗 **Weiter:** Du kennst jetzt die Grundwerte. Im nächsten Kapitel lernst du den **Sinus- und Kosinussatz** kennen — damit kannst du **beliebige** Dreiecke berechnen, nicht nur rechtwinklige!`,
       },
       {
         id: "m-trig-3",
@@ -2259,6 +2398,10 @@ $\\cos(-x) = \\cos(x)$ (gerade Funktion)
         duration: "25 min",
         type: "text",
         content: `## Satz des Sinus & Kosinus
+
+> Du kennst bereits den Einheitskreis und die Grundwerte. Jetzt erweitern wir die Trigonometrie auf **beliebige Dreiecke** — mit dem Sinus- und Kosinussatz kannst du auch ohne rechten Winkel berechnen!
+
+> 🏠 **Fürs Studium:** Diese Sätze sind in der Physik und Ingenieurwissenschaften allgegenwärtig — von Kräftezerlegung bis Signalverarbeitung. In MA1 tauchen sie bei Vektorberechnungen auf.
 
 Diese beiden Sätze erweitern die Trigonometrie über rechtwinklige Dreiecke hinaus.
 
@@ -2314,7 +2457,11 @@ $c = \\sqrt{13} \\approx 3{,}61$
 
 **Lösung:** $\frac{6}{\sin 30°} = \frac{b}{\sin 45°}$
 $b = \frac{6 \cdot \sin 45°}{\sin 30°} = \frac{6 \cdot 0{,}707}{0{,}5} = 8{,}49$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Trigonometrie abgeschlossen! Als Nächstes folgen **Potenzen und Logarithmen** — die Grundlage für Wachstumsprozesse und in der Analysis der Schlüssel zu den Exponentialfunktionen!
+
+> 🎓 **Fürs Studium:** Trigonometrische Funktionen sind in der Analysis unverzichtbar — Fourier-Reihen, Differentialgleichungen und Signalverarbeitung basieren auf Sinus und Kosinus!`,
       },
             {
               id: "m-trigonometrie-aufgaben-leicht",
@@ -2391,6 +2538,10 @@ $$\\log_a(x) = y \\Leftrightarrow a^y = x$$
         type: "text",
         content: `## Potenzregeln
 
+> Die Trigonometrie ist abgeschlossen. Jetzt folgen **Potenzen und Logarithmen** — die Grundlage für exponentielles Wachstum, Zinseszins, Datenkompression ($\\log_2$) und in der Analysis der Schlüssel zu den Exponentialfunktionen!
+
+> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — warum $e$ die wichtigste Zahl der Mathematik ist und was Potenzen wirklich bedeuten.
+
 Potenzen sind die Grundlage für viele mathematische Konzepte. Hier die wichtigsten Regeln:
 
 ### Grundbegriffe
@@ -2442,7 +2593,9 @@ $2^{-3} = \\frac{1}{8} = 0{,}125$
 **Aufgabe 2:** Vereinfache $(3^2)^4$
 
 **Lösung:** $3^{2 \cdot 4} = 3^8 = 6561$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Potenzen sind die Vorstufe zu **Logarithmen** — der Umkehrung der Potenzierung. Damit kannst du Gleichungen wie $2^x = 32$ lösen!`,
       },
       {
         id: "m-pot-2",
@@ -2450,6 +2603,10 @@ $2^{-3} = \\frac{1}{8} = 0{,}125$
         duration: "25 min",
         type: "text",
         content: `## Logarithmen
+
+> Du kennst bereits Potenzregeln. Jetzt lernst du die **Umkehrung** kennen: den Logarithmus. Wenn du weißt, dass $2^5 = 32$, dann ist $\\log_2(32) = 5$ — der Logarithmus verrät dir den **Exponenten**!
+
+> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — erklärt intuitiv, warum Logarithmen so fundamental sind.
 
 Der Logarithmus ist die **Umkehrung** der Potenzierung. Wenn $a^x = b$, dann ist $\\log_a(b) = x$.
 
@@ -2498,7 +2655,9 @@ $x = \\log_2(16) = \\log_2(2^4) = 4$
 **Aufgabe 2:** Löse $2^x = 32$
 
 **Lösung:** $x = \log_2(32) = 5$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Potenzen und Logarithmen sind die Werkzeuge. Jetzt verbinden wir sie zur **Exponentialfunktion** $e^x$ — die Funktion, die sich selbst ableitet!`,
       },
       {
         id: "m-pot-3",
@@ -2506,6 +2665,12 @@ $x = \\log_2(16) = \\log_2(2^4) = 4$
         duration: "20 min",
         type: "text",
         content: `## Exponentialfunktionen
+
+> Du kennst bereits Potenzregeln und Logarithmen. Jetzt verbinden wir beides zur **Exponentialfunktion** — der wichtigsten Funktion der Analysis. Ihre Besonderheit: $\\frac{d}{dx}e^x = e^x$ — sie bleibt unter der Ableitung unverändert!
+
+> 🎬 **3Blue1Brown:** [What's so special about Euler's number e?](https://www.youtube.com/watch?v=m2MIpBrFgFk) — DIE Erklärung, warum $e^x$ überall in der Natur vorkommt.
+
+> 🏠 **Fürs Studium:** Die Exponentialfunktion $e^x$ ist das Herzstück von MA2 (Analysis). Differentialgleichungen wie $f'(x) = f(x)$ haben $e^x$ als Lösung — das macht sie zur wichtigsten Funktion überhaupt!
 
 Eine Exponentialfunktion hat die Form $f(x) = a^x$, wobei die Variable im **Exponenten** steht.
 
@@ -2575,7 +2740,11 @@ $t = \frac{\ln(2)}{0{,}05} = \frac{0{,}693}{0{,}05} = 13{,}86$ Jahre
 **Aufgabe:** Eine Bakterienkultur verdoppelt sich alle 3 Stunden. Start: 100. Nach 12 Stunden?
 
 **Lösung:** $N(12) = 100 \cdot 2^{12/3} = 100 \cdot 2^4 = 1600$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Potenzen, Logarithmen und Exponentialfunktionen abgeschlossen! Diese Werkzeuge brauchst du in der **Analysis** (Grenzwerte, Ableitungen von $e^x$) und in der **Stochastik** (Wahrscheinlichkeitsverteilungen).
+
+> 🎓 **Fürs Studium:** In MA2 wirst du lernen, dass $e^x = \\sum_{n=0}^{\\infty} \\frac{x^n}{n!}$ — eine Potenzreihe! Die Verbindung von Potenzen, Logarithmen und Analysis ist das Herzstück des Mathe-Studiums.`,
       },
             {
               id: "m-potenzen-log-aufgaben-leicht",
@@ -2651,6 +2820,10 @@ $t = \frac{\ln(2)}{0{,}05} = \frac{0{,}693}{0{,}05} = 13{,}86$ Jahre
         type: "text",
         content: `## Mittelwert, Median, Modus
 
+> Potenzen und Logarithmen sind abgeschlossen. Jetzt folgt ein ganz anderes Gebiet: **Statistik** — die Kunst, Daten zu sammeln, zu analysieren und zu interpretieren. Mittelwert, Median und Modus sind die drei wichtigsten Lageparameter!
+
+> 🏠 **Fürs Studium:** Statistik kommt in der Stochastik (MA4) drankommen — und in fast jeder Ingenieurwissenschaft. Wer Daten sicher interpretieren kann, hat einen riesigen Vorteil in Projekten und Forschung!
+
 Diese drei Maße beschreiben die **Lage** einer Datenverteilung.
 
 ### Mittelwert (Durchschnitt)
@@ -2689,7 +2862,9 @@ Daten: 2, 3, 2, 1, 2, 4, 3 → Modus = 2 (kommt 3-mal vor)
 **Lösung:**
 Mittelwert: $\bar{x} = \frac{3+7+5+3+8}{5} = \frac{26}{5} = 5{,}2$
 Sortiert: 3, 3, 5, 7, 8 → Median = 5
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Du kennst jetzt die Lage einer Verteilung. Aber wie **streuen** die Daten um den Mittelwert? Das erfährst du im nächsten Kapitel mit **Varianz und Standardabweichung**!`,
       },
       {
         id: "m-stat-2",
@@ -2697,6 +2872,10 @@ Sortiert: 3, 3, 5, 7, 8 → Median = 5
         duration: "25 min",
         type: "text",
         content: `## Varianz & Standardabweichung
+
+> Du kennst bereits Mittelwert, Median und Modus. Aber zwei Klassen können den gleichen Mittelwert haben — eine mit gleichen Noten, eine mit extremen Unterschieden. Die **Streuung** zeigt dir, wie sehr die Daten um den Mittelwert schwanken!
+
+> 🎬 **3Blue1Brown:** [But what is a Standard Deviation?](https://www.youtube.com/watch?v=mtbM17e3BwQ) — visuelle Erklärung von Varianz und Standardabweichung.
 
 Diese Maße beschreiben die **Streuung** einer Datenverteilung.
 
@@ -2742,7 +2921,9 @@ Klasse B: Noten 1, 2, 3, 4, 5 → $\\sigma \\approx 1{,}41$ (große Streuung)
 **Lösung:** $\bar{x} = 5$. Abweichungen: $-3, -1, -1, -1, 0, 0, 2, 4$
 $\sigma^2 = \frac{9+1+1+1+0+0+4+16}{8} = 4$
 $\sigma = 2$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Du kennst jetzt Mittelwert und Streuung. Im nächsten Kapitel lernst du **Quartile und Boxplots** kennen — damit kannst du Daten visualisieren und Ausreißer erkennen!`,
       },
       {
         id: "m-stat-3",
@@ -2751,6 +2932,10 @@ $\sigma = 2$
         interactive: "boxplotBuilder" as const,
         type: "interactive",
         content: `## Quartile & Boxplot
+
+> Du kennst bereits Mittelwert und Standardabweichung. Jetzt lernst du einen anderen Weg kennen, Daten zu analysieren: **Quartile** teilen die Daten in vier gleiche Teile — und der **Boxplot** zeigt dir auf einen Blick, wo die Daten liegen und wo Ausreißer sind!
+
+> 🎬 **3Blue1Brown:** [But what is a Standard Deviation?](https://www.youtube.com/watch?v=mtbM17e3BwQ) — ergänzend zur Varianz: zeigt, wie man Daten visuell analysiert.
 
 Quartile teilen eine sortierte Datenreihe in **vier gleiche Teile**.
 
@@ -2798,7 +2983,11 @@ Ein Boxplot zeigt:
 
 > **Merke:** Der IQR ist robust gegen Ausreißer und zeigt die typische Streuung der Daten!
 
-[INTERACTIVE]`,
+[INTERACTIVE]
+
+> 🔗 **Weiter:** Statistik abgeschlossen! Du kennst jetzt Lage, Streuung und Verteilung von Daten. Diese Werkzeuge brauchst du in der **Stochastik** — dort geht es um Wahrscheinlichkeiten, Zufallsvariablen und Verteilungen!
+
+> 🎓 **Fürs Studium:** In MA4 (Stochastik) werden Varianz und Erwartungswerte zu zentralen Begriffen. Boxplots und Quartile sind in der Datenanalyse und Qualitätskontrolle allgegenwärtig!`,
       },
             {
               id: "m-statistik-aufgaben-leicht",
@@ -2868,6 +3057,10 @@ $\\frac{a \\cdot k}{b \\cdot k} = \\frac{a}{b}$ — Immer den größten gemeinsa
         duration: "15 min",
         type: "text",
         content: `## Was ist ein Bruch?
+
+> Statistik abgeschlossen! Jetzt beginnen wir mit den **Grundlagen der Algebra** — und zwar mit Brüchen. Bruchrechnen ist überall: von Kochrezepten bis zu technischen Formeln. Wer Brüche sicher beherrscht, hat beim Lösen von Gleichungen und Termumformungen einen riesigen Vorteil!
+
+> 🏠 **Fürs Studium:** Bruchrechnen ist die Voraussetzung für **Gleichungen lösen** und **Termumformung** — beides kommt in MA1 drankommen. Im Studium wirst du ständig mit Brüchen arbeiten, z.B. bei Partialbruchzerlegungen in der Analysis!
 
 Ein Bruch $\\frac{a}{b}$ stellt einen Anteil dar. $a$ ist der **Zähler**, $b$ der **Nenner**.
 
@@ -2946,7 +3139,9 @@ Verschiedene Nenner: $\frac{2}{3}$ vs $\frac{3}{5}$
 
 **Loesung:** $\frac{1}{2} = \frac{15}{30}$, $\frac{3}{5} = \frac{18}{30}$, $\frac{2}{3} = \frac{20}{30}$
 Also: $\frac{1}{2} < \frac{3}{5} < \frac{2}{3}$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Du kennst jetzt Brüche und ihre Darstellung. Im nächsten Schritt lernst du, Brüche zu **addieren und subtrahieren** — das erfordert einen gemeinsamen Nenner!`,
       },
       {
         id: "m-br-2",
@@ -2954,6 +3149,10 @@ Also: $\frac{1}{2} < \frac{3}{5} < \frac{2}{3}$
         duration: "18 min",
         type: "text",
         content: `## Addieren & Subtrahieren von Brüchen
+
+> Du kennst bereits Brüche und ihre Umrechnung. Jetzt lernst du die erste Rechenoperation kennen: **Addieren und Subtrahieren**. Das Besondere: Du brauchst einen **gemeinsamen Nenner** — das kgV (kleinste gemeinsame Vielfache)!
+
+> 🏠 **Fürs Studium:** Das Prinzip des gemeinsamen Nenners kehrt in der Analysis bei Partialbruchzerlegungen wieder — dort zerlegst du komplexe Brüche in einfachere Summanden!
 
 Um Brüche zu addieren oder subtrahieren, braucht man einen **gemeinsamen Nenner**.
 
@@ -3018,7 +3217,9 @@ $= \\frac{6}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{13}{12} = 1\\frac{1}{1
 **Aufgabe:** $\frac{2}{3} + \frac{1}{4} = ?$
 
 **Lösung:** KGV = 12. $\frac{8}{12} + \frac{3}{12} = \frac{11}{12}$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Addieren und Subtrahieren sitzen. Jetzt kommt die **Multiplikation und Division** von Brüchen — und die ist überraschenderweise einfacher!`,
       },
       {
         id: "m-br-3",
@@ -3026,6 +3227,10 @@ $= \\frac{6}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{13}{12} = 1\\frac{1}{1
         duration: "15 min",
         type: "text",
         content: `## Multiplizieren & Dividieren
+
+> Du kennst bereits Addition und Subtraktion von Brüchen. Jetzt kommt die **Multiplikation und Division** — und die ist einfacher: Zähler mal Zähler, Nenner mal Nenner. Beim Dividieren wird einfach gekehrt!
+
+> 🏠 **Fürs Studium:** Bruchterme mit Variablen (z.B. $\\frac{x+1}{x-1} \\cdot \\frac{x-2}{x+3}$) sind in der Analysis bei der Partialbruchzerlegung essenziell. Wer Bruchrechnung sicher beherrscht, spart im Studium viel Zeit!
 
 Brüche zu multiplizieren ist einfacher als zu addieren — man braucht keinen gemeinsamen Nenner!
 
@@ -3073,7 +3278,11 @@ $\\frac{5}{2} : \\frac{5}{4} = \\frac{5}{2} \\cdot \\frac{4}{5} = \\frac{20}{10}
 **Aufgabe:** $\frac{3}{5} \cdot \frac{2}{7} = ?$
 
 **Lösung:** $\frac{3 \cdot 2}{5 \cdot 7} = \frac{6}{35}$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Bruchrechnung abgeschlossen! Diese Fähigkeit brauchst du jetzt für **Gleichungen lösen** — dort wirst du Brüche in Gleichungen auflösen und Variablen isolieren.
+
+> 🎓 **Fürs Studium:** In MA1 und MA2 wirst du Bruchterme mit Variablen ständig umformen — Partialbruchzerlegung, Grenzwerte bei rationalen Funktionen, etc. Diese Basics sind unverzichtbar!`,
       },
       {
         id: "m-br-aufgaben-leicht",
@@ -3143,6 +3352,10 @@ $D = b^2 - 4ac$
         type: "text",
         content: `## Lineare Gleichungen
 
+> Bruchrechnung abgeschlossen! Jetzt lernst du, **Gleichungen zu lösen** — die zentrale Fertigkeit der Algebra. Eine Gleichung sagt: "Links ist gleich rechts." Deine Aufgabe: Finde den Wert von $x$, der das erfüllt!
+
+> 🏠 **Fürs Studium:** Lineare Gleichungen sind die Basis für **Gleichungssysteme** in MA1 (Lineare Algebra). Wer sie sicher beherrscht, kann später mit Matrizen und Vektoren arbeiten!
+
 Lineare Gleichungen sind die einfachste Art von Gleichungen — die Variable kommt nur in der **1. Potenz** vor.
 
 ### Grundprinzip
@@ -3207,7 +3420,11 @@ $x = 12$
 
 **Lösung:** $3x = 15$ → $x = 5$
 Probe: $3 \cdot 5 + 7 = 22$ ✓
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Lineare Gleichungen sind die Basis. Jetzt werden sie **quadratisch**: $x^2$ taucht auf! Mit der pq-Formel oder abc-Formel kannst du sie lösen.
+
+> 🎓 **Fürs Studium:** Quadratische Gleichungen führen zur Diskriminante und zu komplexen Zahlen — beides kommt in MA1 drankommen!`,
       },
       {
         id: "m-gl-2",
@@ -3215,6 +3432,10 @@ Probe: $3 \cdot 5 + 7 = 22$ ✓
         duration: "20 min",
         type: "text",
         content: `## Quadratische Gleichungen
+
+> Du kennst bereits lineare Gleichungen. Jetzt wird die Variable **quadratisch**: $x^2$ taucht auf! Das eröffnet ganz neue Möglichkeiten — und ganz neue Lösungsverfahren: pq-Formel und abc-Formel (Mitternachtsformel).
+
+> 🎬 **3Blue1Brown:** [Essence of Algebra — Quadratic Formula](https://www.youtube.com/watch?v=XMx9S35LfgQ) — zeigt geometrisch, warum die pq-Formel funktioniert.
 
 $ax^2 + bx + c = 0$ — Die Variable kommt in der **2. Potenz** vor.
 
@@ -3303,7 +3524,11 @@ $x_1 = 3$, $x_2 = 2$
 **Aufgabe 2:** Berechne die Diskriminante von $2x^2 + 3x + 5$
 
 **Lösung:** $D = 9 - 40 = -31 < 0$ → keine reellen Lösungen
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Gleichungen lösen abgeschlossen! Jetzt folgt die **Termumformung** — damit kannst du Terme vereinfachen, Klammern ausmultiplizieren und binomische Formeln anwenden. Das ist die Voraussetzung für Kurvendiskussion!
+
+> 🎓 **Fürs Studium:** Quadratische Gleichungen und die Diskriminante sind in MA1 die Grundlage für die Theorie der Polynomgleichungen und komplexen Zahlen!`,
       },
       {
         id: "m-gl-aufgaben-leicht",
@@ -3370,6 +3595,10 @@ $a^0 = 1$ (für $a \\neq 0$)`,
         type: "text",
         content: `## Klammern ausmultiplizieren
 
+> Gleichungen lösen abgeschlossen! Jetzt lernst du die **Termumformung** kennen — das Werkzeug, um Terme zu vereinfachen und umzuformen. Das Distributivgesetz ist der Schlüssel: $a(b+c) = ab + ac$.
+
+> 🏠 **Fürs Studium:** Termumformung ist die Voraussetzung für **Kurvendiskussion** in MA2 — dort musst du Funktionen umformen, um Nullstellen, Extrema und Wendepunkte zu finden!
+
 Das Distributivgesetz ist das wichtigste Werkzeug beim Vereinfachen von Termen.
 
 ### Distributivgesetz
@@ -3412,7 +3641,9 @@ $= x^2 - 3x + 2x - 6 = x^2 - x - 6$
 
 $(a + b)(c + d) = ac + ad + bc + bd"
 
-> **Merke:** "Außen mal Außen, Innen mal Innen" — das FOIL-Prinzip (First, Outer, Inner, Last)!`,
+> **Merke:** "Außen mal Außen, Innen mal Innen" — das FOIL-Prinzip (First, Outer, Inner, Last)!
+
+> 🔗 **Weiter:** Du kennst jetzt das Ausmultiplizieren. Im nächsten Kapitel lernst du die **binomischen Formeln** kennen — drei mächtige Werkzeuge, die in der Algebra überall auftauchen!`,
       },
       {
         id: "m-tu-2",
@@ -3420,6 +3651,10 @@ $(a + b)(c + d) = ac + ad + bc + bd"
         duration: "18 min",
         type: "text",
         content: `## Binomische Formeln
+
+> Du kennst bereits das Ausmultiplizieren mit dem Distributivgesetz. Jetzt lernst du drei **Spezialfälle** kennen, die so häufig vorkommen, dass sie eigene Namen haben: die binomischen Formeln! Sie sind der Schlüssel zum Faktorisieren und zur Scheitelpunktform.
+
+> 🎬 **3Blue1Brown:** [Essence of Algebra — Binomial Theorem](https://www.youtube.com/watch?v=YMm0gWxSckQ) — zeigt, wie binomische Formeln zum Binomischen Theorem verallgemeinert werden.
 
 Die drei binomischen Formeln gehören zu den wichtigsten Werkzeugen der Algebra.
 
@@ -3475,7 +3710,11 @@ $4x^2 - 12x + 9 = (2x-3)^2$
 **Aufgabe:** Wende die 2. binomische Formel an: $(x + 3)^2$
 
 **Lösung:** $x^2 + 2 \cdot 3x + 9 = x^2 + 6x + 9$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Termumformung abgeschlossen! Jetzt folgen **Ungleichungen** — dort suchst du nicht mehr einen einzelnen Wert, sondern einen **Bereich** von Lösungen!
+
+> 🎓 **Fürs Studium:** Binomische Formeln werden in MA2 zur Scheitelpunktform verallgemeinert. In der Linearen Algebra helfen sie bei quadratischen Formen und Optimierung!`,
       },
       {
         id: "m-tu-aufgaben-leicht",
@@ -3538,6 +3777,10 @@ $4x^2 - 12x + 9 = (2x-3)^2$
         duration: "15 min",
         type: "text",
         content: `## Lineare Ungleichungen
+
+> Termumformung abgeschlossen! Jetzt folgt das letzte Algebra-Modul: **Ungleichungen**. Statt "$=$" suchst du jetzt nach "$<$" oder "$>$" — und die Lösung ist kein einzelner Wert, sondern ein **Intervall** auf dem Zahlenstrahl!
+
+> 🏠 **Fürs Studium:** Ungleichungen sind in MA2 bei der Kurvendiskussion essenziell — Monotonie ($f'(x) > 0$) und Krümmung ($f''(x) > 0$) sind Ungleichungen! Auch in der Optimierung (Nebenbedingungen) spielen sie eine zentrale Rolle.
 
 Ungleichungen funktionieren wie Gleichungen — mit einer wichtigen Ausnahme beim Multiplizieren mit negativen Zahlen.
 
@@ -3602,7 +3845,9 @@ $x \\geq 2$: Geschlossener Kreis bei 2, Pfeil nach rechts.
 
 **Lösung:** $2x > 8$ → $x > 4$
 Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> 🔗 **Weiter:** Lineare Ungleichungen sind die Basis. Jetzt werden sie **quadratisch**: $x^2$ taucht auf! Mit dem Tafel-Test findest du die Lösungsmenge.`,
       },
       {
         id: "m-ug-2",
@@ -3610,6 +3855,10 @@ Lösungsmenge: $L = \{x \in \mathbb{R} \mid x > 4\} = (4, \infty)$
         duration: "18 min",
         type: "text",
         content: `## Quadratische Ungleichungen
+
+> Du kennst bereits lineare Ungleichungen. Jetzt wird es komplexer: **Quadratische Ungleichungen** haben die Form $ax^2 + bx + c > 0$. Die Lösung findest du mit dem **Tafel-Test** — erst Nullstellen bestimmen, dann Vorzeichen in den Intervallen prüfen!
+
+> 🎬 **3Blue1Brown:** [Essence of Algebra — Quadratic Formula](https://www.youtube.com/watch?v=XMx9S35LfgQ) — das Verständnis für quadratische Funktionen hilft dir, die Vorzeichen zu verstehen.
 
 Quadratische Ungleichungen haben die Form $ax^2 + bx + c > 0$ (oder $< 0$, $\\leq$, $\\geq$).
 
@@ -3661,7 +3910,11 @@ Der Tafel-Test funktioniert immer:
 2. Für jeden Faktor: Vorzeichen in jedem Intervall bestimmen
 3. Produkt-Vorzeichen ablesen
 
-> **Merke:** Nullstellen finden → Intervalle testen → Lösung ablesen!`,
+> **Merke:** Nullstellen finden → Intervalle testen → Lösung ablesen!
+
+> 🔗 **Weiter:** Alle Algebra-Grundlagen sind abgeschlossen! Du kennst jetzt Brüche, Gleichungen, Termumformung und Ungleichungen. Damit bist du bereit für die **Kurvendiskussion** — dort wirst du all diese Werkzeuge zusammen einsetzen!
+
+> 🎓 **Fürs Studium:** In MA2 (Analysis) löst du Ungleichungen wie $f'(x) > 0$ (Monotonie) und $f''(x) > 0$ (Krümmung). Diese Techniken sind das tägliche Brot im Mathe-Studium!`,
       },
       {
         id: "m-ug-aufgaben-leicht",
@@ -3732,6 +3985,8 @@ Der Tafel-Test funktioniert immer:
         type: "text",
         content: `## Definitionsbereich & Nullstellen
 
+> **Roter Faden:** Du kennst bereits [Ableitungen](/modules/mathe-ableitungen) und [Grenzwerte](/modules/mathe-grenzwerte). Jetzt setzen wir alles zusammen: Die vollständige Analyse einer Funktion beginnt hier — mit Definitionsbereich und Nullstellen.
+
 Bevor man eine Funktion analysiert, muss man wissen, wo sie **definiert** ist und wo sie die x-Achse schneidet.
 
 ### Definitionsbereich (Domain)
@@ -3798,6 +4053,8 @@ $x_1 = 1$, $x_2 = 3$
         type: "text",
         content: `## Extrema
 
+> **Roter Faden:** Nach [Definitionsbereich & Nullstellen](/modules/mathe-kurvendiskussion) wissen wir, wo die Funktion existiert. Jetzt suchen wir die **Hoch- und Tiefpunkte** — hier werden die Ableitungen aus [Modul 4](/modules/mathe-ableitungen) zum zentralen Werkzeug.
+
 Extrema sind die **Hoch- und Tiefpunkte** einer Funktion. Man findet sie mit der Ableitung.
 
 ### Notwendige Bedingung (1. Ableitung)
@@ -3860,7 +4117,9 @@ Absolutes Minimum: $f(0) = 0$
 **Lösung:** $f'(x) = 3x^2 - 3 = 0$ → $x = \pm 1$
 $f''(x) = 6x$. $f''(-1) = -6 < 0$ → Max bei $(-1, 2)$
 $f''(1) = 6 > 0$ → Min bei $(1, -2)$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> **Nächstes:** Im nächsten Kapitel analysieren wir die [Wendepunkte & Monotonie](/modules/mathe-kurvendiskussion) — Krümmungswechsel und Steigungsverhalten.`,
       },
       {
         id: "m-kd-3",
@@ -3868,6 +4127,8 @@ $f''(1) = 6 > 0$ → Min bei $(1, -2)$
         duration: "18 min",
         type: "text",
         content: `## Wendepunkte & Monotonie
+
+> **Roter Faden:** Nach den [Extrema](/modules/mathe-kurvendiskussion) kennen wir Hoch- und Tiefpunkte. Jetzt fehlt noch: Wo ändert sich die **Krümmung**? Und wo steigt bzw. fällt die Funktion?
 
 Nach den Extrema kommen die Wendepunkte — wo sich die **Krümmung** ändert.
 
@@ -4028,6 +4289,10 @@ $x = \\frac{D_x}{D}$, $y = \\frac{D_y}{D}$
         type: "text",
         content: `## Einsetzungsverfahren
 
+> **Roter Faden:** Du kennst [Vektoren](/modules/mathe-vektoren) bereits. Lineare Gleichungssysteme sind der nächste Schritt — sie verbinden Vektoren mit Algebra. Das Gauß-Verfahren und die Matrizen bauen direkt darauf auf.
+
+> 🎓 **Fürs Studium:** In MA3 (Lineare Algebra) wird Gauß das zentrale Werkzeug sein!
+
 Das Einsetzungsverfahren ist eine Methode, um lineare Gleichungssysteme (LGS) zu lösen.
 
 ### Prinzip
@@ -4086,6 +4351,10 @@ Das Einsetzungsverfahren ist gut, wenn eine Variable leicht isolierbar ist (Koef
         duration: "20 min",
         type: "text",
         content: `## Gauß-Verfahren
+
+> **Roter Faden:** Das [Einsetzungsverfahren](/modules/mathe-gleichungssysteme) funktioniert gut für kleine Systeme. Für größere Systeme brauchen wir das **Gauß-Verfahren** — die systematische Methode der Zeilenumformung.
+
+> 🎓 **Fürs Studium:** Gauß ist DAS Werkzeug in der Linearen Algebra. Wer es hier versteht, hat im Studium einen riesigen Vorsprung!
 
 Systematische Methode durch Zeilenumformung.
 
@@ -4174,7 +4443,9 @@ $x + 0 + 2 = 9$ -> $x = 7$
 Zeile 2 - 2×Zeile 1: $0x - 3y = -6$ → $y = 2$
 Einsetzen: $x + 2 = 3$ → $x = 1$
 Probe: $1+2=3$ ✓, $2-2=0$ ✓
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> **Nächstes:** Die Gauß-Verfahren führt uns direkt zu [Matrizen & Determinanten](/modules/mathe-matrizen) — denn Gauß kann man elegant als Matrix-Operationen formulieren.`,
       },
       {
         id: "m-lgs-aufgaben-leicht",
@@ -4239,6 +4510,10 @@ $A^{-1} = \\frac{1}{\\det A} \\begin{pmatrix}d&-b\\-c&a\\end{pmatrix}$`,
         type: "text",
         content: `## Matrix-Operationen
 
+> **Roter Faden:** Aus den [Linearen Gleichungssystemen](/modules/mathe-gleichungssysteme) und den [Vektoren](/modules/mathe-vektoren) ergibt sich ein neues Werkzeug: die **Matrix**. Sie ist die systematische Art, lineare Gleichungen zu schreiben und zu lösen.
+
+> 🎓 **Fürs Studium:** Matrizen sind das Herzstück von MA3. Wer sie hier versteht, hat im Studium einen riesigen Vorsprung!
+
 Eine Matrix ist ein rechteckiges Zahlenfeld in Zeilen und Spalten.
 
 ### Notation
@@ -4289,6 +4564,10 @@ $\\begin{pmatrix} 1 & 2 \\ 3 & 4 \\end{pmatrix}^T = \\begin{pmatrix} 1 & 3 \\ 2 
         type: "text",
         content: `## Determinanten & Inverse
 
+> **Roter Faden:** Nach den [Matrix-Operationen](/modules/mathe-matrizen) (Addition, Multiplikation) fehlt noch die **Determinante** — eine einzige Zahl, die verrät, ob eine Matrix invertierbar ist. Das ist der Schlüssel zum Lösen von Gleichungssystemen!
+
+> 🎬 **3Blue1Brown:** [The Determinant](https://www.youtube.com/watch?v=Ip3X9LOh2dk) — warum die Determinante die "Stauchung" eines Raumes misst.
+
 Die Determinante ist eine Zahl, die aus einer quadratischen Matrix berechnet wird. Sie sagt aus, ob die Matrix invertierbar ist.
 
 ### Determinante (2×2)
@@ -4325,7 +4604,9 @@ Nur wenn $\\det(A) \\neq 0$! Ist $\\det(A) = 0$, heißt die Matrix **singulär**
 
 $A \\vec{x} = \\vec{b} \\Rightarrow \\vec{x} = A^{-1} \\vec{b}$
 
-> **Merke:** det = 0 → keine Inverse → LGS hat keine oder unendlich viele Lösungen!`,
+> **Merke:** det = 0 → keine Inverse → LGS hat keine oder unendlich viele Lösungen!
+
+> **Nächstes:** Matrizen und Determinanten sind auch in der [Analytischen Geometrie](/modules/mathe-analytische-geometrie) zentral — bei Geraden und Ebenen im Raum.`,
       },
       {
         id: "m-ma-aufgaben-leicht",
@@ -4390,6 +4671,8 @@ $E(X) = \\lambda$`,
         type: "text",
         content: `## Binomialverteilung
 
+> **Roter Faden:** Du kennst bereits die Grundlagen der [Stochastik](/modules/mathe-stochastik). Jetzt geht es um **Verteilungen** — die beschreiben, wie Wahrscheinlichkeiten über verschiedene Ergebnisse verteilt sind. Die Binomialverteilung ist die wichtigste diskrete Verteilung.
+
 Die Binomialverteilung modelliert die Anzahl **erfolgreicher** Versuche bei $n$ unabhängigen Experimenten.
 
 ### Voraussetzungen
@@ -4446,6 +4729,10 @@ $\\binom{5}{3} = \\frac{5!}{3! \\cdot 2!} = \\frac{120}{6 \\cdot 2} = 10$
         type: "text",
         content: `## Normalverteilung
 
+> **Roter Faden:** Die [Binomialverteilung](/modules/mathe-wahrscheinlichkeitsverteilungen) ist diskret — endlich viele Ergebnisse. Die **Normalverteilung** ist ihr stetiges Gegenstück: eine Glockenkurve, die überall in der Natur vorkommt.
+
+> 🎓 **Fürs Studium:** Der Zentrale Grenzwertsatz (warum die Normalverteilung überall auftaucht) ist eines der mächtigsten Ergebnisse der Stochastik!
+
 Die Normalverteilung ist die wichtigste **stetige** Verteilung. Sie beschreibt viele natürliche Phänomene: Körpergröße, Messfehler, IQ.
 
 ### Glockenkurve
@@ -4487,7 +4774,9 @@ $P(X > 130) = P\\left(Z > \\frac{130-100}{15}\\right) = P(Z > 2) \\approx 2{,}5\
 
 Nach dem **Zentralen Grenzwertsatz** nähert sich die Summe vieler unabhängiger Zufallsvariablen der Normalverteilung an — egal, welche Verteilung die einzelnen haben!
 
-> **Merke:** Normalverteilung = Glockenkurve. 68-95-99,7 ist die wichtigste Faustregel!`,
+> **Merke:** Normalverteilung = Glockenkurve. 68-95-99,7 ist die wichtigste Faustregel!
+
+> **Nächstes:** Die [Statistik](/modules/mathe-statistik) zeigt dir, wie man mit Daten arbeitet — Verteilungen sind dort das Fundament.`,
       },
       {
         id: "m-vt-aufgaben-leicht",
@@ -4552,6 +4841,8 @@ $S = \\frac{a_1}{1-q}$ (nur für $|q| < 1$)`,
         type: "text",
         content: `## Arithmetische Folgen
 
+> **Roter Faden:** Mit Folgen und Reihen beginnt ein neuer Bereich der Analysis. Die arithmetische Folge ist der einfachste Fall — ein konstanter Abstand zwischen den Gliedern. Später folgen geometrische Folgen und die Verbindung zu [Reihen](/modules/mathe-reihen).
+
 Eine arithmetische Folge hat einen **konstanten Abstand** $d$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
@@ -4611,6 +4902,8 @@ $S_{10} = \frac{10}{2}(3 + 39) = 5 \cdot 42 = 210$
         type: "text",
         content: `## Geometrische Folgen & Reihen
 
+> **Roter Faden:** Die [arithmetische Folge](/modules/mathe-folgen-reihen) hat einen konstanten Abstand. Jetzt kommt die **geometrische Folge** — ein konstanter **Faktor**. Das führt uns direkt zu den [Reihen](/modules/mathe-reihen) und später zu den [Taylorreihen](/modules/mathe-taylorreihen).
+
 Eine geometrische Folge hat einen **konstanten Faktor** $q$ zwischen aufeinanderfolgenden Gliedern.
 
 ### Formel
@@ -4665,7 +4958,9 @@ $0{,}333... = \\frac{3}{10} + \\frac{3}{100} + \\frac{3}{1000} + \\cdots = \\fra
 **Lösung:**
 $a_5 = 2 \cdot 3^4 = 162$
 $S_5 = 2 \cdot \frac{3^5 - 1}{3 - 1} = 2 \cdot \frac{242}{2} = 242$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> **Nächstes:** Geometrische Reihen mit $|q| < 1$ konvergieren — das ist der Schlüssel zu den [Reihen](/modules/mathe-reihen) und später zu den [Taylorreihen](/modules/mathe-taylorreihen).`,
       },
       {
         id: "m-fr-aufgaben-leicht",
@@ -4731,6 +5026,10 @@ $d = \\frac{|\\vec{v} \\times (\\vec{a} - \\vec{p})|}{|\\vec{v}|}$`,
         type: "text",
         content: `## Geraden im Raum
 
+> **Roter Faden:** Du kennst [Vektoren](/modules/mathe-vektoren) und [Lineare Gleichungssysteme](/modules/mathe-gleichungssysteme). Jetzt bringt die **Analytische Geometrie** beides zusammen: Geraden und Ebenen im 3D-Raum werden durch Vektoren beschrieben.
+
+> 🎓 **Fürs Studium:** Geraden und Ebenen im Raum werden in MA3 drankommen — zusammen mit Vektorräumen.
+
 Im dreidimensionalen Raum werden Geraden durch einen **Stützvektor** und einen **Richtungsvektor** beschrieben.
 
 ### Parameterform
@@ -4788,6 +5087,8 @@ Schnittpunkt: $(1, 1, 0)$
         type: "text",
         content: `## Ebenen im Raum
 
+> **Roter Faden:** Nach den [Geraden im Raum](/modules/mathe-analytische-geometrie) folgt die nächste Dimension: **Ebenen**. Sie werden durch einen Punkt und zwei Richtungsvektoren (oder einen Normalenvektor) beschrieben — und erfordern das Gauß-Verfahren aus [Modul 20](/modules/mathe-gleichungssysteme).
+
 Eine Ebene im dreidimensionalen Raum wird durch einen Punkt und zwei Richtungsvektoren (oder einen Normalenvektor) beschrieben.
 
 ### Parameterform
@@ -4834,7 +5135,9 @@ Abstand $(1, 2, 3)$ zur Ebene $2x - y + 3z = 6$:
 
 $d = \\frac{|2 - 2 + 9 - 6|}{\\sqrt{4+1+9}} = \\frac{3}{\\sqrt{14}} \\approx 0{,}80$
 
-> **Merke:** Ebene = Punkt + 2 Richtungen. Normalenvektor steht senkrecht drauf!`,
+> **Merke:** Ebene = Punkt + 2 Richtungen. Normalenvektor steht senkrecht drauf!
+
+> **Nächstes:** Die [Prozent- & Zinsrechnung](/modules/mathe-prozent-zinsen) bringt uns zurück in die Anwendung — wo Mathe im Alltag begegnet.`,
       },
       {
         id: "m-ag-aufgaben-leicht",
@@ -4897,6 +5200,8 @@ $K_n = K_0 \\cdot (1 + \\frac{p}{100})^n$`,
         duration: "15 min",
         type: "text",
         content: `## Prozentrechnung
+
+> **Roter Faden:** Die Prozentrechnung ist ein Grundlagenwerkzeug, das überall im Alltag auftaucht — von Rabatten bis zu Steuern. Im nächsten Kapitel wird sie zur **Zinsrechnung** erweitert, wo Potenzen aus [Modul 13](/modules/mathe-potenzen) ins Spiel kommen.
 
 Prozente begegnen uns überall: Rabatte, Steuern, Zinsen. Die Grundformel ist einfach.
 
@@ -4961,6 +5266,8 @@ $120 - 24 = 96€$ Endpreis
         type: "text",
         content: `## Zinsen & Zinseszins
 
+> **Roter Faden:** Nach der [Prozentrechnung](/modules/mathe-prozent-zinsen) kommt die **Zinsrechnung** — und mit dem Zinseszins wird Potenzrechnung aus [Modul 13](/modules/mathe-potenzen) zum entscheidenden Werkzeug. Die 72er-Regel ist eine elegante Faustregel!
+
 Zinsen sind der "Preis" für geliehenes Geld. Bei Zinseszinsen wächst das Geld exponentiell.
 
 ## Einfache Zinsen
@@ -5009,7 +5316,9 @@ $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\a
 **Aufgabe:** 1000€ zu 5% Zinsen nach 3 Jahren (einfach)?
 
 **Lösung:** $K_3 = 1000 \cdot (1 + 3 \cdot 0{,}05) = 1000 \cdot 1{,}15 = 1150€$
-[PRACTICE_END]`,
+[PRACTICE_END]
+
+> **Nächstes:** Die [Körper & Volumen](/modules/mathe-koerper) bringen uns zurück in die Geometrie — mit 3D-Formen.`,
       },
       {
         id: "m-pz-aufgaben-leicht",
@@ -5071,6 +5380,8 @@ $t \\approx \\frac{72}{8} = 9$ Jahre → $K_9 \\approx 10000 \\cdot 1{,}08^9 \\a
         type: "text",
         content: `## Quader
 
+> **Roter Faden:** Du kennst bereits die [Geometrie](/modules/mathe-geometrie) mit Flächen und Winkeln. Jetzt geht es in die dritte Dimension: **Körper** mit Volumen und Oberfläche. Der Quader ist der einfachste 3D-Körper.
+
 Ein Quader hat 3 verschiedene Kantenlängen: a, b, c.
 
 ### Volumen
@@ -5111,6 +5422,8 @@ $a = 4$: $V = 64$, $O = 96$, $d = 4\\sqrt{3} \\approx 6{,}93$`,
         duration: "18 min",
         type: "text",
         content: `## Zylinder
+
+> **Roter Faden:** Nach [Quader & Würfel](/modules/mathe-koerper) mit geraden Kanten kommen jetzt die **krummlinigen Körper** — Zylinder, Kegel und Kugel. Hier wird $pi$ aus der [Geometrie](/modules/mathe-geometrie) unverzichtbar.
 
 Ein Zylinder hat einen kreisförmigen Querschnitt mit Radius r und Höhe h.
 
@@ -5162,7 +5475,9 @@ $r = 5$:
 
 $V = \\frac{4}{3}\\pi \\cdot 125 = \\frac{500}{3}\\pi \\approx 523{,}6$
 
-$O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
+$O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$
+
+> **Nächstes:** Die [Kombinatorik](/modules/mathe-kombinatorik) bringt uns in einen ganz anderen Bereich — das systematische Zählen.`,
       },
       {
         id: "m-ko-aufgaben-leicht",
@@ -5222,6 +5537,8 @@ $O = 4\\pi \\cdot 25 = 100\\pi \\approx 314{,}2$`,
         type: "text",
         content: `## Permutation
 
+> **Roter Faden:** Du kennst bereits die Grundlagen der [Stochastik](/modules/mathe-stochastik). Die **Kombinatorik** ist der systematische Weg, die Anzahl der Möglichkeiten zu berechnen. Ohne sie kommt man in der Stochastik nicht weit!
+
 Eine Permutation ist eine **Anordnung** von n Elementen. Die Reihenfolge ist wichtig!
 
 ### Formel
@@ -5262,6 +5579,8 @@ $V(8,3) = \\frac{8!}{5!} = 8 \\cdot 7 \\cdot 6 = 336$
         type: "text",
         content: `## Kombination
 
+> **Roter Faden:** Bei [Permutationen & Variationen](/modules/mathe-kombinatorik) war die Reihenfolge wichtig. Bei der **Kombination** ist sie egal — es zählt nur die Auswahl. Das ist das Grundprinzip hinter Lotto und Co.
+
 Eine Kombination ist eine **Auswahl** von k aus n Elementen, bei der die **Reihenfolge egal** ist.
 
 ### Formel
@@ -5281,7 +5600,9 @@ $\\binom{8}{3} = \\frac{8!}{3! \\cdot 5!} = \\frac{8 \\cdot 7 \\cdot 6}{3 \\cdot
 In einer Runde mit 10 Personen schütteln alle einander die Hände. Wie viele Handshakes?
 $\\binom{10}{2} = \\frac{10!}{2! \\cdot 8!} = 45$
 
-> **Merke:** Kombination = Auswahl ohne Reihenfolge. Variation = Auswahl mit Reihenfolge.`,
+> **Merke:** Kombination = Auswahl ohne Reihenfolge. Variation = Auswahl mit Reihenfolge.
+
+> **Nächstes:** In [Logik & Beweise](/modules/mathe-logik) lernst du, wie man mathematische Aussagen systematisch beweist.`,
       },
       {
         id: "m-kb-aufgaben-leicht",
@@ -5344,6 +5665,10 @@ $\\lnot(p \\lor q) = \\lnot p \\land \\lnot q$`,
         duration: "18 min",
         type: "text",
         content: `## Aussagenlogik
+
+> **Roter Faden:** Du kennst bereits die [Mengenlehre](/modules/mathe-mengenlehre) — die Bausteine der Mathematik. Die **Logik** ist die Sprache, in der Mathematik geschrieben wird. Aussagen, Verknüpfungen und Wahrheitstafeln sind die Grundlage für alles, was folgt.
+
+> 🎓 **Fürs Studium:** Beweismethoden sind Teil von MA1 (Grundlagen). Vollständige Induktion und Widerspruchsbeweise werden in der Klausur drankommen!
 
 Die Aussagenlogik ist die Grundlage der Mathematik und Informatik. Sie untersucht, ob Aussagen **wahr** oder **falsch** sind.
 
@@ -5415,6 +5740,8 @@ $\lnot(p \\lor q) = \lnot p \\land \lnot q$
         type: "text",
         content: `## Beweistechniken
 
+> **Roter Faden:** Die [Aussagenlogik](/modules/mathe-logik) gibt uns die Sprache. Jetzt lernst du die **Beweistechniken** — direkter Beweis, Widerspruch und vollständige Induktion. Das sind die Werkzeuge, mit denen Mathematik funktioniert.
+
 Beweise sind das Herzstück der Mathematik. Hier die wichtigsten Techniken.
 
 ### Direkter Beweis
@@ -5463,7 +5790,9 @@ Statt $p \\Rightarrow q$ beweisen wir $\lnot q \\Rightarrow \lnot p$.
 
 Kontraposition: Wenn $n$ gerade, dann $n^2$ gerade. (Einfacher zu beweisen!)
 
-> **Merke:** VI funktioniert wie eine Kartenreihe — wenn jede Karte die nächste umstößt, fallen alle um!`,
+> **Merke:** VI funktioniert wie eine Kartenreihe — wenn jede Karte die nächste umstößt, fallen alle um!
+
+> **Nächstes:** Der [Dreisatz](/modules/mathe-dreisatz) bringt uns zurück in die Praxis — proportionale Zuordnungen im Alltag.`,
       },
       {
         id: "m-lg-aufgaben-leicht",
@@ -5523,6 +5852,8 @@ $a_1 : a_2 = b_2 : b_1$`,
         type: "text",
         content: `## Direkt proportional
 
+> **Roter Faden:** Der Dreisatz ist eines der praktischsten Werkzeuge der Mathematik. Er taucht überall auf — von der Rezeptidee bis zur Fahrzeitberechnung. Die **direkt proportionale** Zuordnung ist der einfachste Fall: „je mehr, desto mehr."
+
 Wenn eine Größe steigt, steigt die andere **im gleichen Verhältnis**. Das Verhältnis bleibt konstant.
 
 ### Schema
@@ -5562,6 +5893,8 @@ $b_2 = \\frac{120 \\cdot 60}{45} = 160$ km
         type: "text",
         content: `## Indirekt proportional
 
+> **Roter Faden:** Beim [direkt proportionalen Dreisatz](/modules/mathe-dreisatz) gilt „je mehr, desto mehr." Jetzt kommt das Gegenteil: **indirekt proportional** — „je mehr, desto weniger." Das Produkt bleibt konstant.
+
 Wenn eine Größe steigt, sinkt die andere. Das **Produkt** bleibt konstant.
 
 ### Schema
@@ -5590,6 +5923,8 @@ Eine Rohrleitung füllt einen Tank in 8 Stunden. Eine zweite (doppelt so schnell
 $b_2 = \\frac{8 \\cdot 1}{2} = 4$ Stunden
 
 > **Merke:** Indirekt proportional = $a_1 \\cdot b_1 = a_2 \\cdot b_2$ (Produkt gleich)
+
+> **Nächstes:** In [Taylorreihen](/modules/mathe-taylorreihen) kehren wir zur Analysis zurück — und verbinden [Reihen](/modules/mathe-reihen) mit [Ableitungen](/modules/mathe-ableitungen) zu etwas Großartigem.
 
 [PRACTICE_START]
 **Aufgabe:** 6 Arbeiter brauchen 10 Tage. Wie lange brauchen 15 Arbeiter?
@@ -5657,6 +5992,12 @@ $f(x) = \\sum_{n=0}^{\\infty} \\frac{f^{(n)}(a)}{n!}(x-a)^n$
         type: "text",
         content: `## Taylor-Reihe
 
+> **Roter Faden:** Du kennst bereits [Reihen](/modules/mathe-reihen) und [Ableitungen](/modules/mathe-ableitungen). Die **Taylor-Reihe** verbindet beides: Jede glatte Funktion lässt sich als unendliche Summe von Potenzen darstellen. Das ist eines der mächtigsten Konzepte der Analysis!
+
+> 🎬 **3Blue1Brown:** [Taylor series](https://www.youtube.com/watch?v=3d6DsjIBzJ4) — eine visuelle Erklärung, wie Taylor-Reihen funktionieren.
+
+> 🎓 **Fürs Studium:** Taylor-Reihen sind ein Thema in MA2 (Analysis 1). Wer sie hier versteht, kann im Studium punkten!
+
 Die Taylor-Reihe ermöglicht es, eine Funktion durch ein **Polynom** (unendliche Summe) anzunähern. Das ist extrem nützlich für Berechnungen!
 
 ### Formel
@@ -5688,6 +6029,10 @@ Computer können nicht $e^x$ direkt berechnen. Sie verwenden stattdessen die Tay
         duration: "18 min",
         type: "text",
         content: `## Wichtige Reihenentwicklungen
+
+> **Roter Faden:** Nach der [Taylor-Reihe](/modules/mathe-taylorreihen) als allgemeinem Prinzip kommen jetzt die **wichtigen Reihen**: $e^x$, $\\sin$, $\\cos$ und $\\ln$. Diese Reihen sind so zentral, dass sie in fast jedem Mathematik- und Informatikstudium vorkommen.
+
+> 🎬 **3Blue1Brown:** [Exponents & e](https://www.youtube.com/watch?v=m2MIpBrFgFk) — warum $e$ überall auftaucht und was es mit Wachstum zu tun hat.
 
 Diese Reihen kommen überall in der Mathematik und Physik vor. Sie lohnt es sich, sie zu kennen!
 
@@ -5756,6 +6101,7 @@ Exakter Wert: $e = 2{,}71828...$ -- nur 0,06% Fehler!
 
 > **Merke:** Mehr Terme = genauere Approximation. Schon 5-6 Terme reichen fuer viele praktische Anwendungen.
 
+> **Nächstes:** Damit ist der Analysis-Teil abgeschlossen! Zurückkehren kannst du jederzeit zu [Grenzwerte](/modules/mathe-grenzwerte), [Ableitungen](/modules/mathe-ableitungen) oder [Reihen](/modules/mathe-reihen).
 
 
 ---
