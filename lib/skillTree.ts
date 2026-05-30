@@ -2,7 +2,7 @@
 // Skill Tree — Module Dependencies & Auto-Layout
 // ============================================================================
 
-export type NodeStatus = "completed" | "available" | "locked";
+export type NodeStatus = "completed" | "in-progress" | "not-started";
 
 export interface SkillTreeNode {
   id: string;
@@ -101,11 +101,15 @@ export function getEdges(nodes: SkillTreeNode[]): SkillTreeEdge[] {
 
 // ─── Status-Berechnung ──────────────────────────────────────────────────────
 
-export function getNodeStatus(node: SkillTreeNode, completedModules: string[]): NodeStatus {
+export function getNodeStatus(
+  node: SkillTreeNode,
+  completedModules: string[],
+  completedLessons: Record<string, string[]>
+): NodeStatus {
   if (completedModules.includes(node.id)) return "completed";
-  if (node.prerequisites.length === 0) return "available";
-  const allPrereqsMet = node.prerequisites.every(p => completedModules.includes(p));
-  return allPrereqsMet ? "available" : "locked";
+  const lessons = completedLessons[node.id];
+  if (lessons && lessons.length > 0) return "in-progress";
+  return "not-started";
 }
 
 // ─── Auto-Layout ────────────────────────────────────────────────────────────
@@ -116,8 +120,8 @@ const CATEGORY_ANGLES: Record<string, number> = {
   ihk: 315,          // nach rechts-unten
 };
 
-const TIER_SPACING = 180;
-const NODE_SPACING = 160;
+const TIER_SPACING = 220;
+const NODE_SPACING = 180;
 
 export function calculateLayout(nodes: SkillTreeNode[], category: string): Map<string, NodePosition> {
   const positions = new Map<string, NodePosition>();
@@ -131,11 +135,13 @@ export function calculateLayout(nodes: SkillTreeNode[], category: string): Map<s
   }
 
   const baseAngle = CATEGORY_ANGLES[category] || 180;
-  const angleSpread = 70; // Grad
 
   for (const [tier, tierNodes] of tiers) {
     const radius = tier * TIER_SPACING;
     const count = tierNodes.length;
+
+    // Winkel-Bereich abhängig von Anzahl der Knoten
+    const angleSpread = Math.max(40, count * 22);
 
     tierNodes.forEach((node, i) => {
       let angle: number;
@@ -143,7 +149,7 @@ export function calculateLayout(nodes: SkillTreeNode[], category: string): Map<s
         angle = baseAngle;
       } else {
         // Verteile gleichmäßig im Winkel-Bereich
-        const t = count > 1 ? i / (count - 1) : 0.5;
+        const t = i / (count - 1);
         angle = baseAngle - angleSpread / 2 + t * angleSpread;
       }
 
