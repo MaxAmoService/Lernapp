@@ -8,6 +8,8 @@ import {
   getNodeStatus,
   NODE_W,
   NODE_H,
+  COL_W,
+  ROW_H,
   type SkillTreeNode,
   type NodeStatus,
 } from "@/lib/skillTree";
@@ -120,10 +122,12 @@ export function SkillTreeGraph() {
     if (n.length === 0) return;
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
     for (const node of n) {
-      minX = Math.min(minX, node.x);
-      maxX = Math.max(maxX, node.x);
-      minY = Math.min(minY, node.y);
-      maxY = Math.max(maxY, node.y);
+      const px = node.col * COL_W;
+      const py = node.row * ROW_H;
+      minX = Math.min(minX, px);
+      maxX = Math.max(maxX, px);
+      minY = Math.min(minY, py);
+      maxY = Math.max(maxY, py);
     }
     const pad = 250;
     setVb({ x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2 + NODE_W, h: maxY - minY + pad * 2 + NODE_H });
@@ -142,22 +146,27 @@ export function SkillTreeGraph() {
     const fs = getNodeStatus(fn, doneModules, doneLessons);
     const ts = getNodeStatus(tn, doneModules, doneLessons);
     const bothDone = fs === "completed" && ts === "completed";
+    const isActive = fs === "completed" && ts !== "completed";
 
-    // Weiße Linie, heller wenn Pfad abgeschlossen
-    const color = bothDone ? "#ffffff" : "#ffffff";
-    const w = bothDone ? 2.5 : 1.5;
-    const op = bothDone ? 0.5 : 0.15;
-
-    // Rechte Kante von from → linke Kante von to
+    // Von unten Mitte von from → oben Mitte von to
     const x1 = fp.x + NODE_W / 2;
-    const y1 = fp.y + NODE_H / 2;
-    const x2 = tp.x - NODE_W / 2;
-    const y2 = tp.y + NODE_H / 2;
+    const y1 = fp.y + NODE_H;
+    const x2 = tp.x + NODE_W / 2;
+    const y2 = tp.y;
 
-    // Gerade Linie
+    // Farbe: grün wenn beide fertig, blau wenn aktiv, sonst grau
+    const color = bothDone ? "#00ff88" : isActive ? "#00aaff" : "#64748b";
+    const w = bothDone ? 3 : isActive ? 2.5 : 2;
+    const op = bothDone ? 0.8 : isActive ? 0.6 : 0.3;
+
     return (
       <g key={`e-${i}`}>
+        {/* Glow */}
+        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={w + 6} opacity={op * 0.2} strokeLinecap="round" />
+        {/* Linie */}
         <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={w} opacity={op} strokeLinecap="round" />
+        {/* Pfeil am Ende */}
+        <polygon points={`${x2},${y2} ${x2 - 5},${y2 - 10} ${x2 + 5},${y2 - 10}`} fill={color} opacity={op} />
       </g>
     );
   };
