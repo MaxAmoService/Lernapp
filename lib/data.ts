@@ -15,6 +15,13 @@ import { qualitaetModule } from "./qualitaetData";
 import { projektmanagementModule } from "./projektmanagementData";
 import { dockerModule } from "./dockerData";
 import { erwProgModule } from "./erwProgData";
+import { grundrechnenModule } from "./grundrechnenData";
+import { ganzeZahlenModule } from "./ganzeZahlenData";
+import { quadratischeGleichungenModule } from "./quadratischeGleichungenData";
+import { logarithmusModule } from "./logarithmusData";
+import { exponentialModule } from "./exponentialData";
+import { wachstumsprozesseModule } from "./wachstumsprozesseData";
+import { fourierModule } from "./fourierData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
 
@@ -53,7 +60,7 @@ export const modules = [
 // Combine all modules
 export const allModules = [
   ...modules,
-  ...mathModules.filter(m => m.id !== "m-komplexe-zahlen"),
+  ...mathModules,
   ihkModule,
   netzwerkModule,
   datenbankModule,
@@ -66,6 +73,13 @@ export const allModules = [
   projektmanagementModule,
   dockerModule,
   erwProgModule,
+  grundrechnenModule,
+  ganzeZahlenModule,
+  quadratischeGleichungenModule,
+  logarithmusModule,
+  exponentialModule,
+  wachstumsprozesseModule,
+  fourierModule,
   ...contentModules,
 ];
 

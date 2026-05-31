@@ -3,6 +3,13 @@
 
 import { computersystemePractice, computersystemeExam } from "./computersystemeExercises";
 import { itSicherheitPractice, itSicherheitExam } from "./itSicherheitExercises";
+import { grundrechnenPractice, grundrechnenExam } from "./grundrechnenData";
+import { ganzeZahlenPractice, ganzeZahlenExam } from "./ganzeZahlenData";
+import { quadratischeGleichungenPractice, quadratischeGleichungenExam } from "./quadratischeGleichungenData";
+import { logarithmusPractice, logarithmusExam } from "./logarithmusData";
+import { exponentialPractice, exponentialExam } from "./exponentialData";
+import { wachstumsprozessePractice, wachstumsprozesseExam } from "./wachstumsprozesseData";
+import { fourierPractice, fourierExam } from "./fourierData";
 
 export interface Exercise {
   id: string;
@@ -12750,6 +12757,13 @@ export const allExercises: Exercise[] = [
   ...verteilungenPractice,
   ...computersystemePractice,
   ...itSicherheitPractice,
+  ...grundrechnenPractice,
+  ...ganzeZahlenPractice,
+  ...quadratischeGleichungenPractice,
+  ...logarithmusPractice,
+  ...exponentialPractice,
+  ...wachstumsprozessePractice,
+  ...fourierPractice,
 ];
 
 export function getExercisesForLesson(moduleId: string): Exercise[] {
@@ -12795,6 +12809,13 @@ export const examExercises: Record<string, Exercise[]> = {
   "m-verteilungen": verteilungenExam,
   "ihk-computersysteme": computersystemeExam,
   "ihk-it-sicherheit": itSicherheitExam,
+  "m-grundrechnen": grundrechnenExam,
+  "m-ganze-zahlen": ganzeZahlenExam,
+  "m-quadratische-gleichungen": quadratischeGleichungenExam,
+  "m-logarithmus": logarithmusExam,
+  "m-exponential": exponentialExam,
+  "m-wachstumsprozesse": wachstumsprozesseExam,
+  "m-fourier": fourierExam,
 };
 
 export function getExamExercises(moduleId: string): Exercise[] {

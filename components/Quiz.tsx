@@ -4,6 +4,13 @@ import { useState, useEffect } from "react";
 import { useAuth } from "./AuthProvider";
 import { mathQuizzes } from "@/lib/mathData";
 import { complexQuizzes } from "@/lib/complexData";
+import { grundrechnenQuizzes } from "@/lib/grundrechnenData";
+import { ganzeZahlenQuizzes } from "@/lib/ganzeZahlenData";
+import { quadratischeGleichungenQuizzes } from "@/lib/quadratischeGleichungenData";
+import { logarithmusQuizzes } from "@/lib/logarithmusData";
+import { exponentialQuizzes } from "@/lib/exponentialData";
+import { wachstumsprozesseQuizzes } from "@/lib/wachstumsprozesseData";
+import { fourierQuizzes } from "@/lib/fourierData";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
 import { CheckCircle2, XCircle, RotateCcw, Send } from "lucide-react";
@@ -377,6 +384,13 @@ const allQuizData: Record<string, QuizQuestion[]> = {
   ...quizData,
   ...mathQuizzes,
   ...complexQuizzes,
+  ...grundrechnenQuizzes,
+  ...ganzeZahlenQuizzes,
+  ...quadratischeGleichungenQuizzes,
+  ...logarithmusQuizzes,
+  ...exponentialQuizzes,
+  ...wachstumsprozesseQuizzes,
+  ...fourierQuizzes,
 };
 
 // Component to render questions with math
