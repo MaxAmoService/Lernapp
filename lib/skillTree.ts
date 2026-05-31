@@ -169,6 +169,103 @@ export function getPositions(nodes: SkillTreeNode[]): Map<string, NodePosition> 
   return map;
 }
 
+/**
+ * Automatische Baum-Layout-Berechnung (Bottom-Up).
+ *
+ * 1. Layer = längster Pfad von einem Root (Topological Sort)
+ * 2. Barycenter-Heuristik minimiert Kantenkreuzungen pro Layer
+ * 3. Eltern werden über ihren Kindern zentriert
+ */
+export function computeTreePositions(nodes: SkillTreeNode[]): Map<string, NodePosition> {
+  const map = new Map<string, NodePosition>();
+  if (nodes.length === 0) return map;
+
+  const nodeMap = new Map(nodes.map(n => [n.id, n]));
+
+  // ── 1. Layer berechnen (längster Pfad von Root) ──
+  const layerCache = new Map<string, number>();
+
+  function getLayer(id: string, visited = new Set<string>()): number {
+    if (layerCache.has(id)) return layerCache.get(id)!;
+    if (visited.has(id)) return 0; // Zyklus-Schutz
+    visited.add(id);
+
+    const node = nodeMap.get(id);
+    if (!node || node.prerequisites.length === 0) {
+      layerCache.set(id, 0);
+      return 0;
+    }
+
+    let maxParent = 0;
+    for (const p of node.prerequisites) {
+      if (nodeMap.has(p)) {
+        maxParent = Math.max(maxParent, getLayer(p, visited) + 1);
+      }
+    }
+    layerCache.set(id, maxParent);
+    return maxParent;
+  }
+
+  nodes.forEach(n => getLayer(n.id));
+
+  // ── 2. Nodes nach Layer gruppieren ──
+  const layers = new Map<number, SkillTreeNode[]>();
+  for (const n of nodes) {
+    const l = layerCache.get(n.id)!;
+    if (!layers.has(l)) layers.set(l, []);
+    layers.get(l)!.push(n);
+  }
+
+  const maxLayer = Math.max(...layers.keys(), 0);
+
+  // ── 3. Barycenter-Sortierung (minimiert Kantenkreuzungen) ──
+  const order = new Map<string, number>();
+
+  // Unteres Layer: nach Original-col sortieren
+  const layer0 = layers.get(0) || [];
+  layer0.sort((a, b) => a.col - b.col);
+  layer0.forEach((n, i) => order.set(n.id, i));
+
+  // Obere Layers: Barycenter der Eltern
+  for (let l = 1; l <= maxLayer; l++) {
+    const layer = layers.get(l) || [];
+    const bary = new Map<string, number>();
+
+    for (const n of layer) {
+      const parentPositions = n.prerequisites
+        .filter(p => order.has(p))
+        .map(p => order.get(p)!);
+      bary.set(
+        n.id,
+        parentPositions.length > 0
+          ? parentPositions.reduce((a, b) => a + b, 0) / parentPositions.length
+          : n.col // Fallback
+      );
+    }
+
+    layer.sort((a, b) => (bary.get(a.id) || 0) - (bary.get(b.id) || 0));
+    layer.forEach((n, i) => order.set(n.id, i));
+  }
+
+  // ── 4. Positionen berechnen ──
+  // Nodes innerhalb jeder Layer gleichmäßig verteilen, zentriert um 0
+  // Y-Achse gespiegelt: Layer 0 = UNTEN (Grundlagen), maxLayer = OBEN (Fortgeschritten)
+  for (let l = 0; l <= maxLayer; l++) {
+    const layer = layers.get(l) || [];
+    const layerW = (layer.length - 1) * COL_W;
+    const startX = -layerW / 2; // zentriert um 0
+
+    for (let i = 0; i < layer.length; i++) {
+      map.set(layer[i].id, {
+        x: startX + i * COL_W,
+        y: (maxLayer - l) * ROW_H, // gespiegelt: Layer 0 = unten
+      });
+    }
+  }
+
+  return map;
+}
+
 export const NODE_W = 160;
 export const NODE_H = 60;
 export { COL_W, ROW_H };

@@ -5,6 +5,7 @@ import {
   skillTreeNodes,
   getEdges,
   getNodeStatus,
+  computeTreePositions,
   NODE_W,
   NODE_H,
   COL_W,
@@ -110,15 +111,8 @@ export function SkillTreeGraph() {
 
   const nodes = useMemo(() => skillTreeNodes.filter(n => n.category === cat), [cat]);
 
-  // Positionen: Row 0 = UNTEN (Grundlagen), höhere Rows = weiter OBEN
-  const positions = useMemo(() => {
-    const map = new Map<string, { x: number; y: number }>();
-    const maxRow = Math.max(...nodes.map(n => n.row), 0);
-    for (const n of nodes) {
-      map.set(n.id, { x: n.col * COL_W, y: (maxRow - n.row) * ROW_H });
-    }
-    return map;
-  }, [nodes]);
+  // Positionen: automatisches Baum-Layout (Grundlagen unten, Fortgeschritten oben)
+  const positions = useMemo(() => computeTreePositions(nodes), [nodes]);
   const edges = useMemo(() => {
     const ids = new Set(nodes.map(n => n.id));
     return getEdges(nodes).filter(e => ids.has(e.from) && ids.has(e.to));
@@ -304,15 +298,13 @@ export function SkillTreeGraph() {
     setSelected(null);
     const n = skillTreeNodes.filter(x => x.category === id);
     if (n.length === 0) return;
-    const maxRow = Math.max(...n.map(x => x.row), 0);
+    const pos = computeTreePositions(n);
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
-    for (const node of n) {
-      const px = node.col * COL_W;
-      const py = (maxRow - node.row) * ROW_H; // flipped
-      minX = Math.min(minX, px);
-      maxX = Math.max(maxX, px);
-      minY = Math.min(minY, py);
-      maxY = Math.max(maxY, py);
+    for (const [, p] of pos) {
+      minX = Math.min(minX, p.x);
+      maxX = Math.max(maxX, p.x);
+      minY = Math.min(minY, p.y);
+      maxY = Math.max(maxY, p.y);
     }
     const pad = 200;
     setVb({ x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2 + NODE_W, h: maxY - minY + pad * 2 + NODE_H });
