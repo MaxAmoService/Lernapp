@@ -411,6 +411,7 @@ class EventEmitter:
       title: "Architekturstile — Schichten, MVC, Microservices",
       duration: "15 min",
       type: "text",
+      visuals: [{ type: "layerArchitecture", position: "top" }],
       content: `## Architekturstile — Wie strukturiere ich Software?
 
 > Nach den Design Patterns (kleine Lösungsmuster) schauen wir uns jetzt das große Ganze an: Wie strukturiere ich eine gesamte Anwendung? Die Wahl des Architekturstils entscheidet über Wartbarkeit und Skalierbarkeit.
@@ -561,6 +562,7 @@ Bei Microservices werden Aufgaben in **unabhängige Services** gekapselt:
       title: "Testverfahren — Unit, Integration, System",
       duration: "15 min",
       type: "text",
+      visuals: [{ type: "testPyramid", position: "top" }],
       content: `## Testverfahren — Qualität sicherstellen
 
 > Wir kennen jetzt Qualitätsmerkmale, Patterns und Architekturen. Aber wie stellen wir sicher, dass unser Code auch wirklich funktioniert? Durch Tests! Verschiedene Testarten decken verschiedene Aspekte ab.
@@ -693,6 +695,7 @@ def test_login_flow():
       title: "Vorgehensmodelle — Wasserfall, V-Modell, Scrum",
       duration: "15 min",
       type: "text",
+      visuals: [{ type: "waterfall", position: "top" }, { type: "vModel", position: "top" }],
       content: `## Vorgehensmodelle — Wie organisiere ich ein Projekt?
 
 > Nach den Testverfahren wissen wir, WIE wir Qualität prüfen. Jetzt fragen wir uns: WANN im Entwicklungsprozess testen wir? Die Vorgehensmodelle bestimmen den gesamten Ablauf — von der Planung bis zum Deployment.

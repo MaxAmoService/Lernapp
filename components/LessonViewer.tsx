@@ -24,6 +24,10 @@ import { CodeSandbox } from "./interactive/CodeSandbox";
 import { PAPSymbolOverview, PAPExample } from "./visuals/PAPDiagram";
 import { StrukExample } from "./visuals/StrukExamples";
 import ScrumCycle from "./visuals/ScrumCycle";
+import WaterfallModel from "./visuals/WaterfallModel";
+import VModel from "./visuals/VModel";
+import LayerArchitecture from "./visuals/LayerArchitecture";
+import TestPyramid from "./visuals/TestPyramid";
 import { PAPBuilder } from "./interactive/PAPBuilder";
 import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
 import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
@@ -127,6 +131,10 @@ function renderVisual(visual: LessonVisual, index: number) {
     struktFor: <StrukExample example="forloop" className="w-full max-w-md mx-auto" />,
     struktBubbleSort: <StrukExample example="bubblesort" className="w-full max-w-lg mx-auto" />,
     scrumCycle: <ScrumCycle />,
+    waterfall: <WaterfallModel />,
+    vModel: <VModel />,
+    layerArchitecture: <LayerArchitecture />,
+    testPyramid: <TestPyramid />,
   };
 
   return (
