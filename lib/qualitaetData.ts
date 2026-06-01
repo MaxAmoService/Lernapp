@@ -423,15 +423,20 @@ Ein **Architekturstil** definiert, wie die Komponenten einer Anwendung organisie
 
 Trennt eine Anwendung in **logisch getrennte Schichten**. Jede Schicht hat eine klare Aufgabe.
 
-\`\`\`
-┌─────────────────────┐
-│   Präsentation      │  ← UI, Darstellung
-├─────────────────────┤
-│   Anwendung         │  ← Geschäftslogik
-├─────────────────────┤
-│   Datenhaltung      │  ← Datenbank, Speicher
-└─────────────────────┘
-\`\`\`
+<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="400" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="60" y="20" width="280" height="50" rx="8" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="2"/>
+  <text x="200" y="42" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="bold">Präsentation</text>
+  <text x="200" y="58" text-anchor="middle" fill="#64748b" font-size="10">UI, Darstellung, Benutzerinteraktion</text>
+  <polygon points="200,70 190,82 210,82" fill="#64748b"/>
+  <rect x="60" y="85" width="280" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="200" y="107" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="bold">Anwendung</text>
+  <text x="200" y="123" text-anchor="middle" fill="#64748b" font-size="10">Geschäftslogik, Verarbeitung</text>
+  <polygon points="200,135 190,147 210,147" fill="#64748b"/>
+  <rect x="60" y="150" width="280" height="50" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="2"/>
+  <text x="200" y="172" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="bold">Datenhaltung</text>
+  <text x="200" y="188" text-anchor="middle" fill="#64748b" font-size="10">Datenbank, Dateisystem, Cache</text>
+</svg>
 
 ### Regeln
 - Kommunikation nur **zwischen benachbarten Schichten**
@@ -537,15 +542,26 @@ Tests sind **essenziell** für Softwarequalität. Es gibt verschiedene Testarten
 
 ## 🧪 Die Testpyramide
 
-\`\`\`
-        ╱╲
-       ╱  ╲      ← E2E/Manuell (wenige, langsam)
-      ╱────╲
-     ╱      ╲    ← Integrationstests (mehrere)
-    ╱────────╲
-   ╱          ╲  ← Unit-Tests (viele, schnell)
-  ╱────────────╲
-\`\`\`
+<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;margin:1rem auto;display:block">
+  <defs>
+    <linearGradient id="pyrGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#f59e0b;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+  <!-- Pyramid layers -->
+  <polygon points="200,20 80,100 320,100" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="2"/>
+  <polygon points="80,105 50,190 350,190 320,105" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="2"/>
+  <polygon points="50,195 20,270 380,270 350,195" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="2"/>
+  <!-- Labels -->
+  <text x="200" y="65" text-anchor="middle" fill="#fca5a5" font-size="12" font-weight="bold">E2E / Manuell</text>
+  <text x="200" y="85" text-anchor="middle" fill="#94a3b8" font-size="10">wenige, langsam</text>
+  <text x="200" y="145" text-anchor="middle" fill="#fcd34d" font-size="12" font-weight="bold">Integrationstests</text>
+  <text x="200" y="165" text-anchor="middle" fill="#94a3b8" font-size="10">mehrere, mittel</text>
+  <text x="200" y="225" text-anchor="middle" fill="#93c5fd" font-size="12" font-weight="bold">Unit-Tests</text>
+  <text x="200" y="245" text-anchor="middle" fill="#94a3b8" font-size="10">viele, schnell</text>
+</svg>
 
 ---
 
@@ -660,9 +676,24 @@ Verschiedene Projekte brauchen verschiedene Vorgehensweisen. Die IHK prüft, ob 
 
 **Prinzip:** Phasen werden **streng sequentiell** durchlaufen.
 
-\`\`\`
-Anforderung → Design → Implementierung → Test → Wartung
-\`\`\`
+<svg viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg" style="max-width:600px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="600" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="15" y="30" width="100" height="50" rx="8" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="65" y="60" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="bold">Anforderung</text>
+  <polygon points="115,50 130,40 130,60" fill="#64748b"/>
+  <rect x="135" y="30" width="80" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="175" y="60" text-anchor="middle" fill="#c4b5fd" font-size="11" font-weight="bold">Design</text>
+  <polygon points="215,50 230,40 230,60" fill="#64748b"/>
+  <rect x="235" y="30" width="110" height="50" rx="8" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="290" y="60" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">Implementierung</text>
+  <polygon points="345,50 360,40 360,60" fill="#64748b"/>
+  <rect x="365" y="30" width="80" height="50" rx="8" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="405" y="60" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="bold">Test</text>
+  <polygon points="445,50 460,40 460,60" fill="#64748b"/>
+  <rect x="465" y="30" width="100" height="50" rx="8" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="515" y="60" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="bold">Wartung</text>
+  <text x="300" y="105" text-anchor="middle" fill="#64748b" font-size="10">Keine Rücksprünge — jede Phase muss abgeschlossen sein</text>
+</svg>
 
 ### Vorteile
 - ✅ Einfach zu verstehen
@@ -680,12 +711,35 @@ Anforderung → Design → Implementierung → Test → Wartung
 
 **Prinzip:** Jede Phase hat eine **zugehörige Testphase**.
 
-\`\`\`
-Anforderung ───────────────────── Akzeptanztest
-    Design ────────────────── Systemtest
-        Implementierung ─ Integrationstest
-              Unit-Test
-\`\`\`
+<svg viewBox="0 0 550 200" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="550" height="200" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <!-- Left side (Development) -->
+  <rect x="20" y="20" width="120" height="36" rx="6" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="80" y="43" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Anforderung</text>
+  <rect x="60" y="65" width="120" height="36" rx="6" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="120" y="88" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">Design</text>
+  <rect x="100" y="110" width="120" height="36" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="160" y="133" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Implementierung</text>
+  <!-- Arrow down -->
+  <line x1="80" y1="56" x2="120" y2="65" stroke="#64748b" stroke-width="1.5"/>
+  <line x1="120" y1="101" x2="160" y2="110" stroke="#64748b" stroke-width="1.5"/>
+  <!-- Right side (Testing) -->
+  <rect x="400" y="20" width="120" height="36" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="460" y="43" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Akzeptanztest</text>
+  <rect x="360" y="65" width="120" height="36" rx="6" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="420" y="88" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">Systemtest</text>
+  <rect x="320" y="110" width="120" height="36" rx="6" fill="#ec4899" fill-opacity="0.25" stroke="#ec4899" stroke-width="1.5"/>
+  <text x="380" y="133" text-anchor="middle" fill="#f9a8d4" font-size="10" font-weight="bold">Integrationstest</text>
+  <rect x="220" y="155" width="100" height="30" rx="6" fill="#6366f1" fill-opacity="0.25" stroke="#6366f1" stroke-width="1.5"/>
+  <text x="270" y="175" text-anchor="middle" fill="#a5b4fc" font-size="10" font-weight="bold">Unit-Test</text>
+  <!-- Connecting arrows -->
+  <line x1="140" y1="38" x2="400" y2="38" stroke="#64748b" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="180" y1="83" x2="360" y2="83" stroke="#64748b" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="220" y1="128" x2="320" y2="128" stroke="#64748b" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="160" y1="146" x2="220" y2="165" stroke="#64748b" stroke-width="1" stroke-dasharray="5,4"/>
+  <line x1="390" y1="146" x2="320" y2="165" stroke="#64748b" stroke-width="1" stroke-dasharray="5,4"/>
+  <text x="275" y="195" text-anchor="middle" fill="#64748b" font-size="9">Jede Entwicklungsphase hat eine zugehörige Testphase</text>
+</svg>
 
 ### Vorteile
 - ✅ Testen von Anfang an geplant

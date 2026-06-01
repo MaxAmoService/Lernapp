@@ -149,13 +149,28 @@ Das **Magische Dreieck** beschreibt das Spannungsfeld, in dem sich jedes Projekt
 
 ## 📐 Die drei Eckpunkte
 
-\`\`\`
-        Qualität
-        /      \\
-       /        \\
-      /          \\
-   Budget ──── Zeit
-\`\`\`
+<svg viewBox="0 0 400 350" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;margin:1rem auto;display:block">
+  <defs>
+    <linearGradient id="triGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:0.15"/>
+    </linearGradient>
+  </defs>
+  <polygon points="200,30 50,300 350,300" fill="url(#triGrad)" stroke="#60a5fa" stroke-width="2.5"/>
+  <line x1="200" y1="180" x2="50" y2="300" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+  <line x1="200" y1="180" x2="350" y2="300" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+  <line x1="200" y1="180" x2="200" y2="30" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,4" opacity="0.5"/>
+  <circle cx="200" cy="30" r="36" fill="#1e293b" stroke="#3b82f6" stroke-width="2"/>
+  <text x="200" y="26" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="bold">✅ Qualität</text>
+  <text x="200" y="42" text-anchor="middle" fill="#64748b" font-size="9">Wie gut?</text>
+  <circle cx="50" cy="300" r="36" fill="#1e293b" stroke="#f59e0b" stroke-width="2"/>
+  <text x="50" y="296" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="bold">💰 Budget</text>
+  <text x="50" y="312" text-anchor="middle" fill="#64748b" font-size="9">Wie viel?</text>
+  <circle cx="350" cy="300" r="36" fill="#1e293b" stroke="#10b981" stroke-width="2"/>
+  <text x="350" y="296" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">⏰ Zeit</text>
+  <text x="350" y="312" text-anchor="middle" fill="#64748b" font-size="9">Bis wann?</text>
+  <text x="200" y="195" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="bold">Spannungsfeld</text>
+</svg>
 
 | Eckpunkt | Beschreibung |
 |----------|-------------|
@@ -463,12 +478,33 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 
 ## 📊 Scrum Board
 
-\`\`\`
-| Backlog | To Do | In Progress | Review | Done |
-|---------|-------|-------------|--------|------|
-| Story 3 | Task 4 | Task 2      | Task 1 | ✅   |
-| Story 4 |       |             |        |      |
-\`\`\`
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;margin:1rem auto;display:block">
+  <defs>
+    <filter id="shadow"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/></filter>
+  </defs>
+  <rect x="0" y="0" width="700" height="220" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="70" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="bold">BACKLOG</text>
+  <text x="210" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="bold">TO DO</text>
+  <text x="350" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="bold">IN PROGRESS</text>
+  <text x="490" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="bold">REVIEW</text>
+  <text x="630" y="28" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="bold">DONE</text>
+  <line x1="140" y1="10" x2="140" y2="210" stroke="#334155" stroke-width="1"/>
+  <line x1="280" y1="10" x2="280" y2="210" stroke="#334155" stroke-width="1"/>
+  <line x1="420" y1="10" x2="420" y2="210" stroke="#334155" stroke-width="1"/>
+  <line x1="560" y1="10" x2="560" y2="210" stroke="#334155" stroke-width="1"/>
+  <rect x="20" y="45" width="100" height="40" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="70" y="70" text-anchor="middle" fill="#c7d2fe" font-size="10">User Story 3</text>
+  <rect x="20" y="95" width="100" height="40" rx="6" fill="#1e293b" stroke="#6366f1" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="70" y="120" text-anchor="middle" fill="#c7d2fe" font-size="10">User Story 4</text>
+  <rect x="160" y="45" width="100" height="40" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="210" y="70" text-anchor="middle" fill="#fcd34d" font-size="10">Task 4</text>
+  <rect x="300" y="45" width="100" height="40" rx="6" fill="#1e293b" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="350" y="70" text-anchor="middle" fill="#93c5fd" font-size="10">Task 2</text>
+  <rect x="440" y="45" width="100" height="40" rx="6" fill="#1e293b" stroke="#a855f7" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="490" y="70" text-anchor="middle" fill="#d8b4fe" font-size="10">Task 1</text>
+  <rect x="580" y="45" width="100" height="40" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="630" y="70" text-anchor="middle" fill="#6ee7b7" font-size="10">✅ Fertig</text>
+</svg>
 
 ---
 

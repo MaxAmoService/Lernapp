@@ -327,6 +327,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     let codeLang = "";
     let inMathBlock = false;
     let mathContent = "";
+    let inSvgBlock = false;
+    let svgContent = "";
     let inTable = false;
     let tableRows: JSX.Element[] = [];
     let olItems: JSX.Element[] = [];
@@ -387,6 +389,29 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           inMathBlock = false;
         } else {
           mathContent += line + "\n";
+        }
+        continue;
+      }
+
+      // SVG block
+      if (line.trim().startsWith("<svg")) {
+        flushTable();
+        flushOl();
+        inSvgBlock = true;
+        svgContent = line + "\n";
+        if (line.includes("</svg>")) {
+          inSvgBlock = false;
+          elements.push(<div key={`svg-${keyIndex++}`} className="my-6 flex justify-center" dangerouslySetInnerHTML={{ __html: svgContent }} />);
+          svgContent = "";
+        }
+        continue;
+      }
+      if (inSvgBlock) {
+        svgContent += line + "\n";
+        if (line.includes("</svg>")) {
+          inSvgBlock = false;
+          elements.push(<div key={`svg-${keyIndex++}`} className="my-6 flex justify-center" dangerouslySetInnerHTML={{ __html: svgContent }} />);
+          svgContent = "";
         }
         continue;
       }

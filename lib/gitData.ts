@@ -375,15 +375,52 @@ Gitflow definiert **klare Regeln**, wann welcher Branch verwendet wird. Es ist e
 
 ## 📊 Visualisierung
 
-\`\`\`
-main:     ──●───────────●───────────●── (Releases)
-             \\         / \\         /
-hotfix:       \\       /   \\       /
-               \\     /     \\     /
-dev:    ──●───●───●───●───●───●───●── (Aktueller Stand)
-               \\       /       \\
-feature:        ●───●──           ●───●
-\`\`\`
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="max-width:700px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="700" height="200" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <!-- main branch -->
+  <text x="30" y="40" fill="#94a3b8" font-size="11" font-weight="bold">main</text>
+  <line x1="60" y1="40" x2="640" y2="40" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="120" cy="40" r="7" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="350" cy="40" r="7" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+  <circle cx="580" cy="40" r="7" fill="#ef4444" stroke="#fff" stroke-width="1.5"/>
+  <text x="120" y="28" text-anchor="middle" fill="#fca5a5" font-size="9">v1.0.0</text>
+  <text x="350" y="28" text-anchor="middle" fill="#fca5a5" font-size="9">v1.1.0</text>
+  <text x="580" y="28" text-anchor="middle" fill="#fca5a5" font-size="9">v1.2.0</text>
+  <!-- dev branch -->
+  <text x="30" y="100" fill="#94a3b8" font-size="11" font-weight="bold">dev</text>
+  <line x1="60" y1="100" x2="640" y2="100" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="100" cy="100" r="6" fill="#3b82f6"/>
+  <circle cx="180" cy="100" r="6" fill="#3b82f6"/>
+  <circle cx="280" cy="100" r="6" fill="#3b82f6"/>
+  <circle cx="400" cy="100" r="6" fill="#3b82f6"/>
+  <circle cx="500" cy="100" r="6" fill="#3b82f6"/>
+  <circle cx="600" cy="100" r="6" fill="#3b82f6"/>
+  <!-- feature branch -->
+  <text x="30" y="150" fill="#94a3b8" font-size="11" font-weight="bold">feature</text>
+  <line x1="100" y1="100" x2="100" y2="150" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="100" y1="150" x2="220" y2="150" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="220" y1="150" x2="220" y2="100" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3"/>
+  <circle cx="140" cy="150" r="5" fill="#22c55e"/>
+  <circle cx="190" cy="150" r="5" fill="#22c55e"/>
+  <!-- feature 2 -->
+  <line x1="400" y1="100" x2="400" y2="150" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="400" y1="150" x2="520" y2="150" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="520" y1="150" x2="520" y2="100" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3"/>
+  <circle cx="440" cy="150" r="5" fill="#22c55e"/>
+  <circle cx="490" cy="150" r="5" fill="#22c55e"/>
+  <!-- release branch -->
+  <text x="30" y="180" fill="#94a3b8" font-size="11" font-weight="bold">release</text>
+  <line x1="280" y1="100" x2="280" y2="180" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3"/>
+  <line x1="280" y1="180" x2="360" y2="180" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="360" y1="180" x2="360" y2="40" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4,3"/>
+  <circle cx="310" cy="180" r="5" fill="#f59e0b"/>
+  <!-- merge arrows -->
+  <path d="M220,100 Q220,70 120,40" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+  <path d="M520,100 Q520,70 350,40" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#22c55e"/></marker></defs>
+  <text x="650" y="40" fill="#94a3b8" font-size="9">(Releases)</text>
+  <text x="650" y="100" fill="#94a3b8" font-size="9">(Entwicklung)</text>
+</svg>
 
 ---
 
