@@ -11,6 +11,7 @@ import { logarithmusQuizzes } from "@/lib/logarithmusData";
 import { exponentialQuizzes } from "@/lib/exponentialData";
 import { wachstumsprozesseQuizzes } from "@/lib/wachstumsprozesseData";
 import { fourierQuizzes } from "@/lib/fourierData";
+import { thowlQuizData } from "@/lib/thowlData";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
 import { CheckCircle2, XCircle, RotateCcw, Send } from "lucide-react";
@@ -541,6 +542,7 @@ const allQuizData: Record<string, QuizQuestion[]> = {
   ...exponentialQuizzes,
   ...wachstumsprozesseQuizzes,
   ...fourierQuizzes,
+  ...thowlQuizData,
 };
 
 // Component to render questions with math

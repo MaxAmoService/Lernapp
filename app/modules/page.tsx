@@ -45,6 +45,7 @@ export default function ModulesPage() {
   };
 
   const filteredModules = allModules.filter((m) => {
+    if (m.hidden) return false; // Geheime Module nicht im Browser anzeigen
     const matchesSearch =
       !search ||
       m.title.toLowerCase().includes(search.toLowerCase()) ||

@@ -24,6 +24,7 @@ import { wachstumsprozesseModule } from "./wachstumsprozesseData";
 import { fourierModule } from "./fourierData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
+import { thowlModules } from "./thowlData";
 
 // Re-export types for backward compatibility
 export type { Lesson, Module, Category } from "./types";
@@ -81,6 +82,7 @@ export const allModules = [
   wachstumsprozesseModule,
   fourierModule,
   ...contentModules,
+  ...thowlModules,
 ];
 
 export function getModule(slug: string) {

@@ -73,6 +73,7 @@ export interface Module {
   category: string;
   lessons: Lesson[];
   merkblatt?: string;
+  hidden?: boolean; // Geheime Module: nicht im Browser sichtbar, nur über direkten Link
 }
 
 export interface Category {
