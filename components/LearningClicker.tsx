@@ -20,7 +20,6 @@ import {
   X,
   GripVertical,
   Flame,
-  Target,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -144,7 +143,6 @@ export default function LearningClicker() {
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; angle: number }[]>([]);
   const [combo, setCombo] = useState(0);
   const [lastClickTime, setLastClickTime] = useState(0);
-  const [justReachedMilestone, setJustReachedMilestone] = useState<string | null>(null);
   const [position, setPosition] = useState({ x: 20, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -219,15 +217,20 @@ export default function LearningClicker() {
 
   // Combo-System
   const getComboMultiplier = useCallback((c: number) => {
+    if (c >= 30) return 10;
     if (c >= 20) return 5;
     if (c >= 12) return 3;
     if (c >= 6) return 2;
     return 1;
   }, []);
 
-  const COMBO_COLORS = ["#F59E0B", "#EF4444", "#EC4899", "#8B5CF6", "#3B82F6"];
+  const COMBO_COLORS = ["#F59E0B", "#EF4444", "#EC4899", "#8B5CF6", "#3B82F6", "#10B981"];
 
-  // Click handler — Combo + Partikel + Milestones
+  // Golden Bonus — 8% Chance auf 5x Punkte
+  const GOLDEN_CHANCE = 0.08;
+  const GOLDEN_MULTIPLIER = 5;
+
+  // Click handler — Combo + Golden Bonus + Partikel
   const handleClick = useCallback(async (e: React.MouseEvent) => {
     if (!user) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -239,51 +242,52 @@ export default function LearningClicker() {
     // Combo berechnen
     const timeSinceLastClick = now - lastClickTime;
     const newCombo = timeSinceLastClick < 600 ? combo + 1 : 1;
-    const multiplier = getComboMultiplier(newCombo);
+    const comboMult = getComboMultiplier(newCombo);
     setCombo(newCombo);
     setLastClickTime(now);
 
-    // Combo-Timeout zurücksetzen
+    // Combo-Timeout
     if (comboTimerRef.current) clearTimeout(comboTimerRef.current);
     comboTimerRef.current = setTimeout(() => setCombo(0), 1500);
 
-    const earnedPoints = state.clickPower * multiplier;
+    // Golden Bonus (random)
+    const isGolden = Math.random() < GOLDEN_CHANCE;
+    const goldenMult = isGolden ? GOLDEN_MULTIPLIER : 1;
+
+    const earnedPoints = state.clickPower * comboMult * goldenMult;
 
     // Optimistic UI update
-    setState((prev) => {
-      const newPoints = prev.points + earnedPoints;
-      const newTotal = prev.totalPoints + earnedPoints;
+    setState((prev) => ({
+      ...prev,
+      points: prev.points + earnedPoints,
+      totalPoints: prev.totalPoints + earnedPoints,
+    }));
 
-      // Milestone prüfen
-      const prevMilestone = MILESTONES.filter(m => prev.totalPoints >= m.points).pop();
-      const newMilestone = MILESTONES.filter(m => newTotal >= m.points).pop();
-      if (newMilestone && (!prevMilestone || newMilestone.points > prevMilestone.points)) {
-        setTimeout(() => setJustReachedMilestone(newMilestone.label), 100);
-        setTimeout(() => setJustReachedMilestone(null), 3000);
-      }
-
-      return { ...prev, points: newPoints, totalPoints: newTotal };
-    });
-
-    // Click-Effect (Punkte)
-    const displayValue = multiplier > 1 ? `+${earnedPoints} ×${multiplier}` : `+${earnedPoints}`;
+    // Click-Effect — Größe skaliert mit Punkten
     setClickEffects((prev) => [...prev, { id, x, y, value: earnedPoints }]);
-    setTimeout(() => { setClickEffects((prev) => prev.filter((c) => c.id !== id)); }, 1000);
+    setTimeout(() => { setClickEffects((prev) => prev.filter((c) => c.id !== id)); }, 1200);
 
-    // Partikel-Effekt
-    const particleCount = Math.min(4 + multiplier, 10);
+    // Partikel — mehr bei Combo, Explosion bei Golden
+    const particleCount = isGolden ? 16 : Math.min(3 + comboMult * 2, 12);
     const newParticles = Array.from({ length: particleCount }, (_, i) => ({
       id: id * 100 + i,
       x, y,
-      color: COMBO_COLORS[Math.floor(Math.random() * COMBO_COLORS.length)],
-      angle: (360 / particleCount) * i + Math.random() * 30,
+      color: isGolden ? "#FFD700" : COMBO_COLORS[Math.floor(Math.random() * COMBO_COLORS.length)],
+      angle: (360 / particleCount) * i + Math.random() * 20,
     }));
     setParticles((prev) => [...prev, ...newParticles]);
     setTimeout(() => {
       setParticles((prev) => prev.filter((p) => !newParticles.find(np => np.id === p.id)));
-    }, 700);
+    }, 800);
 
-    // Pending Points akkumulieren (debounced Save)
+    // Screen shake bei hohem Combo oder Golden
+    if (newCombo >= 15 || isGolden) {
+      document.documentElement.style.setProperty("--shake-intensity", isGolden ? "4px" : "2px");
+      document.documentElement.classList.add("clicker-shake");
+      setTimeout(() => document.documentElement.classList.remove("clicker-shake"), 200);
+    }
+
+    // Pending Points akkumulieren
     pendingPointsRef.current += earnedPoints;
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     saveTimeoutRef.current = setTimeout(async () => {
@@ -337,7 +341,6 @@ export default function LearningClicker() {
   const nextMilestone = MILESTONES.find(m => state.totalPoints < m.points) || MILESTONES[MILESTONES.length - 1];
   const prevMilestonePoints = MILESTONES.filter(m => m.points <= state.totalPoints).pop()?.points ?? 0;
   const milestoneProgress = Math.min(1, (state.totalPoints - prevMilestonePoints) / (nextMilestone.points - prevMilestonePoints));
-  const currentMilestone = MILESTONES.filter(m => state.totalPoints >= m.points).pop();
 
   // Nicht eingeloggt → nichts anzeigen
   if (!user) return null;
@@ -404,105 +407,126 @@ export default function LearningClicker() {
             <>
               {/* Points display */}
               <div className="p-4 text-center">
-                <div className="text-3xl font-bold text-white mb-1">
+                <div className="text-3xl font-black text-white mb-1 tabular-nums tracking-tight"
+                  style={{ textShadow: combo >= 12 ? "0 0 20px rgba(250,204,21,0.3)" : "none" }}
+                >
                   {formatNumber(state.points)}
                 </div>
-                <div className="text-xs text-slate-500">
+                <div className="text-[11px] text-slate-500 tabular-nums">
                   {formatNumber(state.totalPoints)} Gesamt
-                  {pointsPerSecond > 0 && ` · ${formatNumber(pointsPerSecond)}/s`}
+                  {pointsPerSecond > 0 && (
+                    <span className="text-amber-500/80"> · {formatNumber(pointsPerSecond)}/s</span>
+                  )}
                 </div>
 
                 {/* Click area */}
                 <button
                   onClick={handleClick}
                   style={{ touchAction: "manipulation" }}
-                  className={`relative mt-3 w-24 h-24 mx-auto rounded-full border-2 transition-all flex items-center justify-center group active:scale-90 ${
-                    combo >= 20
+                  className={`relative mt-3 w-28 h-28 mx-auto rounded-full border-2 flex items-center justify-center group active:scale-[0.85] transition-transform duration-75 ${
+                    combo >= 30
+                      ? "bg-gradient-to-br from-violet-500/50 to-fuchsia-500/50 border-violet-300/70 shadow-xl shadow-violet-500/40"
+                      : combo >= 20
                       ? "bg-gradient-to-br from-violet-500/40 to-fuchsia-500/40 border-violet-400/60 shadow-lg shadow-violet-500/30"
                       : combo >= 12
-                      ? "bg-gradient-to-br from-purple-500/40 to-pink-500/40 border-purple-400/60 shadow-md shadow-purple-500/20"
+                      ? "bg-gradient-to-br from-red-500/35 to-orange-500/35 border-red-400/50 shadow-md shadow-red-500/20"
                       : combo >= 6
-                      ? "bg-gradient-to-br from-red-500/30 to-orange-500/30 border-red-400/50 shadow-md shadow-red-500/15"
-                      : combo >= 3
-                      ? "bg-gradient-to-br from-amber-500/30 to-orange-500/30 border-amber-400/50"
-                      : "bg-gradient-to-br from-amber-500/30 to-orange-500/30 border-amber-500/40 hover:border-amber-400/60"
+                      ? "bg-gradient-to-br from-amber-500/35 to-orange-500/35 border-amber-400/50 shadow-md shadow-amber-500/15"
+                      : "bg-gradient-to-br from-amber-500/25 to-orange-500/25 border-amber-500/40 hover:border-amber-400/60"
                   }`}
                 >
-                  {/* Pulse ring bei Combo */}
+                  {/* Glow ring bei Combo */}
                   {combo >= 6 && (
-                    <div className={`absolute inset-0 rounded-full animate-ping ${
-                      combo >= 20 ? "bg-violet-400/20" : combo >= 12 ? "bg-purple-400/20" : "bg-red-400/15"
+                    <div className={`absolute -inset-2 rounded-full animate-pulse opacity-60 ${
+                      combo >= 30 ? "bg-gradient-to-r from-violet-500/30 to-fuchsia-500/30 blur-md" :
+                      combo >= 20 ? "bg-gradient-to-r from-purple-500/25 to-pink-500/25 blur-md" :
+                      combo >= 12 ? "bg-gradient-to-r from-red-500/20 to-orange-500/20 blur-sm" :
+                      "bg-gradient-to-r from-amber-500/15 to-orange-500/15 blur-sm"
                     }`} />
                   )}
 
-                  <span className="text-4xl group-hover:scale-110 transition-transform relative z-10">{state.equippedAvatar}</span>
+                  {/* Ping ring */}
+                  {combo >= 12 && (
+                    <div className={`absolute inset-0 rounded-full animate-ping opacity-30 ${
+                      combo >= 30 ? "bg-violet-400" : combo >= 20 ? "bg-purple-400" : "bg-red-400"
+                    }`} />
+                  )}
 
-                  {/* Click effects */}
-                  {clickEffects.map((effect) => (
-                    <div
-                      key={effect.id}
-                      className={`absolute pointer-events-none font-bold text-sm z-20 ${
-                        combo >= 12 ? "text-violet-300" : combo >= 6 ? "text-amber-300" : "text-amber-400"
-                      }`}
-                      style={{ left: effect.x, top: effect.y, animation: "floatUp 1s ease-out forwards" }}
-                    >
-                      +{effect.value}
-                    </div>
-                  ))}
+                  <span className={`text-4xl relative z-10 transition-transform duration-75 ${
+                    combo >= 20 ? "scale-110" : combo >= 12 ? "scale-105" : "group-active:scale-90"
+                  }`}>{state.equippedAvatar}</span>
+
+                  {/* Floating numbers — Größe/Persistenz skaliert mit Wert */}
+                  {clickEffects.map((effect) => {
+                    const isBig = effect.value >= state.clickPower * 3;
+                    return (
+                      <div
+                        key={effect.id}
+                        className={`absolute pointer-events-none z-20 font-black ${
+                          isBig ? "text-lg text-yellow-300" : "text-sm text-amber-400"
+                        }`}
+                        style={{
+                          left: effect.x,
+                          top: effect.y,
+                          animation: isBig ? "floatUpBig 1.2s ease-out forwards" : "floatUp 1s ease-out forwards",
+                          textShadow: isBig ? "0 0 10px rgba(250,204,21,0.5)" : "none",
+                        }}
+                      >
+                        +{effect.value}
+                      </div>
+                    );
+                  })}
 
                   {/* Partikel */}
                   {particles.map((p) => (
                     <div
                       key={p.id}
-                      className="absolute w-1.5 h-1.5 rounded-full pointer-events-none z-10"
+                      className="absolute w-2 h-2 rounded-full pointer-events-none z-10"
                       style={{
                         left: p.x,
                         top: p.y,
                         backgroundColor: p.color,
-                        animation: `particle-burst 0.6s ease-out forwards`,
+                        boxShadow: `0 0 6px ${p.color}`,
+                        animation: "particle-burst 0.7s ease-out forwards",
                         // @ts-ignore
                         "--angle": `${p.angle}deg`,
-                        "--dist": `${30 + Math.random() * 30}px`,
+                        "--dist": `${35 + Math.random() * 35}px`,
                       }}
                     />
                   ))}
                 </button>
 
-                {/* Combo-Anzeige */}
+                {/* Combo-Anzeige — Dopamin-Feedback */}
                 {combo >= 3 && (
-                  <div className={`mt-2 flex items-center justify-center gap-1 text-xs font-bold transition-all ${
-                    combo >= 20 ? "text-violet-400" : combo >= 12 ? "text-purple-400" : combo >= 6 ? "text-red-400" : "text-amber-400"
+                  <div className={`mt-2 flex items-center justify-center gap-1.5 font-bold transition-all ${
+                    combo >= 30 ? "text-violet-300 text-sm" :
+                    combo >= 20 ? "text-violet-400 text-xs" :
+                    combo >= 12 ? "text-red-400 text-xs" :
+                    "text-amber-400 text-xs"
                   }`}>
-                    <Flame className="w-3.5 h-3.5 animate-pulse" />
-                    <span>×{comboMultiplier} Combo!</span>
-                    <span className="text-slate-500 font-normal">({combo} Klicks)</span>
+                    <Flame className={`w-4 h-4 ${combo >= 20 ? "animate-bounce" : "animate-pulse"}`} />
+                    <span>×{comboMultiplier}</span>
+                    {combo >= 12 && <span className="animate-pulse">🔥</span>}
+                    {combo >= 30 && <span className="animate-bounce">⚡</span>}
                   </div>
                 )}
 
-                <div className="mt-2 text-xs text-slate-500">
+                <div className="mt-1.5 text-[11px] text-slate-500">
                   +{state.clickPower}{comboMultiplier > 1 ? ` ×${comboMultiplier}` : ""} pro Klick
                 </div>
 
-                {/* Milestone Progress */}
-                <div className="mt-3 px-2">
-                  <div className="flex items-center justify-between text-[10px] text-slate-500 mb-1">
-                    <span className="flex items-center gap-1">
-                      <Target className="w-3 h-3" />
-                      {nextMilestone.icon} {nextMilestone.label}
-                    </span>
-                    <span>{formatNumber(state.totalPoints)} / {formatNumber(nextMilestone.points)}</span>
-                  </div>
-                  <div className="h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
+                {/* Mini Milestone-Bar */}
+                <div className="mt-2 px-3">
+                  <div className="h-1 bg-slate-700/40 rounded-full overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-500"
+                      className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-300"
                       style={{ width: `${milestoneProgress * 100}%` }}
                     />
                   </div>
-                  {currentMilestone && (
-                    <div className="text-[10px] text-slate-600 mt-0.5 text-center">
-                      {currentMilestone.icon} {currentMilestone.label}
-                    </div>
-                  )}
+                  <div className="flex justify-between text-[9px] text-slate-600 mt-0.5">
+                    <span>{nextMilestone.icon} {nextMilestone.label}</span>
+                    <span>{formatNumber(state.totalPoints)}/{formatNumber(nextMilestone.points)}</span>
+                  </div>
                 </div>
               </div>
 
@@ -613,22 +637,18 @@ export default function LearningClicker() {
         </div>
       </div>
 
-      {/* Milestone Popup */}
-      {justReachedMilestone && (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] pointer-events-none animate-bounce">
-          <div className="bg-gradient-to-br from-amber-500/90 to-orange-600/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-2xl shadow-amber-500/30 border border-amber-400/50 text-center">
-            <div className="text-3xl mb-1">🎉</div>
-            <div className="text-white font-bold text-sm">{justReachedMilestone}</div>
-            <div className="text-amber-200 text-xs mt-0.5">Meilenstein erreicht!</div>
-          </div>
-        </div>
-      )}
-
       {/* CSS for animations */}
       <style jsx global>{`
         @keyframes floatUp {
           0% { opacity: 1; transform: translateY(0) scale(1); }
-          100% { opacity: 0; transform: translateY(-50px) scale(1.3); }
+          50% { opacity: 1; transform: translateY(-30px) scale(1.1); }
+          100% { opacity: 0; transform: translateY(-60px) scale(0.8); }
+        }
+        @keyframes floatUpBig {
+          0% { opacity: 1; transform: translateY(0) scale(0.5); }
+          30% { opacity: 1; transform: translateY(-20px) scale(1.4); }
+          60% { opacity: 1; transform: translateY(-45px) scale(1.1); }
+          100% { opacity: 0; transform: translateY(-70px) scale(0.6); }
         }
         @keyframes particle-burst {
           0% { opacity: 1; transform: translate(0, 0) scale(1); }
@@ -636,6 +656,14 @@ export default function LearningClicker() {
             calc(cos(var(--angle)) * var(--dist)),
             calc(sin(var(--angle)) * var(--dist))
           ) scale(0); }
+        }
+        .clicker-shake {
+          animation: shake 0.15s ease-in-out;
+        }
+        @keyframes shake {
+          0%, 100% { transform: translateX(0); }
+          25% { transform: translateX(var(--shake-intensity, 2px)); }
+          75% { transform: translateX(calc(var(--shake-intensity, 2px) * -1)); }
         }
       `}</style>
     </>
