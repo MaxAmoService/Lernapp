@@ -157,6 +157,8 @@ export default function LearningClicker() {
   const [position, setPosition] = useState({ x: 20, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
   const dragOffset = useRef({ x: 0, y: 0 });
+  const dragMovedRef = useRef(false);
+  const dragHeaderRef = useRef<HTMLDivElement>(null);
   const clickIdRef = useRef(0);
 
   // Load state on mount
@@ -182,18 +184,24 @@ export default function LearningClicker() {
     return () => clearInterval(interval);
   }, [state.autoAmount, state.autoSpeed]);
 
-  // Drag handlers
+  // Drag handlers (pointer capture – works on desktop, tablet, and mobile)
   const handleDragStart = useCallback((e: React.PointerEvent) => {
+    // Only primary button / first touch
+    if (e.button !== 0) return;
+    e.preventDefault();
     setIsDragging(true);
+    dragMovedRef.current = false;
     dragOffset.current = {
       x: e.clientX - position.x,
       y: e.clientY - position.y,
     };
-    e.preventDefault();
+    const el = dragHeaderRef.current;
+    if (el) el.setPointerCapture(e.pointerId);
   }, [position]);
 
   const handleDragMove = useCallback((e: React.PointerEvent) => {
     if (!isDragging) return;
+    dragMovedRef.current = true;
     setPosition({
       x: Math.max(0, Math.min(window.innerWidth - 320, e.clientX - dragOffset.current.x)),
       y: Math.max(0, Math.min(window.innerHeight - 60, e.clientY - dragOffset.current.y)),
@@ -202,6 +210,14 @@ export default function LearningClicker() {
 
   const handleDragEnd = useCallback(() => {
     setIsDragging(false);
+  }, []);
+
+  // Prevent click on header after a drag (buttons inside use stopPropagation)
+  const handleHeaderClick = useCallback((e: React.MouseEvent) => {
+    if (dragMovedRef.current) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
   }, []);
 
   // Click handler
@@ -296,25 +312,22 @@ export default function LearningClicker() {
 
   return (
     <>
-      {/* Drag overlay */}
-      {isDragging && (
-        <div
-          className="fixed inset-0 z-[60] cursor-grabbing"
-          onPointerMove={handleDragMove}
-          onPointerUp={handleDragEnd}
-        />
-      )}
-
       {/* Window */}
       <div
         className="fixed z-50 w-80 select-none"
         style={{ left: position.x, top: position.y }}
       >
         <div className="glass rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 overflow-hidden">
-          {/* Header (draggable) */}
+          {/* Header (draggable via pointer capture) */}
           <div
-            className="flex items-center gap-2 px-3 py-2.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-b border-slate-700/50 cursor-grab active:cursor-grabbing"
+            ref={dragHeaderRef}
+            className="flex items-center gap-2 px-3 py-2.5 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-b border-slate-700/50 cursor-grab active:cursor-grabbing touch-none"
+            style={{ touchAction: "none" }}
             onPointerDown={handleDragStart}
+            onPointerMove={handleDragMove}
+            onPointerUp={handleDragEnd}
+            onPointerCancel={handleDragEnd}
+            onClick={handleHeaderClick}
           >
             <GripVertical className="w-4 h-4 text-slate-500" />
             <div className="flex items-center gap-1.5 flex-1 min-w-0">
@@ -322,13 +335,15 @@ export default function LearningClicker() {
               <span className="text-sm font-bold text-amber-400 truncate">Lern-Clicker</span>
             </div>
             <button
-              onClick={() => setIsMinimized(!isMinimized)}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); setIsMinimized(!isMinimized); }}
               className="p-1 hover:bg-slate-700/50 rounded transition-colors"
             >
               {isMinimized ? <ChevronUp className="w-4 h-4 text-slate-400" /> : <ChevronDown className="w-4 h-4 text-slate-400" />}
             </button>
             <button
-              onClick={() => setIsOpen(false)}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
               className="p-1 hover:bg-slate-700/50 rounded transition-colors"
             >
               <X className="w-4 h-4 text-slate-400" />
@@ -350,6 +365,7 @@ export default function LearningClicker() {
                 {/* Click area */}
                 <button
                   onClick={handleClick}
+                  style={{ touchAction: "manipulation" }}
                   className="relative mt-3 w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-amber-500/30 to-orange-500/30 border-2 border-amber-500/40 hover:border-amber-400/60 active:scale-95 transition-all flex items-center justify-center group"
                 >
                   <span className="text-4xl group-hover:scale-110 transition-transform">{state.equippedAvatar}</span>
