@@ -641,7 +641,7 @@ export default function DockerComposeBuilder() {
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* ---- LEFT: Service List & Templates ---- */}
         <div className="border-b lg:border-b-0 lg:border-r border-gray-700 p-4 sm:p-5 max-h-[36rem] overflow-y-auto">
           {/* Section explainer links */}
@@ -787,8 +787,8 @@ export default function DockerComposeBuilder() {
           </div>
         </div>
 
-        {/* ---- CENTER: Service Editor ---- */}
-        <div className="p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-gray-700 min-h-[20rem] flex flex-col max-h-[36rem] overflow-y-auto">
+        {/* ---- RIGHT: Editor + YAML Preview ---- */}
+        <div className="p-4 sm:p-5 flex flex-col max-h-[36rem] overflow-y-auto">
           <div className="flex items-center justify-between mb-3">
             <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
               <Settings className="w-4 h-4" />
@@ -846,8 +846,8 @@ export default function DockerComposeBuilder() {
           )}
         </div>
 
-        {/* ---- RIGHT: YAML Preview ---- */}
-        <div className="p-4 sm:p-5 flex flex-col max-h-[36rem]">
+        {/* ---- YAML Preview ---- */}
+        <div className="p-4 sm:p-5 flex flex-col">
           <div className="flex items-center justify-between mb-3">
             <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
               <FileCode className="w-4 h-4" />
