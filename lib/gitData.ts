@@ -237,12 +237,10 @@ Git ist der **Industriestandard** für Versionsverwaltung. Hier sind die Befehle
 
 ## 🔄 Der typische Workflow
 
-\`\`\`
-1. Code bearbeiten (Working Directory)
-2. git add → Staging Area
-3. git commit → Lokales Repository
-4. git push → Remote Repository
-\`\`\`
+1. **Code bearbeiten** — Working Directory
+2. **git add** → Staging Area
+3. **git commit** → Lokales Repository
+4. **git push** → Remote Repository
 
 > 💡 **Merke:** Erst adden, dann committen — nicht umgekehrt!
 
@@ -352,30 +350,24 @@ Gitflow definiert **klare Regeln**, wann welcher Branch verwendet wird. Es ist e
 ## 🔄 Der Gitflow-Ablauf
 
 ### Feature entwickeln
-\`\`\`
-1. Von dev einen feature-Branch erstellen
+1. Von dev einen feature/-Branch erstellen
 2. Am Feature arbeiten (Commits)
 3. Feature in dev mergen (Merge Request)
 4. Feature-Branch löschen
-\`\`\`
 
 ### Release vorbereiten
-\`\`\`
-1. Von dev einen release-Branch erstellen
+1. Von dev einen release/-Branch erstellen
 2. Letzte Tests und Fixes
 3. Release in main UND dev mergen
 4. In main mit Version taggen (v1.0.0)
 5. Release-Branch löschen
-\`\`\`
 
 ### Hotfix (Notfall)
-\`\`\`
-1. Von main einen hotfix-Branch erstellen
+1. Von main einen hotfix/-Branch erstellen
 2. Bugfix implementieren
 3. Hotfix in main UND dev mergen
 4. In main mit neuer Version taggen (v1.0.1)
 5. Hotfix-Branch löschen
-\`\`\`
 
 ---
 
@@ -443,11 +435,12 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
 > 💡 **Beispiel:** Version 2.3.1 = Major 2, Minor 3, Patch 1
 
 ### Vorveröffentlichungen
-\`\`\`
-1.0.0-alpha    # Alpha-Version (frühe Testversion)
-1.0.0-beta     # Beta-Version (fast fertig)
-1.0.0-rc.1     # Release Candidate (finale Testversion)
-\`\`\`
+
+| Version | Bedeutung |
+|---------|-----------|
+| 1.0.0-alpha | Alpha-Version (frühe Testversion) |
+| 1.0.0-beta | Beta-Version (fast fertig) |
+| 1.0.0-rc.1 | Release Candidate (finale Testversion) |
 
 ---
 
@@ -526,7 +519,7 @@ const x = 2;
 ### 5. Konflikt als gelöst markieren
 \`\`\`bash
 git add datei.ts
-git commit -m "Merge-Konflikt in datei.ts gelöst"
+git commit -m "resolve merge conflict in file.ts"
 \`\`\`
 
 ---
@@ -597,23 +590,23 @@ Ein Commit dokumentiert eine **abgeschlossene, sinnvolle Änderung**. Die Commit
 
 Das empfohlene Format:
 
-\`\`\`
-<type>(<scope>): <kurze Beschreibung>
+\`\`\`text
+<type>(<scope>): <short description>
 
-<optional: Erklärung WARUM>
+<optional: explanation WHY>
 \`\`\`
 
 ### Commit-Typen
 
 | Typ | Bedeutung | Beispiel |
 |-----|-----------|----------|
-| **feat** | Neues Feature | feat(login): Benutzer registrieren |
-| **fix** | Bugfix | fix(api): NullPointer bei leerer Response behoben |
-| **refactor** | Umstrukturierung | refactor(order): Logik in Service ausgelagert |
-| **style** | Formatierung | style: Einrückung korrigiert |
-| **test** | Tests | test(login): Unit-Tests für Validierung |
-| **docs** | Dokumentation | docs: README aktualisiert |
-| **chore** | Build/Config | chore: Dependencies aktualisiert |
+| **feat** | Neues Feature | feat(login): add user registration |
+| **fix** | Bugfix | fix(api): handle null response gracefully |
+| **refactor** | Umstrukturierung | refactor(order): extract service layer |
+| **style** | Formatierung | style: fix indentation |
+| **test** | Tests | test(login): add validation unit tests |
+| **docs** | Dokumentation | docs: update README |
+| **chore** | Build/Config | chore: update dependencies |
 
 ---
 
@@ -626,15 +619,15 @@ Das empfohlene Format:
 
 ### Gut ✅
 \`\`\`
-fix(cart): entferne doppelte Produkte
+fix(cart): remove duplicate products
 
-Validierung ergänzt, damit keine doppelten Einträge
-mehr im Warenkorb landen.
+Add validation to prevent duplicate entries
+from being added to the shopping cart.
 \`\`\`
 
 ### Schlecht ❌
 \`\`\`
-stuff fix änderungen
+stuff fix changes
 \`\`\`
 
 ---
@@ -642,10 +635,10 @@ stuff fix änderungen
 ## 📊 Beispiel einer sauberen Historie
 
 \`\`\`
-feat(product): Produktliste anzeigen
-feat(product): Produktsuche hinzufügen
-fix(product): Leere Liste korrekt behandeln
-refactor(product): Komponentenstruktur verbessern
+feat(product): display product list
+feat(product): add product search
+fix(product): handle empty list correctly
+refactor(product): improve component structure
 \`\`\`
 
 > 💡 **Merke:** Ein guter Commit erklärt, WARUM etwas geändert wurde — nicht nur WAS.
@@ -697,7 +690,7 @@ touch .gitignore
 \`\`\`
 
 ### Beispiel .gitignore (Python)
-\`\`\`
+\`\`\`gitignore
 # Byte-compiled
 __pycache__/
 *.py[cod]
@@ -715,7 +708,7 @@ venv/
 \`\`\`
 
 ### Beispiel .gitignore (Node.js)
-\`\`\`
+\`\`\`gitignore
 node_modules/
 dist/
 .env
@@ -731,16 +724,10 @@ dist/
 Git ist gut bei **textbasierten Dateien**. Bilder, Videos und andere große Dateien können schnell viel Speicher belegen — hier kommt **Git LFS** ins Spiel.
 
 ### Das Problem
-\`\`\`
-Ohne LFS: Jede Version einer 100MB-Datei wird gespeichert
-→ Bei 10 Versionen = 1GB Speicher!
-\`\`\`
+> Ohne LFS: Jede Version einer 100MB-Datei wird gespeichert → Bei 10 Versionen = **1GB Speicher!**
 
 ### Die Lösung mit LFS
-\`\`\`
-Mit LFS: Nur ein Pointer wird gespeichert
-→ Die große Datei wird nur bei Bedarf heruntergeladen
-\`\`\`
+> Mit LFS: Nur ein **Pointer** wird gespeichert → Die große Datei wird nur bei Bedarf heruntergeladen.
 
 ### Git LFS verwenden
 \`\`\`bash
@@ -754,11 +741,11 @@ git lfs track "*.psd"
 
 # .gitattributes wird erstellt → nicht vergessen zu committen!
 git add .gitattributes
-git commit -m "chore: Git LFS für Bilder konfiguriert"
+git commit -m "chore: configure Git LFS for images"
 \`\`\`
 
 ### .gitattributes (automatisch erstellt)
-\`\`\`
+\`\`\`gitattributes
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 \`\`\`
@@ -827,7 +814,6 @@ git stash clear     # Alle Stashes löschen
 
 ## 🔄 Typischer Workflow mit Stash
 
-\`\`\`
 1. Du arbeitest an feature/login
 2. Chef ruft: "Bug in Produktion! Sofort fixen!"
 3. git stash push -m "Login halb fertig"
@@ -837,7 +823,6 @@ git stash clear     # Alle Stashes löschen
 7. git checkout feature/login
 8. git stash pop
 9. Weiterarbeiten!
-\`\`\`
 
 ---
 

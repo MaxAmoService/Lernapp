@@ -179,13 +179,13 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
 
 Das Passwort wird NIEMALS im Klartext gespeichert, sondern als **Hash**:
 
-\`\`\`
+\`\`\`text
 Passwort: "Hallo123"
 SHA-256: 5b722b307fce6c944905d132691d8e022b23bea0...
 \`\`\`
 
 **Salting** — Schutz gegen Rainbow-Table-Angriffe:
-\`\`\`
+\`\`\`text
 Passwort: "Hallo123" + Salt: "x7Kp9"
 → SHA-256("Hallo123x7Kp9"): a3f8c2... (anderer Hash!)
 \`\`\`

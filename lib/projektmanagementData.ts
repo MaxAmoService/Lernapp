@@ -375,14 +375,13 @@ Die EVA misst **Projektfortschritt** im Vergleich zum Plan.
 | **SPI** = EV / PV | Termineffizienz (>1 = gut) |
 
 ### Beispiel
-\`\`\`
-Geplant (PV): 100.000€ für 10 Features
-Tatsächlich (EV): 8 Features fertig = 80.000€
-Tatsächliche Kosten (AC): 90.000€
 
-CV = 80.000 - 90.000 = -10.000 (über Budget!)
-CPI = 80.000 / 90.000 = 0,89 (ineffizient!)
-\`\`\`
+> **Geplant (PV):** 100.000€ für 10 Features
+> **Tatsächlich (EV):** 8 Features fertig = 80.000€
+> **Tatsächliche Kosten (AC):** 90.000€
+>
+> **CV** = 80.000 − 90.000 = **−10.000** (über Budget!)
+> **CPI** = 80.000 / 90.000 = **0,89** (ineffizient!)
 
 ---
 
@@ -578,12 +577,13 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 2. Was mache ich heute?
 3. Was hindert mich?
 
-### Definition of Done
-> Wann ist ein Arbeitspaket "fertig"?
-> - ✅ Code geschrieben
-> - ✅ Tests bestanden
-> - ✅ Dokumentation aktualisiert
-> - ✅ Review durchgeführt
+### Definition of Done — Wann ist ein Arbeitspaket "fertig"?
+
+- ✅ **Code geschrieben** — Implementierung abgeschlossen
+- ✅ **Tests bestanden** — Unit- und Integrationstests grün
+- ✅ **Dokumentation aktualisiert** — README, Inline-Kommentare
+- ✅ **Review durchgeführt** — Code von Teammitglied geprüft
+- ✅ **Keine bekannten Bugs** — Alle Issues geschlossen
 
 ---
 
