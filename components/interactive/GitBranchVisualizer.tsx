@@ -20,7 +20,7 @@ interface Branch {
 
 export default function GitBranchVisualizer() {
   const [commits, setCommits] = useState<Commit[]>([
-    { id: "c1", message: "Initial commit", branch: "main", parent: null, x: 50, y: 200 },
+    { id: "c1", message: "Initial commit", branch: "main", parent: null, x: 200, y: 40 },
   ]);
   const [branches, setBranches] = useState<Branch[]>([
     { name: "main", color: "#10B981", head: "c1" },
@@ -38,6 +38,9 @@ export default function GitBranchVisualizer() {
     return commits.find((c) => c.id === branch.head) || null;
   };
 
+  const getBranchIndex = (branchName: string) =>
+    branches.findIndex((b) => b.name === branchName);
+
   const addCommit = () => {
     if (!commitMessage.trim()) return;
 
@@ -45,13 +48,18 @@ export default function GitBranchVisualizer() {
     const branch = branches.find((b) => b.name === selectedBranch);
     if (!branch) return;
 
+    // Bottom-up: y increases downward, newest commits at bottom
+    const baseY = lastCommit ? lastCommit.y + 80 : 40;
+    const branchIdx = getBranchIndex(selectedBranch);
+    const baseX = 100 + branchIdx * 140;
+
     const newCommit: Commit = {
       id: getNextId(),
       message: commitMessage,
       branch: selectedBranch,
       parent: lastCommit?.id || null,
-      x: 50 + commits.length * 120,
-      y: 200 + branches.indexOf(branch) * 60,
+      x: baseX,
+      y: baseY,
     };
 
     setCommits([...commits, newCommit]);
@@ -96,13 +104,19 @@ export default function GitBranchVisualizer() {
 
     if (!sourceCommit) return;
 
+    const branchIdx = getBranchIndex(selectedBranch);
+    const baseY = Math.max(
+      sourceCommit.y,
+      targetCommit?.y ?? 0
+    ) + 80;
+
     const newCommit: Commit = {
       id: getNextId(),
       message: `Merge ${mergeSource} into ${selectedBranch}`,
       branch: selectedBranch,
       parent: targetCommit?.id || null,
-      x: 50 + commits.length * 120,
-      y: 200 + branches.indexOf(targetBranch) * 60,
+      x: 100 + branchIdx * 140,
+      y: baseY,
     };
 
     setCommits([...commits, newCommit]);
@@ -121,13 +135,18 @@ export default function GitBranchVisualizer() {
   };
 
   const reset = () => {
-    setCommits([{ id: "c1", message: "Initial commit", branch: "main", parent: null, x: 50, y: 200 }]);
+    setCommits([{ id: "c1", message: "Initial commit", branch: "main", parent: null, x: 200, y: 40 }]);
     setBranches([{ name: "main", color: "#10B981", head: "c1" }]);
     setSelectedBranch("main");
   };
 
   const getBranchColor = (branchName: string) =>
     branches.find((b) => b.name === branchName)?.color || "#6B7280";
+
+  // Calculate SVG dimensions based on content
+  const maxY = commits.length > 0 ? Math.max(...commits.map((c) => c.y)) : 0;
+  const svgHeight = Math.max(maxY + 100, 300);
+  const svgWidth = Math.max(branches.length * 140 + 200, 400);
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 border border-gray-700">
@@ -255,16 +274,23 @@ export default function GitBranchVisualizer() {
             )}
           </button>
         ))}
+        <button
+          onClick={reset}
+          className="flex items-center gap-1 px-3 py-1.5 rounded-full text-sm text-gray-400 hover:text-white border border-gray-600 hover:border-gray-400 transition-all"
+        >
+          <RotateCcw className="w-3 h-3" /> Reset
+        </button>
       </div>
 
-      {/* Commit Graph */}
-      <div className="bg-gray-800 rounded-lg p-4 overflow-x-auto min-h-[200px]">
-        <svg width={Math.max(commits.length * 120 + 100, 400)} height="220">
+      {/* Commit Graph — bottom-up orientation */}
+      <div className="bg-gray-800 rounded-lg p-4 overflow-auto min-h-[200px]">
+        <svg width={svgWidth} height={svgHeight}>
           {/* Draw connections */}
           {commits.map((commit) => {
             if (!commit.parent) return null;
             const parent = commits.find((c) => c.id === commit.parent);
             if (!parent) return null;
+            const isMerge = commit.message.startsWith("Merge");
             return (
               <line
                 key={`${commit.id}-${commit.parent}`}
@@ -273,11 +299,52 @@ export default function GitBranchVisualizer() {
                 x2={commit.x}
                 y2={commit.y}
                 stroke={getBranchColor(commit.branch)}
-                strokeWidth="2"
-                strokeDasharray={commit.message.startsWith("Merge") ? "5,5" : "none"}
+                strokeWidth="2.5"
+                strokeDasharray={isMerge ? "6,4" : "none"}
               />
             );
           })}
+
+          {/* Draw merge cross-connections */}
+          {commits.map((commit) => {
+            if (!commit.message.startsWith("Merge")) return null;
+            // Find the source branch head that was merged
+            const mergeMatch = commit.message.match(/Merge (\S+) into/);
+            if (!mergeMatch) return null;
+            const sourceName = mergeMatch[1];
+            const sourceBranch = branches.find((b) => b.name === sourceName);
+            if (!sourceBranch?.head) return null;
+            const sourceCommit = commits.find((c) => c.id === sourceBranch.head);
+            if (!sourceCommit) return null;
+            return (
+              <line
+                key={`merge-cross-${commit.id}`}
+                x1={sourceCommit.x}
+                y1={sourceCommit.y}
+                x2={commit.x}
+                y2={commit.y}
+                stroke={getBranchColor(sourceName)}
+                strokeWidth="2"
+                strokeDasharray="6,4"
+                opacity="0.5"
+              />
+            );
+          })}
+
+          {/* Branch labels at top */}
+          {branches.map((branch, i) => (
+            <text
+              key={`label-${branch.name}`}
+              x={100 + i * 140}
+              y={20}
+              textAnchor="middle"
+              fill={branch.color}
+              fontSize="11"
+              fontWeight="bold"
+            >
+              {branch.name}
+            </text>
+          ))}
 
           {/* Draw commits */}
           {commits.map((commit) => (
@@ -285,30 +352,30 @@ export default function GitBranchVisualizer() {
               <circle
                 cx={commit.x}
                 cy={commit.y}
-                r="12"
+                r="14"
                 fill={getBranchColor(commit.branch)}
                 stroke="#1F2937"
-                strokeWidth="2"
+                strokeWidth="2.5"
               />
               <text
                 x={commit.x}
                 y={commit.y + 4}
                 textAnchor="middle"
                 fill="white"
-                fontSize="8"
+                fontSize="9"
                 fontWeight="bold"
               >
                 {commit.id}
               </text>
               <text
-                x={commit.x}
-                y={commit.y - 20}
-                textAnchor="middle"
+                x={commit.x + 22}
+                y={commit.y + 4}
+                textAnchor="start"
                 fill="#D1D5DB"
-                fontSize="9"
+                fontSize="10"
               >
-                {commit.message.length > 18
-                  ? commit.message.slice(0, 18) + "…"
+                {commit.message.length > 22
+                  ? commit.message.slice(0, 22) + "…"
                   : commit.message}
               </text>
             </g>
@@ -319,7 +386,7 @@ export default function GitBranchVisualizer() {
       {/* Legend */}
       <div className="mt-4 flex flex-wrap gap-4 text-xs text-gray-400">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-green-500" />
+          <span className="w-3 h-3 rounded-full bg-green-500" />
           Commit
         </div>
         <div className="flex items-center gap-2">
@@ -327,20 +394,9 @@ export default function GitBranchVisualizer() {
           Parent-Verbindung
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-6 h-0.5 bg-gray-400 border-dashed" style={{ borderTop: "2px dashed #9CA3AF" }} />
-          Merge-Verbindung
+          <span className="w-6 h-0.5 bg-gray-400" style={{ borderTop: "2px dashed #9CA3AF" }} />
+          Merge
         </div>
-      </div>
-
-      {/* Reset */}
-      <div className="mt-4 flex justify-end">
-        <button
-          onClick={reset}
-          className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
-        >
-          <RotateCcw className="w-4 h-4" />
-          Zurücksetzen
-        </button>
       </div>
     </div>
   );

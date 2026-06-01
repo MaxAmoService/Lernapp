@@ -126,9 +126,11 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
       title: "Zentrale vs. Dezentrale VV",
       duration: "12 min",
       type: "text",
-      content: `## Zentrale vs. Dezentrale Versionsverwaltung
+      content: `## Zentrale vs. Dezentrale Versionsverwaltung (VV)
 
 > In der letzten Lektion haben wir gelernt, WARUM Versionsmanagement wichtig ist. Jetzt schauen wir uns die zwei grundlegenden Ansätze an — und warum Git (dezentral) sich gegen SVN (zentral) durchgesetzt hat.
+
+**VV** steht für **Versionsverwaltung** — der Überbegriff für Systeme, die Änderungen an Dateien über die Zeit nachverfolgen.
 
 Es gibt zwei grundlegende Ansätze — und der Unterschied ist **prüfungsrelevant**!
 
