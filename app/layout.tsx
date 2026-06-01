@@ -7,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CookieConsent } from "@/components/CookieConsent";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import LearningClicker from "@/components/LearningClicker";
 
 export default function RootLayout({
   children,
@@ -29,6 +30,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <CookieConsent />
+          <LearningClicker />
         </AuthProvider>
       </body>
     </html>
