@@ -532,6 +532,7 @@ Die DIN 69901 definiert 5 Phasen mit klar abgegrenzten Aufgaben und Dokumenten:
       duration: "20 min",
       type: "interactive",
       interactive: "scrumBoard",
+      visuals: [{ type: "scrumCycle", position: "top" }],
       content: `## Agiles Projektmanagement
 
 > In der letzten Lektion hast du das klassische PM mit DIN 69901 und EVA kennengelernt. Jetzt kommt der Gegenentwurf: **Agiles Projektmanagement mit Scrum** — iterativ, flexibel und heute der Industriestandard.

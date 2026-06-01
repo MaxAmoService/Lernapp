@@ -23,6 +23,7 @@ import { VectorExplorer } from "./interactive/VectorExplorer";
 import { CodeSandbox } from "./interactive/CodeSandbox";
 import { PAPSymbolOverview, PAPExample } from "./visuals/PAPDiagram";
 import { StrukExample } from "./visuals/StrukExamples";
+import ScrumCycle from "./visuals/ScrumCycle";
 import { PAPBuilder } from "./interactive/PAPBuilder";
 import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
 import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
@@ -125,6 +126,7 @@ function renderVisual(visual: LessonVisual, index: number) {
     struktWhile: <StrukExample example="while" className="w-full max-w-md mx-auto" />,
     struktFor: <StrukExample example="forloop" className="w-full max-w-md mx-auto" />,
     struktBubbleSort: <StrukExample example="bubblesort" className="w-full max-w-lg mx-auto" />,
+    scrumCycle: <ScrumCycle />,
   };
 
   return (
