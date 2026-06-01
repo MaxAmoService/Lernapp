@@ -465,9 +465,26 @@ Strukturiert eine Anwendung in **drei Komponenten**:
 | 🎮 **Controller** | Vermittler | Verarbeitet Input, steuert Model |
 
 ### Kommunikationsfluss
-\`\`\`
-User → View → Controller → Model → Controller → View → User
-\`\`\`
+
+<svg viewBox="0 0 550 70" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="550" height="70" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <circle cx="40" cy="35" r="20" fill="#94a3b8" fill-opacity="0.2" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="40" y="39" text-anchor="middle" fill="#e2e8f0" font-size="9">👤</text>
+  <text x="40" y="62" text-anchor="middle" fill="#64748b" font-size="7">User</text>
+  <polygon points="62,35 78,30 78,40" fill="#64748b"/>
+  <rect x="82" y="18" width="70" height="34" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="117" y="40" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">View</text>
+  <polygon points="154,35 170,30 170,40" fill="#64748b"/>
+  <rect x="174" y="18" width="85" height="34" rx="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <text x="216" y="40" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">Controller</text>
+  <polygon points="261,35 277,30 277,40" fill="#64748b"/>
+  <rect x="281" y="18" width="60" height="34" rx="6" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="311" y="40" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">Model</text>
+  <polygon points="343,35 359,30 359,40" fill="#64748b"/>
+  <text x="385" y="35" text-anchor="middle" fill="#94a3b8" font-size="9">← Daten</text>
+  <polygon points="430,35 446,30 446,40" fill="#64748b"/>
+  <text x="475" y="35" text-anchor="middle" fill="#94a3b8" font-size="9">← Render</text>
+</svg>
 
 ### Vorteile
 - ✅ Klare Trennung von UI und Logik
@@ -480,15 +497,29 @@ User → View → Controller → Model → Controller → View → User
 
 Bei Microservices werden Aufgaben in **unabhängige Services** gekapselt:
 
-\`\`\`
-┌──────────┐  ┌──────────┐  ┌──────────┐
-│ Service A │  │ Service B │  │ Service C │
-│ (Auth)    │  │ (Orders)  │  │ (Payment) │
-│ DB-A      │  │ DB-B      │  │ DB-C      │
-└──────────┘  └──────────┘  └──────────┘
-      ↑              ↑              ↑
-      └──────────── API ────────────┘
-\`\`\`
+<svg viewBox="0 0 550 160" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="550" height="160" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="25" y="20" width="140" height="75" rx="8" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="95" y="45" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="bold">Service A</text>
+  <text x="95" y="62" text-anchor="middle" fill="#64748b" font-size="9">(Auth)</text>
+  <rect x="45" y="70" width="100" height="18" rx="4" fill="#3b82f6" fill-opacity="0.1" stroke="#3b82f6" stroke-width="0.5"/>
+  <text x="95" y="83" text-anchor="middle" fill="#64748b" font-size="8">🗄️ DB-A</text>
+  <rect x="205" y="20" width="140" height="75" rx="8" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+  <text x="275" y="45" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">Service B</text>
+  <text x="275" y="62" text-anchor="middle" fill="#64748b" font-size="9">(Orders)</text>
+  <rect x="225" y="70" width="100" height="18" rx="4" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="0.5"/>
+  <text x="275" y="83" text-anchor="middle" fill="#64748b" font-size="8">🗄️ DB-B</text>
+  <rect x="385" y="20" width="140" height="75" rx="8" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="455" y="45" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="bold">Service C</text>
+  <text x="455" y="62" text-anchor="middle" fill="#64748b" font-size="9">(Payment)</text>
+  <rect x="405" y="70" width="100" height="18" rx="4" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="0.5"/>
+  <text x="455" y="83" text-anchor="middle" fill="#64748b" font-size="8">🗄️ DB-C</text>
+  <line x1="95" y1="95" x2="95" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="275" y1="95" x2="275" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+  <line x1="455" y1="95" x2="455" y2="115" stroke="#94a3b8" stroke-width="1.5"/>
+  <rect x="60" y="115" width="430" height="28" rx="6" fill="#64748b" fill-opacity="0.15" stroke="#64748b" stroke-width="1.5"/>
+  <text x="275" y="134" text-anchor="middle" fill="#e2e8f0" font-size="10" font-weight="bold">🔌 API Gateway</text>
+</svg>
 
 ### Eigenschaften
 - Jeder Service ist **logisch getrennt** und **technisch unabhängig**

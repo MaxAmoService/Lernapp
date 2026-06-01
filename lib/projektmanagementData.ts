@@ -550,12 +550,29 @@ Es gibt viele Methoden, um Projekte zu analysieren und zu verbessern. Hier die *
 
 Analysiert **Stärken, Schwächen, Chancen und Risiken** eines Projekts.
 
-\`\`\`
-|          | Positiv    | Negativ    |
-|----------|------------|------------|
-| Intern   | Stärken    | Schwächen  |
-| Extern   | Chancen    | Risiken    |
-\`\`\`
+<svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg" style="max-width:400px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="400" height="180" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="100" y="10" width="90" height="30" rx="6" fill="#3b82f6" fill-opacity="0.2"/>
+  <text x="145" y="30" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Positiv</text>
+  <rect x="200" y="10" width="90" height="30" rx="6" fill="#ef4444" fill-opacity="0.2"/>
+  <text x="245" y="30" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Negativ</text>
+  <rect x="10" y="50" width="80" height="55" rx="6" fill="#10b981" fill-opacity="0.15"/>
+  <text x="50" y="75" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Intern</text>
+  <rect x="100" y="50" width="90" height="55" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <text x="145" y="75" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Stärken</text>
+  <text x="145" y="92" text-anchor="middle" fill="#64748b" font-size="8">💪</text>
+  <rect x="200" y="50" width="90" height="55" rx="8" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="245" y="75" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">Schwächen</text>
+  <text x="245" y="92" text-anchor="middle" fill="#64748b" font-size="8">⚠️</text>
+  <rect x="10" y="115" width="80" height="55" rx="6" fill="#8b5cf6" fill-opacity="0.15"/>
+  <text x="50" y="140" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">Extern</text>
+  <rect x="100" y="115" width="90" height="55" rx="8" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="145" y="140" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Chancen</text>
+  <text x="145" y="157" text-anchor="middle" fill="#64748b" font-size="8">🎯</text>
+  <rect x="200" y="115" width="90" height="55" rx="8" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="245" y="140" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Risiken</text>
+  <text x="245" y="157" text-anchor="middle" fill="#64748b" font-size="8">🚨</text>
+</svg>
 
 **Beispiel:**
 | | Positiv | Negativ |
@@ -569,13 +586,31 @@ Analysiert **Stärken, Schwächen, Chancen und Risiken** eines Projekts.
 
 Visualisiert **Ursachen für ein Problem** — sieht aus wie ein Fischgräten-Diagramm.
 
-\`\`\`
-Ursache 1 ──┐
-Ursache 2 ──┤
-Ursache 3 ──┼── Problem
-Ursache 4 ──┤
-Ursache 5 ──┘
-\`\`\`
+<svg viewBox="0 0 580 180" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="580" height="180" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <line x1="80" y1="90" x2="480" y2="90" stroke="#94a3b8" stroke-width="3"/>
+  <polygon points="480,82 500,90 480,98" fill="#94a3b8"/>
+  <rect x="500" y="70" width="70" height="40" rx="8" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="2"/>
+  <text x="535" y="95" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Problem</text>
+  <line x1="150" y1="30" x2="200" y2="85" stroke="#3b82f6" stroke-width="2"/>
+  <rect x="30" y="12" width="110" height="28" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="85" y="31" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">👤 Mensch</text>
+  <line x1="280" y1="30" x2="300" y2="85" stroke="#10b981" stroke-width="2"/>
+  <rect x="180" y="12" width="90" height="28" rx="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1"/>
+  <text x="225" y="31" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">⚙️ Maschine</text>
+  <line x1="400" y1="30" x2="380" y2="85" stroke="#f59e0b" stroke-width="2"/>
+  <rect x="310" y="12" width="80" height="28" rx="6" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+  <text x="350" y="31" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">📦 Material</text>
+  <line x1="150" y1="150" x2="200" y2="95" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="30" y="140" width="110" height="28" rx="6" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="85" y="159" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">📋 Methode</text>
+  <line x1="280" y1="150" x2="300" y2="95" stroke="#ec4899" stroke-width="2"/>
+  <rect x="180" y="140" width="90" height="28" rx="6" fill="#ec4899" fill-opacity="0.2" stroke="#ec4899" stroke-width="1"/>
+  <text x="225" y="159" text-anchor="middle" fill="#f9a8d4" font-size="9" font-weight="bold">📏 Messung</text>
+  <line x1="400" y1="150" x2="380" y2="95" stroke="#6366f1" stroke-width="2"/>
+  <rect x="310" y="140" width="80" height="28" rx="6" fill="#6366f1" fill-opacity="0.2" stroke="#6366f1" stroke-width="1"/>
+  <text x="350" y="159" text-anchor="middle" fill="#a5b4fc" font-size="9" font-weight="bold">🌍 Milieu</text>
+</svg>
 
 **Kategorien (6M):**
 - **M**ensch, **M**aschine, **M**aterial
@@ -588,12 +623,28 @@ Ursache 5 ──┘
 Identifiziert und bewertet alle **Personen mit Interesse** am Projekt.
 
 ### Matrix
-\`\`\`
-Hoher Einfluss │ Manage Closely │ Keep Satisfied
-               ├────────────────┼───────────────
-Geringer       │ Monitor        │ Keep Informed
-Einfluss       │                │
-\`\`\`
+
+<svg viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" style="max-width:420px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="420" height="200" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="15" y="105" text-anchor="middle" fill="#94a3b8" font-size="9" transform="rotate(-90,15,105)">Einfluss</text>
+  <text x="250" y="195" text-anchor="middle" fill="#94a3b8" font-size="9">Interesse →</text>
+  <rect x="60" y="15" width="150" height="80" rx="8" fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="135" y="50" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Manage Closely</text>
+  <text x="135" y="68" text-anchor="middle" fill="#64748b" font-size="8">🏆 Hoher Einfluss</text>
+  <text x="135" y="82" text-anchor="middle" fill="#64748b" font-size="8">+ Hohes Interesse</text>
+  <rect x="220" y="15" width="150" height="80" rx="8" fill="#f59e0b" fill-opacity="0.15" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="295" y="50" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">Keep Satisfied</text>
+  <text x="295" y="68" text-anchor="middle" fill="#64748b" font-size="8">📊 Hoher Einfluss</text>
+  <text x="295" y="82" text-anchor="middle" fill="#64748b" font-size="8">+ Geringes Interesse</text>
+  <rect x="60" y="105" width="150" height="80" rx="8" fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="135" y="140" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Monitor</text>
+  <text x="135" y="158" text-anchor="middle" fill="#64748b" font-size="8">👁️ Geringer Einfluss</text>
+  <text x="135" y="172" text-anchor="middle" fill="#64748b" font-size="8">+ Geringes Interesse</text>
+  <rect x="220" y="105" width="150" height="80" rx="8" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+  <text x="295" y="140" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Keep Informed</text>
+  <text x="295" y="158" text-anchor="middle" fill="#64748b" font-size="8">📢 Geringer Einfluss</text>
+  <text x="295" y="172" text-anchor="middle" fill="#64748b" font-size="8">+ Hohes Interesse</text>
+</svg>
 
 ---
 
@@ -613,14 +664,31 @@ Analysiert **treibende** und **hemmende Kräfte** bei Veränderungen.
 
 Fragt **5 Mal "Warum?"** bis zur eigentlichen Ursache.
 
-\`\`\`
-Problem: Die App stürzt ab.
-Warum? → NullPointer Exception.
-Warum? → Variable nicht initialisiert.
-Warum? → Datenbank liefert null.
-Warum? → Verbindung fehlgeschlagen.
-Warum? → Server nicht erreichbar. ← Echte Ursache!
-\`\`\`
+<svg viewBox="0 0 580 160" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="580" height="160" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="15" y="15" width="160" height="30" rx="6" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="95" y="35" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">💥 App stürzt ab</text>
+  <text x="185" y="35" fill="#64748b" font-size="10">Warum?</text>
+  <polygon points="220,30 235,25 235,35" fill="#64748b"/>
+  <rect x="240" y="15" width="140" height="30" rx="6" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1"/>
+  <text x="310" y="35" text-anchor="middle" fill="#fcd34d" font-size="9">NullPointer Exception</text>
+  <text x="390" y="35" fill="#64748b" font-size="10">Warum?</text>
+  <polygon points="425,30 440,25 440,35" fill="#64748b"/>
+  <rect x="445" y="15" width="120" height="30" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="505" y="35" text-anchor="middle" fill="#93c5fd" font-size="9">Variable = null</text>
+  <rect x="15" y="55" width="160" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="95" y="75" text-anchor="middle" fill="#c4b5fd" font-size="9">DB liefert null</text>
+  <text x="185" y="75" fill="#64748b" font-size="10">Warum?</text>
+  <polygon points="220,70 235,65 235,75" fill="#64748b"/>
+  <rect x="240" y="55" width="140" height="30" rx="6" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1"/>
+  <text x="310" y="75" text-anchor="middle" fill="#6ee7b7" font-size="9">Verbindung fehlgeschlagen</text>
+  <text x="390" y="75" fill="#64748b" font-size="10">Warum?</text>
+  <polygon points="425,70 440,65 440,75" fill="#64748b"/>
+  <rect x="445" y="55" width="120" height="30" rx="6" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
+  <text x="505" y="75" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">🎯 Server down!</text>
+  <text x="300" y="110" text-anchor="middle" fill="#94a3b8" font-size="10">5× Warum? → eigentliche Ursache finden</text>
+  <text x="300" y="130" text-anchor="middle" fill="#64748b" font-size="9">Nicht beim ersten Grund aufhören — weiterfragen!</text>
+</svg>
 
 ---
 

@@ -466,28 +466,69 @@ volumes:
 ## 📋 Deployment-Strategien
 
 ### 1️⃣ All-at-Once (Big Bang)
-\`\`\`
-Alte Version → [Downtime] → Neue Version
-\`\`\`
-- ✅ Einfach
-- ❌ Ausfallzeit
+
+<svg viewBox="0 0 500 70" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="500" height="70" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="18" width="110" height="34" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="75" y="40" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">Alt (v1.0)</text>
+  <polygon points="130,35 148,28 148,42" fill="#64748b"/>
+  <rect x="152" y="18" width="90" height="34" rx="6" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="197" y="36" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">Downtime</text>
+  <text x="197" y="48" text-anchor="middle" fill="#94a3b8" font-size="8">⏸️</text>
+  <polygon points="242,35 260,28 260,42" fill="#64748b"/>
+  <rect x="264" y="18" width="110" height="34" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="319" y="40" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Neu (v2.0)</text>
+  <text x="430" y="40" fill="#64748b" font-size="9">Einfach, aber</text>
+  <text x="430" y="52" fill="#ef4444" font-size="9">Ausfallzeit!</text>
+</svg>
 
 ### 2️⃣ Rolling Update
-\`\`\`
-Server 1: Alt → Neu
-Server 2: Alt → Neu
-Server 3: Alt → Neu
-\`\`\`
-- ✅ Keine Downtime
-- ❌ Komplexer
+
+<svg viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="500" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="60" y="25" text-anchor="middle" fill="#94a3b8" font-size="9">Server 1</text>
+  <text x="190" y="25" text-anchor="middle" fill="#94a3b8" font-size="9">Server 2</text>
+  <text x="320" y="25" text-anchor="middle" fill="#94a3b8" font-size="9">Server 3</text>
+  <rect x="20" y="35" width="75" height="28" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="57" y="54" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">✅ Neu</text>
+  <rect x="110" y="35" width="25" height="28" rx="4" fill="#64748b" fill-opacity="0.2"/>
+  <text x="122" y="54" text-anchor="middle" fill="#94a3b8" font-size="10">→</text>
+  <rect x="150" y="35" width="75" height="28" rx="6" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="187" y="54" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">⏳ Alt→Neu</text>
+  <rect x="240" y="35" width="25" height="28" rx="4" fill="#64748b" fill-opacity="0.2"/>
+  <text x="252" y="54" text-anchor="middle" fill="#94a3b8" font-size="10">→</text>
+  <rect x="280" y="35" width="75" height="28" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="317" y="54" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">Alt</text>
+  <text x="420" y="45" fill="#64748b" font-size="9">Keine Downtime</text>
+  <text x="420" y="57" fill="#64748b" font-size="9">Server für Server</text>
+  <line x1="57" y1="63" x2="57" y2="75" stroke="#10b981" stroke-width="2"/>
+  <line x1="57" y1="75" x2="187" y2="75" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="187" y1="75" x2="187" y2="63" stroke="#10b981" stroke-width="2"/>
+  <line x1="187" y1="75" x2="317" y2="75" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="317" y1="75" x2="317" y2="63" stroke="#10b981" stroke-width="2"/>
+  <text x="187" y="92" text-anchor="middle" fill="#64748b" font-size="8">Sequenziell</text>
+</svg>
 
 ### 3️⃣ Blue-Green
-\`\`\`
-Blue (Alt) ← Traffic
-Green (Neu) ← Traffic nach Test
-\`\`\`
-- ✅ Schneller Rollback
-- ❌ Doppelte Ressourcen
+
+<svg viewBox="0 0 500 90" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="500" height="90" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="20" width="120" height="50" rx="8" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="80" y="42" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Blue (Alt)</text>
+  <text x="80" y="58" text-anchor="middle" fill="#64748b" font-size="9">v1.0</text>
+  <rect x="200" y="20" width="120" height="50" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <text x="260" y="42" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Green (Neu)</text>
+  <text x="260" y="58" text-anchor="middle" fill="#64748b" font-size="9">v2.0</text>
+  <text x="380" y="30" text-anchor="middle" fill="#fcd34d" font-size="10">🔀 Load Balancer</text>
+  <line x1="340" y1="45" x2="140" y2="45" stroke="#3b82f6" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="340" y1="45" x2="260" y2="45" stroke="#10b981" stroke-width="1.5" stroke-dasharray="5,4" marker-end="url(#arrowGreen)"/>
+  <text x="380" y="60" text-anchor="middle" fill="#64748b" font-size="8">Schneller Rollback</text>
+  <text x="380" y="72" text-anchor="middle" fill="#64748b" font-size="8">Doppelte Ressourcen</text>
+  <defs>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#3b82f6"/></marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6" fill="#10b981"/></marker>
+  </defs>
+</svg>
 
 ---
 
@@ -527,17 +568,28 @@ docker run -d -p 80:80 registry.example.com/myapp:1.0
 - 🚀 **Rolling Updates:** Null-Downtime Deployments
 
 ### Konzept
-\`\`\`
-┌─────────────────────────────────────┐
-│ Kubernetes Cluster                  │
-│  ┌─────────┐  ┌─────────┐          │
-│  │ Node 1  │  │ Node 2  │          │
-│  │ ┌─────┐ │  │ ┌─────┐ │          │
-│  │ │ Pod │ │  │ │ Pod │ │          │
-│  │ └─────┘ │  │ └─────┘ │          │
-│  └─────────┘  └─────────┘          │
-└─────────────────────────────────────┘
-\`\`\`
+
+<svg viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="500" height="200" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="15" width="460" height="175" rx="10" fill="none" stroke="#3b82f6" stroke-width="2" stroke-dasharray="6,3"/>
+  <text x="250" y="40" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="bold">Kubernetes Cluster</text>
+  <rect x="50" y="55" width="180" height="120" rx="8" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5"/>
+  <text x="140" y="75" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">Node 1</text>
+  <rect x="70" y="85" width="60" height="40" rx="6" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="100" y="110" text-anchor="middle" fill="#93c5fd" font-size="10">Pod A</text>
+  <rect x="150" y="85" width="60" height="40" rx="6" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="180" y="110" text-anchor="middle" fill="#c4b5fd" font-size="10">Pod B</text>
+  <rect x="70" y="135" width="140" height="28" rx="6" fill="#64748b" fill-opacity="0.15" stroke="#64748b" stroke-width="1"/>
+  <text x="140" y="154" text-anchor="middle" fill="#94a3b8" font-size="9">kubelet + kube-proxy</text>
+  <rect x="270" y="55" width="180" height="120" rx="8" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5"/>
+  <text x="360" y="75" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">Node 2</text>
+  <rect x="290" y="85" width="60" height="40" rx="6" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="320" y="110" text-anchor="middle" fill="#fcd34d" font-size="10">Pod C</text>
+  <rect x="370" y="85" width="60" height="40" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="400" y="110" text-anchor="middle" fill="#fca5a5" font-size="10">Pod D</text>
+  <rect x="290" y="135" width="140" height="28" rx="6" fill="#64748b" fill-opacity="0.15" stroke="#64748b" stroke-width="1"/>
+  <text x="360" y="154" text-anchor="middle" fill="#94a3b8" font-size="9">kubelet + kube-proxy</text>
+</svg>
 
 ### Kubernetes vs. Docker Compose
 
