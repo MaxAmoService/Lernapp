@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/components/AuthProvider";
 import { getModule, Lesson } from "@/lib/data";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -108,9 +109,9 @@ export default function ModulePage() {
     return (
       <div className="text-center py-20">
         <h1 className="text-2xl font-bold text-red-400">Modul nicht gefunden</h1>
-        <a href="/modules" className="text-blue-400 hover:underline mt-4 block">
+        <Link href="/modules" className="text-blue-400 hover:underline mt-4 block">
           Zurück zu allen Modulen
-        </a>
+        </Link>
       </div>
     );
   }
@@ -183,13 +184,13 @@ export default function ModulePage() {
     <div className="animate-fade-in">
       {/* Header */}
       <section className="mb-8">
-        <a
+        <Link
           href="/modules"
           className="inline-flex items-center text-slate-400 hover:text-white transition-colors mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Zurück zu allen Modulen
-        </a>
+        </Link>
         <div className="flex items-start gap-3 sm:gap-4">
           <span className="text-3xl sm:text-5xl">{module.icon}</span>
           <div className="flex-1 min-w-0">
@@ -499,18 +500,18 @@ export default function ModulePage() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3">
-                <a
+                <Link
                   href="/modules"
                   className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 rounded-xl font-medium text-slate-300 transition-colors text-center"
                 >
                   Alle Module
-                </a>
-                <a
+                </Link>
+                <Link
                   href="/leaderboard"
                   className="flex-1 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 rounded-xl font-semibold text-white transition-all text-center"
                 >
                   🏆 Bestenliste
-                </a>
+                </Link>
               </div>
             </div>
           </div>

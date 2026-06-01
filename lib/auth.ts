@@ -56,6 +56,7 @@ export interface UserProfile {
 // ─── Konstanten ─────────────────────────────────────────────────────────────
 
 const AVATARS = ["🤓", "😎", "🦊", "🐱", "🦄", "🐸", "🐼", "🦁", "🐯", "🐨", "🐻", "🐰", "🦋", "🐙", "🦉", "🐧"];
+const STARTER_AVATARS = ["🤓", "😎", "🐱", "🐶", "🐼", "🐨"]; // Nur Level 1 Common
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -120,7 +121,7 @@ export async function registerUser(
     username,
     email,
     emailVerified: false,
-    avatar: AVATARS[Math.floor(Math.random() * AVATARS.length)],
+    avatar: STARTER_AVATARS[Math.floor(Math.random() * STARTER_AVATARS.length)],
     bio: "",
     displayName: username,
     createdAt: new Date().toISOString(),

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useAuth } from "./AuthProvider";
 import { mathQuizzes } from "@/lib/mathData";
 import { complexQuizzes } from "@/lib/complexData";
@@ -173,9 +173,14 @@ const quizData: Record<string, QuizQuestion[]> = {
     {
       question: "Was bedeutet Semantic Versioning 2.1.0?",
       type: "multiple",
-      options: ["MAJOR 2, MINOR 1, PATCH 0", "MAJOR 2, MINOR 0, PATCH 1", "MAJOR 1, MINOR 2, PATCH 0", "MAJOR 0, MINOR 1, PATCH 2"],
+      options: [
+        "Major 2 (Breaking Changes), Minor 1 (neues Feature), Patch 0 (kein Bugfix)",
+        "Revision 2, Build 1, Hotfix 0",
+        "Version 2, Update 1, Release 0",
+        "Generation 2, Iteration 1, Phase 0",
+      ],
       correct: 0,
-      explanation: "2.1.0 = Major 2, Minor 1 (neues Feature), Patch 0.",
+      explanation: "Semantic Versioning: MAJOR.MINOR.PATCH — Major bei Breaking Changes, Minor bei neuen Features, Patch bei Bugfixes.",
     },
     {
       question: "Welcher Branch ist in Gitflow für die produktive Version zuständig?",
@@ -403,6 +408,18 @@ function shuffleArray<T>(arr: T[]): T[] {
   return a;
 }
 
+/** Shuffle answer options for multiple-choice questions and update the correct index */
+function shuffleQuestionOptions(q: QuizQuestion): QuizQuestion {
+  if (q.type !== "multiple" || !q.options) return q;
+  const indexed = q.options.map((opt, i) => ({ opt, i }));
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  const newCorrect = indexed.findIndex(x => x.i === q.correct);
+  return { ...q, options: indexed.map(x => x.opt), correct: newCorrect };
+}
+
 function QuestionWithMath({ text }: { text: string }) {
   const parts = text.split(/(\$[^$]+\$)/g);
   return (
@@ -428,9 +445,10 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
+  const hasAwardedXP = useRef(false);
 
   useEffect(() => {
-    setQuestions(shuffleArray(rawQuestions));
+    setQuestions(shuffleArray(rawQuestions).map(shuffleQuestionOptions));
   }, [moduleSlug]);
 
   if (questions.length === 0) {
@@ -476,14 +494,17 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
       setFinished(true);
       const finalScore = score + (isCorrect ? 1 : 0);
       if (finalScore >= questions.length * 0.8) {
-        completeLesson(moduleSlug, "quiz", finalScore);
-        onComplete();
+        if (!hasAwardedXP.current) {
+          hasAwardedXP.current = true;
+          completeLesson(moduleSlug, "quiz", finalScore);
+          onComplete();
+        }
       }
     }
   };
 
   const restart = () => {
-    setQuestions(shuffleArray(rawQuestions));
+    setQuestions(shuffleArray(rawQuestions).map(shuffleQuestionOptions));
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setInputAnswer("");

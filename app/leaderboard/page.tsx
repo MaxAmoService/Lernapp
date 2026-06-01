@@ -5,6 +5,7 @@ import { useAuth } from "@/components/AuthProvider";
 import { getLeaderboard, getUserLevel } from "@/lib/auth";
 import type { LeaderboardEntry } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
+import { getUnlockedAvatars } from "@/lib/rewards";
 import { FrameOnlineStatus } from "@/components/OnlineStatus";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
@@ -39,7 +40,10 @@ export default function LeaderboardPage() {
           (avatar === "🥉" && myRank !== 3);
 
         if (needsReset) {
-          await updateProfile({ equippedFrame: "none", avatar: "🎓" });
+          const userLevel = getUserLevel(user.totalXP || 0).level;
+          const unlocked = getUnlockedAvatars(userLevel).filter(a => !a.leaderboardRank);
+          const randomAvatar = unlocked.length > 0 ? unlocked[Math.floor(Math.random() * unlocked.length)].emoji : "🎓";
+          await updateProfile({ equippedFrame: "none", avatar: randomAvatar });
         }
       }
     } catch (err) {
@@ -144,6 +148,10 @@ export default function LeaderboardPage() {
             const levelInfo = getUserLevel(entry.totalXP);
             const medalIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : null;
 
+            // Rang-basierte Cosmetics: Leaderboard-Platz bestimmt Frame/Avatar, nicht gespeicherter Wert
+            const displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : entry.equippedFrame;
+            const displayAvatar = rank === 1 ? "🏆" : rank === 2 ? entry.avatar : rank === 3 ? entry.avatar : entry.avatar;
+
             return (
               <div
                 key={entry.uid}
@@ -167,10 +175,10 @@ export default function LeaderboardPage() {
                 {/* Avatar with Frame + Online Status */}
                 <div className="relative">
                   <AvatarFrame
-                    avatar={entry.avatar}
-                    frameId={entry.equippedFrame}
+                    avatar={displayAvatar}
+                    frameId={displayFrame}
                     level={entry.level}
-                    leaderboardRank={entry.rank}
+                    leaderboardRank={rank}
                     size="md"
                   />
                   <FrameOnlineStatus uid={entry.uid} hidden={false} className="-bottom-0.5 -right-0.5" />

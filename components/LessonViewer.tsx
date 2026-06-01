@@ -329,7 +329,19 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     let mathContent = "";
     let inTable = false;
     let tableRows: JSX.Element[] = [];
+    let olItems: JSX.Element[] = [];
     let keyIndex = 0;
+
+    const flushOl = () => {
+      if (olItems.length > 0) {
+        elements.push(
+          <ol key={`ol-${keyIndex++}`} className="my-3 space-y-1.5 list-decimal list-inside marker:text-blue-400 marker:font-bold">
+            {olItems}
+          </ol>
+        );
+        olItems = [];
+      }
+    };
 
     const flushTable = () => {
       if (tableRows.length > 0) {
@@ -382,6 +394,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       // Code block
       if (line.startsWith("```")) {
         flushTable();
+        flushOl();
         if (inCodeBlock) {
           elements.push(<CodeBlock key={`code-${keyIndex++}`} code={codeContent.trim()} language={codeLang || "tsx"} />);
           codeContent = "";
@@ -400,6 +413,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
 
       // Table row
       if (line.includes("|") && line.trim().startsWith("|") && line.trim().endsWith("|")) {
+        flushOl();
         const cells = line.split("|").filter((c, i, arr) => i > 0 && i < arr.length - 1).map(c => c.trim());
         // Skip separator row
         if (!cells.every(c => c.match(/^[\s:-]+$/))) {
@@ -422,13 +436,16 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       // Headers
       if (line.startsWith("# ")) {
         flushTable();
+        flushOl();
         elements.push(<h1 key={`h-${keyIndex++}`} className="text-3xl font-bold text-white mt-8 mb-4"><InlineText text={line.slice(2)} /></h1>);
       } else if (line.startsWith("## ")) {
         flushTable();
-        const isMerkblatt = line.includes("Merkblatt") || line.includes("Zusammenfassung");
+        const headingText = line.slice(3);
+        const isMerkblatt = headingText.includes("Merkblatt") || headingText.includes("Zusammenfassung");
+        const hasEmoji = /^[^\w\s]/.test(headingText);
         elements.push(
           <h2 key={`h-${keyIndex++}`} className={`text-2xl font-semibold mt-6 mb-3 ${isMerkblatt ? "text-yellow-400" : "text-blue-400"}`}>
-            {isMerkblatt && "📋 "}<InlineText text={line.slice(3)} />
+            {isMerkblatt && !hasEmoji && "📋 "}<InlineText text={headingText} />
           </h2>
         );
       } else if (line.startsWith("### ")) {
@@ -437,6 +454,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // Callout boxes: > 💡 text or > [!TIP] text etc.
       else if (line.startsWith("> ")) {
+        flushOl();
         const raw = line.slice(2);
         const calloutTypes: Record<string, { bg: string; border: string; icon: string; label: string; text: string }> = {
           "💡": { bg: "bg-blue-500/10", border: "border-blue-500/40", icon: "💡", label: "Tipp", text: "text-blue-200" },
@@ -515,14 +533,16 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // List items
       else if (line.startsWith("- ")) {
+        flushOl();
         const text = line.slice(2);
         elements.push(<li key={`li-${keyIndex++}`} className="text-slate-200 ml-4 mb-1.5 list-none pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-blue-400 before:font-bold"><InlineText text={text} /></li>);
       } else if (/^\d+\.\s/.test(line)) {
         const text = line.replace(/^\d+\.\s/, "");
-        elements.push(<li key={`oli-${keyIndex++}`} className="text-slate-200 ml-4 mb-1.5 list-decimal list-inside marker:text-blue-400 marker:font-bold"><InlineText text={text} /></li>);
+        olItems.push(<li key={`oli-${keyIndex++}`} className="text-slate-200 mb-1.5"><InlineText text={text} /></li>);
       }
       // Styled divider (---)
       else if (line.trim() === "---") {
+        flushOl();
         elements.push(
           <div key={`divider-${keyIndex++}`} className="my-6 flex items-center gap-4">
             <div className="flex-1 h-px bg-gradient-to-r from-transparent via-slate-600 to-transparent" />
@@ -533,6 +553,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // Guided Exercise markers
       else if (line.trim() === "[GUIDED_START]") {
+        flushOl();
         try {
           const guidedSteps: string[] = [];
           let guidedTitle = "";
@@ -630,6 +651,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         interactiveType &&
         interactiveType !== "codeSandbox"
       ) {
+        flushOl();
         let specificType: string | undefined;
         const match = line.trim().match(/^\[INTERACTIVE:(\w+)\]$/);
         if (match) {
@@ -643,10 +665,12 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
       }
       // Regular paragraph
       else {
+        flushOl();
         elements.push(<p key={`p-${keyIndex++}`} className="text-slate-200 mb-3 leading-relaxed"><InlineText text={line} /></p>);
       }
     }
 
+    flushOl();
     flushTable();
     return elements;
   };

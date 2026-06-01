@@ -22,7 +22,7 @@ export const gitModule: Module = {
 - Zusammenarbeit im Team
 - Jederzeit zurückkehren zu älteren Versionen
 
-### Zentrale vs. Dezentrale VV
+### Zentrale vs. Dezentrale Versionsverwaltung (VV)
 | | Zentral (SVN) | Dezentral (Git) |
 |---|---|---|
 | Repository | Ein Server | Jeder hat alles lokal |
@@ -84,7 +84,7 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
 
 ---
 
-## Die Probleme ohne VV
+## Die Probleme ohne Versionsverwaltung (VV)
 
 | Problem | Auswirkung |
 |---------|-----------|
