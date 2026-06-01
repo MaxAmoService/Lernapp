@@ -1,26 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { useAuth } from "./AuthProvider";
+import {
+  loadClickerState,
+  saveClickerClick,
+  saveClickerTick,
+  buyClickerUpgrade,
+  buyClickerCosmetic,
+  resetClickerState,
+  type ClickerState,
+} from "@/lib/auth";
 import {
   Sparkles,
   Zap,
-  TrendingUp,
   ShoppingBag,
   ChevronDown,
   ChevronUp,
   X,
   GripVertical,
-  Trophy,
-  Star,
-  Award,
-  Rocket,
-  Crown,
-  Diamond,
-  Flame,
-  Heart,
-  Shield,
-  Sword,
-  Gem,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -47,23 +45,9 @@ interface Cosmetic {
   rarity: "common" | "rare" | "epic" | "legendary";
 }
 
-interface ClickerState {
-  points: number;
-  totalPoints: number;
-  clickPower: number;
-  autoSpeed: number; // ms between auto ticks
-  autoAmount: number; // points per auto tick
-  upgrades: Record<string, number>; // upgradeId -> count
-  equippedAvatar: string;
-  equippedFrame: string;
-  ownedCosmetics: string[];
-}
-
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
-
-const STORAGE_KEY = "learnhub-clicker";
 
 const UPGRADES: Upgrade[] = [
   { id: "click1", name: "Schärferer Stift", description: "+1 Punkt pro Klick", icon: "✏️", baseCost: 10, costMultiplier: 1.5, effect: "clickPower", value: 1 },
@@ -110,29 +94,12 @@ const DEFAULT_STATE: ClickerState = {
   equippedAvatar: "📚",
   equippedFrame: "none",
   ownedCosmetics: [],
+  lastTick: new Date().toISOString(),
 };
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
-
-function loadState(): ClickerState {
-  if (typeof window === "undefined") return DEFAULT_STATE;
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return DEFAULT_STATE;
-    return { ...DEFAULT_STATE, ...JSON.parse(raw) };
-  } catch {
-    return DEFAULT_STATE;
-  }
-}
-
-function saveState(state: ClickerState) {
-  if (typeof window === "undefined") return;
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch { /* ok */ }
-}
 
 function getUpgradeCost(upgrade: Upgrade, count: number): number {
   return Math.floor(upgrade.baseCost * Math.pow(upgrade.costMultiplier, count));
@@ -149,6 +116,7 @@ function formatNumber(n: number): string {
 // ---------------------------------------------------------------------------
 
 export default function LearningClicker() {
+  const { user } = useAuth();
   const [state, setState] = useState<ClickerState>(DEFAULT_STATE);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
@@ -156,22 +124,37 @@ export default function LearningClicker() {
   const [clickEffects, setClickEffects] = useState<{ id: number; x: number; y: number; value: number }[]>([]);
   const [position, setPosition] = useState({ x: 20, y: 100 });
   const [isDragging, setIsDragging] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dragOffset = useRef({ x: 0, y: 0 });
   const dragMovedRef = useRef(false);
   const dragHeaderRef = useRef<HTMLDivElement>(null);
   const clickIdRef = useRef(0);
+  const tickIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load state on mount
+  // State aus Firebase laden
   useEffect(() => {
-    setState(loadState());
-  }, []);
+    if (!user) { setLoading(false); return; }
+    setLoading(true);
+    loadClickerState(user.uid).then((s) => {
+      setState(s);
+      setLoading(false);
+    });
+  }, [user]);
 
-  // Save state on change
+  // Auto-Tick: Punkte in Firebase speichern (alle 10 Sekunden)
   useEffect(() => {
-    if (state !== DEFAULT_STATE) saveState(state);
-  }, [state]);
+    if (!user || state.autoAmount <= 0) return;
+    tickIntervalRef.current = setInterval(async () => {
+      const newPoints = await saveClickerTick(user.uid, state.autoAmount, state.autoSpeed);
+      if (newPoints > 0) {
+        setState((prev) => ({ ...prev, points: newPoints, totalPoints: prev.totalPoints + prev.autoAmount }));
+      }
+    }, 10_000); // Alle 10 Sekunden synchronisieren
+    return () => { if (tickIntervalRef.current) clearInterval(tickIntervalRef.current); };
+  }, [user, state.autoAmount, state.autoSpeed]);
 
-  // Auto-generation
+  // Lokaler Auto-Tick (alle 1 Sekunde für flüssige Anzeige)
   useEffect(() => {
     if (state.autoAmount <= 0) return;
     const interval = setInterval(() => {
@@ -184,17 +167,13 @@ export default function LearningClicker() {
     return () => clearInterval(interval);
   }, [state.autoAmount, state.autoSpeed]);
 
-  // Drag handlers (pointer capture – works on desktop, tablet, and mobile)
+  // Drag handlers (pointer capture)
   const handleDragStart = useCallback((e: React.PointerEvent) => {
-    // Only primary button / first touch
     if (e.button !== 0) return;
     e.preventDefault();
     setIsDragging(true);
     dragMovedRef.current = false;
-    dragOffset.current = {
-      x: e.clientX - position.x,
-      y: e.clientY - position.y,
-    };
+    dragOffset.current = { x: e.clientX - position.x, y: e.clientY - position.y };
     const el = dragHeaderRef.current;
     if (el) el.setPointerCapture(e.pointerId);
   }, [position]);
@@ -208,25 +187,20 @@ export default function LearningClicker() {
     });
   }, [isDragging]);
 
-  const handleDragEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  // Prevent click on header after a drag (buttons inside use stopPropagation)
+  const handleDragEnd = useCallback(() => { setIsDragging(false); }, []);
   const handleHeaderClick = useCallback((e: React.MouseEvent) => {
-    if (dragMovedRef.current) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+    if (dragMovedRef.current) { e.preventDefault(); e.stopPropagation(); }
   }, []);
 
-  // Click handler
-  const handleClick = useCallback((e: React.MouseEvent) => {
+  // Click handler — Punkte werden in Firebase gespeichert
+  const handleClick = useCallback(async (e: React.MouseEvent) => {
+    if (!user) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     const id = clickIdRef.current++;
 
+    // Optimistic UI update
     setState((prev) => ({
       ...prev,
       points: prev.points + prev.clickPower,
@@ -234,63 +208,40 @@ export default function LearningClicker() {
     }));
 
     setClickEffects((prev) => [...prev, { id, x, y, value: state.clickPower }]);
-    setTimeout(() => {
-      setClickEffects((prev) => prev.filter((c) => c.id !== id));
-    }, 800);
-  }, [state.clickPower]);
+    setTimeout(() => { setClickEffects((prev) => prev.filter((c) => c.id !== id)); }, 800);
 
-  // Buy upgrade
-  const buyUpgrade = useCallback((upgrade: Upgrade) => {
-    const count = state.upgrades[upgrade.id] || 0;
-    const cost = getUpgradeCost(upgrade, count);
-    if (state.points < cost) return;
+    // In Firebase speichern (debounced)
+    if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
+    saveTimeoutRef.current = setTimeout(async () => {
+      await saveClickerClick(user.uid, state.clickPower);
+    }, 2000);
+  }, [user, state.clickPower]);
 
-    setState((prev) => {
-      const newState = { ...prev, points: prev.points - cost, upgrades: { ...prev.upgrades, [upgrade.id]: count + 1 } };
+  // Upgrade kaufen (server-seitig validiert)
+  const handleBuyUpgrade = useCallback(async (upgrade: Upgrade) => {
+    if (!user) return;
+    const newState = await buyClickerUpgrade(user.uid, upgrade.id);
+    if (newState) setState(newState);
+  }, [user]);
 
-      switch (upgrade.effect) {
-        case "clickPower":
-          newState.clickPower = prev.clickPower + upgrade.value;
-          break;
-        case "autoAmount":
-          newState.autoAmount = prev.autoAmount + upgrade.value;
-          break;
-        case "autoSpeed":
-          newState.autoSpeed = Math.max(100, Math.floor(prev.autoSpeed * upgrade.value));
-          break;
-      }
-
-      return newState;
-    });
-  }, [state.points, state.upgrades]);
-
-  // Buy cosmetic
-  const buyCosmetic = useCallback((cosmetic: Cosmetic) => {
-    if (state.points < cosmetic.cost || state.ownedCosmetics.includes(cosmetic.id)) return;
-    setState((prev) => ({
-      ...prev,
-      points: prev.points - cosmetic.cost,
-      ownedCosmetics: [...prev.ownedCosmetics, cosmetic.id],
-    }));
-  }, [state.points, state.ownedCosmetics]);
-
-  // Equip cosmetic
-  const equipCosmetic = useCallback((cosmetic: Cosmetic) => {
-    if (!state.ownedCosmetics.includes(cosmetic.id)) return;
-    if (cosmetic.type === "avatar") {
-      setState((prev) => ({ ...prev, equippedAvatar: cosmetic.icon }));
-    } else {
-      setState((prev) => ({ ...prev, equippedFrame: cosmetic.id }));
-    }
-  }, [state.ownedCosmetics]);
+  // Cosmetic kaufen (server-seitig validiert)
+  const handleBuyCosmetic = useCallback(async (cosmetic: Cosmetic) => {
+    if (!user) return;
+    const newState = await buyClickerCosmetic(user.uid, cosmetic.id);
+    if (newState) setState(newState);
+  }, [user]);
 
   // Reset
-  const reset = useCallback(() => {
+  const handleReset = useCallback(async () => {
+    if (!user) return;
+    await resetClickerState(user.uid);
     setState(DEFAULT_STATE);
-    localStorage.removeItem(STORAGE_KEY);
-  }, []);
+  }, [user]);
 
   const pointsPerSecond = state.autoAmount > 0 ? (state.autoAmount / state.autoSpeed) * 1000 : 0;
+
+  // Nicht eingeloggt → nichts anzeigen
+  if (!user) return null;
 
   // Floating button (when closed)
   if (!isOpen) {
@@ -350,7 +301,7 @@ export default function LearningClicker() {
             </button>
           </div>
 
-          {!isMinimized && (
+          {!isMinimized && !loading && (
             <>
               {/* Points display */}
               <div className="p-4 text-center">
@@ -369,17 +320,11 @@ export default function LearningClicker() {
                   className="relative mt-3 w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-amber-500/30 to-orange-500/30 border-2 border-amber-500/40 hover:border-amber-400/60 active:scale-95 transition-all flex items-center justify-center group"
                 >
                   <span className="text-4xl group-hover:scale-110 transition-transform">{state.equippedAvatar}</span>
-
-                  {/* Click effects */}
                   {clickEffects.map((effect) => (
                     <div
                       key={effect.id}
                       className="absolute pointer-events-none text-amber-400 font-bold text-sm animate-fade-in"
-                      style={{
-                        left: effect.x,
-                        top: effect.y,
-                        animation: "floatUp 0.8s ease-out forwards",
-                      }}
+                      style={{ left: effect.x, top: effect.y, animation: "floatUp 0.8s ease-out forwards" }}
                     >
                       +{effect.value}
                     </div>
@@ -395,21 +340,15 @@ export default function LearningClicker() {
               <div className="flex border-t border-slate-700/50">
                 <button
                   onClick={() => setActiveTab("upgrades")}
-                  className={`flex-1 py-2 text-xs font-medium transition-colors ${
-                    activeTab === "upgrades" ? "text-amber-400 border-b-2 border-amber-400" : "text-slate-500 hover:text-slate-300"
-                  }`}
+                  className={`flex-1 py-2 text-xs font-medium transition-colors ${activeTab === "upgrades" ? "text-amber-400 border-b-2 border-amber-400" : "text-slate-500 hover:text-slate-300"}`}
                 >
-                  <Zap className="w-3.5 h-3.5 inline mr-1" />
-                  Upgrades
+                  <Zap className="w-3.5 h-3.5 inline mr-1" /> Upgrades
                 </button>
                 <button
                   onClick={() => setActiveTab("cosmetics")}
-                  className={`flex-1 py-2 text-xs font-medium transition-colors ${
-                    activeTab === "cosmetics" ? "text-amber-400 border-b-2 border-amber-400" : "text-slate-500 hover:text-slate-300"
-                  }`}
+                  className={`flex-1 py-2 text-xs font-medium transition-colors ${activeTab === "cosmetics" ? "text-amber-400 border-b-2 border-amber-400" : "text-slate-500 hover:text-slate-300"}`}
                 >
-                  <ShoppingBag className="w-3.5 h-3.5 inline mr-1" />
-                  Shop
+                  <ShoppingBag className="w-3.5 h-3.5 inline mr-1" /> Shop
                 </button>
               </div>
 
@@ -420,17 +359,12 @@ export default function LearningClicker() {
                     const count = state.upgrades[upgrade.id] || 0;
                     const cost = getUpgradeCost(upgrade, count);
                     const canAfford = state.points >= cost;
-
                     return (
                       <button
                         key={upgrade.id}
-                        onClick={() => buyUpgrade(upgrade)}
+                        onClick={() => handleBuyUpgrade(upgrade)}
                         disabled={!canAfford}
-                        className={`w-full text-left p-2.5 rounded-lg border transition-all ${
-                          canAfford
-                            ? "bg-slate-800/50 border-slate-700/50 hover:border-amber-500/40 hover:bg-amber-500/5"
-                            : "bg-slate-800/20 border-slate-700/30 opacity-50"
-                        }`}
+                        className={`w-full text-left p-2.5 rounded-lg border transition-all ${canAfford ? "bg-slate-800/50 border-slate-700/50 hover:border-amber-500/40 hover:bg-amber-500/5" : "bg-slate-800/20 border-slate-700/30 opacity-50"}`}
                       >
                         <div className="flex items-center gap-2">
                           <span className="text-lg">{upgrade.icon}</span>
@@ -455,21 +389,12 @@ export default function LearningClicker() {
                       : state.equippedFrame === cosmetic.id;
                     const canAfford = state.points >= cosmetic.cost;
                     const colors = RARITY_COLORS[cosmetic.rarity];
-
                     return (
                       <button
                         key={cosmetic.id}
-                        onClick={() => (owned ? equipCosmetic(cosmetic) : buyCosmetic(cosmetic))}
+                        onClick={() => (owned ? null : handleBuyCosmetic(cosmetic))}
                         disabled={!owned && !canAfford}
-                        className={`w-full text-left p-2.5 rounded-lg border transition-all ${
-                          equipped
-                            ? `${colors.bg} ${colors.border}`
-                            : owned
-                            ? "bg-slate-800/50 border-slate-700/50 hover:border-slate-600"
-                            : canAfford
-                            ? "bg-slate-800/30 border-slate-700/30 hover:border-amber-500/30"
-                            : "bg-slate-800/20 border-slate-700/20 opacity-40"
-                        }`}
+                        className={`w-full text-left p-2.5 rounded-lg border transition-all ${equipped ? `${colors.bg} ${colors.border}` : owned ? "bg-slate-800/50 border-slate-700/50 hover:border-slate-600" : canAfford ? "bg-slate-800/30 border-slate-700/30 hover:border-amber-500/30" : "bg-slate-800/20 border-slate-700/20 opacity-40"}`}
                       >
                         <div className="flex items-center gap-2">
                           <span className="text-lg">{cosmetic.icon}</span>
@@ -498,7 +423,7 @@ export default function LearningClicker() {
               {/* Footer */}
               <div className="px-3 py-2 border-t border-slate-700/50 flex justify-between items-center">
                 <button
-                  onClick={reset}
+                  onClick={handleReset}
                   className="text-[10px] text-slate-600 hover:text-red-400 transition-colors"
                 >
                   Reset
@@ -508,6 +433,12 @@ export default function LearningClicker() {
                 </div>
               </div>
             </>
+          )}
+
+          {loading && (
+            <div className="p-6 text-center text-slate-500 text-sm">
+              Lade...
+            </div>
           )}
         </div>
       </div>

@@ -51,6 +51,17 @@ export interface UserProfile {
   leaderboardOptIn: boolean;
   equippedFrame: string;
   statusHidden: boolean;
+  // Lern-Clicker
+  clickerPoints: number;
+  clickerTotalPoints: number;
+  clickerClickPower: number;
+  clickerAutoSpeed: number;
+  clickerAutoAmount: number;
+  clickerUpgrades: Record<string, number>;
+  clickerEquippedAvatar: string;
+  clickerEquippedFrame: string;
+  clickerOwnedCosmetics: string[];
+  clickerLastTick: string; // ISO timestamp for offline earnings
 }
 
 // ─── Konstanten ─────────────────────────────────────────────────────────────
@@ -136,6 +147,16 @@ export async function registerUser(
     leaderboardOptIn: false,
     equippedFrame: "none",
     statusHidden: false,
+    clickerPoints: 0,
+    clickerTotalPoints: 0,
+    clickerClickPower: 1,
+    clickerAutoSpeed: 1000,
+    clickerAutoAmount: 0,
+    clickerUpgrades: {},
+    clickerEquippedAvatar: "📚",
+    clickerEquippedFrame: "none",
+    clickerOwnedCosmetics: [],
+    clickerLastTick: new Date().toISOString(),
   };
   await setDoc(doc(getDb(), "users", firebaseUser.uid), {
     ...profile,
@@ -186,8 +207,18 @@ export async function loginUser(email: string, password: string): Promise<UserPr
       savedModules: [],
       settings: { theme: "dark", notifications: true, language: "de" },
       leaderboardOptIn: false,
-    equippedFrame: "none",
-    statusHidden: false,
+      equippedFrame: "none",
+      statusHidden: false,
+      clickerPoints: 0,
+      clickerTotalPoints: 0,
+      clickerClickPower: 1,
+      clickerAutoSpeed: 1000,
+      clickerAutoAmount: 0,
+      clickerUpgrades: {},
+      clickerEquippedAvatar: "📚",
+      clickerEquippedFrame: "none",
+      clickerOwnedCosmetics: [],
+      clickerLastTick: new Date().toISOString(),
     };
     await setDoc(doc(getDb(), "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
   } else if (!profile.emailVerified) {
@@ -413,5 +444,220 @@ export async function toggleLeaderboardOptIn(uid: string, optIn: boolean): Promi
   } catch (err) {
     console.error("[Leaderboard] Toggle failed:", err);
     throw err;
+  }
+}
+
+// ─── Lern-Clicker (server-seitig validiert) ─────────────────────────────────
+
+export interface ClickerState {
+  points: number;
+  totalPoints: number;
+  clickPower: number;
+  autoSpeed: number;
+  autoAmount: number;
+  upgrades: Record<string, number>;
+  equippedAvatar: string;
+  equippedFrame: string;
+  ownedCosmetics: string[];
+  lastTick: string;
+}
+
+const CLICKER_DEFAULTS: ClickerState = {
+  points: 0,
+  totalPoints: 0,
+  clickPower: 1,
+  autoSpeed: 1000,
+  autoAmount: 0,
+  upgrades: {},
+  equippedAvatar: "📚",
+  equippedFrame: "none",
+  ownedCosmetics: [],
+  lastTick: new Date().toISOString(),
+};
+
+export async function loadClickerState(uid: string): Promise<ClickerState> {
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile || profile.clickerPoints === undefined) {
+      // Erste Initialisierung — Defaults in Firebase speichern
+      await updateUserProfile(uid, { ...CLICKER_DEFAULTS });
+      return CLICKER_DEFAULTS;
+    }
+
+    // Offline-Earnings berechnen
+    const lastTick = new Date(profile.clickerLastTick || Date.now()).getTime();
+    const now = Date.now();
+    const elapsed = Math.min(now - lastTick, 24 * 60 * 60 * 1000); // Max 24h
+    const autoAmount = profile.clickerAutoAmount || 0;
+    const autoSpeed = profile.clickerAutoSpeed || 1000;
+    const offlinePoints = autoAmount > 0 ? Math.floor((elapsed / autoSpeed) * autoAmount) : 0;
+
+    const state: ClickerState = {
+      points: (profile.clickerPoints || 0) + offlinePoints,
+      totalPoints: (profile.clickerTotalPoints || 0) + offlinePoints,
+      clickPower: profile.clickerClickPower || 1,
+      autoSpeed: autoSpeed,
+      autoAmount: autoAmount,
+      upgrades: profile.clickerUpgrades || {},
+      equippedAvatar: profile.clickerEquippedAvatar || "📚",
+      equippedFrame: profile.clickerEquippedFrame || "none",
+      ownedCosmetics: profile.clickerOwnedCosmetics || [],
+      lastTick: new Date().toISOString(),
+    };
+
+    // Offline-Earnings speichern
+    if (offlinePoints > 0) {
+      await updateUserProfile(uid, {
+        clickerPoints: state.points,
+        clickerTotalPoints: state.totalPoints,
+        clickerLastTick: state.lastTick,
+      });
+    }
+
+    return state;
+  } catch (err) {
+    console.error("[Clicker] Load failed:", err);
+    return CLICKER_DEFAULTS;
+  }
+}
+
+export async function saveClickerClick(uid: string, clickPower: number): Promise<number> {
+  // Server-seitige Validierung: max. 100 Klicks/Sekunde
+  const validPower = Math.min(Math.max(1, Math.floor(clickPower)), 10000);
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return 0;
+    const newPoints = (profile.clickerPoints || 0) + validPower;
+    const newTotal = (profile.clickerTotalPoints || 0) + validPower;
+    await updateUserProfile(uid, {
+      clickerPoints: newPoints,
+      clickerTotalPoints: newTotal,
+      clickerLastTick: new Date().toISOString(),
+    });
+    return newPoints;
+  } catch (err) {
+    console.error("[Clicker] Click save failed:", err);
+    return 0;
+  }
+}
+
+export async function saveClickerTick(uid: string, autoAmount: number, autoSpeed: number): Promise<number> {
+  const validAmount = Math.min(Math.max(0, Math.floor(autoAmount)), 1000);
+  const validSpeed = Math.min(Math.max(100, Math.floor(autoSpeed)), 60000);
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return 0;
+    const earned = Math.floor((validAmount / validSpeed) * 1000);
+    const newPoints = (profile.clickerPoints || 0) + earned;
+    const newTotal = (profile.clickerTotalPoints || 0) + earned;
+    await updateUserProfile(uid, {
+      clickerPoints: newPoints,
+      clickerTotalPoints: newTotal,
+      clickerLastTick: new Date().toISOString(),
+    });
+    return newPoints;
+  } catch (err) {
+    console.error("[Clicker] Tick save failed:", err);
+    return 0;
+  }
+}
+
+const UPGRADE_COSTS: Record<string, { base: number; mult: number; effect: string; value: number }> = {
+  click1: { base: 10, mult: 1.5, effect: "clickPower", value: 1 },
+  click2: { base: 100, mult: 1.8, effect: "clickPower", value: 5 },
+  click3: { base: 1000, mult: 2.0, effect: "clickPower", value: 25 },
+  auto1: { base: 50, mult: 1.6, effect: "autoAmount", value: 1 },
+  auto2: { base: 500, mult: 1.8, effect: "autoAmount", value: 5 },
+  auto3: { base: 5000, mult: 2.0, effect: "autoAmount", value: 25 },
+  speed1: { base: 200, mult: 2.0, effect: "autoSpeed", value: 0.9 },
+  speed2: { base: 2000, mult: 2.5, effect: "autoSpeed", value: 0.8 },
+};
+
+export async function buyClickerUpgrade(uid: string, upgradeId: string): Promise<ClickerState | null> {
+  const config = UPGRADE_COSTS[upgradeId];
+  if (!config) return null;
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+    const upgrades = profile.clickerUpgrades || {};
+    const count = upgrades[upgradeId] || 0;
+    const cost = Math.floor(config.base * Math.pow(config.mult, count));
+    const currentPoints = profile.clickerPoints || 0;
+    if (currentPoints < cost) return null; // Nicht genug Punkte
+
+    const newUpgrades = { ...upgrades, [upgradeId]: count + 1 };
+    const updates: Record<string, unknown> = {
+      clickerPoints: currentPoints - cost,
+      clickerUpgrades: newUpgrades,
+    };
+
+    // Effekt anwenden
+    if (config.effect === "clickPower") {
+      updates.clickerClickPower = (profile.clickerClickPower || 1) + config.value;
+    } else if (config.effect === "autoAmount") {
+      updates.clickerAutoAmount = (profile.clickerAutoAmount || 0) + config.value;
+    } else if (config.effect === "autoSpeed") {
+      updates.clickerAutoSpeed = Math.max(100, Math.floor((profile.clickerAutoSpeed || 1000) * config.value));
+    }
+
+    await updateUserProfile(uid, updates);
+    return loadClickerState(uid);
+  } catch (err) {
+    console.error("[Clicker] Upgrade failed:", err);
+    return null;
+  }
+}
+
+const COSMETIC_COSTS: Record<string, number> = {
+  av_book: 50, av_light: 50, av_atom: 100, av_gear: 100,
+  av_brain: 250, av_rocket: 250, av_dragon: 500, av_unicorn: 500,
+  av_crown: 1000, av_diamond: 1000,
+  fr_wood: 75, fr_silver: 200, fr_gold: 500, fr_flame: 1000,
+};
+
+export async function buyClickerCosmetic(uid: string, cosmeticId: string): Promise<ClickerState | null> {
+  const cost = COSMETIC_COSTS[cosmeticId];
+  if (cost === undefined) return null;
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+    const owned = profile.clickerOwnedCosmetics || [];
+    if (owned.includes(cosmeticId)) return null; // Bereits gekauft
+    const currentPoints = profile.clickerPoints || 0;
+    if (currentPoints < cost) return null;
+
+    await updateUserProfile(uid, {
+      clickerPoints: currentPoints - cost,
+      clickerOwnedCosmetics: [...owned, cosmeticId],
+    });
+    return loadClickerState(uid);
+  } catch (err) {
+    console.error("[Clicker] Cosmetic buy failed:", err);
+    return null;
+  }
+}
+
+export async function equipClickerCosmetic(uid: string, cosmeticId: string, type: "avatar" | "frame"): Promise<void> {
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return;
+    const owned = profile.clickerOwnedCosmetics || [];
+    if (!owned.includes(cosmeticId)) return; // Nicht gekauft
+    if (type === "avatar") {
+      // Avatar-Emoji aus der Cosmetic-ID extrahieren — wird im Component gelöst
+      await updateUserProfile(uid, { clickerEquippedAvatar: cosmeticId });
+    } else {
+      await updateUserProfile(uid, { clickerEquippedFrame: cosmeticId });
+    }
+  } catch (err) {
+    console.error("[Clicker] Equip failed:", err);
+  }
+}
+
+export async function resetClickerState(uid: string): Promise<void> {
+  try {
+    await updateUserProfile(uid, { ...CLICKER_DEFAULTS });
+  } catch (err) {
+    console.error("[Clicker] Reset failed:", err);
   }
 }
