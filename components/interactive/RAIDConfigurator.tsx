@@ -86,6 +86,45 @@ const raidConfigs: RAIDConfig[] = [
 
 const diskSizeGB = 1000; // 1 TB per disk for calculation
 
+function getBlockLabel(stripe: number, disk: number, diskCount: number, level: RAIDLevel): string {
+  switch (level) {
+    case 0: {
+      // RAID 0: pure striping, all data
+      const blockNum = stripe * diskCount + disk + 1;
+      return `A${blockNum}`;
+    }
+    case 1: {
+      // RAID 1: mirrored pairs
+      const pair = Math.floor(disk / 2);
+      const isEven = disk % 2 === 0;
+      return isEven ? `A${stripe * (diskCount / 2) + pair + 1}` : `M${stripe * (diskCount / 2) + pair + 1}`;
+    }
+    case 5: {
+      // RAID 5: distributed parity, parity rotates per stripe
+      const parityDisk = (diskCount - 1 - stripe % diskCount) % diskCount;
+      if (disk === parityDisk) return `P${stripe + 1}`;
+      const dataIdx = disk < parityDisk ? disk : disk - 1;
+      return `A${stripe * (diskCount - 1) + dataIdx + 1}`;
+    }
+    case 6: {
+      // RAID 6: dual distributed parity
+      const p1 = (diskCount - 1 - stripe % diskCount) % diskCount;
+      const p2 = (diskCount - 2 - stripe % diskCount) % diskCount;
+      if (disk === p1 || disk === p2) return `P${stripe + 1}`;
+      const dataIdx6 = disk - (disk > p1 ? 1 : 0) - (disk > p2 ? 1 : 0);
+      return `A${stripe * (diskCount - 2) + dataIdx6 + 1}`;
+    }
+    case 10: {
+      // RAID 10: mirror + stripe
+      const mirrorPair = Math.floor(disk / 2);
+      const isPrimary = disk % 2 === 0;
+      return isPrimary ? `A${stripe * (diskCount / 2) + mirrorPair + 1}` : `M${stripe * (diskCount / 2) + mirrorPair + 1}`;
+    }
+    default:
+      return `A${stripe * diskCount + disk + 1}`;
+  }
+}
+
 export default function RAIDConfigurator() {
   const [diskCount, setDiskCount] = useState(4);
   const [selectedRAID, setSelectedRAID] = useState<RAIDLevel>(5);
@@ -277,6 +316,60 @@ export default function RAIDConfigurator() {
         <p className="text-xs text-center text-gray-400">
           Klicke auf eine Festplatte, um einen Ausfall zu simulieren.
         </p>
+      )}
+
+      {/* Block-Ansicht (Lehrbuch-Darstellung) */}
+      {isValidConfig && (
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 border border-gray-200 dark:border-gray-700">
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+            📦 Block-Ansicht — Datenverteilung
+          </h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr>
+                  <th className="px-2 py-1.5 text-left font-semibold text-gray-500 border-b border-gray-300 dark:border-gray-600">
+                    Streifen (Stripe)
+                  </th>
+                  {Array.from({ length: diskCount }, (_, i) => (
+                    <th key={i} className="px-2 py-1.5 text-center font-semibold border-b border-gray-300 dark:border-gray-600" style={{ color: getDiskColor(i) }}>
+                      Platte {i + 1}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: Math.max(3, Math.ceil(8 / dataDisks)) }, (_, stripe) => (
+                  <tr key={stripe} className="border-b border-gray-200 dark:border-gray-700">
+                    <td className="px-2 py-1.5 text-gray-500 font-mono">S{stripe + 1}</td>
+                    {Array.from({ length: diskCount }, (_, disk) => {
+                      const blockLabel = getBlockLabel(stripe, disk, diskCount, selectedRAID);
+                      const isParity = blockLabel.startsWith("P");
+                      const isMirror = blockLabel.startsWith("M");
+                      return (
+                        <td
+                          key={disk}
+                          className={`px-2 py-1.5 text-center font-mono font-bold rounded-sm ${
+                            isParity
+                              ? "bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300"
+                              : isMirror
+                              ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                              : "bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300"
+                          }`}
+                        >
+                          {blockLabel}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="text-[10px] text-gray-400 mt-2">
+            A = Datenblock, P = Parität, M = Mirror — Blöcke werden zeilenweise über die Platten verteilt (Striping).
+          </p>
+        </div>
       )}
     </div>
   );
