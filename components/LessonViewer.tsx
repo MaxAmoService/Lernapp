@@ -97,6 +97,7 @@ import SMARTGoalBuilder from "./interactive/SMARTGoalBuilder";
 import DockerComposeBuilder from "./interactive/DockerComposeBuilder";
 import MagicTriangle from "./interactive/MagicTriangle";
 import GitShellSimulator from "./interactive/GitShellSimulator";
+import MergeConflictResolver from "./interactive/MergeConflictResolver";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -212,6 +213,7 @@ function renderInteractive(type: string, codeExample?: string) {
     dockerComposeBuilder: "Docker Compose Builder",
     magicTriangle: "Magisches Dreieck",
     gitShellSimulator: "Git Shell Simulator",
+    mergeConflictResolver: "Merge-Konflikte lösen",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -295,6 +297,7 @@ function renderInteractive(type: string, codeExample?: string) {
     dockerComposeBuilder: <DockerComposeBuilder />,
     magicTriangle: <MagicTriangle />,
     gitShellSimulator: <GitShellSimulator />,
+    mergeConflictResolver: <MergeConflictResolver />,
   };
 
   const name = interactiveNames[type] || type;

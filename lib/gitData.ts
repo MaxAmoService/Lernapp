@@ -468,7 +468,8 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
       id: "git-5",
       title: "Merge-Konflikte lösen",
       duration: "12 min",
-      type: "text",
+      type: "interactive",
+      interactive: "mergeConflictResolver",
       content: `## Merge-Konflikte — Wenn Git nicht mehr weiterweiß
 
 > In der letzten Lektion hast du gelernt, wie man mit Gitflow Branches strategisch einsetzt. Aber was passiert, wenn zwei Entwickler dieselbe Zeile ändern? Jetzt lernst du, wie Merge-Konflikte entstehen und wie du sie löst.
@@ -553,6 +554,8 @@ git rebase dev
 \`\`\`
 
 ---
+
+[INTERACTIVE]
 
 ## 🎯 IHK-Tipp
 
