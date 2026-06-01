@@ -155,6 +155,7 @@ export default function LearningClicker() {
   const tickIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const comboTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pendingPointsRef = useRef(0);
 
   // State aus Firebase laden
   useEffect(() => {
@@ -282,26 +283,45 @@ export default function LearningClicker() {
       setParticles((prev) => prev.filter((p) => !newParticles.find(np => np.id === p.id)));
     }, 700);
 
-    // In Firebase speichern (debounced)
+    // Pending Points akkumulieren (debounced Save)
+    pendingPointsRef.current += earnedPoints;
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
     saveTimeoutRef.current = setTimeout(async () => {
-      await saveClickerClick(user.uid, state.clickPower);
+      if (pendingPointsRef.current > 0) {
+        await saveClickerClick(user.uid, pendingPointsRef.current);
+        pendingPointsRef.current = 0;
+      }
     }, 2000);
   }, [user, state.clickPower, combo, lastClickTime, getComboMultiplier]);
+
+  // Pending Clicks sofort in Firebase speichern
+  const flushPendingClicks = useCallback(async () => {
+    if (!user) return;
+    if (saveTimeoutRef.current) {
+      clearTimeout(saveTimeoutRef.current);
+      saveTimeoutRef.current = null;
+    }
+    if (pendingPointsRef.current > 0) {
+      await saveClickerClick(user.uid, pendingPointsRef.current);
+      pendingPointsRef.current = 0;
+    }
+  }, [user]);
 
   // Upgrade kaufen (server-seitig validiert)
   const handleBuyUpgrade = useCallback(async (upgrade: Upgrade) => {
     if (!user) return;
+    await flushPendingClicks();
     const newState = await buyClickerUpgrade(user.uid, upgrade.id);
     if (newState) setState(newState);
-  }, [user]);
+  }, [user, flushPendingClicks]);
 
   // Cosmetic kaufen (server-seitig validiert)
   const handleBuyCosmetic = useCallback(async (cosmetic: Cosmetic) => {
     if (!user) return;
+    await flushPendingClicks();
     const newState = await buyClickerCosmetic(user.uid, cosmetic.id);
     if (newState) setState(newState);
-  }, [user]);
+  }, [user, flushPendingClicks]);
 
   // Reset
   const handleReset = useCallback(async () => {

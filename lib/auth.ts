@@ -521,9 +521,10 @@ export async function loadClickerState(uid: string): Promise<ClickerState> {
   }
 }
 
-export async function saveClickerClick(uid: string, clickPower: number): Promise<number> {
-  // Server-seitige Validierung: max. 100 Klicks/Sekunde
-  const validPower = Math.min(Math.max(1, Math.floor(clickPower)), 10000);
+export async function saveClickerClick(uid: string, earnedPoints: number): Promise<number> {
+  // Server-seitige Validierung: max. 10.000 Punkte pro Speicherung
+  const validPower = Math.min(Math.max(0, Math.floor(earnedPoints)), 10000);
+  if (validPower <= 0) return 0;
   try {
     const profile = await getUserProfile(uid);
     if (!profile) return 0;
