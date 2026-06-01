@@ -296,21 +296,29 @@ Ein **Szenario** beschreibt eine **konkrete Situation**, in der eine Persona das
 Eine **User Story** beschreibt eine Funktion aus der Sicht des Nutzers:
 
 ### Format
-\`\`\`
-Als [Rolle] möchte ich [Ziel], um [Nutzen].
-\`\`\`
+
+<svg viewBox="0 0 580 70" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="580" height="70" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="30" y="42" fill="#94a3b8" font-size="12">Als</text>
+  <rect x="55" y="25" width="90" height="30" rx="6" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="100" y="45" text-anchor="middle" fill="#93c5fd" font-size="11" font-weight="bold">[Rolle]</text>
+  <text x="160" y="42" fill="#94a3b8" font-size="12">möchte ich</text>
+  <rect x="248" y="25" width="90" height="30" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="293" y="45" text-anchor="middle" fill="#6ee7b7" font-size="11" font-weight="bold">[Ziel]</text>
+  <text x="352" y="42" fill="#94a3b8" font-size="12">,</text>
+  <text x="370" y="42" fill="#94a3b8" font-size="12">um</text>
+  <rect x="395" y="25" width="90" height="30" rx="6" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="440" y="45" text-anchor="middle" fill="#fcd34d" font-size="11" font-weight="bold">[Nutzen]</text>
+  <text x="500" y="42" fill="#94a3b8" font-size="12">.</text>
+</svg>
 
 ### Beispiele
-\`\`\`
-Als Ausbilder möchte ich Ausbildungsnachweise online prüfen,
-um Papier zu sparen und schneller zu arbeiten.
 
-Als Azubi möchte ich meinen Fortschritt sehen,
-um motiviert zu bleiben.
+> 👤 **Als Ausbilder** möchte ich **Ausbildungsnachweise online prüfen**, um **Papier zu sparen und schneller zu arbeiten**.
 
-Als Admin möchte ich Benutzerrechte verwalten,
-um die Sicherheit zu gewährleisten.
-\`\`\`
+> 👤 **Als Azubi** möchte ich **meinen Fortschritt sehen**, um **motiviert zu bleiben**.
+
+> 👤 **Als Admin** möchte ich **Benutzerrechte verwalten**, um **die Sicherheit zu gewährleisten**.
 
 > 💡 **Merke:** User Stories beschreiben WAS der Nutzer will, nicht WIE es technisch umgesetzt wird.
 
@@ -360,13 +368,35 @@ Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in 
 
 ## 📅 Die 5 Phasen
 
-| Tag | Phase | Ziel |
-|-----|-------|------|
-| 1️⃣ | **Understand** | Problem verstehen |
-| 2️⃣ | **Diverge** | Ideen sammeln (kreativ!) |
-| 3️⃣ | **Converge** | Ideen auswählen |
-| 4️⃣ | **Prototype** | Prototyp bauen |
-| 5️⃣ | **Test** | Mit echten Nutzern testen |
+<svg viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg" style="max-width:650px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="650" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <line x1="55" y1="50" x2="595" y2="50" stroke="#334155" stroke-width="2"/>
+  <circle cx="55" cy="50" r="18" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
+  <text x="55" y="47" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">1</text>
+  <text x="55" y="58" text-anchor="middle" fill="#93c5fd" font-size="7">Tag</text>
+  <text x="55" y="82" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">Understand</text>
+  <text x="55" y="22" text-anchor="middle" fill="#64748b" font-size="8">Problem</text>
+  <circle cx="195" cy="50" r="18" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="195" y="47" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">2</text>
+  <text x="195" y="58" text-anchor="middle" fill="#c4b5fd" font-size="7">Tag</text>
+  <text x="195" y="82" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">Diverge</text>
+  <text x="195" y="22" text-anchor="middle" fill="#64748b" font-size="8">Ideen</text>
+  <circle cx="335" cy="50" r="18" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
+  <text x="335" y="47" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">3</text>
+  <text x="335" y="58" text-anchor="middle" fill="#fcd34d" font-size="7">Tag</text>
+  <text x="335" y="82" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">Converge</text>
+  <text x="335" y="22" text-anchor="middle" fill="#64748b" font-size="8">Auswahl</text>
+  <circle cx="475" cy="50" r="18" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
+  <text x="475" y="47" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">4</text>
+  <text x="475" y="58" text-anchor="middle" fill="#6ee7b7" font-size="7">Tag</text>
+  <text x="475" y="82" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">Prototype</text>
+  <text x="475" y="22" text-anchor="middle" fill="#64748b" font-size="8">Bauen</text>
+  <circle cx="595" cy="50" r="18" fill="#ef4444" fill-opacity="0.3" stroke="#ef4444" stroke-width="2"/>
+  <text x="595" y="47" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">5</text>
+  <text x="595" y="58" text-anchor="middle" fill="#fca5a5" font-size="7">Tag</text>
+  <text x="595" y="82" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">Test</text>
+  <text x="595" y="22" text-anchor="middle" fill="#64748b" font-size="8">Validieren</text>
+</svg>
 
 ---
 

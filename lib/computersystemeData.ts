@@ -518,17 +518,73 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 - **Nachteil**: Keine Redundanz — eine Platte defekt = alle Daten weg
 - **Einsatz**: Temporäre Daten, Gaming, Scratch-Disk
 
+<svg viewBox="0 0 350 120" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="350" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="40" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 0</text>
+  <text x="140" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 1</text>
+  <text x="240" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 2</text>
+  <rect x="15" y="35" width="50" height="30" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="40" y="55" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">A1</text>
+  <rect x="115" y="35" width="50" height="30" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="140" y="55" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">A2</text>
+  <rect x="215" y="35" width="50" height="30" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="240" y="55" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">A3</text>
+  <rect x="15" y="72" width="50" height="30" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="40" y="92" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">B1</text>
+  <rect x="115" y="72" width="50" height="30" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="140" y="92" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">B2</text>
+  <rect x="215" y="72" width="50" height="30" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="240" y="92" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">B3</text>
+  <text x="310" y="55" fill="#64748b" font-size="9">0% Redundanz</text>
+  <text x="310" y="70" fill="#64748b" font-size="9">100% Kapazität</text>
+</svg>
+
 ### RAID 1 — Mirroring (Sicherheit)
 - Jede Platte hat eine exakte Kopie
 - **Vorteil**: Volle Redundanz — eine Platte darf komplett ausfallen
 - **Nachteil**: Nur 50% nutzbare Kapazität
 - **Einsatz**: Betriebssystem-Platte, kleine Büros
 
+<svg viewBox="0 0 250 120" xmlns="http://www.w3.org/2000/svg" style="max-width:250px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="250" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="65" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 0</text>
+  <text x="175" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 1</text>
+  <rect x="25" y="35" width="80" height="30" rx="4" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+  <text x="65" y="55" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">A</text>
+  <rect x="135" y="35" width="80" height="30" rx="4" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+  <text x="175" y="55" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">A (Kopie)</text>
+  <rect x="25" y="72" width="80" height="30" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <text x="65" y="92" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">B</text>
+  <rect x="135" y="72" width="80" height="30" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <text x="175" y="92" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">B (Kopie)</text>
+</svg>
+
 ### RAID 5 — Striping + verteilte Parität (Kompromiss)
 - Daten + Paritätsinformationen werden verteilt
 - **Vorteil**: Gute Balance aus Leistung und Sicherheit
 - **Nachteil**: Schreibtgeschwindigkeit reduziert (Parität berechnen), nur 1 Platte darf ausfallen
 - **Einsatz**: Fileserver, NAS in KMUs
+
+<svg viewBox="0 0 350 120" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="350" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="60" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 0</text>
+  <text x="160" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 1</text>
+  <text x="260" y="25" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="bold">Disk 2</text>
+  <rect x="20" y="35" width="70" height="30" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="55" y="55" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">A1</text>
+  <rect x="120" y="35" width="70" height="30" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="155" y="55" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">A2</text>
+  <rect x="220" y="35" width="70" height="30" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="255" y="55" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">P</text>
+  <rect x="20" y="72" width="70" height="30" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="55" y="92" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">B1</text>
+  <rect x="120" y="72" width="70" height="30" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="155" y="92" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">P</text>
+  <rect x="220" y="72" width="70" height="30" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="255" y="92" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">B2</text>
+  <text x="325" y="55" fill="#64748b" font-size="9">P = Parität</text>
+  <text x="325" y="70" fill="#64748b" font-size="9"> verteilt</text>
+</svg>
 
 ### RAID 6 — Doppelte Parität
 - Wie RAID 5, aber mit zweiter Paritätsinformation
@@ -541,6 +597,33 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 - **Vorteil**: Schnell UND sicher
 - **Nachteil**: Teuer (50% Kapazität)
 - **Einsatz**: Datenbanken, High-Performance-Server
+
+<svg viewBox="0 0 350 130" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="350" height="130" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="50" y="20" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">Mirror 0</text>
+  <text x="150" y="20" text-anchor="middle" fill="#94a3b8" font-size="9" font-weight="bold">Mirror 1</text>
+  <text x="50" y="35" text-anchor="middle" fill="#94a3b8" font-size="8">Disk 0+1</text>
+  <text x="150" y="35" text-anchor="middle" fill="#94a3b8" font-size="8">Disk 2+3</text>
+  <rect x="15" y="42" width="35" height="28" rx="4" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+  <text x="32" y="60" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">A</text>
+  <rect x="55" y="42" width="35" height="28" rx="4" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1"/>
+  <text x="72" y="60" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">A'</text>
+  <rect x="115" y="42" width="35" height="28" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="132" y="60" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">B</text>
+  <rect x="155" y="42" width="35" height="28" rx="4" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="1"/>
+  <text x="172" y="60" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">B'</text>
+  <rect x="15" y="77" width="35" height="28" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="32" y="95" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">C</text>
+  <rect x="55" y="77" width="35" height="28" rx="4" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="72" y="95" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">C'</text>
+  <rect x="115" y="77" width="35" height="28" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <text x="132" y="95" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">D</text>
+  <rect x="155" y="77" width="35" height="28" rx="4" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1"/>
+  <text x="172" y="95" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">D'</text>
+  <text x="260" y="60" fill="#64748b" font-size="9">Stripe + Mirror</text>
+  <text x="260" y="75" fill="#64748b" font-size="9">50% Kapazität</text>
+  <text x="260" y="90" fill="#64748b" font-size="9">Schnell + Sicher</text>
+</svg>
 
 > Praxis: Ein kleines Büro mit 5 Mitarbeitern braucht kein RAID 6. RAID 1 mit 2 Platten reicht — einfach und günstig. Für kritische Daten: RAID 5 ab 3 Platten.
 
