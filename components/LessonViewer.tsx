@@ -341,6 +341,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     let inTable = false;
     let tableRows: JSX.Element[] = [];
     let olItems: JSX.Element[] = [];
+    let tableIsFirstRow = true;
     let keyIndex = 0;
 
     const flushOl = () => {
@@ -365,6 +366,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         );
         tableRows = [];
         inTable = false;
+        tableIsFirstRow = true;
       }
     };
 
@@ -452,12 +454,20 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         // Skip separator row
         if (!cells.every(c => c.match(/^[\s:-]+$/))) {
           inTable = true;
+          const isHeader = tableIsFirstRow;
+          tableIsFirstRow = false;
           tableRows.push(
-            <tr key={`tr-${keyIndex++}`} className="border-b border-slate-700/40 last:border-0">
+            <tr key={`tr-${keyIndex++}`} className={`border-b border-slate-700/40 last:border-0 ${isHeader ? "bg-slate-800/60" : ""}`}>
               {cells.map((cell, ci) => (
-                <td key={ci} className="px-4 py-2.5 text-slate-200 bg-slate-800/40 first:bg-slate-800/60">
-                  <InlineText text={cell} />
-                </td>
+                isHeader ? (
+                  <th key={ci} className="px-4 py-2.5 text-left text-sm font-semibold text-blue-300 bg-blue-500/10 border-b border-blue-500/20">
+                    <InlineText text={cell} />
+                  </th>
+                ) : (
+                  <td key={ci} className="px-4 py-2.5 text-slate-200 bg-slate-800/40">
+                    <InlineText text={cell} />
+                  </td>
+                )
               ))}
             </tr>
           );

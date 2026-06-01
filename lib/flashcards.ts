@@ -148,3 +148,37 @@ export function saveDeckProgress(moduleId: string, deck: DeckProgress) {
   all[moduleId] = deck;
   saveProgress(all);
 }
+
+// ─── Anki Export ─────────────────────────────────────────────────────────
+
+/**
+ * Exportiert Karteikarten im Anki-kompatiblen TSV-Format.
+ * Format: Front\tBack\tTags
+ * Import in Anki: Datei → Importieren → TSV-Datei wählen
+ */
+export function exportToAnki(cards: Flashcard[], moduleName: string): string {
+  const header = "#separator:tab\n#html:false\n#tags column:3\n";
+  const rows = cards.map((card) => {
+    const front = card.front.replace(/\t/g, " ").replace(/\n/g, "<br>");
+    const back = card.back.replace(/\t/g, " ").replace(/\n/g, "<br>");
+    const tags = `LearnHub::${moduleName.replace(/\s+/g, "_")}`;
+    return `${front}\t${back}\t${tags}`;
+  });
+  return header + rows.join("\n");
+}
+
+/**
+ * Downloadet die Karteikarten als .txt-Datei für Anki.
+ */
+export function downloadAnkiDeck(cards: Flashcard[], moduleName: string) {
+  const content = exportToAnki(cards, moduleName);
+  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `LearnHub_${moduleName.replace(/\s+/g, "_")}_Anki.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}

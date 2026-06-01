@@ -10,8 +10,9 @@ import {
   getDeckStats,
   getDeckProgress,
   saveDeckProgress,
+  downloadAnkiDeck,
 } from "@/lib/flashcards";
-import { RotateCcw, CheckCircle2, XCircle, Brain } from "lucide-react";
+import { RotateCcw, CheckCircle2, XCircle, Brain, Download } from "lucide-react";
 
 interface FlashcardViewerProps {
   moduleId: string;
@@ -135,17 +136,25 @@ export function FlashcardViewer({ moduleId, cards }: FlashcardViewerProps) {
           <StatBox label="Gelernt" value={stats.studied} icon="📖" />
           <StatBox label="Gemeistert" value={stats.mastered} icon="🏆" />
         </div>
-        <button
-          onClick={() => {
-            // Alle Karten nochmal üben
-            setCurrentIndex(0);
-            setSessionDone(false);
-          }}
-          className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg font-medium transition-colors flex items-center gap-2"
-        >
-          <RotateCcw className="w-4 h-4" />
-          Alle wiederholen
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => {
+              setCurrentIndex(0);
+              setSessionDone(false);
+            }}
+            className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg font-medium transition-colors flex items-center gap-2"
+          >
+            <RotateCcw className="w-4 h-4" />
+            Alle wiederholen
+          </button>
+          <button
+            onClick={() => downloadAnkiDeck(cards, moduleId)}
+            className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg font-medium transition-colors flex items-center gap-2 text-slate-400 hover:text-slate-200"
+          >
+            <Download className="w-4 h-4" />
+            Anki Export
+          </button>
+        </div>
       </div>
     );
   }

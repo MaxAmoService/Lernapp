@@ -14,6 +14,7 @@ export default function Dashboard() {
   const { user, resetAll } = useAuth();
   const [showLogin, setShowLogin] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const levelInfo = user ? getUserLevel(user.totalXP) : null;
 
@@ -146,15 +147,25 @@ export default function Dashboard() {
         </section>
       )}
 
-      {/* Completed Modules */}
+      {/* Completed Modules (collapsible) */}
       {user && completedModules.length > 0 && (
         <section>
-          <SectionHeader title="Abgeschlossen" icon="✅" count={completedModules.length} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {completedModules.map((m) => (
-              <ModuleCard key={m.id} module={m} />
-            ))}
-          </div>
+          <button
+            onClick={() => setShowCompleted(!showCompleted)}
+            className="w-full flex items-center justify-between group"
+          >
+            <SectionHeader title="Abgeschlossen" icon="✅" count={completedModules.length} />
+            <span className="text-xs text-slate-500 group-hover:text-slate-300 transition-colors">
+              {showCompleted ? "Ausblenden" : `${completedModules.length} anzeigen`}
+            </span>
+          </button>
+          {showCompleted && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-2">
+              {completedModules.map((m) => (
+                <ModuleCard key={m.id} module={m} />
+              ))}
+            </div>
+          )}
         </section>
       )}
 
