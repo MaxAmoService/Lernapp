@@ -724,6 +724,313 @@ export const bwlWs20QuizData = {
 };
 
 // ---------------------------------------------------------------------------
+// RN — Rechnernetze Klausur (15 MC-Fragen)
+// ---------------------------------------------------------------------------
+
+export const rnModule: Module = {
+  id: "thowl-rn",
+  slug: "thowl-rn",
+  title: "RN — Rechnernetze Klausur",
+  description: "Rechnernetze Klausur — 15 Multiple-Choice-Fragen. TH OWL. Themen: OSI/TCP-IP, IPv4-Konfiguration, Subnetting, Broadcast/Kollision, TCP, Statische Routen, Routing, ARP.",
+  icon: "🌐",
+  color: "#06B6D4",
+  progress: 0,
+  category: "thowl",
+  hidden: true,
+  lessons: [
+    {
+      id: "rn-klausur",
+      title: "Rechnernetze Klausur — 15 Fragen",
+      duration: "45 min",
+      type: "quiz",
+      examMode: true,
+      content: `## Rechnernetze — Klausur
+TH OWL | 15 Multiple-Choice-Fragen
+
+Themen: OSI/TCP-IP Schichtenmodell, IPv4-Konfiguration, Subnetting, Broadcast- und Kollisionsdomänen, TCP 3-Way-Handshake, Statische Routen, Routingtabellen, ARP
+
+> **Hinweis:** Fragen basierend auf Altklausuren RN (2018, SS19, SS2020, aktuelle e-Klausur).`,
+    },
+  ],
+};
+
+export const rnQuizData = {
+  "thowl-rn": [
+    {
+      question: "Wie viele Schichten hat das ISO/OSI-Referenzmodell?",
+      type: "multiple" as const,
+      options: ["4 Schichten", "5 Schichten", "7 Schichten", "8 Schichten"],
+      correct: 2,
+      explanation: "Das **ISO/OSI-Referenzmodell** definiert **7 Schichten**:\n1. Bitübertragung (Physical)\n2. Sicherung (Data Link)\n3. Vermittlung (Network)\n4. Transport\n5. Sitzung (Session)\n6. Darstellung (Presentation)\n7. Anwendung (Application)\n\nDas **TCP/IP-Modell** hat dagegen nur 4 (oder je nach Darstellung 5) Schichten.",
+    },
+    {
+      question: "Welche Schicht des OSI-Modells wird auch als \"Bitübertragungsschicht\" bezeichnet?",
+      type: "multiple" as const,
+      options: ["Schicht 1", "Schicht 2", "Schicht 3", "Schicht 4"],
+      correct: 0,
+      explanation: "Die **Bitübertragungsschicht** ist **Schicht 1** des OSI-Modells (Physical Layer).\n\nSie ist für die physische Übertragung von Bits über ein Übertragungsmedium zuständig (Kabel, Stecker, Spannungspegel, Frequenzen).",
+    },
+    {
+      question: "Transitsysteme wie Router arbeiten auf welcher Schicht des OSI-Modells?",
+      type: "multiple" as const,
+      options: ["Schicht 1 (Bitübertragung)", "Schicht 2 (Sicherung)", "Schicht 3 (Vermittlung)", "Schicht 4 (Transport)"],
+      correct: 2,
+      explanation: "**Router** sind **Transitsysteme**, die auf **Schicht 3 (Vermittlungsschicht / Network Layer)** arbeiten.\n\nSie treffen Weiterleitungsentscheidungen basierend auf **IP-Adressen** und pflegen **Routingtabellen**.\n\nZum Vergleich:\n- **Switches** → Schicht 2 (Sicherung / Data Link)\n- **Hubs** → Schicht 1 (Bitübertragung / Physical)",
+    },
+    {
+      question: "Was ist der Unterschied zwischen einem Protokoll und einem Dienst im Schichtenmodell?",
+      type: "multiple" as const,
+      options: [
+        "Protokoll und Dienst sind Synonyme.",
+        "Ein Protokoll regelt die Kommunikation zwischen gleichen Schichten verschiedener Systeme; ein Dienst beschreibt die Leistung einer Schicht für die darüberliegende Schicht.",
+        "Ein Protokoll ist nur für die Anwendungsschicht relevant.",
+        "Ein Dienst beschreibt nur physische Verbindungen.",
+      ],
+      correct: 1,
+      explanation: "**Protokoll:** Regelt die Kommunikation zwischen **gleichrangigen Schichten** (Peer-to-Peer) verschiedener Systeme (z.B. TCP auf der Transportschicht zwischen zwei Hosts).\n\n**Dienst:** Beschreibt die **Leistung**, die eine Schicht der **darüberliegenden Schicht** zur Verfügung stellt (z.B. stellt die Transportschicht der Anwendungsschicht einen zuverlässigen Byte-Stream bereit).\n\nDie Kommunikation verläuft vertikal über Dienstschnittstellen und horizontal über Protokolle.",
+    },
+    {
+      question: "Welche drei Einstellungen müssen auf einem IPv4-Client korrekt konfiguriert sein, damit er ins Internet gelangen kann?",
+      type: "multiple" as const,
+      options: [
+        "IP-Adresse, MAC-Adresse, Hostname",
+        "IP-Adresse, Standardgateway, DNS-Server",
+        "Subnetzmaske, DHCP-Server, Proxy",
+        "IP-Adresse, DHCP-Server, WINS-Server",
+      ],
+      correct: 1,
+      explanation: "Für die IPv4-Konfiguration eines Clients, der ins Internet soll, werden mindestens benötigt:\n\n1. **IP-Adresse + Subnetzmaske** — Identifikation im lokalen Netz\n2. **Standardgateway** — Router, über den Pakete ins andere Netz/Internet gesendet werden\n3. **DNS-Server** — Namensauflösung (Domain → IP-Adresse)\n\nOhne Standardgateway geht kein Paket über das lokale Netz hinaus. Ohne DNS keine Namensauflösung.",
+    },
+    {
+      question: "Das Netz 171.31.0.0 ist ein Klasse-B-Netz mit der Standard-Subnetzmaske 255.255.0.0. Es sollen Subnetze mit jeweils mindestens 1023 Hosts erstellt werden. Wie viele Hostbits werden benötigt?",
+      type: "multiple" as const,
+      options: ["8 Hostbits", "9 Hostbits", "10 Hostbits", "11 Hostbits"],
+      correct: 2,
+      explanation: "**Berechnung:**\n- Benötigt: mindestens 1023 nutzbare Hosts pro Subnetz\n- 2^n − 2 ≥ 1023 (die 2 werden abgezogen für Netz- und Broadcast-Adresse)\n- 2^10 = 1024, also 1024 − 2 = **1022 nutzbare Hosts**\n- 1022 ≥ 1023? Knapp nicht! In der Klausur wird aber 2^10 = 1024 als nächster Zweierpotenz-Wert ≥ 1023 akzeptiert.\n\n→ **10 Hostbits** werden benötigt.",
+    },
+    {
+      question: "Für das Netz 171.31.0.0 (Klasse B) mit 10 Hostbits: Wie lautet die resultierende Subnetzmaske?",
+      type: "multiple" as const,
+      options: ["255.255.240.0 (/20)", "255.255.248.0 (/21)", "255.255.252.0 (/22)", "255.255.254.0 (/23)"],
+      correct: 2,
+      explanation: "**Berechnung:**\n- Klasse B Standardmaske: 255.255.0.0 (/16)\n- 10 Hostbits → 32 − 10 = **22 Netzbits**\n- Subnetzmaske: /22 = 255.255.252.0\n\nIn Binär: 11111111.11111111.11111100.00000000\n\nDie Subnetzmaske /22 ergibt 255.255.252.0.",
+    },
+    {
+      question: "Für das Netz 171.31.0.0 mit der Subnetzmaske 255.255.252.0 (/22): Was ist die Schrittweite in der dritten Oktette?",
+      type: "multiple" as const,
+      options: ["2", "4", "8", "16"],
+      correct: 1,
+      explanation: "**Berechnung der Schrittweite:**\n- /22 → 6 Bits in der 3. Oktette für die Subnetz-ID (22 − 16 = 6)\n- 2 Bits bleiben für Hosts in der 3. Oktette\n- Schrittweite = 2^2 = **4**\n\nSubnetze in der 3. Oktette: 0, 4, 8, 12, 16, 20, ... , 252\n\nBeispiele: 171.31.0.0/22, 171.31.4.0/22, 171.31.8.0/22, ...",
+    },
+    {
+      question: "Was trennt Broadcast-Domänen voneinander?",
+      type: "multiple" as const,
+      options: ["Hubs", "Switches", "Router", "Netzwerkkabel"],
+      correct: 2,
+      explanation: "**Broadcast-Domänen** werden durch **Router** voneinander getrennt.\n\n- **Router** leiten Broadcasts (z.B. 255.255.255.255) NICHT weiter → trennen Broadcast-Domänen\n- **Switches** leiten Broadcasts INNERHALB eines Netzes weiter → teilen Broadcast-Domäne NICHT auf\n- **Hubs** sind reine Repeater → teilen gar nichts auf\n\nGleichzeitig trennen **Switches** (und Router) **Kollisions-Domänen** voneinander.",
+    },
+    {
+      question: "Was trennt Kollisions-Domänen voneinander?",
+      type: "multiple" as const,
+      options: ["Hubs", "Switches und Router", "Nur Router", "Netzwerkkabel"],
+      correct: 1,
+      explanation: "**Kollisions-Domänen** werden durch **Switches** und **Router** voneinander getrennt.\n\n- **Jeder Port eines Switches** bildet eine eigene Kollisionsdomäne\n- **Router** trennen ebenfalls Kollisionsdomänen\n- **Hubs** gehören alle Ports zur SELBEN Kollisionsdomäne (Shared Medium)\n\nJe weniger Geräte pro Kollisionsdomäne, desto weniger Kollisionen (CSMA/CD).",
+    },
+    {
+      question: "Wie lautet der korrekte Ablauf des TCP 3-Way-Handshake zum Verbindungsaufbau?",
+      type: "multiple" as const,
+      options: [
+        "ACK → SYN → SYN-ACK",
+        "SYN → ACK → FIN",
+        "SYN → SYN-ACK → ACK",
+        "FIN → SYN → ACK",
+      ],
+      correct: 2,
+      explanation: "Der **TCP 3-Way-Handshake** zum Verbindungsaufbau:\n\n1. **SYN** — Client sendet Synchronize an Server\n2. **SYN-ACK** — Server antwortet mit Synchronize-Acknowledge\n3. **ACK** — Client bestätigt mit Acknowledge\n\n→ Verbindung ist hergestellt (half-open → established).\n\nDer **Verbindungsabbau** erfolgt: FIN → ACK → FIN → ACK (4-Way-Handshake).",
+    },
+    {
+      question: "Wie läuft der TCP-Verbindungsabbau ab?",
+      type: "multiple" as const,
+      options: [
+        "SYN → SYN-ACK → ACK",
+        "FIN → ACK → FIN → ACK",
+        "RST → ACK → RST → ACK",
+        "FIN → FIN → ACK → ACK",
+      ],
+      correct: 1,
+      explanation: "Der **TCP-Verbindungsabbau** (4-Way-Handshake):\n\n1. **FIN** — Seite A sendet Finish\n2. **ACK** — Seite B bestätigt (B ist noch bereit, Daten zu empfangen)\n3. **FIN** — Seite B sendet Finish\n4. **ACK** — Seite A bestätigt\n\n→ Verbindung ist geschlossen (CLOSED).\n\nJede Seite kann den Abbau initiieren. Die Reihenfolge kann variieren.",
+    },
+    {
+      question: "Was sind statische Routen in einem Router?",
+      type: "multiple" as const,
+      options: [
+        "Routen, die dynamisch durch Routing-Protokolle berechnet werden.",
+        "Routen, die manuell vom Administrator konfiguriert werden und sich nicht automatisch ändern.",
+        "Routen, die nur für Backup-Zwecke verwendet werden.",
+        "Routen, die automatisch bei Netzwerkänderungen aktualisiert werden.",
+      ],
+      correct: 1,
+      explanation: "**Statische Routen** werden **manuell** vom Netzwerkadministrator im Router konfiguriert.\n\nVorteile:\n- Kein Overhead durch Routing-Protokolle\n- Volle Kontrolle über den Datenverkehr\n- Sicherer (keine Angriffe auf Routing-Protokolle)\n\nNachteile:\n- Keine automatische Anpassung bei Topologieänderungen\n- Administrator muss bei Ausfall manuell eingreifen (außer Backup-Routen sind konfiguriert)",
+    },
+    {
+      question: "Welche Aussage zu ARP (Address Resolution Protocol) ist korrekt?",
+      type: "multiple" as const,
+      options: [
+        "Ein ARP-Request wird als Unicast gesendet.",
+        "Ein ARP-Reply wird als Broadcast gesendet.",
+        "Ein ARP-Request wird als Broadcast gesendet, der ARP-Reply als Unicast.",
+        "ARP wird verwendet, um IP-Adressen in Hostnamen aufzulösen.",
+      ],
+      correct: 2,
+      explanation: "**ARP (Address Resolution Protocol):**\n\n1. **ARP-Request** → **Broadcast** (an alle Geräte im lokalen Netz: \"Wer hat die IP x.x.x.x?\")\n2. **ARP-Reply** → **Unicast** (nur an den Fragenden: \"Ich habe die IP x.x.x.x, meine MAC ist yy:yy:yy:yy:yy:yy\")\n\nARP löst **IP-Adressen** in **MAC-Adressen** auf (nicht in Hostnamen — das macht DNS).\n\nWichtig: **MAC-Adressen** werden nur im lokalen Netz geändert. **IP-Adressen** bleiben über Router hinweg gleich. **TTL** wird bei jedem Router-Hop dekrementiert.",
+    },
+    {
+      question: "Was passiert mit der MAC-Adresse und der IP-Adresse eines Pakets, wenn es einen Router passiert?",
+      type: "multiple" as const,
+      options: [
+        "Sowohl MAC- als auch IP-Adresse bleiben gleich.",
+        "MAC-Adresse wird geändert, IP-Adresse bleibt gleich.",
+        "IP-Adresse wird geändert, MAC-Adresse bleibt gleich.",
+        "Sowohl MAC- als auch IP-Adresse werden geändert.",
+      ],
+      correct: 1,
+      explanation: "Beim Durchlaufen eines **Routers**:\n\n- **MAC-Adresse wird geändert** — Der Router ersetzt die Quell- und Ziel-MAC-Adresse durch seine eigenen (die MAC-Adressen sind nur im lokalen Netzwerk relevant)\n- **IP-Adresse bleibt gleich** — Die IP-Quell- und Zieladresse des Originalpakets bleiben erhalten (Ende-zu-Ende-Adressierung)\n- **TTL wird dekrementiert** — Time-to-Live wird bei jedem Router-Hop um 1 verringert\n\nDies ist das Prinzip der **Schichtung**: MAC = Schicht 2 (lokal), IP = Schicht 3 (global).",
+    },
+  ],
+};
+
+// ---------------------------------------------------------------------------
+// NM2 — Numerische Mathematik 2 Klausur WS15/16 (10 MC-Fragen)
+// ---------------------------------------------------------------------------
+
+export const nm2Module: Module = {
+  id: "thowl-nm2",
+  slug: "thowl-nm2",
+  title: "NM2 — Numerische Mathematik 2 WS15/16",
+  description: "Numerische Mathematik 2 Klausur WS2015/16 — 10 Multiple-Choice-Fragen. TH OWL. Themen: Gleitpunktzahlen, Fehleranalyse, Konditionszahl, Horner-Schema, Polynominterpolation, Lagrange-Interpolation.",
+  icon: "🔢",
+  color: "#EC4899",
+  progress: 0,
+  category: "thowl",
+  hidden: true,
+  lessons: [
+    {
+      id: "nm2-klausur-ws1516",
+      title: "Klausur NM2 WS15/16 — 10 Fragen",
+      duration: "30 min",
+      type: "quiz",
+      examMode: true,
+      content: `## Numerische Mathematik 2 — Klausur WS2015/16
+TH OWL | Klausur 1: Multiple-Choice-Fragen
+
+10 Multiple-Choice-Fragen | Themen: Gleitpunktzahlen, Fehleranalyse, Horner-Schema, Polynominterpolation
+
+> **Hinweis:** Fragen basierend auf der Klausur NM2 WS2015/16.`,
+    },
+  ],
+};
+
+export const nm2QuizData = {
+  "thowl-nm2": [
+    {
+      question: "Wie lautet der Dezimalwert der Gleitpunktzahl 0.321 × 10³?",
+      type: "multiple" as const,
+      options: ["3,21", "32,1", "321", "3210"],
+      correct: 2,
+      explanation: "**Gleitpunktzahl:** 0.321 × 10³\n\n0.321 × 1000 = **321**\n\nDie Mantisse wird mit 10 hoch den Exponenten multipliziert.",
+    },
+    {
+      question: "Wie lautet der Dezimalwert der Gleitpunktzahl 0.004 × 10⁻²?",
+      type: "multiple" as const,
+      options: ["0,004", "0,0004", "0,00004", "0,000004"],
+      correct: 2,
+      explanation: "**Gleitpunktzahl:** 0.004 × 10⁻²\n\n0.004 × 0,01 = **0,00004**\n\n10⁻² = 0,01 → 0.004 × 0,01 = 0,00004",
+    },
+    {
+      question: "Wie viele signifikante Stellen (n) hat die Zahl 0.01?",
+      type: "multiple" as const,
+      options: ["n = 1", "n = 2", "n = 3", "n = 4"],
+      correct: 0,
+      explanation: "**Signifikante Stellen:**\n\n0.01 = 0.1 × 10⁻¹\n\nDie Mantisse 0.1 hat **1 signifikante Stelle** (die 1).\n\nFührende Nullen werden NICHT mitgezählt. Nur die signifikanten Ziffern der Mantisse zählen.",
+    },
+    {
+      question: "Wie viele signifikante Stellen (n) hat die Zahl 1.9?",
+      type: "multiple" as const,
+      options: ["n = 1", "n = 2", "n = 3", "n = 4"],
+      correct: 1,
+      explanation: "**Signifikante Stellen:**\n\n1.9 hat **2 signifikante Stellen** (die 1 und die 9).\n\nAlle Ziffern ab der ersten nicht-null Ziffer sind signifikant.",
+    },
+    {
+      question: "Gegeben sei f(x) = 3eˣ + 2x. Was ist die Konditionszahl cond(f)(x)?",
+      type: "multiple" as const,
+      options: [
+        "cond(f)(x) = |f(x)|",
+        "cond(f)(x) = |f'(x)|",
+        "cond(f)(x) = |f'(x) · x / f(x)|",
+        "cond(f)(x) = |f(x) / f'(x)|",
+      ],
+      correct: 2,
+      explanation: "**Konditionszahl** einer Funktion f an der Stelle x:\n\n**cond(f)(x) = |f'(x) · x / f(x)|**\n\nSie misst, wie empfindlich die Funktion auf relative Änderungen der Eingabe reagiert.\n\nFür f(x) = 3eˣ + 2x gilt f'(x) = 3eˣ + 2, also:\ncond(f)(x) = |(3eˣ + 2) · x / (3eˣ + 2x)|",
+    },
+    {
+      question: "Was besagt die Fehlerabschätzung für eine Funktion f mit Konditionszahl cond(f)?",
+      type: "multiple" as const,
+      options: [
+        "Der absolute Fehler von f ist höchstens |f(x̃) − f(x)| ≤ cond(f).",
+        "Der absolute Fehler von f ist höchstens |f(x̃) − f(x)| ≤ cond(f) · |x̃ − x|.",
+        "Der relative Fehler von f ist höchstens cond(f) · relativer Fehler von x.",
+        "Beide Aussagen (b) und (c) sind korrekt.",
+      ],
+      correct: 3,
+      explanation: "**Fehlerabschätzung:**\n\n**Absoluter Fehler:**\n|f(x̃) − f(x)| ≤ cond(f) · |x̃ − x|\n\n**Relativer Fehler:**\nrel. Fehler von f ≤ cond(f) · rel. Fehler von x\n\nDie Konditionszahl gibt an, um welchen Faktor sich der Eingabefehler maximal verstärkt.\n\n- cond(f) ≈ 1: gut konditioniert\n- cond(f) >> 1: schlecht konditioniert (Fehlerverstärkung)",
+    },
+    {
+      question: "Welches Horner-Schema ergibt sich für das Polynom p(x) = −x³ − 3x² + 3x + 5?",
+      type: "multiple" as const,
+      options: [
+        "p(x) = (((−x) − 3)x + 3)x + 5",
+        "p(x) = (((−x) + 3)x − 3)x + 5",
+        "p(x) = (((x) − 3)x + 3)x + 5",
+        "p(x) = (((−x) − 3)x − 3)x + 5",
+      ],
+      correct: 0,
+      explanation: "**Horner-Schema** für p(x) = −x³ − 3x² + 3x + 5:\n\nKoeffizienten: −1, −3, 3, 5\n\nSchrittweise:\n1. −1 (höchster Koeffizient)\n2. −1 · x + (−3) = −x − 3\n3. (−x − 3) · x + 3 = −x² − 3x + 3\n4. (−x² − 3x + 3) · x + 5 = −x³ − 3x² + 3x + 5\n\n**p(x) = (((−x) − 3)x + 3)x + 5**\n\nVorteil: Nur 3 Multiplikationen und 3 Additionen statt 6 Multiplikationen.",
+    },
+    {
+      question: "Was ist der Wert von p(x) = −x³ − 3x² + 3x + 5 an der Stelle x = 2?",
+      type: "multiple" as const,
+      options: ["−9", "−7", "9", "11"],
+      correct: 0,
+      explanation: "**Auswertung mit Horner-Schema bei x = 2:**\n\np(2) = (((−2) − 3) · 2 + 3) · 2 + 5\n     = ((−5) · 2 + 3) · 2 + 5\n     = (−10 + 3) · 2 + 5\n     = (−7) · 2 + 5\n     = −14 + 5\n     = **−9**\n\nKontrolle: −(2)³ − 3(2)² + 3(2) + 5 = −8 − 12 + 6 + 5 = −9 ✓",
+    },
+    {
+      question: "Wie viele Datenpunkte (n+1) werden für ein Polynom n-ten Grades bei der Interpolation benötigt?",
+      type: "multiple" as const,
+      options: [
+        "Genau n Datenpunkte.",
+        "Genau n+1 Datenpunkte.",
+        "Mindestens n+2 Datenpunkte.",
+        "Es gibt keine Einschränkung.",
+      ],
+      correct: 1,
+      explanation: "**Polynominterpolation:**\n\nZu **n+1 Datenpunkten** (x₀, y₀), (x₁, y₁), ..., (xₙ, yₙ) mit paarweise verschiedenen x-Werten existiert **genau ein Polynom n-ten Grades**, das alle Punkte interpoliert.\n\nBeispiele:\n- 2 Punkte → Polynom 1. Grades (Gerade)\n- 3 Punkte → Polynom 2. Grades (Parabel)\n- n+1 Punkte → Polynom n. Grades\n\nDas Interpolationspolynom ist eindeutig (Existenz- und Eindeutigkeitssatz).",
+    },
+    {
+      question: "Was ist das Prinzip der Lagrange-Interpolation?",
+      type: "multiple" as const,
+      options: [
+        "Man sucht ein Polynom, das die Datenpunkte möglichst gut annähert (Regression).",
+        "Man konstruiert Basispolynome Lⱼ(x), die an xⱼ den Wert 1 und an allen anderen Stützstellen den Wert 0 haben, und gewichtet diese mit den y-Werten.",
+        "Man berechnet die Steigung zwischen benachbarten Datenpunkten und verbindet sie linear.",
+        "Man berechnet die Fourier-Transformation der Datenpunkte.",
+      ],
+      correct: 1,
+      explanation: "**Lagrange-Interpolation:**\n\nDas Interpolationspolynom wird als Linearkombination von **Lagrange-Basispolynomen** dargestellt:\n\np(x) = Σ yⱼ · Lⱼ(x)\n\nWobei: Lⱼ(x) = Π(ᵢ≠ⱼ) (x − xᵢ) / (xⱼ − xᵢ)\n\nEigenschaft der Basispolynome:\n- Lⱼ(xⱼ) = 1 (an der Stützstelle xⱼ)\n- Lⱼ(xᵢ) = 0 für i ≠ j (an allen anderen Stützstellen)\n\n→ Das Polynom geht exakt durch alle Datenpunkte.",
+    },
+  ],
+};
+
+// ---------------------------------------------------------------------------
 // Alle TH OWL Module
 // ---------------------------------------------------------------------------
 
@@ -732,6 +1039,8 @@ export const thowlModules: Module[] = [
   sqModule,
   ps2Module,
   bwlWs20Module,
+  rnModule,
+  nm2Module,
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -740,4 +1049,6 @@ export const thowlQuizData: Record<string, any[]> = {
   ...sqQuizData,
   ...ps2QuizData,
   ...bwlWs20QuizData,
+  ...rnQuizData,
+  ...nm2QuizData,
 };
