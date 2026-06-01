@@ -41,6 +41,7 @@ function MerkblattContent({ content }: { content: string }) {
   let tableKey = 0;
   let elementKey = 0;
 
+  let isTableHeaderRow = true;
   const flushTable = () => {
     if (tableRows.length > 0) {
       elements.push(
@@ -52,24 +53,35 @@ function MerkblattContent({ content }: { content: string }) {
       );
       tableRows = [];
     }
+    isTableHeaderRow = true;
   };
 
   lines.forEach((line) => {
     // Table row
     if (line.includes("|") && line.trim().startsWith("|") && line.trim().endsWith("|")) {
       const cells = line.split("|").filter((_, i, arr) => i > 0 && i < arr.length - 1).map(c => c.trim());
-      // Skip separator rows
-      if (!cells.every(c => /^[\s:-]+$/.test(c))) {
-        tableRows.push(
-          <tr key={`tr-${elementKey++}`} className="border-b border-slate-700/50">
-            {cells.map((cell, ci) => (
+      // Skip separator rows (--- | --- | ---)
+      if (cells.every(c => /^[\s:-]+$/.test(c))) {
+        isTableHeaderRow = false;
+        return;
+      }
+      const isHeader = isTableHeaderRow;
+      isTableHeaderRow = false;
+      tableRows.push(
+        <tr key={`tr-${elementKey++}`} className="border-b border-slate-700/50">
+          {cells.map((cell, ci) => (
+            isHeader ? (
+              <th key={ci} className="px-3 py-2 text-left text-sm font-semibold text-blue-300 bg-blue-500/10">
+                <InlineText text={cell} />
+              </th>
+            ) : (
               <td key={ci} className="px-3 py-1.5 text-slate-300 bg-slate-800/30">
                 <InlineText text={cell} />
               </td>
-            ))}
-          </tr>
-        );
-      }
+            )
+          ))}
+        </tr>
+      );
       return;
     }
 
