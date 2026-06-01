@@ -398,12 +398,136 @@ CPI = 80.000 / 90.000 = 0,89 (ineffizient!)
 
 ---
 
-> Das klassische PM funktioniert gut bei festen Anforderungen. Aber was, wenn sich Anforderungen ändern? In der nächsten Lektion kommt das **agile Projektmanagement mit Scrum** — der Gegenpol zum Wasserfallmodell.`
+> Das klassische PM funktioniert gut bei festen Anforderungen. Aber was, wenn sich Anforderungen ändern? In der nächsten Lektion vertiefen wir die **DIN 69901** — und danach kommt das agile Projektmanagement mit Scrum.`
     },
 
-    // --- Lektion 5: Agiles Projektmanagement ---
+    // --- Lektion 5: DIN 69901 vertieft ---
     {
       id: "pm-5",
+      title: "DIN 69901 — Projektphasen vertieft",
+      duration: "15 min",
+      type: "text",
+      content: `## DIN 69901 — Die Projektphasen im Detail
+
+> In der letzten Lektion hast du die 5 Phasen der DIN 69901 als Überblick kennengelernt. Jetzt gehen wir tiefer: Was genau passiert in jeder Phase? Welche Dokumente entstehen? Und was prüft die IHK?
+
+Die **DIN 69901** ist die deutsche Norm für Projektmanagement. Sie definiert den **Lebenszyklus** eines Projekts in 5 Phasen — von der Idee bis zum Abschluss.
+
+---
+
+## Phase 1: Initiierung 🚀
+
+**Ziel:** Projektidee bewerten und Machbarkeit prüfen.
+
+| Aufgabe | Beschreibung |
+|---------|-------------|
+| **Bedarfsanalyse** | Warum ist das Projekt nötig? |
+| **Machbarkeitsstudie** | Technisch, wirtschaftlich, zeitlich realistisch? |
+| **Projektauftrag** | Erstes Dokument: Wer, was, warum, bis wann? |
+| **Stakeholder identifizieren** | Wer ist betroffen? Wer entscheidet? |
+
+> 💡 **Merke:** Ohne Projektauftrag kein Projekt! Er ist die **Grundlage** für alles Weitere.
+
+---
+
+## Phase 2: Definition 📋
+
+**Ziel:** Projektrahmen klar abstecken.
+
+| Aufgabe | Beschreibung |
+|---------|-------------|
+| **Ziele definieren** | SMART-Ziele formulieren (siehe Lektion 2) |
+| **Umfang festlegen** | Was gehört dazu, was NICHT? (Scope) |
+| **Risiken analysieren** | Was kann schiefgehen? Gegenmaßnahmen? |
+| **Stakeholder-Analyse** | Wer hat welchen Einfluss? (siehe Lektion 3) |
+
+**Ergebnis:** **Lastenheft** (vom Auftraggeber) — WAS soll gemacht werden?
+
+---
+
+## Phase 3: Planung 📅
+
+**Ziel:** Detaillierten Plan erstellen.
+
+| Aufgabe | Werkzeug |
+|---------|----------|
+| **Ablaufplanung** | Gantt-Diagramm, Netzplantechnik |
+| **Ressourcenplanung** | Wer macht was? Budget? |
+| **Terminplanung** | Meilensteine, Abhängigkeiten |
+| **Kostenplanung** | Budget schätzen, EVA (siehe Lektion 4) |
+
+**Ergebnis:** **Pflichtenheft** (vom Auftragnehmer) — WIE wird es gemacht?
+
+### Netzplantechnik — Kritischer Pfad
+
+| Begriff | Bedeutung |
+|---------|-----------|
+| **FAZ** | Frühester Anfangszeitpunkt |
+| **FEZ** | Frühester Endzeitpunkt |
+| **SAZ** | Spätester Anfangszeitpunkt |
+| **SEZ** | Spätester Endzeitpunkt |
+| **Pufferzeit** | SAZ − FAZ (= 0 auf kritischem Pfad) |
+
+> 🎯 **IHK-Tipp:** Der **kritische Pfad** ist die längste Kette von Aktivitäten ohne Puffer. Verzögerungen hier verschieben das GESAMTE Projekt!
+
+---
+
+## Phase 4: Steuerung 🎮
+
+**Ziel:** Umsetzung überwachen und steuern.
+
+| Aufgabe | Beschreibung |
+|---------|-------------|
+| **Fortschritt messen** | EVA (Earned Value Analyse) |
+| **Abweichungen erkennen** | Ist ≠ Soll? Warum? |
+| **Nachsteuern** | Pläne anpassen, Ressourcen umverteilen |
+| **Reporting** | Statusberichte an Stakeholder |
+
+> EVA berechnet den **Fertigstellungsgrad** eines Projekts — die Formeln (PV, EV, AC, SPI, CPI) hast du in der vorigen Lektion kennengelernt.
+
+---
+
+## Phase 5: Abschluss ✅
+
+**Ziel:** Projekt formell abschließen.
+
+| Aufgabe | Beschreibung |
+|---------|-------------|
+| **Abnahme** | Auftraggeber prüft Ergebnis |
+| **Dokumentation** | Technische Docs, Benutzerhandbuch |
+| **Lessons Learned** | Was lief gut? Was besser machen? |
+| **Ressourcen freigeben** | Team, Budget, Infrastruktur |
+
+> 💡 **Merke:** "Lessons Learned" ist IHK-Prüfungsfavorit! Beschreibe immer: Was war gut? Was war schlecht? Was nehmen wir mit?
+
+---
+
+## 📋 Zusammenfassung
+
+Die DIN 69901 definiert 5 Phasen mit klar abgegrenzten Aufgaben und Dokumenten:
+
+| Phase | Kernfrage | Wichtigstes Dokument |
+|-------|-----------|---------------------|
+| **Initiierung** | Warum? | Projektauftrag |
+| **Definition** | Was? | Lastenheft |
+| **Planung** | Wie? Wann? | Pflichtenheft, Gantt |
+| **Steuerung** | Läuft es gut? | EVA-Bericht |
+| **Abschluss** | Fertig? | Lessons Learned |
+
+---
+
+## 🎯 IHK-Tipp
+
+> ❗ **Prüfungsfrage:** "Nennen Sie die 5 Phasen der DIN 69901!" — Initiierung, Definition, Planung, Steuerung, Abschluss. Ordne jeder Phase die passenden Dokumente und Werkzeuge zu.
+
+---
+
+> Du kennst jetzt das klassische PM in der Tiefe. Aber was, wenn sich Anforderungen ständig ändern? In der nächsten Lektion kommt das **agile Projektmanagement mit Scrum** — der Gegenentwurf zum Wasserfallmodell.`
+    },
+
+    // --- Lektion 6: Agiles Projektmanagement & Scrum ---
+    {
+      id: "pm-6",
       title: "Agiles Projektmanagement & Scrum",
       duration: "20 min",
       type: "interactive",
@@ -533,9 +657,9 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 > Du kennst jetzt klassisches und agiles PM. In der letzten inhaltlichen Lektion lernst du **Analyse-Methoden** kennen — SWOT, Ishikawa, Stakeholder-Analyse und mehr.`
     },
 
-    // --- Lektion 6: Analyse-Methoden ---
+    // --- Lektion 7: Analyse-Methoden ---
     {
-      id: "pm-6",
+      id: "pm-7",
       title: "Analyse-Methoden für Projekte",
       duration: "15 min",
       type: "text",
@@ -717,9 +841,9 @@ Bewertet **Optionen nach gewichteten Kriterien**.
 > Das war die letzte inhaltliche Lektion zu Projektmanagement! Du hast von den Grundlagen über klassisches und agiles PM bis zu den Analyse-Methoden alles kennengelernt. Jetzt kannst du dein Wissen im Quiz testen!`
     },
 
-    // --- Lektion 7: Quiz ---
+    // --- Lektion 8: Quiz ---
     {
-      id: "pm-7",
+      id: "pm-8",
       title: "Wissenstest: Projektmanagement",
       duration: "15 min",
       type: "quiz",
