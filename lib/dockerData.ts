@@ -107,12 +107,25 @@ Ein Container ist eine **leichtgewichtige, isolierte Laufzeitumgebung**, die ein
 
 ## 🔄 Der Docker-Workflow
 
-\`\`\`
-1. Dockerfile schreiben (Bauanleitung)
-2. Image bauen (docker build)
-3. Container starten (docker run)
-4. Image teilen (docker push)
-\`\`\`
+<svg viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg" style="max-width:650px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="650" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="15" y="25" width="120" height="50" rx="8" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="75" y="48" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Dockerfile</text>
+  <text x="75" y="62" text-anchor="middle" fill="#64748b" font-size="9">Bauanleitung</text>
+  <polygon points="135,50 150,42 150,58" fill="#64748b"/>
+  <rect x="155" y="25" width="120" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="215" y="48" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">docker build</text>
+  <text x="215" y="62" text-anchor="middle" fill="#64748b" font-size="9">Image erstellen</text>
+  <polygon points="275,50 290,42 290,58" fill="#64748b"/>
+  <rect x="295" y="25" width="120" height="50" rx="8" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1.5"/>
+  <text x="355" y="48" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">docker run</text>
+  <text x="355" y="62" text-anchor="middle" fill="#64748b" font-size="9">Container starten</text>
+  <polygon points="415,50 430,42 430,58" fill="#64748b"/>
+  <rect x="435" y="25" width="120" height="50" rx="8" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="495" y="48" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">docker push</text>
+  <text x="495" y="62" text-anchor="middle" fill="#64748b" font-size="9">Image teilen</text>
+  <text x="600" y="55" text-anchor="middle" fill="#64748b" font-size="18">📦</text>
+</svg>
 
 ---
 

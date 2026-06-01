@@ -250,10 +250,33 @@ Ein **VPN** erstellt einen verschlüsselten Tunnel durch das Internet:
 
 ### DMZ (Demilitarisierte Zone)
 
-\`\`\`
-Internet → [Firewall 1] → DMZ (Webserver, Mailserver)
-                              → [Firewall 2] → Internes Netz
-\`\`\`
+<svg viewBox="0 0 650 140" xmlns="http://www.w3.org/2000/svg" style="max-width:650px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="650" height="140" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <!-- Internet -->
+  <rect x="15" y="35" width="90" height="70" rx="8" fill="#ef4444" fill-opacity="0.15" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="60" y="65" text-anchor="middle" fill="#fca5a5" font-size="11" font-weight="bold">Internet</text>
+  <text x="60" y="82" text-anchor="middle" fill="#64748b" font-size="9">🌍</text>
+  <!-- Firewall 1 -->
+  <polygon points="130,40 140,30 150,40 150,100 140,110 130,100" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="140" y="75" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">FW</text>
+  <!-- DMZ -->
+  <rect x="170" y="20" width="300" height="100" rx="8" fill="#f59e0b" fill-opacity="0.08" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="320" y="18" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">DMZ</text>
+  <rect x="185" y="40" width="90" height="40" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="230" y="65" text-anchor="middle" fill="#93c5fd" font-size="9">Webserver</text>
+  <rect x="290" y="40" width="90" height="40" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="335" y="65" text-anchor="middle" fill="#93c5fd" font-size="9">Mailserver</text>
+  <rect x="395" y="40" width="60" height="40" rx="6" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1"/>
+  <text x="425" y="65" text-anchor="middle" fill="#93c5fd" font-size="9">DNS</text>
+  <!-- Firewall 2 -->
+  <polygon points="490,40 500,30 510,40 510,100 500,110 490,100" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1.5"/>
+  <text x="500" y="75" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">FW</text>
+  <!-- Internes Netz -->
+  <rect x="530" y="35" width="100" height="70" rx="8" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.5"/>
+  <text x="580" y="65" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Internes</text>
+  <text x="580" y="82" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Netz</text>
+  <text x="580" y="96" text-anchor="middle" fill="#64748b" font-size="9">🏢</text>
+</svg>
 
 Die DMZ ist ein Pufferbereich — öffentliche Server stehen hier, das interne Netz bleibt geschützt.
 
@@ -391,10 +414,27 @@ Ein **gemeinsamer Key** für Ver- und Entschlüsselung:
 - **Vorteil:** Schnell, gut für große Datenmengen
 - **Nachteil:** Key-Verteilung ist problematisch (wie übermittelt man den Key sicher?)
 
-\`\`\`
-Sender: Plaintext + Key → AES → Ciphertext
-Empfänger: Ciphertext + Key → AES → Plaintext
-\`\`\`
+<svg viewBox="0 0 550 90" xmlns="http://www.w3.org/2000/svg" style="max-width:550px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="550" height="90" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="50" y="30" text-anchor="middle" fill="#94a3b8" font-size="10">Sender</text>
+  <rect x="20" y="40" width="60" height="30" rx="6" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1"/>
+  <text x="50" y="60" text-anchor="middle" fill="#93c5fd" font-size="9">Plaintext</text>
+  <text x="100" y="60" text-anchor="middle" fill="#fcd34d" font-size="14">🔑</text>
+  <polygon points="120,55 135,48 135,62" fill="#64748b"/>
+  <rect x="140" y="40" width="60" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="170" y="60" text-anchor="middle" fill="#c4b5fd" font-size="9">AES</text>
+  <polygon points="200,55 215,48 215,62" fill="#64748b"/>
+  <rect x="220" y="40" width="80" height="30" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1"/>
+  <text x="260" y="60" text-anchor="middle" fill="#fca5a5" font-size="9">Ciphertext</text>
+  <text x="330" y="60" fill="#64748b" font-size="12">───▶</text>
+  <text x="380" y="30" text-anchor="middle" fill="#94a3b8" font-size="10">Empfänger</text>
+  <rect x="390" y="40" width="80" height="30" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1"/>
+  <text x="430" y="60" text-anchor="middle" fill="#fca5a5" font-size="9">Ciphertext</text>
+  <text x="485" y="60" text-anchor="middle" fill="#fcd34d" font-size="14">🔑</text>
+  <polygon points="490,55 505,48 505,62" fill="#64748b"/>
+  <rect x="500" y="40" width="40" height="30" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1"/>
+  <text x="520" y="60" text-anchor="middle" fill="#6ee7b7" font-size="9">🔓</text>
+</svg>
 
 ### Asymmetrische Verschlüsselung
 
@@ -404,10 +444,26 @@ Empfänger: Ciphertext + Key → AES → Plaintext
 - **Vorteil:** Kein gemeinsames Geheimnis nötig
 - **Nachteil:** Langsamer als symmetrisch
 
-\`\`\`
-Sender: Plaintext + Public Key → RSA → Ciphertext
-Empfänger: Ciphertext + Private Key → RSA → Plaintext
-\`\`\`
+<svg viewBox="0 0 580 90" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="580" height="90" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <text x="50" y="30" text-anchor="middle" fill="#94a3b8" font-size="10">Sender</text>
+  <rect x="20" y="40" width="60" height="30" rx="6" fill="#3b82f6" fill-opacity="0.25" stroke="#3b82f6" stroke-width="1"/>
+  <text x="50" y="60" text-anchor="middle" fill="#93c5fd" font-size="9">Plaintext</text>
+  <text x="105" y="60" text-anchor="middle" fill="#10b981" font-size="10">🔓 Pub</text>
+  <polygon points="140,55 155,48 155,62" fill="#64748b"/>
+  <rect x="160" y="40" width="60" height="30" rx="6" fill="#8b5cf6" fill-opacity="0.25" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="190" y="60" text-anchor="middle" fill="#c4b5fd" font-size="9">RSA</text>
+  <polygon points="220,55 235,48 235,62" fill="#64748b"/>
+  <rect x="240" y="40" width="80" height="30" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1"/>
+  <text x="280" y="60" text-anchor="middle" fill="#fca5a5" font-size="9">Ciphertext</text>
+  <text x="350" y="60" fill="#64748b" font-size="12">───▶</text>
+  <text x="400" y="30" text-anchor="middle" fill="#94a3b8" font-size="10">Empfänger</text>
+  <rect x="410" y="40" width="80" height="30" rx="6" fill="#ef4444" fill-opacity="0.25" stroke="#ef4444" stroke-width="1"/>
+  <text x="450" y="60" text-anchor="middle" fill="#fca5a5" font-size="9">Ciphertext</text>
+  <text x="510" y="60" text-anchor="middle" fill="#f59e0b" font-size="10">🔐 Priv</text>
+  <rect x="530" y="40" width="40" height="30" rx="6" fill="#10b981" fill-opacity="0.25" stroke="#10b981" stroke-width="1"/>
+  <text x="550" y="60" text-anchor="middle" fill="#6ee7b7" font-size="9">🔓</text>
+</svg>
 
 ### Digitale Signatur
 
@@ -426,9 +482,18 @@ Beweist **Authentizität** und **Integrität**:
 - **TLS-Handshake:** Browser prüft Zertifikat der CA → verschlüsselte Verbindung
 
 **Zertifikatskette:**
-\`\`\`
-Root CA → Intermediate CA → Server-Zertifikat
-\`\`\`
+
+<svg viewBox="0 0 500 70" xmlns="http://www.w3.org/2000/svg" style="max-width:500px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="500" height="70" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="20" y="15" width="120" height="40" rx="8" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="80" y="40" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">🏛️ Root CA</text>
+  <polygon points="140,35 158,28 158,42" fill="#64748b"/>
+  <rect x="165" y="15" width="140" height="40" rx="8" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="235" y="40" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">🔗 Intermediate CA</text>
+  <polygon points="305,35 323,28 323,42" fill="#64748b"/>
+  <rect x="330" y="15" width="150" height="40" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <text x="405" y="40" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">🌐 Server-Zertifikat</text>
+</svg>
 
 ### Hashing vs. Verschlüsselung
 
