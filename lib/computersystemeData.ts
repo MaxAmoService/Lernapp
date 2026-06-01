@@ -179,7 +179,7 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
 2. Ergebnis wird im Register oder Speicher abgelegt
 3. Status-Flags werden gesetzt (Zero, Carry, Overflow)
 
-> IHK-Prüfung: Der Fetch-Decode-Execute-Zyklus ist ein Klassiker! Zeichne ihn als Flussdiagramm: PC → MAR → Speicher → MDR → IR → Decode → ALU → Ergebnis.
+> ❗ **IHK-Tipp:** Der Fetch-Decode-Execute-Zyklus ist ein Klassiker! Zeichne ihn als Flussdiagramm: PC → MAR → Speicher → MDR → IR → Decode → ALU → Ergebnis.
 
 ## CISC vs. RISC
 
@@ -275,7 +275,7 @@ Jede CPU versteht einen bestimmten Befehlssatz — die Maschinensprache:
 - **Steuerbefehle**: JMP (Sprung), CMP (Vergleich), CALL, RET
 - **I/O-Befehle**: IN, OUT (Peripheriezugriff)
 
-> IHK-Prüfung: Kenne den Unterschied zwischen Opcode und Operand. Ein Befehl im Maschinencode besteht immer aus beiden Teilen.
+> ❗ **IHK-Tipp:** Kenne den Unterschied zwischen Opcode und Operand. Ein Befehl im Maschinencode besteht immer aus beiden Teilen.
 
 > Häufige Fehler: "Taktfrequenz ist das Einzige was zählt" — Falsch! IPC, Cache-Größe, Pipeline-Tiefe und Architektur sind mindestens genauso wichtig.
 
@@ -343,7 +343,7 @@ Biometrische Verfahren nutzen einzigartige körperliche Merkmale:
 | **Iris-Scan** | Sehr hoch | Sehr hoch | Hochsicherheitsbereiche |
 | **Stimmerkennung** | Mittel | Mittel | Sprachassistenten |
 
-> IHK-Prüfung: Biometrie = "was man IST" (Authentifizierungsfaktor). Die drei Faktoren: "was man weiß" (Passwort), "was man hat" (Token), "was man IST" (Biometrie).
+> ❗ **IHK-Tipp:** Biometrie = "was man IST" (Authentifizierungsfaktor). Die drei Faktoren: "was man weiß" (Passwort), "was man hat" (Token), "was man IST" (Biometrie).
 
 ## Weitere Eingabegeräte
 
@@ -446,7 +446,7 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
 - **Screenreader**: Vorlesesoftware für Blinde
 - **Vergrößerungssoftware**: Für sehbehinderte Nutzer
 
-> IHK-Prüfung: Vergleiche Druckverfahren! "Welcher Drucker eignet sich für..." ist eine häufige Aufgabenstellung.
+> ❗ **IHK-Tipp:** Vergleiche Druckverfahren! "Welcher Drucker eignet sich für..." ist eine häufige Aufgabenstellung.
 
 > Häufige Fehler: "Laserdrucker drucken mit Tinte" — Falsch! Laserdrucker nutzen Toner (Pulver), das durch Hitze auf das Papier fixiert wird.
 
@@ -627,7 +627,7 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 
 > Praxis: Ein kleines Büro mit 5 Mitarbeitern braucht kein RAID 6. RAID 1 mit 2 Platten reicht — einfach und günstig. Für kritische Daten: RAID 5 ab 3 Platten.
 
-> IHK-Prüfung: Berechne immer die nutzbare Kapazität! Formel: RAID 0 = n, RAID 1 = n/2, RAID 5 = n-1, RAID 6 = n-2, RAID 10 = n/2.
+> ❗ **IHK-Tipp:** Berechne immer die nutzbare Kapazität! Formel: RAID 0 = n, RAID 1 = n/2, RAID 5 = n-1, RAID 6 = n-2, RAID 10 = n/2.
 
 [INTERACTIVE]
 
@@ -718,7 +718,7 @@ Virtuelle Adresse = **Seitennummer** + **Offset**
 - OS lädt Seite von Festplatte in RAM (langsam!)
 - Wenn RAM voll: Eine Seite wird ausgelagert (Replacement: LRU, FIFO)
 
-> IHK-Prüfung: Berechne die Anzahl der Seitenrahmen! Formel: Seitenrahmen = RAM-Größe / Seitengröße. Beispiel: 4 GB RAM, 4 KB Seiten → 1.048.576 Rahmen.
+> ❗ **IHK-Tipp:** Berechne die Anzahl der Seitenrahmen! Formel: Seitenrahmen = RAM-Größe / Seitengröße. Beispiel: 4 GB RAM, 4 KB Seiten → 1.048.576 Rahmen.
 
 ## Endianness
 
@@ -871,7 +871,7 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 - **Update**: Fehlerbehebungen, Sicherheitspatches (klein)
 - **Upgrade**: Neue Version mit neuen Funktionen (groß)
 
-> IHK-Prüfung: Kenne den Unterschied zwischen BIOS und UEFI! UEFI ersetzt BIOS und bringt modernere Features mit.
+> ❗ **IHK-Tipp:** Kenne den Unterschied zwischen BIOS und UEFI! UEFI ersetzt BIOS und bringt modernere Features mit.
 
 > Siehe auch: Netzwerkmodul — dort wird auf Netzwerk-Protokolle und -Freigaben eingegangen.
 
@@ -923,7 +923,7 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
 | **Startzeit** | Sekunden | Sekunden | Millisekunden |
 | **Einsatz** | Rechenzentren | Entwicklung | Microservices |
 
-> IHK-Prüfung: Typ 1 vs. Typ 2 ist ein Klassiker! Typ 1 = direkt auf Hardware (Server), Typ 2 = auf OS (Desktop/Entwicklung).
+> ❗ **IHK-Tipp:** Typ 1 vs. Typ 2 ist ein Klassiker! Typ 1 = direkt auf Hardware (Server), Typ 2 = auf OS (Desktop/Entwicklung).
 
 ## Cloud Computing
 
@@ -1031,7 +1031,7 @@ $$Speedup = \\frac{1}{(1-p) + \\frac{p}{n}}$$
 
 > Merke: Selbst mit unendlich vielen Prozessoren ist der Speedup begrenzt durch den sequenziellen Teil (1-p). Bei p=0.8: maximaler Speedup = 1/0.2 = 5.
 
-> IHK-Prüfung: Amdahl-Formel auswendig können und anwenden! Häufige Aufgabe: "Wie viele Prozessoren braucht man für Speedup X?"
+> ❗ **IHK-Tipp:** Amdahl-Formel auswendig können und anwenden! Häufige Aufgabe: "Wie viele Prozessoren braucht man für Speedup X?"
 
 ## Speicherhierarchie & Engpässe
 
@@ -1158,7 +1158,7 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
 - **EMAS** (Eco-Management and Audit Scheme): EU-Umweltmanagementsystem
 - **ISO 14001**: Internationaler Standard für Umweltmanagement
 
-> IHK-Prüfung: Green IT ist ein häufiges Prüfungsthema! Kenne mindestens 3 konkrete Maßnahmen und den Rebound-Effekt.
+> ❗ **IHK-Tipp:** Green IT ist ein häufiges Prüfungsthema! Kenne mindestens 3 konkrete Maßnahmen und den Rebound-Effekt.
 
 > Häufige Fehler: "Cloud ist automatisch grüner" — Kommt darauf an! Wenn das Rechenzentrum Kohlestrom nutzt, kann Cloud sogar schlechter sein.
 
@@ -1255,7 +1255,7 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
 | **Virtualisierung** | Typ 1/2, Container, IaaS/PaaS/SaaS |
 | **Green IT** | Energieeffizienz, Recycling, Rebound |
 
-> IHK-Prüfung: Die Computertechnik-Prüfung kombiniert oft mehrere Themen. Beispiel: "Ein Unternehmen braucht einen Server mit RAID, virtueller Speicherverwaltung und Cloud-Anbindung — welche Komponenten und Konzepte sind relevant?"
+> ❗ **IHK-Tipp:** Die Computertechnik-Prüfung kombiniert oft mehrere Themen. Beispiel: "Ein Unternehmen braucht einen Server mit RAID, virtueller Speicherverwaltung und Cloud-Anbindung — welche Komponenten und Konzepte sind relevant?"
 
 > **Nächste Lektion:** BIOS/UEFI & Bootvorgang — POST, MBR/GPT und der Bootloader: Was passiert, bevor das Betriebssystem startet?
 
@@ -1297,7 +1297,7 @@ Der POST ist der erste Schritt nach dem Einschalten:
 | 1 lang, 2 kurz | Grafikkarten-Fehler |
 | Dauerpiepen | Kein RAM eingesetzt |
 
-> IHK-Prüfung: Kenne die POST-Tonsignale! "Ein PC piept beim Einschalten dauerhaft — was ist defekt?"
+> ❗ **IHK-Tipp:** Kenne die POST-Tonsignale! "Ein PC piept beim Einschalten dauerhaft — was ist defekt?"
 
 ## BIOS vs. UEFI
 
@@ -1353,7 +1353,7 @@ Der Bootloader lädt den Kernel des Betriebssystems in den RAM und übergibt die
 9. **Init-Prozess** — Erster Prozess (systemd, init)
 10. **Login** — System ist bereit
 
-> IHK-Prüfung: "Beschreiben Sie den Bootvorgang eines PCs" — die 10 Schritte können als PAP oder Struktogramm verlangt werden.
+> ❗ **IHK-Tipp:** "Beschreiben Sie den Bootvorgang eines PCs" — die 10 Schritte können als PAP oder Struktogramm verlangt werden.
 
 > **Nächste Lektion:** Serielle Datenübertragung — RS-232, Parität, USB-Versionen und Schnittstellen: Wie werden Daten bitweise übertragen?
 
@@ -1404,7 +1404,7 @@ Ein Datenrahmen bei RS-232 besteht aus:
 
 **8N1** = 8 Datenbits, keine Parität (None), 1 Stopp-Bit = 10 Bit pro Rahmen.
 
-> IHK-Prüfung: "Was bedeutet 8N1?" — 8 Datenbits, keine Parität, 1 Stopp-Bit!
+> ❗ **IHK-Tipp:** "Was bedeutet 8N1?" — 8 Datenbits, keine Parität, 1 Stopp-Bit!
 
 ## Parität — Einfache Fehlererkennung
 
@@ -1433,7 +1433,7 @@ Die Geschwindigkeit einer seriellen Verbindung wird in **Baud** (Symbolrate) ode
 - Rahmenlänge: 1 + 8 + 1 + 1 = 11 Bit
 - Netto: 115200 / 11 × 8 ≈ 83.782 Byte/s ≈ 81,8 KB/s
 
-> IHK-Prüfung: "Berechne die effektive Datenrate bei 9600 Baud und 8N1" — Formel: Baudrate / Rahmenlänge × Datenbits
+> ❗ **IHK-Tipp:** "Berechne die effektive Datenrate bei 9600 Baud und 8N1" — Formel: Baudrate / Rahmenlänge × Datenbits
 
 ## Schnittstellen im Überblick
 
@@ -1449,7 +1449,7 @@ Die Geschwindigkeit einer seriellen Verbindung wird in **Baud** (Symbolrate) ode
 | **Thunderbolt 4** | Seriell | 40 Gbit/s | Alles (Display, Daten, Laden) |
 | **RS-232** | Seriell | 115,2 Kbit/s | Legacy, Industrie |
 
-> IHK-Prüfung: Kenne die USB-Versionen und ihre Geschwindigkeiten! "Welche USB-Version bietet 5 Gbit/s?" → USB 3.0
+> ❗ **IHK-Tipp:** Kenne die USB-Versionen und ihre Geschwindigkeiten! "Welche USB-Version bietet 5 Gbit/s?" → USB 3.0
 
 [INTERACTIVE]
 `,

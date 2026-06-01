@@ -926,7 +926,7 @@ Wenn ein Gerät ein Paket im lokalen Netzwerk senden will, kennt es nur die **IP
 2. **Reply**: Das Gerät mit dieser IP antwortet: "Ich bin AA:BB:CC:11:22:33"
 3. **ARP-Tabelle**: Die Zuordnung wird zwischengespeichert (Cache)
 
-> IHK-Prüfung: "Erklären Sie den ARP-Prozess" — Broadcast → Reply → Tabelle!
+> ❗ **IHK-Tipp:** "Erklären Sie den ARP-Prozess" — Broadcast → Reply → Tabelle!
 
 ### ARP im OSI-Modell
 ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen (Schicht 3) in MAC-Adressen (Schicht 2).
@@ -939,7 +939,7 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
 - **Man-in-the-Middle-Angriff** möglich
 - **Gegenmaßnahme**: Dynamic ARP Inspection (DAI) auf Managed Switches
 
-> IHK-Prüfung: ARP-Spoofing als Sicherheitsrisiko kennen!
+> ❗ **IHK-Tipp:** ARP-Spoofing als Sicherheitsrisiko kennen!
 
 [INTERACTIVE]
 
@@ -980,7 +980,7 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
 - **Hub**: Vergrößert Kollisionsdomäne (alle Ports)
 - **Switch**: Trennt Kollisionsdomäne (jeder Port eigene Domäne)
 
-> IHK-Prüfung: "Was trennt Kollisionsdomänen?" → Switch!
+> ❗ **IHK-Tipp:** "Was trennt Kollisionsdomänen?" → Switch!
 
 ## CSMA/CA — WLAN (Funk)
 
@@ -1009,7 +1009,7 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
 | **Verfahren** | Jam Signal + Backoff | RTS/CTS + ACK |
 | **Standard** | IEEE 802.3 | IEEE 802.11 |
 
-> IHK-Prüfung: "Warum verwendet WLAN CSMA/CA statt CSMA/CD?" — Weil WLAN nicht gleichzeitig senden und hören kann!
+> ❗ **IHK-Tipp:** "Warum verwendet WLAN CSMA/CA statt CSMA/CD?" — Weil WLAN nicht gleichzeitig senden und hören kann!
 
 ## Switch vs. Hub — Kollisionsdomänen
 
@@ -1061,7 +1061,7 @@ DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 - Username + Passwort werden übertragen
 - IP-Adresse wird vom Provider zugewiesen
 
-> IHK-Prüfung: "Was macht ein Splitter?" — Trennt Sprache und Daten auf der Telefonleitung!
+> ❗ **IHK-Tipp:** "Was macht ein Splitter?" — Trennt Sprache und Daten auf der Telefonleitung!
 
 ## Mobilfunkstandards
 
@@ -1093,7 +1093,7 @@ DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 
 > Praxis: Glasfaser nutzt Licht statt Strom → kein Signalverlust über große Distanzen, extrem hohe Bandbreite, aber teurer in der Installation.
 
-> IHK-Prüfung: "Was ist der Unterschied zwischen FTTH und FTTB?" — FTTH: Glasfaser bis ins Haus. FTTB: Glasfaser bis zum Gebäude, dann Kupfer.
+> ❗ **IHK-Tipp:** "Was ist der Unterschied zwischen FTTH und FTTB?" — FTTH: Glasfaser bis ins Haus. FTTB: Glasfaser bis zum Gebäude, dann Kupfer.
 
 > Häufige Fehler: "ADSL ist schneller als VDSL" — Falsch! VDSL ist schneller als ADSL, braucht aber kürzere Leitungen.
 `,

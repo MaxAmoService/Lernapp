@@ -1033,7 +1033,7 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
 | **Spalten** | Flexibel | Nein | Horizontal | Analytics, Big Data |
 | **Graph** | Flexibel | Traversierung | Vertikal | Beziehungen, KI |
 
-> IHK-Prüfung: "Welche Datenbank eignet sich für...?" — Kenne die Stärken der einzelnen Typen!
+> ❗ **IHK-Tipp:** "Welche Datenbank eignet sich für...?" — Kenne die Stärken der einzelnen Typen!
 
 ## SQL vs. NoSQL
 
@@ -1177,7 +1177,7 @@ REVOKE INSERT ON schule.noten FROM 'lehrer'@'localhost';
 GRANT ALL PRIVILEGES ON schule.* TO 'admin'@'localhost';
 \`\`\`
 
-> IHK-Prüfung: "Erstellen Sie eine Tabelle für..." — Datentypen und Constraints können!
+> ❗ **IHK-Tipp:** "Erstellen Sie eine Tabelle für..." — Datentypen und Constraints können!
 
 > Häufige Fehler: "VARCHAR und CHAR sind gleich" — Falsch! CHAR füllt mit Leerzeichen auf (feste Länge), VARCHAR speichert nur die tatsächlich eingegebenen Zeichen.
 `,
