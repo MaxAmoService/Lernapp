@@ -859,14 +859,21 @@ git restore --source=HEAD~2 dateiname.txt  # Version von 2 Commits zurück
 
 ## 📋 Zusammenfassung
 
+In dieser Lektion hast du zwei wichtige Werkzeuge für den Alltag kennengelernt:
+
+- **git stash** speichert unvollständige Änderungen temporär, damit du schnell den Branch wechseln kannst (z.B. für einen Hotfix)
+- **git restore** verwirft lokale Änderungen oder stellt eine ältere Dateiversion wieder her
+
 | Befehl | Zweck |
 |--------|-------|
 | \`git stash\` | Änderungen temporär speichern |
 | \`git stash pop\` | Stash anwenden + löschen |
-| \`git stash apply\` | Stash anwenden (bleibt) |
+| \`git stash apply\` | Stash anwenden (bleibt im Stash) |
 | \`git stash list\` | Alle Stashes anzeigen |
 | \`git restore\` | Änderungen verwerfen |
 | \`git restore --staged\` | Aus Staging entfernen |
+
+> 💡 **Merke:** \`git stash pop\` entfernt den Stash nach dem Anwenden, \`git stash apply\` behält ihn. Im Zweifel erst \`apply\` nutzen, dann manuell mit \`git stash drop\` löschen.
 
 ---
 

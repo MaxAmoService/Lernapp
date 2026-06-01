@@ -298,13 +298,21 @@ export async function saveUserProgress(
   const profile = await getUserProfile(uid);
   if (!profile) return null;
   if (!profile.completedLessons[moduleId]) profile.completedLessons[moduleId] = [];
-  if (!profile.completedLessons[moduleId].includes(lessonId)) {
+  // Merken ob die Lektion bereits abgeschlossen war BEVOR wir sie hinzufügen
+  const wasLessonAlreadyDone = profile.completedLessons[moduleId].includes(lessonId);
+  if (!wasLessonAlreadyDone) {
     profile.completedLessons[moduleId].push(lessonId);
     profile.totalXP += 10;
   }
   if (quizScore !== undefined) {
     const old = profile.quizScores[moduleId] || 0;
-    if (quizScore > old) { profile.quizScores[moduleId] = quizScore; profile.totalXP += (quizScore - old) * 2; }
+    if (quizScore > old) {
+      profile.quizScores[moduleId] = quizScore;
+      // Nur XP für den ersten Abschluss vergeben, nicht für Wiederholungen
+      if (!wasLessonAlreadyDone) {
+        profile.totalXP += (quizScore - old) * 2;
+      }
+    }
   }
   try {
     const { getModule } = await import("./data");

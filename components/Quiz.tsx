@@ -580,7 +580,7 @@ function QuestionWithMath({ text }: { text: string }) {
 }
 
 export function Quiz({ moduleSlug, onComplete }: QuizProps) {
-  const { completeLesson } = useAuth();
+  const { completeLesson, user } = useAuth();
   const rawQuestions = allQuizData[moduleSlug] || [];
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -590,7 +590,8 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
   const [score, setScore] = useState(0);
   const [finished, setFinished] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
-  const hasAwardedXP = useRef(false);
+  const quizAlreadyCompleted = user?.completedLessons?.[moduleSlug]?.includes("quiz") ?? false;
+  const hasAwardedXP = useRef(quizAlreadyCompleted);
 
   useEffect(() => {
     setQuestions(shuffleArray(rawQuestions).map(shuffleQuestionOptions));
@@ -707,7 +708,7 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
           </div>
 
           {/* Aktionen */}
-          <div className="flex justify-center mt-4">
+          <div className="flex flex-col items-center gap-2 mt-4">
             <button
               onClick={restart}
               className="flex items-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors text-sm"
@@ -715,6 +716,9 @@ export function Quiz({ moduleSlug, onComplete }: QuizProps) {
               <RotateCcw className="w-4 h-4" />
               Quiz wiederholen
             </button>
+            {quizAlreadyCompleted && (
+              <p className="text-xs text-slate-500">Wiederholung — keine zusätzlichen XP</p>
+            )}
           </div>
 
           {passed && (

@@ -757,12 +757,14 @@ class ReportGenerator:
 
 ## ⚔️ Zusammenfassung
 
+**Coupling** (Kopplung) beschreibt, wie stark Klassen voneinander abhängen. **Cohesion** (Kohäsion) beschreibt, wie gut die Methoden einer Klasse zusammenpassen.
+
 | Merkmal | Gut | Schlecht |
 |---------|-----|----------|
 | **Coupling** | 🟢 Lose (über Interfaces) | 🔴 Stark (direkte Abhängigkeiten) |
 | **Cohesion** | 🟢 Stark (eine Aufgabe) | 🔴 Schwach (vieles durcheinander) |
 
-> 💡 **Merke:** Lose Kopplung + Starke Kohäsion = **sauberer Code**!
+> 💡 **Merke:** Lose Kopplung + Starke Kohäsion = **sauberer Code**! Klassen sollten nur über Interfaces kommunizieren und jeweils nur eine Aufgabe erfüllen.
 
 ---
 

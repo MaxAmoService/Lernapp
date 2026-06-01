@@ -494,6 +494,7 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         );
       } else if (line.startsWith("### ")) {
         flushTable();
+        flushOl();
         elements.push(<h3 key={`h-${keyIndex++}`} className="text-2xl font-semibold text-slate-200 mt-4 mb-2"><InlineText text={line.slice(4)} /></h3>);
       }
       // Callout boxes: > 💡 text or > [!TIP] text etc.
