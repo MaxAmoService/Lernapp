@@ -50,6 +50,7 @@ export const dockerModule: Module = {
       title: "Was ist Docker?",
       duration: "12 min",
       type: "text",
+      visuals: [{ type: "dockerWorkflow", position: "top" }],
       content: `## Docker — Container für die moderne Welt
 
 > Docker ist der Industriestandard für Container-Virtualisierung. In diesem Modul lernst du die Grundlagen, Befehle, Docker Compose und Deployment-Strategien kennen — alles prüfungsrelevant für die IHK!

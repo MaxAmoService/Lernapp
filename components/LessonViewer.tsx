@@ -29,6 +29,7 @@ import VModel from "./visuals/VModel";
 import LayerArchitecture from "./visuals/LayerArchitecture";
 import TestPyramid from "./visuals/TestPyramid";
 import GitflowDiagram from "./visuals/GitflowDiagram";
+import DockerWorkflow from "./visuals/DockerWorkflow";
 import { PAPBuilder } from "./interactive/PAPBuilder";
 import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
 import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
@@ -137,6 +138,7 @@ function renderVisual(visual: LessonVisual, index: number) {
     layerArchitecture: <LayerArchitecture />,
     testPyramid: <TestPyramid />,
     gitflow: <GitflowDiagram />,
+    dockerWorkflow: <DockerWorkflow />,
   };
 
   return (
