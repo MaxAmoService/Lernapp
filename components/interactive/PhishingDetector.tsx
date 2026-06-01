@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 // ============================================================================
 // Phishing Detector — E-Mails analysieren und Phishing erkennen
@@ -258,13 +258,23 @@ IT-Abteilung`,
   },
 ];
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 export function PhishingDetector() {
+  const [shuffledEmails, setShuffledEmails] = useState<Email[]>(() => shuffleArray(emails));
   const [currentEmailIndex, setCurrentEmailIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, boolean>>({});
   const [showExplanation, setShowExplanation] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
 
-  const currentEmail = emails[currentEmailIndex];
+  const currentEmail = shuffledEmails[currentEmailIndex];
   const answered = answers[currentEmail.id] !== undefined;
   const correct = answers[currentEmail.id] === currentEmail.isPhishing;
 
@@ -274,7 +284,7 @@ export function PhishingDetector() {
   };
 
   const handleNext = () => {
-    if (currentEmailIndex < emails.length - 1) {
+    if (currentEmailIndex < shuffledEmails.length - 1) {
       setCurrentEmailIndex((i) => i + 1);
       setShowExplanation(false);
     } else {
@@ -283,6 +293,7 @@ export function PhishingDetector() {
   };
 
   const handleRestart = () => {
+    setShuffledEmails(shuffleArray(emails));
     setCurrentEmailIndex(0);
     setAnswers({});
     setShowExplanation(false);
@@ -290,7 +301,7 @@ export function PhishingDetector() {
   };
 
   const score = Object.entries(answers).filter(
-    ([id, answer]) => answer === emails.find((e) => e.id === Number(id))?.isPhishing
+    ([id, answer]) => answer === shuffledEmails.find((e) => e.id === Number(id))?.isPhishing
   ).length;
 
   const phishingSigns = [
@@ -312,7 +323,7 @@ export function PhishingDetector() {
           <div className="text-6xl mb-4">
             {score >= 9 ? "🏆" : score >= 7 ? "🥈" : score >= 5 ? "🥉" : "📚"}
           </div>
-          <p className="text-white text-2xl font-bold mb-2">{score} / {emails.length} richtig erkannt</p>
+          <p className="text-white text-2xl font-bold mb-2">{score} / {shuffledEmails.length} richtig erkannt</p>
           <p className="text-slate-400 text-sm mb-6">
             {score >= 9 ? "Ausgezeichnet! Du bist ein Phishing-Experte!" :
              score >= 7 ? "Gut gemacht! Achte auf die roten Flaggen." :
@@ -322,7 +333,7 @@ export function PhishingDetector() {
 
           {/* Review */}
           <div className="text-left space-y-2 mb-6">
-            {emails.map((email) => {
+            {shuffledEmails.map((email) => {
               const wasCorrect = answers[email.id] === email.isPhishing;
               return (
                 <div key={email.id} className={`flex items-center gap-2 p-2 rounded-lg text-xs ${
@@ -365,9 +376,9 @@ export function PhishingDetector() {
 
       {/* Progress */}
       <div className="flex items-center gap-2 mb-4">
-        <span className="text-slate-400 text-xs">E-Mail {currentEmailIndex + 1} / {emails.length}</span>
+        <span className="text-slate-400 text-xs">E-Mail {currentEmailIndex + 1} / {shuffledEmails.length}</span>
         <div className="flex-1 h-2 bg-slate-700 rounded-full overflow-hidden">
-          <div className="h-full bg-red-500 rounded-full transition-all" style={{ width: `${((currentEmailIndex + 1) / emails.length) * 100}%` }} />
+          <div className="h-full bg-red-500 rounded-full transition-all" style={{ width: `${((currentEmailIndex + 1) / shuffledEmails.length) * 100}%` }} />
         </div>
         <span className="text-green-400 text-xs font-bold">{score} ✓</span>
       </div>
@@ -441,7 +452,7 @@ export function PhishingDetector() {
             onClick={handleNext}
             className="mt-3 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-sm"
           >
-            {currentEmailIndex < emails.length - 1 ? "Nächste E-Mail →" : "Ergebnis anzeigen →"}
+            {currentEmailIndex < shuffledEmails.length - 1 ? "Nächste E-Mail →" : "Ergebnis anzeigen →"}
           </button>
         </div>
       )}
