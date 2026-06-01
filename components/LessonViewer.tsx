@@ -95,6 +95,7 @@ import { TestRunner } from "./interactive/TestRunner";
 import EVACalculator from "./interactive/EVACalculator";
 import SMARTGoalBuilder from "./interactive/SMARTGoalBuilder";
 import DockerComposeBuilder from "./interactive/DockerComposeBuilder";
+import MagicTriangle from "./interactive/MagicTriangle";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -208,6 +209,7 @@ function renderInteractive(type: string, codeExample?: string) {
     evaCalculator: "EVA-Rechner",
     smartGoalBuilder: "SMART-Ziel Builder",
     dockerComposeBuilder: "Docker Compose Builder",
+    magicTriangle: "Magisches Dreieck",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -289,6 +291,7 @@ function renderInteractive(type: string, codeExample?: string) {
     evaCalculator: <EVACalculator />,
     smartGoalBuilder: <SMARTGoalBuilder />,
     dockerComposeBuilder: <DockerComposeBuilder />,
+    magicTriangle: <MagicTriangle />,
   };
 
   const name = interactiveNames[type] || type;

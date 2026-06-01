@@ -67,3 +67,4 @@ export { TestRunner } from "./TestRunner";
 export { default as EVACalculator } from "./EVACalculator";
 export { default as SMARTGoalBuilder } from "./SMARTGoalBuilder";
 export { default as DockerComposeBuilder } from "./DockerComposeBuilder";
+export { default as MagicTriangle } from "./MagicTriangle";

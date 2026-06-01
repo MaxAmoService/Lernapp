@@ -138,7 +138,8 @@ Die **Projektakte** ist das "heilige Dokument" eines Projekts — sie enthält A
       id: "pm-2",
       title: "Das Magische Dreieck",
       duration: "12 min",
-      type: "text",
+      type: "interactive",
+      interactive: "magicTriangle",
       content: `## Das Magische Dreieck — Qualität, Budget, Zeit
 
 > In der letzten Lektion hast du gelernt, was ein Projekt ist und wer daran beteiligt ist. Jetzt kommt das wichtigste Modell für jedes Projekt: das **Magische Dreieck**. Es beschreibt das Spannungsfeld, in dem sich jedes Projekt bewegt.
@@ -217,6 +218,8 @@ Das **Magische Dreieck** beschreibt das Spannungsfeld, in dem sich jedes Projekt
 - Zeit problematisch → Budget erhöhen (mehr Leute)
 - Budget problematisch → Zeit verlängern
 - Qualität problematisch → Mehr Zeit/Budget für Tests
+
+[INTERACTIVE]
 
 ---
 

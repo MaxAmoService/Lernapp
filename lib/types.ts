@@ -44,7 +44,8 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "evaCalculator"
   | "testRunner"
   | "smartGoalBuilder"
-  | "dockerComposeBuilder";
+  | "dockerComposeBuilder"
+  | "magicTriangle";
 
 export interface Lesson {
   id: string;
