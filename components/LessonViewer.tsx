@@ -28,6 +28,7 @@ import WaterfallModel from "./visuals/WaterfallModel";
 import VModel from "./visuals/VModel";
 import LayerArchitecture from "./visuals/LayerArchitecture";
 import TestPyramid from "./visuals/TestPyramid";
+import GitflowDiagram from "./visuals/GitflowDiagram";
 import { PAPBuilder } from "./interactive/PAPBuilder";
 import { PseudocodeRunner } from "./interactive/PseudocodeRunner";
 import { StruktogrammBuilder } from "./interactive/StruktogrammBuilder";
@@ -135,6 +136,7 @@ function renderVisual(visual: LessonVisual, index: number) {
     vModel: <VModel />,
     layerArchitecture: <LayerArchitecture />,
     testPyramid: <TestPyramid />,
+    gitflow: <GitflowDiagram />,
   };
 
   return (

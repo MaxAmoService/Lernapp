@@ -326,6 +326,7 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
       duration: "15 min",
       type: "interactive",
       interactive: "gitBranchVisualizer",
+      visuals: [{ type: "gitflow", position: "top" }],
       content: `## Gitflow — Ordnung im Branch-Chaos
 
 > In der letzten Lektion hast du die einzelnen Git-Befehle kennengelernt. Jetzt schauen wir uns an, wie man mit einer **Branching-Strategie** wie Gitflow Ordnung ins Chaos bringt — denn ohne klare Regeln wird es bei mehreren Entwicklern schnell unübersichtlich.
