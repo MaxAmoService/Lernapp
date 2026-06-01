@@ -45,7 +45,8 @@ export type InteractiveType = "functionExplorer" | "tangentExplorer" | "integral
   | "testRunner"
   | "smartGoalBuilder"
   | "dockerComposeBuilder"
-  | "magicTriangle";
+  | "magicTriangle"
+  | "gitShellSimulator";
 
 export interface Lesson {
   id: string;

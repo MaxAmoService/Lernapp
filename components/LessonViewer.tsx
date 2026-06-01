@@ -96,6 +96,7 @@ import EVACalculator from "./interactive/EVACalculator";
 import SMARTGoalBuilder from "./interactive/SMARTGoalBuilder";
 import DockerComposeBuilder from "./interactive/DockerComposeBuilder";
 import MagicTriangle from "./interactive/MagicTriangle";
+import GitShellSimulator from "./interactive/GitShellSimulator";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -210,6 +211,7 @@ function renderInteractive(type: string, codeExample?: string) {
     smartGoalBuilder: "SMART-Ziel Builder",
     dockerComposeBuilder: "Docker Compose Builder",
     magicTriangle: "Magisches Dreieck",
+    gitShellSimulator: "Git Shell Simulator",
   };
 
   const components: Record<string, JSX.Element> = {
@@ -292,6 +294,7 @@ function renderInteractive(type: string, codeExample?: string) {
     smartGoalBuilder: <SMARTGoalBuilder />,
     dockerComposeBuilder: <DockerComposeBuilder />,
     magicTriangle: <MagicTriangle />,
+    gitShellSimulator: <GitShellSimulator />,
   };
 
   const name = interactiveNames[type] || type;

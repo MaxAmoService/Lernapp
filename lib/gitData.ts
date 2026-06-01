@@ -210,7 +210,8 @@ Diese Strategien bestimmen, **wie mit parallelem Zugriff** umgegangen wird:
       id: "git-3",
       title: "Git Grundlagen & Befehle",
       duration: "20 min",
-      type: "text",
+      type: "interactive",
+      interactive: "gitShellSimulator",
       content: `## Git — Die wichtigsten Befehle
 
 > In der letzten Lektion haben wir zentrale und dezentrale VV verglichen. Jetzt wird es praktisch: Du lernst die wichtigsten Git-Befehle kennen, mit denen du im Alltag arbeitest.
@@ -308,6 +309,8 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
 ## 🎯 IHK-Tipp
 
 > ❗ **Prüfungsfrage:** "Erklären Sie den Unterschied zwischen git pull und git fetch!" — pull = fetch + merge. fetch lädt nur herunter, ohne lokale Branches zu verändern.
+
+[INTERACTIVE]
 
 ---
 
