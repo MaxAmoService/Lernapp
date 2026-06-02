@@ -2,7 +2,8 @@
 
 import { Lesson } from "@/lib/data";
 import { LessonVisual } from "@/lib/types";
-import { CheckCircle2, ChevronRight } from "lucide-react";
+import { CheckCircle2, ChevronRight, Home } from "lucide-react";
+import Link from "next/link";
 import { CodeBlock } from "./CodeBlock";
 import { MathBlock } from "./MathBlock";
 import { InlineText } from "./InlineText";
@@ -105,6 +106,7 @@ import DockerComposeBuilder from "./interactive/DockerComposeBuilder";
 import MagicTriangle from "./interactive/MagicTriangle";
 import GitShellSimulator from "./interactive/GitShellSimulator";
 import MergeConflictResolver from "./interactive/MergeConflictResolver";
+import { LessonFeedback } from "./LessonFeedback";
 
 function renderVisual(visual: LessonVisual, index: number) {
   const w = 400, h = 300;
@@ -338,9 +340,13 @@ interface LessonViewerProps {
   isCompleted: boolean;
   onNext?: () => void;
   hasNext?: boolean;
+  moduleSlug?: string;
+  moduleTitle?: string;
+  moduleIcon?: string;
+  lessonIndex?: number;
 }
 
-export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext }: LessonViewerProps) {
+export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext, moduleSlug, moduleTitle, moduleIcon, lessonIndex }: LessonViewerProps) {
   const renderContent = (content: string, interactiveType?: string) => {
     const elements: JSX.Element[] = [];
     const lines = content.split("\n");
@@ -746,6 +752,32 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
 
   return (
     <div className="glass rounded-xl p-4 sm:p-6 lg:p-8 animate-slide-up">
+      {/* Breadcrumb / Roter Faden */}
+      {moduleSlug && moduleTitle && (
+        <nav className="flex items-center gap-1.5 text-sm mb-4 sm:mb-5 pb-3 border-b border-slate-700/50">
+          <Link
+            href="/modules"
+            className="text-slate-500 hover:text-slate-300 transition-colors flex items-center gap-1"
+          >
+            <Home className="w-3.5 h-3.5" />
+            <span className="hidden sm:inline">Module</span>
+          </Link>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+          <Link
+            href={`/modules/${moduleSlug}`}
+            className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-1.5 font-medium"
+          >
+            {moduleIcon && <span className="text-base">{moduleIcon}</span>}
+            <span className="truncate max-w-[180px] sm:max-w-none">{moduleTitle}</span>
+          </Link>
+          <ChevronRight className="w-3.5 h-3.5 text-slate-600" />
+          <span className="text-blue-400 font-medium truncate max-w-[200px] sm:max-w-none">
+            {lessonIndex !== undefined && <span className="text-slate-500 mr-1">{lessonIndex + 1}.</span>}
+            {lesson.title}
+          </span>
+        </nav>
+      )}
+
       {/* Header */}
       <div className="flex items-center justify-between mb-4 sm:mb-6 pb-3 sm:pb-4 border-b border-slate-700">
         <div className="min-w-0 flex-1">
@@ -843,6 +875,16 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           </a>
         )}
       </div>
+
+      {/* Feedback-Formular */}
+      {moduleSlug && moduleTitle && (
+        <LessonFeedback
+          moduleSlug={moduleSlug}
+          moduleTitle={moduleTitle}
+          lessonId={lesson.id}
+          lessonTitle={lesson.title}
+        />
+      )}
     </div>
   );
 }

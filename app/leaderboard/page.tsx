@@ -7,6 +7,7 @@ import type { LeaderboardEntry } from "@/lib/auth";
 import { AvatarFrame } from "@/components/AvatarFrame";
 import { getUnlockedAvatars } from "@/lib/rewards";
 import { FrameOnlineStatus } from "@/components/OnlineStatus";
+import { LeaderboardProfileModal } from "@/components/LeaderboardProfileModal";
 import { Trophy, Flame, Zap, Crown, Lock, Eye, EyeOff, Loader2, TrendingUp, Users } from "lucide-react";
 import Link from "next/link";
 
@@ -15,6 +16,7 @@ export default function LeaderboardPage() {
   const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [optingIn, setOptingIn] = useState(false);
+  const [selectedEntry, setSelectedEntry] = useState<LeaderboardEntry | null>(null);
 
   useEffect(() => {
     loadEntries();
@@ -155,7 +157,8 @@ export default function LeaderboardPage() {
             return (
               <div
                 key={entry.uid}
-                className={`relative flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-200 group ${
+                onClick={() => setSelectedEntry(entry)}
+                className={`relative flex items-center gap-2 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-200 group cursor-pointer ${
                   isCurrentUser
                     ? "bg-blue-500/10 border border-blue-500/30 shadow-md shadow-blue-500/10"
                     : "bg-slate-800/40 border border-slate-700/40 hover:bg-slate-800/60 hover:border-slate-700/60"
@@ -255,6 +258,23 @@ export default function LeaderboardPage() {
           <h3 className="text-lg font-semibold text-slate-400 mb-2">Nicht eingeloggt</h3>
           <p className="text-slate-500 text-sm mb-4">Melde dich an, um die Bestenliste zu sehen</p>
         </div>
+      )}
+
+      {/* Profile Modal */}
+      {selectedEntry && (
+        <LeaderboardProfileModal
+          uid={selectedEntry.uid}
+          displayName={selectedEntry.displayName}
+          avatar={selectedEntry.avatar}
+          equippedFrame={selectedEntry.equippedFrame}
+          totalXP={selectedEntry.totalXP}
+          streak={selectedEntry.streak}
+          completedModules={selectedEntry.completedModules}
+          level={selectedEntry.level}
+          levelTitle={selectedEntry.levelTitle}
+          leaderboardRank={entries.findIndex(e => e.uid === selectedEntry.uid) + 1}
+          onClose={() => setSelectedEntry(null)}
+        />
       )}
     </div>
   );

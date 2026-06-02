@@ -468,6 +468,10 @@ export default function ModulePage() {
                 isCompleted={completedLessons.has(selectedLesson.id)}
                 onNext={goToNextLesson}
                 hasNext={hasNextLesson()}
+                moduleSlug={module.slug}
+                moduleTitle={module.title}
+                moduleIcon={module.icon}
+                lessonIndex={module.lessons.findIndex(l => l.id === selectedLesson.id)}
               />
             )
           ) : (
