@@ -1454,6 +1454,15 @@ Die Geschwindigkeit einer seriellen Verbindung wird in **Baud** (Symbolrate) ode
 [INTERACTIVE]
 `,
     },
+    {
+      id: "hw-14",
+      title: "Wissenstest: Computersysteme & Hardware",
+      duration: "15 min",
+      type: "quiz",
+      content: `## 🎯 Quiz: Computersysteme & Hardware
+
+Teste dein Wissen über CPU-Architektur, Speicherhierarchie, RAID, BIOS/UEFI und Virtualisierung!`,
+    },
   ],
 };
 

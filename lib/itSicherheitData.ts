@@ -571,5 +571,14 @@ Social Engineering nutzt die **menschliche Psyche** als Angriffsvektor — keine
 > ❗ **IHK-Tipp:** Social Engineering-Fragen zielen oft auf die menschliche Schwachstelle ab — "Warum ist der Mensch das schwächste Glied?"
 `,
     },
+    {
+      id: "sec-7",
+      title: "Wissenstest: IT-Sicherheit",
+      duration: "15 min",
+      type: "quiz",
+      content: `## 🎯 Quiz: IT-Sicherheit
+
+Teste dein Wissen über IT-Sicherheit — von der CIA-Triade über Verschlüsselung bis zu Netzwerksicherheit!`,
+    },
   ],
 };
