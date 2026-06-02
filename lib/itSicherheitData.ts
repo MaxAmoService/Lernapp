@@ -111,17 +111,6 @@ Ein **Angriffsvektor** ist der Weg, den ein Angreifer nutzt, um in ein System ei
 - **Menschlich:** Social Engineering, Phishing, Pretexting
 - **Physisch:** Einbruch, Diebstahl, Tailgating
 
-### Schadsoftware (Malware) im Überblick
-
-| Art | Beschreibung | Schutz |
-|-----|-------------|--------|
-| **Virus** | Braucht einen Wirt, verbreitet sich durch Nutzeraktion | Virenscanner |
-| **Wurm** | Selbstreplizierend, nutzt Netzwerk | Firewall, Updates |
-| **Trojaner** | Tarnung als nützliches Programm | Quellen prüfen |
-| **Ransomware** | Verschlüsselt Daten, fordert Lösegeld | Backups, Schulung |
-| **Spyware** | Späht Daten heimlich aus | Virenscanner |
-| **Keylogger** | Protokolliert Tastatureingaben | Virtuelle Tastatur |
-
 [INTERACTIVE:securityThreatExplorer]
 
 ### Schutzmaßnahmen — Defense in Depth

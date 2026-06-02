@@ -59,7 +59,7 @@ export const gitModule: Module = {
 - **MAJOR** — Breaking Change
 
 ### Commit-Regeln (Conventional Commits)
-- Format: \`type(scope): beschreibung\`
+- Format: \`type(scope): description\`
 - Typen: feat, fix, refactor, style, test, docs, chore
 - Imperativ verwenden, max. 50 Zeichen`,
 
@@ -822,15 +822,25 @@ git stash clear     # Alle Stashes löschen
 
 ## 🔄 Typischer Workflow mit Stash
 
-1. Du arbeitest an feature/login
-2. Chef ruft: "Bug in Produktion! Sofort fixen!"
-3. git stash push -m "Login halb fertig"
-4. git checkout main
-5. git checkout -b hotfix/bug-123
-6. Bugfix machen, committen, pushen
-7. git checkout feature/login
-8. git stash pop
-9. Weiterarbeiten!
+\`\`\`bash
+# 1. Du arbeitest an feature/login
+# 2. Chef ruft: "Bug in Produktion! Sofort fixen!"
+
+# Änderungen stashen
+git stash push -m "Login halb fertig"
+
+# Auf main wechseln und Hotfix-Branch erstellen
+git checkout main
+git checkout -b hotfix/bug-123
+
+# Bugfix machen, committen, pushen
+# ... git add, commit, push ...
+
+# Zurück zum Feature und Stash wiederherstellen
+git checkout feature/login
+git stash pop
+# Weiterarbeiten!
+\`\`\`
 
 ---
 
