@@ -455,6 +455,7 @@ export interface ClickerState {
   clickPower: number;
   autoSpeed: number;
   autoAmount: number;
+  prestigeMultiplier: number;
   upgrades: Record<string, number>;
   equippedAvatar: string;
   equippedFrame: string;
@@ -468,6 +469,7 @@ const CLICKER_DEFAULTS: ClickerState = {
   clickPower: 1,
   autoSpeed: 1000,
   autoAmount: 0,
+  prestigeMultiplier: 1,
   upgrades: {},
   equippedAvatar: "📚",
   equippedFrame: "none",
@@ -490,7 +492,9 @@ export async function loadClickerState(uid: string): Promise<ClickerState> {
     const elapsed = Math.min(now - lastTick, 24 * 60 * 60 * 1000); // Max 24h
     const autoAmount = profile.clickerAutoAmount || 0;
     const autoSpeed = profile.clickerAutoSpeed || 1000;
-    const offlinePoints = autoAmount > 0 ? Math.floor((elapsed / autoSpeed) * autoAmount) : 0;
+    const equippedFrame = profile.clickerEquippedFrame || "none";
+    const prestigeMultiplier = PRESTIGE_MULTIPLIERS[equippedFrame] || 1;
+    const offlinePoints = autoAmount > 0 ? Math.floor((elapsed / autoSpeed) * autoAmount * prestigeMultiplier) : 0;
 
     const state: ClickerState = {
       points: (profile.clickerPoints || 0) + offlinePoints,
@@ -498,9 +502,10 @@ export async function loadClickerState(uid: string): Promise<ClickerState> {
       clickPower: profile.clickerClickPower || 1,
       autoSpeed: autoSpeed,
       autoAmount: autoAmount,
+      prestigeMultiplier,
       upgrades: profile.clickerUpgrades || {},
       equippedAvatar: profile.clickerEquippedAvatar || "📚",
-      equippedFrame: profile.clickerEquippedFrame || "none",
+      equippedFrame,
       ownedCosmetics: profile.clickerOwnedCosmetics || [],
       lastTick: new Date().toISOString(),
     };
@@ -522,8 +527,8 @@ export async function loadClickerState(uid: string): Promise<ClickerState> {
 }
 
 export async function saveClickerClick(uid: string, earnedPoints: number): Promise<number> {
-  // Server-seitige Validierung: max. 10.000 Punkte pro Speicherung
-  const validPower = Math.min(Math.max(0, Math.floor(earnedPoints)), 10000);
+  // Server-seitige Validierung: max. 1.000.000 Punkte pro Speicherung
+  const validPower = Math.min(Math.max(0, Math.floor(earnedPoints)), 1_000_000);
   if (validPower <= 0) return 0;
   try {
     const profile = await getUserProfile(uid);
@@ -543,7 +548,7 @@ export async function saveClickerClick(uid: string, earnedPoints: number): Promi
 }
 
 export async function saveClickerTick(uid: string, autoAmount: number, autoSpeed: number): Promise<number> {
-  const validAmount = Math.min(Math.max(0, Math.floor(autoAmount)), 1000);
+  const validAmount = Math.min(Math.max(0, Math.floor(autoAmount)), 10000);
   const validSpeed = Math.min(Math.max(100, Math.floor(autoSpeed)), 60000);
   try {
     const profile = await getUserProfile(uid);
@@ -621,6 +626,54 @@ export async function buyClickerUpgrade(uid: string, upgradeId: string): Promise
   }
 }
 
+export async function buyClickerUpgradeBulk(uid: string, upgradeId: string, maxLevels: number = 1): Promise<ClickerState | null> {
+  const config = UPGRADE_COSTS[upgradeId];
+  if (!config) return null;
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+    const upgrades = profile.clickerUpgrades || {};
+    let count = upgrades[upgradeId] || 0;
+    let currentPoints = profile.clickerPoints || 0;
+    let levelsBought = 0;
+
+    while (levelsBought < maxLevels) {
+      const cost = Math.floor(config.base * Math.pow(config.mult, count));
+      if (currentPoints < cost) break;
+      currentPoints -= cost;
+      count++;
+      levelsBought++;
+    }
+
+    if (levelsBought === 0) return null;
+
+    const newUpgrades = { ...upgrades, [upgradeId]: count };
+    const updates: Record<string, unknown> = {
+      clickerPoints: currentPoints,
+      clickerUpgrades: newUpgrades,
+    };
+
+    // Effekt anwenden
+    if (config.effect === "clickPower") {
+      updates.clickerClickPower = (profile.clickerClickPower || 1) + config.value * levelsBought;
+    } else if (config.effect === "autoAmount") {
+      updates.clickerAutoAmount = (profile.clickerAutoAmount || 0) + config.value * levelsBought;
+    } else if (config.effect === "autoSpeed") {
+      let speed = profile.clickerAutoSpeed || 1000;
+      for (let i = 0; i < levelsBought; i++) {
+        speed = Math.max(100, Math.floor(speed * config.value));
+      }
+      updates.clickerAutoSpeed = speed;
+    }
+
+    await updateUserProfile(uid, updates);
+    return loadClickerState(uid);
+  } catch (err) {
+    console.error("[Clicker] Bulk upgrade failed:", err);
+    return null;
+  }
+}
+
 const COSMETIC_COSTS: Record<string, number> = {
   av_book: 50, av_light: 50, av_atom: 100, av_gear: 100,
   av_brain: 250, av_rocket: 250, av_dragon: 500, av_unicorn: 500,
@@ -640,6 +693,23 @@ const PRESTIGE_MIN_TOTAL: Record<string, number> = {
   fr_prestige_gold: 2000000,
   fr_prestige_diamond: 10000000,
   fr_prestige_legend: 50000000,
+};
+
+// Prestige-Multiplikatoren (basieren auf ausgerüstetem Rahmen)
+const PRESTIGE_MULTIPLIERS: Record<string, number> = {
+  fr_prestige_bronze: 1.10,
+  fr_prestige_silver: 1.25,
+  fr_prestige_gold: 1.50,
+  fr_prestige_diamond: 2.00,
+  fr_prestige_legend: 3.00,
+};
+
+// Cosmetic-ID → Emoji-Icon Mapping (für equipClickerCosmetic)
+const COSMETIC_ICONS: Record<string, string> = {
+  av_book: "📚", av_light: "💡", av_atom: "⚛️", av_gear: "⚙️",
+  av_brain: "🧠", av_rocket: "🚀", av_dragon: "🐉", av_unicorn: "🦄",
+  av_crown: "👑", av_diamond: "💎",
+  av_phoenix: "🔥", av_galaxy: "🌌", av_cosmic: "✨",
 };
 
 export async function buyClickerCosmetic(uid: string, cosmeticId: string): Promise<ClickerState | null> {
@@ -678,7 +748,8 @@ export async function equipClickerCosmetic(uid: string, cosmeticId: string, type
     const owned = profile.clickerOwnedCosmetics || [];
     if (!owned.includes(cosmeticId)) return; // Nicht gekauft
     if (type === "avatar") {
-      await updateUserProfile(uid, { clickerEquippedAvatar: cosmeticId });
+      const icon = COSMETIC_ICONS[cosmeticId] || cosmeticId;
+      await updateUserProfile(uid, { clickerEquippedAvatar: icon });
     } else {
       // frame und prestige werden beide als Frame equipped
       await updateUserProfile(uid, { clickerEquippedFrame: cosmeticId });
