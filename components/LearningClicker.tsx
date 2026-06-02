@@ -263,29 +263,45 @@ export default function LearningClicker() {
     return () => clearInterval(interval);
   }, [state.autoAmount, effectiveAutoSpeed, prestigeMultiplier, petBonuses.auto]);
 
-  // Drag handlers
+  // Drag handlers — erst nach 5px Bewegung aktivieren
   const handleDragStart = useCallback((e: React.PointerEvent) => {
     if (e.button !== 0) return;
     e.preventDefault();
-    setIsDragging(true);
+    e.stopPropagation();
     dragMovedRef.current = false;
     dragOffset.current = { x: e.clientX - position.x, y: e.clientY - position.y };
     const el = dragHeaderRef.current;
     if (el) el.setPointerCapture(e.pointerId);
+    const startX = e.clientX;
+    const startY = e.clientY;
+    const onMove = (ev: PointerEvent) => {
+      const dx = Math.abs(ev.clientX - startX);
+      const dy = Math.abs(ev.clientY - startY);
+      if (dx > 5 || dy > 5) {
+        setIsDragging(true);
+        dragMovedRef.current = true;
+      }
+      if (dragMovedRef.current) {
+        setPosition({
+          x: Math.max(0, Math.min(window.innerWidth - 320, ev.clientX - dragOffset.current.x)),
+          y: Math.max(0, Math.min(window.innerHeight - 60, ev.clientY - dragOffset.current.y)),
+        });
+      }
+    };
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      setIsDragging(false);
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
   }, [position]);
-
-  const handleDragMove = useCallback((e: React.PointerEvent) => {
-    if (!isDragging) return;
-    dragMovedRef.current = true;
-    setPosition({
-      x: Math.max(0, Math.min(window.innerWidth - 320, e.clientX - dragOffset.current.x)),
-      y: Math.max(0, Math.min(window.innerHeight - 60, e.clientY - dragOffset.current.y)),
-    });
-  }, [isDragging]);
 
   const handleDragEnd = useCallback(() => { setIsDragging(false); }, []);
   const handleHeaderClick = useCallback((e: React.MouseEvent) => {
-    if (dragMovedRef.current) { e.preventDefault(); e.stopPropagation(); }
+    // IMMER stoppen — Header-Klicks sollen NIE durchschlagen
+    e.preventDefault();
+    e.stopPropagation();
   }, []);
 
   // Combo-System
@@ -586,7 +602,6 @@ export default function LearningClicker() {
             className="flex items-center gap-2 px-3 py-2 bg-gradient-to-r from-amber-500/20 to-orange-500/20 border-b border-slate-700/50 cursor-grab active:cursor-grabbing touch-none"
             style={{ touchAction: "none" }}
             onPointerDown={handleDragStart}
-            onPointerMove={handleDragMove}
             onPointerUp={handleDragEnd}
             onPointerCancel={handleDragEnd}
             onClick={handleHeaderClick}
@@ -642,11 +657,12 @@ export default function LearningClicker() {
                   )}
                 </div>
 
-                {/* Click area */}
+                {/* Click area — komplett isoliert */}
                 <button
-                  onClick={(e) => { e.stopPropagation(); handleClick(e); }}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onTouchStart={(e) => e.stopPropagation()}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); handleClick(e); }}
+                  onMouseDown={(e) => { e.stopPropagation(); e.preventDefault(); }}
+                  onTouchStart={(e) => { e.stopPropagation(); e.preventDefault(); }}
+                  onPointerDown={(e) => { e.stopPropagation(); }}
                   style={{ touchAction: "manipulation" }}
                   className={`relative mt-2 w-24 h-24 mx-auto rounded-full border-2 flex items-center justify-center group active:scale-[0.85] transition-transform duration-75 ${
                     combo >= 30
