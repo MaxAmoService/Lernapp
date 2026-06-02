@@ -237,10 +237,32 @@ Git ist der **Industriestandard** für Versionsverwaltung. Hier sind die Befehle
 
 ## 🔄 Der typische Workflow
 
-1. **Code bearbeiten** — Working Directory
-2. **git add** → Staging Area
-3. **git commit** → Lokales Repository
-4. **git push** → Remote Repository
+<svg viewBox="0 0 680 100" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="680" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <rect x="15" y="25" width="120" height="50" rx="8" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="75" y="46" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">Working Dir</text>
+  <text x="75" y="62" text-anchor="middle" fill="#64748b" font-size="8">Code bearbeiten</text>
+  <text x="75" y="18" text-anchor="middle" fill="#94a3b8" font-size="8">💻</text>
+  <polygon points="140,50 158,42 158,58" fill="#64748b"/>
+  <text x="149" y="38" text-anchor="middle" fill="#64748b" font-size="7">add</text>
+  <rect x="165" y="25" width="120" height="50" rx="8" fill="#f59e0b" fill-opacity="0.2" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="225" y="46" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">Staging Area</text>
+  <text x="225" y="62" text-anchor="middle" fill="#64748b" font-size="8">git add</text>
+  <text x="225" y="18" text-anchor="middle" fill="#94a3b8" font-size="8">📋</text>
+  <polygon points="290,50 308,42 308,58" fill="#64748b"/>
+  <text x="299" y="38" text-anchor="middle" fill="#64748b" font-size="7">commit</text>
+  <rect x="315" y="25" width="140" height="50" rx="8" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5"/>
+  <text x="385" y="46" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">Lokales Repo</text>
+  <text x="385" y="62" text-anchor="middle" fill="#64748b" font-size="8">git commit</text>
+  <text x="385" y="18" text-anchor="middle" fill="#94a3b8" font-size="8">🗄️</text>
+  <polygon points="460,50 478,42 478,58" fill="#64748b"/>
+  <text x="469" y="38" text-anchor="middle" fill="#64748b" font-size="7">push</text>
+  <rect x="485" y="25" width="140" height="50" rx="8" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="555" y="46" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">Remote Repo</text>
+  <text x="555" y="62" text-anchor="middle" fill="#64748b" font-size="8">git push</text>
+  <text x="555" y="18" text-anchor="middle" fill="#94a3b8" font-size="8">☁️</text>
+  <text x="640" y="50" text-anchor="middle" fill="#94a3b8" font-size="8">GitHub</text>
+</svg>
 
 > 💡 **Merke:** Erst adden, dann committen — nicht umgekehrt!
 
