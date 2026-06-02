@@ -174,6 +174,8 @@ export default function LearningClicker() {
   const [isDragging, setIsDragging] = useState(false);
   const [loading, setLoading] = useState(true);
   const [buyFeedback, setBuyFeedback] = useState<string | null>(null);
+  const [buttonGlow, setButtonGlow] = useState<"combo" | "golden" | null>(null);
+  const [upgradesSubTab, setUpgradesSubTab] = useState<"klick" | "auto" | "speed" | "synergie">("klick");
 
   // Pet-System State
   const [allPets, setAllPets] = useState<PetDef[]>([]);
@@ -185,6 +187,7 @@ export default function LearningClicker() {
   // Prestige State
   const [showPrestigeConfirm, setShowPrestigeConfirm] = useState(false);
   const [prestigeAnimating, setPrestigeAnimating] = useState(false);
+  const [prestigeParticles, setPrestigeParticles] = useState<{ angle: number; dist: number; color: string; size: number; delay: number; duration: number }[]>([]);
 
   const dragOffset = useRef({ x: 0, y: 0 });
   const dragMovedRef = useRef(false);
@@ -243,6 +246,10 @@ export default function LearningClicker() {
   const clickUpgradeCount =
     (state.upgrades["click1"] || 0) + (state.upgrades["click2"] || 0) +
     (state.upgrades["click3"] || 0) + (state.upgrades["click4"] || 0) + (state.upgrades["click5"] || 0);
+  const speedUpgradeCount =
+    (state.upgrades["speed1"] || 0) + (state.upgrades["speed2"] || 0) +
+    (state.upgrades["speed3"] || 0) + (state.upgrades["speed4"] || 0);
+  const synUpgradeCount = (state.upgrades["syn1"] || 0) + (state.upgrades["syn2"] || 0);
   const syn1Count = state.upgrades["syn1"] || 0;
   const syn2Count = state.upgrades["syn2"] || 0;
   const synergyClickBonus = syn1Count > 0 ? 1 + (autoUpgradeCount * 0.02 * syn1Count) : 1;
@@ -365,9 +372,8 @@ export default function LearningClicker() {
     }, 800);
 
     if (newCombo >= 15 || isGolden) {
-      document.documentElement.style.setProperty("--shake-intensity", isGolden ? "4px" : "2px");
-      document.documentElement.classList.add("clicker-shake");
-      setTimeout(() => document.documentElement.classList.remove("clicker-shake"), 200);
+      setButtonGlow(isGolden ? "golden" : "combo");
+      setTimeout(() => setButtonGlow(null), 400);
     }
 
     pendingPointsRef.current += earnedPoints;
@@ -451,6 +457,18 @@ export default function LearningClicker() {
   const handlePrestige = useCallback(async () => {
     if (!user) return;
     await flushPendingClicks();
+
+    // Pre-generate particles before animation starts
+    const colors = ["#F43F5E", "#FB923C", "#FBBF24", "#A78BFA", "#60A5FA", "#34D399"];
+    setPrestigeParticles(Array.from({ length: 50 }, (_, i) => ({
+      angle: (360 / 50) * i,
+      dist: 150 + Math.random() * 300,
+      color: colors[i % colors.length],
+      size: 2 + Math.random() * 4,
+      delay: 0.1 + Math.random() * 0.3,
+      duration: 1.2 + Math.random() * 1,
+    })));
+
     setPrestigeAnimating(true);
     setShowPrestigeConfirm(false);
 
@@ -513,70 +531,111 @@ export default function LearningClicker() {
 
   return (
     <>
-      {/* Prestige Glitch Overlay */}
+      {/* Prestige Glitch Overlay — full screen */}
       {prestigeAnimating && (
         <div className="fixed inset-0 z-[100] pointer-events-none prestige-glitch-overlay">
-          <div className="absolute inset-0 bg-black/80 animate-pulse" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-6xl font-black text-rose-400 animate-bounce prestige-glitch-text">
-              PRESTIGE {state.prestigeLevel + 1}
+          {/* Dark backdrop with pulse */}
+          <div className="absolute inset-0 bg-black/85" />
+          {/* Scanline glitch strips */}
+          <div className="absolute inset-0 prestige-scanlines" />
+          {/* Glitch color bars */}
+          <div className="absolute inset-0 prestige-color-bars opacity-20" />
+          {/* Central text */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+            <div className="text-7xl sm:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 via-amber-300 to-violet-400 prestige-glitch-text drop-shadow-2xl tracking-wider">
+              PRESTIGE
+            </div>
+            <div className="text-5xl sm:text-6xl font-black text-white/90 prestige-level-pop drop-shadow-2xl">
+              {state.prestigeLevel + 1}
+            </div>
+            <div className="text-sm text-slate-400 mt-2 prestige-subtitle tracking-widest uppercase">
+              Fortschritt zurückgesetzt
             </div>
           </div>
-          {/* Prestige Particles */}
-          {Array.from({ length: 30 }, (_, i) => (
+          {/* Prestige Particles — radial burst from center */}
+          {prestigeParticles.map((p, i) => (
             <div
               key={`pp-${i}`}
-              className="absolute w-3 h-3 rounded-full"
+              className="absolute rounded-full"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                backgroundColor: ["#F43F5E", "#FB923C", "#FBBF24", "#A78BFA"][i % 4],
-                boxShadow: `0 0 10px ${["#F43F5E", "#FB923C", "#FBBF24", "#A78BFA"][i % 4]}`,
-                animation: `prestige-particle ${1 + Math.random() * 2}s ease-out forwards`,
-                animationDelay: `${Math.random() * 0.5}s`,
+                left: "50%",
+                top: "50%",
+                width: `${p.size}px`,
+                height: `${p.size}px`,
+                backgroundColor: p.color,
+                boxShadow: `0 0 ${p.size * 3}px ${p.color}`,
+                animation: `prestige-radial ${p.duration}s ease-out forwards`,
+                animationDelay: `${p.delay}s`,
+                // @ts-ignore
+                "--pp-angle": `${p.angle}deg`,
+                "--pp-dist": `${p.dist}px`,
               }}
             />
           ))}
+          {/* Sparkle ring */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-40 h-40 rounded-full border-2 border-rose-500/40 animate-ping" />
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-64 h-64 rounded-full border border-violet-500/20 prestige-expand-ring" />
+          </div>
         </div>
       )}
 
-      {/* Pet Reveal Overlay */}
+      {/* Pet Reveal Overlay — centered on screen */}
       {revealedPet && (
-        <div className="fixed inset-0 z-[90] flex items-center justify-center pointer-events-none">
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative flex flex-col items-center gap-3 animate-bounce-in">
-            {/* Rarity Glow */}
-            <div className={`absolute -inset-8 rounded-full blur-2xl opacity-60 ${
-              revealedPet.pet.rarity === "legendary" ? "bg-amber-500/40"
-              : revealedPet.pet.rarity === "epic" ? "bg-violet-500/40"
-              : revealedPet.pet.rarity === "rare" ? "bg-blue-500/40"
-              : "bg-slate-500/30"
-            }`} />
-            <div className="text-7xl relative z-10 animate-spin-slow">{revealedPet.pet.emoji}</div>
-            <div className={`text-xl font-black relative z-10 ${RARITY_COLORS[revealedPet.pet.rarity].text}`}>
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center cursor-pointer"
+          onClick={() => setRevealedPet(null)}
+        >
+          {/* Dark backdrop with blur */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm animate-fade-in" />
+          <div className="relative flex flex-col items-center gap-4 animate-bounce-in" onClick={(e) => e.stopPropagation()}>
+            {/* Box-opening shake phase */}
+            <div className="relative">
+              {/* Rarity Glow ring */}
+              <div className={`absolute -inset-12 rounded-full blur-3xl opacity-50 ${
+                revealedPet.pet.rarity === "legendary" ? "bg-amber-500/50"
+                : revealedPet.pet.rarity === "epic" ? "bg-violet-500/50"
+                : revealedPet.pet.rarity === "rare" ? "bg-blue-500/50"
+                : "bg-slate-500/30"
+              }`} />
+              {/* Spinning emoji */}
+              <div className="text-8xl relative z-10 animate-spin-slow drop-shadow-2xl">{revealedPet.pet.emoji}</div>
+              {/* Outer ring pulse */}
+              <div className={`absolute -inset-4 rounded-full border-2 opacity-40 animate-ping ${
+                revealedPet.pet.rarity === "legendary" ? "border-amber-400"
+                : revealedPet.pet.rarity === "epic" ? "border-violet-400"
+                : revealedPet.pet.rarity === "rare" ? "border-blue-400"
+                : "border-slate-400"
+              }`} />
+            </div>
+            <div className={`text-2xl font-black relative z-10 ${RARITY_COLORS[revealedPet.pet.rarity].text} drop-shadow-lg`}>
               {revealedPet.pet.name}
             </div>
-            <div className="text-sm text-slate-300 relative z-10">{revealedPet.pet.bonus}</div>
-            <div className={`text-xs font-bold px-2 py-0.5 rounded-full ${RARITY_COLORS[revealedPet.pet.rarity].bg} ${RARITY_COLORS[revealedPet.pet.rarity].text} ${RARITY_COLORS[revealedPet.pet.rarity].border} border relative z-10`}>
+            <div className="text-sm text-slate-200 relative z-10 font-medium">{revealedPet.pet.bonus}</div>
+            <div className={`text-xs font-bold px-3 py-1 rounded-full ${RARITY_COLORS[revealedPet.pet.rarity].bg} ${RARITY_COLORS[revealedPet.pet.rarity].text} ${RARITY_COLORS[revealedPet.pet.rarity].border} border relative z-10 tracking-wider`}>
               {revealedPet.pet.rarity.toUpperCase()}
             </div>
             {/* Reveal Particles */}
             {revealParticles.map((p) => (
               <div
                 key={p.id}
-                className="absolute w-2.5 h-2.5 rounded-full pointer-events-none z-20"
+                className="absolute w-3 h-3 rounded-full pointer-events-none z-20"
                 style={{
                   left: `${p.x}px`,
                   top: `${p.y}px`,
                   backgroundColor: p.color,
-                  boxShadow: `0 0 8px ${p.color}`,
-                  animation: "particle-burst 1s ease-out forwards",
+                  boxShadow: `0 0 12px ${p.color}`,
+                  animation: "particle-burst 1.2s ease-out forwards",
                   // @ts-ignore
                   "--angle": `${p.angle}deg`,
-                  "--dist": `${60 + Math.random() * 60}px`,
+                  "--dist": `${80 + Math.random() * 80}px`,
                 }}
               />
             ))}
+            {/* Click hint */}
+            <div className="text-[11px] text-slate-500 relative z-10 mt-2 animate-pulse">Klicken zum Schließen</div>
           </div>
         </div>
       )}
@@ -674,7 +733,7 @@ export default function LearningClicker() {
                       : combo >= 6
                       ? "bg-gradient-to-br from-amber-500/35 to-orange-500/35 border-amber-400/50 shadow-md shadow-amber-500/15"
                       : "bg-gradient-to-br from-amber-500/25 to-orange-500/25 border-amber-500/40 hover:border-amber-400/60"
-                  }`}
+                  } ${buttonGlow === "golden" ? "animate-click-glow-golden" : buttonGlow === "combo" ? "animate-click-glow" : ""}`}
                 >
                   {combo >= 6 && (
                     <div className={`absolute -inset-2 rounded-full animate-pulse opacity-60 ${
@@ -797,12 +856,48 @@ export default function LearningClicker() {
 
                 {/* ════ UPGRADES TAB ════ */}
                 {activeTab === "upgrades" && (
-                  <div className="space-y-3">
+                  <div className="space-y-2.5">
+                    {/* Sub-Category Tabs */}
+                    <div className="grid grid-cols-4 gap-1">
+                      {[
+                        { key: "klick" as const, icon: "👆", label: "Klick", levelSum: clickUpgradeCount,
+                          activeBg: "bg-amber-500/15", activeBorder: "border-amber-500/40", activeShadow: "shadow-amber-500/10",
+                          activeText: "text-amber-400", activeBadge: "bg-amber-500/20 text-amber-300" },
+                        { key: "auto" as const, icon: "🤖", label: "Auto", levelSum: autoUpgradeCount,
+                          activeBg: "bg-emerald-500/15", activeBorder: "border-emerald-500/40", activeShadow: "shadow-emerald-500/10",
+                          activeText: "text-emerald-400", activeBadge: "bg-emerald-500/20 text-emerald-300" },
+                        { key: "speed" as const, icon: "⚡", label: "Speed", levelSum: speedUpgradeCount,
+                          activeBg: "bg-blue-500/15", activeBorder: "border-blue-500/40", activeShadow: "shadow-blue-500/10",
+                          activeText: "text-blue-400", activeBadge: "bg-blue-500/20 text-blue-300" },
+                        { key: "synergie" as const, icon: "🔗", label: "Synergie", levelSum: synUpgradeCount,
+                          activeBg: "bg-purple-500/15", activeBorder: "border-purple-500/40", activeShadow: "shadow-purple-500/10",
+                          activeText: "text-purple-400", activeBadge: "bg-purple-500/20 text-purple-300" },
+                      ].map((cat) => {
+                        const isActive = upgradesSubTab === cat.key;
+                        return (
+                          <button
+                            key={cat.key}
+                            onClick={() => setUpgradesSubTab(cat.key)}
+                            className={`flex flex-col items-center gap-0.5 py-1.5 px-1 rounded-lg border transition-all text-center ${
+                              isActive
+                                ? `${cat.activeBg} ${cat.activeBorder} shadow-sm ${cat.activeShadow}`
+                                : "bg-slate-800/20 border-slate-700/20 hover:border-slate-600/40"
+                            }`}
+                          >
+                            <span className="text-base leading-none">{cat.icon}</span>
+                            <span className={`text-[10px] font-bold ${isActive ? cat.activeText : "text-slate-500"}`}>{cat.label}</span>
+                            {cat.levelSum > 0 && (
+                              <span className={`text-[8px] font-bold px-1 rounded-full ${isActive ? cat.activeBadge : "bg-slate-700/40 text-slate-500"}`}>
+                                Lv.{cat.levelSum}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
                     {/* Klick-Upgrades */}
-                    <div>
-                      <div className="text-[12px] font-bold text-amber-400 mb-1.5 flex items-center gap-1">
-                        <span>👆</span> Klick-Punkte
-                      </div>
+                    {upgradesSubTab === "klick" && (
                       <div className="grid grid-cols-2 gap-1.5">
                         {CLICK_UPGRADES.map((upgrade) => {
                           const count = state.upgrades[upgrade.id] || 0;
@@ -857,13 +952,10 @@ export default function LearningClicker() {
                           );
                         })}
                       </div>
-                    </div>
+                    )}
 
                     {/* Auto-Upgrades */}
-                    <div>
-                      <div className="text-[12px] font-bold text-emerald-400 mb-1.5 flex items-center gap-1">
-                        <span>🤖</span> Auto-Generierung
-                      </div>
+                    {upgradesSubTab === "auto" && (
                       <div className="grid grid-cols-2 gap-1.5">
                         {AUTO_UPGRADES.map((upgrade) => {
                           const count = state.upgrades[upgrade.id] || 0;
@@ -918,13 +1010,10 @@ export default function LearningClicker() {
                           );
                         })}
                       </div>
-                    </div>
+                    )}
 
                     {/* Speed */}
-                    <div>
-                      <div className="text-[12px] font-bold text-blue-400 mb-1.5 flex items-center gap-1">
-                        <span>⚡</span> Geschwindigkeit
-                      </div>
+                    {upgradesSubTab === "speed" && (
                       <div className="grid grid-cols-2 gap-1.5">
                         {SPEED_UPGRADES.map((upgrade) => {
                           const count = state.upgrades[upgrade.id] || 0;
@@ -969,13 +1058,10 @@ export default function LearningClicker() {
                           );
                         })}
                       </div>
-                    </div>
+                    )}
 
                     {/* Synergie */}
-                    <div>
-                      <div className="text-[12px] font-bold text-purple-400 mb-1.5 flex items-center gap-1">
-                        <span>🔗</span> Synergie
-                      </div>
+                    {upgradesSubTab === "synergie" && (
                       <div className="grid grid-cols-2 gap-1.5">
                         {SYN_UPGRADES.map((upgrade) => {
                           const count = state.upgrades[upgrade.id] || 0;
@@ -1020,7 +1106,7 @@ export default function LearningClicker() {
                           );
                         })}
                       </div>
-                    </div>
+                    )}
                   </div>
                 )}
 
@@ -1111,35 +1197,61 @@ export default function LearningClicker() {
                         </div>
                       ) : (
                         <div className="grid grid-cols-3 gap-1.5">
-                          {/* Deduplizierte Pets anzeigen */}
                           {allPets
                             .filter((pet) => state.ownedPets.includes(pet.id))
                             .map((pet) => {
                               const colors = RARITY_COLORS[pet.rarity];
                               const isActive = state.activePet === pet.id;
                               const count = state.ownedPets.filter((id) => id === pet.id).length;
+                              const rarityBarColor = pet.rarity === "legendary" ? "bg-amber-400"
+                                : pet.rarity === "epic" ? "bg-violet-400"
+                                : pet.rarity === "rare" ? "bg-blue-400"
+                                : "bg-slate-500";
 
                               return (
                                 <button
                                   key={pet.id}
                                   onClick={() => handleEquipPet(pet.id)}
-                                  className={`relative p-2 rounded-lg border text-center transition-all active:scale-95 ${
+                                  className={`relative p-2 rounded-lg border text-center transition-all active:scale-95 overflow-hidden ${
                                     isActive
-                                      ? `${colors.bg} ${colors.border} shadow-lg ${colors.glow}`
-                                      : "bg-slate-800/30 border-slate-700/30 hover:border-slate-600"
+                                      ? `${colors.bg} ${colors.border} shadow-lg ${colors.glow} ${
+                                          pet.rarity === "legendary" ? "ring-1 ring-amber-400/30"
+                                          : pet.rarity === "epic" ? "ring-1 ring-violet-400/30"
+                                          : pet.rarity === "rare" ? "ring-1 ring-blue-400/30"
+                                          : "ring-1 ring-slate-400/30"
+                                        }`
+                                      : "bg-slate-800/30 border-slate-700/30 hover:border-slate-600 hover:bg-slate-800/40"
                                   }`}
                                 >
-                                  <div className="text-2xl mb-0.5">{pet.emoji}</div>
-                                  <div className={`text-[10px] font-bold truncate ${isActive ? colors.text : "text-slate-400"}`}>
+                                  {/* Rarity color bar at top */}
+                                  <div className={`absolute top-0 left-0 right-0 h-0.5 ${rarityBarColor} ${isActive ? "opacity-80" : "opacity-40"}`} />
+                                  {/* Active glow backdrop */}
+                                  {isActive && (
+                                    <div className={`absolute -top-2 -right-2 w-12 h-12 rounded-full blur-lg opacity-30 ${
+                                      pet.rarity === "legendary" ? "bg-amber-400"
+                                      : pet.rarity === "epic" ? "bg-violet-400"
+                                      : pet.rarity === "rare" ? "bg-blue-400"
+                                      : "bg-slate-400"
+                                    }`} />
+                                  )}
+                                  <div className="text-2xl mb-0.5 relative z-10">{pet.emoji}</div>
+                                  <div className={`text-[10px] font-bold truncate relative z-10 ${isActive ? colors.text : "text-slate-300"}`}>
                                     {pet.name}
                                   </div>
+                                  <div className={`text-[8px] truncate relative z-10 ${isActive ? "text-emerald-400" : "text-slate-500"}`}>
+                                    {pet.bonusType === "click" ? "👆" : pet.bonusType === "auto" ? "🤖" : "⚡"} +{pet.bonusPercent}%
+                                  </div>
+                                  {/* Count badge */}
                                   {count > 1 && (
-                                    <div className="absolute -top-1 -right-1 px-1 py-0.5 bg-slate-900 rounded-full text-[8px] font-bold text-slate-400 border border-slate-700">
+                                    <div className="absolute -top-1 -right-1 px-1 py-0.5 bg-slate-900 rounded-full text-[8px] font-bold text-slate-300 border border-slate-600 z-20">
                                       x{count}
                                     </div>
                                   )}
+                                  {/* Active indicator */}
                                   {isActive && (
-                                    <div className="text-[8px] text-green-400 font-medium mt-0.5">Aktiv</div>
+                                    <div className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 px-1.5 py-0.5 bg-green-500/20 border border-green-500/40 rounded-full text-[7px] font-bold text-green-300 z-20 whitespace-nowrap">
+                                      Aktiv
+                                    </div>
                                   )}
                                 </button>
                               );
@@ -1328,14 +1440,6 @@ export default function LearningClicker() {
             calc(sin(var(--angle)) * var(--dist))
           ) scale(0); }
         }
-        .clicker-shake {
-          animation: shake 0.15s ease-in-out;
-        }
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          25% { transform: translateX(var(--shake-intensity, 2px)); }
-          75% { transform: translateX(calc(var(--shake-intensity, 2px) * -1)); }
-        }
         @keyframes prestige-glow {
           0%, 100% { box-shadow: 0 0 4px 2px #f43f5e, 0 0 12px 4px rgba(244,63,94,0.3), 0 0 24px 8px rgba(251,191,36,0.15); }
           50% { box-shadow: 0 0 6px 3px #fb7185, 0 0 18px 6px rgba(251,113,133,0.4), 0 0 32px 10px rgba(251,191,36,0.2); }
@@ -1370,30 +1474,115 @@ export default function LearningClicker() {
           animation: spin-slow 3s linear infinite;
         }
         .prestige-glitch-overlay {
-          animation: glitch-overlay 2s ease-in-out forwards;
+          animation: glitch-overlay 2.5s ease-in-out forwards;
         }
         @keyframes glitch-overlay {
           0% { opacity: 0; }
-          10% { opacity: 1; }
-          80% { opacity: 1; }
+          8% { opacity: 1; }
+          85% { opacity: 1; }
           100% { opacity: 0; }
         }
         .prestige-glitch-text {
-          animation: glitch-text 0.3s ease-in-out infinite alternate;
+          animation: glitch-text 0.25s ease-in-out infinite alternate;
         }
         @keyframes glitch-text {
-          0% { text-shadow: 2px 0 #f43f5e, -2px 0 #3b82f6; transform: translate(0); }
-          25% { text-shadow: -2px 0 #f43f5e, 2px 0 #3b82f6; transform: translate(2px, -1px); }
-          50% { text-shadow: 2px 2px #f43f5e, -2px -2px #3b82f6; transform: translate(-1px, 2px); }
-          75% { text-shadow: -2px -2px #f43f5e, 2px 2px #3b82f6; transform: translate(1px, -2px); }
-          100% { text-shadow: 2px 0 #f43f5e, -2px 0 #3b82f6; transform: translate(0); }
+          0% { text-shadow: 3px 0 #f43f5e, -3px 0 #3b82f6; transform: translate(0); }
+          25% { text-shadow: -3px 0 #f43f5e, 3px 0 #3b82f6; transform: translate(3px, -2px); }
+          50% { text-shadow: 3px 3px #f43f5e, -3px -3px #3b82f6; transform: translate(-2px, 3px); }
+          75% { text-shadow: -3px -3px #f43f5e, 3px 3px #3b82f6; transform: translate(2px, -3px); }
+          100% { text-shadow: 3px 0 #f43f5e, -3px 0 #3b82f6; transform: translate(0); }
         }
-        @keyframes prestige-particle {
-          0% { opacity: 1; transform: scale(1) translate(0, 0); }
-          100% { opacity: 0; transform: scale(0) translate(
-            ${Math.random() > 0.5 ? "" : "-"}${50 + Math.random() * 100}px,
-            ${Math.random() > 0.5 ? "" : "-"}${50 + Math.random() * 100}px
-          ); }
+        /* Button glow on combo/golden */
+        .animate-click-glow {
+          animation: click-glow 0.4s ease-out;
+        }
+        @keyframes click-glow {
+          0% { box-shadow: 0 0 0px 0px rgba(250,204,21,0); }
+          30% { box-shadow: 0 0 20px 8px rgba(250,204,21,0.5), 0 0 40px 16px rgba(245,158,11,0.2); }
+          100% { box-shadow: 0 0 0px 0px rgba(250,204,21,0); }
+        }
+        .animate-click-glow-golden {
+          animation: click-glow-golden 0.5s ease-out;
+        }
+        @keyframes click-glow-golden {
+          0% { box-shadow: 0 0 0px 0px rgba(255,215,0,0); transform: scale(1); }
+          20% { box-shadow: 0 0 30px 12px rgba(255,215,0,0.6), 0 0 60px 24px rgba(255,215,0,0.2); transform: scale(1.08); }
+          100% { box-shadow: 0 0 0px 0px rgba(255,215,0,0); transform: scale(1); }
+        }
+        /* Fade in for overlays */
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+        @keyframes fade-in {
+          0% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        /* Prestige radial particle burst */
+        @keyframes prestige-radial {
+          0% { opacity: 1; transform: translate(-50%, -50%) translate(0, 0) scale(1); }
+          100% { opacity: 0; transform: translate(-50%, -50%) translate(
+            calc(cos(var(--pp-angle)) * var(--pp-dist)),
+            calc(sin(var(--pp-angle)) * var(--pp-dist))
+          ) scale(0); }
+        }
+        /* Prestige scanlines effect */
+        .prestige-scanlines {
+          background: repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(255,255,255,0.03) 2px,
+            rgba(255,255,255,0.03) 4px
+          );
+          animation: scanline-scroll 0.5s linear infinite;
+        }
+        @keyframes scanline-scroll {
+          0% { background-position: 0 0; }
+          100% { background-position: 0 4px; }
+        }
+        /* Prestige color distortion bars */
+        .prestige-color-bars {
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(244,63,94,0.15) 15%,
+            transparent 30%,
+            rgba(59,130,246,0.15) 50%,
+            transparent 65%,
+            rgba(168,85,247,0.15) 80%,
+            transparent 100%
+          );
+          animation: color-bars-move 0.8s ease-in-out infinite alternate;
+        }
+        @keyframes color-bars-move {
+          0% { transform: translateX(-20%); }
+          100% { transform: translateX(20%); }
+        }
+        /* Prestige level number pop */
+        .prestige-level-pop {
+          animation: level-pop 0.8s ease-out forwards;
+        }
+        @keyframes level-pop {
+          0% { opacity: 0; transform: scale(3); }
+          40% { opacity: 1; transform: scale(0.8); }
+          60% { transform: scale(1.1); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+        /* Prestige subtitle fade in */
+        .prestige-subtitle {
+          animation: subtitle-in 1s ease-out 0.5s both;
+        }
+        @keyframes subtitle-in {
+          0% { opacity: 0; transform: translateY(10px); }
+          100% { opacity: 0.7; transform: translateY(0); }
+        }
+        /* Prestige expanding ring */
+        .prestige-expand-ring {
+          animation: expand-ring 2s ease-out forwards;
+        }
+        @keyframes expand-ring {
+          0% { transform: scale(0.5); opacity: 0.5; }
+          100% { transform: scale(3); opacity: 0; }
         }
       `}</style>
     </>
