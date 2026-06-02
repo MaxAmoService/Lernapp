@@ -222,19 +222,14 @@ export default function LearningClicker() {
   }, [user]);
 
   // Auto-Tick: Punkte in Firebase speichern (alle 10 Sekunden)
+  // WICHTIG: Überschreibt NICHT den lokalen State — nur speichern
   useEffect(() => {
     if (!user || state.autoAmount <= 0) return;
     tickIntervalRef.current = setInterval(async () => {
       const petAutoBonus = 1 + petBonuses.auto / 100;
       const effectiveAmount = Math.floor(state.autoAmount * prestigeMultiplier * petAutoBonus);
-      const newPoints = await saveClickerTick(user.uid, effectiveAmount, state.autoSpeed);
-      if (newPoints > 0) {
-        setState((prev) => ({
-          ...prev,
-          points: newPoints,
-          totalPoints: prev.totalPoints + Math.floor(prev.autoAmount * (prev.prestigeMultiplier || 1) * petAutoBonus),
-        }));
-      }
+      // Speichern, aber NICHT den lokalen State überschreiben
+      await saveClickerTick(user.uid, effectiveAmount, state.autoSpeed);
     }, 10_000);
     return () => { if (tickIntervalRef.current) clearInterval(tickIntervalRef.current); };
   }, [user, state.autoAmount, state.autoSpeed, prestigeMultiplier, petBonuses.auto]);
@@ -399,17 +394,57 @@ export default function LearningClicker() {
     }
   }, [user]);
 
-  // Upgrade kaufen
+  // Upgrade kaufen — Optimistic UI (sofort, Firebase asynchron)
   const handleBuyUpgrade = useCallback(async (upgrade: Upgrade) => {
     if (!user) return;
-    await flushPendingClicks();
-    const newState = await buyClickerUpgradeBulk(user.uid, upgrade.id, 1);
-    if (newState) {
-      setState(newState);
-      setBuyFeedback(upgrade.id);
-      setTimeout(() => setBuyFeedback(null), 300);
-    }
-  }, [user, flushPendingClicks]);
+    const count = state.upgrades[upgrade.id] || 0;
+    const cost = getUpgradeCost(upgrade, count);
+    if (state.points < cost) return;
+
+    // SOFORT lokalen State aktualisieren (optimistic)
+    const prevPoints = state.points;
+    const prevTotal = state.totalPoints;
+    const prevUpgrades = { ...state.upgrades };
+    const prevClickPower = state.clickPower;
+    const prevAutoAmount = state.autoAmount;
+    const prevAutoSpeed = state.autoSpeed;
+
+    let newClickPower = state.clickPower;
+    let newAutoAmount = state.autoAmount;
+    let newAutoSpeed = state.autoSpeed;
+    if (upgrade.effect === "clickPower") newClickPower += upgrade.value;
+    else if (upgrade.effect === "autoAmount") newAutoAmount += upgrade.value;
+    else if (upgrade.effect === "autoSpeed") newAutoSpeed = Math.max(100, Math.floor(newAutoSpeed * upgrade.value));
+
+    setState((prev) => ({
+      ...prev,
+      points: prev.points - cost,
+      clickPower: newClickPower,
+      autoAmount: newAutoAmount,
+      autoSpeed: newAutoSpeed,
+      upgrades: { ...prev.upgrades, [upgrade.id]: (prev.upgrades[upgrade.id] || 0) + 1 },
+    }));
+    setBuyFeedback(upgrade.id);
+    setTimeout(() => setBuyFeedback(null), 300);
+
+    // Firebase asynchron (mit flush)
+    flushPendingClicks().then(() => {
+      buyClickerUpgradeBulk(user.uid, upgrade.id, 1).then((newState) => {
+        if (!newState) {
+          // Fehler — State zurücksetzen
+          setState((prev) => ({
+            ...prev,
+            points: prevPoints,
+            totalPoints: prevTotal,
+            clickPower: prevClickPower,
+            autoAmount: prevAutoAmount,
+            autoSpeed: prevAutoSpeed,
+            upgrades: prevUpgrades,
+          }));
+        }
+      });
+    });
+  }, [user, state, flushPendingClicks]);
 
   // Pet-Box öffnen
   const handleOpenBox = useCallback(async (boxType: string) => {
