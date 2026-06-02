@@ -97,9 +97,11 @@ export const itSicherheitModule: Module = {
 
 Alle IT-Sicherheitsmaßnahmen zielen auf drei Grundziele ab:
 
-- **Confidentiality (Vertraulichkeit):** Nur autorisierte Personen haben Zugriff auf Daten und Systeme
-- **Integrity (Integrität):** Daten sind korrekt und unverändert — niemand hat sie manipuliert
-- **Availability (Verfügbarkeit):** Systeme und Daten sind zugänglich, wenn sie gebraucht werden
+| Ziel | Beschreibung |
+|------|-------------|
+| **Confidentiality** (Vertraulichkeit) | Nur autorisierte Personen haben Zugriff auf Daten und Systeme |
+| **Integrity** (Integrität) | Daten sind korrekt und unverändert — niemand hat sie manipuliert |
+| **Availability** (Verfügbarkeit) | Systeme und Daten sind zugänglich, wenn sie gebraucht werden |
 
 > **Merke:** Jede Sicherheitsmaßnahme lässt sich einem oder mehreren dieser drei Ziele zuordnen!
 
@@ -107,9 +109,11 @@ Alle IT-Sicherheitsmaßnahmen zielen auf drei Grundziele ab:
 
 Ein **Angriffsvektor** ist der Weg, den ein Angreifer nutzt, um in ein System einzudringen:
 
-- **Technisch:** Malware, Exploits, SQL-Injection, DDoS
-- **Menschlich:** Social Engineering, Phishing, Pretexting
-- **Physisch:** Einbruch, Diebstahl, Tailgating
+| Kategorie | Beispiele |
+|-----------|----------|
+| 🔧 **Technisch** | Malware, Exploits, SQL-Injection, DDoS |
+| 👤 **Menschlich** | Social Engineering, Phishing, Pretexting |
+| 🏢 **Physisch** | Einbruch, Diebstahl, Tailgating |
 
 [INTERACTIVE:securityThreatExplorer]
 
@@ -141,8 +145,10 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
 
 ### Authentifizierung vs. Autorisierung
 
-- **Authentifizierung:** "Wer bist du?" — Identitätsnachweis
-- **Autorisierung:** "Was darfst du?" — Berechtigungsprüfung
+| Begriff | Frage | Bedeutung |
+|---------|-------|----------|
+| 🔐 **Authentifizierung** | "Wer bist du?" | Identitätsnachweis |
+| 🛡️ **Autorisierung** | "Was darfst du?" | Berechtigungsprüfung |
 
 > **Beispiel:** Du zeigst deinen Ausweis am Eingang (Authentifizierung). Dann entscheidet der Zutrittsausweis, welche Räume du betreten darfst (Autorisierung).
 
@@ -159,10 +165,13 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
 ### Passwortsicherheit
 
 **Gute Passwörter:**
-- Mindestens **12 Zeichen** (besser 16+)
-- Mix aus Groß-/Kleinbuchstaben, Zahlen, Sonderzeichen
-- Keine Wörter aus dem Wörterbuch
-- Für jeden Dienst ein anderes Passwort
+
+| Regel | Beschreibung |
+|-------|-------------|
+| 📏 **Länge** | Mindestens 12 Zeichen (besser 16+) |
+| 🔤 **Mix** | Groß-/Kleinbuchstaben, Zahlen, Sonderzeichen |
+| 🚫 **Keine Wörter** | Keine Wörter aus dem Wörterbuch |
+| 🔑 **Einzigartig** | Für jeden Dienst ein anderes Passwort |
 
 **Passwort-Hashing:**
 
@@ -184,9 +193,12 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
 ### Passwort-Manager
 
 **Warum Passwort-Manager?**
-- Du musst dir nur EIN Master-Passwort merken
-- Generiert sichere, einzigartige Passwörter
-- Speichert sie verschlüsselt
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| 🧠 **Ein Passwort** | Du musst dir nur EIN Master-Passwort merken |
+| 🔐 **Sichere Generierung** | Generiert sichere, einzigartige Passwörter |
+| 🔒 **Verschlüsselt** | Speichert sie verschlüsselt |
 
 > 💡 **IHK-Tipp:** Erkläre den Unterschied zwischen Hashing und Verschlüsselung — das kommt oft in Prüfungen!
 
@@ -207,9 +219,11 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
 
 Eine **Firewall** filtert den Netzwerkverkehr anhand definierter Regeln:
 
-- **Packet Filtering:** Prüft Header (IP, Port, Protokoll)
-- **Stateful Inspection:** Verfolgt Verbindungsstatus
-- **Application Layer:** Prüft Anwendungsdaten (z.B. HTTP)
+| Typ | Beschreibung |
+|-----|-------------|
+| 📦 **Packet Filtering** | Prüft Header (IP, Port, Protokoll) |
+| 🔍 **Stateful Inspection** | Verfolgt Verbindungsstatus |
+| 🌐 **Application Layer** | Prüft Anwendungsdaten (z.B. HTTP) |
 
 **Regel-Beispiel:**
 | Regel | Quelle | Ziel | Port | Aktion |
@@ -233,9 +247,11 @@ Eine **Firewall** filtert den Netzwerkverkehr anhand definierter Regeln:
 
 Ein **VPN** erstellt einen verschlüsselten Tunnel durch das Internet:
 
-- **Nutzung:** Remote-Zugriff auf Firmennetz
-- **Protokolle:** IPSec, OpenVPN, WireGuard
-- **Vorteil:** Daten sind auch in unsicheren Netzen (z.B. WLAN) geschützt
+| Aspekt | Beschreibung |
+|--------|-------------|
+| 🌐 **Nutzung** | Remote-Zugriff auf Firmennetz |
+| 🔧 **Protokolle** | IPSec, OpenVPN, WireGuard |
+| ✅ **Vorteil** | Daten sind auch in unsicheren Netzen (z.B. WLAN) geschützt |
 
 ### DMZ (Demilitarisierte Zone)
 
@@ -331,9 +347,12 @@ Der Angreifer schleust JavaScript-Code in Webseiten ein:
 **Reflected XSS:** Schadcode kommt über URL-Parameter
 
 **Schutz:**
-- **Output Encoding:** < wird zu &lt;, > wird zu &gt;
-- **Content Security Policy (CSP):** Erlaubt nur Skripte von vertrauenswürdigen Quellen
-- **HTTPOnly Cookies:** Cookies sind per JavaScript nicht lesbar
+
+| Maßnahme | Beschreibung |
+|----------|-------------|
+| 🔤 **Output Encoding** | < wird zu &lt;, > wird zu &gt; |
+| 🛡️ **Content Security Policy (CSP)** | Erlaubt nur Skripte von vertrauenswürdigen Quellen |
+| 🍪 **HTTPOnly Cookies** | Cookies sind per JavaScript nicht lesbar |
 
 ### 3. Cross-Site Request Forgery (CSRF)
 
@@ -348,14 +367,18 @@ Der Angreifer lässt den Browser des Opfers eine Aktion auf einer anderen Websei
 
 ### 4. Broken Authentication
 
-- Schwache Passwörter, fehlende MFA
-- Session Hijacking (Session-Cookie stehlen)
+| Problem | Beschreibung |
+|---------|-------------|
+| 🔓 **Schwache Passwörter** | Fehlende MFA |
+| 🍪 **Session Hijacking** | Session-Cookie stehlen |
 
 ### 5. Security Misconfiguration
 
-- Default-Passwörter (admin/admin)
-- Debug-Modus im Produktionssystem
-- Offene Ports, unnötige Dienste
+| Problem | Beschreibung |
+|---------|-------------|
+| 🔓 **Default-Passwörter** | admin/admin |
+| 🐛 **Debug-Modus** | Im Produktionssystem aktiv |
+| 🚪 **Offene Ports** | Unnötige Dienste |
 
 ### 🧃 OWASP Juice Shop — Selber ausprobieren!
 
@@ -429,9 +452,11 @@ Ein **gemeinsamer Key** für Ver- und Entschlüsselung:
 
 **Zwei Keys:** Public Key (öffentlich) + Private Key (geheim)
 
-- **Algorithmen:** RSA, ECC (Elliptic Curve)
-- **Vorteil:** Kein gemeinsames Geheimnis nötig
-- **Nachteil:** Langsamer als symmetrisch
+| Eigenschaft | Beschreibung |
+|-------------|-------------|
+| 🔐 **Algorithmen** | RSA, ECC (Elliptic Curve) |
+| ✅ **Vorteil** | Kein gemeinsames Geheimnis nötig |
+| ❌ **Nachteil** | Langsamer als symmetrisch |
 
 <svg viewBox="0 0 580 90" xmlns="http://www.w3.org/2000/svg" style="max-width:580px;margin:1rem auto;display:block">
   <rect x="0" y="0" width="580" height="90" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
@@ -466,9 +491,11 @@ Beweist **Authentizität** und **Integrität**:
 
 ### PKI (Public Key Infrastructure)
 
-- **CA (Certificate Authority):** Vertrauenswürdige Instanz, die Zertifikate ausstellt
-- **Zertifikat:** Bindet einen Public Key an eine Identität (z.B. google.com)
-- **TLS-Handshake:** Browser prüft Zertifikat der CA → verschlüsselte Verbindung
+| Komponente | Beschreibung |
+|------------|-------------|
+| 🏛️ **CA (Certificate Authority)** | Vertrauenswürdige Instanz, die Zertifikate ausstellt |
+| 📜 **Zertifikat** | Bindet einen Public Key an eine Identität (z.B. google.com) |
+| 🔒 **TLS-Handshake** | Browser prüft Zertifikat der CA → verschlüsselte Verbindung |
 
 **Zertifikatskette:**
 
@@ -512,10 +539,12 @@ Beweist **Authentizität** und **Integrität**:
 
 Social Engineering nutzt die **menschliche Psyche** als Angriffsvektor — keine Technik, sondern Manipulation:
 
-- **Vertrauen** aufbauen ("Ich bin von der IT-Abteilung")
-- **Druck** erzeugen ("Ihr Konto wird gesperrt!")
-- **Neugier** wecken ("Gehaltsliste 2024.xlsx")
-- **Hilfsbereitschaft** ausnutzen ("Können Sie mir kurz Zugang geben?")
+| Methode | Beispiel |
+|---------|---------|
+| 🤝 **Vertrauen** aufbauen | "Ich bin von der IT-Abteilung" |
+| ⏰ **Druck** erzeugen | "Ihr Konto wird gesperrt!" |
+| 🎁 **Neugier** wecken | "Gehaltsliste 2024.xlsx" |
+| 🙋 **Hilfsbereitschaft** ausnutzen | "Können Sie mir kurz Zugang geben?" |
 
 ### Angriffsmethoden
 
@@ -543,18 +572,27 @@ Social Engineering nutzt die **menschliche Psyche** als Angriffsvektor — keine
 ### Schutzmaßnahmen
 
 **Technisch:**
-- Spam-Filter und Anti-Phishing-Tools
-- MFA aktivieren (auch bei gestohlenem Passwort kein Zugriff)
-- E-Mail-Authentifizierung (SPF, DKIM, DMARC)
+
+| Maßnahme | Beschreibung |
+|----------|-------------|
+| 🛡️ **Spam-Filter** | Anti-Phishing-Tools |
+| 🔐 **MFA aktivieren** | Auch bei gestohlenem Passwort kein Zugriff |
+| 📧 **E-Mail-Authentifizierung** | SPF, DKIM, DMARC |
 
 **Organisatorisch:**
-- Regelmäßige Schulungen für Mitarbeiter
-- Klare Prozesse (z.B. "Keine Überweisungen per E-Mail")
-- Meldeprozess für verdächtige E-Mails
+
+| Maßnahme | Beschreibung |
+|----------|-------------|
+| 📚 **Schulungen** | Regelmäßige Schulungen für Mitarbeiter |
+| 📋 **Klare Prozesse** | z.B. "Keine Überweisungen per E-Mail" |
+| 🚨 **Meldeprozess** | Für verdächtige E-Mails |
 
 **Persönlich:**
-- Immer skeptisch sein bei unerwarteten Nachrichten
-- Niemals Passwörter per E-Mail/Telefon weitergeben
+
+| Maßnahme | Beschreibung |
+|----------|-------------|
+| 🤔 **Skeptisch sein** | Bei unerwarteten Nachrichten |
+| 🔒 **Passwörter schützen** | Niemals per E-Mail/Telefon weitergeben |
 - Im Zweifel: direkt bei der Firma anrufen (nicht über Links in der Mail!)
 
 > 💡 **IHK-Tipp:** Social Engineering-Fragen zielen oft auf die menschliche Schwachstelle ab — "Warum ist der Mensch das schwächste Glied?"

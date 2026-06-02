@@ -290,10 +290,13 @@ class User:
 **Refactoring** = Code verbessern ohne das Verhalten zu ändern.
 
 ### Wann refactorn?
-- Code Smells erkannt
-- Vor dem Merge
-- Iterativ/inkrementell
-- Pfadfinder-Regel: Hinterlasse den Code besser als du ihn vorgefunden hast
+
+| Zeitpunkt | Beschreibung |
+|-----------|-------------|
+| 🚩 **Code Smells erkannt** | Warnsignale im Code entdeckt |
+| 🔀 **Vor dem Merge** | Code sauber halten |
+| 🔄 **Iterativ/inkrementell** | Kleine Schritte, nicht alles auf einmal |
+| 🏕️ **Pfadfinder-Regel** | "Hinterlasse den Code besser als du ihn vorgefunden hast" |
 
 ### Typische Refactorings
 | Vorher | Nachher |

@@ -104,11 +104,13 @@ Ein Projekt ist eine **zeitlich befristete, einmalige Aufgabe** mit klaren Ziele
 
 Die **Projektakte** ist das "heilige Dokument" eines Projekts — sie enthält ALLES:
 
-- Lastenheft, Pflichtenheft
-- Zeitpläne, Budget
-- Risikoanalyse
-- Protokolle, Entscheidungen
-- Abschlussbericht
+| Inhalt | Beschreibung |
+|--------|-------------|
+| 📄 **Lastenheft, Pflichtenheft** | Anforderungen und Umsetzungsplan |
+| 📅 **Zeitpläne, Budget** | Termine und Kostenrahmen |
+| ⚠️ **Risikoanalyse** | Identifizierte Risiken und Gegenmaßnahmen |
+| 📝 **Protokolle, Entscheidungen** | Dokumentation aller Meetings |
+| 📋 **Abschlussbericht** | Ergebnisse und Lessons Learned |
 
 > ⚠️ Die Projektakte kommt am Ende ins **Archiv** und ist nicht mehr anpassbar!
 
@@ -213,9 +215,11 @@ Das **Magische Dreieck** beschreibt das Spannungsfeld, in dem sich jedes Projekt
 
 > **Einer der anderen beiden Punkte kann den geschwächten Punkt ausgleichen.**
 
-- Zeit problematisch → Budget erhöhen (mehr Leute)
-- Budget problematisch → Zeit verlängern
-- Qualität problematisch → Mehr Zeit/Budget für Tests
+| Problem | Ausgleich |
+|---------|----------|
+| ⏰ **Zeit** problematisch | Budget erhöhen (mehr Leute) |
+| 💰 **Budget** problematisch | Zeit verlängern |
+| ✅ **Qualität** problematisch | Mehr Zeit/Budget für Tests |
 
 [INTERACTIVE]
 
@@ -317,22 +321,31 @@ Das klassische PM ist **phasenbasiert** und **dokumentengetrieben**. Es eignet s
 ## 📋 Projektplanung
 
 ### Ablaufplan
-- Phasen und Arbeitspakete definieren
-- Meilensteine setzen
-- Verantwortlichkeiten zuweisen
+
+| Schritt | Beschreibung |
+|---------|-------------|
+| 📋 **Phasen definieren** | Arbeitspakete strukturieren |
+| 🎯 **Meilensteine setzen** | Wichtige Zwischenziele markieren |
+| 👤 **Verantwortlichkeiten** | Wer macht was? |
 
 ### Gantt-Diagramm
-- Visuelle Darstellung des Zeitplans
-- Balken zeigen Dauer der Arbeitspakete
-- Abhängigkeiten sichtbar
+
+| Eigenschaft | Beschreibung |
+|-------------|-------------|
+| 📊 **Visuelle Darstellung** | Zeitplan als Balkendiagramm |
+| ⏱️ **Balken** | Zeigen Dauer der Arbeitspakete |
+| 🔗 **Abhängigkeiten** | Verknüpfungen zwischen Aufgaben sichtbar |
 
 ### Netzplantechnik
-- FAZ (Frühester Anfangszeitpunkt)
-- FEZ (Frühester Endzeitpunkt)
-- SAZ (Spätester Anfangszeitpunkt)
-- SEZ (Spätester Endzeitpunkt)
-- **Pufferzeit** = SAZ - FAZ
-- **Kritischer Pfad** = Pufferzeit = 0
+
+| Kürzel | Bedeutung |
+|--------|----------|
+| **FAZ** | Frühester Anfangszeitpunkt |
+| **FEZ** | Frühester Endzeitpunkt |
+| **SAZ** | Spätester Anfangszeitpunkt |
+| **SEZ** | Spätester Endzeitpunkt |
+| **Pufferzeit** | SAZ - FAZ |
+| **Kritischer Pfad** | Pufferzeit = 0 |
 
 ---
 

@@ -90,9 +90,12 @@ Einfach gesagt: **Tut das Programm, was es soll — und tut es gut?**
 | ✅ **Fertigstellung** | Standard wird veröffentlicht |
 
 ### Ebenen
-- 🇩🇪 **National:** DIN (Deutsches Institut für Normung)
-- 🇪🇺 **Europäisch:** CEN
-- 🌍 **International:** ISO
+
+| Ebene | Organisation |
+|-------|-------------|
+| 🇩🇪 **National** | DIN (Deutsches Institut für Normung) |
+| 🇪🇺 **Europäisch** | CEN |
+| 🌍 **International** | ISO |
 
 > ⚠️ Der Prozess kann **3-5 Jahre** dauern!
 
@@ -227,166 +230,13 @@ Die **ISO 9126** definiert 6 Hauptmerkmale für Softwarequalität. Diese Struktu
 
 **Design Patterns** sind bewährte Lösungen für häufig auftretende Probleme in der Softwareentwicklung. Sie sind kein konkreter Code, sondern **allgemeine Konzepte**.
 
----
-
-## 🎯 Was sind Design Patterns?
-
-> "The pattern is not a specific piece of code, but a general concept for solving a particular problem."
-
-### Unterschied zum Algorithmus
 | | Algorithmus | Pattern |
 |---|---|---|
 | **Fokus** | Schritt-für-Schritt Lösung | High-Level Lösungskonzept |
 | **Anwendung** | Ein Problem | Mehrere Probleme |
 | **Code** | Spezifisch | Allgemein |
 
----
-
-## 📂 Die drei Kategorien
-
-| Kategorie | Zweck | Beispiel |
-|-----------|-------|----------|
-| 🏗️ **Creational** | Objekterstellung | Singleton, Factory |
-| 🏛️ **Structural** | Struktur aufbauen | Adapter, Facade |
-| 🎭 **Behavioral** | Verhalten regeln | Strategy, Observer |
-
----
-
-## 🏗️ Creational Patterns
-
-### Singleton
-> Stellt sicher, dass eine Klasse **nur eine Instanz** hat.
-
-\`\`\`python
-class Database:
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-\`\`\`
-
-**Verwendung:** Datenbankverbindung, Logger, Config-Manager
-
-### Factory Method
-> Definiert eine Schnittstelle zur Objekterstellung, lässt Unterklassen entscheiden.
-
-\`\`\`python
-class AnimalFactory:
-    def create(self, type):
-        if type == "dog": return Dog()
-        if type == "cat": return Cat()
-\`\`\`
-
-**Verwendung:** Wenn die Art des Objekts erst zur Laufzeit feststeht.
-
----
-
-## 🏛️ Structural Patterns
-
-### Adapter
-> Passt eine inkompatible Schnittstelle an die erwartete an.
-
-\`\`\`python
-class OldPrinter:
-    def print_old(self, text):
-        print(f"OLD: {text}")
-
-class PrinterAdapter:
-    def __init__(self, printer):
-        self.printer = printer
-
-    def print(self, text):
-        self.printer.print_old(text)
-\`\`\`
-
-**Verwendung:** Alte Systeme in neue integrieren.
-
-### Facade
-> Bietet eine vereinfachte Schnittstelle zu einem komplexen System.
-
-\`\`\`python
-class ComputerFacade:
-    def start(self):
-        self.cpu.start()
-        self.ram.load()
-        self.hdd.read()
-\`\`\`
-
-**Verwendung:** Komplexe Bibliotheken einfacher nutzbar machen.
-
-### Decorator
-> Fügt einem Objekt dynamisch neue Funktionen hinzu.
-
-\`\`\`python
-class Coffee:
-    def cost(self): return 5
-
-class MilkDecorator:
-    def __init__(self, coffee):
-        self.coffee = coffee
-    def cost(self):
-        return self.coffee.cost() + 2
-\`\`\`
-
-**Verwendung:** Funktionen zur Laufzeit erweitern.
-
----
-
-## 🎭 Behavioral Patterns
-
-### Strategy
-> Definiert eine Familie von Algorithmen und macht sie austauschbar.
-
-\`\`\`python
-class SortStrategy:
-    def sort(self, data): pass
-
-class BubbleSort(SortStrategy):
-    def sort(self, data):
-        # Bubblesort-Implementierung
-        pass
-
-class QuickSort(SortStrategy):
-    def sort(self, data):
-        # Quicksort-Implementierung
-        pass
-\`\`\`
-
-**Verwendung:** Wenn ein Algorithmus zur Laufzeit gewechselt werden soll.
-
-### Observer
-> Benachrichtigt abhängige Objekte bei Zustandsänderungen.
-
-\`\`\`python
-class EventEmitter:
-    def __init__(self):
-        self.listeners = []
-
-    def subscribe(self, listener):
-        self.listeners.append(listener)
-
-    def emit(self, event):
-        for listener in self.listeners:
-            listener.notify(event)
-\`\`\`
-
-**Verwendung:** Event-Systeme, UI-Updates, Messaging.
-
----
-
-## 📋 Zusammenfassung der wichtigsten Patterns
-
-| Pattern | Typ | Zweck |
-|---------|-----|-------|
-| **Singleton** | Creational | Eine einzige Instanz |
-| **Factory** | Creational | Objekterstellung delegieren |
-| **Adapter** | Structural | Inkompatible Schnittstellen |
-| **Facade** | Structural | Vereinfachte Schnittstelle |
-| **Decorator** | Structural | Dynamisch erweitern |
-| **Strategy** | Behavioral | Algorithmen austauschen |
-| **Observer** | Behavioral | Bei Änderung benachrichtigen |
+Im interaktiven Explorer unten findest du alle wichtigen Patterns mit Code-Beispielen, Erklärungen und Verwendungszwecken.
 
 ---
 
@@ -434,18 +284,27 @@ Trennt eine Anwendung in **logisch getrennte Schichten**. Jede Schicht hat eine 
 </svg>
 
 ### Regeln
-- Kommunikation nur **zwischen benachbarten Schichten**
-- **Strenge Schichtenarchitektur:** Nur von oben nach unten
-- **Lockere Schichtenarchitektur:** Auch Schichten überspringen
+
+| Regel | Beschreibung |
+|-------|-------------|
+| 🔗 **Kommunikation** | Nur **zwischen benachbarten Schichten** |
+| 📏 **Strenge Architektur** | Nur von oben nach unten |
+| 🔀 **Lockere Architektur** | Auch Schichten überspringen |
 
 ### Vorteile
-- ✅ Klare Trennung der Verantwortlichkeiten
-- ✅ Gut testbar
-- ✅ Austauschbar (z.B. Datenbank wechseln)
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| ✅ **Trennung** | Klare Trennung der Verantwortlichkeiten |
+| ✅ **Testbar** | Gut testbar |
+| ✅ **Austauschbar** | z.B. Datenbank wechseln |
 
 ### Nachteile
-- ❌ Kann zu viel Overhead erzeugen
-- ❌ Performance durch viele Schichten
+
+| Nachteil | Beschreibung |
+|----------|-------------|
+| ❌ **Overhead** | Kann zu viel Overhead erzeugen |
+| ❌ **Performance** | Durch viele Schichten |
 
 ---
 
@@ -482,9 +341,12 @@ Strukturiert eine Anwendung in **drei Komponenten**:
 </svg>
 
 ### Vorteile
-- ✅ Klare Trennung von UI und Logik
-- ✅ Gut testbar (Model unabhängig von View)
-- ✅ Mehrere Views für ein Model möglich
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| ✅ **Trennung** | Klare Trennung von UI und Logik |
+| ✅ **Testbar** | Model unabhängig von View |
+| ✅ **Flexibel** | Mehrere Views für ein Model möglich |
 
 ---
 
@@ -517,20 +379,29 @@ Bei Microservices werden Aufgaben in **unabhängige Services** gekapselt:
 </svg>
 
 ### Eigenschaften
-- Jeder Service ist **logisch getrennt** und **technisch unabhängig**
-- Eigene Datenbank pro Service möglich
-- Kommunikation über **APIs** (nicht Methodenaufrufe)
-- Können unabhängig skaliert und aktualisiert werden
+
+| Eigenschaft | Beschreibung |
+|-------------|-------------|
+| 🔀 **Getrennt** | Jeder Service ist **logisch getrennt** und **technisch unabhängig** |
+| 🗄️ **Eigene DB** | Eigene Datenbank pro Service möglich |
+| 🔌 **APIs** | Kommunikation über **APIs** (nicht Methodenaufrufe) |
+| 📈 **Skalierbar** | Können unabhängig skaliert und aktualisiert werden |
 
 ### Vorteile
-- ✅ Unabhängige Entwicklung und Deployment
-- ✅ Technologie-Freiheit pro Service
-- ✅ Skalierbar
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| ✅ **Unabhängig** | Entwicklung und Deployment |
+| ✅ **Technologie-Freiheit** | Pro Service |
+| ✅ **Skalierbar** | Horizontal skalierbar |
 
 ### Nachteile
-- ❌ Komplexität (Netzwerk, API-Management)
-- ❌ Schwieriges Debugging
-- ❌ Datenkonsistenz
+
+| Nachteil | Beschreibung |
+|----------|-------------|
+| ❌ **Komplexität** | Netzwerk, API-Management |
+| ❌ **Debugging** | Schwieriges Debugging |
+| ❌ **Datenkonsistenz** | Verteilte Daten |
 
 ---
 
@@ -720,14 +591,20 @@ Verschiedene Projekte brauchen verschiedene Vorgehensweisen. Die IHK prüft, ob 
 </svg>
 
 ### Vorteile
-- ✅ Einfach zu verstehen
-- ✅ Klare Struktur
-- ✅ Gut für Projekte mit festen Anforderungen
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| ✅ **Einfach** | Zu verstehen |
+| ✅ **Klare Struktur** | Übersichtlich |
+| ✅ **Feste Anforderungen** | Gut für Projekte mit festen Anforderungen |
 
 ### Nachteile
-- ❌ Keine Rücksprünge möglich
-- ❌ Späte Fehlererkennung
-- ❌ Kunde sieht erst am Ende das Ergebnis
+
+| Nachteil | Beschreibung |
+|----------|-------------|
+| ❌ **Keine Rücksprünge** | Möglich |
+| ❌ **Späte Fehlererkennung** | Fehler erst am Ende |
+| ❌ **Kunde** | Sieht erst am Ende das Ergebnis |
 
 ---
 
@@ -766,13 +643,19 @@ Verschiedene Projekte brauchen verschiedene Vorgehensweisen. Die IHK prüft, ob 
 </svg>
 
 ### Vorteile
-- ✅ Testen von Anfang an geplant
-- ✅ Frühe Fehlererkennung
-- ✅ Klare Zuordnung (Was → Wie testen)
+
+| Vorteil | Beschreibung |
+|---------|-------------|
+| ✅ **Testen** | Von Anfang an geplant |
+| ✅ **Frühe Fehlererkennung** | Fehler früh finden |
+| ✅ **Zuordnung** | Klare Zuordnung (Was → Wie testen) |
 
 ### Nachteile
-- ❌ Wie Wasserfall: starr
-- ❌ Hoher Dokumentationsaufwand
+
+| Nachteil | Beschreibung |
+|----------|-------------|
+| ❌ **Starr** | Wie Wasserfall: starr |
+| ❌ **Dokumentation** | Hoher Dokumentationsaufwand |
 
 > 💡 **Merke:** Das V-Modell ist wie Wasserfall, aber mit **eingebautem Testen**!
 
@@ -919,15 +802,21 @@ except SpecificError as e:
 **Refactoring** = Code verbessern ohne das Verhalten zu ändern.
 
 ### Wann refactorn?
-- Code Smells erkannt
-- Vor dem Merge
-- Iterativ/inkrementell
-- Pfadfinder-Regel: "Hinterlasse den Code besser als du ihn vorgefunden hast"
+
+| Zeitpunkt | Beschreibung |
+|-----------|-------------|
+| 🚩 **Code Smells erkannt** | Warnsignale im Code entdeckt |
+| 🔀 **Vor dem Merge** | Code sauber halten |
+| 🔄 **Iterativ/inkrementell** | Kleine Schritte, nicht alles auf einmal |
+| 🏕️ **Pfadfinder-Regel** | "Hinterlasse den Code besser als du ihn vorgefunden hast" |
 
 ### Beispiele
-- Lange Methode → in mehrere kleine aufteilen
-- Duplizierter Code → in Funktion auslagern
-- Magische Zahlen → Konstanten definieren
+
+| Problem | Lösung |
+|---------|--------|
+| Lange Methode | In mehrere kleine aufteilen |
+| Duplizierter Code | In Funktion auslagern |
+| Magische Zahlen | Konstanten definieren |
 
 ---
 

@@ -151,8 +151,13 @@ export default function LeaderboardPage() {
             const medalIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : null;
 
             // Rang-basierte Cosmetics: Leaderboard-Platz bestimmt Frame/Avatar, nicht gespeicherter Wert
-            const displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : entry.equippedFrame;
-            const displayAvatar = rank === 1 ? "🏆" : rank === 2 ? entry.avatar : rank === 3 ? entry.avatar : entry.avatar;
+            // Fuer Rang 4+: Wenn gespeicherter Frame/Avatar ein Rang-Reward ist, zuruecksetzen
+            const rankFrames = ["champion", "silver", "bronze-frame"];
+            const rankAvatars = ["🏆", "🥇", "🥈", "🥉"];
+            let displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : entry.equippedFrame;
+            let displayAvatar = rank === 1 ? "🏆" : rank === 2 ? entry.avatar : rank === 3 ? entry.avatar : entry.avatar;
+            if (rank > 3 && rankFrames.includes(entry.equippedFrame)) displayFrame = "none";
+            if (rank > 3 && rankAvatars.includes(entry.avatar)) displayAvatar = "🎓";
 
             return (
               <div

@@ -85,10 +85,12 @@ export const uxModule: Module = {
 
 ## 📊 Warum UX wichtig ist
 
-- 💰 **Kosten senken:** Weniger Support-Anfragen
-- 📈 **Conversion steigern:** Nutzer bleiben länger
-- 😊 **Zufriedenheit:** Nutzer kommen zurück
-- 🏆 **Wettbewerbsvorteil:** Besseres Produkt
+| Vorteil | Beschreibung |
+|---------|-------------|
+| 💰 **Kosten senken** | Weniger Support-Anfragen |
+| 📈 **Conversion steigern** | Nutzer bleiben länger |
+| 😊 **Zufriedenheit** | Nutzer kommen zurück |
+| 🏆 **Wettbewerbsvorteil** | Besseres Produkt |
 
 ---
 
@@ -107,10 +109,12 @@ export const uxModule: Module = {
 
 Kleine, subtile Interaktionen, die das Erlebnis verbessern:
 
-- 🖱️ **Hover-Effekte** — Button ändert Farbe beim Darüberfahren
-- 📳 **Haptisches Feedback** — Vibration bei Tastendruck
-- 🔊 **Audio-Feedback** — Klick-Geräusch
-- ✨ **Animationen** — Ladebalken, Übergänge
+| Typ | Beispiel |
+|-----|---------|
+| 🖱️ **Hover-Effekte** | Button ändert Farbe beim Darüberfahren |
+| 📳 **Haptisches Feedback** | Vibration bei Tastendruck |
+| 🔊 **Audio-Feedback** | Klick-Geräusch |
+| ✨ **Animationen** | Ladebalken, Übergänge |
 
 > 💡 **Merke:** Micro-Interactions geben dem Nutzer **Feedback** — er weiß, dass das System seine Aktion registriert hat.
 
@@ -136,99 +140,11 @@ Kleine, subtile Interaktionen, die das Erlebnis verbessern:
 
 Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interface-Design. Sie sind **prüfungsrelevant** und sollten beim Programmierprojekt angewendet werden!
 
----
-
-## 1️⃣ Sichtbarkeit des Systemstatus
-
-> Das System hält den Nutzer **immer** über den aktuellen Stand informiert.
-
-**Gut:** Fortschrittsbalken beim Download
-**Schlecht:** Download ohne Anzeige — "Lädt es noch?"
+Im interaktiven Tool unten kannst du jede Heuristik erkunden — mit Erklärung, Gut-/Schlecht-Beispielen und IHK-Tipps.
 
 ---
 
-## 2️⃣ Übereinstimmung mit der realen Welt
-
-> Das System spricht die **Sprache des Nutzers**, nicht die des Systems.
-
-**Gut:** 🗑️ Papierkorb-Symbol auf dem Desktop
-**Schlecht:** 💾 Diskette als "Speichern" für junge Generationen
-
----
-
-## 3️⃣ Kontrolle und Freiheit des Nutzers
-
-> Nutzer brauchen einen **"Notfall-Exit"** — unerwünschte Aktionen rückgängig machen.
-
-**Gut:** Strg+Z zum Rückgängig machen
-**Schlecht:** Kreuz bei Werbeanzeigen, das nicht funktioniert
-
----
-
-## 4️⃣ Konsistenz und Standards
-
-> Gleiches sollte **gleich aussehen** und **gleich funktionieren**.
-
-**Gut:** Kamera-Icon immer oben rechts auf dem Smartphone
-**Schlecht:** Taschenlampen-Funktion per Doppelklick Seitentaste (Android)
-
----
-
-## 5️⃣ Fehlervermeidung
-
-> **Verhindere** Fehler, bevor sie passieren — nicht nur Fehlermeldungen zeigen.
-
-**Gut:** "Betreff fehlt!" beim E-Mail-Versand
-**Schlecht:** Spielstand nur manuell speichern (Datenverlust möglich)
-
----
-
-## 6️⃣ Wiedererkennen statt Erinnern
-
-> Mache **Optionen sichtbar** — der Nutzer soll nicht raten müssen.
-
-**Gut:** Pokémon-Kampf-Oberfläche mit sichtbaren Aktionen
-**Schlecht:** SAP-Text ohne Kontext — "Was war nochmal F4?"
-
----
-
-## 7️⃣ Flexibilität und Effizienz der Nutzung
-
-> Anfänger UND Experten sollten das System effizient nutzen können.
-
-**Gut:** GitLab mit Klickibunti UND Console
-**Schlecht:** Altes SAP — nur Shortcuts, keine Maus-Alternative
-
----
-
-## 8️⃣ Ästhetisches und minimalistisches Design
-
-> Jede Information auf dem Screen sollte **relevant** sein — nichts überflüssiges.
-
-**Gut:** Fire-TV Fernbedienung — nur nötige Knöpfe
-**Schlecht:** Ali Express — überladene Oberfläche
-
----
-
-## 9️⃣ Nutzer bei Fehlern unterstützen
-
-> Fehlermeldungen sollten **verständlich** sein und einen **Lösungsweg** zeigen.
-
-**Gut:** "Datei nicht gefunden. Prüfe den Pfad: /documents/"
-**Schlecht:** "Error 0x80070005" — ohne Kontext
-
----
-
-## 🔟 Hilfe und Dokumentation
-
-> Im Idealfall braucht der Nutzer keine Hilfe. Falls doch, sollte sie **leicht zu finden** sein.
-
-**Gut:** \`git help\` — sofortige Kontexthilfe
-**Schlecht:** Schulung nötig für einfache Funktionen (Vplan)
-
----
-
-## 🔨 Heuristiken anwenden
+## 🔨 Heuristiken erkunden
 
 [INTERACTIVE]
 
@@ -330,10 +246,13 @@ Eine **User Story** beschreibt eine Funktion aus der Sicht des Nutzers:
 | 🖼️ **Prototyping** | Klickbare Mockups testen | Vor der Implementierung |
 
 ### Dabei beachten
-- ✅ Repräsentative Nutzer auswählen
-- ✅ Vorher klare Ziele definieren
-- ✅ Neutral bleiben (nicht beeinflussen!)
-- ✅ Ergebnisse dokumentieren und umsetzen
+
+| Regel | Beschreibung |
+|-------|-------------|
+| ✅ **Repräsentativ** | Passende Nutzer auswählen |
+| ✅ **Klare Ziele** | Vorher definieren, was getestet wird |
+| ✅ **Neutral bleiben** | Nutzer nicht beeinflussen! |
+| ✅ **Dokumentieren** | Ergebnisse aufschreiben und umsetzen |
 
 ---
 
@@ -362,34 +281,34 @@ Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in 
 
 ## 📅 Die 5 Phasen
 
-<svg viewBox="0 0 650 100" xmlns="http://www.w3.org/2000/svg" style="max-width:650px;margin:1rem auto;display:block">
-  <rect x="0" y="0" width="650" height="100" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
-  <line x1="55" y1="50" x2="595" y2="50" stroke="#334155" stroke-width="2"/>
-  <circle cx="55" cy="50" r="18" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
-  <text x="55" y="47" text-anchor="middle" fill="#93c5fd" font-size="10" font-weight="bold">1</text>
-  <text x="55" y="58" text-anchor="middle" fill="#93c5fd" font-size="7">Tag</text>
-  <text x="55" y="82" text-anchor="middle" fill="#93c5fd" font-size="9" font-weight="bold">Understand</text>
-  <text x="55" y="22" text-anchor="middle" fill="#64748b" font-size="8">Problem</text>
-  <circle cx="195" cy="50" r="18" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="2"/>
-  <text x="195" y="47" text-anchor="middle" fill="#c4b5fd" font-size="10" font-weight="bold">2</text>
-  <text x="195" y="58" text-anchor="middle" fill="#c4b5fd" font-size="7">Tag</text>
-  <text x="195" y="82" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="bold">Diverge</text>
-  <text x="195" y="22" text-anchor="middle" fill="#64748b" font-size="8">Ideen</text>
-  <circle cx="335" cy="50" r="18" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
-  <text x="335" y="47" text-anchor="middle" fill="#fcd34d" font-size="10" font-weight="bold">3</text>
-  <text x="335" y="58" text-anchor="middle" fill="#fcd34d" font-size="7">Tag</text>
-  <text x="335" y="82" text-anchor="middle" fill="#fcd34d" font-size="9" font-weight="bold">Converge</text>
-  <text x="335" y="22" text-anchor="middle" fill="#64748b" font-size="8">Auswahl</text>
-  <circle cx="475" cy="50" r="18" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
-  <text x="475" y="47" text-anchor="middle" fill="#6ee7b7" font-size="10" font-weight="bold">4</text>
-  <text x="475" y="58" text-anchor="middle" fill="#6ee7b7" font-size="7">Tag</text>
-  <text x="475" y="82" text-anchor="middle" fill="#6ee7b7" font-size="9" font-weight="bold">Prototype</text>
-  <text x="475" y="22" text-anchor="middle" fill="#64748b" font-size="8">Bauen</text>
-  <circle cx="595" cy="50" r="18" fill="#ef4444" fill-opacity="0.3" stroke="#ef4444" stroke-width="2"/>
-  <text x="595" y="47" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="bold">5</text>
-  <text x="595" y="58" text-anchor="middle" fill="#fca5a5" font-size="7">Tag</text>
-  <text x="595" y="82" text-anchor="middle" fill="#fca5a5" font-size="9" font-weight="bold">Test</text>
-  <text x="595" y="22" text-anchor="middle" fill="#64748b" font-size="8">Validieren</text>
+<svg viewBox="0 0 650 120" xmlns="http://www.w3.org/2000/svg" style="max-width:650px;margin:1rem auto;display:block">
+  <rect x="0" y="0" width="650" height="120" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5"/>
+  <line x1="55" y1="55" x2="595" y2="55" stroke="#334155" stroke-width="2"/>
+  <circle cx="55" cy="55" r="22" fill="#3b82f6" fill-opacity="0.3" stroke="#3b82f6" stroke-width="2"/>
+  <text x="55" y="51" text-anchor="middle" fill="#93c5fd" font-size="14" font-weight="bold">1</text>
+  <text x="55" y="65" text-anchor="middle" fill="#93c5fd" font-size="10">Tag</text>
+  <text x="55" y="98" text-anchor="middle" fill="#93c5fd" font-size="13" font-weight="bold">Understand</text>
+  <text x="55" y="22" text-anchor="middle" fill="#64748b" font-size="11">Problem</text>
+  <circle cx="195" cy="55" r="22" fill="#8b5cf6" fill-opacity="0.3" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="195" y="51" text-anchor="middle" fill="#c4b5fd" font-size="14" font-weight="bold">2</text>
+  <text x="195" y="65" text-anchor="middle" fill="#c4b5fd" font-size="10">Tag</text>
+  <text x="195" y="98" text-anchor="middle" fill="#c4b5fd" font-size="13" font-weight="bold">Diverge</text>
+  <text x="195" y="22" text-anchor="middle" fill="#64748b" font-size="11">Ideen</text>
+  <circle cx="335" cy="55" r="22" fill="#f59e0b" fill-opacity="0.3" stroke="#f59e0b" stroke-width="2"/>
+  <text x="335" y="51" text-anchor="middle" fill="#fcd34d" font-size="14" font-weight="bold">3</text>
+  <text x="335" y="65" text-anchor="middle" fill="#fcd34d" font-size="10">Tag</text>
+  <text x="335" y="98" text-anchor="middle" fill="#fcd34d" font-size="13" font-weight="bold">Converge</text>
+  <text x="335" y="22" text-anchor="middle" fill="#64748b" font-size="11">Auswahl</text>
+  <circle cx="475" cy="55" r="22" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="2"/>
+  <text x="475" y="51" text-anchor="middle" fill="#6ee7b7" font-size="14" font-weight="bold">4</text>
+  <text x="475" y="65" text-anchor="middle" fill="#6ee7b7" font-size="10">Tag</text>
+  <text x="475" y="98" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="bold">Prototype</text>
+  <text x="475" y="22" text-anchor="middle" fill="#64748b" font-size="11">Bauen</text>
+  <circle cx="595" cy="55" r="22" fill="#ef4444" fill-opacity="0.3" stroke="#ef4444" stroke-width="2"/>
+  <text x="595" y="51" text-anchor="middle" fill="#fca5a5" font-size="14" font-weight="bold">5</text>
+  <text x="595" y="65" text-anchor="middle" fill="#fca5a5" font-size="10">Tag</text>
+  <text x="595" y="98" text-anchor="middle" fill="#fca5a5" font-size="13" font-weight="bold">Test</text>
+  <text x="595" y="22" text-anchor="middle" fill="#64748b" font-size="11">Validieren</text>
 </svg>
 
 ---
@@ -507,15 +426,19 @@ In der Softwareentwicklung gibt es **verschiedene Arten von Anforderungen**. Die
 
 > **Was** soll das System tun?
 
-- Konkrete Funktionen und Features
-- Beispiel: "Das System soll PDF-Export unterstützen"
+| Aspekt | Beschreibung |
+|--------|-------------|
+| 📋 **Inhalt** | Konkrete Funktionen und Features |
+| 💡 **Beispiel** | "Das System soll PDF-Export unterstützen" |
 
 ### 2️⃣ Nicht-funktionale Anforderungen
 
 > **Wie gut** soll das System es tun?
 
-- Qualitätsmerkmale und Rahmenbedingungen
-- Beispiel: "Die Seite muss in unter 2 Sekunden laden"
+| Aspekt | Beschreibung |
+|--------|-------------|
+| 📋 **Inhalt** | Qualitätsmerkmale und Rahmenbedingungen |
+| 💡 **Beispiel** | "Die Seite muss in unter 2 Sekunden laden" |
 
 | Kategorie | Beispiel |
 |-----------|----------|

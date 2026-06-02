@@ -76,9 +76,11 @@ export const gitModule: Module = {
 
 Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Versionsmanagement chaos:
 
-- 📧 Dateien per E-Mail tauschen — wer hat die neueste Version?
-- 💾 USB-Sticks hin und her schieben
-- 📁 \`Projekt_final_v2_wirklich_final_NEU.docx\` — jeder kennt das
+| Problem | Beschreibung |
+|---------|-------------|
+| 📧 **E-Mail** | Dateien per E-Mail tauschen — wer hat die neueste Version? |
+| 💾 **USB-Sticks** | USB-Sticks hin und her schieben |
+| 📁 **Dateinamen** | \`Projekt_final_v2_wirklich_final_NEU.docx\` — jeder kennt das |
 
 > 💡 Versionsmanagement löst ALL diese Probleme — es ist wie ein **Zeitmaschine für deinen Code**.
 
@@ -97,21 +99,25 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
 
 ## Was Versionsmanagement kann
 
-- 📝 **Jede Änderung dokumentieren** — Wer, Wann, Warum
-- 🔀 **Parallele Entwicklung** — Jeder arbeitet an seinem Feature
-- ⏪ **Jederzeit zurückkehren** — Zu jedem beliebigen Stand
-- 🤝 **Zusammenarbeit** — Mehrere Entwickler gleichzeitig
-- 🏷️ **Versionen markieren** — Releases sauber kennzeichnen
+| Funktion | Beschreibung |
+|----------|-------------|
+| 📝 **Dokumentieren** | Jede Änderung — Wer, Wann, Warum |
+| 🔀 **Parallele Entwicklung** | Jeder arbeitet an seinem Feature |
+| ⏪ **Zurückkehren** | Zu jedem beliebigen Stand |
+| 🤝 **Zusammenarbeit** | Mehrere Entwickler gleichzeitig |
+| 🏷️ **Versionen markieren** | Releases sauber kennzeichnen |
 
 ---
 
 > 💡 **IHK-Tipp:** In der Prüfung wird oft gefragt: **Warum braucht man Versionsmanagement?** Nenne mindestens 3 Gründe!
 
-- Änderungen nachvollziehen
-- Parallele Entwicklung ermöglichen
-- Rückfallmöglichkeit (Backup)
-- Teamzusammenarbeit verbessern
-- Konflikte erkennen und lösen
+| Grund | Beschreibung |
+|-------|-------------|
+| 📝 **Nachvollziehbarkeit** | Änderungen dokumentieren |
+| 🔀 **Parallele Entwicklung** | Gleichzeitig an verschiedenen Features arbeiten |
+| 💾 **Rückfallmöglichkeit** | Backup — jederzeit zurückkehren |
+| 🤝 **Teamzusammenarbeit** | Mehrere Entwickler koordinieren |
+| ⚠️ **Konflikte erkennen** | Merge-Konflikte sichtbar und lösbar |
 
 ---
 
@@ -181,16 +187,22 @@ Es gibt zwei grundlegende Ansätze — und der Unterschied ist **prüfungsreleva
 Diese Strategien bestimmen, **wie mit parallelem Zugriff** umgegangen wird:
 
 ### Pessimistisches Locking (SVN, SAP)
-- Eine Datei wird **gesperrt** bevor sie bearbeitet wird
-- Andere können sie nur lesen, nicht ändern
-- ✅ **Vorteil:** Keine Merge-Konflikte
-- ❌ **Nachteil:** Blockaden, Wartezeiten
+
+| Aspekt | Beschreibung |
+|--------|-------------|
+| 🔒 **Sperren** | Eine Datei wird **gesperrt** bevor sie bearbeitet wird |
+| 📖 **Lesen** | Andere können sie nur lesen, nicht ändern |
+| ✅ **Vorteil** | Keine Merge-Konflikte |
+| ❌ **Nachteil** | Blockaden, Wartezeiten |
 
 ### Optimistisches Locking (Git)
-- Jeder darf **zu jeder Zeit** alle Dateien bearbeiten
-- Konflikte werden erst beim **Merge** erkannt
-- ✅ **Vorteil:** Hohe Flexibilität, paralleles Arbeiten
-- ❌ **Nachteil:** Merge-Konflikte müssen manuell gelöst werden
+
+| Aspekt | Beschreibung |
+|--------|-------------|
+| 🔓 **Frei** | Jeder darf **zu jeder Zeit** alle Dateien bearbeiten |
+| ⚠️ **Konflikte** | Erst beim **Merge** erkannt |
+| ✅ **Vorteil** | Hohe Flexibilität, paralleles Arbeiten |
+| ❌ **Nachteil** | Merge-Konflikte müssen manuell gelöst werden |
 
 > 💡 **Merke:** Git arbeitet IMMER optimistisch! Das ist ein Feature, kein Bug.
 
@@ -540,10 +552,12 @@ git commit -m "resolve merge conflict in file.ts"
 
 ## 🛡️ Konflikte vermeiden
 
-- 🔄 **Häufig pullen** — Hole regelmäßig die neuesten Änderungen
-- 📦 **Kleine Commits** — Weniger Änderungen = weniger Konfliktpotenzial
-- 💬 **Kommunikation** — Sag dem Team, an welchen Dateien du arbeitest
-- 🌿 **Kurzlebige Branches** — Je länger ein Branch existiert, desto mehr Konflikte
+| Tipp | Beschreibung |
+|------|-------------|
+| 🔄 **Häufig pullen** | regelmäßig die neuesten Änderungen holen |
+| 📦 **Kleine Commits** | Weniger Änderungen = weniger Konfliktpotenzial |
+| 💬 **Kommunikation** | Team mitteilen, an welchen Dateien man arbeitet |
+| 🌿 **Kurzlebige Branches** | Je länger ein Branch existiert, desto mehr Konflikte |
 
 ---
 

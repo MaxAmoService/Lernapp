@@ -557,10 +557,13 @@ docker run -d -p 80:80 registry.example.com/myapp:1.0
 **Kubernetes** (K8s) ist ein System zur Verwaltung von Containern auf **vielen Servern** (Nodes).
 
 ### Was kann Kubernetes?
-- 📈 **Skalierung:** Automatisch mehr Container bei hoher Last
-- 🔄 **Self-Healing:** Defekte Container werden neu gestartet
-- ⚖️ **Load-Balancing:** Traffic auf Container verteilen
-- 🚀 **Rolling Updates:** Null-Downtime Deployments
+
+| Funktion | Beschreibung |
+|----------|-------------|
+| 📈 **Skalierung** | Automatisch mehr Container bei hoher Last |
+| 🔄 **Self-Healing** | Defekte Container werden neu gestartet |
+| ⚖️ **Load-Balancing** | Traffic auf Container verteilen |
+| 🚀 **Rolling Updates** | Null-Downtime Deployments |
 
 ### Konzept
 

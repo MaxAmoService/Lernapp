@@ -525,12 +525,6 @@ export default function ProfilePage() {
                 </div>
               </button>
             </div>
-            <div className="p-4 bg-slate-100 dark:bg-slate-800/40 rounded-xl">
-              <div className="flex items-center gap-3 mb-2"><BookOpen className="w-5 h-5 text-green-400" /><div><p className="font-medium">Gespeicherte Module</p><p className="text-xs text-slate-500 dark:text-slate-400">{user.savedModules?.length || 0}</p></div></div>
-              {user.savedModules && user.savedModules.length > 0 ? (
-                <div className="flex flex-wrap gap-1.5 mt-2">{user.savedModules.map((s) => <span key={s} className="px-2.5 py-1 bg-blue-500/15 text-blue-400 text-xs rounded-lg">{s}</span>)}</div>
-              ) : <p className="text-xs text-slate-600 italic">Keine</p>}
-            </div>
           </div>
         )}
 
