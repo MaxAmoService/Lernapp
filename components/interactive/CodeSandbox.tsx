@@ -102,9 +102,12 @@ export function CodeSandbox({
     try {
       let executableCode = code;
 
-      // JSX erkennen und transpilieren
+      // TypeScript/JSX erkennen und transpilieren
+      const hasTS = /(?:interface\s+\w+|type\s+\w+\s*=|:\s*(?:string|number|boolean|any|void|unknown|never)\b|as\s+(?:string|number|boolean|any)|<[A-Z][a-zA-Z]*>)/.test(code);
       const hasJSX = /<[A-Z][a-zA-Z]*[\s/>]/.test(code) || /<>|<\//.test(code);
-      if (hasJSX && typeof window !== "undefined") {
+      const needsBabel = hasTS || hasJSX;
+
+      if (needsBabel && typeof window !== "undefined") {
         // Babel laden wenn noch nicht geladen
         const babelId = "babel-standalone";
         if (!document.getElementById(babelId)) {
@@ -112,15 +115,14 @@ export function CodeSandbox({
           script.id = babelId;
           script.src = "https://unpkg.com/@babel/standalone/babel.min.js";
           document.head.appendChild(script);
-          // Warte auf Laden (synchron im try-catch)
-          throw new Error("JSX erkannt — bitte nochmal klicken (Babel wird geladen)");
+          throw new Error("TypeScript/JSX erkannt — bitte nochmal klicken (Babel wird geladen)");
         }
         // @ts-ignore
         if (window.Babel) {
           // @ts-ignore
           executableCode = window.Babel.transform(code, {
-            presets: ["react"],
-            filename: "sandbox.jsx",
+            presets: hasTS ? ["typescript", "react"] : ["react"],
+            filename: hasTS ? "sandbox.tsx" : "sandbox.jsx",
           }).code;
         }
       }

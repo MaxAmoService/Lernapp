@@ -937,7 +937,7 @@ export function TestRunner() {
               <div className="relative rounded-lg overflow-hidden border border-gray-600 bg-gray-800">
                 <pre
                   ref={preRef}
-                  className="p-4 overflow-auto text-sm leading-relaxed pointer-events-none absolute inset-0 font-mono"
+                  className="p-4 overflow-auto text-sm leading-relaxed pointer-events-none absolute inset-0 font-mono whitespace-pre-wrap break-words"
                   aria-hidden="true"
                   dangerouslySetInnerHTML={{ __html: highlightPython(code) }}
                 />
@@ -949,7 +949,7 @@ export function TestRunner() {
                     setTestResults([]);
                   }}
                   onScroll={handleScroll}
-                  className="w-full min-h-[300px] p-4 bg-transparent text-transparent caret-emerald-400 font-mono text-sm leading-relaxed resize-y outline-none relative z-10"
+                  className="w-full min-h-[300px] p-4 bg-transparent text-transparent caret-emerald-400 font-mono text-sm leading-relaxed resize-y outline-none relative z-10 whitespace-pre-wrap break-words"
                   spellCheck={false}
                   placeholder="# Schreibe deinen Test-Code hier..."
                 />
