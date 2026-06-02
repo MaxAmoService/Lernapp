@@ -62,6 +62,10 @@ export interface UserProfile {
   clickerEquippedFrame: string;
   clickerOwnedCosmetics: string[];
   clickerLastTick: string; // ISO timestamp for offline earnings
+  clickerPrestigePoints: number;
+  clickerPrestigeLevel: number;
+  clickerOwnedPets: string[];
+  clickerActivePet: string | null;
 }
 
 // ─── Konstanten ─────────────────────────────────────────────────────────────
@@ -157,6 +161,10 @@ export async function registerUser(
     clickerEquippedFrame: "none",
     clickerOwnedCosmetics: [],
     clickerLastTick: new Date().toISOString(),
+    clickerPrestigePoints: 0,
+    clickerPrestigeLevel: 0,
+    clickerOwnedPets: [],
+    clickerActivePet: null,
   };
   await setDoc(doc(getDb(), "users", firebaseUser.uid), {
     ...profile,
@@ -219,6 +227,10 @@ export async function loginUser(email: string, password: string): Promise<UserPr
       clickerEquippedFrame: "none",
       clickerOwnedCosmetics: [],
       clickerLastTick: new Date().toISOString(),
+      clickerPrestigePoints: 0,
+      clickerPrestigeLevel: 0,
+      clickerOwnedPets: [],
+      clickerActivePet: null,
     };
     await setDoc(doc(getDb(), "users", firebaseUser.uid), { ...profile, createdAt: serverTimestamp() });
   } else if (!profile.emailVerified) {
@@ -456,7 +468,11 @@ export interface ClickerState {
   autoSpeed: number;
   autoAmount: number;
   prestigeMultiplier: number;
+  prestigePoints: number;
+  prestigeLevel: number;
   upgrades: Record<string, number>;
+  ownedPets: string[];
+  activePet: string | null;
   equippedAvatar: string;
   equippedFrame: string;
   ownedCosmetics: string[];
@@ -470,7 +486,11 @@ const CLICKER_DEFAULTS: ClickerState = {
   autoSpeed: 1000,
   autoAmount: 0,
   prestigeMultiplier: 1,
+  prestigePoints: 0,
+  prestigeLevel: 0,
   upgrades: {},
+  ownedPets: [],
+  activePet: null,
   equippedAvatar: "📚",
   equippedFrame: "none",
   ownedCosmetics: [],
@@ -503,7 +523,11 @@ export async function loadClickerState(uid: string): Promise<ClickerState> {
       autoSpeed: autoSpeed,
       autoAmount: autoAmount,
       prestigeMultiplier,
+      prestigePoints: profile.clickerPrestigePoints || 0,
+      prestigeLevel: profile.clickerPrestigeLevel || 0,
       upgrades: profile.clickerUpgrades || {},
+      ownedPets: profile.clickerOwnedPets || [],
+      activePet: profile.clickerActivePet || null,
       equippedAvatar: profile.clickerEquippedAvatar || "📚",
       equippedFrame,
       ownedCosmetics: profile.clickerOwnedCosmetics || [],
@@ -764,5 +788,153 @@ export async function resetClickerState(uid: string): Promise<void> {
     await updateUserProfile(uid, { ...CLICKER_DEFAULTS });
   } catch (err) {
     console.error("[Clicker] Reset failed:", err);
+  }
+}
+
+// ─── Prestige-System ────────────────────────────────────────────────────────
+
+export async function prestigeClickerState(uid: string): Promise<ClickerState | null> {
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+
+    const totalPoints = profile.clickerTotalPoints || 0;
+    if (totalPoints < 10000) return null; // Mindestens 10.000 Punkte
+
+    // Prestige-Punkte berechnen: floor(log10(totalPoints / 10000))
+    const newPrestigePoints = Math.floor(Math.log10(totalPoints / 10000));
+    const currentPrestigePoints = profile.clickerPrestigePoints || 0;
+    const currentPrestigeLevel = profile.clickerPrestigeLevel || 0;
+
+    await updateUserProfile(uid, {
+      clickerPoints: 0,
+      clickerTotalPoints: 0,
+      clickerClickPower: 1,
+      clickerAutoSpeed: 1000,
+      clickerAutoAmount: 0,
+      clickerUpgrades: {},
+      clickerOwnedCosmetics: [],
+      clickerEquippedAvatar: "📚",
+      clickerEquippedFrame: "none",
+      clickerPrestigePoints: currentPrestigePoints + newPrestigePoints,
+      clickerPrestigeLevel: currentPrestigeLevel + 1,
+      // Pets bleiben erhalten
+      clickerOwnedPets: profile.clickerOwnedPets || [],
+      clickerActivePet: profile.clickerActivePet || null,
+    });
+
+    return loadClickerState(uid);
+  } catch (err) {
+    console.error("[Clicker] Prestige failed:", err);
+    return null;
+  }
+}
+
+// ─── Pet-System ─────────────────────────────────────────────────────────────
+
+interface PetDef {
+  id: string;
+  name: string;
+  emoji: string;
+  bonus: string;
+  bonusType: "auto" | "click" | "speed";
+  bonusPercent: number;
+  rarity: "common" | "rare" | "epic" | "legendary";
+  module: string;
+}
+
+const ALL_PETS: PetDef[] = [
+  { id: "pet_ihk", name: "IHK-Buch", emoji: "📖", bonus: "+5% Auto", bonusType: "auto", bonusPercent: 5, rarity: "common", module: "IHK" },
+  { id: "pet_math", name: "Rechenschieber", emoji: "📐", bonus: "+5% Klick", bonusType: "click", bonusPercent: 5, rarity: "common", module: "Mathematik" },
+  { id: "pet_prog", name: "Bug", emoji: "🐛", bonus: "+5% Auto", bonusType: "auto", bonusPercent: 5, rarity: "common", module: "Programmierung" },
+  { id: "pet_net", name: "Router", emoji: "📡", bonus: "+3% Speed", bonusType: "speed", bonusPercent: 3, rarity: "rare", module: "Netzwerk" },
+  { id: "pet_docker", name: "Container", emoji: "📦", bonus: "+8% Auto", bonusType: "auto", bonusPercent: 8, rarity: "rare", module: "Docker" },
+  { id: "pet_db", name: "Datensatz", emoji: "🗄️", bonus: "+8% Klick", bonusType: "click", bonusPercent: 8, rarity: "rare", module: "Datenbank" },
+  { id: "pet_git", name: "Branch", emoji: "🌿", bonus: "+5% Speed", bonusType: "speed", bonusPercent: 5, rarity: "epic", module: "Git" },
+  { id: "pet_ki", name: "Neuron", emoji: "🧬", bonus: "+10% Auto", bonusType: "auto", bonusPercent: 10, rarity: "epic", module: "KI" },
+  { id: "pet_pm", name: "Gantt", emoji: "📊", bonus: "+10% Klick", bonusType: "click", bonusPercent: 10, rarity: "epic", module: "Projektmanagement" },
+  { id: "pet_sec", name: "Schild", emoji: "🛡️", bonus: "+8% Speed", bonusType: "speed", bonusPercent: 8, rarity: "legendary", module: "IT-Sicherheit" },
+  { id: "pet_ux", name: "Wireframe", emoji: "🖼️", bonus: "+15% Auto", bonusType: "auto", bonusPercent: 15, rarity: "legendary", module: "UX" },
+  { id: "pet_quantum", name: "Qubit", emoji: "⚛️", bonus: "+20% Klick", bonusType: "click", bonusPercent: 20, rarity: "legendary", module: "Quantencomputer" },
+];
+
+const BOX_TIERS: Record<string, { cost: number; rarities: PetDef["rarity"][] }> = {
+  common: { cost: 100, rarities: ["common", "rare"] },
+  rare: { cost: 500, rarities: ["rare", "epic"] },
+  epic: { cost: 2000, rarities: ["epic", "legendary"] },
+  prestige: { cost: 10000, rarities: ["legendary"] },
+};
+
+export function getPetDefs(): PetDef[] {
+  return ALL_PETS;
+}
+
+export function getBoxTiers(): Record<string, { cost: number }> {
+  return Object.fromEntries(Object.entries(BOX_TIERS).map(([k, v]) => [k, { cost: v.cost }]));
+}
+
+export function getPetBonuses(ownedPets: string[], activePet: string | null): { auto: number; click: number; speed: number } {
+  const bonuses = { auto: 0, click: 0, speed: 0 };
+  if (!activePet) return bonuses;
+  const pet = ALL_PETS.find((p) => p.id === activePet);
+  if (!pet || !ownedPets.includes(activePet)) return bonuses;
+  if (pet.bonusType === "auto") bonuses.auto = pet.bonusPercent;
+  else if (pet.bonusType === "click") bonuses.click = pet.bonusPercent;
+  else if (pet.bonusType === "speed") bonuses.speed = pet.bonusPercent;
+  return bonuses;
+}
+
+export async function openPetBox(uid: string, boxType: string): Promise<{ state: ClickerState; pet: PetDef } | null> {
+  const tier = BOX_TIERS[boxType];
+  if (!tier) return null;
+
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+
+    // Prestige-Box nur nach Prestige
+    if (boxType === "prestige" && (profile.clickerPrestigeLevel || 0) < 1) return null;
+
+    const currentPoints = profile.clickerPoints || 0;
+    if (currentPoints < tier.cost) return null;
+
+    // Zufälliges Pet aus den erlaubten Rarities
+    const possible = ALL_PETS.filter((p) => tier.rarities.includes(p.rarity));
+    const chosen = possible[Math.floor(Math.random() * possible.length)];
+
+    const ownedPets = profile.clickerOwnedPets || [];
+    // Duplikate erlaubt (für zukünftige Upgrades), aber Pet wird trotzdem hinzugefügt
+    const newOwned = [...ownedPets, chosen.id];
+
+    await updateUserProfile(uid, {
+      clickerPoints: currentPoints - tier.cost,
+      clickerOwnedPets: newOwned,
+    });
+
+    const state = await loadClickerState(uid);
+    if (!state) return null;
+    return { state, pet: chosen };
+  } catch (err) {
+    console.error("[Clicker] Open box failed:", err);
+    return null;
+  }
+}
+
+export async function equipPet(uid: string, petId: string): Promise<ClickerState | null> {
+  try {
+    const profile = await getUserProfile(uid);
+    if (!profile) return null;
+
+    const ownedPets = profile.clickerOwnedPets || [];
+    if (!ownedPets.includes(petId) && petId !== null) return null;
+
+    // Toggle: wenn bereits aktiv, deaktivieren
+    const newActive = profile.clickerActivePet === petId ? null : petId;
+
+    await updateUserProfile(uid, { clickerActivePet: newActive });
+    return loadClickerState(uid);
+  } catch (err) {
+    console.error("[Clicker] Equip pet failed:", err);
+    return null;
   }
 }
