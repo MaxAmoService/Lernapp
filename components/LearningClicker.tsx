@@ -227,7 +227,6 @@ export default function LearningClicker() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [activeTab, setActiveTab] = useState<"upgrades" | "cosmetics" | "prestige">("upgrades");
-  const [buyQty, setBuyQty] = useState<1 | 10 | "max">(1);
   const [expandedCats, setExpandedCats] = useState<Record<string, boolean>>({ click: true, auto: true, speed: true, syn: true });
   const [clickEffects, setClickEffects] = useState<{ id: number; x: number; y: number; value: number }[]>([]);
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; angle: number }[]>([]);
@@ -422,18 +421,17 @@ export default function LearningClicker() {
     }
   }, [user]);
 
-  // ── Upgrade kaufen (mit Bulk-Support) ──
+  // ── Upgrade kaufen (1 Klick = 1 Level) ──
   const handleBuyUpgrade = useCallback(async (upgrade: Upgrade) => {
     if (!user) return;
     await flushPendingClicks();
-    const maxLevels = buyQty === "max" ? 999999 : buyQty;
-    const newState = await buyClickerUpgradeBulk(user.uid, upgrade.id, maxLevels);
+    const newState = await buyClickerUpgradeBulk(user.uid, upgrade.id, 1);
     if (newState) {
       setState(newState);
       setBuyFeedback(upgrade.id);
-      setTimeout(() => setBuyFeedback(null), 400);
+      setTimeout(() => setBuyFeedback(null), 300);
     }
-  }, [user, flushPendingClicks, buyQty]);
+  }, [user, flushPendingClicks]);
 
   // ── Cosmetic kaufen ──
   const handleBuyCosmetic = useCallback(async (cosmetic: Cosmetic) => {
@@ -673,23 +671,6 @@ export default function LearningClicker() {
                 </div>
               </div>
 
-              {/* ── Buy quantity toggle ── */}
-              <div className="flex items-center justify-center gap-1 px-3 pb-1">
-                {([1, 10, "max"] as const).map((qty) => (
-                  <button
-                    key={String(qty)}
-                    onClick={() => setBuyQty(qty)}
-                    className={`px-2.5 py-0.5 text-[10px] font-medium rounded transition-colors ${
-                      buyQty === qty
-                        ? "bg-amber-500/20 text-amber-400 border border-amber-500/40"
-                        : "text-slate-500 hover:text-slate-300 border border-transparent"
-                    }`}
-                  >
-                    {qty === "max" ? "Max" : `${qty}×`}
-                  </button>
-                ))}
-              </div>
-
               {/* ── Tabs ── */}
               <div className="flex border-t border-slate-700/50">
                 <button
@@ -713,104 +694,108 @@ export default function LearningClicker() {
               </div>
 
               {/* ── Content ── */}
-              <div className="max-h-52 overflow-y-auto p-1.5 space-y-0.5">
+              <div className="max-h-52 overflow-y-auto p-1.5">
                 {/* ════ UPGRADES TAB ════ */}
-                {activeTab === "upgrades" && (
-                  UPGRADE_CATEGORIES.map((cat) => {
-                    const catUpgrades = UPGRADES.filter((u) => cat.ids.includes(u.id));
-                    const totalLevels = catUpgrades.reduce((s, u) => s + (state.upgrades[u.id] || 0), 0);
-                    const expanded = expandedCats[cat.id] !== false;
-                    return (
-                      <div key={cat.id}>
-                        {/* Category header */}
-                        <button
-                          onClick={() => setExpandedCats((prev) => ({ ...prev, [cat.id]: !prev[cat.id] }))}
-                          className="w-full flex items-center gap-1.5 px-2 py-1 text-[11px] font-semibold text-slate-300 hover:text-white rounded transition-colors"
-                        >
-                          <span className="text-[9px] w-3">{expanded ? "▼" : "▶"}</span>
-                          <span>{cat.icon}</span>
-                          <span>{cat.name}</span>
-                          <span className="text-slate-500 text-[9px]">({totalLevels})</span>
-                        </button>
+                {activeTab === "upgrades" && (() => {
+                  // Sortiere Upgrades: kaufbare zuerst, dann nach Preis
+                  const sortedUpgrades = [...UPGRADES].sort((a, b) => {
+                    const countA = state.upgrades[a.id] || 0;
+                    const countB = state.upgrades[b.id] || 0;
+                    const costA = getUpgradeCost(a, countA);
+                    const costB = getUpgradeCost(b, countB);
+                    const canA = state.points >= costA ? 0 : 1;
+                    const canB = state.points >= costB ? 0 : 1;
+                    if (canA !== canB) return canA - canB;
+                    return costA - costB;
+                  });
 
-                        {/* Upgrades in category */}
-                        {expanded && (
-                          <div className="space-y-0.5 pl-1">
-                            {catUpgrades.map((upgrade) => {
-                              const count = state.upgrades[upgrade.id] || 0;
-                              const isSynergy = upgrade.id.startsWith("syn");
-                              const isFeedback = buyFeedback === upgrade.id;
+                  // Kategorie-Farben (statisch für Tailwind)
+                  const catStyles: Record<string, { bg: string; border: string; hover: string; badge: string; badgeText: string; cost: string; bar: string }> = {
+                    click: { bg: "bg-amber-500/10", border: "border-amber-500/30", hover: "hover:border-amber-400/60 hover:bg-amber-500/15", badge: "bg-amber-500/20", badgeText: "text-amber-300", cost: "text-amber-400", bar: "bg-amber-500/60" },
+                    auto: { bg: "bg-emerald-500/10", border: "border-emerald-500/30", hover: "hover:border-emerald-400/60 hover:bg-emerald-500/15", badge: "bg-emerald-500/20", badgeText: "text-emerald-300", cost: "text-emerald-400", bar: "bg-emerald-500/60" },
+                    speed: { bg: "bg-blue-500/10", border: "border-blue-500/30", hover: "hover:border-blue-400/60 hover:bg-blue-500/15", badge: "bg-blue-500/20", badgeText: "text-blue-300", cost: "text-blue-400", bar: "bg-blue-500/60" },
+                    syn: { bg: "bg-purple-500/10", border: "border-purple-500/30", hover: "hover:border-purple-400/60 hover:bg-purple-500/15", badge: "bg-purple-500/20", badgeText: "text-purple-300", cost: "text-purple-400", bar: "bg-purple-500/60" },
+                  };
 
-                              let costText: string;
-                              let canAfford: boolean;
+                  return (
+                    <div className="grid grid-cols-2 gap-1.5">
+                      {sortedUpgrades.map((upgrade) => {
+                        const count = state.upgrades[upgrade.id] || 0;
+                        const isSynergy = upgrade.id.startsWith("syn");
+                        const isFeedback = buyFeedback === upgrade.id;
+                        const cost = getUpgradeCost(upgrade, count);
+                        const canAfford = state.points >= cost;
+                        const nextCost = getUpgradeCost(upgrade, count + 1);
+                        const progressToNext = Math.min(1, state.points / nextCost);
+                        const catKey = upgrade.id.startsWith("click") ? "click"
+                          : upgrade.id.startsWith("auto") ? "auto"
+                          : upgrade.id.startsWith("speed") ? "speed"
+                          : "syn";
+                        const s = catStyles[catKey];
 
-                              if (buyQty === 1) {
-                                const cost = getUpgradeCost(upgrade, count);
-                                canAfford = state.points >= cost;
-                                costText = formatNumber(cost);
-                              } else {
-                                const info = getBulkBuyInfo(
-                                  upgrade,
-                                  count,
-                                  state.points,
-                                  buyQty === "max" ? 999999 : buyQty
-                                );
-                                canAfford = info.levels > 0;
-                                if (buyQty === "max") {
-                                  costText = canAfford ? `${info.levels}× ${formatNumber(info.totalCost)}` : "—";
-                                } else {
-                                  costText = canAfford
-                                    ? `${info.levels}/${buyQty} · ${formatNumber(info.totalCost)}`
-                                    : "—";
-                                }
-                              }
+                        return (
+                          <button
+                            key={upgrade.id}
+                            onClick={() => handleBuyUpgrade(upgrade)}
+                            disabled={!canAfford}
+                            className={`relative text-left p-2 rounded-lg border transition-all active:scale-95 ${
+                              isFeedback
+                                ? "bg-green-500/15 border-green-500/40"
+                                : canAfford
+                                ? `${s.bg} ${s.border} ${s.hover} hover:scale-[1.02]`
+                                : "bg-slate-800/20 border-slate-700/20 opacity-50"
+                            }`}
+                          >
+                            {/* Kauf-Feedback Flash */}
+                            {isFeedback && (
+                              <div className="absolute inset-0 bg-green-400/10 rounded-lg animate-pulse pointer-events-none" />
+                            )}
 
-                              return (
-                                <button
-                                  key={upgrade.id}
-                                  onClick={() => handleBuyUpgrade(upgrade)}
-                                  disabled={!canAfford}
-                                  className={`w-full text-left px-2 py-1.5 rounded-md border transition-all ${
-                                    isFeedback
-                                      ? "bg-green-500/15 border-green-500/40"
-                                      : canAfford
-                                      ? "bg-slate-800/50 border-slate-700/50 hover:border-amber-500/40 hover:bg-amber-500/5"
-                                      : "bg-slate-800/20 border-slate-700/30 opacity-50"
-                                  }`}
-                                >
-                                  <div className="flex items-center gap-1.5">
-                                    <span className="text-sm">{upgrade.icon}</span>
-                                    <div className="flex-1 min-w-0">
-                                      <div className="text-[11px] font-medium text-white truncate">
-                                        {upgrade.name}{" "}
-                                        {count > 0 && (
-                                          <span className="text-slate-500">Lv.{count}</span>
-                                        )}
-                                        {isSynergy && (
-                                          <span className="ml-1 text-[9px] text-purple-400">Synergie</span>
-                                        )}
-                                      </div>
-                                      <div className="text-[9px] text-slate-500 truncate">
-                                        {upgrade.description}
-                                      </div>
-                                    </div>
-                                    <div
-                                      className={`text-[11px] font-bold whitespace-nowrap ${
-                                        canAfford ? "text-amber-400" : "text-slate-600"
-                                      }`}
-                                    >
-                                      {costText}
-                                    </div>
-                                  </div>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })
-                )}
+                            {/* Icon + Level */}
+                            <div className="flex items-center justify-between mb-0.5">
+                              <span className="text-base">{upgrade.icon}</span>
+                              {count > 0 && (
+                                <span className={`text-[9px] font-bold px-1 py-0.5 rounded ${s.badge} ${s.badgeText}`}>
+                                  Lv.{count}
+                                </span>
+                              )}
+                            </div>
+
+                            {/* Name */}
+                            <div className="text-[10px] font-bold text-white truncate mb-0.5">
+                              {upgrade.name}
+                            </div>
+
+                            {/* Effekt */}
+                            <div className="text-[8px] text-slate-400 truncate mb-1">
+                              {upgrade.description}
+                            </div>
+
+                            {/* Kosten */}
+                            <div className={`text-[10px] font-bold ${canAfford ? s.cost : "text-slate-600"}`}>
+                              {formatNumber(cost)}
+                            </div>
+
+                            {/* Mini Progress Bar zum nächsten Level */}
+                            {count > 0 && (
+                              <div className="mt-1 h-0.5 bg-slate-700/40 rounded-full overflow-hidden">
+                                <div
+                                  className={`h-full ${s.bar} rounded-full transition-all duration-300`}
+                                  style={{ width: `${progressToNext * 100}%` }}
+                                />
+                              </div>
+                            )}
+
+                            {/* Synergie Badge */}
+                            {isSynergy && (
+                              <div className="absolute top-1 right-1 text-[7px] text-purple-400">🔗</div>
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  );
+                })()}
 
                 {/* ════ COSMETICS TAB ════ */}
                 {activeTab === "cosmetics" &&
