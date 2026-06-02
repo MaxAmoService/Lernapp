@@ -83,14 +83,14 @@ Register → L1 (~64KB, ~1ns) → L2 (~256KB-1MB, ~4ns) → L3 (~4-32MB, ~10ns) 
 
 ### BIOS/UEFI & Bootvorgang
 - **POST**: Power-On Self-Test — Hardwareprüfung beim Einschalten
-- **BIOS**: 16-Bit, MBR (max. 2TB), textbasiert | **UEEFI**: 32/64-Bit, GPT (max. 9,4 ZB), grafisch
+- **BIOS**: 16-Bit, MBR (max. 2TB), textbasiert | **UEFI**: 32/64-Bit, GPT (max. 9,4 ZB), grafisch
 - **MBR**: 512 Byte, 4 primäre Partitionen, max. 2TB | **GPT**: 128 Partitionen, bis 9,4 ZB
 - **ROM-Typen**: ROM → PROM → EPROM → EEPROM → Flash-EEPROM
 - **Boot-Reihenfolge**: POST → BIOS/UEFI → MBR/GPT → Bootloader → Kernel → Login
 
 ### Serielle Datenübertragung
-- **Seriell**: 1 Leitung, langsam, günstig, große Distanzen (USB, SATA, Ethernet)
-- **Parallel**: n Leitungen, schnell, teuer, kurze Distanzen (PCIe, RAM)
+- **Seriell**: 1 Leitung, günstig, große Distanzen, hohe Taktfrequenzen (USB, SATA, Ethernet, PCIe pro Lane)
+- **Parallel**: n Leitungen, kurze Distanzen, Signalversatz (PCIe, RAM, alt: Parallel-ATA)
 - **8N1**: 8 Datenbits, keine Parität, 1 Stopp-Bit = 10 Bit/Rahmen
 - **Parität**: Gerade/Ungerade — erkennt 1-Bit-Fehler
 - **USB**: 1.0 (12 Mbit/s), 2.0 (480), 3.0 (5 Gbit/s), 3.2 (20), USB4 (40)
@@ -118,7 +118,7 @@ Register → L1 (~64KB, ~1ns) → L2 (~256KB-1MB, ~4ns) → L3 (~4-32MB, ~10ns) 
 
 Die CPU (Central Processing Unit) ist das "Gehirn" des Computers. Sie führt Befehle aus, die im Speicher abgelegt sind. Die meisten modernen Computer folgen der **Von-Neumann-Architektur** — ein Konzept aus dem Jahr 1945, das bis heute die Grundlage bildet.
 
-> 💡 **Analogie:** Von-Neumann ist wie ein Koch, der sein Rezept (Programm) und seine Zutaten (Daten) im selben Regal (Speicher) lagert. Er muss abwechselnd Rezept und Zutaten holen — das ist der berühmte Von-Neumann-Flaschenhals.
+> 💡 **Tipp:** Von-Neumann ist wie ein Koch, der sein Rezept (Programm) und seine Zutaten (Daten) im selben Regal (Speicher) lagert. Er muss abwechselnd Rezept und Zutaten holen — das ist der berühmte Von-Neumann-Flaschenhals.
 
 ## Die Von-Neumann-Architektur
 
@@ -145,7 +145,7 @@ Die CPU selbst besteht aus drei Kernbereichen:
 - Weist die ALU an, was zu tun ist (**Execute**)
 
 ### Register — Die schnelle Zwischenablage
-Register sind ultra-schnelle Speicherzellen direkt in der CPU:
+Register sind sehr schnelle Speicherzellen direkt in der CPU (Zugriffszeit unter 1 ns):
 
 | Register | Name | Aufgabe |
 |----------|------|---------|
@@ -217,7 +217,7 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
 
 > In der letzten Lektion haben wir die CPU-Architektur mit Von-Neumann, dem Fetch-Decode-Execute-Zyklus und CISC/RISC kennengelernt. Jetzt schauen wir uns an, wie die CPU mit dem Rest des Systems kommuniziert — über Busse und Taktfrequenz.
 
-Verbindung zwischen CPU, Speicher und Peripherie — wie Autobahnen für Daten:
+Busse sind die Verbindungsleitungen zwischen CPU, Speicher und Peripherie — vergleichbar mit Autobahnen für Daten:
 
 > 📝 **Merksatz:** "**A**lle **D**aten **S**ind wichtig" — **A**dressbus, **D**atenbus, **S**teuerbus
 
@@ -515,7 +515,7 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 ### RAID 0 — Striping (Leistung)
 - Daten werden auf alle Platten verteilt (keine Duplikate)
 - **Vorteil**: Maximale Geschwindigkeit (Lesen/Schreiben parallel)
-- **Nachteil**: Keine Redundanz — eine Platte defekt = alle Daten weg
+- **Nachteil**: Keine Redundanz — bei Ausfall einer Platte sind alle Daten verloren
 - **Einsatz**: Temporäre Daten, Gaming, Scratch-Disk
 
 <svg viewBox="0 0 350 120" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;margin:1rem auto;display:block">
@@ -593,9 +593,9 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 - **Einsatz**: Große Server, Rechenzentren
 
 ### RAID 10 — Mirror + Stripe (Premium)
-- Kombination aus RAID 1 und RAID 0
-- **Vorteil**: Schnell UND sicher
-- **Nachteil**: Teuer (50% Kapazität)
+- Kombination aus RAID 1 und RAID 0: Daten werden gespiegelt UND gestriped
+- **Vorteil**: Hohe Lesegeschwindigkeit durch Striping, hohe Sicherheit durch Mirroring
+- **Nachteil**: Nur 50% nutzbare Kapazität (teuer)
 - **Einsatz**: Datenbanken, High-Performance-Server
 
 <svg viewBox="0 0 350 130" xmlns="http://www.w3.org/2000/svg" style="max-width:350px;margin:1rem auto;display:block">
@@ -699,9 +699,9 @@ Der Cache speichert häufig verwendete Daten näher an der CPU:
 ## Virtueller Speicher & Paging
 
 ### Warum virtueller Speicher?
-- RAM ist begrenzt, Programme groß
+- RAM ist begrenzt, Programme benötigen oft mehr Speicher
 - Virtueller Speicher erlaubt es, mehr Speicher zu nutzen als physisch vorhanden
-- Auslagerung auf Festplatte (Swap/Pagefile)
+- Auslagerung auf Festplatte (Swap/Pagefile) bei Bedarf
 
 ### Paging
 - Virtueller Speicher wird in **Seiten** (Pages) eingeteilt (typisch 4 KB)
@@ -795,9 +795,9 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 - OS weist CPU-Zeit zu (Scheduling)
 
 ### Thread
-- Leichtgewichtiger Prozess innerhalb eines Prozesses
+- Leichtgewichtige Ausführungseinheit innerhalb eines Prozesses
 - Teilt sich Speicher und Ressourcen des Prozesses
-- Mehrere Threads = bessere CPU-Auslastung
+- Mehrere Threads = bessere CPU-Auslastung (wenn parallelisierbar)
 
 ### Multitasking-Modelle
 
@@ -873,7 +873,7 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 
 > 💡 **IHK-Tipp:** Kenne den Unterschied zwischen BIOS und UEFI! UEFI ersetzt BIOS und bringt modernere Features mit.
 
-> 📚 **Siehe auch:** Netzwerkmodul — dort wird auf Netzwerk-Protokolle und -Freigaben eingegangen.
+> 💡 **Tipp:** Im Netzwerkmodul wird auf Netzwerk-Protokolle und -Freigaben eingegangen — dort findest du vertiefende Inhalte.
 
 > ⚠️ **Häufige Fehler:** "Linux ist nur für Experten" — Falsch! Distributionen wie Ubuntu oder Linux Mint sind einsteigerfreundlich. Und: Fast alle Server laufen unter Linux.
 
@@ -896,7 +896,7 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 
 Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle Maschinen" (VMs) laufen auf einer einzigen physischen Maschine — jede mit eigenem OS.
 
-> 💡 **Analogie:** Virtualisierung ist wie ein Mehrfamilienhaus: Eine physische Struktur (Haus), mehrere unabhängige Wohnungen (VMs) mit eigenen Schlüsseln (OS).
+> 💡 **Tipp:** Virtualisierung ist wie ein Mehrfamilienhaus: Eine physische Struktur (Haus), mehrere unabhängige Wohnungen (VMs) mit eigenen Schlüsseln (OS).
 
 ## Hypervisor — Der Virtualisierer
 
@@ -908,11 +908,11 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
 ### Typ 2: Hosted Hypervisor
 - Läuft **auf einem Host-OS** (z.B. Windows, macOS)
 - Einfacher zu installieren, aber langsamer
-- Beispiele: VirtualBox, VMware Workstation, Paralleles
+- Beispiele: VirtualBox, VMware Workstation, Parallels Desktop
 
 ### Container (kein klassischer Hypervisor)
-- Teilen sich den **Kernel des Host-OS**
-- Sehr leichtgewichtig (kein eigenes OS pro Container)
+- Teilen sich den **Kernel des Host-OS** (Shared Kernel)
+- Sehr leichtgewichtig — kein eigenes OS pro Container, nur isolierte Prozesse
 - Beispiele: Docker, Kubernetes, LXC
 
 | Merkmal | Typ 1 | Typ 2 | Container |
@@ -929,7 +929,7 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
 
 ### Cloud-Modelle
 
-| Modell | Beschreibung | Beispiel | Sie manages |
+| Modell | Beschreibung | Beispiel | Sie managen |
 |--------|-------------|----------|-------------|
 | **IaaS** | Infrastruktur als Dienst | AWS EC2, Azure VM | OS, Apps, Daten |
 | **PaaS** | Plattform als Dienst | Heroku, Google App Engine | Apps, Daten |
@@ -1009,11 +1009,11 @@ Benchmarks sind standardisierte Tests zur Messung der Computerleistung:
 - **FLOPS**: Misst Gleitkomma-Operationen — relevant für wissenschaftliche Berechnungen, KI, Grafik
 
 ### Benchmark-Probleme
-- Hersteller optimieren für bestimmte Benchmarks ("Benchmark-Betrug")
-- Real-world Performance kann abweichen
+- Hersteller optimieren gezielt für bestimmte Benchmarks ("Benchmark-Betrug")
+- Tagesleistung (Real-World) kann stark abweichen
 - Verschiedene Benchmarks sind nicht direkt vergleichbar
 
-> 💡 **Praxis-Tipp:** Verlasse dich nie auf einen einzelnen Benchmark. Vergleiche mehrere Tests und schaue dir real-world Anwendungsbeispiele an.
+> 💡 **Praxis-Tipp:** Verlasse dich nie auf einen einzelnen Benchmark. Vergleiche mehrere Tests und prüfe reale Anwendungsszenarien.
 
 ## Amdahlsches Gesetz
 
@@ -1029,7 +1029,7 @@ $$Speedup = \\frac{1}{(1-p) + \\frac{p}{n}}$$
 - 4 Prozessoren (n = 4)
 - Speedup = 1 / ((1-0.8) + 0.8/4) = 1 / (0.2 + 0.2) = 1 / 0.4 = **2.5**
 
-> 📝 **Merke:** Selbst mit unendlich vielen Prozessoren ist der Speedup begrenzt durch den sequenziellen Teil (1-p). Bei p=0.8: maximaler Speedup = 1/0.2 = 5.
+> 📝 **Merksatz:** Selbst mit unendlich vielen Prozessoren ist der Speedup begrenzt durch den sequenziellen Teil (1-p). Bei p=0.8: maximaler Speedup = 1/0.2 = 5.
 
 > 💡 **IHK-Tipp:** Amdahl-Formel auswendig können und anwenden! Häufige Aufgabe: "Wie viele Prozessoren braucht man für Speedup X?"
 
@@ -1082,7 +1082,7 @@ Das OS verwaltet Ressourcen effizient:
       type: "text",
       content: `## Warum Green IT?
 
-> In der letzten Lektion haben wir Leistungsbewertung kennengelernt — Benchmarks, das Amdahlsche Gesetz und Engpassanalyse. Jetzt stellen wir sich die Frage: Was kostet all diese Leistung — und wie kann IT nachhaltiger werden?
+> In der letzten Lektion haben wir Leistungsbewertung kennengelernt — Benchmarks, das Amdahlsche Gesetz und Engpassanalyse. Jetzt stellen wir uns die Frage: Was kostet all diese Leistung — und wie kann IT nachhaltiger werden?
 
 Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Green IT zielt darauf ab, den ökologischen Fußabdruck der IT zu reduzieren.
 
@@ -1106,7 +1106,7 @@ Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Gr
 | **Server-Virtualisierung** | 60-80% weniger physische Server |
 | **Effiziente Netzteile** (80 PLUS) | 10-15% weniger Verlust |
 | **SSD statt HDD** | 60-70% weniger Strom |
-| **Cloud statt lokal** | Bessere Auslastung = weniger Verschwendung |
+| **Cloud statt lokal** | Bessere Serverauslastung durch Shared Infrastructure |
 
 ### Power Management
 - **ACPI** (Advanced Configuration and Power Interface): Standard für Stromverwaltung
@@ -1224,7 +1224,7 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
 ## Moores Gesetz
 
 Gordon Moore (Intel-Mitgründer) stellte 1965 fest:
-- **Aussage**: Die Anzahl der Transistoren auf einem Chip verdoppelt sich alle ~18-24 Jahre
+- **Aussage**: Die Anzahl der Transistoren auf einem Chip verdoppelt sich alle ~18-24 Monate
 - **Bis ~2010**: Traf erstaunlich genau zu
 - **Heute**: Physikalische Grenzen erreicht (Atomgröße), aber neue Ansätze (3D-Chips, Quantencomputer)
 
@@ -1276,7 +1276,7 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
 
 > In der letzten Lektion haben wir die historische Entwicklung der IT kennengelernt — von Röhren über Transistoren zu Mikroprozessoren und Moores Gesetz. Jetzt schauen wir uns an, was genau passiert, wenn ein moderner Computer eingeschaltet wird.
 
-Wenn du den Power-Button drückst, passiert eine ganze Kette von Ereignissen, bevor das Betriebssystem startet. Diese Kette ist standardisiert und bei jedem PC gleich.
+Wenn du den Power-Button drückst, durchläuft der Computer eine standardisierte Kette von Ereignissen, bevor das Betriebssystem startet.
 
 > 📝 **Merksatz:** **POST → BIOS → Bootmedium → MBR/GPT → Bootloader → Kernel → Login**
 
@@ -1382,14 +1382,14 @@ Es gibt zwei grundlegende Arten, Daten zu übertragen:
 | **Geschwindigkeit** | Pro Bit 1 Takt | Alle Bits gleichzeitig |
 | **Distanz** | Große Distanzen | Kurze Distanzen |
 | **Kosten** | Günstig (wenig Kabel) | Teuer (viele Kabel) |
-| **Problem** | Langsamer | Signalversatz (Skew) |
+| **Problem** | Pro Takt 1 Bit (aber hohe Frequenzen) | Signalversatz (Skew) |
 | **Beispiele** | USB, SATA, Ethernet, RS-232 | PCIe, RAM-Bus, Parallel-ATA (alt) |
 
 > 💡 **Praxis-Tipp:** Heute dominiert die serielle Übertragung. Selbst PCIe ist intern seriell (pro Lane). Der Vorteil: Kein Signalversatz, günstigere Kabel, höhere Taktfrequenzen möglich.
 
 ## RS-232 — Der serielle Klassiker
 
-RS-232 ist der älteste serielle Standard (1962). Er definiert die physische Schnittstelle für serielle Kommunikation.
+RS-232 ist ein älterer serieller Standard (1962). Er definiert die physische Schnittstelle und die Signalpegel für serielle Kommunikation.
 
 ### Der Seriellrahmen (8N1)
 
