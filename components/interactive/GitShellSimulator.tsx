@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Terminal, RotateCcw, HelpCircle, ChevronRight } from "lucide-react";
+import { Terminal, RotateCcw, HelpCircle, ChevronRight, GitBranch } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Types & State
@@ -33,6 +33,8 @@ interface GitState {
   history: { command: string; output: string }[];
 }
 
+type ShellMode = "bash" | "powershell";
+
 // ---------------------------------------------------------------------------
 // Initial State
 // ---------------------------------------------------------------------------
@@ -48,20 +50,50 @@ const INITIAL_STATE: GitState = {
   history: [],
 };
 
-const SHORT_HELP = `Verfügbare Befehle:
-  git status     — Zeigt den aktuellen Zustand
-  git add <file> — Datei zum Staging hinzufügen
-  git add .      — Alle Dateien stagen
-  git commit -m "..." — Änderungen committen
-  git log        — Commit-Historie anzeigen
-  git branch     — Branches anzeigen
-  git branch <name> — Neuen Branch erstellen
+const BASH_HELP = `Verfuegbare Befehle (Bash):
+  git status          — Zeigt den aktuellen Zustand
+  git add <file>      — Datei zum Staging hinzufuegen
+  git add .           — Alle Dateien stagen
+  git commit -m "..." — Aenderungen committen
+  git log             — Commit-Historie anzeigen
+  git branch          — Branches anzeigen
+  git branch <name>   — Neuen Branch erstellen
   git checkout <name> — Branch wechseln
   git checkout -b <name> — Neuen Branch erstellen und wechseln
-  git merge <name> — Branch mergen
-  touch <file>   — Neue Datei erstellen
-  help           — Diese Hilfe anzeigen
-  clear          — Verlauf löschen`;
+  git merge <name>    — Branch mergen
+  touch <file>        — Neue Datei erstellen
+  help                — Diese Hilfe anzeigen
+  clear               — Verlauf loeschen`;
+
+const POWERSHELL_HELP = `Verfuegbare Befehle (PowerShell + poshgit):
+  git status          — Zeigt den aktuellen Zustand
+  git add <file>      — Datei zum Staging hinzufuegen
+  git add .           — Alle Dateien stagen
+  git commit -m "..." — Aenderungen committen
+  git log             — Commit-Historie anzeigen
+  git branch          — Branches anzeigen
+  git branch <name>   — Neuen Branch erstellen
+  git checkout <name> — Branch wechseln
+  git checkout -b <name> — Neuen Branch erstellen und wechseln
+  git merge <name>    — Branch mergen
+
+  PowerShell-Aliase:
+  ga <file>           — git add
+  gaa                 — git add .
+  gcmsg "..."         — git commit -m "..."
+  gco <name>          — git checkout
+  gcb <name>          — git checkout -b
+  gst                 — git status
+  gl                  — git log
+  gb                  — git branch
+  gm <name>           — git merge
+
+  New-Item <file>     — Neue Datei erstellen (alias: ni)
+  help                — Diese Hilfe anzeigen
+  clear               — Verlauf loeschen
+
+  poshgit zeigt im Prompt:
+  [Branch +N ~M -D]  — N neu, M geaendert, D geloescht`;
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -76,6 +108,24 @@ function parseCommand(input: string): { cmd: string; args: string[] } {
   return { cmd: parts[0] || "", args: parts.slice(1) };
 }
 
+// poshgit-style status string
+function getPoshGitStatus(state: GitState): string {
+  const staged = state.files.filter(f => f.staged).length;
+  const untracked = state.files.filter(f => !f.staged && !f.committed).length;
+  const modified = state.files.filter(f => f.committed && !f.staged).length;
+
+  let status = "";
+  if (staged > 0) status += ` +${staged}`;
+  if (modified > 0) status += ` ~${modified}`;
+  if (untracked > 0) status += ` -${untracked}`;
+  return status;
+}
+
+function getPoshGitBranch(state: GitState): string {
+  const status = getPoshGitStatus(state);
+  return `[${state.currentBranch}${status}]`;
+}
+
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -85,6 +135,7 @@ export default function GitShellSimulator() {
   const [input, setInput] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
+  const [shellMode, setShellMode] = useState<ShellMode>("bash");
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -108,9 +159,48 @@ export default function GitShellSimulator() {
 
     const { cmd, args } = parseCommand(trimmed);
 
-    switch (cmd) {
+    // ---- PowerShell aliases ----
+    const psAliases: Record<string, string[]> = {
+      ga: ["git", "add"],
+      gaa: ["git", "add", "."],
+      gcmsg: ["git", "commit", "-m"],
+      gco: ["git", "checkout"],
+      gcb: ["git", "checkout", "-b"],
+      gst: ["git", "status"],
+      gl: ["git", "log"],
+      gb: ["git", "branch"],
+      gm: ["git", "merge"],
+    };
+
+    // Resolve PowerShell alias
+    let resolvedCmd = cmd;
+    let resolvedArgs = args;
+    if (shellMode === "powershell" && psAliases[cmd]) {
+      const alias = psAliases[cmd];
+      resolvedCmd = alias[0];
+      resolvedArgs = [...alias.slice(1), ...args];
+    }
+
+    // PowerShell New-Item alias
+    if (shellMode === "powershell" && (cmd === "New-Item" || cmd === "ni")) {
+      const fileName = args.find(a => !a.startsWith("-"));
+      if (!fileName) {
+        addOutput(trimmed, "New-Item: Missing file name parameter.");
+      } else if (state.files.find(f => f.name === fileName)) {
+        addOutput(trimmed, `'${fileName}' existiert bereits.`);
+      } else {
+        setState(prev => ({
+          ...prev,
+          files: [...prev.files, { name: fileName, content: "", staged: false, committed: false }],
+        }));
+        addOutput(trimmed, `'${fileName}' erstellt.`);
+      }
+      return;
+    }
+
+    switch (resolvedCmd) {
       case "help": {
-        addOutput(trimmed, SHORT_HELP);
+        addOutput(trimmed, shellMode === "powershell" ? POWERSHELL_HELP : BASH_HELP);
         break;
       }
 
@@ -120,26 +210,28 @@ export default function GitShellSimulator() {
       }
 
       case "git": {
-        const subcmd = args[0];
+        const subcmd = resolvedArgs[0];
         switch (subcmd) {
           case "status": {
-            const current = state.branches.find((b) => b.name === state.currentBranch);
             const staged = state.files.filter((f) => f.staged);
             const unstaged = state.files.filter((f) => !f.staged && !f.committed);
             const modified = state.files.filter((f) => f.committed && !f.staged);
 
             let output = `On branch ${state.currentBranch}\n`;
+            if (shellMode === "powershell") {
+              output += `poshgit: ${getPoshGitBranch(state)}\n`;
+            }
             if (staged.length > 0) {
               output += "\nChanges to be committed:\n";
-              staged.forEach((f) => (output += `  \x1b[32mnew file:   ${f.name}\x1b[0m\n`));
+              staged.forEach((f) => (output += `  new file:   ${f.name}\n`));
             }
             if (unstaged.length > 0) {
               output += "\nUntracked files:\n";
-              unstaged.forEach((f) => (output += `  \x1b[31m${f.name}\x1b[0m\n`));
+              unstaged.forEach((f) => (output += `  ${f.name}\n`));
             }
             if (modified.length > 0) {
               output += "\nChanges not staged for commit:\n";
-              modified.forEach((f) => (output += `  \x1b[31mmodified:   ${f.name}\x1b[0m\n`));
+              modified.forEach((f) => (output += `  modified:   ${f.name}\n`));
             }
             if (staged.length === 0 && unstaged.length === 0 && modified.length === 0) {
               output += "nothing to commit, working tree clean";
@@ -149,22 +241,22 @@ export default function GitShellSimulator() {
           }
 
           case "add": {
-            if (args[1] === ".") {
+            if (resolvedArgs[1] === ".") {
               setState((prev) => ({
                 ...prev,
                 files: prev.files.map((f) => ({ ...f, staged: true })),
               }));
-              addOutput(trimmed, `Alle Dateien zum Staging hinzugefügt.`);
-            } else if (args[1]) {
-              const file = state.files.find((f) => f.name === args[1]);
+              addOutput(trimmed, `Alle Dateien zum Staging hinzugefuegt.`);
+            } else if (resolvedArgs[1]) {
+              const file = state.files.find((f) => f.name === resolvedArgs[1]);
               if (!file) {
-                addOutput(trimmed, `fatal: pathspec '${args[1]}' did not match any files`);
+                addOutput(trimmed, `fatal: pathspec '${resolvedArgs[1]}' did not match any files`);
               } else {
                 setState((prev) => ({
                   ...prev,
-                  files: prev.files.map((f) => (f.name === args[1] ? { ...f, staged: true } : f)),
+                  files: prev.files.map((f) => (f.name === resolvedArgs[1] ? { ...f, staged: true } : f)),
                 }));
-                addOutput(trimmed, `'${args[1]}' zum Staging hinzugefügt.`);
+                addOutput(trimmed, `'${resolvedArgs[1]}' zum Staging hinzugefuegt.`);
               }
             } else {
               addOutput(trimmed, "Nothing specified, nothing added.");
@@ -173,8 +265,8 @@ export default function GitShellSimulator() {
           }
 
           case "commit": {
-            const msgIdx = args.indexOf("-m");
-            const message = msgIdx >= 0 ? args.slice(msgIdx + 1).join(" ").replace(/["']/g, "") : "";
+            const msgIdx = resolvedArgs.indexOf("-m");
+            const message = msgIdx >= 0 ? resolvedArgs.slice(msgIdx + 1).join(" ").replace(/["']/g, "") : "";
             const stagedFiles = state.files.filter((f) => f.staged);
             if (stagedFiles.length === 0) {
               addOutput(trimmed, "nothing to commit");
@@ -207,7 +299,7 @@ export default function GitShellSimulator() {
               const log = branch.commits
                 .slice()
                 .reverse()
-                .map((c) => `\x1b[33mcommit ${c.hash}\x1b[0m\n    ${c.message}`)
+                .map((c) => `commit ${c.hash}\n    ${c.message}`)
                 .join("\n\n");
               addOutput(trimmed, log);
             }
@@ -215,13 +307,13 @@ export default function GitShellSimulator() {
           }
 
           case "branch": {
-            if (args.length === 1) {
+            if (resolvedArgs.length === 1) {
               const list = state.branches
-                .map((b) => (b.name === state.currentBranch ? `* \x1b[32m${b.name}\x1b[0m` : `  ${b.name}`))
+                .map((b) => (b.name === state.currentBranch ? `* ${b.name}` : `  ${b.name}`))
                 .join("\n");
               addOutput(trimmed, list);
             } else {
-              const name = args[1];
+              const name = resolvedArgs[1];
               if (state.branches.find((b) => b.name === name)) {
                 addOutput(trimmed, `fatal: A branch named '${name}' already exists.`);
               } else {
@@ -236,8 +328,8 @@ export default function GitShellSimulator() {
           }
 
           case "checkout": {
-            if (args[1] === "-b") {
-              const name = args[2];
+            if (resolvedArgs[1] === "-b") {
+              const name = resolvedArgs[2];
               if (!name) {
                 addOutput(trimmed, "fatal: branch name required");
               } else if (state.branches.find((b) => b.name === name)) {
@@ -250,29 +342,29 @@ export default function GitShellSimulator() {
                 }));
                 addOutput(trimmed, `Switched to a new branch '${name}'`);
               }
-            } else if (args[1]) {
-              const branch = state.branches.find((b) => b.name === args[1]);
+            } else if (resolvedArgs[1]) {
+              const branch = state.branches.find((b) => b.name === resolvedArgs[1]);
               if (!branch) {
-                addOutput(trimmed, `error: pathspec '${args[1]}' did not match any file(s) known to git`);
-              } else if (args[1] === state.currentBranch) {
-                addOutput(trimmed, `Already on '${args[1]}'`);
+                addOutput(trimmed, `error: pathspec '${resolvedArgs[1]}' did not match any file(s) known to git`);
+              } else if (resolvedArgs[1] === state.currentBranch) {
+                addOutput(trimmed, `Already on '${resolvedArgs[1]}'`);
               } else {
-                setState((prev) => ({ ...prev, currentBranch: args[1] }));
-                addOutput(trimmed, `Switched to branch '${args[1]}'`);
+                setState((prev) => ({ ...prev, currentBranch: resolvedArgs[1] }));
+                addOutput(trimmed, `Switched to branch '${resolvedArgs[1]}'`);
               }
             }
             break;
           }
 
           case "merge": {
-            if (!args[1]) {
+            if (!resolvedArgs[1]) {
               addOutput(trimmed, "fatal: No branch specified.");
-            } else if (args[1] === state.currentBranch) {
-              addOutput(trimmed, `Already on '${args[1]}' — cannot merge into itself.`);
+            } else if (resolvedArgs[1] === state.currentBranch) {
+              addOutput(trimmed, `Already on '${resolvedArgs[1]}' — cannot merge into itself.`);
             } else {
-              const source = state.branches.find((b) => b.name === args[1]);
+              const source = state.branches.find((b) => b.name === resolvedArgs[1]);
               if (!source) {
-                addOutput(trimmed, `error: branch '${args[1]}' not found.`);
+                addOutput(trimmed, `error: branch '${resolvedArgs[1]}' not found.`);
               } else {
                 const currentBranch = state.branches.find((b) => b.name === state.currentBranch);
                 const newCommits = source.commits.filter(
@@ -289,7 +381,7 @@ export default function GitShellSimulator() {
                         : b
                     ),
                   }));
-                  addOutput(trimmed, `Merge von '${args[1]}' in '${state.currentBranch}' — ${newCommits.length} Commit(s) übernommen.`);
+                  addOutput(trimmed, `Merge von '${resolvedArgs[1]}' in '${state.currentBranch}' — ${newCommits.length} Commit(s) uebernommen.`);
                 }
               }
             }
@@ -318,7 +410,7 @@ export default function GitShellSimulator() {
       }
 
       default:
-        addOutput(trimmed, `${cmd}: command not found. Tippe 'help' für verfügbare Befehle.`);
+        addOutput(trimmed, `${cmd}: command not found. Tippe 'help' fuer verfuegbare Befehle.`);
     }
   };
 
@@ -355,8 +447,37 @@ export default function GitShellSimulator() {
     setHistoryIndex(-1);
   };
 
+  const promptPrefix = shellMode === "powershell"
+    ? `PS ${getPoshGitBranch(state)}> `
+    : "$";
+
   return (
     <div className="space-y-4">
+      {/* Shell mode toggle */}
+      <div className="flex items-center gap-2">
+        <span className="text-xs text-gray-500 dark:text-gray-400">Shell-Modus:</span>
+        <button
+          onClick={() => setShellMode("bash")}
+          className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            shellMode === "bash"
+              ? "bg-green-600 text-white"
+              : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600"
+          }`}
+        >
+          Bash
+        </button>
+        <button
+          onClick={() => setShellMode("powershell")}
+          className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+            shellMode === "powershell"
+              ? "bg-blue-600 text-white"
+              : "bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-600"
+          }`}
+        >
+          PowerShell + poshgit
+        </button>
+      </div>
+
       {/* Terminal */}
       <div
         className="bg-[#0d1117] rounded-xl border border-slate-700/50 overflow-hidden font-mono text-sm cursor-text"
@@ -371,7 +492,12 @@ export default function GitShellSimulator() {
           </div>
           <div className="flex items-center gap-1.5 text-slate-400 text-xs">
             <Terminal className="w-3.5 h-3.5" />
-            <span>Git Shell Simulator — {state.currentBranch}</span>
+            <span>
+              {shellMode === "powershell" ? "PowerShell" : "Git Shell"} — {state.currentBranch}
+            </span>
+            {shellMode === "powershell" && (
+              <span className="ml-2 text-green-400 font-mono">{getPoshGitBranch(state)}</span>
+            )}
           </div>
         </div>
 
@@ -380,9 +506,12 @@ export default function GitShellSimulator() {
           {/* Welcome */}
           {state.history.length === 0 && (
             <div className="text-slate-500 space-y-1">
-              <p>Willkommen im Git Shell Simulator!</p>
-              <p>Tippe &apos;help&apos; für verfügbare Befehle.</p>
-              <p className="text-slate-600">Nutze ↑/↓ für Befehlshistorie.</p>
+              <p>Willkommen im {shellMode === "powershell" ? "PowerShell + poshgit" : "Git Shell"} Simulator!</p>
+              <p>Tippe &apos;help&apos; fuer verfuegbare Befehle.</p>
+              <p className="text-slate-600">Nutze Pfeil hoch/runter fuer Befehlshistorie.</p>
+              {shellMode === "powershell" && (
+                <p className="text-cyan-500">poshgit zeigt Git-Status im Prompt: [+N ~M -D]</p>
+              )}
             </div>
           )}
 
@@ -390,7 +519,9 @@ export default function GitShellSimulator() {
           {state.history.map((entry, i) => (
             <div key={i} className="space-y-1">
               <div className="flex items-center gap-1">
-                <span className="text-green-400">$</span>
+                <span className={shellMode === "powershell" ? "text-cyan-400" : "text-green-400"}>
+                  {shellMode === "powershell" ? `PS ${getPoshGitBranch(state)}>` : "$"}
+                </span>
                 <span className="text-white">{entry.command}</span>
               </div>
               <pre className="text-slate-300 whitespace-pre-wrap text-xs leading-relaxed">{entry.output}</pre>
@@ -399,7 +530,9 @@ export default function GitShellSimulator() {
 
           {/* Input */}
           <form onSubmit={handleSubmit} className="flex items-center gap-1">
-            <span className="text-green-400">$</span>
+            <span className={shellMode === "powershell" ? "text-cyan-400" : "text-green-400"}>
+              {shellMode === "powershell" ? `PS ${getPoshGitBranch(state)}>` : "$"}
+            </span>
             <input
               ref={inputRef}
               type="text"
@@ -407,7 +540,7 @@ export default function GitShellSimulator() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               className="flex-1 bg-transparent text-white outline-none caret-green-400"
-              placeholder="git status"
+              placeholder={shellMode === "powershell" ? "gst oder git status" : "git status"}
               autoFocus
               spellCheck={false}
             />
@@ -418,7 +551,10 @@ export default function GitShellSimulator() {
 
       {/* Quick commands */}
       <div className="flex flex-wrap gap-2">
-        {["git status", "git add .", 'git commit -m "init"', "git log", "git branch", "help"].map((cmd) => (
+        {(shellMode === "powershell"
+          ? ["gst", "gaa", 'gcmsg "init"', "gl", "gb", "help"]
+          : ["git status", "git add .", 'git commit -m "init"', "git log", "git branch", "help"]
+        ).map((cmd) => (
           <button
             key={cmd}
             onClick={() => {
@@ -434,7 +570,9 @@ export default function GitShellSimulator() {
       {/* State visualization */}
       <div className="grid grid-cols-3 gap-3 text-xs">
         <div className="glass rounded-lg p-3">
-          <div className="text-slate-500 mb-1">Branches</div>
+          <div className="text-slate-500 mb-1 flex items-center gap-1">
+            <GitBranch size={12} /> Branches
+          </div>
           {state.branches.map((b) => (
             <div key={b.name} className={b.name === state.currentBranch ? "text-green-400 font-bold" : "text-slate-400"}>
               {b.name === state.currentBranch ? "* " : "  "}{b.name} ({b.commits.length})
@@ -463,6 +601,20 @@ export default function GitShellSimulator() {
         </div>
       </div>
 
+      {/* poshgit info */}
+      {shellMode === "powershell" && (
+        <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
+          <h4 className="text-sm font-bold text-blue-700 dark:text-blue-300 mb-1">poshgit Erklaerung</h4>
+          <p className="text-xs text-blue-600 dark:text-blue-400">
+            poshgit ist ein PowerShell-Modul, das den Git-Status im Prompt anzeigt.
+            Das Format <code className="bg-blue-100 dark:bg-blue-800 px-1 rounded">[Branch +N ~M -D]</code> bedeutet:
+            <strong> +N</strong> = N neue/staged Dateien,
+            <strong> ~M</strong> = M geaenderte Dateien,
+            <strong> -D</strong> = D ungetrackte Dateien.
+          </p>
+        </div>
+      )}
+
       {/* Reset */}
       <div className="flex justify-center">
         <button
@@ -470,7 +622,7 @@ export default function GitShellSimulator() {
           className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg text-sm text-slate-300 transition-colors"
         >
           <RotateCcw className="w-4 h-4" />
-          Zurücksetzen
+          Zuruecksetzen
         </button>
       </div>
     </div>

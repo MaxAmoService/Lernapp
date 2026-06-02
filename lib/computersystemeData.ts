@@ -118,7 +118,7 @@ Register → L1 (~64KB, ~1ns) → L2 (~256KB-1MB, ~4ns) → L3 (~4-32MB, ~10ns) 
 
 Die CPU (Central Processing Unit) ist das "Gehirn" des Computers. Sie führt Befehle aus, die im Speicher abgelegt sind. Die meisten modernen Computer folgen der **Von-Neumann-Architektur** — ein Konzept aus dem Jahr 1945, das bis heute die Grundlage bildet.
 
-> Von-Neumann ist wie ein Koch, der sein Rezept (Programm) und seine Zutaten (Daten) im selben Regal (Speicher) lagert. Er muss abwechselnd Rezept und Zutaten holen — das ist der berühmte Von-Neumann-Flaschenhals.
+> 💡 **Analogie:** Von-Neumann ist wie ein Koch, der sein Rezept (Programm) und seine Zutaten (Daten) im selben Regal (Speicher) lagert. Er muss abwechselnd Rezept und Zutaten holen — das ist der berühmte Von-Neumann-Flaschenhals.
 
 ## Die Von-Neumann-Architektur
 
@@ -195,9 +195,9 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
 - **Multicore**: Mehrere physische Kerne auf einem Chip → echte Parallelverarbeitung
 - **Hyperthreading**: Ein physischer Kern wird als zwei logische Kerne dargestellt → bessere Auslastung, aber keine Verdopplung
 
-> Praxis: Ein 6-Kern-Prozessor mit Hyperthreading zeigt 12 logische CPUs im Task Manager. Das bedeutet nicht 12x so schnell, sondern besseres Multitasking.
+> 💡 **Praxis-Tipp:** Ein 6-Kern-Prozessor mit Hyperthreading zeigt 12 logische CPUs im Task Manager. Das bedeutet nicht 12x so schnell, sondern besseres Multitasking.
 
-> Häufige Fehler: "Mehr Kerne = schneller" — Falsch! Nur wenn die Software parallelisieren kann. Ein Single-Thread-Programm wird von 12 Kernen nicht profitieren.
+> ⚠️ **Häufige Fehler:** "Mehr Kerne = schneller" — Falsch! Nur wenn die Software parallelisieren kann. Ein Single-Thread-Programm wird von 12 Kernen nicht profitieren.
 
 > **Nächste Lektion:** Busse, Taktfrequenz & Befehlssatz — Wie verbindet sich die CPU mit dem Rest des Systems, und was bestimmt die tatsächliche Geschwindigkeit?
 
@@ -219,7 +219,7 @@ Jeder Befehl durchläuft drei Phasen — dieser Zyklus wiederholt sich Milliarde
 
 Verbindung zwischen CPU, Speicher und Peripherie — wie Autobahnen für Daten:
 
-> Merksatz: "**A**lle **D**aten **S**ind wichtig" — **A**dressbus, **D**atenbus, **S**teuerbus
+> 📝 **Merksatz:** "**A**lle **D**aten **S**ind wichtig" — **A**dressbus, **D**atenbus, **S**teuerbus
 
 ### Adressbus
 - Richtung: CPU → Speicher (einseitig)
@@ -235,7 +235,7 @@ Verbindung zwischen CPU, Speicher und Peripherie — wie Autobahnen für Daten:
 - Signale für: Lesen, Schreiben, Interrupt, Takt, Bus-Request
 - Koordiniert, wer wann den Bus nutzen darf
 
-> Praxis: Der Bus ist oft der Flaschenhals. Ein schneller Prozessor mit schmalem Datenbus ist wie ein Rennauto auf einer einspurigen Straße.
+> 💡 **Praxis-Tipp:** Der Bus ist oft der Flaschenhals. Ein schneller Prozessor mit schmalem Datenbus ist wie ein Rennauto auf einer einspurigen Straße.
 
 ## Taktfrequenz
 
@@ -253,7 +253,7 @@ Die Taktfrequenz gibt an, wie viele Zyklen die CPU pro Sekunde durchführt:
 - **IPC** (Instructions Per Cycle) = 1/CPI — wie viele Befehle pro Takt
 - Moderne CPUs: IPC von 3-5 durch Pipelining und Superskalar-Architektur
 
-> Beispiel: Eine CPU mit 3 GHz und IPC = 4 führt 12 Milliarden Befehle pro Sekunde aus.
+> 💡 **Beispiel:** Eine CPU mit 3 GHz und IPC = 4 führt 12 Milliarden Befehle pro Sekunde aus.
 
 ## Befehlssatz
 
@@ -277,7 +277,7 @@ Jede CPU versteht einen bestimmten Befehlssatz — die Maschinensprache:
 
 > 💡 **IHK-Tipp:** Kenne den Unterschied zwischen Opcode und Operand. Ein Befehl im Maschinencode besteht immer aus beiden Teilen.
 
-> Häufige Fehler: "Taktfrequenz ist das Einzige was zählt" — Falsch! IPC, Cache-Größe, Pipeline-Tiefe und Architektur sind mindestens genauso wichtig.
+> ⚠️ **Häufige Fehler:** "Taktfrequenz ist das Einzige was zählt" — Falsch! IPC, Cache-Größe, Pipeline-Tiefe und Architektur sind mindestens genauso wichtig.
 
 > **Nächste Lektion:** Eingabegeräte — Von Tastatur und Maus über Scanner bis hin zu biometrischen Verfahren und NFC.
 `,
@@ -360,9 +360,9 @@ Biometrische Verfahren nutzen einzigartige körperliche Merkmale:
 | Sicherheit | Geringer | Höher (kurze Distanz) |
 | Einsatz | Logistik, Lager | Bezahlung, Ticketing |
 
-> Praxis: NFC ist ein Teilbereich von RFID. Jedes NFC-Gerät kann RFID lesen, aber nicht jedes RFID-Gerät kann NFC.
+> 💡 **Praxis-Tipp:** NFC ist ein Teilbereich von RFID. Jedes NFC-Gerät kann RFID lesen, aber nicht jedes RFID-Gerät kann NFC.
 
-> Häufige Fehler: "RFID und NFC sind das Gleiche" — Falsch! NFC ist eine Teilmenge von RFID mit kürzerer Reichweite und bidirektionaler Kommunikation.
+> ⚠️ **Häufige Fehler:** "RFID und NFC sind das Gleiche" — Falsch! NFC ist eine Teilmenge von RFID mit kürzerer Reichweite und bidirektionaler Kommunikation.
 
 > **Nächste Lektion:** Ausgabegeräte — Monitore, Drucker, 3D-Drucker und barrierefreie Ausgabe: Wie bringen wir Ergebnisse zum Menschen?
 `,
@@ -426,7 +426,7 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
 - **Seiten/Minute**: Geschwindigkeit
 - **Duplex**: Beidseitiger Druck
 
-> Praxis: Laserdrucker lohnen sich ab ~500 Seiten/Monat. Für gelegentlichen Farbdruck reicht ein Tintenstrahler.
+> 💡 **Praxis-Tipp:** Laserdrucker lohnen sich ab ~500 Seiten/Monat. Für gelegentlichen Farbdruck reicht ein Tintenstrahler.
 
 ## 3D-Drucker
 
@@ -448,7 +448,7 @@ Ausgabegeräte stellen Verarbeitungsergebnisse für den Menschen dar — visuell
 
 > 💡 **IHK-Tipp:** Vergleiche Druckverfahren! "Welcher Drucker eignet sich für..." ist eine häufige Aufgabenstellung.
 
-> Häufige Fehler: "Laserdrucker drucken mit Tinte" — Falsch! Laserdrucker nutzen Toner (Pulver), das durch Hitze auf das Papier fixiert wird.
+> ⚠️ **Häufige Fehler:** "Laserdrucker drucken mit Tinte" — Falsch! Laserdrucker nutzen Toner (Pulver), das durch Hitze auf das Papier fixiert wird.
 
 > **Nächste Lektion:** Speichermedien & RAID — HDD, SSD, optische Medien und die verschiedenen RAID-Level für Performance und Ausfallsicherheit.
 `,
@@ -625,13 +625,13 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
   <text x="260" y="90" fill="#64748b" font-size="9">Schnell + Sicher</text>
 </svg>
 
-> Praxis: Ein kleines Büro mit 5 Mitarbeitern braucht kein RAID 6. RAID 1 mit 2 Platten reicht — einfach und günstig. Für kritische Daten: RAID 5 ab 3 Platten.
+> 💡 **Praxis-Tipp:** Ein kleines Büro mit 5 Mitarbeitern braucht kein RAID 6. RAID 1 mit 2 Platten reicht — einfach und günstig. Für kritische Daten: RAID 5 ab 3 Platten.
 
 > 💡 **IHK-Tipp:** Berechne immer die nutzbare Kapazität! Formel: RAID 0 = n, RAID 1 = n/2, RAID 5 = n-1, RAID 6 = n-2, RAID 10 = n/2.
 
 [INTERACTIVE]
 
-> Häufige Fehler: "RAID ist ein Backup" — Falsch! RAID schützt vor Hardwareausfall, nicht vor Löschen, Viren oder Brand. Trotzdem Backup machen!
+> ⚠️ **Häufige Fehler:** "RAID ist ein Backup" — Falsch! RAID schützt vor Hardwareausfall, nicht vor Löschen, Viren oder Brand. Trotzdem Backup machen!
 
 > **Nächste Lektion:** Speicherverwaltung & Adressierung — Die Speicherhierarchie, Caching, Paging und virtueller Speicher: Wie verwaltet das System seinen Arbeitsspeicher?
 `,
@@ -652,7 +652,7 @@ RAID kombiniert mehrere Festplatten zu einem logischen Verbund — für mehr **L
 
 Der Computer nutzt verschiedene Speichertypen — je schneller, desto teurer und kleiner:
 
-> Merksatz: "**R**ein **L**ustig **L**ernen **L**ektionen **R**ichtig **S**chnell" — Register, L1, L2, L3, RAM, SSD
+> 📝 **Merksatz:** "**R**ein **L**ustig **L**ernen **L**ektionen **R**ichtig **S**chnell" — Register, L1, L2, L3, RAM, SSD
 
 | Ebene | Typ | Größe | Zugriffszeit | Kosten/GB |
 |-------|-----|-------|-------------|-----------|
@@ -694,7 +694,7 @@ Der Cache speichert häufig verwendete Daten näher an der CPU:
 - **Cache Miss**: Daten nicht im Cache → langsamer Zugriff aus RAM
 - **Hit Rate**: Anteil der Treffer — moderne CPUs: ~95-99%
 
-> Praxis: Ein Cache-Miss kostet ~100x so viel Zeit wie ein Hit. Deshalb ist Cache-Optimierung in der Softwareentwicklung so wichtig (Daten lokal im Array statt über Zeiger verteilt).
+> 💡 **Praxis-Tipp:** Ein Cache-Miss kostet ~100x so viel Zeit wie ein Hit. Deshalb ist Cache-Optimierung in der Softwareentwicklung so wichtig (Daten lokal im Array statt über Zeiger verteilt).
 
 ## Virtueller Speicher & Paging
 
@@ -732,7 +732,7 @@ Wie werden mehrbyte-Werte im Speicher abgelegt?
 - **LSB** (Least Significant Byte) zuerst
 - 0x12345678 → Speicher: [78] [56] [34] [12]
 
-> Merksatz: Big-Endian = wie wir Zahlen lesen (links = wichtigste Stelle). Little-Endian = umgekehrt (Intel ist "anders").
+> 📝 **Merksatz:** Big-Endian = wie wir Zahlen lesen (links = wichtigste Stelle). Little-Endian = umgekehrt (Intel ist "anders").
 
 ## Adressierung
 
@@ -746,7 +746,7 @@ Wie werden mehrbyte-Werte im Speicher abgelegt?
 
 Formel: **Adressraum = 2^n** (n = Anzahl Adressleitungen)
 
-> Häufige Fehler: "L1-Cache ist langsamer als RAM weil er kleiner ist" — Falsch! L1 ist am SCHNELLSTEN, gerade WEIL er klein und nahe am Prozessor ist.
+> ⚠️ **Häufige Fehler:** "L1-Cache ist langsamer als RAM weil er kleiner ist" — Falsch! L1 ist am SCHNELLSTEN, gerade WEIL er klein und nahe am Prozessor ist.
 
 > **Nächste Lektion:** Betriebssysteme & Systemsoftware — Kernel, Prozesse, Threads und Dateisysteme: Was macht das OS zur Vermittlerschicht zwischen Hardware und Software?
 
@@ -806,7 +806,7 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 | **Preemptive** | OS entscheidet, wann Umschaltung (Zeitscheibe) | Windows, Linux, macOS |
 | **Cooperativ** | Prozess gibt CPU freiwillig ab | Windows 3.x, Mac OS Classic |
 
-> Praxis: Moderne OS nutzen ausschließlich Preemptive Multitasking. Cooperativ war anfällig für einfrierende Programme (ein Prozess konnte die CPU blockieren).
+> 💡 **Praxis-Tipp:** Moderne OS nutzen ausschließlich Preemptive Multitasking. Cooperativ war anfällig für einfrierende Programme (ein Prozess konnte die CPU blockieren).
 
 ## Dateisysteme
 
@@ -873,9 +873,9 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 
 > 💡 **IHK-Tipp:** Kenne den Unterschied zwischen BIOS und UEFI! UEFI ersetzt BIOS und bringt modernere Features mit.
 
-> Siehe auch: Netzwerkmodul — dort wird auf Netzwerk-Protokolle und -Freigaben eingegangen.
+> 📚 **Siehe auch:** Netzwerkmodul — dort wird auf Netzwerk-Protokolle und -Freigaben eingegangen.
 
-> Häufige Fehler: "Linux ist nur für Experten" — Falsch! Distributionen wie Ubuntu oder Linux Mint sind einsteigerfreundlich. Und: Fast alle Server laufen unter Linux.
+> ⚠️ **Häufige Fehler:** "Linux ist nur für Experten" — Falsch! Distributionen wie Ubuntu oder Linux Mint sind einsteigerfreundlich. Und: Fast alle Server laufen unter Linux.
 
 > **Nächste Lektion:** Virtualisierung & Cloud Computing — Hypervisor, Container, IaaS/PaaS/SaaS und Cloud-Deployment: Wie löst man sich von der physischen Hardware?
 `,
@@ -896,7 +896,7 @@ Der Kernel ist der Kern des Betriebssystems mit direktem Hardwarezugriff:
 
 Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle Maschinen" (VMs) laufen auf einer einzigen physischen Maschine — jede mit eigenem OS.
 
-> Virtualisierung ist wie ein Mehrfamilienhaus: Eine physische Struktur (Haus), mehrere unabhängige Wohnungen (VMs) mit eigenen Schlüsseln (OS).
+> 💡 **Analogie:** Virtualisierung ist wie ein Mehrfamilienhaus: Eine physische Struktur (Haus), mehrere unabhängige Wohnungen (VMs) mit eigenen Schlüsseln (OS).
 
 ## Hypervisor — Der Virtualisierer
 
@@ -973,9 +973,9 @@ Virtualisierung trennt Software von der physischen Hardware. Mehrere "virtuelle 
 - **Nachteile**: Netzwerkabhängig, eingeschränkte Offline-Nutzung
 - **Einsatz**: Call Center, Schulen, Citrix/Remote Desktop
 
-> Praxis: Viele Unternehmen migrieren von lokalen Servern in die Cloud. Aber: Nicht alles gehört in die Cloud. Sensible Daten oder Echtzeitanwendungen bleiben oft on-premise.
+> 💡 **Praxis-Tipp:** Viele Unternehmen migrieren von lokalen Servern in die Cloud. Aber: Nicht alles gehört in die Cloud. Sensible Daten oder Echtzeitanwendungen bleiben oft on-premise.
 
-> Häufige Fehler: "Cloud = immer billiger" — Falsch! Bei konstant hoher Last kann ein eigener Server günstiger sein. Cloud lohnt sich bei schwankendem Bedarf.
+> ⚠️ **Häufige Fehler:** "Cloud = immer billiger" — Falsch! Bei konstant hoher Last kann ein eigener Server günstiger sein. Cloud lohnt sich bei schwankendem Bedarf.
 
 > **Nächste Lektion:** Leistungsbewertung & Optimierung — Benchmarks, Amdahlsches Gesetz und Engpassanalyse: Wie misst und verbessert man die Performance?
 `,
@@ -1013,7 +1013,7 @@ Benchmarks sind standardisierte Tests zur Messung der Computerleistung:
 - Real-world Performance kann abweichen
 - Verschiedene Benchmarks sind nicht direkt vergleichbar
 
-> Praxis: Verlasse dich nie auf einen einzelnen Benchmark. Vergleiche mehrere Tests und schaue dir real-world Anwendungsbeispiele an.
+> 💡 **Praxis-Tipp:** Verlasse dich nie auf einen einzelnen Benchmark. Vergleiche mehrere Tests und schaue dir real-world Anwendungsbeispiele an.
 
 ## Amdahlsches Gesetz
 
@@ -1029,7 +1029,7 @@ $$Speedup = \\frac{1}{(1-p) + \\frac{p}{n}}$$
 - 4 Prozessoren (n = 4)
 - Speedup = 1 / ((1-0.8) + 0.8/4) = 1 / (0.2 + 0.2) = 1 / 0.4 = **2.5**
 
-> Merke: Selbst mit unendlich vielen Prozessoren ist der Speedup begrenzt durch den sequenziellen Teil (1-p). Bei p=0.8: maximaler Speedup = 1/0.2 = 5.
+> 📝 **Merke:** Selbst mit unendlich vielen Prozessoren ist der Speedup begrenzt durch den sequenziellen Teil (1-p). Bei p=0.8: maximaler Speedup = 1/0.2 = 5.
 
 > 💡 **IHK-Tipp:** Amdahl-Formel auswendig können und anwenden! Häufige Aufgabe: "Wie viele Prozessoren braucht man für Speedup X?"
 
@@ -1062,9 +1062,9 @@ Das OS verwaltet Ressourcen effizient:
 | **Disk** | Lange Wartezeiten | SSD statt HDD, Caching |
 | **Netzwerk** | Langsame Übertragung | Schnelleres Interface, Caching |
 
-> Praxis: Nutze den Task-Manager (Windows) oder htop (Linux), um Engpässe zu identifizieren. Wenn die CPU bei 100% ist, hilft mehr RAM nicht.
+> 💡 **Praxis-Tipp:** Nutze den Task-Manager (Windows) oder htop (Linux), um Engpässe zu identifizieren. Wenn die CPU bei 100% ist, hilft mehr RAM nicht.
 
-> Häufige Fehler: "Mehr GHz = immer schneller" — Falsch! Ein 3-GHz-Prozessor mit hoher IPC kann schneller sein als ein 4-GHz-Prozessor mit niedriger IPC.
+> ⚠️ **Häufige Fehler:** "Mehr GHz = immer schneller" — Falsch! Ein 3-GHz-Prozessor mit hoher IPC kann schneller sein als ein 4-GHz-Prozessor mit niedriger IPC.
 
 > **Nächste Lektion:** Nachhaltigkeit & Green IT — Energieeffizienz, Recycling und der Rebound-Effekt: Wie reduziert man den ökologischen Fußabdruck der IT?
 
@@ -1113,7 +1113,7 @@ Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Gr
 - **S-States**: S0 (aktiv) → S1 (Leerlauf) → S2 → S3 (Standby) → S4 (Ruhezustand) → S5 (Aus)
 - **Wake-on-LAN**: Server aus der Ferne aufwecken
 
-> Praxis: Ein Server mit 500W, der 24/7 läuft, kostet ~4.400 kWh/Jahr. Bei 30 Ct/kWh = ~1.320€/Jahr nur für Strom.
+> 💡 **Praxis-Tipp:** Ein Server mit 500W, der 24/7 läuft, kostet ~4.400 kWh/Jahr. Bei 30 Ct/kWh = ~1.320€/Jahr nur für Strom.
 
 ## Energie-Labels & Standards
 
@@ -1136,7 +1136,7 @@ Die IT-Branche verbraucht weltweit etwa 3-4% des Stroms — Tendenz steigend. Gr
 - **Reuse**: Geräte weiterverkaufen oder spenden
 - **Recycle**: Fachgerechte Entsorgung, Rohstoffe zurückgewinnen
 
-> Praxis: Ein Smartphone enthält ca. 0.03g Gold, 0.3g Silber, 15g Kupfer und Seltene Erden. Recycling spart Ressourcen und verhindert Umweltverschmutzung.
+> 💡 **Praxis-Tipp:** Ein Smartphone enthält ca. 0.03g Gold, 0.3g Silber, 15g Kupfer und Seltene Erden. Recycling spart Ressourcen und verhindert Umweltverschmutzung.
 
 ## Rebound-Effekt
 
@@ -1160,7 +1160,7 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
 
 > 💡 **IHK-Tipp:** Green IT ist ein häufiges Prüfungsthema! Kenne mindestens 3 konkrete Maßnahmen und den Rebound-Effekt.
 
-> Häufige Fehler: "Cloud ist automatisch grüner" — Kommt darauf an! Wenn das Rechenzentrum Kohlestrom nutzt, kann Cloud sogar schlechter sein.
+> ⚠️ **Häufige Fehler:** "Cloud ist automatisch grüner" — Kommt darauf an! Wenn das Rechenzentrum Kohlestrom nutzt, kann Cloud sogar schlechter sein.
 
 > **Nächste Lektion:** Historische Entwicklung — Von Röhren über Transistoren zu Mikroprozessoren: Wie hat sich die Computertechnik entwickelt, und was ist Moores Gesetz?
 `,
@@ -1179,7 +1179,7 @@ Der Rebound-Effekt beschreibt, wie Effizienzsteigerungen zu Mehrverbrauch führe
 
 > In der letzten Lektion haben wir Green IT kennengelernt — Energieeffizienz, Recycling und den Rebound-Effekt. Jetzt machen wir einen Schritt zurück in die Geschichte: Wie hat sich die Computertechnik von den Anfängen bis heute entwickelt?
 
-> Merksatz: "**R**olf **T**rinkt **I**mmer **M**ilch" — **R**öhren, **T**ransistoren, **I**ntegrierte Schaltungen, **M**ikroprozessoren
+> 📝 **Merksatz:** "**R**olf **T**rinkt **I**mmer **M**ilch" — **R**öhren, **T**ransistoren, **I**ntegrierte Schaltungen, **M**ikroprozessoren
 
 ### 1. Generation: Röhren (1940-1955)
 - **Technologie**: Elektronenröhren
@@ -1237,7 +1237,7 @@ Gordon Moore (Intel-Mitgründer) stellte 1965 fest:
 | 2020 | 54.000.000.000 (Apple M1 Max) |
 | 2024 | 134.000.000.000 (Apple M2 Ultra) |
 
-> Praxis: Moores Gesetz ist kein physikalisches Gesetz, sondern eine empirische Beobachtung. Es hat die Industrie als Zielvorgabe inspiriert.
+> 💡 **Praxis-Tipp:** Moores Gesetz ist kein physikalisches Gesetz, sondern eine empirische Beobachtung. Es hat die Industrie als Zielvorgabe inspiriert.
 
 ## Zusammenfassung: Die wichtigsten Konzepte
 
@@ -1278,7 +1278,7 @@ Dieses Modul hat die gesamte Hardware- und Systemlandschaft abgedeckt:
 
 Wenn du den Power-Button drückst, passiert eine ganze Kette von Ereignissen, bevor das Betriebssystem startet. Diese Kette ist standardisiert und bei jedem PC gleich.
 
-> Merksatz: **POST → BIOS → Bootmedium → MBR/GPT → Bootloader → Kernel → Login**
+> 📝 **Merksatz:** **POST → BIOS → Bootmedium → MBR/GPT → Bootloader → Kernel → Login**
 
 ## POST — Power-On Self-Test
 
@@ -1326,7 +1326,7 @@ Das BIOS/UEFI liegt auf einem nicht-flüchtigen Speicherchip:
 | **EEPROM** | Elektronisch löschbar |
 | **Flash-EEPROM** | Modern: In USB-Sticks, SSDs, BIOS-Chips |
 
-> Praxis: Moderne Mainboards nutzen Flash-EEPROM für das BIOS/UEFI. Ein BIOS-Update ("Flashen") überschreibt den Chip-Inhalt.
+> 💡 **Praxis-Tipp:** Moderne Mainboards nutzen Flash-EEPROM für das BIOS/UEFI. Ein BIOS-Update ("Flashen") überschreibt den Chip-Inhalt.
 
 ## Bootloader
 
@@ -1385,7 +1385,7 @@ Es gibt zwei grundlegende Arten, Daten zu übertragen:
 | **Problem** | Langsamer | Signalversatz (Skew) |
 | **Beispiele** | USB, SATA, Ethernet, RS-232 | PCIe, RAM-Bus, Parallel-ATA (alt) |
 
-> Praxis: Heute dominiert die serielle Übertragung. Selbst PCIe ist intern seriell (pro Lane). Der Vorteil: Kein Signalversatz, günstigere Kabel, höhere Taktfrequenzen möglich.
+> 💡 **Praxis-Tipp:** Heute dominiert die serielle Übertragung. Selbst PCIe ist intern seriell (pro Lane). Der Vorteil: Kein Signalversatz, günstigere Kabel, höhere Taktfrequenzen möglich.
 
 ## RS-232 — Der serielle Klassiker
 
@@ -1415,7 +1415,7 @@ Das Paritätsbit ermöglicht die Erkennung von 1-Bit-Fehlern:
 | **Gerade Parität** | Anzahl der 1en ist gerade | 1+0+1+1+0+0+1 = 4 (gerade) → Parität = 0 |
 | **Ungerade Parität** | Anzahl der 1en ist ungerade | 4 (gerade) → Parität = 1 |
 
-> Praxis: Parität erkennt nur Fehler mit ungerader Bitanzahl. Bei 2 Bit-Fehlern bleibt der Fehler unentdeckt. Für bessere Sicherheit: CRC (Cyclic Redundancy Check).
+> 💡 **Praxis-Tipp:** Parität erkennt nur Fehler mit ungerader Bitanzahl. Bei 2 Bit-Fehlern bleibt der Fehler unentdeckt. Für bessere Sicherheit: CRC (Cyclic Redundancy Check).
 
 ## Übertragungsgeschwindigkeit
 
