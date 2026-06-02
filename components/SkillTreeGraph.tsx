@@ -113,6 +113,23 @@ export function SkillTreeGraph() {
 
   // Positionen: automatisches Baum-Layout (Grundlagen unten, Fortgeschritten oben)
   const positions = useMemo(() => computeTreePositions(nodes), [nodes]);
+
+  // Initiales Zentrieren beim ersten Render
+  const initializedRef = useRef(false);
+  useEffect(() => {
+    if (initializedRef.current) return;
+    if (positions.size === 0) return;
+    initializedRef.current = true;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const [, p] of positions) {
+      minX = Math.min(minX, p.x);
+      maxX = Math.max(maxX, p.x);
+      minY = Math.min(minY, p.y);
+      maxY = Math.max(maxY, p.y);
+    }
+    const pad = 200;
+    setVb({ x: minX - pad, y: minY - pad, w: maxX - minX + pad * 2 + NODE_W, h: maxY - minY + pad * 2 + NODE_H });
+  }, [positions]);
   const edges = useMemo(() => {
     const ids = new Set(nodes.map(n => n.id));
     return getEdges(nodes).filter(e => ids.has(e.from) && ids.has(e.to));

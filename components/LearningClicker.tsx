@@ -410,7 +410,7 @@ export default function LearningClicker() {
     <>
       {/* Window */}
       <div
-        className="fixed z-50 w-80 select-none"
+        className="fixed z-50 w-80 select-none pointer-events-auto"
         style={{ left: position.x, top: position.y }}
       >
         <div className="glass rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 overflow-hidden">

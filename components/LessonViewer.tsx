@@ -836,55 +836,57 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext,
       )}
 
       {/* Actions — Auto-complete on next or scroll to bottom */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-slate-700">
-        {isCompleted ? (
-          <div className="text-green-400 flex items-center gap-2">
-            <CheckCircle2 className="w-5 h-5" />
-            Abgeschlossen
-          </div>
-        ) : (
-          <button
-            onClick={onComplete}
-            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-green-500/20 hover:bg-green-500/30 border border-green-500/40 text-green-400 rounded-lg font-medium transition-all text-base sm:text-lg"
-          >
-            <CheckCircle2 className="w-4 h-4" />
-            Als abgeschlossen markieren
-          </button>
-        )}
+      <div className="mt-6 sm:mt-8 pt-3 sm:pt-4 border-t border-slate-700">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-between gap-3">
+          {isCompleted ? (
+            <div className="text-green-400 flex items-center gap-2">
+              <CheckCircle2 className="w-5 h-5" />
+              Abgeschlossen
+            </div>
+          ) : (
+            <button
+              onClick={onComplete}
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-green-500/20 hover:bg-green-500/30 border border-green-500/40 text-green-400 rounded-lg font-medium transition-all text-base sm:text-lg"
+            >
+              <CheckCircle2 className="w-4 h-4" />
+              Als abgeschlossen markieren
+            </button>
+          )}
 
-        {hasNext && (
-          <button
-            onClick={() => {
-              onNext?.();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
-            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
-          >
-            Nächste Lektion
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        )}
+          {/* Feedback-Button — zwischen Complete und Next */}
+          {moduleSlug && moduleTitle && (
+            <LessonFeedback
+              moduleSlug={moduleSlug}
+              moduleTitle={moduleTitle}
+              lessonId={lesson.id}
+              lessonTitle={lesson.title}
+            />
+          )}
 
-        {!hasNext && isCompleted && (
-          <a
-            href="/modules"
-            className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-violet-500 hover:bg-violet-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
-          >
-            Alle Module
-            <ChevronRight className="w-4 h-4" />
-          </a>
-        )}
+          {hasNext && (
+            <button
+              onClick={() => {
+                onNext?.();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-blue-500 hover:bg-blue-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
+            >
+              Nächste Lektion
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          )}
+
+          {!hasNext && isCompleted && (
+            <a
+              href="/modules"
+              className="flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 bg-violet-500 hover:bg-violet-600 rounded-lg font-medium transition-colors text-base sm:text-lg"
+            >
+              Alle Module
+              <ChevronRight className="w-4 h-4" />
+            </a>
+          )}
+        </div>
       </div>
-
-      {/* Feedback-Formular */}
-      {moduleSlug && moduleTitle && (
-        <LessonFeedback
-          moduleSlug={moduleSlug}
-          moduleTitle={moduleTitle}
-          lessonId={lesson.id}
-          lessonTitle={lesson.title}
-        />
-      )}
     </div>
   );
 }

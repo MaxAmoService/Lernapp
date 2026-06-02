@@ -20,7 +20,7 @@ export default function ModulesPage() {
   const { user } = useAuth();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(categories.map(c => c.id)));
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set());
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

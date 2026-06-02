@@ -147,17 +147,23 @@ export default function LeaderboardPage() {
           {entries.map((entry, index) => {
             const rank = index + 1;
             const isCurrentUser = user?.uid === entry.uid;
-            const levelInfo = getUserLevel(entry.totalXP);
+
+            // Für den aktuellen User: lokale Auth-Daten verwenden (sofort aktuell nach Profiländerung)
+            const effectiveEntry = isCurrentUser && user
+              ? { ...entry, avatar: user.avatar, equippedFrame: user.equippedFrame || "none" }
+              : entry;
+
+            const levelInfo = getUserLevel(effectiveEntry.totalXP);
             const medalIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : null;
 
             // Rang-basierte Cosmetics: Leaderboard-Platz bestimmt Frame/Avatar, nicht gespeicherter Wert
             // Fuer Rang 4+: Wenn gespeicherter Frame/Avatar ein Rang-Reward ist, zuruecksetzen
             const rankFrames = ["champion", "silver", "bronze-frame"];
             const rankAvatars = ["🏆", "🥇", "🥈", "🥉"];
-            let displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : entry.equippedFrame;
-            let displayAvatar = rank === 1 ? "🏆" : rank === 2 ? entry.avatar : rank === 3 ? entry.avatar : entry.avatar;
-            if (rank > 3 && rankFrames.includes(entry.equippedFrame)) displayFrame = "none";
-            if (rank > 3 && rankAvatars.includes(entry.avatar)) displayAvatar = "🎓";
+            let displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : effectiveEntry.equippedFrame;
+            let displayAvatar = rank === 1 ? "🏆" : effectiveEntry.avatar;
+            if (rank > 3 && rankFrames.includes(effectiveEntry.equippedFrame)) displayFrame = "none";
+            if (rank > 3 && rankAvatars.includes(effectiveEntry.avatar)) displayAvatar = "🎓";
 
             return (
               <div
