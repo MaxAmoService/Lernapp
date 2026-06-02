@@ -564,14 +564,26 @@ export async function saveClickerTick(uid: string, autoAmount: number, autoSpeed
 }
 
 const UPGRADE_COSTS: Record<string, { base: number; mult: number; effect: string; value: number }> = {
+  // Klick-Punkte (5 Stufen)
   click1: { base: 10, mult: 1.5, effect: "clickPower", value: 1 },
   click2: { base: 100, mult: 1.8, effect: "clickPower", value: 5 },
   click3: { base: 1000, mult: 2.0, effect: "clickPower", value: 25 },
+  click4: { base: 12000, mult: 2.2, effect: "clickPower", value: 120 },
+  click5: { base: 150000, mult: 2.5, effect: "clickPower", value: 600 },
+  // Auto-Generierung (5 Stufen)
   auto1: { base: 50, mult: 1.6, effect: "autoAmount", value: 1 },
   auto2: { base: 500, mult: 1.8, effect: "autoAmount", value: 5 },
   auto3: { base: 5000, mult: 2.0, effect: "autoAmount", value: 25 },
+  auto4: { base: 60000, mult: 2.2, effect: "autoAmount", value: 120 },
+  auto5: { base: 750000, mult: 2.5, effect: "autoAmount", value: 600 },
+  // Geschwindigkeit (4 Stufen)
   speed1: { base: 200, mult: 2.0, effect: "autoSpeed", value: 0.9 },
-  speed2: { base: 2000, mult: 2.5, effect: "autoSpeed", value: 0.8 },
+  speed2: { base: 2500, mult: 2.3, effect: "autoSpeed", value: 0.85 },
+  speed3: { base: 30000, mult: 2.5, effect: "autoSpeed", value: 0.8 },
+  speed4: { base: 400000, mult: 3.0, effect: "autoSpeed", value: 0.75 },
+  // Synergie (nur Kauf-Tracking, Effekt client-seitig)
+  syn1: { base: 8000, mult: 2.5, effect: "clickPower", value: 0 },
+  syn2: { base: 15000, mult: 2.8, effect: "autoSpeed", value: 1 },
 };
 
 export async function buyClickerUpgrade(uid: string, upgradeId: string): Promise<ClickerState | null> {
@@ -614,6 +626,20 @@ const COSMETIC_COSTS: Record<string, number> = {
   av_brain: 250, av_rocket: 250, av_dragon: 500, av_unicorn: 500,
   av_crown: 1000, av_diamond: 1000,
   fr_wood: 75, fr_silver: 200, fr_gold: 500, fr_flame: 1000,
+  // Prestige Avatare
+  av_phoenix: 5000, av_galaxy: 10000, av_cosmic: 25000,
+  // Prestige Rahmen
+  fr_prestige_bronze: 50000, fr_prestige_silver: 150000, fr_prestige_gold: 500000,
+  fr_prestige_diamond: 2000000, fr_prestige_legend: 10000000,
+};
+
+// Prestige-Mindestanforderungen (Gesamtpunkte)
+const PRESTIGE_MIN_TOTAL: Record<string, number> = {
+  fr_prestige_bronze: 100000,
+  fr_prestige_silver: 500000,
+  fr_prestige_gold: 2000000,
+  fr_prestige_diamond: 10000000,
+  fr_prestige_legend: 50000000,
 };
 
 export async function buyClickerCosmetic(uid: string, cosmeticId: string): Promise<ClickerState | null> {
@@ -627,6 +653,13 @@ export async function buyClickerCosmetic(uid: string, cosmeticId: string): Promi
     const currentPoints = profile.clickerPoints || 0;
     if (currentPoints < cost) return null;
 
+    // Prestige-Validierung: Mindest-Gesamtpunkte pruefen
+    const minTotal = PRESTIGE_MIN_TOTAL[cosmeticId];
+    if (minTotal !== undefined) {
+      const totalPoints = profile.clickerTotalPoints || 0;
+      if (totalPoints < minTotal) return null;
+    }
+
     await updateUserProfile(uid, {
       clickerPoints: currentPoints - cost,
       clickerOwnedCosmetics: [...owned, cosmeticId],
@@ -638,16 +671,16 @@ export async function buyClickerCosmetic(uid: string, cosmeticId: string): Promi
   }
 }
 
-export async function equipClickerCosmetic(uid: string, cosmeticId: string, type: "avatar" | "frame"): Promise<void> {
+export async function equipClickerCosmetic(uid: string, cosmeticId: string, type: "avatar" | "frame" | "prestige"): Promise<void> {
   try {
     const profile = await getUserProfile(uid);
     if (!profile) return;
     const owned = profile.clickerOwnedCosmetics || [];
     if (!owned.includes(cosmeticId)) return; // Nicht gekauft
     if (type === "avatar") {
-      // Avatar-Emoji aus der Cosmetic-ID extrahieren — wird im Component gelöst
       await updateUserProfile(uid, { clickerEquippedAvatar: cosmeticId });
     } else {
+      // frame und prestige werden beide als Frame equipped
       await updateUserProfile(uid, { clickerEquippedFrame: cosmeticId });
     }
   } catch (err) {

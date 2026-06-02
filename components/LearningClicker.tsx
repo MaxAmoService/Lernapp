@@ -42,8 +42,9 @@ interface Cosmetic {
   name: string;
   icon: string;
   cost: number;
-  type: "avatar" | "frame";
-  rarity: "common" | "rare" | "epic" | "legendary";
+  type: "avatar" | "frame" | "prestige";
+  rarity: "common" | "rare" | "epic" | "legendary" | "prestige";
+  minTotalPoints?: number; // Mindest-Gesamtpunkte zum Freischalten
 }
 
 // ---------------------------------------------------------------------------
@@ -51,17 +52,33 @@ interface Cosmetic {
 // ---------------------------------------------------------------------------
 
 const UPGRADES: Upgrade[] = [
-  { id: "click1", name: "Schärferer Stift", description: "+1 Punkt pro Klick", icon: "✏️", baseCost: 10, costMultiplier: 1.5, effect: "clickPower", value: 1 },
+  // ── Klick-Punkte (5 Stufen, exponentiell steigend) ──
+  { id: "click1", name: "Scharfer Stift", description: "+1 Punkt pro Klick", icon: "✏️", baseCost: 10, costMultiplier: 1.5, effect: "clickPower", value: 1 },
   { id: "click2", name: "Mechanischer Stift", description: "+5 Punkte pro Klick", icon: "🖊️", baseCost: 100, costMultiplier: 1.8, effect: "clickPower", value: 5 },
   { id: "click3", name: "Laser-Stift", description: "+25 Punkte pro Klick", icon: "✒️", baseCost: 1000, costMultiplier: 2.0, effect: "clickPower", value: 25 },
+  { id: "click4", name: "Plasma-Stift", description: "+120 Punkte pro Klick", icon: "🖊️", baseCost: 12000, costMultiplier: 2.2, effect: "clickPower", value: 120 },
+  { id: "click5", name: "Quanten-Stift", description: "+600 Punkte pro Klick", icon: "✒️", baseCost: 150000, costMultiplier: 2.5, effect: "clickPower", value: 600 },
+
+  // ── Auto-Generierung (5 Stufen) ──
   { id: "auto1", name: "Lern-Assistent", description: "+1 Punkt/Sekunde", icon: "🤖", baseCost: 50, costMultiplier: 1.6, effect: "autoAmount", value: 1 },
   { id: "auto2", name: "Tutor-Bot", description: "+5 Punkte/Sekunde", icon: "🧠", baseCost: 500, costMultiplier: 1.8, effect: "autoAmount", value: 5 },
   { id: "auto3", name: "KI-Professor", description: "+25 Punkte/Sekunde", icon: "🎓", baseCost: 5000, costMultiplier: 2.0, effect: "autoAmount", value: 25 },
+  { id: "auto4", name: "KI-Fakultat", description: "+120 Punkte/Sekunde", icon: "🏫", baseCost: 60000, costMultiplier: 2.2, effect: "autoAmount", value: 120 },
+  { id: "auto5", name: "KI-Universitat", description: "+600 Punkte/Sekunde", icon: "🏛️", baseCost: 750000, costMultiplier: 2.5, effect: "autoAmount", value: 600 },
+
+  // ── Geschwindigkeit (4 Stufen, stackend) ──
   { id: "speed1", name: "Schneller Denker", description: "Auto 10% schneller", icon: "⚡", baseCost: 200, costMultiplier: 2.0, effect: "autoSpeed", value: 0.9 },
-  { id: "speed2", name: "Blitzgeist", description: "Auto 20% schneller", icon: "🌩️", baseCost: 2000, costMultiplier: 2.5, effect: "autoSpeed", value: 0.8 },
+  { id: "speed2", name: "Blitzgeist", description: "Auto 15% schneller", icon: "🌩️", baseCost: 2500, costMultiplier: 2.3, effect: "autoSpeed", value: 0.85 },
+  { id: "speed3", name: "Zeitraffer", description: "Auto 20% schneller", icon: "⏱️", baseCost: 30000, costMultiplier: 2.5, effect: "autoSpeed", value: 0.8 },
+  { id: "speed4", name: "Lichtgeschwindigkeit", description: "Auto 25% schneller", icon: "🌌", baseCost: 400000, costMultiplier: 3.0, effect: "autoSpeed", value: 0.75 },
+
+  // ── Synergie-Upgrades (gegenseitige Verstärkung) ──
+  { id: "syn1", name: "Neuronales Netz", description: "Auto-Bonus: +2% Klick-Power pro Auto-Upgrade", icon: "🔗", baseCost: 8000, costMultiplier: 2.5, effect: "clickPower", value: 0 },
+  { id: "syn2", name: "Feedback-Schleife", description: "Klick-Bonus: +3% Auto-Speed pro Klick-Upgrade", icon: "🔄", baseCost: 15000, costMultiplier: 2.8, effect: "autoSpeed", value: 1 },
 ];
 
 const COSMETICS: Cosmetic[] = [
+  // ── Standard Avatare ──
   { id: "av_book", name: "Buch", icon: "📚", cost: 50, type: "avatar", rarity: "common" },
   { id: "av_light", name: "Glühbirne", icon: "💡", cost: 50, type: "avatar", rarity: "common" },
   { id: "av_atom", name: "Atom", icon: "⚛️", cost: 100, type: "avatar", rarity: "common" },
@@ -72,10 +89,24 @@ const COSMETICS: Cosmetic[] = [
   { id: "av_unicorn", name: "Einhorn", icon: "🦄", cost: 500, type: "avatar", rarity: "epic" },
   { id: "av_crown", name: "Krone", icon: "👑", cost: 1000, type: "avatar", rarity: "legendary" },
   { id: "av_diamond", name: "Diamant", icon: "💎", cost: 1000, type: "avatar", rarity: "legendary" },
+
+  // ── Standard Rahmen ──
   { id: "fr_wood", name: "Holz", icon: "🪵", cost: 75, type: "frame", rarity: "common" },
   { id: "fr_silver", name: "Silber", icon: "🪙", cost: 200, type: "frame", rarity: "rare" },
   { id: "fr_gold", name: "Gold", icon: "🏅", cost: 500, type: "frame", rarity: "epic" },
   { id: "fr_flame", name: "Flammen", icon: "🔥", cost: 1000, type: "frame", rarity: "legendary" },
+
+  // ── Prestige-Icons (nur bei hohen Gesamtpunkten) ──
+  { id: "av_phoenix", name: "Phonix", icon: "🔥", cost: 5000, type: "avatar", rarity: "legendary" },
+  { id: "av_galaxy", name: "Galaxie", icon: "🌌", cost: 10000, type: "avatar", rarity: "legendary" },
+  { id: "av_cosmic", name: "Kosmisch", icon: "✨", cost: 25000, type: "avatar", rarity: "legendary" },
+
+  // ── Prestige-Rahmen (animiert, bei sehr hohen Summen) ──
+  { id: "fr_prestige_bronze", name: "Prestige Bronze", icon: "🥉", cost: 50000, type: "prestige", rarity: "prestige", minTotalPoints: 100000 },
+  { id: "fr_prestige_silver", name: "Prestige Silber", icon: "🥈", cost: 150000, type: "prestige", rarity: "prestige", minTotalPoints: 500000 },
+  { id: "fr_prestige_gold", name: "Prestige Gold", icon: "🥇", cost: 500000, type: "prestige", rarity: "prestige", minTotalPoints: 2000000 },
+  { id: "fr_prestige_diamond", name: "Prestige Diamant", icon: "💎", cost: 2000000, type: "prestige", rarity: "prestige", minTotalPoints: 10000000 },
+  { id: "fr_prestige_legend", name: "Legendärer Rahmen", icon: "👑", cost: 10000000, type: "prestige", rarity: "prestige", minTotalPoints: 50000000 },
 ];
 
 const RARITY_COLORS: Record<string, { text: string; bg: string; border: string }> = {
@@ -83,6 +114,7 @@ const RARITY_COLORS: Record<string, { text: string; bg: string; border: string }
   rare: { text: "text-blue-400", bg: "bg-blue-500/10", border: "border-blue-500/30" },
   epic: { text: "text-violet-400", bg: "bg-violet-500/10", border: "border-violet-500/30" },
   legendary: { text: "text-amber-400", bg: "bg-amber-500/10", border: "border-amber-500/30" },
+  prestige: { text: "text-rose-400", bg: "bg-gradient-to-br from-rose-500/15 to-amber-500/15", border: "border-rose-500/40" },
 };
 
 const DEFAULT_STATE: ClickerState = {
@@ -112,7 +144,10 @@ const MILESTONES = [
   { points: 50000, label: "Meister", icon: "🏆", reward: null },
   { points: 150000, label: "Genie", icon: "🧠", reward: null },
   { points: 500000, label: "Legendär", icon: "⭐", reward: null },
-  { points: 1000000, label: "Übermensch", icon: "👑", reward: null },
+  { points: 1000000, label: "Prestige I", icon: "👑", reward: null },
+  { points: 5000000, label: "Prestige II", icon: "💫", reward: null },
+  { points: 25000000, label: "Prestige III", icon: "🌌", reward: null },
+  { points: 100000000, label: "Transzendenz", icon: "✨", reward: null },
 ];
 
 // ---------------------------------------------------------------------------
@@ -138,7 +173,7 @@ export default function LearningClicker() {
   const [state, setState] = useState<ClickerState>(DEFAULT_STATE);
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
-  const [activeTab, setActiveTab] = useState<"upgrades" | "cosmetics">("upgrades");
+  const [activeTab, setActiveTab] = useState<"upgrades" | "cosmetics" | "prestige">("upgrades");
   const [clickEffects, setClickEffects] = useState<{ id: number; x: number; y: number; value: number }[]>([]);
   const [particles, setParticles] = useState<{ id: number; x: number; y: number; color: string; angle: number }[]>([]);
   const [combo, setCombo] = useState(0);
@@ -178,6 +213,14 @@ export default function LearningClicker() {
   }, [user, state.autoAmount, state.autoSpeed]);
 
   // Lokaler Auto-Tick (alle 1 Sekunde für flüssige Anzeige)
+  // Synergie-Multiplikator berechnen
+  const autoUpgradeCount = (state.upgrades["auto1"] || 0) + (state.upgrades["auto2"] || 0) + (state.upgrades["auto3"] || 0) + (state.upgrades["auto4"] || 0) + (state.upgrades["auto5"] || 0);
+  const clickUpgradeCount = (state.upgrades["click1"] || 0) + (state.upgrades["click2"] || 0) + (state.upgrades["click3"] || 0) + (state.upgrades["click4"] || 0) + (state.upgrades["click5"] || 0);
+  const syn1Count = state.upgrades["syn1"] || 0;
+  const syn2Count = state.upgrades["syn2"] || 0;
+  const synergyClickBonus = syn1Count > 0 ? 1 + (autoUpgradeCount * 0.02 * syn1Count) : 1;
+  const synergySpeedBonus = syn2Count > 0 ? Math.max(0.3, 1 - (clickUpgradeCount * 0.03 * syn2Count)) : 1;
+  const effectiveAutoSpeed = Math.max(100, Math.floor(state.autoSpeed * synergySpeedBonus));
   useEffect(() => {
     if (state.autoAmount <= 0) return;
     const interval = setInterval(() => {
@@ -186,9 +229,9 @@ export default function LearningClicker() {
         points: prev.points + prev.autoAmount,
         totalPoints: prev.totalPoints + prev.autoAmount,
       }));
-    }, state.autoSpeed);
+    }, effectiveAutoSpeed);
     return () => clearInterval(interval);
-  }, [state.autoAmount, state.autoSpeed]);
+  }, [state.autoAmount, effectiveAutoSpeed]);
 
   // Drag handlers (pointer capture)
   const handleDragStart = useCallback((e: React.PointerEvent) => {
@@ -254,7 +297,7 @@ export default function LearningClicker() {
     const isGolden = Math.random() < GOLDEN_CHANCE;
     const goldenMult = isGolden ? GOLDEN_MULTIPLIER : 1;
 
-    const earnedPoints = state.clickPower * comboMult * goldenMult;
+    const earnedPoints = Math.floor(state.clickPower * comboMult * goldenMult * synergyClickBonus);
 
     // Optimistic UI update
     setState((prev) => ({
@@ -334,8 +377,8 @@ export default function LearningClicker() {
     setState(DEFAULT_STATE);
   }, [user]);
 
-  const pointsPerSecond = state.autoAmount > 0 ? (state.autoAmount / state.autoSpeed) * 1000 : 0;
   const comboMultiplier = getComboMultiplier(combo);
+  const pointsPerSecond = state.autoAmount > 0 ? (state.autoAmount / effectiveAutoSpeed) * 1000 : 0;
 
   // Nächstes Milestone finden
   const nextMilestone = MILESTONES.find(m => state.totalPoints < m.points) || MILESTONES[MILESTONES.length - 1];
@@ -512,7 +555,8 @@ export default function LearningClicker() {
                 )}
 
                 <div className="mt-1.5 text-[11px] text-slate-500">
-                  +{state.clickPower}{comboMultiplier > 1 ? ` ×${comboMultiplier}` : ""} pro Klick
+                  +{Math.floor(state.clickPower * synergyClickBonus)}{comboMultiplier > 1 ? ` ×${comboMultiplier}` : ""} pro Klick
+                  {synergyClickBonus > 1 && <span className="text-purple-400 ml-1">(+{Math.round((synergyClickBonus - 1) * 100)}% Synergie)</span>}
                 </div>
 
                 {/* Mini Milestone-Bar */}
@@ -544,6 +588,12 @@ export default function LearningClicker() {
                 >
                   <ShoppingBag className="w-3.5 h-3.5 inline mr-1" /> Shop
                 </button>
+                <button
+                  onClick={() => setActiveTab("prestige")}
+                  className={`flex-1 py-2 text-xs font-medium transition-colors ${activeTab === "prestige" ? "text-rose-400 border-b-2 border-rose-400" : "text-slate-500 hover:text-slate-300"}`}
+                >
+                  <Sparkles className="w-3.5 h-3.5 inline mr-1" /> Prestige
+                </button>
               </div>
 
               {/* Content */}
@@ -553,6 +603,7 @@ export default function LearningClicker() {
                     const count = state.upgrades[upgrade.id] || 0;
                     const cost = getUpgradeCost(upgrade, count);
                     const canAfford = state.points >= cost;
+                    const isSynergy = upgrade.id.startsWith("syn");
                     return (
                       <button
                         key={upgrade.id}
@@ -565,6 +616,7 @@ export default function LearningClicker() {
                           <div className="flex-1 min-w-0">
                             <div className="text-xs font-medium text-white truncate">
                               {upgrade.name} {count > 0 && <span className="text-slate-500">×{count}</span>}
+                              {isSynergy && <span className="ml-1 text-[10px] text-purple-400">Synergie</span>}
                             </div>
                             <div className="text-[10px] text-slate-500">{upgrade.description}</div>
                           </div>
@@ -575,8 +627,8 @@ export default function LearningClicker() {
                       </button>
                     );
                   })
-                ) : (
-                  COSMETICS.map((cosmetic) => {
+                ) : activeTab === "cosmetics" ? (
+                  COSMETICS.filter(c => c.type !== "prestige").map((cosmetic) => {
                     const owned = state.ownedCosmetics.includes(cosmetic.id);
                     const equipped = cosmetic.type === "avatar"
                       ? state.equippedAvatar === cosmetic.icon
@@ -604,6 +656,47 @@ export default function LearningClicker() {
                             <span className="text-[10px] text-slate-500">Auswählen</span>
                           ) : (
                             <span className={`text-xs font-bold ${canAfford ? "text-amber-400" : "text-slate-600"}`}>
+                              {formatNumber(cosmetic.cost)}
+                            </span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })
+                ) : (
+                  /* Prestige-Tab */
+                  COSMETICS.filter(c => c.type === "prestige").map((cosmetic) => {
+                    const owned = state.ownedCosmetics.includes(cosmetic.id);
+                    const equipped = state.equippedFrame === cosmetic.id;
+                    const canAfford = state.points >= cosmetic.cost;
+                    const meetsMinPoints = !cosmetic.minTotalPoints || state.totalPoints >= cosmetic.minTotalPoints;
+                    const colors = RARITY_COLORS[cosmetic.rarity];
+                    return (
+                      <button
+                        key={cosmetic.id}
+                        onClick={() => (owned || !meetsMinPoints ? null : handleBuyCosmetic(cosmetic))}
+                        disabled={!owned && (!canAfford || !meetsMinPoints)}
+                        className={`w-full text-left p-2.5 rounded-lg border transition-all ${equipped ? `${colors.bg} ${colors.border}` : owned ? "bg-rose-500/10 border-rose-500/30 hover:border-rose-400/50" : canAfford && meetsMinPoints ? "bg-slate-800/30 border-rose-500/20 hover:border-rose-500/40" : "bg-slate-800/20 border-slate-700/20 opacity-40"}`}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{cosmetic.icon}</span>
+                          <div className="flex-1 min-w-0">
+                            <div className="text-xs font-medium text-white truncate">
+                              {cosmetic.name}
+                              <span className={`ml-1.5 text-[10px] ${colors.text}`}>Prestige</span>
+                            </div>
+                            {!meetsMinPoints && (
+                              <div className="text-[10px] text-rose-400/70">
+                                Benötigt {formatNumber(cosmetic.minTotalPoints!)} Gesamtpunkte
+                              </div>
+                            )}
+                          </div>
+                          {equipped ? (
+                            <span className="text-[10px] text-green-400 font-medium">Aktiv</span>
+                          ) : owned ? (
+                            <span className="text-[10px] text-slate-500">Auswählen</span>
+                          ) : (
+                            <span className={`text-xs font-bold ${canAfford && meetsMinPoints ? "text-rose-400" : "text-slate-600"}`}>
                               {formatNumber(cosmetic.cost)}
                             </span>
                           )}
@@ -664,6 +757,13 @@ export default function LearningClicker() {
           0%, 100% { transform: translateX(0); }
           25% { transform: translateX(var(--shake-intensity, 2px)); }
           75% { transform: translateX(calc(var(--shake-intensity, 2px) * -1)); }
+        }
+        @keyframes prestige-glow {
+          0%, 100% { box-shadow: 0 0 4px 2px #f43f5e, 0 0 12px 4px rgba(244,63,94,0.3), 0 0 24px 8px rgba(251,191,36,0.15); }
+          50% { box-shadow: 0 0 6px 3px #fb7185, 0 0 18px 6px rgba(251,113,133,0.4), 0 0 32px 10px rgba(251,191,36,0.2); }
+        }
+        .prestige-glow {
+          animation: prestige-glow 2s ease-in-out infinite;
         }
       `}</style>
     </>
