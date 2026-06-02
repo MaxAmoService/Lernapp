@@ -206,7 +206,7 @@ service = UserService(PostgreSQLDatabase())
 
 ---
 
-## 📋 Zusammenfassung
+## Zusammenfassung
 
 | Prinzip | Merksatz |
 |---------|----------|

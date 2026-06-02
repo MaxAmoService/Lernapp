@@ -606,25 +606,19 @@ Der Prozess der Anforderungserhebung:
 
 > Schützt das System den Nutzer vor ungewollten Aktionen?
 
-- Gibt es eine **Bestätigung** bei kritischen Aktionen?
-- Gibt es einen **Rückgängig**-Mechanismus?
-- Beispiel: "Möchtest du wirklich ALLE Daten löschen?"
+**Safety** prüft, ob das System den Nutzer vor Fehler schützt. Gibt es eine **Bestätigung** bei kritischen Aktionen? Gibt es einen **Rückgängig**-Mechanismus? Beispiel: "Möchtest du wirklich ALLE Daten löschen?" — ein guter Safety-Mechanismus verhindert unbeabsichtigte Zerstörung.
 
 ### 📚 Learnability (Erlernbarkeit)
 
 > Wie einfach ist es, das System zu erlernen?
 
-- Ist die **Navigation intuitiv**?
-- Braucht der Nutzer eine **Schulung**?
-- Beispiel: Ein Kind sollte die Grundfunktionen verstehen können.
+**Learnability** misst, wie schnell ein neuer Nutzer das System bedienen kann. Ist die **Navigation intuitiv**? Braucht der Nutzer eine **Schulung**? Beispiel: Ein Kind sollte die Grundfunktionen verstehen können — wenn ja, ist die Learnability hoch.
 
 ### 🧠 Memorability (Wiedererkennbarkeit)
 
 > Kann der Nutzer das System nach einer Pause wieder verwenden?
 
-- Sind **Funktionen sichtbar**?
-- Gibt es **konsistente** Bedienelemente?
-- Beispiel: Auch nach 6 Monaten Pause weiß man, wo der Speicher-Button ist.
+**Memorability** prüft, ob ein gelegentlicher Nutzer nach einer Pause wieder zurechtkommt. Sind **Funktionen sichtbar**? Gibt es **konsistente** Bedienelemente? Beispiel: Auch nach 6 Monaten Pause weiß man, wo der Speicher-Button ist.
 
 ---
 

@@ -845,7 +845,7 @@ git restore --source=HEAD~2 dateiname.txt  # Version von 2 Commits zurück
 
 ---
 
-## 📋 Zusammenfassung
+## Zusammenfassung
 
 In dieser Lektion hast du zwei wichtige Werkzeuge für den Alltag kennengelernt:
 
@@ -855,13 +855,17 @@ In dieser Lektion hast du zwei wichtige Werkzeuge für den Alltag kennengelernt:
 | Befehl | Zweck |
 |--------|-------|
 | \`git stash\` | Änderungen temporär speichern |
+| \`git stash push -m "msg"\` | Stash mit Beschreibung |
 | \`git stash pop\` | Stash anwenden + löschen |
 | \`git stash apply\` | Stash anwenden (bleibt im Stash) |
 | \`git stash list\` | Alle Stashes anzeigen |
-| \`git restore\` | Änderungen verwerfen |
-| \`git restore --staged\` | Aus Staging entfernen |
+| \`git stash drop\` | Einzelnen Stash löschen |
+| \`git restore dateiname\` | Lokale Änderungen verwerfen |
+| \`git restore --staged dateiname\` | Aus Staging entfernen |
 
 > 💡 **Merke:** \`git stash pop\` entfernt den Stash nach dem Anwenden, \`git stash apply\` behält ihn. Im Zweifel erst \`apply\` nutzen, dann manuell mit \`git stash drop\` löschen.
+
+> ⚠️ **Achtung:** \`git restore\` ist NICHT rückgängig zu machen — die Änderungen sind weg! Im Zweifel vorher stashen.
 
 ---
 

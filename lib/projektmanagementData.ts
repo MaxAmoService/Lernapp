@@ -544,10 +544,12 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 
 ## 📜 Das Agile Manifest
 
-> 1. **Individuen und Interaktionen** mehr als Prozesse und Werkzeuge
-> 2. **Funktionierende Software** mehr als umfassende Dokumentation
-> 3. **Zusammenarbeit mit dem Kunden** mehr als Vertragsverhandlung
-> 4. **Reagieren auf Veränderung** mehr als das Befolgen eines Plans
+| Wertvoller | weniger wertvoll |
+|------------|------------------|
+| **Individuen und Interaktionen** | Prozesse und Werkzeuge |
+| **Funktionierende Software** | umfassende Dokumentation |
+| **Zusammenarbeit mit dem Kunden** | Vertragsverhandlung |
+| **Reagieren auf Veränderung** | das Befolgen eines Plans |
 
 > 💡 **Merke:** Die rechte Seite hat Wert — aber die linke Seite hat MEHR Wert!
 
@@ -579,28 +581,23 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 
 ### Definition of Done — Wann ist ein Arbeitspaket "fertig"?
 
-- ✅ **Code geschrieben** — Implementierung abgeschlossen
-- ✅ **Tests bestanden** — Unit- und Integrationstests grün
-- ✅ **Dokumentation aktualisiert** — README, Inline-Kommentare
-- ✅ **Review durchgeführt** — Code von Teammitglied geprüft
-- ✅ **Keine bekannten Bugs** — Alle Issues geschlossen
+| Kriterium | Beschreibung |
+|-----------|-------------|
+| ✅ **Code geschrieben** | Implementierung abgeschlossen |
+| ✅ **Tests bestanden** | Unit- und Integrationstests grün |
+| ✅ **Dokumentation aktualisiert** | README, Inline-Kommentare |
+| ✅ **Review durchgeführt** | Code von Teammitglied geprüft |
+| ✅ **Keine bekannten Bugs** | Alle Issues geschlossen |
 
 ---
 
 ## 📋 Scrum Artefakte
 
-### Product Backlog
-- Liste aller Anforderungen (User Stories)
-- Vom Product Owner gepflegt
-- Priorisiert nach Wert
-
-### Sprint Backlog
-- Arbeitspakete für den aktuellen Sprint
-- Vom Team ausgewählt
-
-### Inkrement
-- Funktionierende Software am Sprint-Ende
-- Muss Definition of Done erfüllen
+| Artefakt | Beschreibung | Verantwortlich |
+|----------|-------------|----------------|
+| **Product Backlog** | Liste aller Anforderungen (User Stories), priorisiert nach Wert | Product Owner |
+| **Sprint Backlog** | Arbeitspakete für den aktuellen Sprint, vom Team ausgewählt | Entwicklerteam |
+| **Inkrement** | Funktionierende Software am Sprint-Ende, muss Definition of Done erfüllen | Gesamtes Team |
 
 ---
 

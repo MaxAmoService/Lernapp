@@ -498,12 +498,14 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
         elements.push(<h1 key={`h-${keyIndex++}`} className="text-3xl font-bold text-white mt-8 mb-4"><InlineText text={line.slice(2)} /></h1>);
       } else if (line.startsWith("## ")) {
         flushTable();
+        flushOl();
         const headingText = line.slice(3);
-        const isMerkblatt = headingText.includes("Merkblatt") || headingText.includes("Zusammenfassung");
+        const isMerkblatt = headingText.includes("Merkblatt");
+        const isZusammenfassung = headingText.includes("Zusammenfassung");
         const hasEmoji = /^[^\w\s]/.test(headingText);
         elements.push(
-          <h2 key={`h-${keyIndex++}`} className={`text-2xl font-semibold mt-6 mb-3 ${isMerkblatt ? "text-yellow-400" : "text-blue-400"}`}>
-            {isMerkblatt && !hasEmoji && "📋 "}<InlineText text={headingText} />
+          <h2 key={`h-${keyIndex++}`} className={`text-2xl font-semibold mt-6 mb-3 ${isMerkblatt || isZusammenfassung ? "text-yellow-400" : "text-blue-400"}`}>
+            {isMerkblatt && !hasEmoji && "📋 "}{isZusammenfassung && !hasEmoji && "📝 "}<InlineText text={headingText} />
           </h2>
         );
       } else if (line.startsWith("### ")) {
