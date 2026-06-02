@@ -114,9 +114,7 @@ Einfach gesagt: **Tut das Programm, was es soll — und tut es gut?**
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Nennen Sie 3 Beispiele für Software-Katastrophen und deren Ursachen!" — Mangelhafte Tests, schlechte Kommunikation, überhastete Updates.`
+> 💡 **IHK-Tipp:** "Nennen Sie 3 Beispiele für Software-Katastrophen und deren Ursachen!" — Mangelhafte Tests, schlechte Kommunikation, überhastete Updates.`
     },
 
     // --- Lektion 2: ISO 9126 ---
@@ -211,9 +209,7 @@ Die **ISO 9126** definiert 6 Hauptmerkmale für Softwarequalität. Diese Struktu
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Nennen Sie die 6 Qualitätsmerkmale der ISO 9126!" — Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit, Portabilität.`
+> 💡 **IHK-Tipp:** "Nennen Sie die 6 Qualitätsmerkmale der ISO 9126!" — Funktionalität, Zuverlässigkeit, Benutzbarkeit, Effizienz, Wartbarkeit, Portabilität.`
     },
 
     // --- Lektion 3: Design Patterns ---
@@ -400,9 +396,7 @@ class EventEmitter:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie das Strategy-Pattern!" — Definiert eine Familie von Algorithmen, kapselt sie in separate Klassen und macht sie austauschbar. Beispiel: Verschiedene Sortierverfahren zur Laufzeit wechseln.`
+> 💡 **IHK-Tipp:** "Erklären Sie das Strategy-Pattern!" — Definiert eine Familie von Algorithmen, kapselt sie in separate Klassen und macht sie austauschbar. Beispiel: Verschiedene Sortierverfahren zur Laufzeit wechseln.`
     },
 
     // --- Lektion 4: Architekturstile ---
@@ -551,9 +545,7 @@ Bei Microservices werden Aufgaben in **unabhängige Services** gekapselt:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie die Schichtenarchitektur!" — Präsentation, Anwendung, Datenhaltung. Kommunikation nur zwischen benachbarten Schichten. Vorteile: Klare Trennung, testbar, austauschbar.`
+> 💡 **IHK-Tipp:** "Erklären Sie die Schichtenarchitektur!" — Präsentation, Anwendung, Datenhaltung. Kommunikation nur zwischen benachbarten Schichten. Vorteile: Klare Trennung, testbar, austauschbar.`
     },
 
     // --- Lektion 5: Testverfahren ---
@@ -684,9 +676,7 @@ def test_login_flow():
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Unit-Test und Integrationstest?" — Unit = isoliert, eine Funktion. Integration = Zusammenspiel mehrerer Module.`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Unit-Test und Integrationstest?" — Unit = isoliert, eine Funktion. Integration = Zusammenspiel mehrerer Module.`
     },
 
     // --- Lektion 6: Vorgehensmodelle ---
@@ -832,9 +822,7 @@ Verschiedene Projekte brauchen verschiedene Vorgehensweisen. Die IHK prüft, ob 
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Vergleichen Sie Wasserfall und Scrum!" — Wasserfall: sequentiell, starr, feste Anforderungen. Scrum: iterativ, flexibel, Kundenkontakt. V-Modell: wie Wasserfall aber mit Testphasen.`
+> 💡 **IHK-Tipp:** "Vergleichen Sie Wasserfall und Scrum!" — Wasserfall: sequentiell, starr, feste Anforderungen. Scrum: iterativ, flexibel, Kundenkontakt. V-Modell: wie Wasserfall aber mit Testphasen.`
     },
 
     // --- Lektion 7: Code Smells & Clean Code ---
@@ -943,9 +931,7 @@ except SpecificError as e:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was sind Code Smells und wie entfernt man sie?" — Warnsignale (lange Methoden, Error Hiding, etc.). Entfernen durch Refactoring: Code verbessern ohne Verhalten zu ändern.`
+> 💡 **IHK-Tipp:** "Was sind Code Smells und wie entfernt man sie?" — Warnsignale (lange Methoden, Error Hiding, etc.). Entfernen durch Refactoring: Code verbessern ohne Verhalten zu ändern.`
     },
 
     // --- Lektion 8: Quiz ---

@@ -116,9 +116,7 @@ Kleine, subtile Interaktionen, die das Erlebnis verbessern:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen UX und UI?" — UX = gesamtes Erlebnis (nützlich, intuitiv, Spaßig). UI = visuelles Design (schön, konsistent). UX ist das Dach, UI ist ein Teil davon.
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen UX und UI?" — UX = gesamtes Erlebnis (nützlich, intuitiv, Spaßig). UI = visuelles Design (schön, konsistent). UX ist das Dach, UI ist ein Teil davon.
 
 ---
 
@@ -236,9 +234,7 @@ Jakob Nielsens 10 Heuristiken sind die **wichtigsten Regeln** für gutes Interfa
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Nennen Sie 5 von Nielsens 10 Heuristiken mit Beispiel!" — Die Heuristiken müssen nicht in dieser Reihenfolge genannt werden, aber mit konkreten Beispielen.
+> 💡 **IHK-Tipp:** "Nennen Sie 5 von Nielsens 10 Heuristiken mit Beispiel!" — Die Heuristiken müssen nicht in dieser Reihenfolge genannt werden, aber mit konkreten Beispielen.
 
 ---
 
@@ -341,9 +337,7 @@ Eine **User Story** beschreibt eine Funktion aus der Sicht des Nutzers:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist eine Persona und wozu braucht man sie?" — Fiktiver Nutzer für eine Zielgruppe, hilft bei der Produktgestaltung, da man sich besser in den Nutzer hineinversetzen kann.
+> 💡 **IHK-Tipp:** "Was ist eine Persona und wozu braucht man sie?" — Fiktiver Nutzer für eine Zielgruppe, hilft bei der Produktgestaltung, da man sich besser in den Nutzer hineinversetzen kann.
 
 ---
 
@@ -402,10 +396,12 @@ Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in 
 
 ## 1️⃣ Understand — Problem verstehen
 
-- 🎯 **Was ist das Problem?** Für wen lösen wir es?
-- 👥 **Stakeholder** einbeziehen
-- 📊 **Daten** analysieren
-- 🗺️ **User Journey** kartieren
+| Schritt | Beschreibung |
+|---------|-------------|
+| 🎯 **Problem definieren** | Für wen lösen wir das Problem? Warum ist es relevant? |
+| 👥 **Stakeholder einbeziehen** | Alle Beteiligten identifizieren und ihre Bedürfnisse verstehen |
+| 📊 **Daten analysieren** | Vorhandene Daten, Analytics und Nutzerfeedback auswerten |
+| 🗺️ **User Journey kartieren** | Den kompletten Weg des Nutzers durch das Produkt aufzeichnen |
 
 > 💡 **Fragen:** Wer sind die Nutzer? Was sind ihre Probleme? Was haben sie schon probiert?
 
@@ -413,10 +409,12 @@ Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in 
 
 ## 2️⃣ Diverge — Ideen sammeln
 
-- 🧠 **Brainstorming** — Keine Kritik, alles erlaubt!
-- ✏️ **Sketching** — Ideen auf Papier bringen
-- 🔄 **Crazy 8s** — 8 Varianten in 8 Minuten
-- 📋 **Storyboarding** — Ablauf visualisieren
+| Methode | Beschreibung |
+|---------|-------------|
+| 🧠 **Brainstorming** | Keine Kritik — alle Ideen sind erlaubt und werden gesammelt |
+| ✏️ **Sketching** | Ideen schnell auf Papier bringen, um sie greifbar zu machen |
+| 🔄 **Crazy 8s** | 8 Varianten in 8 Minuten skizzieren — Fokus auf Quantität |
+| 📋 **Storyboarding** | Den Ablauf der Nutzererfahrung als Geschichte visualisieren |
 
 > ⚠️ **Regel:** In dieser Phase gilt KEINE Kritik! Alle Ideen sind willkommen.
 
@@ -424,44 +422,46 @@ Der **Design Sprint** von Google Ventures ist eine strukturierte Methode, um in 
 
 ## 3️⃣ Converge — Ideen auswählen
 
-- 🗳️ **Abstimmung** — Jeder hat Stimmen
-- 📊 **Priorisierung** — Machbarkeit × Impact
-- 🎯 **Entscheidung** — Team einigt sich auf eine Richtung
+| Schritt | Beschreibung |
+|---------|-------------|
+| 🗳️ **Abstimmung** | Jedes Teammitglied hat Stimmen — demokratische Auswahl |
+| 📊 **Priorisierung** | Ideen nach Machbarkeit × Impact bewerten und sortieren |
+| 🎯 **Entscheidung** | Das Team einigt sich auf eine Richtung für den Prototyp |
 
 ---
 
 ## 4️⃣ Prototype — Prototyp bauen
 
-- 🖼️ **Low-Fidelity:** Papier, Stift, Post-its
-- 💻 **High-Fidelity:** Figma, Sketch, Adobe XD
-- ⚡ **Schnell** — Lieber schnell als perfekt
-- 🎯 **Fokussiert** — Nur die Kernfunktionen
+| Ansatz | Werkzeuge | Fokus |
+|--------|----------|-------|
+| 🖼️ **Low-Fidelity** | Papier, Stift, Post-its | Schnell, günstig, einfach zu ändern |
+| 💻 **High-Fidelity** | Figma, Sketch, Adobe XD | Detailliert, klickbar, realistisch |
+
+> ⚡ **Prinzip:** Lieber schnell als perfekt — nur die Kernfunktionen abbilden.
 
 ---
 
 ## 5️⃣ Test — Mit Nutzern testen
 
-- 👥 **5 Nutzer** reichen für 80% der Probleme
-- 📝 **Beobachten** — Nicht helfen!
-- 🎤 **Laut denken** — Nutzer soll erklären, was er tut
-- 📊 **Dokumentieren** — Probleme aufschreiben
+| Schritt | Beschreibung |
+|---------|-------------|
+| 👥 **5 Nutzer reichen** | Laut Nielsen decken 5 Nutzer ca. 80% der Usability-Probleme auf |
+| 📝 **Beobachten** | Nicht helfen! Den Nutzer selbstständig agieren lassen |
+| 🎤 **Laut denken** | Nutzer soll erklären, was er tut und warum (Think-Aloud) |
+| 📊 **Dokumentieren** | Alle beobachteten Probleme und Reaktionen aufschreiben |
 
 ---
 
 ## 🎨 Low-Fidelity Prototyping
 
-Schnelle, billige Prototypen auf Papier:
+Schnelle, billige Prototypen auf Papier — ideal für erste Ideen und schnelles Feedback.
 
-### Vorteile
-- ⚡ Schnell (Minuten statt Stunden)
-- 💰 Kostenlos
-- 🔄 Einfach zu ändern
-- 🎯 Fokus auf Funktion, nicht auf Design
-
-### Nachteile
-- ❌ Nicht klickbar
-- ❌ Schwer zu testen
-- ❌ Wirkt "unprofessionell"
+| | Vorteile | Nachteile |
+|---|---------|----------|
+| ⚡ | **Schnell** — Minuten statt Stunden | ❌ **Nicht klickbar** — nur statisch |
+| 💰 | **Kostenlos** — Papier und Stift reichen | ❌ **Schwer zu testen** — kein echtes Nutzererlebnis |
+| 🔄 | **Einfach zu ändern** — neue Version in Sekunden | ❌ **Wirkt "unprofessionell"** — nicht für Präsentationen |
+| 🎯 | **Fokus auf Funktion** — Design ablenkungen fallen weg | |
 
 ---
 
@@ -478,9 +478,7 @@ Schnelle, billige Prototypen auf Papier:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Beschreiben Sie den Design Sprint!" — 5 Phasen: Understand, Diverge, Converge, Prototype, Test. Ziel: In 5 Tagen vom Problem zum getesteten Prototyp.
+> 💡 **IHK-Tipp:** "Beschreiben Sie den Design Sprint!" — 5 Phasen: Understand, Diverge, Converge, Prototype, Test. Ziel: In 5 Tagen vom Problem zum getesteten Prototyp.
 
 ---
 
@@ -575,9 +573,7 @@ Der Prozess der Anforderungserhebung:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Nennen Sie die verschiedenen Anforderungsarten!" — Funktional, nicht-funktional, technisch, regulatorisch, Benutzeranforderungen. Erkläre den Unterschied mit je einem Beispiel.
+> 💡 **IHK-Tipp:** "Nennen Sie die verschiedenen Anforderungsarten!" — Funktional, nicht-funktional, technisch, regulatorisch, Benutzeranforderungen. Erkläre den Unterschied mit je einem Beispiel.
 
 ---
 
@@ -674,9 +670,7 @@ Der Prozess der Anforderungserhebung:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Safety, Learnability und Memorability?" — Safety = Schutz vor Fehlern. Learnability = einfach zu erlernen. Memorability = gut wiederzuerkennen.
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Safety, Learnability und Memorability?" — Safety = Schutz vor Fehlern. Learnability = einfach zu erlernen. Memorability = gut wiederzuerkennen.
 
 ---
 

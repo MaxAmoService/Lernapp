@@ -105,9 +105,7 @@ Stell dir vor, du arbeitest an einem Projekt mit mehreren Entwicklern. Ohne Vers
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ In der Prüfung wird oft gefragt: **Warum braucht man Versionsmanagement?** Nenne mindestens 3 Gründe!
+> 💡 **IHK-Tipp:** In der Prüfung wird oft gefragt: **Warum braucht man Versionsmanagement?** Nenne mindestens 3 Gründe!
 
 - Änderungen nachvollziehen
 - Parallele Entwicklung ermöglichen
@@ -198,9 +196,7 @@ Diese Strategien bestimmen, **wie mit parallelem Zugriff** umgegangen wird:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Typische Frage:** "Erklären Sie den Unterschied zwischen zentraler und dezentraler Versionsverwaltung!" — Nenne Vor- und Nachteile beider Ansätze.
+> 💡 **IHK-Tipp:** "Erklären Sie den Unterschied zwischen zentraler und dezentraler Versionsverwaltung!" — Nenne Vor- und Nachteile beider Ansätze.
 
 ---
 
@@ -328,9 +324,7 @@ git stash pop            # Gespeicherte Änderungen wiederherstellen
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie den Unterschied zwischen git pull und git fetch!" — pull = fetch + merge. fetch lädt nur herunter, ohne lokale Branches zu verändern.
+> 💡 **IHK-Tipp:** "Erklären Sie den Unterschied zwischen git pull und git fetch!" — pull = fetch + merge. fetch lädt nur herunter, ohne lokale Branches zu verändern.
 
 [INTERACTIVE]
 
@@ -472,9 +466,7 @@ Jedes Release bekommt eine Version nach dem Schema **MAJOR.MINOR.PATCH**:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie die Gitflow-Strategie!" — Benenne die Branches (main, dev, feature, release, hotfix) und deren Zweck. Erkläre den Ablauf eines Feature-Branches.
+> 💡 **IHK-Tipp:** "Erklären Sie die Gitflow-Strategie!" — Benenne die Branches (main, dev, feature, release, hotfix) und deren Zweck. Erkläre den Ablauf eines Feature-Branches.
 
 ---
 
@@ -575,9 +567,7 @@ git rebase dev
 
 [INTERACTIVE]
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Wie löst man einen Merge-Konflikt?" — Schritt für Schritt erklären: Konfliktmarker finden, Code manuell anpassen, als gelöst markieren, committen.
+> 💡 **IHK-Tipp:** "Wie löst man einen Merge-Konflikt?" — Schritt für Schritt erklären: Konfliktmarker finden, Code manuell anpassen, als gelöst markieren, committen.
 
 ---
 
@@ -667,9 +657,7 @@ refactor(product): improve component structure
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was macht einen guten Commit aus?" — Eine logische Änderung, aussagekräftige Nachricht im Imperativ, Warum erklären, max. 50 Zeichen erste Zeile.
+> 💡 **IHK-Tipp:** "Was macht einen guten Commit aus?" — Eine logische Änderung, aussagekräftige Nachricht im Imperativ, Warum erklären, max. 50 Zeichen erste Zeile.
 
 ---
 
@@ -776,9 +764,7 @@ git commit -m "chore: configure Git LFS for images"
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Zweck von .gitignore?" — Dateien vom Tracking ausschließen, die nicht im Repository sein sollten (Build-Artefakte, Abhängigkeiten, Geheimnisse).
+> 💡 **IHK-Tipp:** "Was ist der Zweck von .gitignore?" — Dateien vom Tracking ausschließen, die nicht im Repository sein sollten (Build-Artefakte, Abhängigkeiten, Geheimnisse).
 
 ---
 
@@ -891,9 +877,7 @@ In dieser Lektion hast du zwei wichtige Werkzeuge für den Alltag kennengelernt:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Wann verwendet man git stash?" — Wenn man unvollständige Änderungen zwischenspeichern muss, um auf einem anderen Branch zu arbeiten.
+> 💡 **IHK-Tipp:** "Wann verwendet man git stash?" — Wenn man unvollständige Änderungen zwischenspeichern muss, um auf einem anderen Branch zu arbeiten.
 
 ---
 

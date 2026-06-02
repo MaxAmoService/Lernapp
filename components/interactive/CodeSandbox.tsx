@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 
 // @ts-ignore
 import Prism from "prismjs";
@@ -39,6 +39,14 @@ export function CodeSandbox({
   title = "Code Sandbox",
   className = "",
 }: CodeSandboxProps) {
+  // Automatische Spracherkennung basierend auf Code-Inhalt
+  const detectedLanguage = useMemo(() => {
+    if (language !== "javascript") return language;
+    if (/(?:interface\s+\w+|type\s+\w+\s*=|:\s*(?:string|number|boolean|any|void|unknown|never)\b)/.test(initialCode)) return "typescript";
+    if (/def\s+\w+|import\s+\w+|print\s*\(/.test(initialCode)) return "python";
+    return "javascript";
+  }, [initialCode, language]);
+
   const [code, setCode] = useState(initialCode);
   const [output, setOutput] = useState<OutputLine[]>([]);
   const [isRunning, setIsRunning] = useState(false);
@@ -124,6 +132,9 @@ export function CodeSandbox({
             presets: hasTS ? ["typescript", "react"] : ["react"],
             filename: hasTS ? "sandbox.tsx" : "sandbox.jsx",
           }).code;
+        } else {
+          // Script-Tag existiert, aber Babel ist noch nicht geladen
+          throw new Error("TypeScript/JSX erkannt — bitte nochmal klicken (Babel wird geladen)");
         }
       }
 
@@ -196,7 +207,7 @@ export function CodeSandbox({
             <div className="w-3 h-3 rounded-full bg-green-500/80" />
           </div>
           <span className="text-sm text-slate-300 font-medium">{title}</span>
-          <span className="text-xs px-2 py-0.5 bg-slate-700/80 rounded text-slate-400 font-mono">{language}</span>
+          <span className="text-xs px-2 py-0.5 bg-slate-700/80 rounded text-slate-400 font-mono">{detectedLanguage}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <button onClick={() => setIsExpanded(!isExpanded)} className="px-2.5 py-1.5 text-xs text-slate-400 hover:text-white hover:bg-slate-700/50 rounded transition-colors" title={isExpanded ? "Verkleinern" : "Vergrößern"}>
@@ -227,7 +238,7 @@ export function CodeSandbox({
 
         {/* Highlighted code (background) */}
         <pre className={`!m-0 !p-4 !pl-14 !bg-transparent overflow-hidden pointer-events-none absolute inset-0 z-0 ${isExpanded ? "overflow-y-auto" : ""}`} aria-hidden="true">
-          <code ref={highlightRef} className={`language-${language} !bg-transparent`}>{code}</code>
+          <code ref={highlightRef} className={`language-${detectedLanguage} !bg-transparent`}>{code}</code>
         </pre>
 
         {/* Textarea (foreground, transparent) */}

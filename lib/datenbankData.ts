@@ -150,7 +150,7 @@ Durch fehlende Normalisierung können drei Probleme auftreten:
 - **Änderungsanomalie**: Kundenadresse muss in JEDER Bestellung geändert werden
 - **Löschanomalie**: Löscht man die letzte Bestellung, verschwindet der Kunde
 
-> ❗ **IHK-Tipp:** Diese Begriffe kommen in JEDER Prüfung — sowohl in AP1 als auch AP2!
+> 💡 **IHK-Tipp:** Diese Begriffe kommen in JEDER Prüfung — sowohl in AP1 als auch AP2!
 
 > **Nächste Lektion:** Relationale Datenbanken & Kardinalitäten — Wie Tabellen über Schlüssel miteinander verbunden sind und welche Beziehungstypen es gibt.`,
     },
@@ -209,7 +209,7 @@ Die Verweistabelle enthält:
 - Die **Fremdschlüssel** beider Tabellen als zusammengesetzten Primärschlüssel
 - Optional **Beziehungsattribute** (z.B. Note, Datum)
 
-> ❗ **IHK-Tipp:** Immer BEIDE Richtungen prüfen! Wenn du dir unsicher bist, ob 1:n oder n:m — frag: "Kann A mehrere B haben UND B mehrere A?" → Dann n:m.
+> 💡 **IHK-Tipp:** Immer BEIDE Richtungen prüfen! Wenn du dir unsicher bist, ob 1:n oder n:m — frag: "Kann A mehrere B haben UND B mehrere A?" → Dann n:m.
 
 ## Verweistabelle Beispiel
 
@@ -284,7 +284,7 @@ Das **ER-Modell** (Entity-Relationship-Modell) ist ein Hilfsmittel zur **Datenba
 - ❌ **Singular/Plural** falsch → Immer Singular für Entitätsnamen
 - ❌ **n:m** wenn eigentlich 1:n → Immer beide Richtungen prüfen!
 
-> ❗ **IHK-Tipp:** In der Prüfung musst du ein ER-Modell aus einer Aufgabenstellung erstellen können — übe mit dem Builder!
+> 💡 **IHK-Tipp:** In der Prüfung musst du ein ER-Modell aus einer Aufgabenstellung erstellen können — übe mit dem Builder!
 
 ## 🏗️ ER-Diagramm Builder
 
@@ -380,7 +380,7 @@ Kunde(KundenID, Name, PLZ, Stadt)
 - Kunde(KundenID, Name, PLZ)
 - Ort(PLZ, Stadt)
 
-> ❗ **IHK-Tipp:** Die Normalisierung kommt als Aufgabe in JEDER Prüfung — meist als "Bringen Sie die Tabelle in die 3NF!"
+> 💡 **IHK-Tipp:** Die Normalisierung kommt als Aufgabe in JEDER Prüfung — meist als "Bringen Sie die Tabelle in die 3NF!"
 
 ## 📊 Normalisierungs-Trainier
 
@@ -516,7 +516,7 @@ UPDATE Konto SET saldo = saldo + 100 WHERE id = 2;
 COMMIT;  -- oder ROLLBACK;
 \`\`\`
 
-> ❗ **IHK-Tipp:** Merke dir die Abkürzungen DDL, DML, DQL, DCL, TCL — kommen als Multiple-Choice dran!
+> 💡 **IHK-Tipp:** Merke dir die Abkürzungen DDL, DML, DQL, DCL, TCL — kommen als Multiple-Choice dran!
 
 ## 💾 SQL Playground
 
@@ -608,7 +608,7 @@ WHERE Kunde.id = Bestellung.kunde_id;
 
 Aber: **JOIN ist schneller** (besserer Query-Plan) und **lesbarer**!
 
-> ❗ **IHK-Tipp:** In Prüfungen musst du oft das richtige JOIN-Typ erkennen oder eine JOIN-Abfrage schreiben!
+> 💡 **IHK-Tipp:** In Prüfungen musst du oft das richtige JOIN-Typ erkennen oder eine JOIN-Abfrage schreiben!
 
 ## 🔀 JOIN-Visualisierer
 
@@ -692,7 +692,7 @@ Sobald eine Transaktion erfolgreich abgeschlossen (COMMIT) ist, bleiben die Date
 
 > **A**lles oder nichts → **C**onsistent → **I**soliert → **D**auerhaft
 
-> ❗ **IHK-Tipp:** ACID kommt als Multiple-Choice-Frage dran — und in AP2 als Erklärungsaufgabe!
+> 💡 **IHK-Tipp:** ACID kommt als Multiple-Choice-Frage dran — und in AP2 als Erklärungsaufgabe!
 
 > **Nächste Lektion:** IHK Übungsaufgaben — SQL — Typische Prüfungsaufgaben zu SELECT, WHERE, GROUP BY und Aggregationen aus realen AP1/AP2-Prüfungen.`,
     },
@@ -779,7 +779,7 @@ AND Garage = FALSE
 AND Vertragsbeginn BETWEEN '2022-05-01' AND '2022-05-31';
 \`\`\`
 
-> ❗ **IHK-Tipp:** BETWEEN ist inklusive — also genau der Monat Mai!
+> 💡 **IHK-Tipp:** BETWEEN ist inklusive — also genau der Monat Mai!
 
 ## 💻 Übe selbst im SQL Playground
 
@@ -893,7 +893,7 @@ CREATE TABLE Mitarbeiter (
 );
 \`\`\`
 
-> ❗ **IHK-Tipp:** In der AP2 musst du oft eine Datenbank komplett durchplanen — von der externen Phase bis zum SQL-Code!
+> 💡 **IHK-Tipp:** In der AP2 musst du oft eine Datenbank komplett durchplanen — von der externen Phase bis zum SQL-Code!
 
 ## 📋 Phasen-Interaktiver Guide
 
@@ -971,7 +971,7 @@ psql -U benutzer datenbank < backup.sql
 - ✅ **Wiederherstellungszeit** dokumentieren
 - ❌ Backups auf **derselben Festplatte** wie die Datenbank!
 
-> ❗ **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. inkrementelles Backup unterscheiden können!
+> 💡 **IHK-Tipp:** Backups kommen als theoretische Frage dran — Full vs. inkrementelles Backup unterscheiden können!
 
 > **Nächste Lektion:** Datenbanktypen im Überblick — Relationale Datenbanken sind nicht die einzige Wahl: NoSQL, Key-Value, Graph und weitere im Vergleich.`,
     },
@@ -1033,7 +1033,7 @@ Nicht jedes Problem passt in eine relationale Tabelle. Verschiedene Anforderunge
 | **Spalten** | Flexibel | Nein | Horizontal | Analytics, Big Data |
 | **Graph** | Flexibel | Traversierung | Vertikal | Beziehungen, KI |
 
-> ❗ **IHK-Tipp:** "Welche Datenbank eignet sich für...?" — Kenne die Stärken der einzelnen Typen!
+> 💡 **IHK-Tipp:** "Welche Datenbank eignet sich für...?" — Kenne die Stärken der einzelnen Typen!
 
 ## SQL vs. NoSQL
 
@@ -1177,7 +1177,7 @@ REVOKE INSERT ON schule.noten FROM 'lehrer'@'localhost';
 GRANT ALL PRIVILEGES ON schule.* TO 'admin'@'localhost';
 \`\`\`
 
-> ❗ **IHK-Tipp:** "Erstellen Sie eine Tabelle für..." — Datentypen und Constraints können!
+> 💡 **IHK-Tipp:** "Erstellen Sie eine Tabelle für..." — Datentypen und Constraints können!
 
 > Häufige Fehler: "VARCHAR und CHAR sind gleich" — Falsch! CHAR füllt mit Leerzeichen auf (feste Länge), VARCHAR speichert nur die tatsächlich eingegebenen Zeichen.
 `,

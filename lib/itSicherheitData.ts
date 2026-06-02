@@ -135,7 +135,7 @@ Das Prinzip der **mehreren Sicherheitsschichten**:
 5. **Daten:** Verschlüsselung, Backup
 6. **Mensch:** Schulung, Awareness
 
-> ❗ **IHK-Tipp:** Fragen zu Sicherheitszielen und Angriffsarten kommen häufig in AP1/AP2 vor!
+> 💡 **IHK-Tipp:** Fragen zu Sicherheitszielen und Angriffsarten kommen häufig in AP1/AP2 vor!
 
 > **Nächste Lektion:** Authentifizierung & Passwörter — Wir schauen uns an, wie man Identitäten nachweist und Passwörter sicher speichert.
 `,
@@ -199,7 +199,7 @@ Passwort: "Hallo123" + Salt: "x7Kp9"
 - Generiert sichere, einzigartige Passwörter
 - Speichert sie verschlüsselt
 
-> ❗ **IHK-Tipp:** Erkläre den Unterschied zwischen Hashing und Verschlüsselung — das kommt oft in Prüfungen!
+> 💡 **IHK-Tipp:** Erkläre den Unterschied zwischen Hashing und Verschlüsselung — das kommt oft in Prüfungen!
 
 > **Nächste Lektion:** Netzwerksicherheit — Firewalls, IDS/IPS, VPN und die wichtigsten Ports für die IHK-Prüfung.
 `,
@@ -391,7 +391,7 @@ docker run -d -p 3000:3000 bkimminich/juice-shop
 
 > Die Challenges sind Schwierigkeitsgrad 1-6 ⭐. Starte mit Level 1 und steigere dich!
 
-> ❗ **IHK-Tipp:** SQL-Injection und XSS sind DIE Klassiker in der Prüfung. Erkläre den Angriff + Schutzmaßnahme!
+> 💡 **IHK-Tipp:** SQL-Injection und XSS sind DIE Klassiker in der Prüfung. Erkläre den Angriff + Schutzmaßnahme!
 
 > **Nächste Lektion:** Verschlüsselung & PKI — Symmetrische und asymmetrische Verschlüsselung, digitale Signaturen und Zertifikate.
 `,
@@ -504,7 +504,7 @@ Beweist **Authentizität** und **Integrität**:
 | **Zweck** | Integrität, Passwörter | Vertraulichkeit |
 | **Beispiel** | SHA-256, bcrypt | AES, RSA |
 
-> ❗ **IHK-Tipp:** "Erkläre den Unterschied zwischen Hashing und Verschlüsselung" — fast jede Prüfung!
+> 💡 **IHK-Tipp:** "Erkläre den Unterschied zwischen Hashing und Verschlüsselung" — fast jede Prüfung!
 
 > **Nächste Lektion:** Social Engineering & Phishing — Der Mensch als schwächstes Glied: Angriffe erkennen und sich schützen.
 `,
@@ -568,7 +568,7 @@ Social Engineering nutzt die **menschliche Psyche** als Angriffsvektor — keine
 - Niemals Passwörter per E-Mail/Telefon weitergeben
 - Im Zweifel: direkt bei der Firma anrufen (nicht über Links in der Mail!)
 
-> ❗ **IHK-Tipp:** Social Engineering-Fragen zielen oft auf die menschliche Schwachstelle ab — "Warum ist der Mensch das schwächste Glied?"
+> 💡 **IHK-Tipp:** Social Engineering-Fragen zielen oft auf die menschliche Schwachstelle ab — "Warum ist der Mensch das schwächste Glied?"
 `,
     },
     {

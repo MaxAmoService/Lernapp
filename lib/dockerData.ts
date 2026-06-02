@@ -130,9 +130,7 @@ Ein Container ist eine **leichtgewichtige, isolierte Laufzeitumgebung**, die ein
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Container und VM?" — Container teilt das OS, ist leichter und startet schneller. VM hat eigenes OS, ist stärker isoliert aber langsamer.`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Container und VM?" — Container teilt das OS, ist leichter und startet schneller. VM hat eigenes OS, ist stärker isoliert aber langsamer.`
     },
 
     // --- Lektion 2: Docker-Befehle ---
@@ -291,9 +289,7 @@ docker compose logs -f
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was macht die Dockerfile-Instruktion COPY?" — Kopiert Dateien vom Host in den Container. Wird nach WORKDIR verwendet, um den Zielort zu definieren.`
+> 💡 **IHK-Tipp:** "Was macht die Dockerfile-Instruktion COPY?" — Kopiert Dateien vom Host in den Container. Wird nach WORKDIR verwendet, um den Zielort zu definieren.`
     },
 
     // --- Lektion 3: Docker Compose ---
@@ -439,9 +435,7 @@ volumes:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Zweck von Docker Compose?" — Multi-Container-Anwendungen mit einer YAML-Datei definieren und starten. Vereinfacht die Orchestrierung von Services.`
+> 💡 **IHK-Tipp:** "Was ist der Zweck von Docker Compose?" — Multi-Container-Anwendungen mit einer YAML-Datei definieren und starten. Vereinfacht die Orchestrierung von Services.`
     },
 
     // --- Lektion 4: Deployment ---
@@ -604,9 +598,7 @@ docker run -d -p 80:80 registry.example.com/myapp:1.0
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Docker Compose und Kubernetes?" — Compose für einen Host, K8s für viele Nodes. K8s bietet automatische Skalierung und Self-Healing.`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Docker Compose und Kubernetes?" — Compose für einen Host, K8s für viele Nodes. K8s bietet automatische Skalierung und Self-Healing.`
     },
 
     // --- Lektion 5: Quiz ---

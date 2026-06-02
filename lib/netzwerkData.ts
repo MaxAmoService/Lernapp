@@ -140,7 +140,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 | Netzwerk | Internet |
 | Sicherung, Physikalisch | Netzwerkzugang |
 
-> ❗ **IHK-Tipp:** Das TCP/IP-Modell ist das praktische Modell — das Internet nutzt es. OSI ist nur ein Referenzmodell.
+> 💡 **IHK-Tipp:** Das TCP/IP-Modell ist das praktische Modell — das Internet nutzt es. OSI ist nur ein Referenzmodell.
 
 ## 🔐 Interaktiv ausprobieren
 
@@ -194,7 +194,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 | 143 | IMAP | E-Mail |
 | 443 | HTTPS | Sicheres Web |
 
-> ❗ **IHK-Tipp:** Port-Nummern auswendig lernen — besonders 80, 443, 22, 25, 53!
+> 💡 **IHK-Tipp:** Port-Nummern auswendig lernen — besonders 80, 443, 22, 25, 53!
 
 ## 🤝 TCP-Handshake ausprobieren
 
@@ -246,7 +246,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 - **Broadcast-Adresse**: Letzte im Subnetz (Host-Bits = 1)
 - **Nutzbare Hosts**: Alles dazwischen
 
-> ❗ **IHK-Tipp:** Subnetting-Berechnungen kommen in AP1 und AP2 regelmäßig dran!
+> 💡 **IHK-Tipp:** Subnetting-Berechnungen kommen in AP1 und AP2 regelmäßig dran!
 
 ## 🔢 Binär/Dezimal-Konverter
 
@@ -271,7 +271,7 @@ Subnetting bedeutet, ein großes Netzwerk in **kleinere Teilnetze (Subnetze)** a
 - ⚡ **Performance**: Broadcast-Traffic bleibt im Subnetz
 - 📦 **Effizienz**: IP-Adressen werden besser genutzt
 
-> ❗ **IHK-Tipp:** Subnetting kommt in JEDER AP1/AP2-Prüfung dran — es ist DIE Aufgabe, die du können MUSST!
+> 💡 **IHK-Tipp:** Subnetting kommt in JEDER AP1/AP2-Prüfung dran — es ist DIE Aufgabe, die du können MUSST!
 
 ## Die CIDR-Notation (Classless Inter-Domain Routing)
 
@@ -367,7 +367,7 @@ $$2^h - 2 \\geq 500 \\Rightarrow 2^h \\geq 502 \\Rightarrow h = 9 \\ (2^9 = 512)
 
 $$\\text{CIDR} = 32 - 9 = 23 \\Rightarrow /23 \\text{ mit } 510 \\text{ nutzbaren Hosts}$$
 
-> ❗ **IHK-Tipp:** Merke dir die Zweierpotenzen: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024!
+> 💡 **IHK-Tipp:** Merke dir die Zweierpotenzen: 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024!
 
 ## Netzwerk- und Broadcast-Adresse
 
@@ -433,7 +433,7 @@ $$\\text{Letzter Host} = \\text{Broadcast} - 1 = 192.168.1.190$$
 
 $$\\text{Anzahl nutzbarer Hosts} = 2^6 - 2 = 62$$
 
-> ❗ **IHK-Tipp:** Übe diese Schritte auf Papier! In der Prüfung darfst du keinen Taschenrechner für Binär-Arithmetik benutzen.
+> 💡 **IHK-Tipp:** Übe diese Schritte auf Papier! In der Prüfung darfst du keinen Taschenrechner für Binär-Arithmetik benutzen.
 
 ## 🧮 Interaktiver Subnetting-Rechner
 
@@ -490,7 +490,7 @@ Ausgangsnetzwerk: **192.168.1.0/24**
 **Schritt 4:** Geschäftsführung (/29):
 - Netz: 192.168.1.112/29 → 192.168.1.112 – 192.168.1.119
 
-> ❗ **IHK-Tipp:** VLSM-Aufgaben sind die schwierigsten Subnetting-Aufgaben — IMMER mit der größten Abteilung anfangen!
+> 💡 **IHK-Tipp:** VLSM-Aufgaben sind die schwierigsten Subnetting-Aufgaben — IMMER mit der größten Abteilung anfangen!
 
 ## 🏋️ IHK Subnetting-Trainer
 
@@ -535,7 +535,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 - **Tunneling**: IPv6 in IPv4 verpacken (6to4, Teredo)
 - **NAT64**: IPv6 ↔ IPv4 übersetzen
 
-> ❗ **IHK-Tipp:** IPv6-Adressen können lang sein — die Vereinfachungsregeln kennen!
+> 💡 **IHK-Tipp:** IPv6-Adressen können lang sein — die Vereinfachungsregeln kennen!
 
 > Jetzt kennst du IPv4 und IPv6. In der nächsten Lektion widmen wir uns den Netzwerkgeräten — von Hubs und Switches bis zu Routern und Firewalls.`,
     },
@@ -572,7 +572,7 @@ Beispiel: \`2001:0db8:0000:0000:0000:0000:0000:0001\` → \`2001:db8::1\`
 - **Kollisionsdomäne**: Bereich in dem Pakete kollidieren können (Switch trennt diese)
 - **Broadcast-Domäne**: Bereich in dem Broadcasts ankommen (Router trennt diese)
 
-> ❗ **IHK-Tipp:** Merke: Switch = Schicht 2 = MAC, Router = Schicht 3 = IP. Das kommt IMMER dran!
+> 💡 **IHK-Tipp:** Merke: Switch = Schicht 2 = MAC, Router = Schicht 3 = IP. Das kommt IMMER dran!
 
 ## 🔧 Netzwerk bauen
 
@@ -612,7 +612,7 @@ Ein Knoten dessen Ausfall **alles lahmlegt**:
 
 **Gegenmaßnahme:** Redundanz — Backup-Geräte, mehrere Pfade.
 
-> ❗ **IHK-Tipp:** In der Prüfung nach SPoFs fragen — immer an Redundanz denken!
+> 💡 **IHK-Tipp:** In der Prüfung nach SPoFs fragen — immer an Redundanz denken!
 
 > Jetzt kennst du die Netzwerktopologien und das SPoF-Konzept. In der nächsten Lektion lernst du die wichtigsten Netzwerkprotokolle kennen — DNS, DHCP, ARP, HTTP und E-Mail-Protokolle.`,
     },
@@ -651,7 +651,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 - **SSH** (22): Verschlüsselt ✅
 - **Telnet** (23): Unverschlüsselt ❌
 
-> ❗ **IHK-Tipp:** IMMER HTTPS, IMAP und SSH empfehlen — Sicherheit wird in der Prüfung großgeschrieben!
+> 💡 **IHK-Tipp:** IMMER HTTPS, IMAP und SSH empfehlen — Sicherheit wird in der Prüfung großgeschrieben!
 
 ## 🔍 DNS-Lookup
 
@@ -715,7 +715,7 @@ Request (Broadcast): "Wer hat 192.168.1.1?" → Reply (Unicast): "Ich! MAC: AA:B
 **WPA2-Personal (PSK):** Ein gemeinsames Passwort — für Heimnetzwerke.
 **WPA2-Enterprise (802.1X):** Individuelle Anmeldung via RADIUS — für Unternehmen.
 
-> ❗ **IHK-Tipp:** WEP ist UNSICHER — in der Prüfung immer mindestens WPA2 empfehlen!
+> 💡 **IHK-Tipp:** WEP ist UNSICHER — in der Prüfung immer mindestens WPA2 empfehlen!
 
 ## 📶 WLAN konfigurieren
 
@@ -761,7 +761,7 @@ Enthält öffentliche Server (Web, Mail) — durch **2 Firewalls** geschützt.
 Switch-Begrenzung der MAC-Adressen pro Port.
 Schützt gegen: MAC-Flooding, unautorisierte Geräte.
 
-> ❗ **IHK-Tipp:** VLAN, VPN und Firewall sind DIE Sicherheitsthemen — immer mit konkreten Beispielen erklären!
+> 💡 **IHK-Tipp:** VLAN, VPN und Firewall sind DIE Sicherheitsthemen — immer mit konkreten Beispielen erklären!
 
 ## 🔥 Firewall-Regeln bauen
 
@@ -818,7 +818,7 @@ Vorteile: Keine EMI, hohe Bandbreite, lange Strecken
 | Reichweite | 100m | 100km+ |
 | Installation | ✅ Einfach | ❌ Spezialwerkzeug |
 
-> ❗ **IHK-Tipp:** 100m Segmentlänge bei Kupfer IMMER im Kopf haben!
+> 💡 **IHK-Tipp:** 100m Segmentlänge bei Kupfer IMMER im Kopf haben!
 
 ## 🔌 Kabel vergleichen
 
@@ -880,7 +880,7 @@ netstat -an  → Alle Verbindungen mit Portnummern
 - Filter: Nach IP, Protokoll, Port
 - Analyse: Protokoll-Details
 
-> ❗ **IHK-Tipp:** Wireshark als Diagnosewerkzeug nennen können!
+> 💡 **IHK-Tipp:** Wireshark als Diagnosewerkzeug nennen können!
 
 > Jetzt kennst du die wichtigsten Netzwerk-Tools. In der nächsten Lektion lernst du MAC-Adressen und das ARP-Protokoll kennen — wie Geräte im lokalen Netzwerk einander finden.`,
     },
@@ -926,7 +926,7 @@ Wenn ein Gerät ein Paket im lokalen Netzwerk senden will, kennt es nur die **IP
 2. **Reply**: Das Gerät mit dieser IP antwortet: "Ich bin AA:BB:CC:11:22:33"
 3. **ARP-Tabelle**: Die Zuordnung wird zwischengespeichert (Cache)
 
-> ❗ **IHK-Tipp:** "Erklären Sie den ARP-Prozess" — Broadcast → Reply → Tabelle!
+> 💡 **IHK-Tipp:** "Erklären Sie den ARP-Prozess" — Broadcast → Reply → Tabelle!
 
 ### ARP im OSI-Modell
 ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen (Schicht 3) in MAC-Adressen (Schicht 2).
@@ -939,7 +939,7 @@ ARP arbeitet **zwischen Schicht 2 und Schicht 3** — es übersetzt IP-Adressen 
 - **Man-in-the-Middle-Angriff** möglich
 - **Gegenmaßnahme**: Dynamic ARP Inspection (DAI) auf Managed Switches
 
-> ❗ **IHK-Tipp:** ARP-Spoofing als Sicherheitsrisiko kennen!
+> 💡 **IHK-Tipp:** ARP-Spoofing als Sicherheitsrisiko kennen!
 
 [INTERACTIVE]
 
@@ -980,7 +980,7 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
 - **Hub**: Vergrößert Kollisionsdomäne (alle Ports)
 - **Switch**: Trennt Kollisionsdomäne (jeder Port eigene Domäne)
 
-> ❗ **IHK-Tipp:** "Was trennt Kollisionsdomänen?" → Switch!
+> 💡 **IHK-Tipp:** "Was trennt Kollisionsdomänen?" → Switch!
 
 ## CSMA/CA — WLAN (Funk)
 
@@ -1009,7 +1009,7 @@ Wenn mehrere Geräte dasselben Medium teilen (Kabel, Funk), braucht es Regeln, w
 | **Verfahren** | Jam Signal + Backoff | RTS/CTS + ACK |
 | **Standard** | IEEE 802.3 | IEEE 802.11 |
 
-> ❗ **IHK-Tipp:** "Warum verwendet WLAN CSMA/CA statt CSMA/CD?" — Weil WLAN nicht gleichzeitig senden und hören kann!
+> 💡 **IHK-Tipp:** "Warum verwendet WLAN CSMA/CA statt CSMA/CD?" — Weil WLAN nicht gleichzeitig senden und hören kann!
 
 ## Switch vs. Hub — Kollisionsdomänen
 
@@ -1061,7 +1061,7 @@ DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 - Username + Passwort werden übertragen
 - IP-Adresse wird vom Provider zugewiesen
 
-> ❗ **IHK-Tipp:** "Was macht ein Splitter?" — Trennt Sprache und Daten auf der Telefonleitung!
+> 💡 **IHK-Tipp:** "Was macht ein Splitter?" — Trennt Sprache und Daten auf der Telefonleitung!
 
 ## Mobilfunkstandards
 
@@ -1093,7 +1093,7 @@ DSL nutzt die bestehende Telefonleitung für schnelles Internet.
 
 > Praxis: Glasfaser nutzt Licht statt Strom → kein Signalverlust über große Distanzen, extrem hohe Bandbreite, aber teurer in der Installation.
 
-> ❗ **IHK-Tipp:** "Was ist der Unterschied zwischen FTTH und FTTB?" — FTTH: Glasfaser bis ins Haus. FTTB: Glasfaser bis zum Gebäude, dann Kupfer.
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen FTTH und FTTB?" — FTTH: Glasfaser bis ins Haus. FTTB: Glasfaser bis zum Gebäude, dann Kupfer.
 
 > Häufige Fehler: "ADSL ist schneller als VDSL" — Falsch! VDSL ist schneller als ADSL, braucht aber kürzere Leitungen.
 `,

@@ -333,7 +333,7 @@ Sortieren ist eine der **grundlegendsten Aufgaben** in der Informatik. Viele Alg
 
 ## 🎯 IHK-Tipps
 
-> ❗ **Diese Tipps sichern dir Punkte!**
+> 💡 **Diese Tipps sichern dir Punkte!**
 
 - 🧪 Immer einen **Schreibtischtest** machen — Variablen in einer Tabelle protokollieren
 - 📊 Jeden **Durchlauf einzeln** aufschreiben — nicht abkürzen!
@@ -812,7 +812,7 @@ Es gibt 3 Grundreihenfolgen, einen Baum zu durchlaufen:
 - **Pre-Order**: 50, 25, 12, 37, 75
 - **Post-Order**: 12, 37, 25, 75, 50
 
-> ❗ **IHK-Tipp:** "Geben Sie die In-Order-Traversierung des Baums an!" — Links, Wurzel, Rechts!
+> 💡 **IHK-Tipp:** "Geben Sie die In-Order-Traversierung des Baums an!" — Links, Wurzel, Rechts!
 
 ### Anwendungen von Bäumen
 - **Dateisysteme**: Verzeichnisse als Baumstruktur
@@ -891,7 +891,7 @@ Ein Graph ist eine Datenstruktur aus **Knoten** (Nodes) und **Kanten** (Edges) �
 | **Kürzester Weg** | Ja | Nein |
 | **Speicher** | Mehr (alle Nachbarn) | Weniger (Pfad) |
 
-> ❗ **IHK-Tipp:** "Was ist der Unterschied zwischen BFS und DFS?" — BFS=Warteschlange=kürzester Weg, DFS=Stapel=tief zuerst!
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen BFS und DFS?" — BFS=Warteschlange=kürzester Weg, DFS=Stapel=tief zuerst!
 
 ## Anwendungen von Graphen
 - **Navigation**: Kürzester Weg (Dijkstra, A*)

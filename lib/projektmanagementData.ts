@@ -124,9 +124,7 @@ Die **Projektakte** ist das "heilige Dokument" eines Projekts — sie enthält A
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was sind die Eigenschaften eines Projekts?" — Klare Zielvorgabe, Einmaligkeit, Zeitliche Befristung, Komplexität, Interdisziplinär, Risikobehaftet.
+> 💡 **IHK-Tipp:** "Was sind die Eigenschaften eines Projekts?" — Klare Zielvorgabe, Einmaligkeit, Zeitliche Befristung, Komplexität, Interdisziplinär, Risikobehaftet.
 
 ---
 
@@ -223,9 +221,7 @@ Das **Magische Dreieck** beschreibt das Spannungsfeld, in dem sich jedes Projekt
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie das Magische Dreieck!" — Qualität, Budget, Zeit im Spannungsfeld. Wenn ein Punkt schwächelt, muss ein anderer ausgleichen. Planung muss verteidigt werden.
+> 💡 **IHK-Tipp:** "Erklären Sie das Magische Dreieck!" — Qualität, Budget, Zeit im Spannungsfeld. Wenn ein Punkt schwächelt, muss ein anderer ausgleichen. Planung muss verteidigt werden.
 
 ---
 
@@ -282,9 +278,7 @@ Das **SMART-Modell** hilft, Ziele so zu formulieren, dass sie **messbar, realist
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was bedeutet SMART?" — Spezifisch, Messbar, Anspruchsvoll/Akzeptiert, Realistisch, Terminiert. Formuliere ein Beispiel-Ziel!
+> 💡 **IHK-Tipp:** "Was bedeutet SMART?" — Spezifisch, Messbar, Anspruchsvoll/Akzeptiert, Realistisch, Terminiert. Formuliere ein Beispiel-Ziel!
 
 ---
 
@@ -391,9 +385,7 @@ Die EVA misst **Projektfortschritt** im Vergleich zum Plan.
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Lastenheft und Pflichtenheft?" — Lastenheft = WAS (Auftraggeber), Pflichtenheft = WIE (Auftragnehmer).
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Lastenheft und Pflichtenheft?" — Lastenheft = WAS (Auftraggeber), Pflichtenheft = WIE (Auftragnehmer).
 
 ---
 
@@ -467,7 +459,7 @@ Die **DIN 69901** ist die deutsche Norm für Projektmanagement. Sie definiert de
 | **SEZ** | Spätester Endzeitpunkt |
 | **Pufferzeit** | SAZ − FAZ (= 0 auf kritischem Pfad) |
 
-> 🎯 **IHK-Tipp:** Der **kritische Pfad** ist die längste Kette von Aktivitäten ohne Puffer. Verzögerungen hier verschieben das GESAMTE Projekt!
+> 💡 **IHK-Tipp:** Der **kritische Pfad** ist die längste Kette von Aktivitäten ohne Puffer. Verzögerungen hier verschieben das GESAMTE Projekt!
 
 ---
 
@@ -515,9 +507,7 @@ Die DIN 69901 definiert 5 Phasen mit klar abgegrenzten Aufgaben und Dokumenten:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Nennen Sie die 5 Phasen der DIN 69901!" — Initiierung, Definition, Planung, Steuerung, Abschluss. Ordne jeder Phase die passenden Dokumente und Werkzeuge zu.
+> 💡 **IHK-Tipp:** "Nennen Sie die 5 Phasen der DIN 69901!" — Initiierung, Definition, Planung, Steuerung, Abschluss. Ordne jeder Phase die passenden Dokumente und Werkzeuge zu.
 
 ---
 
@@ -646,9 +636,7 @@ Agiles PM ist **iterativ** und **inkrementell** — statt alles am Ende zu liefe
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie Scrum!" — 3 Rollen (PO, SM, Team), 4 Events (Planning, Daily, Review, Retro), 3 Artefakte (Backlog, Sprint Backlog, Inkrement). Iterativ in 2-4 Wochen Sprints.
+> 💡 **IHK-Tipp:** "Erklären Sie Scrum!" — 3 Rollen (PO, SM, Team), 4 Events (Planning, Daily, Review, Retro), 3 Artefakte (Backlog, Sprint Backlog, Inkrement). Iterativ in 2-4 Wochen Sprints.
 
 ---
 
@@ -830,9 +818,7 @@ Bewertet **Optionen nach gewichteten Kriterien**.
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie die SWOT-Analyse!" — Stärken, Schwächen (intern), Chancen, Risiken (extern). Hilft bei der strategischen Bewertung eines Projekts.
+> 💡 **IHK-Tipp:** "Erklären Sie die SWOT-Analyse!" — Stärken, Schwächen (intern), Chancen, Risiken (extern). Hilft bei der strategischen Bewertung eines Projekts.
 
 ---
 

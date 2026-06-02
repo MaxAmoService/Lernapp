@@ -218,9 +218,7 @@ service = UserService(PostgreSQLDatabase())
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Erklären Sie das Single Responsibility Principle!" — Eine Klasse sollte nur eine Aufgabe haben. Das verbessert Wartbarkeit und Testbarkeit.`
+> 💡 **IHK-Tipp:** "Erklären Sie das Single Responsibility Principle!" — Eine Klasse sollte nur eine Aufgabe haben. Das verbessert Wartbarkeit und Testbarkeit.`
     },
 
     // --- Lektion 2: Clean Code ---
@@ -309,19 +307,10 @@ class User:
 
 ## 📊 Coupling & Cohesion
 
-### Lose Kopplung (Low Coupling)
-> Klassen sollten **wenig voneinander abhängen**.
-
-- Abhängigkeiten nur über Interfaces
-- Keine globalen Variablen
-- Dependency Injection
-
-### Starke Kohäsion (High Cohesion)
-> Eine Klasse sollte **eine Sache gut machen**.
-
-- Alle Methoden gehören zusammen
-- Klasse hat einen klaren Zweck
-- Nicht zu viele Verantwortlichkeiten
+| Prinzip | Bedeutung | Merkmale |
+|---------|----------|----------|
+| 🔗 **Lose Kopplung** (Low Coupling) | Klassen sollen **wenig voneinander abhängen** | Nur über Interfaces kommunizieren, keine globalen Variablen, Dependency Injection nutzen |
+| 🎯 **Starke Kohäsion** (High Cohesion) | Eine Klasse soll **eine Sache gut machen** | Alle Methoden gehören zusammen, klaren Zweck erfüllen, nicht zu viele Verantwortlichkeiten |
 
 ---
 
@@ -337,9 +326,7 @@ class User:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Coupling und Cohesion?" — Coupling = Abhängigkeit zwischen Klassen (niedrig ist gut). Cohesion = Zusammengehörigkeit innerhalb einer Klasse (hoch ist gut).`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Coupling und Cohesion?" — Coupling = Abhängigkeit zwischen Klassen (niedrig ist gut). Cohesion = Zusammengehörigkeit innerhalb einer Klasse (hoch ist gut).`
     },
 
     // --- Lektion 3: Interfaces ---
@@ -501,9 +488,7 @@ public class UserService
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Vorteil von Interfaces?" — Austauschbarkeit, Testbarkeit (Mocks), klare Struktur, Dependency Injection möglich.`
+> 💡 **IHK-Tipp:** "Was ist der Vorteil von Interfaces?" — Austauschbarkeit, Testbarkeit (Mocks), klare Struktur, Dependency Injection möglich.`
     },
 
     // // --- Lektion 4: Unit Tests ---
@@ -671,9 +656,7 @@ public class CalculatorTests
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Unit-Test und Integrationstest?" — Unit = isoliert, eine Funktion. Integration = Zusammenspiel mehrerer Module.`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Unit-Test und Integrationstest?" — Unit = isoliert, eine Funktion. Integration = Zusammenspiel mehrerer Module.`
     },
 
     // --- Lektion 5: Coupling & Cohesion ---
@@ -768,9 +751,7 @@ class ReportGenerator:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was ist der Unterschied zwischen Coupling und Cohesion?" — Coupling = Abhängigkeit zwischen Klassen (niedrig = gut). Cohesion = Zusammengehörigkeit innerhalb einer Klasse (hoch = gut).`
+> 💡 **IHK-Tipp:** "Was ist der Unterschied zwischen Coupling und Cohesion?" — Coupling = Abhängigkeit zwischen Klassen (niedrig = gut). Cohesion = Zusammengehörigkeit innerhalb einer Klasse (hoch = gut).`
     },
 
     // --- Lektion 6: Code Smells ---
@@ -865,9 +846,7 @@ except SpecificError as e:
 
 ---
 
-## 🎯 IHK-Tipp
-
-> ❗ **Prüfungsfrage:** "Was sind Code Smells und wie entfernt man sie?" — Warnsignale (lange Methoden, Error Hiding, etc.). Entfernen durch Refactoring: Code verbessern ohne Verhalten zu ändern.`
+> 💡 **IHK-Tipp:** "Was sind Code Smells und wie entfernt man sie?" — Warnsignale (lange Methoden, Error Hiding, etc.). Entfernen durch Refactoring: Code verbessern ohne Verhalten zu ändern.`
     },
 
     // --- Lektion 7: Quiz ---
