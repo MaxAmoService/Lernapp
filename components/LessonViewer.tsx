@@ -353,7 +353,8 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     let inSvgBlock = false;
     let svgContent = "";
     let inTable = false;
-    let tableRows: JSX.Element[] = [];
+    let tableHeadRow: JSX.Element | null = null;
+    let tableBodyRows: JSX.Element[] = [];
     let olItems: JSX.Element[] = [];
     let tableIsFirstRow = true;
     let keyIndex = 0;
@@ -370,15 +371,17 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
     };
 
     const flushTable = () => {
-      if (tableRows.length > 0) {
+      if (tableHeadRow || tableBodyRows.length > 0) {
         elements.push(
           <div key={`table-wrap-${keyIndex++}`} className="overflow-x-auto my-5 rounded-xl border border-slate-700/50">
             <table className="w-full border-collapse">
-              <tbody>{tableRows}</tbody>
+              {tableHeadRow && <thead>{tableHeadRow}</thead>}
+              <tbody>{tableBodyRows}</tbody>
             </table>
           </div>
         );
-        tableRows = [];
+        tableHeadRow = null;
+        tableBodyRows = [];
         inTable = false;
         tableIsFirstRow = true;
       }
@@ -470,11 +473,11 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
           inTable = true;
           const isHeader = tableIsFirstRow;
           tableIsFirstRow = false;
-          tableRows.push(
-            <tr key={`tr-${keyIndex++}`} className={`border-b border-slate-700/40 last:border-0 ${isHeader ? "bg-slate-800/60" : ""}`}>
+          const row = (
+            <tr key={`tr-${keyIndex++}`} className={`border-b border-slate-700/40 last:border-0 ${isHeader ? "bg-blue-500/5" : ""}`}>
               {cells.map((cell, ci) => (
                 isHeader ? (
-                  <th key={ci} className="px-4 py-2.5 text-left text-sm font-semibold text-blue-300 bg-blue-500/10 border-b border-blue-500/20">
+                  <th key={ci} className="px-4 py-3 text-left text-sm font-bold text-blue-200 bg-blue-500/15 border-b-2 border-blue-500/30">
                     <InlineText text={cell} />
                   </th>
                 ) : (
@@ -485,6 +488,11 @@ export function LessonViewer({ lesson, onComplete, isCompleted, onNext, hasNext 
               ))}
             </tr>
           );
+          if (isHeader) {
+            tableHeadRow = row;
+          } else {
+            tableBodyRows.push(row);
+          }
         }
         continue;
       } else if (inTable) {

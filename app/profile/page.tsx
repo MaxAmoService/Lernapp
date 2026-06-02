@@ -15,6 +15,7 @@ import {
   User, Mail, Lock, Camera, Save, Loader2, CheckCircle2, AlertCircle,
   Shield, Bell, Palette, Trophy, Flame, Zap, BookOpen, ArrowLeft,
   Eye, EyeOff, RefreshCw, Edit3, X, Users, Sparkles, Lock as LockIcon,
+  Settings,
 } from "lucide-react";
 
 type Tab = "profile" | "security" | "settings" | "stats";
@@ -157,7 +158,7 @@ export default function ProfilePage() {
   const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
     { id: "profile", label: "Profil", icon: <User className="w-4 h-4" /> },
     { id: "security", label: "Sicherheit", icon: <Shield className="w-4 h-4" /> },
-    { id: "settings", label: "Einstellungen", icon: <Palette className="w-4 h-4" /> },
+    { id: "settings", label: "Einstellungen", icon: <Settings className="w-4 h-4" /> },
     { id: "stats", label: "Statistiken", icon: <Trophy className="w-4 h-4" /> },
   ];
 
@@ -523,17 +524,20 @@ export default function ProfilePage() {
         {activeTab === "stats" && (
           <div className="space-y-6">
             <div className="p-4 bg-slate-800/40 rounded-xl">
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center justify-between mb-1">
                 <h3 className="font-semibold">Level {levelInfo.level} — {levelInfo.title}</h3>
-                <span className="text-xs text-slate-400">{levelInfo.xpToNext} XP bis Level {levelInfo.level + 1}</span>
+                <div className="flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="text-sm font-semibold text-amber-400">{user.totalXP.toLocaleString("de-DE")} XP</span>
+                </div>
               </div>
+              <p className="text-xs text-slate-500 mb-2">{levelInfo.xpToNext} XP bis Level {levelInfo.level + 1}</p>
               <div className="h-2.5 bg-slate-700 rounded-full overflow-hidden">
                 <div className="h-full bg-gradient-to-r from-blue-500 to-violet-500 rounded-full transition-all" style={{ width: `${levelInfo.progress}%` }} />
               </div>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="grid grid-cols-3 gap-3">
               <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Flame className="w-6 h-6 text-orange-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.streak}</p><p className="text-[10px] text-slate-500 uppercase">Streak</p></div>
-              <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Zap className="w-6 h-6 text-yellow-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.totalXP}</p><p className="text-[10px] text-slate-500 uppercase">XP</p></div>
               <div className="p-4 bg-slate-800/40 rounded-xl text-center"><Trophy className="w-6 h-6 text-violet-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.completedModules.length}</p><p className="text-[10px] text-slate-500 uppercase">Module</p></div>
               <div className="p-4 bg-slate-800/40 rounded-xl text-center"><BookOpen className="w-6 h-6 text-green-400 mx-auto mb-1" /><p className="text-xl font-bold">{Object.values(user.completedLessons).flat().length}</p><p className="text-[10px] text-slate-500 uppercase">Lektionen</p></div>
             </div>

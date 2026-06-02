@@ -37,21 +37,24 @@ import { fireConfetti } from "@/components/Confetti";
 function MerkblattContent({ content }: { content: string }) {
   const elements: JSX.Element[] = [];
   const lines = content.split("\n");
-  let tableRows: JSX.Element[] = [];
+  let tableHeadRow: JSX.Element | null = null;
+  let tableBodyRows: JSX.Element[] = [];
   let tableKey = 0;
   let elementKey = 0;
 
   let isTableHeaderRow = true;
   const flushTable = () => {
-    if (tableRows.length > 0) {
+    if (tableHeadRow || tableBodyRows.length > 0) {
       elements.push(
         <div key={`table-${tableKey++}`} className="overflow-x-auto my-3">
           <table className="w-full border-collapse text-xs">
-            <tbody>{tableRows}</tbody>
+            {tableHeadRow && <thead>{tableHeadRow}</thead>}
+            <tbody>{tableBodyRows}</tbody>
           </table>
         </div>
       );
-      tableRows = [];
+      tableHeadRow = null;
+      tableBodyRows = [];
     }
     isTableHeaderRow = true;
   };
@@ -67,11 +70,11 @@ function MerkblattContent({ content }: { content: string }) {
       }
       const isHeader = isTableHeaderRow;
       isTableHeaderRow = false;
-      tableRows.push(
+      const row = (
         <tr key={`tr-${elementKey++}`} className="border-b border-slate-700/50">
           {cells.map((cell, ci) => (
             isHeader ? (
-              <th key={ci} className="px-3 py-2 text-left text-sm font-semibold text-blue-300 bg-blue-500/10">
+              <th key={ci} className="px-3 py-2.5 text-left text-sm font-bold text-blue-200 bg-blue-500/15 border-b-2 border-blue-500/30">
                 <InlineText text={cell} />
               </th>
             ) : (
@@ -82,6 +85,11 @@ function MerkblattContent({ content }: { content: string }) {
           ))}
         </tr>
       );
+      if (isHeader) {
+        tableHeadRow = row;
+      } else {
+        tableBodyRows.push(row);
+      }
       return;
     }
 

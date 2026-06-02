@@ -88,14 +88,18 @@ export default function Dashboard() {
 
       {/* Stats Grid */}
       {user && levelInfo && (
-        <section className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-          {/* Level Card — spans 2 cols on mobile */}
+        <section className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {/* Level + XP Card — merged display */}
           <div className="col-span-2 sm:col-span-1 glass rounded-xl p-4 flex flex-col justify-between">
-            <div className="flex items-center gap-2 mb-2">
+            <div className="flex items-center gap-2 mb-1">
               <Star className="w-4 h-4 text-amber-400" />
               <span className="text-xs text-slate-400 uppercase tracking-wider">Level {levelInfo.level}</span>
             </div>
-            <p className="text-lg font-bold text-white mb-1">{levelInfo.title}</p>
+            <p className="text-lg font-bold text-white mb-0.5">{levelInfo.title}</p>
+            <div className="flex items-center gap-1.5 mb-2">
+              <Zap className="w-3.5 h-3.5 text-amber-400" />
+              <span className="text-sm font-semibold text-amber-400">{user.totalXP.toLocaleString("de-DE")} XP</span>
+            </div>
             <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full transition-all duration-700"
@@ -108,7 +112,6 @@ export default function Dashboard() {
           <StatCard icon={<BookOpen className="w-5 h-5" />} color="blue" label="Module" value={`${user.completedModules.length}/${modules.length}`} />
           <StatCard icon={<Trophy className="w-5 h-5" />} color="green" label="Lektionen" value={`${completedLessons}/${totalLessons}`} />
           <StatCard icon={<Flame className="w-5 h-5" />} color="orange" label="Streak" value={`${user.streak} 🔥`} />
-          <StatCard icon={<Zap className="w-5 h-5" />} color="purple" label="XP" value={String(user.totalXP)} />
         </section>
       )}
 

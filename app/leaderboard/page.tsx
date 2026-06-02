@@ -18,7 +18,7 @@ export default function LeaderboardPage() {
 
   useEffect(() => {
     loadEntries();
-  }, [user?.leaderboardOptIn]);
+  }, [user?.leaderboardOptIn, user?.avatar, user?.equippedFrame]);
 
   async function loadEntries() {
     setLoading(true);
