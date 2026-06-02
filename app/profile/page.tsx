@@ -549,6 +549,53 @@ export default function ProfilePage() {
               <div className="p-4 bg-slate-100 dark:bg-slate-800/40 rounded-xl text-center"><Trophy className="w-6 h-6 text-violet-400 mx-auto mb-1" /><p className="text-xl font-bold">{user.completedModules.length}</p><p className="text-[10px] text-slate-500 uppercase">Module</p></div>
               <div className="p-4 bg-slate-100 dark:bg-slate-800/40 rounded-xl text-center"><BookOpen className="w-6 h-6 text-green-400 mx-auto mb-1" /><p className="text-xl font-bold">{Object.values(user.completedLessons).flat().length}</p><p className="text-[10px] text-slate-500 uppercase">Lektionen</p></div>
             </div>
+
+            {/* Detaillierte Streak-Anzeige */}
+            <div className="p-4 bg-slate-100 dark:bg-slate-800/40 rounded-xl">
+              <div className="flex items-center gap-3 mb-3">
+                <Flame className="w-6 h-6 text-orange-400" />
+                <div>
+                  <h3 className="font-semibold">{user.streak} Tage in Folge</h3>
+                  <p className="text-xs text-slate-500">
+                    Letzte Aktivität:{" "}
+                    {(() => {
+                      const now = new Date();
+                      const last = new Date(user.lastActive);
+                      const diffMs = now.getTime() - last.getTime();
+                      const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+                      if (diffDays === 0) return "Heute";
+                      if (diffDays === 1) return "Gestern";
+                      return `vor ${diffDays} Tagen`;
+                    })()}
+                  </p>
+                </div>
+              </div>
+              {/* Naechster Meilenstein */}
+              {(() => {
+                const milestones = [3, 7, 14, 30, 50, 100];
+                const next = milestones.find(m => m > user.streak) || null;
+                if (!next) return (
+                  <p className="text-xs text-amber-400 font-medium">Alle Streak-Meilensteine erreicht!</p>
+                );
+                const prev = milestones.filter(m => m <= user.streak).pop() ?? 0;
+                const progress = Math.min(1, (user.streak - prev) / (next - prev));
+                return (
+                  <>
+                    <div className="flex items-center justify-between text-xs mb-1.5">
+                      <span className="text-slate-500">Naechster Meilenstein</span>
+                      <span className="text-amber-400 font-medium">{user.streak} / {next} Tage</span>
+                    </div>
+                    <div className="h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden mb-1.5">
+                      <div
+                        className="h-full bg-gradient-to-r from-orange-500 to-amber-400 rounded-full transition-all"
+                        style={{ width: `${progress * 100}%` }}
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-500">Lerne jeden Tag, um deine Streak zu halten und Belohnungen freizuschalten!</p>
+                  </>
+                );
+              })()}
+            </div>
             <div>
               <h3 className="font-semibold mb-3">🏆 Erfolge</h3>
               <div className="flex flex-wrap gap-1.5">

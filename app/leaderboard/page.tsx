@@ -27,27 +27,6 @@ export default function LeaderboardPage() {
     try {
       const data = await getLeaderboard(50);
       setEntries(data);
-
-      // Champion-Items auto-entfernen wenn überholt
-      if (user && updateProfile) {
-        const myRank = data.findIndex((e) => e.uid === user.uid) + 1;
-        const frame = user.equippedFrame;
-        const avatar = user.avatar;
-        const needsReset =
-          (frame === "champion" && myRank !== 1) ||
-          (frame === "silver" && myRank !== 2) ||
-          (frame === "bronze-frame" && myRank !== 3) ||
-          ((avatar === "🏆" || avatar === "🥇") && myRank !== 1) ||
-          (avatar === "🥈" && myRank !== 2) ||
-          (avatar === "🥉" && myRank !== 3);
-
-        if (needsReset) {
-          const userLevel = getUserLevel(user.totalXP || 0).level;
-          const unlocked = getUnlockedAvatars(userLevel).filter(a => !a.leaderboardRank);
-          const randomAvatar = unlocked.length > 0 ? unlocked[Math.floor(Math.random() * unlocked.length)].emoji : "🎓";
-          await updateProfile({ equippedFrame: "none", avatar: randomAvatar });
-        }
-      }
     } catch (err) {
       console.error("Leaderboard error:", err);
     } finally {
@@ -156,14 +135,9 @@ export default function LeaderboardPage() {
             const levelInfo = getUserLevel(effectiveEntry.totalXP);
             const medalIcon = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : null;
 
-            // Rang-basierte Cosmetics: Leaderboard-Platz bestimmt Frame/Avatar, nicht gespeicherter Wert
-            // Fuer Rang 4+: Wenn gespeicherter Frame/Avatar ein Rang-Reward ist, zuruecksetzen
-            const rankFrames = ["champion", "silver", "bronze-frame"];
-            const rankAvatars = ["🏆", "🥇", "🥈", "🥉"];
-            let displayFrame = rank === 1 ? "champion" : rank === 2 ? "silver" : rank === 3 ? "bronze-frame" : effectiveEntry.equippedFrame;
-            let displayAvatar = rank === 1 ? "🏆" : effectiveEntry.avatar;
-            if (rank > 3 && rankFrames.includes(effectiveEntry.equippedFrame)) displayFrame = "none";
-            if (rank > 3 && rankAvatars.includes(effectiveEntry.avatar)) displayAvatar = "🎓";
+            // Zeige IMMER was der User ausgewaehlt hat, kein rang-basiertes Override
+            const displayFrame = effectiveEntry.equippedFrame;
+            const displayAvatar = effectiveEntry.avatar;
 
             return (
               <div

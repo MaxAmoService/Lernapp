@@ -498,12 +498,21 @@ export default function LearningClicker() {
 
   return (
     <>
-      {/* Window */}
+      {/* Window — pointer-events-auto auf ALLE Ebenen um Click-Through zu verhindern */}
       <div
         className="fixed z-50 w-72 sm:w-80 select-none pointer-events-auto"
-        style={{ left: position.x, top: position.y }}
+        style={{ left: position.x, top: position.y, isolation: "isolate" }}
+        onClick={(e) => e.stopPropagation()}
+        onPointerDown={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
       >
-        <div className="glass rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 overflow-hidden">
+        <div
+          className="glass rounded-2xl border border-slate-700/50 shadow-2xl shadow-black/50 overflow-hidden pointer-events-auto"
+          onClick={(e) => e.stopPropagation()}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           {/* Header (draggable via pointer capture) */}
           <div
             ref={dragHeaderRef}
@@ -560,7 +569,9 @@ export default function LearningClicker() {
 
                 {/* Click area */}
                 <button
-                  onClick={handleClick}
+                  onClick={(e) => { e.stopPropagation(); handleClick(e); }}
+                  onMouseDown={(e) => e.stopPropagation()}
+                  onTouchStart={(e) => e.stopPropagation()}
                   style={{ touchAction: "manipulation" }}
                   className={`relative mt-2 w-24 h-24 mx-auto rounded-full border-2 flex items-center justify-center group active:scale-[0.85] transition-transform duration-75 ${
                     combo >= 30
