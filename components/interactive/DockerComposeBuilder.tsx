@@ -643,7 +643,7 @@ export default function DockerComposeBuilder() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* ---- LEFT: Service List & Templates ---- */}
-        <div className="border-b lg:border-b-0 lg:border-r border-gray-700 p-4 sm:p-5 max-h-[36rem] overflow-y-auto">
+        <div className="border-b lg:border-b-0 lg:border-r border-gray-700 p-4 sm:p-5 overflow-y-auto max-h-[42rem]">
           {/* Section explainer links */}
           <div className="mb-4">
             <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5 mb-2">
@@ -787,182 +787,184 @@ export default function DockerComposeBuilder() {
           </div>
         </div>
 
-        {/* ---- RIGHT: Editor + YAML Preview ---- */}
-        <div className="p-4 sm:p-5 flex flex-col max-h-[36rem] overflow-y-auto">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
-              <Settings className="w-4 h-4" />
-              Service-Eigenschaften
-            </h4>
-            {services.length > 0 && (
-              <button
-                onClick={clearAll}
-                className="text-xs text-red-400 hover:text-red-300 transition-colors flex items-center gap-1"
-              >
-                <RotateCcw className="w-3 h-3" />
-                Zuruecksetzen
-              </button>
+        {/* ---- RIGHT: Editor + YAML Preview (wrapped in one column) ---- */}
+        <div className="flex flex-col min-h-0">
+          <div className="p-4 sm:p-5 flex flex-col min-h-0 overflow-y-auto">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
+                <Settings className="w-4 h-4" />
+                Service-Eigenschaften
+              </h4>
+              {services.length > 0 && (
+                <button
+                  onClick={clearAll}
+                  className="text-xs text-red-400 hover:text-red-300 transition-colors flex items-center gap-1"
+                >
+                  <RotateCcw className="w-3 h-3" />
+                  Zuruecksetzen
+                </button>
+              )}
+            </div>
+
+            {!editingService ? (
+              <div className="flex-1 flex items-center justify-center py-8">
+                <div className="text-center">
+                  <Layers className="w-10 h-10 text-slate-700 mx-auto mb-3" />
+                  <p className="text-slate-500 text-sm">
+                    Waehle links einen Service zum Bearbeiten aus<br />
+                    oder fuege einen neuen hinzu.
+                  </p>
+                  <p className="text-slate-600 text-xs mt-2">
+                    Oder lade eine Vorlage.
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <ServiceEditor
+                service={editingService}
+                allServiceNames={services.map((s) => s.name)}
+                onUpdate={(updates) => updateService(editingService.id, updates)}
+              />
+            )}
+
+            {/* Validation messages */}
+            {errors.length > 0 && (
+              <div className="mt-3 space-y-1">
+                {errors.map((err, i) => (
+                  <div
+                    key={i}
+                    className={`flex items-start gap-2 px-3 py-2 rounded-lg text-xs ${
+                      err.severity === "error"
+                        ? "bg-red-900/30 border border-red-800/50 text-red-300"
+                        : "bg-yellow-900/20 border border-yellow-800/40 text-yellow-300"
+                    }`}
+                  >
+                    <AlertTriangle className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+                    <span>{err.message}</span>
+                  </div>
+                ))}
+              </div>
             )}
           </div>
 
-          {!editingService ? (
-            <div className="flex-1 flex items-center justify-center">
-              <div className="text-center">
-                <Layers className="w-10 h-10 text-slate-700 mx-auto mb-3" />
-                <p className="text-slate-500 text-sm">
-                  Waehle links einen Service zum Bearbeiten aus<br />
-                  oder fuege einen neuen hinzu.
-                </p>
-                <p className="text-slate-600 text-xs mt-2">
-                  Oder lade eine Vorlage.
-                </p>
+          {/* ---- YAML Preview ---- */}
+          <div className="px-4 sm:px-5 pb-4 sm:pb-5 flex flex-col min-h-0 border-t border-gray-700 pt-4">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
+                <FileCode className="w-4 h-4" />
+                docker-compose.yml
+              </h4>
+              <div className="flex items-center gap-2">
+                {services.length > 0 && !running && errors.filter((e) => e.severity === "error").length === 0 && (
+                  <button
+                    onClick={runSimulation}
+                    className="text-xs text-green-400 hover:text-green-300 transition-colors flex items-center gap-1"
+                  >
+                    <Play className="w-3 h-3" />
+                    Start simulieren
+                  </button>
+                )}
+                {running && (
+                  <span className="text-xs text-green-400 animate-pulse flex items-center gap-1">
+                    <Play className="w-3 h-3" />
+                    Starte... ({runningStep + 1}/{services.length})
+                  </span>
+                )}
+                {services.length > 0 && (
+                  <button
+                    onClick={handleCopy}
+                    className="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1"
+                  >
+                    {copied ? (
+                      <>
+                        <Check className="w-3 h-3 text-green-400" />
+                        Kopiert!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3" />
+                        Kopieren
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
-          ) : (
-            <ServiceEditor
-              service={editingService}
-              allServiceNames={services.map((s) => s.name)}
-              onUpdate={(updates) => updateService(editingService.id, updates)}
-            />
-          )}
 
-          {/* Validation messages */}
-          {errors.length > 0 && (
-            <div className="mt-3 space-y-1">
-              {errors.map((err, i) => (
-                <div
-                  key={i}
-                  className={`flex items-start gap-2 px-3 py-2 rounded-lg text-xs ${
-                    err.severity === "error"
-                      ? "bg-red-900/30 border border-red-800/50 text-red-300"
-                      : "bg-yellow-900/20 border border-yellow-800/40 text-yellow-300"
-                  }`}
-                >
-                  <AlertTriangle className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
-                  <span>{err.message}</span>
+            <div className="rounded-lg bg-gray-950 border border-gray-700 overflow-hidden flex flex-col">
+              {/* Title bar */}
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 border-b border-gray-700">
+                <div className="flex gap-1">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                 </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* ---- YAML Preview ---- */}
-        <div className="p-4 sm:p-5 flex flex-col">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="text-sm font-semibold text-slate-300 flex items-center gap-1.5">
-              <FileCode className="w-4 h-4" />
-              docker-compose.yml
-            </h4>
-            <div className="flex items-center gap-2">
-              {services.length > 0 && !running && errors.filter((e) => e.severity === "error").length === 0 && (
-                <button
-                  onClick={runSimulation}
-                  className="text-xs text-green-400 hover:text-green-300 transition-colors flex items-center gap-1"
-                >
-                  <Play className="w-3 h-3" />
-                  Start simulieren
-                </button>
-              )}
-              {running && (
-                <span className="text-xs text-green-400 animate-pulse flex items-center gap-1">
-                  <Play className="w-3 h-3" />
-                  Starte... ({runningStep + 1}/{services.length})
-                </span>
-              )}
-              {services.length > 0 && (
-                <button
-                  onClick={handleCopy}
-                  className="text-xs text-slate-400 hover:text-white transition-colors flex items-center gap-1"
-                >
-                  {copied ? (
-                    <>
-                      <Check className="w-3 h-3 text-green-400" />
-                      Kopiert!
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3 h-3" />
-                      Kopieren
-                    </>
-                  )}
-                </button>
-              )}
-            </div>
-          </div>
-
-          <div className="flex-1 rounded-lg bg-gray-950 border border-gray-700 overflow-hidden flex flex-col">
-            {/* Title bar */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-gray-800 border-b border-gray-700">
-              <div className="flex gap-1">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                <span className="text-[10px] text-slate-500 font-mono ml-1">docker-compose.yml</span>
               </div>
-              <span className="text-[10px] text-slate-500 font-mono ml-1">docker-compose.yml</span>
+
+              <pre
+                ref={previewRef}
+                className="p-3 text-xs font-mono overflow-auto min-h-[6rem] max-h-56"
+              >
+                {services.length === 0 ? (
+                  <span className="text-slate-600 italic"># Deine docker-compose.yml erscheint hier...</span>
+                ) : (
+                  highlightYaml(yamlText)
+                )}
+              </pre>
             </div>
 
-            <pre
-              ref={previewRef}
-              className="p-3 text-xs font-mono overflow-auto flex-1 min-h-[8rem] max-h-80"
-            >
-              {services.length === 0 ? (
-                <span className="text-slate-600 italic"># Deine docker-compose.yml erscheint hier...</span>
-              ) : (
-                highlightYaml(yamlText)
-              )}
-            </pre>
-          </div>
+            {/* Run success */}
+            {runSuccess && (
+              <div className="mt-3 flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-green-900/30 border border-green-800/50 text-green-300 animate-pulse">
+                <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                <span className="font-semibold">
+                  docker compose up erfolgreich! Alle {services.length} Services laufen.
+                </span>
+              </div>
+            )}
 
-          {/* Run success */}
-          {runSuccess && (
-            <div className="mt-3 flex items-center gap-2 px-3 py-2 rounded-lg text-xs bg-green-900/30 border border-green-800/50 text-green-300 animate-pulse">
-              <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-              <span className="font-semibold">
-                docker compose up erfolgreich! Alle {services.length} Services laufen.
-              </span>
+            {/* Best Practices */}
+            <div className="mt-4 bg-gray-800/50 border border-gray-700 rounded-lg p-3">
+              <div className="flex items-center gap-2 mb-2">
+                <Lightbulb className="w-4 h-4 text-yellow-400" />
+                <span className="text-xs font-semibold text-slate-300">Best Practices</span>
+              </div>
+              <ul className="text-xs text-slate-400 space-y-1.5 leading-relaxed">
+                <li className="flex items-start gap-1.5">
+                  <span className="text-green-400 mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </span>
+                  <span>
+                    <strong className="text-slate-300">Named Volumes</strong> fuer Datenbanken nutzen -- Daten bleiben bei Container-Neustart erhalten.
+                  </span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-green-400 mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </span>
+                  <span>
+                    <strong className="text-slate-300">depends_on</strong> nur fuer Startreihenfolge -- fuer echte Readiness braucht man Healthchecks.
+                  </span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-green-400 mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </span>
+                  <span>
+                    <strong className="text-slate-300">Umgebungsvariablen</strong> besser in <code className="text-blue-300">.env</code>-Datei auslagern, niemals Passwoerter hartcodieren.
+                  </span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-green-400 mt-0.5 flex-shrink-0">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </span>
+                  <span>
+                    <strong className="text-slate-300">Eigene Netzwerke</strong> definieren isolieren Services und verbessern die Sicherheit.
+                  </span>
+                </li>
+              </ul>
             </div>
-          )}
-
-          {/* Best Practices */}
-          <div className="mt-4 bg-gray-800/50 border border-gray-700 rounded-lg p-3">
-            <div className="flex items-center gap-2 mb-2">
-              <Lightbulb className="w-4 h-4 text-yellow-400" />
-              <span className="text-xs font-semibold text-slate-300">Best Practices</span>
-            </div>
-            <ul className="text-xs text-slate-400 space-y-1.5 leading-relaxed">
-              <li className="flex items-start gap-1.5">
-                <span className="text-green-400 mt-0.5 flex-shrink-0">
-                  <CheckCircle2 className="w-3 h-3" />
-                </span>
-                <span>
-                  <strong className="text-slate-300">Named Volumes</strong> fuer Datenbanken nutzen -- Daten bleiben bei Container-Neustart erhalten.
-                </span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <span className="text-green-400 mt-0.5 flex-shrink-0">
-                  <CheckCircle2 className="w-3 h-3" />
-                </span>
-                <span>
-                  <strong className="text-slate-300">depends_on</strong> nur fuer Startreihenfolge -- fuer echte Readiness braucht man Healthchecks.
-                </span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <span className="text-green-400 mt-0.5 flex-shrink-0">
-                  <CheckCircle2 className="w-3 h-3" />
-                </span>
-                <span>
-                  <strong className="text-slate-300">Umgebungsvariablen</strong> besser in <code className="text-blue-300">.env</code>-Datei auslagern, niemals Passwoerter hartcodieren.
-                </span>
-              </li>
-              <li className="flex items-start gap-1.5">
-                <span className="text-green-400 mt-0.5 flex-shrink-0">
-                  <CheckCircle2 className="w-3 h-3" />
-                </span>
-                <span>
-                  <strong className="text-slate-300">Eigene Netzwerke</strong> definieren isolieren Services und verbessern die Sicherheit.
-                </span>
-              </li>
-            </ul>
           </div>
         </div>
       </div>

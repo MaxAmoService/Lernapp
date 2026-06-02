@@ -258,6 +258,71 @@ IT-Abteilung`,
   },
 ];
 
+interface QuizQuestion {
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+}
+
+const phishingQuiz: QuizQuestion[] = [
+  {
+    question: "Welches ist KEIN typisches Zeichen fuer Phishing?",
+    options: [
+      "Dringende Handlungsaufforderung mit Frist",
+      "Persoenliche Anrede mit vollem Namen",
+      "Verdaechtige Absender-Domaene",
+      "Aufforderung zur Eingabe von Passwoertern per Link",
+    ],
+    correctIndex: 1,
+    explanation: "Phishing nutzt fast immer generische Anreden wie 'Sehr geehrter Kunde'. Eine persoenliche Anrede mit vollem Namen ist eher ein Zeichen fuer eine legitime E-Mail.",
+  },
+  {
+    question: "Welche URL ist am meisten verdächtig?",
+    options: [
+      "https://www.amazon.de/gp/css/order-history",
+      "http://amazon-zahlung-verifizieren.com/update",
+      "https://github.com/settings/security",
+      "https://www.sparkasse.de/login",
+    ],
+    correctIndex: 1,
+    explanation: "Die URL 'amazon-zahlung-verifizieren.com' ist eine fremde Domain, die nur so tut als waere sie Amazon. Echte Amazon-Seiten nutzen immer 'amazon.de'. Ausserdem fehlt HTTPS.",
+  },
+  {
+    question: "Was sollte man tun, wenn man eine verdächtige E-Mail von der 'IT-Abteilung' erhaelt?",
+    options: [
+      "Sofort den Link anklicken, bevor das Konto gesperrt wird",
+      "Die E-Mail an alle Kolunden weiterleiten",
+      "Die IT-Abteilung direkt anrufen oder persoenlich ansprechen",
+      "Die E-Mail einfach loeschen und ignorieren",
+    ],
+    correctIndex: 2,
+    explanation: "Im Zweifel immer den Absender ueber einen anderen Kanal kontaktieren (telefonisch, persoenlich). Niemals auf Links in verdächtigen E-Mails klicken!",
+  },
+  {
+    question: "Was ist CEO-Fraud / Business Email Compromise (BEC)?",
+    options: [
+      "Ein Virus, der den CEO-Computer sperrt",
+      "Ein Angriff, bei dem der Geschäftsführer impersoniert wird, um Geld zu erpressen",
+      "Eine Methode, um CEO-Passwoerter zu knacken",
+      "Ein Phishing-Angriff auf CEOs per SMS",
+    ],
+    correctIndex: 1,
+    explanation: "Beim CEO-Fraud geben sich Angreifer als Geschäftsführer aus und fordern per E-Mail dringende Überweisungen an. Echte Geschäftsführer verlangen nie ohne offiziellen Prozess Geld.",
+  },
+  {
+    question: "Welche Massnahme schuetzt am besten vor Phishing?",
+    options: [
+      "Alle E-Mails automatisch oeffnen",
+      "Passwoerter regelmaessig per E-Mail versenden",
+      "Links pruefen (Maus drueberhalten), Absender verifizieren, keine Passwoerter per E-Mail eingeben",
+      "Nur E-Mails von unbekannten Absendern oeffnen",
+    ],
+    correctIndex: 2,
+    explanation: "Die Kombination aus Link-Pruefung, Absender-Verifizierung und dem Grundsatz, niemals Passwoerter per E-Mail einzugeben, ist der beste Schutz gegen Phishing.",
+  },
+];
+
 function shuffleArray<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -273,6 +338,10 @@ export function PhishingDetector() {
   const [answers, setAnswers] = useState<Record<number, boolean>>({});
   const [showExplanation, setShowExplanation] = useState(false);
   const [gameComplete, setGameComplete] = useState(false);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [quizIndex, setQuizIndex] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
+  const [quizShowExplanation, setQuizShowExplanation] = useState(false);
 
   const currentEmail = shuffledEmails[currentEmailIndex];
   const answered = answers[currentEmail.id] !== undefined;
@@ -298,7 +367,27 @@ export function PhishingDetector() {
     setAnswers({});
     setShowExplanation(false);
     setGameComplete(false);
+    setQuizStarted(false);
+    setQuizIndex(0);
+    setQuizAnswers({});
+    setQuizShowExplanation(false);
   };
+
+  const handleQuizAnswer = (optionIndex: number) => {
+    setQuizAnswers((prev) => ({ ...prev, [quizIndex]: optionIndex }));
+    setQuizShowExplanation(true);
+  };
+
+  const handleQuizNext = () => {
+    if (quizIndex < phishingQuiz.length - 1) {
+      setQuizIndex((i) => i + 1);
+      setQuizShowExplanation(false);
+    }
+  };
+
+  const quizScore = Object.entries(quizAnswers).filter(
+    ([idx, ans]) => ans === phishingQuiz[Number(idx)].correctIndex
+  ).length;
 
   const score = Object.entries(answers).filter(
     ([id, answer]) => answer === shuffledEmails.find((e) => e.id === Number(id))?.isPhishing
@@ -352,6 +441,125 @@ export function PhishingDetector() {
           <button onClick={handleRestart} className="px-6 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium">
             🔄 Nochmal spielen
           </button>
+        </div>
+
+        {/* Quiz Section */}
+        <div className="mt-4 bg-blue-900/20 border border-blue-800/30 rounded-lg p-4">
+          <h4 className="text-blue-400 font-semibold text-sm mb-3 flex items-center gap-2">
+            🧠 Phishing-Wissenstest
+          </h4>
+
+          {!quizStarted ? (
+            <div className="text-center py-4">
+              <p className="text-slate-300 text-sm mb-3">
+                Teste jetzt dein Phishing-Wissen mit {phishingQuiz.length} Fragen!
+              </p>
+              <button
+                onClick={() => setQuizStarted(true)}
+                className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors"
+              >
+                Quiz starten
+              </button>
+            </div>
+          ) : (
+            <div>
+              {/* Quiz Progress */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-slate-400 text-xs">Frage {quizIndex + 1} / {phishingQuiz.length}</span>
+                <div className="flex-1 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500 rounded-full transition-all"
+                    style={{ width: `${((quizIndex + 1) / phishingQuiz.length) * 100}%` }}
+                  />
+                </div>
+                <span className="text-green-400 text-xs font-bold">{quizScore} ✓</span>
+              </div>
+
+              {/* Question */}
+              <p className="text-white text-sm font-medium mb-3">
+                {phishingQuiz[quizIndex].question}
+              </p>
+
+              {/* Options */}
+              <div className="space-y-2 mb-3">
+                {phishingQuiz[quizIndex].options.map((opt, i) => {
+                  const selected = quizAnswers[quizIndex] === i;
+                  const isCorrect = i === phishingQuiz[quizIndex].correctIndex;
+                  const answered = quizAnswers[quizIndex] !== undefined;
+
+                  let optionClasses = "border-gray-600 hover:border-blue-500 hover:bg-blue-900/20";
+                  if (answered) {
+                    if (isCorrect) {
+                      optionClasses = "border-green-500 bg-green-900/30 text-green-300";
+                    } else if (selected && !isCorrect) {
+                      optionClasses = "border-red-500 bg-red-900/30 text-red-300";
+                    } else {
+                      optionClasses = "border-gray-700 opacity-50";
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={i}
+                      onClick={() => !answered && handleQuizAnswer(i)}
+                      disabled={answered}
+                      className={`w-full text-left px-3 py-2 rounded-lg border text-sm transition-all ${optionClasses}`}
+                    >
+                      <span className="font-mono text-xs text-slate-500 mr-2">{String.fromCharCode(65 + i)}.</span>
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Explanation */}
+              {quizShowExplanation && (
+                <div className={`rounded-lg p-3 mb-3 ${
+                  quizAnswers[quizIndex] === phishingQuiz[quizIndex].correctIndex
+                    ? "bg-green-900/30 border border-green-700"
+                    : "bg-red-900/30 border border-red-700"
+                }`}>
+                  <p className={`text-sm font-bold mb-1 ${
+                    quizAnswers[quizIndex] === phishingQuiz[quizIndex].correctIndex
+                      ? "text-green-400"
+                      : "text-red-400"
+                  }`}>
+                    {quizAnswers[quizIndex] === phishingQuiz[quizIndex].correctIndex
+                      ? "✅ Richtig!"
+                      : "❌ Falsch!"}
+                  </p>
+                  <p className="text-slate-300 text-xs leading-relaxed">
+                    {phishingQuiz[quizIndex].explanation}
+                  </p>
+                </div>
+              )}
+
+              {/* Next / Result */}
+              {quizShowExplanation && (
+                quizIndex < phishingQuiz.length - 1 ? (
+                  <button
+                    onClick={handleQuizNext}
+                    className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm transition-colors"
+                  >
+                    Naechste Frage →
+                  </button>
+                ) : (
+                  <div className="text-center py-2">
+                    <p className="text-white font-bold text-lg mb-1">
+                      {quizScore} / {phishingQuiz.length} richtig!
+                    </p>
+                    <p className="text-slate-400 text-xs">
+                      {quizScore === phishingQuiz.length
+                        ? "Perfekt! Du bist ein Phishing-Experte!"
+                        : quizScore >= 3
+                        ? "Gut gemacht! Du erkennst die meisten Phishing-Versuche."
+                        : "Uebung macht den Meister — lies dir die Erklaerungen durch!"}
+                    </p>
+                  </div>
+                )
+              )}
+            </div>
+          )}
         </div>
 
         {/* Phishing Signs */}
