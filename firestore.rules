@@ -33,6 +33,20 @@ service cloud.firestore {
       allow write: if true;
     }
 
+    // Feedback: authentifizierte & anonyme Nutzer dürfen erstellen
+    // Validiert Feld-Typen und Längen zum Schutz vor Missbrauch
+    match /feedback/{docId} {
+      allow read: if false;
+      allow create: if request.resource.data.keys().hasAll([
+        "uid", "username", "displayName", "moduleSlug",
+        "moduleTitle", "lessonId", "lessonTitle", "category",
+        "message", "createdAt", "userAgent"
+      ])
+        && request.resource.data.message is string
+        && request.resource.data.message.size() >= 10
+        && request.resource.data.message.size() <= 2000;
+    }
+
     // Alles andere: blockiert
     match /{document=**} {
       allow read, write: if false;
