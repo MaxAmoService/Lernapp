@@ -47,7 +47,7 @@ export const categories: Category[] = [
   ...ihkCategories,
   {
     id: "studium",
-    name: "Studium (TH OWL)",
+    name: "Studium",
     icon: "🎓",
     description: "Hochschul-Module: Mathe 1, Algorithmen, Datenbanken, KI, ML & mehr — mit Original-Prüfungsaufgaben",
     password: "THOWL",
