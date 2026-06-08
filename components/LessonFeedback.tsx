@@ -99,9 +99,9 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
     return (
       <button
         onClick={() => { setSubmitted(false); setIsExpanded(false); }}
-        className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 transition-all text-xs font-medium whitespace-nowrap"
+        className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/30 transition-all text-sm font-semibold whitespace-nowrap shadow-lg shadow-emerald-500/5"
       >
-        <CheckCircle2 className="w-3.5 h-3.5" />
+        <CheckCircle2 className="w-4 h-4" />
         Feedback gesendet
       </button>
     );
@@ -111,11 +111,11 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
     return (
       <button
         onClick={() => setIsExpanded(true)}
-        className="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800/50 border border-slate-700/40 hover:bg-slate-800/70 hover:border-slate-600 transition-all text-xs font-medium text-slate-400 hover:text-slate-200 whitespace-nowrap"
+        className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-500/20 border border-blue-500/30 hover:bg-blue-500/30 hover:border-blue-400/50 transition-all text-sm font-semibold text-blue-400 hover:text-blue-300 whitespace-nowrap shadow-lg shadow-blue-500/5"
         title="Feedback zu dieser Lektion senden"
       >
-        <MessageSquare className="w-3.5 h-3.5 text-blue-400" />
-        Feedback
+        <MessageSquare className="w-4 h-4" />
+        💬 Feedback
       </button>
     );
   }
