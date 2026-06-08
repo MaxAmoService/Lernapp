@@ -64,10 +64,30 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
     setIsSubmitting(true);
 
     try {
-      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
+      const { collection, addDoc, query, where, getDocs, deleteDoc, doc, serverTimestamp } = await import("firebase/firestore");
       const { getDb } = await import("@/lib/firebase");
+      const db = getDb();
 
-      await addDoc(collection(getDb(), "feedback"), {
+      const today = new Date().toISOString().split("T")[0]; // "2026-06-08"
+
+      // 7-Tage-Cleanup: Feedback älter als 7 Tage löschen
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 7);
+      const cutoffStr = cutoff.toISOString().split("T")[0];
+      try {
+        const oldQuery = query(
+          collection(db, "feedback"),
+          where("date", "<=", cutoffStr)
+        );
+        const oldSnapshot = await getDocs(oldQuery);
+        const deletions = oldSnapshot.docs.map((d) => deleteDoc(doc(db, "feedback", d.id)));
+        await Promise.allSettled(deletions);
+      } catch (cleanupErr) {
+        // Cleanup-Fehler sind nicht kritisch für den User
+        console.warn("Feedback cleanup failed:", cleanupErr);
+      }
+
+      await addDoc(collection(db, "feedback"), {
         uid: user?.uid || "anonymous",
         username: user?.username || "anonymous",
         displayName: user?.displayName || "Anonym",
@@ -77,6 +97,7 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
         lessonTitle,
         category,
         message: message.trim(),
+        date: today,
         createdAt: serverTimestamp(),
       });
 
