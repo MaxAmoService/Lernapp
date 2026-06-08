@@ -16,7 +16,7 @@ import {
   User, Mail, Lock, Camera, Save, Loader2, CheckCircle2, AlertCircle,
   Shield, Bell, Palette, Trophy, Flame, Zap, BookOpen, ArrowLeft,
   Eye, EyeOff, RefreshCw, Edit3, X, Users, Sparkles, Lock as LockIcon,
-  Settings, Moon, Sun,
+  Settings, Moon, Sun, Download,
 } from "lucide-react";
 
 type Tab = "profile" | "security" | "settings" | "stats";
@@ -456,6 +456,57 @@ export default function ProfilePage() {
                 {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4" />} E-Mail ändern
               </button>
             </form>
+            <hr className="border-slate-700/50" />
+            {/* DSGVO: Datenexport (Art. 20) */}
+            <div>
+              <h3 className="text-lg font-semibold mb-3 flex items-center gap-2"><Download className="w-5 h-5 text-blue-400" /> Daten exportieren</h3>
+              <p className="text-slate-400 text-sm mb-4">Lade alle deine gespeicherten Daten als JSON-Datei herunter (Art. 20 DSGVO).</p>
+              <button
+                onClick={() => {
+                  const exportData = {
+                    exportedAt: new Date().toISOString(),
+                    profile: {
+                      uid: user.uid,
+                      username: user.username,
+                      displayName: user.displayName,
+                      email: user.email,
+                      bio: user.bio,
+                      avatar: user.avatar,
+                      equippedFrame: user.equippedFrame,
+                      totalXP: user.totalXP,
+                      level: getUserLevel(user.totalXP).level,
+                      streak: user.streak,
+                      lastActive: user.lastActive,
+                      leaderboardOptIn: user.leaderboardOptIn,
+                      statusHidden: user.statusHidden,
+                      completedModules: user.completedModules,
+                      completedLessons: user.completedLessons,
+                      quizScores: user.quizScores,
+                      clickerPoints: user.clickerPoints,
+                      clickerTotalPoints: user.clickerTotalPoints,
+                      clickerPrestigeLevel: user.clickerPrestigeLevel,
+                      clickerPrestigePoints: user.clickerPrestigePoints,
+                      settings: user.settings,
+                    },
+                    einwilligungen: {
+                      cookies: typeof window !== "undefined" ? localStorage.getItem("learnhub-cookie-consent") : null,
+                    },
+                  };
+                  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
+                  const url = URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  a.href = url;
+                  a.download = `learnhub-daten-${user.username || user.uid}.json`;
+                  a.click();
+                  URL.revokeObjectURL(url);
+                  showMessage("success", "Daten exportiert!");
+                }}
+                className="px-6 py-3 bg-blue-500/20 hover:bg-blue-500/30 text-blue-400 rounded-xl font-medium flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
+                JSON herunterladen
+              </button>
+            </div>
             <hr className="border-slate-700/50" />
             <div>
               <h3 className="text-lg font-semibold mb-3 flex items-center gap-2"><AlertCircle className="w-5 h-5 text-red-400" /> Account löschen</h3>

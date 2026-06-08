@@ -83,12 +83,27 @@ export default function Datenschutz() {
         </section>
 
         <section>
-          <h2 className="text-xl font-semibold text-white mb-3">4. Firebase</h2>
+          <h2 className="text-xl font-semibold text-white mb-3">4. Firebase & Hosting (Vercel)</h2>
           <p className="text-sm">
-            Wir nutzen Firebase (Google Ireland Limited) für die technische Bereitstellung unserer
-            Plattform. Firebase kann dabei bestimmte Geräteinformationen und technische Daten erfassen.
-            Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO (berechtigtes
-            Interesse an einer stabilen Plattform).
+            Wir nutzen Firebase (Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland)
+            für Authentifizierung und Datenspeicherung. Firebase speichert folgende Daten:
+          </p>
+          <ul className="text-sm mt-2 space-y-1 list-disc list-inside">
+            <li><strong>Profil-Daten:</strong> Benutzername, Anzeigename, E-Mail, Avatar, XP, Level, Lernfortschritt</li>
+            <li><strong>Feedback:</strong> Nachrichten, Kategorie, Lektions-Kontext (bei Nutzung der Feedback-Funktion)</li>
+            <li><strong>Lern-Clicker:</strong> Spielstand, Punkte, Upgrades, Pets, Prestige-Daten</li>
+            <li><strong>Online-Status:</strong> Ob du gerade aktiv bist (nur wenn Bestenliste aktiviert)</li>
+          </ul>
+          <p className="text-sm mt-2">
+            Die Firestore-Datenbank wird in der Region <strong>eur3 (Frankfurt)</strong> gehostet.
+            Firebase kann dabei bestimmte Geräteinformationen und technische Daten erfassen.
+            Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b und f DSGVO.
+          </p>
+          <p className="text-sm mt-2">
+            <strong>Hosting:</strong> Die Plattform wird über Vercel Inc. (340 S Lemon Ave #4133,
+            Walnut, CA 91789, USA) bereitgestellt. Vercel ist unter dem EU-US Data Privacy Framework
+            zertifiziert. Vercel verarbeitet Zugriffsdaten (IP-Adressen, User-Agent)
+            in Server-Log-Dateien gemäß unseren Weisungen.
           </p>
         </section>
 
@@ -103,8 +118,8 @@ export default function Datenschutz() {
             <li><strong>Analytics-Cookies:</strong> Google Analytics (nur mit Ihrer Einwilligung)</li>
           </ul>
           <p className="text-sm mt-2">
-            Sie können Ihre Cookie-Einstellungen jederzeit ändern, indem Sie die Website erneut besuchen
-            und im Cookie-Banner Ihre Präferenzen anpassen.
+            Sie können Ihre Cookie-Einstellungen jederzeit ändern — klicken Sie dazu auf
+            &quot;Cookie-Einstellungen&quot; im Footer der Website.
           </p>
         </section>
 

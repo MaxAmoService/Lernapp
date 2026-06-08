@@ -21,6 +21,10 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
+  collection,
+  query,
+  where,
+  getDocs,
   serverTimestamp,
 } from "firebase/firestore";
 import { getAuthInstance, getDb } from "./firebase";
@@ -316,9 +320,24 @@ export async function deleteAccount(password: string): Promise<void> {
   const user = getAuthInstance().currentUser;
   if (!user) throw new Error("Nicht eingeloggt");
   await reauthenticate(password);
+  const { uid } = user;
+  const db = getDb();
+
+  // Feedback-Einträge des Users löschen (DSGVO Art. 17)
+  if (uid) {
+    try {
+      const feedbackQuery = query(collection(db, "feedback"), where("uid", "==", uid));
+      const snapshot = await getDocs(feedbackQuery);
+      const deletions = snapshot.docs.map((d) => deleteDoc(doc(db, "feedback", d.id)));
+      await Promise.all(deletions);
+    } catch (e) {
+      console.warn("[deleteAccount] Feedback cleanup failed:", e);
+    }
+  }
+
   const username = user.displayName;
-  if (username) await deleteDoc(doc(getDb(), "usernames", username)).catch(() => {});
-  await deleteDoc(doc(getDb(), "users", user.uid)).catch(() => {});
+  if (username) await deleteDoc(doc(db, "usernames", username)).catch(() => {});
+  await deleteDoc(doc(db, "users", uid)).catch(() => {});
   await deleteUser(user);
 }
 

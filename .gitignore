@@ -18,3 +18,4 @@ tmp/
 graphify-out/
 data/pdf_images/
 data/scan_pdfs.py
+data/

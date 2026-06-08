@@ -78,7 +78,6 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
         category,
         message: message.trim(),
         createdAt: serverTimestamp(),
-        userAgent: navigator.userAgent,
       });
 
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());

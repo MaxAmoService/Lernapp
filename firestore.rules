@@ -40,7 +40,7 @@ service cloud.firestore {
       allow create: if request.resource.data.keys().hasAll([
         "uid", "username", "displayName", "moduleSlug",
         "moduleTitle", "lessonId", "lessonTitle", "category",
-        "message", "createdAt", "userAgent"
+        "message", "createdAt"
       ])
         && request.resource.data.message is string
         && request.resource.data.message.size() >= 10
