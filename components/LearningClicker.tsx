@@ -151,9 +151,16 @@ function getUpgradeCost(upgrade: Upgrade, count: number): number {
 }
 
 function formatNumber(n: number): string {
-  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1) + "M";
-  if (n >= 1_000) return (n / 1_000).toFixed(1) + "K";
-  return Math.floor(n).toString();
+  if (n >= 1_000_000_000_000) return short(n / 1_000_000_000_000) + "T";
+  if (n >= 1_000_000_000) return short(n / 1_000_000_000) + "B";
+  if (n >= 1_000_000) return short(n / 1_000_000) + "M";
+  if (n >= 1_000) return short(n / 1_000) + "K";
+  return Math.floor(n).toLocaleString("de-DE");
+}
+function short(v: number): string {
+  // Zeigt 1 Dezimalstelle nur wenn nötig, sonst ganzzahlig
+  const r = v.toFixed(1);
+  return r.endsWith(".0") ? Math.floor(v).toString() : r;
 }
 
 // ---------------------------------------------------------------------------
@@ -395,21 +402,38 @@ export default function LearningClicker() {
   }, [user]);
 
   // Upgrade kaufen — Optimistic UI (sofort, Firebase asynchron)
-  const handleBuyUpgrade = useCallback(async (upgrade: Upgrade) => {
+  const handleBuyUpgrade = useCallback(async (upgrade: Upgrade, e?: React.MouseEvent) => {
     if (!user) return;
+    const buyMax = e?.shiftKey ?? false;
 
     // State-Update über funktionales setState (kein Stale-Closure)
     setState((prev) => {
       const count = prev.upgrades[upgrade.id] || 0;
-      const cost = getUpgradeCost(upgrade, count);
-      if (prev.points < cost) return prev; // Nicht genug Punkte — kein Update
+      let quantity = 1;
+      let totalCost = getUpgradeCost(upgrade, count);
+
+      if (buyMax) {
+        // Berechne wie viele Levels mit aktuellen Punkten kaufbar sind
+        let c = count;
+        let cost = 0;
+        while (cost + getUpgradeCost(upgrade, c) <= prev.points) {
+          cost += getUpgradeCost(upgrade, c);
+          c++;
+        }
+        quantity = c - count;
+        totalCost = cost;
+      }
+
+      if (prev.points < totalCost || quantity <= 0) return prev;
 
       let newClickPower = prev.clickPower;
       let newAutoAmount = prev.autoAmount;
       let newAutoSpeed = prev.autoSpeed;
-      if (upgrade.effect === "clickPower") newClickPower += upgrade.value;
-      else if (upgrade.effect === "autoAmount") newAutoAmount += upgrade.value;
-      else if (upgrade.effect === "autoSpeed") newAutoSpeed = Math.max(100, Math.floor(newAutoSpeed * upgrade.value));
+      if (upgrade.effect === "clickPower") newClickPower += upgrade.value * quantity;
+      else if (upgrade.effect === "autoAmount") newAutoAmount += upgrade.value * quantity;
+      else if (upgrade.effect === "autoSpeed") {
+        for (let i = 0; i < quantity; i++) newAutoSpeed = Math.max(100, Math.floor(newAutoSpeed * upgrade.value));
+      }
 
       // Feedback
       setBuyFeedback(upgrade.id);
@@ -417,16 +441,16 @@ export default function LearningClicker() {
 
       // Firebase asynchron
       flushPendingClicks().then(() => {
-        buyClickerUpgradeBulk(user.uid, upgrade.id, 1);
+        buyClickerUpgradeBulk(user.uid, upgrade.id, quantity);
       });
 
       return {
         ...prev,
-        points: prev.points - cost,
+        points: prev.points - totalCost,
         clickPower: newClickPower,
         autoAmount: newAutoAmount,
         autoSpeed: newAutoSpeed,
-        upgrades: { ...prev.upgrades, [upgrade.id]: count + 1 },
+        upgrades: { ...prev.upgrades, [upgrade.id]: count + quantity },
       };
     });
   }, [user, flushPendingClicks]);
@@ -814,17 +838,29 @@ export default function LearningClicker() {
 
                 {/* Combo-Anzeige */}
                 {combo >= 3 && (
-                  <div className={`mt-1.5 flex items-center justify-center gap-1.5 font-bold transition-all ${
-                    combo >= 30 ? "text-violet-300 text-sm" :
-                    combo >= 20 ? "text-violet-400 text-xs" :
-                    combo >= 12 ? "text-red-400 text-xs" :
-                    "text-amber-400 text-xs"
-                  }`}>
-                    <Flame className={`w-4 h-4 ${combo >= 20 ? "animate-bounce" : "animate-pulse"}`} />
-                    <span>x{comboMultiplier}</span>
-                    {combo >= 12 && <span className="animate-pulse">🔥</span>}
-                    {combo >= 30 && <span className="animate-bounce">⚡</span>}
-                  </div>
+                  <>
+                    <div className={`mt-1.5 flex items-center justify-center gap-1.5 font-bold transition-all ${
+                      combo >= 30 ? "text-violet-300 text-sm" :
+                      combo >= 20 ? "text-violet-400 text-xs" :
+                      combo >= 12 ? "text-red-400 text-xs" :
+                      "text-amber-400 text-xs"
+                    }`}>
+                      <Flame className={`w-4 h-4 ${combo >= 20 ? "animate-bounce" : "animate-pulse"}`} />
+                      <span>x{comboMultiplier}</span>
+                      <span className="text-slate-500">· {combo} Hits</span>
+                      {combo >= 12 && <span className="animate-pulse">🔥</span>}
+                      {combo >= 30 && <span className="animate-bounce">⚡</span>}
+                    </div>
+                    {/* Combo-Timer Bar */}
+                    <div className="mt-1 mx-8 h-0.5 bg-slate-700/50 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-full"
+                        style={{
+                          animation: "comboTimerShrink 0.6s linear forwards",
+                        }}
+                      />
+                    </div>
+                  </>
                 )}
 
                 <div className="mt-1 text-[12px] text-slate-500">
@@ -916,6 +952,9 @@ export default function LearningClicker() {
                       })}
                     </div>
 
+                    {/* Buy-Max Hinweis */}
+                    <p className="text-[10px] text-slate-600 text-center mt-1">⇧+Klick = Max kaufen</p>
+
                     {/* Klick-Upgrades */}
                     {upgradesSubTab === "klick" && (
                       <div className="grid grid-cols-2 gap-1.5">
@@ -930,7 +969,7 @@ export default function LearningClicker() {
                           return (
                             <button
                               key={upgrade.id}
-                              onClick={() => handleBuyUpgrade(upgrade)}
+                              onClick={(e) => handleBuyUpgrade(upgrade, e)}
                               disabled={!canAfford}
                               className={`relative text-left p-2 rounded-lg border transition-all active:scale-95 ${
                                 isFeedback
@@ -988,7 +1027,7 @@ export default function LearningClicker() {
                           return (
                             <button
                               key={upgrade.id}
-                              onClick={() => handleBuyUpgrade(upgrade)}
+                              onClick={(e) => handleBuyUpgrade(upgrade, e)}
                               disabled={!canAfford}
                               className={`relative text-left p-2 rounded-lg border transition-all active:scale-95 ${
                                 isFeedback
@@ -1044,7 +1083,7 @@ export default function LearningClicker() {
                           return (
                             <button
                               key={upgrade.id}
-                              onClick={() => handleBuyUpgrade(upgrade)}
+                              onClick={(e) => handleBuyUpgrade(upgrade, e)}
                               disabled={!canAfford}
                               className={`relative text-left p-2 rounded-lg border transition-all active:scale-95 ${
                                 isFeedback
@@ -1092,7 +1131,7 @@ export default function LearningClicker() {
                           return (
                             <button
                               key={upgrade.id}
-                              onClick={() => handleBuyUpgrade(upgrade)}
+                              onClick={(e) => handleBuyUpgrade(upgrade, e)}
                               disabled={!canAfford}
                               className={`relative text-left p-2 rounded-lg border transition-all active:scale-95 ${
                                 isFeedback
@@ -1603,6 +1642,22 @@ export default function LearningClicker() {
         @keyframes expand-ring {
           0% { transform: scale(0.5); opacity: 0.5; }
           100% { transform: scale(3); opacity: 0; }
+        }
+        @keyframes autoTickFloat {
+          0% { opacity: 0.6; transform: translateY(0); }
+          100% { opacity: 0; transform: translateY(-20px); }
+        }
+        @keyframes comboTimerShrink {
+          0% { width: 100%; }
+          100% { width: 0%; }
+        }
+        /* Accessibility: reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+          }
         }
       `}</style>
     </>
