@@ -442,15 +442,11 @@ export function OSICapsuleViewer() {
 
   return (
     <div className="bg-slate-800 rounded-xl p-4 sm:p-6 border border-slate-700">
-      {/* ── Header ─────────────────────────────────────────────── */}
-      <div className="mb-4">
-        <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
-          📡 OSI-Modell: End-to-End-Datenübertragung
-        </h3>
-        <p className="text-slate-300 text-sm">
-          Verfolge die Reise einer HTTP-Anfrage durch alle 7 Schichten — vom Sender zum Empfänger
-        </p>
-      </div>
+      {/* ── Kurzbeschreibung ──────────────────────────────────── */}
+      <p className="text-slate-400 text-xs mb-4">
+        📡 Verfolge die Reise einer HTTP-Anfrage durch alle 7 OSI-Schichten — vom Sender zum Empfänger.
+        Jeder Schritt zeigt dir, was mit den Daten passiert.
+      </p>
 
       {/* ── Navigation ─────────────────────────────────────────── */}
       <div className="flex flex-wrap items-center gap-2 mb-3">

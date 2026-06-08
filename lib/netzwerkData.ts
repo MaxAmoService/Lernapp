@@ -142,11 +142,7 @@ Beim Empfänger wird alles **umgekehrt entkapselt**.
 
 > 💡 **IHK-Tipp:** Das TCP/IP-Modell ist das praktische Modell — das Internet nutzt es. OSI ist nur ein Referenzmodell.
 
-## 🔐 Interaktiv ausprobieren
-
 [INTERACTIVE]
-
-> 💡 Der OSI-Kapselungs-Viewer zeigt dir, wie Daten Schicht für Schicht verpackt werden — klicke durch die Animation!
 
 > Jetzt kennst du die theoretische Schichten-Architektur. In der nächsten Lektion schauen wir uns das praktische TCP/IP-Modell an — und lernen die wichtigsten Protokolle und Ports kennen.`,
     },
