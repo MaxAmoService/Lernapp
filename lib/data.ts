@@ -25,6 +25,7 @@ import { fourierModule } from "./fourierData";
 import { Category } from "./types";
 import { contentModules } from "./content/registry";
 import { thowlModules } from "./thowlData";
+import { thowlMathe1Module } from "./thowl/mathe1Data";
 
 // Re-export types for backward compatibility
 export type { Lesson, Module, Category } from "./types";
@@ -38,6 +39,13 @@ export const categories: Category[] = [
   },
   ...mathCategories,
   ...ihkCategories,
+  {
+    id: "studium",
+    name: "Studium (TH OWL)",
+    icon: "🎓",
+    description: "Hochschul-Module: Mathe 1, Algorithmen, Datenbanken, KI, ML & mehr — mit Original-Prüfungsaufgaben",
+    password: "THOWL",
+  },
   {
     id: "projektmanagement",
     name: "Projektmanagement",
@@ -83,6 +91,7 @@ export const allModules = [
   fourierModule,
   ...contentModules,
   ...thowlModules,
+  thowlMathe1Module,
 ];
 
 export function getModule(slug: string) {

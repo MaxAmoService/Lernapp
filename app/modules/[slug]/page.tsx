@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/components/AuthProvider";
-import { getModule, Lesson } from "@/lib/data";
+import { getModule, Lesson, categories } from "@/lib/data";
+import { isStudiumUnlocked, StudiumGate } from "@/components/StudiumGate";
 import { ProgressBar } from "@/components/ProgressBar";
 import { LessonViewer } from "@/components/LessonViewer";
 import { Quiz } from "@/components/Quiz";
@@ -133,6 +134,16 @@ export default function ModulePage() {
           Zurück zu allen Modulen
         </Link>
       </div>
+    );
+  }
+
+  // Passwortschutz für Studium-Module (Direktlink)
+  const moduleCategory = categories.find((c) => c.id === module.category);
+  if (moduleCategory?.password && !isStudiumUnlocked()) {
+    return (
+      <StudiumGate password={moduleCategory.password} categoryName={moduleCategory.name}>
+        <div />
+      </StudiumGate>
     );
   }
 

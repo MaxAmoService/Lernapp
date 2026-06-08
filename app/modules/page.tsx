@@ -4,6 +4,7 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import { allModules, categories } from "@/lib/data";
 import { ModuleCard } from "@/components/ModuleCard";
 import { useAuth } from "@/components/AuthProvider";
+import { isStudiumUnlocked, unlockStudium } from "@/components/StudiumGate";
 import {
   BookOpen,
   Search,
@@ -14,6 +15,7 @@ import {
   X,
   Filter,
   SlidersHorizontal,
+  Lock,
 } from "lucide-react";
 
 export default function ModulesPage() {
@@ -44,8 +46,13 @@ export default function ModulesPage() {
     });
   };
 
+  const studiumUnlocked = isStudiumUnlocked();
+
   const filteredModules = allModules.filter((m) => {
     if (m.hidden) return false; // Geheime Module nicht im Browser anzeigen
+    // Passwortgeschützte Kategorien ausblenden wenn nicht freigeschaltet
+    const cat = categories.find((c) => c.id === m.category);
+    if (cat?.password && !studiumUnlocked) return false;
     const matchesSearch =
       !search ||
       m.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -242,6 +249,68 @@ export default function ModulesPage() {
             Filter zurücksetzen
           </button>
         </div>
+      )}
+
+      {/* Studium-Kategorie: Passwort-geschützt */}
+      {!studiumUnlocked && categories.some((c) => c.password) && (
+        <section className="glass rounded-xl p-5 border-amber-500/20">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-2xl">🎓</span>
+            <div>
+              <h2 className="text-base font-semibold text-amber-400">Studium (TH OWL)</h2>
+              <p className="text-slate-400 text-xs">Hochschul-Module — mit Passwort freischalten</p>
+            </div>
+            <Lock className="w-4 h-4 text-amber-500 ml-auto" />
+          </div>
+          <p className="text-slate-500 text-xs mb-3">
+            Dieser Bereich enthält Module zu Mathe 1, Algorithmen, Datenbanken, KI, ML und weiteren
+            TH OWL Studieninhalten — inklusive Original-Prüfungsaufgaben.
+          </p>
+          <details className="group">
+            <summary className="text-xs text-slate-400 cursor-pointer hover:text-slate-300 transition-colors">
+              Passwort eingeben...
+            </summary>
+            <div className="mt-3 flex gap-2 max-w-sm">
+              <input
+                id="studium-password-input"
+                type="password"
+                placeholder="THOWL"
+                className="flex-1 px-3 py-2 bg-slate-800/60 border border-slate-700/50 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-amber-500/50"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    const pw = (e.target as HTMLInputElement).value;
+                    if (pw === "THOWL") {
+                      unlockStudium();
+                      window.location.reload();
+                    } else {
+                      (e.target as HTMLInputElement).value = "";
+                      (e.target as HTMLInputElement).classList.add("border-red-500/50");
+                      setTimeout(() => (e.target as HTMLInputElement).classList.remove("border-red-500/50"), 800);
+                    }
+                  }
+                }}
+              />
+              <button
+                onClick={() => {
+                  const input = document.getElementById("studium-password-input") as HTMLInputElement;
+                  if (!input) return;
+                  if (input.value === "THOWL") {
+                    const { unlockStudium } = require("@/components/StudiumGate");
+                    unlockStudium();
+                    window.location.reload();
+                  } else {
+                    input.value = "";
+                    input.classList.add("border-red-500/50");
+                    setTimeout(() => input.classList.remove("border-red-500/50"), 800);
+                  }
+                }}
+                className="px-4 py-2 bg-amber-600 hover:bg-amber-500 text-white rounded-lg text-sm font-medium transition-all"
+              >
+                Freischalten
+              </button>
+            </div>
+          </details>
+        </section>
       )}
 
       {/* Coming Soon */}

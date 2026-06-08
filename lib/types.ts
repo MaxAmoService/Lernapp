@@ -82,6 +82,7 @@ export interface Category {
   icon: string;
   description: string;
   subCategories?: { id: string; name: string; description: string }[];
+  password?: string; // Wenn gesetzt: Kategorie ist passwortgeschützt
 }
 
 export interface QuizQuestion {

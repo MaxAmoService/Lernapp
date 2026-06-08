@@ -16,8 +16,7 @@ export const bwlModule: Module = {
   icon: "📊",
   color: "#10B981",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "bwl-klausur-ss21",
@@ -248,8 +247,7 @@ export const sqModule: Module = {
   icon: "✅",
   color: "#8B5CF6",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "sq-klausur-2025",
@@ -394,8 +392,7 @@ export const ps2Module: Module = {
   icon: "λ",
   color: "#F59E0B",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "ps2-klausur-ws2324",
@@ -550,8 +547,7 @@ export const bwlWs20Module: Module = {
   icon: "📈",
   color: "#3B82F6",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "bwl-klausur-ws2021",
@@ -735,8 +731,7 @@ export const rnModule: Module = {
   icon: "🌐",
   color: "#06B6D4",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "rn-klausur",
@@ -911,8 +906,7 @@ export const nm2Module: Module = {
   icon: "🔢",
   color: "#EC4899",
   progress: 0,
-  category: "thowl",
-  hidden: true,
+  category: "studium",
   lessons: [
     {
       id: "nm2-klausur-ws1516",
