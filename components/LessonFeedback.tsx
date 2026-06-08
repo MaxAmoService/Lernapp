@@ -104,9 +104,18 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
       setSubmitted(true);
       setMessage("");
-    } catch (err) {
+    } catch (err: unknown) {
       console.error("Feedback error:", err);
-      setError("Fehler beim Senden. Bitte versuche es erneut.");
+      // Firebase-Fehler extrahieren für bessere Fehlermeldung
+      const fbErr = err as { code?: string; message?: string };
+      const fbCode = fbErr?.code || "";
+      if (fbCode === "permission-denied") {
+        setError("Firebase Rules müssen aktualisiert werden! (permission-denied)");
+      } else if (fbCode === "unavailable" || fbCode === "unauthenticated") {
+        setError("Keine Verbindung. Bitte prüfe dein Internet.");
+      } else {
+        setError(`Fehler: ${fbErr?.message || "Unbekannter Fehler"}`);
+      }
     } finally {
       setIsSubmitting(false);
     }
