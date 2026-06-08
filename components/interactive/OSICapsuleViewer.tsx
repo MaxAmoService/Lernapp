@@ -26,6 +26,9 @@ interface OSILayerData {
   protocols: string[];
   hardware: string[];
 
+  // Header-Größe
+  headerSize: string;       // "20–32 Bytes"
+
   // Sender (Encapsulation)
   senderAction: string;
   senderHeader: string;
@@ -52,6 +55,7 @@ const OSI_LAYERS: OSILayerData[] = [
     pdu: "Daten",
     protocols: ["HTTP", "HTTPS", "FTP", "SMTP", "DNS", "DHCP", "SSH", "SNMP"],
     hardware: ["Browser", "E-Mail-Client", "Webserver"],
+    headerSize: "variabel (~500 B)",
     senderAction: "HTTP-Request wird erzeugt",
     senderHeader: "Kein Header — reine Anwendungsdaten",
     senderHeaderDetail: "GET /index.html HTTP/1.1\nHost: example.com\nUser-Agent: Mozilla/5.0\nAccept: text/html",
@@ -71,6 +75,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#F97316",
     icon: "🔒",
     pdu: "Daten",
+    headerSize: "~30 Bytes",
     protocols: ["TLS", "SSL", "JPEG", "GIF", "MPEG", "ASCII"],
     hardware: ["Verschlüsselungs-HW", "Codec-Chips"],
     senderAction: "Daten werden mit TLS verschlüsselt",
@@ -92,6 +97,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#EAB308",
     icon: "🔗",
     pdu: "Daten",
+    headerSize: "~10 Bytes",
     protocols: ["NetBIOS", "RPC", "SOCKS", "PPTP"],
     hardware: ["Gateway", "Proxy"],
     senderAction: "Session-ID wird hinzugefügt",
@@ -113,6 +119,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#22C55E",
     icon: "📦",
     pdu: "Segment",
+    headerSize: "20–32 Bytes",
     protocols: ["TCP", "UDP", "SCTP"],
     hardware: ["Firewall", "Load Balancer"],
     senderAction: "TCP-Header mit Port-Nummern wird hinzugefügt",
@@ -135,6 +142,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#3B82F6",
     icon: "🌐",
     pdu: "Paket",
+    headerSize: "20 Bytes",
     protocols: ["IP", "ICMP", "OSPF", "BGP", "RIP"],
     hardware: ["Router", "Layer-3-Switch"],
     senderAction: "IP-Header mit Quell- und Ziel-Adresse wird hinzugefügt",
@@ -157,6 +165,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#8B5CF6",
     icon: "🔗",
     pdu: "Frame",
+    headerSize: "14–18 Bytes + 4 B Trailer",
     protocols: ["Ethernet", "Wi-Fi (802.11)", "PPP", "ARP", "VLAN", "STP"],
     hardware: ["Switch", "Bridge", "Access Point", "Netzwerkkarte"],
     senderAction: "Ethernet-Header mit MAC-Adressen + FCS wird hinzugefügt",
@@ -179,6 +188,7 @@ const OSI_LAYERS: OSILayerData[] = [
     color: "#6B7280",
     icon: "⚡",
     pdu: "Bits",
+    headerSize: "n/a (Bits)",
     protocols: ["1000BASE-T", "100BASE-TX", "USB", "Bluetooth", "DSL"],
     hardware: ["Kabel (Cat6)", "Hub", "Repeater", "Modem", "NIC"],
     senderAction: "Frame wird in Bits umgewandelt und aufs Kabel gelegt",
@@ -315,88 +325,89 @@ export function OSICapsuleViewer() {
     setShowMnemonic(false);
   };
 
-  // Welche Schicht ist aktuell aktiv?
+  // Schritt → Layer-Index: currentStep 0..6 → OSI_LAYERS[0]..[6] (Layer 7→1, Sender)
+  //                       currentStep 7..13 → OSI_LAYERS[6]..[0] (Layer 1→7, Empfänger)
   const getActiveLayer = (): OSILayerData | null => {
     if (currentStep < 0 || currentStep >= TOTAL_STEPS) return null;
     if (currentStep < 7) {
-      // Sender-Phase: Layer 7…1 (Index 0…6)
-      return OSI_LAYERS[currentStep];
+      return OSI_LAYERS[currentStep]; // Step 0=Layer7, 1=Layer6, ..., 6=Layer1
     } else {
-      // Empfänger-Phase: Layer 1…7 (Index 6…0)
-      return OSI_LAYERS[TOTAL_STEPS - 1 - currentStep];
+      return OSI_LAYERS[TOTAL_STEPS - 1 - currentStep]; // Step 7=Layer1(Idx6), 8=Layer2(Idx5), ..., 13=Layer7(Idx0)
     }
   };
 
-  const isSenderPhase = currentStep < 7;
+  const isSenderPhase = currentStep >= 0 && currentStep < 7;
   const activeLayer = getActiveLayer();
 
-  // Ist eine Schicht auf der Sender-Seite bereits abgeschlossen?
+  // Sender: Layer {nr} wird bei step = 7-nr verarbeitet (Layer 7 bei step 0, ..., Layer 1 bei step 6)
+  const getSenderStep = (layerNr: number): number => 7 - layerNr; // 7→0, 6→1, ..., 1→6
+  // Empfänger: Layer {nr} wird bei step = nr+6 verarbeitet (Layer 1 bei step 7, ..., Layer 7 bei step 13)
+  const getReceiverStep = (layerNr: number): number => layerNr + 6; // 1→7, 2→8, ..., 7→13
+
   const isSenderDone = (layerNr: number): boolean => {
     if (currentStep < 0) return false;
-    if (currentStep >= 6) return true; // Alle Schichten fertig
-    const senderStepIndex = layerNr - 1; // Layer 7 → Schritt 0, Layer 1 → Schritt 6
-    return currentStep >= 7 ? true : currentStep >= senderStepIndex;
+    if (currentStep > getSenderStep(layerNr)) return true;
+    if (currentStep >= 7) return true; // Empfänger-Phase: alle Sender-Schichten fertig
+    return false;
   };
 
-  // Ist eine Schicht auf der Empfänger-Seite bereits abgeschlossen?
   const isReceiverDone = (layerNr: number): boolean => {
-    if (currentStep < 7) return false; // Noch nicht in Empfänger-Phase
-    const receiverStepIndex = TOTAL_STEPS - layerNr; // Layer 1 → Schritt 7, Layer 7 → Schritt 13
-    return currentStep >= receiverStepIndex;
+    if (currentStep < 7) return false;
+    return currentStep > getReceiverStep(layerNr);
   };
 
-  // Ist eine Schicht gerade aktiv (wird gerade verarbeitet)?
   const isSenderActive = (layerNr: number): boolean => {
-    if (!isSenderPhase || !activeLayer) return false;
-    return activeLayer.nr === layerNr;
+    if (currentStep < 0 || currentStep >= 7) return false;
+    return currentStep === getSenderStep(layerNr);
   };
 
   const isReceiverActive = (layerNr: number): boolean => {
-    if (isSenderPhase || !activeLayer) return false;
-    return activeLayer.nr === layerNr;
+    if (currentStep < 7) return false;
+    return currentStep === getReceiverStep(layerNr);
   };
 
   // Header-Blöcke für die Nachrichten-Visualisierung
+  // Zeigt die Schichten von außen nach innen, wie das Paket aufgebaut ist
   const getHeaderBlocks = (): { label: string; color: string; visible: boolean; isPayload?: boolean }[] => {
     const blocks: { label: string; color: string; visible: boolean; isPayload?: boolean }[] = [];
 
     if (currentStep < 0) {
-      // Startzustand: nur Payload sichtbar
       blocks.push({ label: "HTTP-Daten", color: "#EF4444", visible: true, isPayload: true });
       return blocks;
     }
 
     if (isSenderPhase) {
-      // Sender-Phase: Header werden schrittweise hinzugefügt (von Layer 7 zu Layer 1)
-      // Payload zuerst
-      blocks.push({ label: "Nutzdaten", color: "#EF4444", visible: true, isPayload: true });
-      const senderStepsComplete = Math.min(currentStep + 1, 7);
-      // Reihenfolge der Verpackung: Anwendung → Präsentation → Sitzung → Transport → Netzwerk → Sicherung → Bits
-      // Visuell zeigen wir von außen nach innen: Eth | IP | TCP | ... | Nutzdaten
-      // Aber während der Sender-Phase bauen wir von innen nach außen auf
-      for (let i = senderStepsComplete - 1; i >= 0; i--) {
+      // Sender-Phase (steps 0-6): Header werden von Layer 6→1 hinzugefügt (Layer 7 = Payload selbst)
+      const completed = currentStep + 1; // 1..7 Schichten verarbeitet
+      // Zeige Header von außen (Eth, Layer 2) nach innen (TLS, Layer 6)
+      // Indices: completed-1 absteigend bis 1 (überspringe Index 0 = Layer 7, das ist der Payload)
+      for (let i = completed - 1; i >= 1; i--) {
+        const layer = OSI_LAYERS[i];
+        blocks.push({
+          label: layer.nr === 2 ? `Eth-Header` : `${layer.name}-Header`,
+          color: layer.color,
+          visible: true,
+        });
+      }
+      // Nutzdaten (innerster Teil, immer sichtbar nach step 0)
+      blocks.push({ label: "Nutzdaten (HTTP)", color: "#EF4444", visible: true, isPayload: true });
+    } else {
+      // Empfänger-Phase (steps 7-13): Header werden von Layer 1→7 entfernt
+      const completed = currentStep - 6; // 1..7 Schichten verarbeitet (step7→1, step13→7)
+      // Noch vorhanden sind Layer completed+1 .. 7, also Indices (6-completed) .. 0
+      const remainingTop = 6 - completed; // höchster noch vorhandener Index
+      for (let i = remainingTop; i >= 0; i--) {
         const layer = OSI_LAYERS[i];
         if (layer.nr === 1) {
-          blocks.unshift({ label: "Bits", color: layer.color, visible: true });
-        } else {
-          blocks.unshift({ label: `${layer.name}-Header`, color: layer.color, visible: true });
-        }
-      }
-    } else {
-      // Empfänger-Phase: Header werden schrittweise entfernt (von Layer 1 zu Layer 7)
-      const receiverStepsComplete = currentStep - 6; // 1..7
-      // Zeige Header, die noch NICHT entfernt wurden
-      const layersRemaining = 7 - receiverStepsComplete;
-      for (let i = 0; i < layersRemaining; i++) {
-        const layer = OSI_LAYERS[6 - i];
-        if (layer.nr === 1) {
           blocks.push({ label: "Bits", color: layer.color, visible: true });
+        } else if (layer.nr === 2) {
+          blocks.push({ label: "Eth-Header", color: layer.color, visible: true });
         } else {
           blocks.push({ label: `${layer.name}-Header`, color: layer.color, visible: true });
         }
       }
-      // Payload
-      blocks.push({ label: "Nutzdaten", color: "#EF4444", visible: true, isPayload: true });
+      // Nutzdaten
+      blocks.push({ label: "Nutzdaten (HTTP)", color: "#EF4444", visible: true, isPayload: true });
     }
 
     return blocks;
@@ -559,8 +570,8 @@ export function OSICapsuleViewer() {
         {/* ── Linke Spalte: Sender-Stack ──────────────────────── */}
         <div className="bg-slate-900/60 rounded-xl p-3 sm:p-4 border border-slate-700/50">
           <h4 className="text-sm font-semibold text-blue-400 mb-3 flex items-center gap-1.5">
-            📤 Sender <span className="text-slate-500 font-normal text-xs">(Kapselung)</span>
-            <span className="ml-auto text-[10px] text-slate-500">7 → 1</span>
+            📤 Sender <span className="text-slate-500 font-normal text-xs">(Kapselung ↓)</span>
+            <span className="ml-auto text-[10px] text-slate-500">von oben nach unten</span>
           </h4>
           <div className="space-y-1">
             {OSI_LAYERS.map((layer) => {
@@ -622,14 +633,14 @@ export function OSICapsuleViewer() {
           </div>
         </div>
 
-        {/* ── Rechte Spalte: Empfänger-Stack ──────────────────── */}
+        {/* ── Rechte Spalte: Empfänger-Stack (gleiche Reihenfolge 7→1, Verarbeitung von unten nach oben) ── */}
         <div className="bg-slate-900/60 rounded-xl p-3 sm:p-4 border border-slate-700/50">
           <h4 className="text-sm font-semibold text-green-400 mb-3 flex items-center gap-1.5">
-            📥 Empfänger <span className="text-slate-500 font-normal text-xs">(Entkapselung)</span>
-            <span className="ml-auto text-[10px] text-slate-500">1 → 7</span>
+            📥 Empfänger <span className="text-slate-500 font-normal text-xs">(Entkapselung ↑)</span>
+            <span className="ml-auto text-[10px] text-slate-500">von unten nach oben</span>
           </h4>
           <div className="space-y-1">
-            {[...OSI_LAYERS].reverse().map((layer) => {
+            {OSI_LAYERS.map((layer) => {
               const done = isReceiverDone(layer.nr);
               const active = isReceiverActive(layer.nr);
 
@@ -969,6 +980,92 @@ export function OSICapsuleViewer() {
               </div>
             ))}
           </div>
+        </div>
+      )}
+
+      {/* ═══ Paket-Aufbau: Header-Größen & Struktur ═══════════════ */}
+      {currentStep >= 5 && currentStep <= 7 && (
+        <div className="bg-slate-900 rounded-xl p-4 mb-4 border border-amber-700/30">
+          <h4 className="text-amber-400 font-semibold text-sm mb-3 flex items-center gap-2">
+            📐 Paket-Struktur — So sieht das Datenpaket auf dem Kabel aus
+          </h4>
+          <p className="text-slate-400 text-xs mb-3">
+            {currentStep < 6
+              ? "Während der Kapselung wächst das Paket Schicht für Schicht..."
+              : currentStep === 6
+              ? "Das vollständig gekapselte Paket wird in Bits umgewandelt:"
+              : "Der Empfänger erhält den Bit-Strom und rekonstruiert das Paket:"}
+          </p>
+
+          {/* Visuelle Paket-Struktur mit proportionalen Größen */}
+          <div className="flex items-stretch gap-0.5 mb-3 h-16 sm:h-20">
+            {/* Ethernet (größter Header — 18 Bytes) */}
+            <div
+              className="flex items-center justify-center rounded-l-lg text-white font-bold text-[10px] sm:text-xs px-2 text-center"
+              style={{ backgroundColor: "#8B5CF6", width: "18%", minWidth: "3rem" }}
+            >
+              Eth<br/>18 B
+            </div>
+            {/* IP (20 Bytes) */}
+            <div
+              className="flex items-center justify-center text-white font-bold text-[10px] sm:text-xs px-2 text-center"
+              style={{ backgroundColor: "#3B82F6", width: "20%", minWidth: "3rem" }}
+            >
+              IP<br/>20 B
+            </div>
+            {/* TCP (20 Bytes) */}
+            <div
+              className="flex items-center justify-center text-white font-bold text-[10px] sm:text-xs px-2 text-center"
+              style={{ backgroundColor: "#22C55E", width: "20%", minWidth: "3rem" }}
+            >
+              TCP<br/>20 B
+            </div>
+            {/* TLS (~30 Bytes) */}
+            <div
+              className="flex items-center justify-center text-white font-bold text-[10px] sm:text-xs px-2 text-center"
+              style={{ backgroundColor: "#F97316", width: "10%", minWidth: "2.5rem" }}
+            >
+              TLS<br/>~30 B
+            </div>
+            {/* Session (~10 Bytes) */}
+            <div
+              className="flex items-center justify-center text-white font-bold text-[10px] sm:text-xs px-2 text-center"
+              style={{ backgroundColor: "#EAB308", width: "8%", minWidth: "2rem" }}
+            >
+              Sess<br/>~10 B
+            </div>
+            {/* HTTP Nutzdaten (variabel) */}
+            <div
+              className="flex items-center justify-center rounded-r-lg text-white font-bold text-[10px] sm:text-xs px-2 text-center flex-1 ring-2 ring-yellow-400/50"
+              style={{ backgroundColor: "#EF4444" }}
+            >
+              HTTP-Daten<br/>~500 B
+            </div>
+          </div>
+
+          {/* Legende */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-[10px] sm:text-xs">
+            {[
+              { label: "Ethernet (Schicht 2)", size: "14–18 Bytes", desc: "MAC-Adressen + EtherType", color: "#8B5CF6" },
+              { label: "IP (Schicht 3)", size: "20 Bytes", desc: "Src/Dst-IP, TTL, Proto", color: "#3B82F6" },
+              { label: "TCP (Schicht 4)", size: "20–32 Bytes", desc: "Ports, SEQ, ACK, Window", color: "#22C55E" },
+              { label: "TLS (Schicht 6)", size: "~30 Bytes", desc: "Verschlüsselungs-Metadaten", color: "#F97316" },
+              { label: "Session (Schicht 5)", size: "~10 Bytes", desc: "Session-ID, State", color: "#EAB308" },
+              { label: "HTTP-Daten (Schicht 7)", size: "~500 Bytes (variabel)", desc: "GET-Request + Header", color: "#EF4444" },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-1.5 p-1.5 bg-slate-800/50 rounded">
+                <span className="w-2.5 h-2.5 rounded-sm shrink-0" style={{ backgroundColor: item.color }} />
+                <div>
+                  <p className="text-slate-200 font-medium">{item.label}</p>
+                  <p className="text-slate-400">{item.size} — {item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-slate-500 text-[10px] mt-2 text-center">
+            Gesamtgröße: ~598 Bytes (Header-Overhead: ~98 Bytes = ~16%)
+          </p>
         </div>
       )}
 
