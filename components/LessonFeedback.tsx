@@ -64,30 +64,12 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
     setIsSubmitting(true);
 
     try {
-      const { collection, addDoc, query, where, getDocs, deleteDoc, doc, serverTimestamp } = await import("firebase/firestore");
+      const { collection, addDoc, serverTimestamp } = await import("firebase/firestore");
       const { getDb } = await import("@/lib/firebase");
-      const db = getDb();
 
       const today = new Date().toISOString().split("T")[0]; // "2026-06-08"
 
-      // 7-Tage-Cleanup: Feedback älter als 7 Tage löschen
-      const cutoff = new Date();
-      cutoff.setDate(cutoff.getDate() - 7);
-      const cutoffStr = cutoff.toISOString().split("T")[0];
-      try {
-        const oldQuery = query(
-          collection(db, "feedback"),
-          where("date", "<=", cutoffStr)
-        );
-        const oldSnapshot = await getDocs(oldQuery);
-        const deletions = oldSnapshot.docs.map((d) => deleteDoc(doc(db, "feedback", d.id)));
-        await Promise.allSettled(deletions);
-      } catch (cleanupErr) {
-        // Cleanup-Fehler sind nicht kritisch für den User
-        console.warn("Feedback cleanup failed:", cleanupErr);
-      }
-
-      await addDoc(collection(db, "feedback"), {
+      await addDoc(collection(getDb(), "feedback"), {
         uid: user?.uid || "anonymous",
         username: user?.username || "anonymous",
         displayName: user?.displayName || "Anonym",
@@ -104,18 +86,10 @@ export function LessonFeedback({ moduleSlug, moduleTitle, lessonId, lessonTitle 
       localStorage.setItem(RATE_LIMIT_KEY, Date.now().toString());
       setSubmitted(true);
       setMessage("");
-    } catch (err: unknown) {
+    } catch (err) {
+      // Niemals Firebase-Fehlerdetails an Endbenutzer weitergeben!
       console.error("Feedback error:", err);
-      // Firebase-Fehler extrahieren für bessere Fehlermeldung
-      const fbErr = err as { code?: string; message?: string };
-      const fbCode = fbErr?.code || "";
-      if (fbCode === "permission-denied") {
-        setError("Firebase Rules müssen aktualisiert werden! (permission-denied)");
-      } else if (fbCode === "unavailable" || fbCode === "unauthenticated") {
-        setError("Keine Verbindung. Bitte prüfe dein Internet.");
-      } else {
-        setError(`Fehler: ${fbErr?.message || "Unbekannter Fehler"}`);
-      }
+      setError("Fehler beim Senden. Bitte versuche es später erneut.");
     } finally {
       setIsSubmitting(false);
     }

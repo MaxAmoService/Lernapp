@@ -34,20 +34,11 @@ service cloud.firestore {
     }
 
     // Feedback: authentifizierte & anonyme Nutzer dürfen erstellen
-    // 7-Tage-Cleanup: Ältere Einträge werden automatisch gelöscht
     match /feedback/{docId} {
       allow read: if false;
-      allow create: if request.resource.data.keys().hasAll([
-        "uid", "username", "displayName", "moduleSlug",
-        "moduleTitle", "lessonId", "lessonTitle", "category",
-        "message", "date", "createdAt"
-      ])
-        && request.resource.data.message is string
+      allow create: if request.resource.data.message is string
         && request.resource.data.message.size() >= 10
-        && request.resource.data.message.size() <= 2000
-        && request.resource.data.date is string
-        && request.resource.data.date.size() == 10;
-      // Löschen: Auth-User dürfen eigene + alle >7 Tage alten Einträge (Cleanup)
+        && request.resource.data.message.size() <= 2000;
       allow delete: if request.auth != null;
     }
 
