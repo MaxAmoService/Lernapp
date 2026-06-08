@@ -26,6 +26,12 @@ import { Category } from "./types";
 import { contentModules } from "./content/registry";
 import { thowlModules } from "./thowlData";
 import { thowlMathe1Module } from "./thowl/mathe1Data";
+import { thowlADModule } from "./thowl/adData";
+import { thowlDBModule } from "./thowl/dbData";
+import { thowlKIModule } from "./thowl/kiData";
+import { thowlMLModule } from "./thowl/mlData";
+import { thowlKBModule } from "./thowl/kbData";
+import { thowlEnglischModule } from "./thowl/englischData";
 
 // Re-export types for backward compatibility
 export type { Lesson, Module, Category } from "./types";
@@ -92,6 +98,12 @@ export const allModules = [
   ...contentModules,
   ...thowlModules,
   thowlMathe1Module,
+  thowlADModule,
+  thowlDBModule,
+  thowlKIModule,
+  thowlMLModule,
+  thowlKBModule,
+  thowlEnglischModule,
 ];
 
 export function getModule(slug: string) {

@@ -1,0 +1,30 @@
+import { Module } from "../types";
+
+export const thowlMLModule: Module = {
+  id: "thowl-ml", slug: "thowl-ml",
+  title: "Maschinelles Lernen",
+  description: "TH OWL: Lineare Regression, Klassifikation (LogReg, SVM, kNN), Entscheidungsbäume & Ensemble, Neuronale Netze, Evaluierung — mit Original-Klausurfragen.",
+  icon: "📈", color: "#EC4899", progress: 0, category: "studium",
+  lessons: [
+    {
+      id: "ml-regression", title: "1. Lineare Regression & Gradient Descent", duration: "35 min", type: "text",
+      content: "## Lineare Regression\n\nGesucht: $y = w_1 x + w_0$, die $(x_i, y_i)$ bestmöglich annähert.\n\n### OLS (Ordinary Least Squares)\n\n$J(w) = \\\\frac{1}{2m}\\\\sum (h_w(x_i) - y_i)^2$\n\n**Normalengleichung:** $w = (X^T X)^{-1} X^T y$\n\n> Problem: Inversion $O(n^3)$, nicht immer invertierbar.\n\n### Gradient Descent\n\n$w_j := w_j - \\\\alpha \\\\frac{\\\\partial J}{\\\\partial w_j}$\n\n| Typ | Update pro | Tempo |\n|-----|-----------|-------|\n| Batch GD | Alle $m$ | Langsam |\n| SGD | 1 Sample | Schnell, rauschig |\n| Mini-Batch | $k$ Samples | Bester Kompromiss |\n\n### Polynomiale Regression\n\n$y = w_d x^d + \\\\dots + w_1 x + w_0$\n\nZu hoher Grad → **Overfitting!** Regularisierung (L1/L2) hilft.",
+    },
+    {
+      id: "ml-klassifikation", title: "2. Klassifikation", duration: "40 min", type: "text",
+      content: "## Klassifikation\n\n### Logistische Regression\n\n$h_w(x) = \\\\sigma(w^T x) = \\\\frac{1}{1 + e^{-w^T x}}$\n\nSigmoid → Werte in (0,1) → Wahrscheinlichkeit.\n\n**Kostenfunktion (Cross-Entropy):**\n$J(w) = -\\\\frac{1}{m}\\\\sum [y_i \\\\log(h_w(x_i)) + (1-y_i)\\\\log(1-h_w(x_i))]$\n\n### k-Nearest-Neighbors (kNN)\n\nLazy Learner — keine Trainingsphase. Bei Vorhersage: $k$ nächste Nachbarn finden, Mehrheitsvotum.\n\n> $k$ wählen: Zu klein = Overfitting, zu groß = Underfitting. Kreuzvalidierung!\n\n### Support Vector Machines (SVM)\n\nMaximiere **Margin** (Abstand zur nächsten Klasse).\n\n- **Stützvektoren:** Punkte am Margin\n- **Kernel-Trick:** $K(x,z) = \\\\phi(x)^T \\\\phi(z)$\n- Kernel: Linear, RBF ($e^{-\\\\gamma||x-z||^2}$), Polynomiell",
+    },
+    {
+      id: "ml-baeume", title: "3. Entscheidungsbäume & Ensemble", duration: "35 min", type: "text",
+      content: "## Entscheidungsbäume\n\n### ID3 — Information Gain\n\n$IG(S, A) = H(S) - \\\\sum \\\\frac{|S_v|}{|S|} H(S_v)$\n\n**Entropie:** $H(S) = -\\\\sum p_c \\\\log_2 p_c$\n$H=0$ = rein, $H=1$ = perfekt gemischt (binär).\n\n### Random Forest\n\n1. **Bagging:** Jeder Baum auf Bootstrap-Sample\n2. **Random Subspace:** Nur Teilmenge der Features pro Split\n3. **Voting:** Mehrheit aller Bäume\n\n### Gradient Boosting (XGBoost)\n\n$F_m(x) = F_{m-1}(x) + \\\\eta \\\\cdot h_m(x)$\n\nSequentiell — jeder neue Baum korrigiert Residuen.\n\n> **XGBoost = State of the Art für tabellarische Daten!**\n\n| Methode | Stärke | Schwäche |\n|---------|--------|----------|\n| Einzelbaum | Interpretierbar | Overfitting |\n| Random Forest | Robust | Weniger interpretierbar |\n| Gradient Boosting | Genaueste | Langsamer, Overfitting-Risiko |",
+    },
+    {
+      id: "ml-evaluierung", title: "4. Modell-Evaluierung", duration: "30 min", type: "text",
+      content: "## Evaluierung\n\n### Konfusionsmatrix\n\n| | Vorh. Positiv | Vorh. Negativ |\n|---|-------------|-------------|\n| Tats. Positiv | TP | FN |\n| Tats. Negativ | FP | TN |\n\n### Metriken\n\n- **Accuracy:** $(TP+TN)/Total$\n- **Precision:** $TP/(TP+FP)$ — Wie viele Positive sind wirklich positiv?\n- **Recall:** $TP/(TP+FN)$ — Wie viele Positive gefunden?\n- **F1:** $2 \\\\cdot P \\\\cdot R / (P + R)$\n\n> **Trade-off:** Precision vs. Recall. F1 balanciert.\n\n### ROC & AUC\n\nROC = TPR vs. FPR für verschiedene Schwellwerte. AUC = 1.0 perfekt, 0.5 Zufall.\n\n### k-Fold Cross-Validation\n\n1. Daten in $k$ Teile\n2. $k-1$ trainieren, 1 testen\n3. $k$ Mal wiederholen, mitteln\n\n> 10-Fold CV = Standard!\n\n### Bias-Variance-Tradeoff\n\n$\\\\text{Error} = \\\\text{Bias}^2 + \\\\text{Variance} + \\\\text{Irreducible}$\n\n| | Underfitting | Overfitting |\n|---|-------------|------------|\n| Trainingsfehler | Hoch | Niedrig |\n| Testfehler | Hoch | Viel höher |\n| Lösung | Komplexeres Modell | Mehr Daten, Regularisierung |",
+    },
+    {
+      id: "ml-klausur", title: "Probeklausur ML — 12 Fragen", duration: "60 min", type: "quiz", examMode: true,
+      content: "## ML Probeklausur — 12 Fragen\n\n### Frage 1\nOLS minimiert...\nA) Absolute Fehler\nB) Quadratische Fehler\nC) Maximale Abweichung\nD) Median\n\nRichtig: **B.** Ordinary Least Squares.\n\n### Frage 2\nSigmoid-Funktion?\nA) $f(x)=\\\\max(0,x)$\nB) $f(x)=\\\\tanh(x)$\nC) $f(x)=1/(1+e^{-x})$\nD) $f(x)=x$\n\nRichtig: **C.** Werte in (0,1).\n\n### Frage 3\nPrecision misst...\nA) Richtige insgesamt\nB) TP / (TP + FP)\nC) TP / (TP + FN)\nD) (TP+TN)/Total\n\nRichtig: **B.**\n\n### Frage 4\nEntropie reiner Knoten?\nA) 1\nB) 0\nC) 0.5\nD) -1\n\nRichtig: **B.** Keine Unsicherheit.\n\n### Frage 5\nRandom Forest = ...\nA) Bagging + Random Subspace\nB) Boosting\nC) Ein Baum\nD) k-Means\n\nRichtig: **A.**\n\n### Frage 6\nOverfitting = ...\nA) Zu einfach\nB) Trainingsdaten auswendig gelernt\nC) Zu wenige Daten\nD) Alle\n\nRichtig: **B.**\n\n### Frage 7\n10-Fold CV?\nA) 10x gleiche Daten\nB) 10 Teile, 9 Train/1 Test, 10x\nC) 10 Modelle\nD) 10x Lernrate\n\nRichtig: **B.**\n\n### Frage 8\nKernel-Trick?\nA) Schnellere Matrix-Mul.\nB) Abbildung in höhere Dimension ohne explizite Berechnung\nC) Feature-Auswahl\nD) Normalisierung\n\nRichtig: **B.**\n\n### Frage 9\nGradient Boosting: Bäume werden...\nA) parallel\nB) sequentiell\nC) zufällig\nD) auf allen Daten\n\nRichtig: **B.** Jeder korrigiert den vorherigen.\n\n### Frage 10\nLazy Learner?\nA) Entscheidungsbaum\nB) SVM\nC) kNN\nD) LogReg\n\nRichtig: **C.** Keine Trainingsphase.\n\n### Frage 11\nRBF-Kernel?\nA) $K(x,z)=x^T z$\nB) $K(x,z)=(x^T z+1)^d$\nC) $K(x,z)=e^{-\\\\gamma||x-z||^2}$\nD) $K(x,z)=\\\\tanh(x^T z)$\n\nRichtig: **C.** Gauß-Kernel.\n\n### Frage 12\nBatch GD vs. SGD?\nA) Gleich\nB) Batch = alle Samples, SGD = 1 Sample\nC) SGD immer besser\nD) Batch braucht weniger RAM\n\nRichtig: **B.**",
+    },
+  ],
+};
